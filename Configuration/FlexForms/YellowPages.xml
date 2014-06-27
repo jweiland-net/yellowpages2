@@ -1,0 +1,42 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEFAULT>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:sheetGeneral</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.showWspMembers>
+						<TCEforms>
+							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:showWspMembers</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.showWspMembers>
+					<settings.district>
+					<TCEforms>
+						<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:district</label>
+						<config>
+							<type>select</type>
+							<foreign_table>tx_yellowpages2_domain_model_district</foreign_table>
+							<items type="array">
+								<numIndex index="0">
+									<numIndex index="0">LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose</numIndex>
+									<numIndex index="1"></numIndex>
+								</numIndex>
+							</items>
+							<size>1</size>
+							<minitems>0</minitems>
+						</config>
+					</TCEforms>
+				</settings.district>
+				</el>
+			</ROOT>
+		</sDEFAULT>
+	</sheets>
+</T3DataStructure>

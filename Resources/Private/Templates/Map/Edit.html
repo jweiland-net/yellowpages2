@@ -1,0 +1,12 @@
+{namespace maps2=JWeiland\Maps2\ViewHelpers}
+
+<f:layout name="Default" />
+
+<f:section name="main">
+	<f:render partial="FormErrors" arguments="{object: Company}"/>
+
+	<f:form action="update" name="company" object="{company}" enctype="multipart/form-data">
+		<maps2:widget.editPoi poiCollection="{company.txMaps2Uid}" prepend="tx_yellowpages2_directory[company]" mapOptions="{mapTypeId: 'google.maps.MapTypeId.ROADMAP'}" />
+		<f:form.submit class="powermail_submit" value="{f:translate(key: 'update')}" />
+	</f:form>
+</f:section>

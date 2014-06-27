@@ -1,0 +1,18 @@
+<f:switch expression="{company.trades -> f:count()}">
+	<f:case value="0">
+		<f:for each="{0: 0, 1: 0}" as="trade" key="key">
+			<f:form.select name="company[{field}][]" id="{field}_{key}" class="powermail_field powermail_select marginbottom" options="{options}" size="1" value="0" optionValueField="uid" optionLabelField="title" sortByOptionLabel="1" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" prependOptionValue="" />
+		</f:for>
+	</f:case>
+	<f:case value="1">
+		<f:for each="{company.trades}" as="trade">
+			<f:form.select name="company[{field}][]" id="{field}_0" class="powermail_field powermail_select marginbottom" options="{options}" size="1" value="{trade.uid}" optionValueField="uid" optionLabelField="title" sortByOptionLabel="1" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" prependOptionValue="" />
+		</f:for>
+		<f:form.select name="company[{field}][]" id="{field}_1" class="powermail_field powermail_select" options="{options}" size="1" value="0" optionValueField="uid" optionLabelField="title" sortByOptionLabel="1" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" prependOptionValue="" />
+	</f:case>
+	<f:case value="2">
+		<f:for each="{company.trades}" as="trade" iteration="tradeIterator">
+			<f:form.select name="company[{field}][]" id="{field}_{tradeIterator.index}" class="powermail_field powermail_select marginbottom" options="{options}" size="1" value="{trade.uid}" optionValueField="uid" optionLabelField="title" sortByOptionLabel="1" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" prependOptionValue="" />
+		</f:for>
+	</f:case>
+</f:switch>

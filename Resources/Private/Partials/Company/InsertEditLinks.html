@@ -1,0 +1,16 @@
+<f:security.ifHasRole role="{settings.userGroup}">
+	<aside class="floatleft grid_4" role="complementary">
+		<div class="gridleft">
+			<p class="align-right info-box">
+				<f:link.action class="new" action="new">
+					<span><f:translate key="newCompany"/></span><span aria-hidden="true" class="icon-arrowright"></span>
+				</f:link.action>
+			</p>
+			<p class="align-right info-box">
+				<f:link.action class="listMyCompanies" action="listMyCompanies">
+					<span><f:translate key="listMyCompanies"/></span><span aria-hidden="true" class="icon-arrowright"></span>
+				</f:link.action>
+			</p>
+		</div>
+	</aside>
+</f:security.ifHasRole>
