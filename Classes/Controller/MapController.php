@@ -158,7 +158,7 @@ class MapController extends AbstractController {
 	 *
 	 * @param string $subjectKey
 	 * @param \JWeiland\Yellowpages2\Domain\Model\Company $company
-	 * @return integer The amound of email receivers
+	 * @return integer The amount of email receivers
 	 */
 	public function sendMail($subjectKey, \JWeiland\Yellowpages2\Domain\Model\Company $company) {
 		$this->view->assign('company', $company);

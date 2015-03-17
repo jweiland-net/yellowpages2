@@ -163,12 +163,12 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$argument = $this->request->getArgument($argumentName);
 		if (is_array($argument)) {
 			// get company from form ($_POST)
-			$company = $this->companyRepository->findHiddenEntryByUid($argument['__identity']);
+			$topic = $this->companyRepository->findHiddenEntryByUid($argument['__identity']);
 		} else {
 			// get company from UID
-			$company = $this->companyRepository->findHiddenEntryByUid($argument);
+			$topic = $this->companyRepository->findHiddenEntryByUid($argument);
 		}
-		$this->session->registerObject($company, $company->getUid());
+		$this->session->registerObject($topic, $topic->getUid());
 	}
 
 	/**
