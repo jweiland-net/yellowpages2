@@ -29,110 +29,118 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 /**
  * FileReference
  */
-class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference {
+class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
+{
 
-	/**
-	 * title
-	 *
-	 * @var string
-	 */
-	protected $title = NULL;
+    /**
+     * title
+     *
+     * @var string
+     */
+    protected $title = null;
 
-	/**
-	 * cruserId
-	 *
-	 * @var int
-	 */
-	protected $cruserId = 0;
+    /**
+     * cruserId
+     *
+     * @var int
+     */
+    protected $cruserId = 0;
 
-	/**
-	 * uidLocal
-	 *
-	 * @var int
-	 */
-	protected $uidLocal = 0;
+    /**
+     * uidLocal
+     *
+     * @var int
+     */
+    protected $uidLocal = 0;
 
-	/**
-	 * tablenames
-	 *
-	 * @var string
-	 */
-	protected $tablenames = '';
+    /**
+     * tablenames
+     *
+     * @var string
+     */
+    protected $tablenames = '';
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the cruserId
-	 *
-	 * @return int $cruserId
-	 */
-	public function getCruserId() {
-		return $this->cruserId;
-	}
+    /**
+     * Returns the cruserId
+     *
+     * @return int $cruserId
+     */
+    public function getCruserId()
+    {
+        return $this->cruserId;
+    }
 
-	/**
-	 * Sets the cruserId
-	 *
-	 * @param int $cruserId
-	 * @return void
-	 */
-	public function setCruserId($cruserId) {
-		$this->cruserId = $cruserId;
-	}
+    /**
+     * Sets the cruserId
+     *
+     * @param int $cruserId
+     * @return void
+     */
+    public function setCruserId($cruserId)
+    {
+        $this->cruserId = $cruserId;
+    }
 
-	/**
-	 * Returns the uidLocal
-	 *
-	 * @return int $uidLocal
-	 */
-	public function getUidLocal() {
-		return $this->uidLocal;
-	}
+    /**
+     * Returns the uidLocal
+     *
+     * @return int $uidLocal
+     */
+    public function getUidLocal()
+    {
+        return $this->uidLocal;
+    }
 
-	/**
-	 * Sets the uidLocal
-	 *
-	 * @param int $uidLocal
-	 * @return void
-	 */
-	public function setUidLocal($uidLocal) {
-		$this->uidLocal = $uidLocal;
-	}
+    /**
+     * Sets the uidLocal
+     *
+     * @param int $uidLocal
+     * @return void
+     */
+    public function setUidLocal($uidLocal)
+    {
+        $this->uidLocal = $uidLocal;
+    }
 
-	/**
-	 * Returns the tablenames
-	 *
-	 * @return string $tablenames
-	 */
-	public function getTablenames() {
-		return $this->tablenames;
-	}
+    /**
+     * Returns the tablenames
+     *
+     * @return string $tablenames
+     */
+    public function getTablenames()
+    {
+        return $this->tablenames;
+    }
 
-	/**
-	 * Sets the tablenames
-	 *
-	 * @param string $tablenames
-	 * @return void
-	 */
-	public function setTablenames($tablenames) {
-		$this->tablenames = $tablenames;
-	}
-
+    /**
+     * Sets the tablenames
+     *
+     * @param string $tablenames
+     * @return void
+     */
+    public function setTablenames($tablenames)
+    {
+        $this->tablenames = $tablenames;
+    }
 }

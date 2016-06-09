@@ -5,7 +5,7 @@ namespace JWeiland\Yellowpages2\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,191 +33,197 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * @var \TYPO3\CMS\Core\Mail\MailMessage
-	 * @inject
-	 */
-	protected $mail;
+    /**
+     * @var \TYPO3\CMS\Core\Mail\MailMessage
+     * @inject
+     */
+    protected $mail;
 
-	/**
-	 * @var \JWeiland\Yellowpages2\Configuration\ExtConf
-	 * @inject
-	 */
-	protected $extConf;
+    /**
+     * @var \JWeiland\Yellowpages2\Configuration\ExtConf
+     * @inject
+     */
+    protected $extConf;
 
-	/**
-	 * persistenceManager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-	 * @inject
-	 */
-	protected $persistenceManager;
+    /**
+     * persistenceManager
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     * @inject
+     */
+    protected $persistenceManager;
 
-	/**
-	 * googleMaps
-	 *
-	 * @var \JWeiland\Maps2\Utility\GoogleMaps
-	 * @inject
-	 */
-	protected $googleMaps;
+    /**
+     * googleMaps
+     *
+     * @var \JWeiland\Maps2\Utility\GoogleMaps
+     * @inject
+     */
+    protected $googleMaps;
 
-	/**
-	 * companyRepository
-	 *
-	 * @var \JWeiland\Yellowpages2\Domain\Repository\CompanyRepository
-	 * @inject
-	 */
-	protected $companyRepository;
+    /**
+     * companyRepository
+     *
+     * @var \JWeiland\Yellowpages2\Domain\Repository\CompanyRepository
+     * @inject
+     */
+    protected $companyRepository;
 
-	/**
-	 * districtRepository
-	 *
-	 * @var \JWeiland\Yellowpages2\Domain\Repository\DistrictRepository
-	 * @inject
-	 */
-	protected $districtRepository;
+    /**
+     * districtRepository
+     *
+     * @var \JWeiland\Yellowpages2\Domain\Repository\DistrictRepository
+     * @inject
+     */
+    protected $districtRepository;
 
-	/**
-	 * categoryRepository
-	 *
-	 * @var \JWeiland\Yellowpages2\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
+    /**
+     * categoryRepository
+     *
+     * @var \JWeiland\Yellowpages2\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository;
 
-	/**
-	 * feUserRepository
-	 *
-	 * @var \JWeiland\Yellowpages2\Domain\Repository\FeUserRepository
-	 * @inject
-	 */
-	protected $feUserRepository;
+    /**
+     * feUserRepository
+     *
+     * @var \JWeiland\Yellowpages2\Domain\Repository\FeUserRepository
+     * @inject
+     */
+    protected $feUserRepository;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\Session
-	 * @inject
-	 */
-	protected $session;
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\Session
+     * @inject
+     */
+    protected $session;
 
-	protected $letters = '0-9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
-
-
-
+    protected $letters = '0-9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
 
 
-	/**
-	 * preprocessing of all actions
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		// if this value was not set, then it will be filled with 0
-		// but that is not good, because UriBuilder accepts 0 as pid, so it's better to set it to NULL
-		if (empty($this->settings['pidOfDetailPage'])) {
-			$this->settings['pidOfDetailPage'] = NULL;
-		}
-	}
 
-	/**
-	 * get an array with letters as keys for the glossar
-	 *
-	 * @param boolean $isWsp
-	 * @return array Array with starting letters as keys
-	 */
-	protected function getGlossar($isWsp) {
-		$glossar = array();
-		$availableLetters = $this->companyRepository->getStartingLetters($isWsp);
-		$possibleLetters = GeneralUtility::trimExplode(',', $this->letters);
 
-		// add all letters which we have found in DB
-		foreach ($availableLetters as $availableLetter) {
-			if (MathUtility::canBeInterpretedAsInteger($availableLetter['letter'])) {
-				$availableLetter['letter'] = '0-9';
-			}
-			// add only letters which are valid (do not add "§$%")
-			if (array_search($availableLetter['letter'], $possibleLetters) !== FALSE) {
-				$glossar[$availableLetter['letter']] = TRUE;
-			}
-		}
 
-		// add all valid letters which are not set/found by previous foreach
-		foreach ($possibleLetters as $possibleLetter) {
-			if (!array_key_exists($possibleLetter, $glossar)) {
-				$glossar[$possibleLetter] = FALSE;
-			}
-		}
+    /**
+     * preprocessing of all actions
+     *
+     * @return void
+     */
+    public function initializeAction()
+    {
+        // if this value was not set, then it will be filled with 0
+        // but that is not good, because UriBuilder accepts 0 as pid, so it's better to set it to NULL
+        if (empty($this->settings['pidOfDetailPage'])) {
+            $this->settings['pidOfDetailPage'] = null;
+        }
+    }
 
-		ksort($glossar, SORT_STRING);
+    /**
+     * get an array with letters as keys for the glossar
+     *
+     * @param boolean $isWsp
+     * @return array Array with starting letters as keys
+     */
+    protected function getGlossar($isWsp)
+    {
+        $glossar = array();
+        $availableLetters = $this->companyRepository->getStartingLetters($isWsp);
+        $possibleLetters = GeneralUtility::trimExplode(',', $this->letters);
 
-		return $glossar;
-	}
+        // add all letters which we have found in DB
+        foreach ($availableLetters as $availableLetter) {
+            if (MathUtility::canBeInterpretedAsInteger($availableLetter['letter'])) {
+                $availableLetter['letter'] = '0-9';
+            }
+            // add only letters which are valid (do not add "§$%")
+            if (array_search($availableLetter['letter'], $possibleLetters) !== false) {
+                $glossar[$availableLetter['letter']] = true;
+            }
+        }
 
-	/**
-	 * This is a workaround to help controller actions to find (hidden) companies
-	 *
-	 * @param $argumentName
-	 */
-	protected function registerCompanyFromRequest($argumentName) {
-		$argument = $this->request->getArgument($argumentName);
-		if (is_array($argument)) {
-			// get company from form ($_POST)
-			$topic = $this->companyRepository->findHiddenEntryByUid($argument['__identity']);
-		} else {
-			// get company from UID
-			$topic = $this->companyRepository->findHiddenEntryByUid($argument);
-		}
-		$this->session->registerObject($topic, $topic->getUid());
-	}
+        // add all valid letters which are not set/found by previous foreach
+        foreach ($possibleLetters as $possibleLetter) {
+            if (!array_key_exists($possibleLetter, $glossar)) {
+                $glossar[$possibleLetter] = false;
+            }
+        }
 
-	/**
-	 * A template method for displaying custom error flash messages, or to
-	 * display no flash message at all on errors. Override this to customize
-	 * the flash message in your action controller.
-	 *
-	 * @return string The flash message or FALSE if no flash message should be set
-	 * @api
-	 */
-	protected function getErrorFlashMessage() {
-		return LocalizationUtility::translate('errorFlashMessage', 'yellowpages2', array(
-			get_class($this),
-			$this->actionMethodName
-		));
-	}
+        ksort($glossar, SORT_STRING);
 
-	/**
-	 * remove empty arguments from request
-	 *
-	 * @return void
-	 */
-	protected function removeEmptyArgumentsFromRequest() {
-		$company = $this->request->getArgument('company');
-		$company['trades'] = GeneralUtility::removeArrayEntryByValue($company['trades'], '');
-		if ($company['trades'] === array()) {
-			unset($company['trades']);
-		}
-		$this->request->setArgument('company', $company);
-	}
+        return $glossar;
+    }
 
-	/**
-	 * files will be uploaded in typeConverter automatically
-	 * But, if an error occurs we have to remove them
-	 *
-	 * @param string $argument
-	 * @return void
-	 */
-	protected function deleteUploadedFilesOnValidationErrors($argument) {
-		if ($this->getControllerContext()->getRequest()->hasArgument($argument)) {
-			$company = $this->getControllerContext()->getRequest()->getArgument($argument);
-			if ($company['images'] !== array()) {
-				unset($company['images']);
-			}
-			if ($company['logo'] !== array()) {
-				unset($company['logo']);
-			}
-			$this->getControllerContext()->getRequest()->setArgument($argument, $company);
-		}
-	}
+    /**
+     * This is a workaround to help controller actions to find (hidden) companies
+     *
+     * @param $argumentName
+     */
+    protected function registerCompanyFromRequest($argumentName)
+    {
+        $argument = $this->request->getArgument($argumentName);
+        if (is_array($argument)) {
+            // get company from form ($_POST)
+            $company = $this->companyRepository->findHiddenEntryByUid($argument['__identity']);
+        } else {
+            // get company from UID
+            $company = $this->companyRepository->findHiddenEntryByUid($argument);
+        }
+        $this->session->registerObject($company, $company->getUid());
+    }
 
+    /**
+     * A template method for displaying custom error flash messages, or to
+     * display no flash message at all on errors. Override this to customize
+     * the flash message in your action controller.
+     *
+     * @return string The flash message or FALSE if no flash message should be set
+     * @api
+     */
+    protected function getErrorFlashMessage()
+    {
+        return LocalizationUtility::translate('errorFlashMessage', 'yellowpages2', array(
+            get_class($this),
+            $this->actionMethodName
+        ));
+    }
+
+    /**
+     * remove empty arguments from request
+     *
+     * @return void
+     */
+    protected function removeEmptyArgumentsFromRequest()
+    {
+        $company = $this->request->getArgument('company');
+        $company['trades'] = GeneralUtility::removeArrayEntryByValue($company['trades'], '');
+        if ($company['trades'] === array()) {
+            unset($company['trades']);
+        }
+        $this->request->setArgument('company', $company);
+    }
+
+    /**
+     * files will be uploaded in typeConverter automatically
+     * But, if an error occurs we have to remove them
+     *
+     * @param string $argument
+     * @return void
+     */
+    protected function deleteUploadedFilesOnValidationErrors($argument)
+    {
+        if ($this->getControllerContext()->getRequest()->hasArgument($argument)) {
+            $company = $this->getControllerContext()->getRequest()->getArgument($argument);
+            if ($company['images'] !== array()) {
+                unset($company['images']);
+            }
+            if ($company['logo'] !== array()) {
+                unset($company['logo']);
+            }
+            $this->getControllerContext()->getRequest()->setArgument($argument, $company);
+        }
+    }
 }

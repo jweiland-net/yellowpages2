@@ -13,7 +13,9 @@
 										<yp:grayScaleImage image="{company.logo}" alt="Logo: {company.company}" width="{settings.list.image.width}" height="{settings.list.image.height}" minWidth="{settings.list.image.minWidth}" maxWidth="{settings.list.image.maxWidth}" minHeight="{settings.list.image.minHeight}" maxHeight="{settings.list.image.maxHeight}" />
 									</f:then>
 									<f:else>
-										<yp:grayScaleImage src="uploads/tx_yellowpages2/{company.mainTrade.icon}" alt="Logo: {company.mainTrade.title}" width="{settings.list.image.width}" height="{settings.list.image.height}" minWidth="{settings.list.image.minWidth}" maxWidth="{settings.list.image.maxWidth}" minHeight="{settings.list.image.minHeight}" maxHeight="{settings.list.image.maxHeight}" />
+										<f:if condition="{company.mainTrade.icon}">
+											<yp:grayScaleImage src="uploads/tx_yellowpages2/{company.mainTrade.icon}" alt="Logo: {company.mainTrade.title}" width="{settings.list.image.width}" height="{settings.list.image.height}" minWidth="{settings.list.image.minWidth}" maxWidth="{settings.list.image.maxWidth}" minHeight="{settings.list.image.minHeight}" maxHeight="{settings.list.image.maxHeight}" />
+										</f:if>
 									</f:else>
 								</f:if>
 							</figure>

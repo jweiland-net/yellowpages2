@@ -1,7 +1,6 @@
 <?php
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
-
 /***************************************************************
  *  Copyright notice
  *
@@ -30,6 +29,6 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FeUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
+class FeUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 }

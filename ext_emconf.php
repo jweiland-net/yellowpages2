@@ -11,31 +11,31 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Industry Directory',
-	'description' => 'With this extension you can build your own industry directory',
-	'category' => 'plugin',
-	'author' => 'Stefan Froemken',
-	'author_email' => 'projects@jweiland.net',
-	'author_company' => 'jweiland.net',
-	'shy' => '',
-	'priority' => '',
-	'module' => '',
-	'state' => 'alpha',
-	'internal' => '',
-	'uploadfolder' => '1',
-	'createDirs' => '',
-	'modify_tables' => '',
-	'clearCacheOnLoad' => 0,
-	'lockType' => '',
-	'version' => '0.1.5',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2',
-			'maps2' => '1.0.0-1.0.99'
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
+    'title' => 'Industry Directory',
+    'description' => 'With this extension you can build your own industry directory',
+    'category' => 'plugin',
+    'author' => 'Stefan Froemken',
+    'author_email' => 'projects@jweiland.net',
+    'author_company' => 'jweiland.net',
+    'shy' => '',
+    'priority' => '',
+    'module' => '',
+    'state' => 'alpha',
+    'internal' => '',
+    'uploadfolder' => '1',
+    'createDirs' => '',
+    'modify_tables' => '',
+    'clearCacheOnLoad' => 0,
+    'lockType' => '',
+    'version' => '1.0.0',
+    'constraints' => array(
+        'depends' => array(
+            'typo3' => '6.2',
+            'maps2' => '1.0.0-1.0.99'
+        ),
+        'conflicts' => array(
+        ),
+        'suggests' => array(
+        ),
+    ),
 );

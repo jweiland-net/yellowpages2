@@ -29,36 +29,38 @@ namespace JWeiland\Yellowpages2\Domain\Model;
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category {
+class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
+{
 
-	/**
-	 * Icon
-	 *
-	 * @var string
-	 */
-	protected $icon;
-
-
-
+    /**
+     * Icon
+     *
+     * @var string
+     */
+    protected $icon;
 
 
-	/**
-	 * Returns the icon
-	 *
-	 * @return string $icon
-	 */
-	public function getIcon() {
-		return $this->icon;
-	}
 
-	/**
-	 * Sets the icon
-	 *
-	 * @param string $icon
-	 * @return void
-	 */
-	public function setIcon($icon) {
-		$this->icon = $icon;
-	}
 
+
+    /**
+     * Returns the icon
+     *
+     * @return string $icon
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * Sets the icon
+     *
+     * @param string $icon
+     * @return void
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+    }
 }

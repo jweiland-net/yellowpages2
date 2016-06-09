@@ -29,28 +29,29 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DistrictRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class DistrictRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * @var array
-	 */
-	protected $defaultOrderings = array(
-		'district' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-	);
+    /**
+     * @var array
+     */
+    protected $defaultOrderings = array(
+        'district' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+    );
 
-	/**
-	 * get all districts for selectbox
-	 *
-	 * @return array
-	 */
-	public function getDistricts() {
-		$query = $this->createQuery();
-		$results = $query->execute(TRUE);
-		$districts = array();
-		foreach ($results as $result) {
-			$districts[$result['uid']] = $result['district'];
-		}
-		return $districts;
-	}
-
+    /**
+     * get all districts for selectbox
+     *
+     * @return array
+     */
+    public function getDistricts()
+    {
+        $query = $this->createQuery();
+        $results = $query->execute(true);
+        $districts = array();
+        foreach ($results as $result) {
+            $districts[$result['uid']] = $result['district'];
+        }
+        return $districts;
+    }
 }

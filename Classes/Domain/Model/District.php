@@ -29,32 +29,34 @@ namespace JWeiland\Yellowpages2\Domain\Model;
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class District extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class District extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * District
-	 *
-	 * @var string
-	 */
-	protected $district;
+    /**
+     * District
+     *
+     * @var string
+     */
+    protected $district;
 
-	/**
-	 * Returns the district
-	 *
-	 * @return string $district
-	 */
-	public function getDistrict() {
-		return $this->district;
-	}
+    /**
+     * Returns the district
+     *
+     * @return string $district
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
 
-	/**
-	 * Sets the district
-	 *
-	 * @param string $district
-	 * @return void
-	 */
-	public function setDistrict($district) {
-		$this->district = $district;
-	}
-
+    /**
+     * Sets the district
+     *
+     * @param string $district
+     * @return void
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+    }
 }
