@@ -60,6 +60,9 @@ class MapController extends AbstractController
      */
     public function newAction(Company $company = null)
     {
+        $this->addNewPoiCollectionToCompany($company);
+        $this->companyRepository->update($company);
+        $this->persistenceManager->persistAll();
         $this->view->assign('company', $company);
     }
 

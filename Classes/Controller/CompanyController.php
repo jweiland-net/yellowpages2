@@ -259,7 +259,11 @@ class CompanyController extends AbstractController
         $this->persistenceManager->persistAll();
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
-        $this->redirect('edit', 'Map', 'yellowpages2', array('company' => $company));
+        if ($company->getTxMaps2Uid() === null) {
+            $this->redirect('new', 'Map', 'yellowpages2', array('company' => $company));
+        } else {
+            $this->redirect('edit', 'Map', 'yellowpages2', array('company' => $company));
+        }
     }
 
     /**

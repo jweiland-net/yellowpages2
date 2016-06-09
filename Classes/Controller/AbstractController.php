@@ -24,6 +24,9 @@ namespace JWeiland\Yellowpages2\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use JWeiland\Maps2\Domain\Model\PoiCollection;
+use JWeiland\Maps2\Utility\GeocodeUtility;
+use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -296,5 +299,28 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             }
             $this->getControllerContext()->getRequest()->setArgument($argument, $company);
         }
+    }
+
+    /**
+     * Add new PoiCollection to Company, if company is new
+     *
+     * @param Company $company
+     * @return void
+     */
+    protected function addNewPoiCollectionToCompany(Company $company)
+    {
+        /** @var GeocodeUtility $geocodeUtility */
+        $geocodeUtility = $this->objectManager->get('JWeiland\\Maps2\\Utility\\GeocodeUtility');
+        $response = $geocodeUtility->findPositionByAddress($company->getAddress());
+        /* @var \JWeiland\Maps2\Domain\Model\RadiusResult $location */
+        $location = $response->current();
+        /** @var PoiCollection $poiCollection */
+        $poiCollection = $this->objectManager->get('JWeiland\\Maps2\\Domain\\Model\\PoiCollection');
+        $poiCollection->setCollectionType('Point');
+        $poiCollection->setTitle($company->getCompany());
+        $poiCollection->setLatitude($location->getGeometry()->getLocation()->getLatitude());
+        $poiCollection->setLongitude($location->getGeometry()->getLocation()->getLongitude());
+        $poiCollection->setAddress($location->getFormattedAddress());
+        $company->setTxMaps2Uid($poiCollection);
     }
 }
