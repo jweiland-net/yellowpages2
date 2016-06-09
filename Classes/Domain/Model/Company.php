@@ -792,7 +792,7 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * helper method to get the address of the record
-     * this is needed by google maps api geocode
+     * this is needed by google maps geocode API
      *
      * @return string
      */

@@ -38,13 +38,11 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * @var \TYPO3\CMS\Core\Mail\MailMessage
-     * @inject
      */
     protected $mail;
 
     /**
      * @var \JWeiland\Yellowpages2\Configuration\ExtConf
-     * @inject
      */
     protected $extConf;
 
@@ -52,23 +50,13 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * persistenceManager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
      */
     protected $persistenceManager;
-
-    /**
-     * googleMaps
-     *
-     * @var \JWeiland\Maps2\Utility\GoogleMaps
-     * @inject
-     */
-    protected $googleMaps;
 
     /**
      * companyRepository
      *
      * @var \JWeiland\Yellowpages2\Domain\Repository\CompanyRepository
-     * @inject
      */
     protected $companyRepository;
 
@@ -76,7 +64,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * districtRepository
      *
      * @var \JWeiland\Yellowpages2\Domain\Repository\DistrictRepository
-     * @inject
      */
     protected $districtRepository;
 
@@ -84,7 +71,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * categoryRepository
      *
      * @var \JWeiland\Yellowpages2\Domain\Repository\CategoryRepository
-     * @inject
      */
     protected $categoryRepository;
 
@@ -92,24 +78,109 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * feUserRepository
      *
      * @var \JWeiland\Yellowpages2\Domain\Repository\FeUserRepository
-     * @inject
      */
     protected $feUserRepository;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\Session
-     * @inject
      */
     protected $session;
 
+    /**
+     * @var string
+     */
     protected $letters = '0-9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
 
-
-
-
+    /**
+     * inject mail
+     *
+     * @param \TYPO3\CMS\Core\Mail\MailMessage $mail
+     * @return void
+     */
+    public function injectMail(\TYPO3\CMS\Core\Mail\MailMessage $mail)
+    {
+        $this->mail = $mail;
+    }
 
     /**
-     * preprocessing of all actions
+     * inject extConf
+     *
+     * @param \JWeiland\Yellowpages2\Configuration\ExtConf $extConf
+     * @return void
+     */
+    public function injectExtConf(\JWeiland\Yellowpages2\Configuration\ExtConf $extConf)
+    {
+        $this->extConf = $extConf;
+    }
+
+    /**
+     * inject persistenceManager
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
+     * @return void
+     */
+    public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
+    /**
+     * inject companyRepository
+     *
+     * @param \JWeiland\Yellowpages2\Domain\Repository\CompanyRepository $companyRepository
+     * @return void
+     */
+    public function injectCompanyRepository(\JWeiland\Yellowpages2\Domain\Repository\CompanyRepository $companyRepository)
+    {
+        $this->companyRepository = $companyRepository;
+    }
+
+    /**
+     * inject districtRepository
+     *
+     * @param \JWeiland\Yellowpages2\Domain\Repository\DistrictRepository $districtRepository
+     * @return void
+     */
+    public function injectDistrictRepository(\JWeiland\Yellowpages2\Domain\Repository\DistrictRepository $districtRepository)
+    {
+        $this->districtRepository = $districtRepository;
+    }
+
+    /**
+     * inject categoryRepository
+     *
+     * @param \JWeiland\Yellowpages2\Domain\Repository\CategoryRepository $categoryRepository
+     * @return void
+     */
+    public function injectCategoryRepository(\JWeiland\Yellowpages2\Domain\Repository\CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * inject feUserRepository
+     *
+     * @param \JWeiland\Yellowpages2\Domain\Repository\FeUserRepository $feUserRepository
+     * @return void
+     */
+    public function injectFeUserRepository(\JWeiland\Yellowpages2\Domain\Repository\FeUserRepository $feUserRepository)
+    {
+        $this->feUserRepository = $feUserRepository;
+    }
+
+    /**
+     * inject session
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\Session $session
+     * @return void
+     */
+    public function injectSession(\TYPO3\CMS\Extbase\Persistence\Generic\Session $session)
+    {
+        $this->session = $session;
+    }
+
+    /**
+     * PreProcessing of all actions
      *
      * @return void
      */

@@ -5,7 +5,7 @@ namespace JWeiland\Yellowpages2\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,19 +36,35 @@ class EmailController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     /**
      * @var \TYPO3\CMS\Core\Mail\MailMessage
-     * @inject
      */
     protected $mail;
 
     /**
      * @var \JWeiland\Yellowpages2\Configuration\ExtConf
-     * @inject
      */
     protected $extConf;
 
+    /**
+     * inject mail
+     *
+     * @param \TYPO3\CMS\Core\Mail\MailMessage $mail
+     * @return void
+     */
+    public function injectMail(\TYPO3\CMS\Core\Mail\MailMessage $mail)
+    {
+        $this->mail = $mail;
+    }
 
-
-
+    /**
+     * inject extConf
+     *
+     * @param \JWeiland\Yellowpages2\Configuration\ExtConf $extConf
+     * @return void
+     */
+    public function injectExtConf(\JWeiland\Yellowpages2\Configuration\ExtConf $extConf)
+    {
+        $this->extConf = $extConf;
+    }
 
     /**
      * action send

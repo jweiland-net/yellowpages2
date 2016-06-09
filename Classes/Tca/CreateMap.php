@@ -24,6 +24,7 @@ namespace JWeiland\Yellowpages2\Tca;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use JWeiland\Maps2\Utility\GeocodeUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -33,17 +34,20 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class CreateMap
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
      */
     protected $objectManager;
 
+    /**
+     * @var GeocodeUtility
+     */
+    protected $geocodeUtility;
+
+    /**
+     * @var array
+     */
     protected $currentRecord = array();
-
-
-
-
 
     /**
      * initializes this object
@@ -51,6 +55,7 @@ class CreateMap
     public function init()
     {
         $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->geocodeUtility = $this->objectManager->get('JWeiland\\Maps2\\Utility\\GeocodeUtility');
     }
 
     /**
@@ -83,9 +88,8 @@ class CreateMap
             $this->updateMmEntries();
         } else {
             // create new map-record and set them in relation
-            $jSon = GeneralUtility::getUrl('http://maps.googleapis.com/maps/api/geocode/json?address=' . $this->getAddress() . '&sensor=false');
-            $response = json_decode($jSon, true);
-            if (is_array($response) && $response['status'] === 'OK') {
+            $response = $this->geocodeUtility->findPositionByAddress($this->getAddress());
+            if (count($response)) {
                 $location = $response['results'][0]['geometry']['location'];
                 $address = $response['results'][0]['formatted_address'];
                 $poiUid = $this->createNewPoiCollection($location, $address);

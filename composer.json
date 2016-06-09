@@ -2,7 +2,7 @@
     "name": "jweiland/yellowpages2",
     "type": "typo3-cms-extension",
     "description": "With this extension you can build your own industry directory",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "GPL-2.0+",
     "keywords": ["typo3", "TYPO3 CMS", "yellowpages", "industry", "directory"],
     "homepage": "http://www.jweiland.net",

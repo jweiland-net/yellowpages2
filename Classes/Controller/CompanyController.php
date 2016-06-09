@@ -32,7 +32,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class CompanyController extends AbstractController
 {
-
     /**
      * action list
      *
@@ -157,7 +156,7 @@ class CompanyController extends AbstractController
         $company->setFeUser($feUser);
 
         // set map record
-        $results = $this->googleMaps->findPositionByAddress($company->getAddress());
+        $results = $this->geocodeUtility->findPositionByAddress($company->getAddress());
         if (count($results)) {
             $results->rewind();
             /** @var \JWeiland\Maps2\Domain\Model\RadiusResult $result */

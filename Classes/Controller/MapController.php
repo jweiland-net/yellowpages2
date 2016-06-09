@@ -35,12 +35,21 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class MapController extends AbstractController
 {
-
     /**
      * @var \JWeiland\Maps2\Configuration\ExtConf
-     * @inject
      */
     protected $extConfOfMaps2;
+
+    /**
+     * inject extConfOfMaps2
+     *
+     * @param \JWeiland\Maps2\Configuration\ExtConf $extConfOfMaps2
+     * @return void
+     */
+    public function injectExtConfOfMaps2(\JWeiland\Maps2\Configuration\ExtConf $extConfOfMaps2)
+    {
+        $this->extConfOfMaps2 = $extConfOfMaps2;
+    }
 
     /**
      * action new
