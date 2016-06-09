@@ -25,10 +25,12 @@ namespace JWeiland\Yellowpages2\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use JWeiland\Maps2\Domain\Model\PoiCollection;
+use JWeiland\Maps2\Domain\Model\RadiusResult;
 use JWeiland\Maps2\Utility\GeocodeUtility;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -36,7 +38,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class AbstractController extends ActionController
 {
 
     /**
@@ -305,7 +307,10 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * Add new PoiCollection to Company, if company is new
      *
      * @param Company $company
+     *
      * @return void
+     *
+     * @throws \Exception
      */
     protected function addNewPoiCollectionToCompany(Company $company)
     {
@@ -314,13 +319,18 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $response = $geocodeUtility->findPositionByAddress($company->getAddress());
         /* @var \JWeiland\Maps2\Domain\Model\RadiusResult $location */
         $location = $response->current();
-        /** @var PoiCollection $poiCollection */
-        $poiCollection = $this->objectManager->get('JWeiland\\Maps2\\Domain\\Model\\PoiCollection');
-        $poiCollection->setCollectionType('Point');
-        $poiCollection->setTitle($company->getCompany());
-        $poiCollection->setLatitude($location->getGeometry()->getLocation()->getLatitude());
-        $poiCollection->setLongitude($location->getGeometry()->getLocation()->getLongitude());
-        $poiCollection->setAddress($location->getFormattedAddress());
-        $company->setTxMaps2Uid($poiCollection);
+        if ($location instanceof RadiusResult) {
+            /** @var PoiCollection $poiCollection */
+            $poiCollection = $this->objectManager->get('JWeiland\\Maps2\\Domain\\Model\\PoiCollection');
+            $poiCollection->setCollectionType('Point');
+            $poiCollection->setTitle($company->getCompany());
+            $poiCollection->setLatitude($location->getGeometry()->getLocation()->getLatitude());
+            $poiCollection->setLongitude($location->getGeometry()->getLocation()->getLongitude());
+            $poiCollection->setAddress($location->getFormattedAddress());
+            $company->setTxMaps2Uid($poiCollection);
+        } else {
+            DebuggerUtility::var_dump($response);
+            throw new \Exception('Can\'t find a result for address: ' . $company->getAddress() . '. Activate Debugging for a more detailed output.', 1465474954);
+        }
     }
 }
