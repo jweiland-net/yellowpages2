@@ -92,6 +92,11 @@ class AbstractController extends ActionController
     protected $session;
 
     /**
+     * @var \JWeiland\Maps2\Utility\GeocodeUtility
+     */
+    protected $geocodeUtility;
+
+    /**
      * @var string
      */
     protected $letters = '0-9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
@@ -182,6 +187,17 @@ class AbstractController extends ActionController
     public function injectSession(\TYPO3\CMS\Extbase\Persistence\Generic\Session $session)
     {
         $this->session = $session;
+    }
+
+    /**
+     * inject geocodeUtility
+     *
+     * @param \JWeiland\Maps2\Utility\GeocodeUtility $geocodeUtility
+     * @return void
+     */
+    public function injectGeocodeUtility(\JWeiland\Maps2\Utility\GeocodeUtility $geocodeUtility)
+    {
+        $this->geocodeUtility = $geocodeUtility;
     }
 
     /**
@@ -314,9 +330,7 @@ class AbstractController extends ActionController
      */
     protected function addNewPoiCollectionToCompany(Company $company)
     {
-        /** @var GeocodeUtility $geocodeUtility */
-        $geocodeUtility = $this->objectManager->get('JWeiland\\Maps2\\Utility\\GeocodeUtility');
-        $response = $geocodeUtility->findPositionByAddress($company->getAddress());
+        $response = $this->geocodeUtility->findPositionByAddress($company->getAddress());
         /* @var \JWeiland\Maps2\Domain\Model\RadiusResult $location */
         $location = $response->current();
         if ($location instanceof RadiusResult) {
