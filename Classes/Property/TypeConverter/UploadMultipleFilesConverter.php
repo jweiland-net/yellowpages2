@@ -34,66 +34,85 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class UploadMultipleFilesConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter
 {
-
     /**
      * @var array<string>
      */
     protected $sourceTypes = array('array');
-
+    
     /**
      * @var string
      */
     protected $targetType = 'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage';
-
+    
     /**
      * @var integer
      */
     protected $priority = 2;
-
+    
     /**
-     * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-     * @inject
-     */
-    protected $fileFactory;
-
-    /**
-     * This implementation always returns TRUE for this method.
+     * Return true, if images were uploaded
      *
      * @param mixed $source the source data
      * @param string $targetType the type to convert to.
+     *
      * @return boolean TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
-     * @api
      */
     public function canConvertFrom($source, $targetType)
     {
         // check if $source consists of uploaded files
         foreach ($source as $uploadedFile) {
-            if (!isset($uploadedFile['error']) || !isset($uploadedFile['name']) || !isset($uploadedFile['size']) || !isset($uploadedFile['tmp_name']) || !isset($uploadedFile['type'])) {
+            if (
+                !isset($uploadedFile['error']) ||
+                !isset($uploadedFile['name']) ||
+                !isset($uploadedFile['size']) ||
+                !isset($uploadedFile['tmp_name']) ||
+                !isset($uploadedFile['type'])
+            ) {
                 return false;
             }
         }
+        
         return true;
     }
-
+    
     /**
      * Actually convert from $source to $targetType, taking into account the fully
      * built $convertedChildProperties and $configuration.
      *
-     * @param array $source
+     * The return value can be one of three types:
+     * - an arbitrary object, or a simple type (which has been created while mapping).
+     *   This is the normal case.
+     * - NULL, indicating that this object should *not* be mapped (i.e. a "File Upload" Converter could return NULL if no file has been uploaded, and a silent failure should occur.
+     * - An instance of \TYPO3\CMS\Extbase\Error\Error -- This will be a user-visible error message later on.
+     * Furthermore, it should throw an Exception if an unexpected failure (like a security error) occurred or a configuration issue happened.
+     *
+     * @param mixed $source
      * @param string $targetType
      * @param array $convertedChildProperties
      * @param \TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface $configuration
-     * @throws \TYPO3\CMS\Extbase\Property\Exception
-     * @return \TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder
-     * @api
+     *
+     * @return mixed|\TYPO3\CMS\Extbase\Error\Error the target type, or an error object if a user-error occurred
+     *
+     * @throws \TYPO3\CMS\Extbase\Property\Exception\TypeConverterException thrown in case a developer error occurred
      */
-    public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface $configuration = null)
-    {
+    public function convertFrom(
+        $source,
+        $targetType,
+        array $convertedChildProperties = array(),
+        \TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface $configuration = null
+    ) {
         $alreadyPersistedImages = $configuration->getConfigurationValue('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadMultipleFilesConverter', 'IMAGES');
         $originalSource = $source;
         foreach ($originalSource as $key => $uploadedFile) {
             // check if $source contains an uploaded file. 4 = no file uploaded
-            if (!isset($uploadedFile['error']) || !isset($uploadedFile['name']) || !isset($uploadedFile['size']) || !isset($uploadedFile['tmp_name']) || !isset($uploadedFile['type']) || $uploadedFile['error'] === 4) {
+            if (
+                !isset($uploadedFile['error']) ||
+                !isset($uploadedFile['name']) ||
+                !isset($uploadedFile['size']) ||
+                !isset($uploadedFile['tmp_name']) ||
+                !isset($uploadedFile['type']) ||
+                $uploadedFile['error'] === 4
+            ) {
                 if ($alreadyPersistedImages[$key] !== null) {
                     $source[$key] = $alreadyPersistedImages[$key];
                 } else {
@@ -103,16 +122,31 @@ class UploadMultipleFilesConverter extends \TYPO3\CMS\Extbase\Property\TypeConve
             }
             // check if uploaded file returns an error
             if (!$uploadedFile['error'] === 0) {
-                return new \TYPO3\CMS\Extbase\Error\Error(LocalizationUtility::translate('error.upload', 'yellowpages2') . $uploadedFile['error'], 1396957314);
+                return new \TYPO3\CMS\Extbase\Error\Error(
+                    LocalizationUtility::translate('error.upload', 'yellowpages2') . $uploadedFile['error'],
+                    1396957314
+                );
             }
             // now we have a valid uploaded file. Check if user has rights to upload this file
             if (!isset($uploadedFile['rights']) || empty($uploadedFile['rights'])) {
-                return new \TYPO3\CMS\Extbase\Error\Error(LocalizationUtility::translate('error.uploadRights', 'yellowpages2'), 1397464390);
+                return new \TYPO3\CMS\Extbase\Error\Error(
+                    LocalizationUtility::translate('error.uploadRights', 'yellowpages2'),
+                    1397464390
+                );
             }
             // check if file extension is allowed
             $fileParts = GeneralUtility::split_fileref($uploadedFile['name']);
             if (!GeneralUtility::inList($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'], $fileParts['fileext'])) {
-                return new \TYPO3\CMS\Extbase\Error\Error(LocalizationUtility::translate('error.fileExtension', 'yellowpages2', array($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])), 1402981282);
+                return new \TYPO3\CMS\Extbase\Error\Error(
+                    LocalizationUtility::translate(
+                        'error.fileExtension',
+                        'yellowpages2',
+                        array(
+                            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+                        )
+                    ),
+                    1402981282
+                );
             }
             // OK...we have a valid file and the user has the rights. It's time to check, if an old file can be deleted
             if ($alreadyPersistedImages[$key] instanceof \JWeiland\Yellowpages2\Domain\Model\FileReference) {
@@ -121,84 +155,58 @@ class UploadMultipleFilesConverter extends \TYPO3\CMS\Extbase\Property\TypeConve
                 $oldFile->getOriginalResource()->getOriginalFile()->delete();
             }
         }
-
+        
         // I will do two foreach here. First: everything must be OK, before files will be uploaded
-
+        
         // upload file and add it to ObjectStorage
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $references */
         $references = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
-        $tableName = $configuration->getConfigurationValue('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadMultipleFilesConverter', 'TABLENAME');
         foreach ($source as $uploadedFile) {
-            if ($uploadedFile instanceof \JWeiland\Yellowpages2\Domain\Model\FileReference) {
+            if ($uploadedFile instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
                 $references->attach($uploadedFile);
             } else {
-                $references->attach($this->getReference($uploadedFile, $tableName));
+                $references->attach($this->getExtbaseFileReference($uploadedFile));
             }
         }
+        
         return $references;
     }
-
+    
     /**
-     * upload file and get a file reference object
+     * upload file and get a file reference object.
+     *
+     * @param array  $source
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    protected function getExtbaseFileReference($source)
+    {
+        /** @var $reference \TYPO3\CMS\Extbase\Domain\Model\FileReference */
+        $extbaseFileReference = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference');
+        $extbaseFileReference->setOriginalResource($this->getCoreFileReference($source));
+        
+        return $extbaseFileReference;
+    }
+    
+    /**
+     * upload file and get a file reference object.
      *
      * @param array $source
-     * @param string $tableName
-     * @return \JWeiland\Yellowpages2\Domain\Model\FileReference
-     * @throws \TYPO3\CMS\Extbase\Property\Exception
-     */
-    protected function getReference($source, $tableName)
-    {
-        // upload file
-        $storage = ResourceFactory::getInstance()->getStorageObject(0);
-        $uploadedFile = $storage->addUploadedFile($source, $storage->getFolder('uploads/tx_yellowpages2/'), $this->getTargetFileName($source), 'changeName');
-        if (!$uploadedFile instanceof \TYPO3\CMS\Core\Resource\File) {
-            throw new \TYPO3\CMS\Extbase\Property\Exception('Uploaded file is not of type \\TYPO3\\CMS\\Core\\Resource\\File', 1396963537);
-        }
-        // create reference
-        /** @var $reference \JWeiland\Yellowpages2\Domain\Model\FileReference */
-        $reference = $this->objectManager->get('JWeiland\\Yellowpages2\\Domain\\Model\\FileReference');
-        $reference->setTablenames($tableName);
-        $reference->setTitle($uploadedFile->getName());
-        $reference->setUidLocal($uploadedFile->getUid());
-        $reference->setOriginalResource($uploadedFile);
-        return $reference;
-    }
-
-    /**
-     * Gets a Folder object from an identifier
      *
-     * @param string $identifier
-     * @return \TYPO3\CMS\Core\Resource\Folder|\TYPO3\CMS\Core\Resource\File
-     * @throws \TYPO3\CMS\Core\Resource\Exception\InvalidFileException
-     */
-    protected function getFolderObject($identifier)
-    {
-        $object = $this->fileFactory->retrieveFileOrFolderObject($identifier);
-        if (!is_object($object)) {
-            throw new \TYPO3\CMS\Core\Resource\Exception\InvalidFileException('The item ' . $identifier . ' was not a file or directory!!', 1320122453);
-        }
-        return $object;
-    }
-
-    /**
-     * creates a target filename
-     * orig: dog.PNg --> dog_35268592817.png
-     *
-     * @param array $source
-     * @return string
-     */
-    protected function getTargetFileName(array $source)
-    {
-        $fileParts = GeneralUtility::split_fileref($source['name']);
-        return $fileParts['filebody'] . '_' . time() . '.' . $fileParts['fileext'];
-    }
-
-    /**
-     * @param integer $source
      * @return \TYPO3\CMS\Core\Resource\FileReference
      */
-    protected function getOriginalResource($source)
+    protected function getCoreFileReference(array $source)
     {
-        return $this->fileFactory->getFileReferenceObject($source);
+        // upload file
+        $uploadFolder = ResourceFactory::getInstance()->retrieveFileOrFolderObject('uploads/tx_yellowpages2/');
+        $uploadedFile = $uploadFolder->addUploadedFile($source, 'changeName');
+        // create Core FileReference
+        return ResourceFactory::getInstance()->createFileReferenceObject(
+            array(
+                'uid_local' => $uploadedFile->getUid(),
+                'uid_foreign' => uniqid('NEW_'),
+                'uid' => uniqid('NEW_'),
+            )
+        );
     }
 }
