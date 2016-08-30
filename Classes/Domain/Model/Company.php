@@ -31,7 +31,6 @@ namespace JWeiland\Yellowpages2\Domain\Model;
  */
 class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Hidden
      *
@@ -59,7 +58,7 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \JWeiland\Yellowpages2\Domain\Model\FileReference
      */
-    protected $logo = null;
+    protected $logo;
 
     /**
      * Images
@@ -209,7 +208,7 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \JWeiland\Maps2\Domain\Model\PoiCollection
      */
-    protected $txMaps2Uid = null;
+    protected $txMaps2Uid;
 
     /**
      * FeUser
@@ -217,12 +216,8 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \JWeiland\Yellowpages2\Domain\Model\FeUser
      * @lazy
      */
-    protected $feUser = null;
-
-
-
-
-
+    protected $feUser;
+    
     /**
      * Constructor of this object
      */
