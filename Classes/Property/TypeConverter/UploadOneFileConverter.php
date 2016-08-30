@@ -27,12 +27,13 @@ namespace JWeiland\Yellowpages2\Property\TypeConverter;
  ***************************************************************/
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Converter for uploads.
  */
-class UploadOneFileConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter
+class UploadOneFileConverter extends AbstractTypeConverter
 {
     /**
      * @var array<string>
@@ -45,7 +46,7 @@ class UploadOneFileConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\A
     protected $targetType = 'JWeiland\\Yellowpages2\\Domain\\Model\\FileReference';
 
     /**
-     * @var integer
+     * @var int
      */
     protected $priority = 2;
 
@@ -81,7 +82,7 @@ class UploadOneFileConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\A
         array $convertedChildProperties = array(),
         \TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface $configuration = NULL
     ) {
-        /** @var \JWeiland\Yellowpages2\Domain\Model\Filereference $alreadyPersistedImage */
+        /** @var \TYPO3\CMS\Extbase\Domain\Model\Filereference $alreadyPersistedImage */
         $alreadyPersistedImage = $configuration->getConfigurationValue('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadOneFileConverter', 'IMAGE');
 
         // if no file was uploaded use the already persisted one

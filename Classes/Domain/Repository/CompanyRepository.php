@@ -5,7 +5,7 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,21 +24,25 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Query;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class CompanyRepository extends Repository
 {
 
     /**
      * @var array
      */
     protected $defaultOrderings = array(
-        'company' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'company' => QueryInterface::ORDER_ASCENDING
     );
 
     /**
@@ -53,7 +57,7 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * find company by uid whether it is hidden or not
      *
-     * @param integer $companyUid
+     * @param int $companyUid
      * @return \JWeiland\Yellowpages2\Domain\Model\Company
      */
     public function findHiddenEntryByUid($companyUid)
@@ -61,7 +65,10 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(array('disabled'));
-        return $query->matching($query->equals('uid', (int) $companyUid))->execute()->getFirst();
+        
+        /** @var Company $company */
+        $company = $query->matching($query->equals('uid', (int)$companyUid))->execute()->getFirst();
+        return $company;
     }
 
     /**
@@ -124,6 +131,7 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         } else {
             $addWhere = '';
         }
+        /** @var Query $query */
         $query = $this->createQuery();
         return $query->statement('
 			SELECT UPPER(LEFT(company, 1)) as letter
@@ -140,7 +148,7 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * search records
      *
      * @param string $search
-     * @param integer $category
+     * @param int $category
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function searchCompanies($search, $category)
@@ -162,6 +170,7 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $longStreetSearch = str_ireplace('str', 'straße', $search);
         }
 
+        /** @var Query $query */
         $query = $this->createQuery();
 
         $constraint = array();
@@ -189,10 +198,11 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * return grouped categories
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return array
      */
     public function getGroupedCategories()
     {
+        /** @var Query $query */
         $query = $this->createQuery();
         $results = $query->statement('
 			SELECT sys_category.uid, sys_category.title
@@ -220,7 +230,7 @@ class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * find all records which are older than given days
      * Hint: Needed by scheduler
      *
-     * @param integer $days
+     * @param int $days
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findOlderThan($days)

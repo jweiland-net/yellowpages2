@@ -126,21 +126,31 @@ return array(
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.logo',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                    'logo', array(
-                        'minitems' => 0,
-                        'maxitems' => 1
-                    )
-                ),
+                'logo', array(
+                    'minitems' => 0,
+                    'maxitems' => 1,
+                    'foreign_match_fields' => array(
+                        'fieldname' => 'logo',
+                        'tablenames' => 'tx_yellowpages2_domain_model_company',
+                        'table_local' => 'sys_file',
+                    ),
+                )
+            ),
         ),
         'images' => array(
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.images',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                    'images', array(
-                        'minitems' => 0,
-                        'maxitems' => 5
-                    )
-                ),
+                'images', array(
+                    'minitems' => 0,
+                    'maxitems' => 5,
+                    'foreign_match_fields' => array(
+                        'fieldname' => 'images',
+                        'tablenames' => 'tx_yellowpages2_domain_model_company',
+                        'table_local' => 'sys_file',
+                    ),
+                )
+            ),
         ),
         'street' => array(
             'exclude' => 1,

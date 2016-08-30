@@ -32,7 +32,6 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class ExtConf implements SingletonInterface
 {
-
     /**
      * editLink
      *

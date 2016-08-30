@@ -166,7 +166,7 @@ class MapController extends AbstractController
      *
      * @param string $subjectKey
      * @param Company $company
-     * @return integer The amount of email receivers
+     * @return int The amount of email receivers
      */
     public function sendMail($subjectKey, Company $company)
     {

@@ -63,7 +63,7 @@ class CreateMap
      *
      * @param string $status "new" od something else to update the record
      * @param string $table The table name
-     * @param integer $uid The UID of the new or updated record. Can be prepended with NEW if record is new. Use: $this->substNEWwithIDs to convert
+     * @param int $uid The UID of the new or updated record. Can be prepended with NEW if record is new. Use: $this->substNEWwithIDs to convert
      * @param array $fieldArray The fields of the current record
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
      * @return void
@@ -106,7 +106,7 @@ class CreateMap
      * While updating a record only the changed fields will be in $fieldArray
      *
      * @param string $table
-     * @param integer $uid
+     * @param int $uid
      * @return array
      */
     public function getFullRecord($table, $uid)
@@ -136,7 +136,7 @@ class CreateMap
      * try to find a similar poiCollection
      *
      * @param array $location
-     * @return integer The UID of the PoiCollection. 0 if not found
+     * @return int The UID of the PoiCollection. 0 if not found
      */
     public function findPoiByLocation(array $location)
     {
@@ -157,7 +157,7 @@ class CreateMap
     /**
      * update yellowpages record
      *
-     * @param integer $poi
+     * @param int $poi
      * @return void
      */
     public function updateCurrentRecord($poi)
@@ -175,7 +175,7 @@ class CreateMap
      *
      * @param array $location
      * @param string $address Formatted Address returned from Google
-     * @return integer insert UID
+     * @return int insert UID
      */
     public function createNewPoiCollection(array $location, $address)
     {

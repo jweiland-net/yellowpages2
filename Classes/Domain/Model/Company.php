@@ -24,12 +24,13 @@ namespace JWeiland\Yellowpages2\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Company extends AbstractEntity
 {
     /**
      * Hidden
@@ -56,14 +57,14 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Logo
      *
-     * @var \JWeiland\Yellowpages2\Domain\Model\FileReference
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $logo;
 
     /**
      * Images
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\FileReference>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
     protected $images;
 
@@ -294,7 +295,7 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the logo
      * This is only needed by the edit form
      *
-     * @return \JWeiland\Yellowpages2\Domain\Model\FileReference $logo
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $logo
      */
     public function getLogo()
     {
@@ -304,10 +305,10 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the logo
      *
-     * @param \JWeiland\Yellowpages2\Domain\Model\FileReference $logo
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $logo
      * @return void
      */
-    public function setLogo(\JWeiland\Yellowpages2\Domain\Model\FileReference $logo = null)
+    public function setLogo(\TYPO3\CMS\Extbase\Domain\Model\FileReference $logo = null)
     {
         $this->logo = $logo;
     }

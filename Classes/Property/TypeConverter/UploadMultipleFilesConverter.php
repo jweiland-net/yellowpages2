@@ -27,12 +27,13 @@ namespace JWeiland\Yellowpages2\Property\TypeConverter;
  ***************************************************************/
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Converter for uploads.
  */
-class UploadMultipleFilesConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter
+class UploadMultipleFilesConverter extends AbstractTypeConverter
 {
     /**
      * @var array<string>
@@ -45,7 +46,7 @@ class UploadMultipleFilesConverter extends \TYPO3\CMS\Extbase\Property\TypeConve
     protected $targetType = 'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage';
     
     /**
-     * @var integer
+     * @var int
      */
     protected $priority = 2;
     
@@ -149,8 +150,8 @@ class UploadMultipleFilesConverter extends \TYPO3\CMS\Extbase\Property\TypeConve
                 );
             }
             // OK...we have a valid file and the user has the rights. It's time to check, if an old file can be deleted
-            if ($alreadyPersistedImages[$key] instanceof \JWeiland\Yellowpages2\Domain\Model\FileReference) {
-                /** @var \JWeiland\Yellowpages2\Domain\Model\FileReference $oldFile */
+            if ($alreadyPersistedImages[$key] instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+                /** @var \TYPO3\CMS\Extbase\Domain\Model\FileReference $oldFile */
                 $oldFile = $alreadyPersistedImages[$key];
                 $oldFile->getOriginalResource()->getOriginalFile()->delete();
             }

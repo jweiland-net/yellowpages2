@@ -24,14 +24,16 @@ namespace JWeiland\Yellowpages2\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Resource\FileInterface;
+use TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder;
+use TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper;
 
 /**
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class GrayScaleImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
+class GrayScaleImageViewHelper extends ImageViewHelper
 {
-
     /**
      * Resizes a given image (if required) and renders the respective img tag
      *
@@ -40,10 +42,10 @@ class GrayScaleImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHel
      * @param FileInterface|AbstractFileFolder $image
      * @param string $width width of the image. This can be a numeric value representing the fixed width of the image in pixels. But you can also perform simple calculations by adding "m" or "c" to the value. See imgResource.width for possible options.
      * @param string $height height of the image. This can be a numeric value representing the fixed height of the image in pixels. But you can also perform simple calculations by adding "m" or "c" to the value. See imgResource.width for possible options.
-     * @param integer $minWidth minimum width of the image
-     * @param integer $minHeight minimum height of the image
-     * @param integer $maxWidth maximum width of the image
-     * @param integer $maxHeight maximum height of the image
+     * @param int $minWidth minimum width of the image
+     * @param int $minHeight minimum height of the image
+     * @param int $maxWidth maximum width of the image
+     * @param int $maxHeight maximum height of the image
      * @param boolean $treatIdAsReference given src argument is a sys_file_reference record
      *
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
