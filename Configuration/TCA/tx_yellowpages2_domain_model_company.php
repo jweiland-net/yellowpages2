@@ -261,13 +261,15 @@ return array(
                 'eval' => 'trim,required',
                 'wizards' => array(
                     'RTE' => array(
-                        'icon' => 'wizard_rte2.gif',
-                        'notNewRecords'=> 1,
+                        'notNewRecords' => 1,
                         'RTEonly' => 1,
-                        'script' => 'wizard_rte.php',
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xml:bodytext.W.RTE',
-                        'type' => 'script'
-                    )
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
+                        'module' => array(
+                            'name' => 'wizard_rte'
+                        )
+                    ),
                 )
             ),
             'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
@@ -330,14 +332,15 @@ return array(
                 'size' => 30,
                 'eval' => 'trim',
                 'wizards' => array(
-                    '_PADDING' => 2,
                     'link' => array(
                         'type' => 'popup',
-                        'title' => 'Link',
-                        'icon' => 'link_popup.gif',
-                        'script' => 'browse_links.php?mode=wizard',
-                        'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-                    )
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'module' => array(
+                            'name' => 'wizard_link',
+                        ),
+                        'JSopenParams' => 'width=800,height=600,status=0,menubar=0,scrollbars=1'
+                    ),
                 ),
                 'softref' => 'typolink[linkList]',
             ),
@@ -350,14 +353,15 @@ return array(
                 'size' => 30,
                 'eval' => 'trim',
                 'wizards' => array(
-                    '_PADDING' => 2,
                     'link' => array(
                         'type' => 'popup',
-                        'title' => 'Link',
-                        'icon' => 'link_popup.gif',
-                        'script' => 'browse_links.php?mode=wizard',
-                        'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-                    )
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'module' => array(
+                            'name' => 'wizard_link',
+                        ),
+                        'JSopenParams' => 'width=800,height=600,status=0,menubar=0,scrollbars=1'
+                    ),
                 ),
                 'softref' => 'typolink[linkList]',
             ),
@@ -370,14 +374,15 @@ return array(
                 'size' => 30,
                 'eval' => 'trim',
                 'wizards' => array(
-                    '_PADDING' => 2,
                     'link' => array(
                         'type' => 'popup',
-                        'title' => 'Link',
-                        'icon' => 'link_popup.gif',
-                        'script' => 'browse_links.php?mode=wizard',
-                        'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-                    )
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'module' => array(
+                            'name' => 'wizard_link',
+                        ),
+                        'JSopenParams' => 'width=800,height=600,status=0,menubar=0,scrollbars=1'
+                    ),
                 ),
                 'softref' => 'typolink[linkList]',
             ),
