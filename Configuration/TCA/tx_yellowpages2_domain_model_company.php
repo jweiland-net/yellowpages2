@@ -390,46 +390,25 @@ return array(
         'main_trade' => array(
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.mainTrade',
-            'config' => array(
-                'type' => 'select',
-                'foreign_table' => 'sys_category',
-                'renderMode' => 'tree',
-                'size' => 10,
-                'autoSizeMax' => 50,
-                'treeConfig' => array(
-                    'parentField' => 'parent',
-                    'appearance' => array(
-                        'showHeader' => true,
-                        'expandAll' => true,
-                    ),
-                ),
-                'minitems' => 0,
-                'maxitems' => 1,
+            'config' => \TYPO3\CMS\Core\Category\CategoryRegistry::getTcaFieldConfiguration(
+                'tx_yellowpages2_domain_model_company',
+                'main_trade',
+                array(
+                    'maxitems' => 1,
+                    'minitems' => 0,
+                )
             ),
         ),
         'trades' => array(
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.trades',
-            'config' => array(
-                'type' => 'select',
-                'foreign_table' => 'sys_category',
-                'MM' => 'sys_category_record_mm',
-                'MM_match_fields' => array(
-                    'tablenames' => 'tx_yellowpages2_domain_model_company',
-                    'fieldname' => 'trades'
-                ),
-                'MM_opposite_field' => 'items',
-                'renderMode' => 'tree',
-                'treeConfig' => array(
-                    'rootUid' => 0,
-                    'parentField' => 'parent',
-                    'appearance' => array(
-                        'showHeader' => true,
-                        'expandAll' => false,
-                    ),
-                ),
-                'minitems' => 0,
-                'maxitems' => 2,
+            'config' => \TYPO3\CMS\Core\Category\CategoryRegistry::getTcaFieldConfiguration(
+                'tx_yellowpages2_domain_model_company',
+                'trades',
+                array(
+                    'maxitems' => 2,
+                    'minitems' => 0,
+                )
             ),
         ),
     ),

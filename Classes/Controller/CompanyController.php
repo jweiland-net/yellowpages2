@@ -43,7 +43,7 @@ class CompanyController extends AbstractController
     public function listAction($letter = null)
     {
         $companies = $this->companyRepository->findByStartingLetter($letter, $this->settings);
-
+    
         $this->view->assign('companies', $companies);
         $this->view->assign('glossar', $this->getGlossar($this->settings['showWspMembers']));
         $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
