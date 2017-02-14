@@ -184,7 +184,7 @@ class CompanyRepository extends Repository
         
         if (!empty($category)) {
             $constraint[] = $query->logicalOr(array(
-                $query->equals('mainTrade', $category),
+                $query->contains('mainTrade', $category),
                 $query->contains('trades', $category),
             ));
         }
