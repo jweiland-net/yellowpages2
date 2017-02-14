@@ -152,10 +152,13 @@ class CompanyRepository extends Repository
      */
     public function searchCompanies($search, $category)
     {
+        /** @var Query $query */
+        $query = $this->createQuery();
+    
         // strtolower is not UTF-8 compatible
         // $search = strtolower($search);
-        $longStreetSearch = $search;
-        $smallStreetSearch = $search;
+        $longStreetSearch = trim($search);
+        $smallStreetSearch = trim($search);
 
         // unify street search
         if (strtolower($this->charsetConverter->utf8_substr($search, -6) === 'straße')) {
@@ -168,29 +171,28 @@ class CompanyRepository extends Repository
         if (strtolower($this->charsetConverter->utf8_substr($search, -3)) === 'str') {
             $longStreetSearch = str_ireplace('str', 'straße', $search);
         }
-
-        /** @var Query $query */
-        $query = $this->createQuery();
-
+        
         $constraint = array();
-        $constraint[] = $query->like('company', '%' . $search . '%');
-        $constraint[] = $query->like('street', '%' . $smallStreetSearch . '%');
-        $constraint[] = $query->like('street', '%' . $longStreetSearch . '%');
+        
+        if (!empty($longStreetSearch)) {
+            $searchConstraint = array();
+            $searchConstraint[] = $query->like('company', '%' . $search . '%');
+            $searchConstraint[] = $query->like('street', '%' . $smallStreetSearch . '%');
+            $searchConstraint[] = $query->like('street', '%' . $longStreetSearch . '%');
+            $constraint[] = $query->logicalOr($searchConstraint);
+        }
+        
+        if (!empty($category)) {
+            $constraint[] = $query->logicalOr(array(
+                $query->equals('mainTrade', $category),
+                $query->contains('trades', $category),
+            ));
+        }
 
-        if ($category) {
-            return $query->matching(
-                $query->logicalAnd(
-                    $query->logicalOr($constraint),
-                    $query->logicalOr(array(
-                        $query->equals('mainTrade', $category),
-                        $query->contains('trades', $category),
-                    ))
-                )
-            )->execute();
+        if (!empty($constraint)) {
+            return $query->matching($query->logicalAnd($constraint))->execute();
         } else {
-            return $query->matching(
-                $query->logicalOr($constraint)
-            )->execute();
+            return $query->execute();
         }
     }
 
