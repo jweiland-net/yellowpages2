@@ -102,15 +102,19 @@ class CompanyRepository extends Repository
             }
             $constraintAnd[] = $query->logicalOr($constraintOr);
         }
-
-        if ($settings['district']) {
-            $constraintAnd[] = $query->equals('district', $settings['district']);
-        }
-
+    
         if ($settings['showWspMembers']) {
             $constraintAnd[] = $query->equals('wspMember', $settings['showWspMembers']);
         }
-
+    
+        if ($settings['presetMainTrade']) {
+            $constraintAnd[] = $query->equals('mainTrade.uid', $settings['presetMainTrade']);
+        }
+    
+        if ($settings['district']) {
+            $constraintAnd[] = $query->equals('district', $settings['district']);
+        }
+    
         if (count($constraintAnd)) {
             return $query->matching($query->logicalAnd($constraintAnd))->execute();
         } else {

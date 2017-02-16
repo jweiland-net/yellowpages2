@@ -10,6 +10,9 @@
 			<trans-unit id="showWspMembers" xml:space="preserve">
 				<source>Show only WSP Members</source>
 			</trans-unit>
+			<trans-unit id="presetMainTrade" xml:space="preserve">
+				<source>Preset main trade</source>
+			</trans-unit>
 			<trans-unit id="district" xml:space="preserve">
 				<source>District</source>
 			</trans-unit>
