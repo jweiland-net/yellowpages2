@@ -10,7 +10,8 @@ if (!defined('TYPO3_MODE')) {
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Industry Directory');
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_directory'] = 'pi_flexform';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_directory'] = 'pi_flexform';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_directory'] = 'select_key';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY . '_directory', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/YellowPages.xml');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_yellowpages2_domain_model_company', 'EXT:yellowpages2/Resources/Private/Language/locallang_csh_tx_yellowpages2_domain_model_company.xlf');
@@ -20,5 +21,5 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_directory']
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_yellowpages2_domain_model_district');
 
 $extConf = unserialize($_EXTCONF);
-$tsConfig = 'ext.yellowpages2.pid = ' . (int) $extConf['poiCollectionPid'];
+$tsConfig = 'ext.yellowpages2.pid = ' . (int)$extConf['poiCollectionPid'];
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig($tsConfig);
