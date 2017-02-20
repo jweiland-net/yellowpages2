@@ -109,8 +109,8 @@ class CompanyRepository extends Repository
     
         if ($settings['presetTrade']) {
             $constraintAnd[] = $query->logicalOr(array(
-                $query->contains('mainTrade.uid', $settings['presetTrade']),
-                $query->contains('trades.uid', $settings['presetTrade'])
+                $query->contains('mainTrade', $settings['presetTrade']),
+                $query->contains('trades', $settings['presetTrade'])
             ));
         }
     
@@ -191,8 +191,8 @@ class CompanyRepository extends Repository
         
         if (!empty($category)) {
             $constraint[] = $query->logicalOr(array(
-                $query->contains('mainTrade.uid', $category),
-                $query->contains('trades.uid', $category),
+                $query->contains('mainTrade', $category),
+                $query->contains('trades', $category),
             ));
         }
 
