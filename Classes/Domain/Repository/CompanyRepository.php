@@ -107,8 +107,11 @@ class CompanyRepository extends Repository
             $constraintAnd[] = $query->equals('wspMember', $settings['showWspMembers']);
         }
     
-        if ($settings['presetMainTrade']) {
-            $constraintAnd[] = $query->equals('mainTrade.uid', $settings['presetMainTrade']);
+        if ($settings['presetTrade']) {
+            $constraintAnd[] = $query->logicalOr(array(
+                $query->contains('mainTrade.uid', $settings['presetTrade']),
+                $query->contains('trades.uid', $settings['presetTrade'])
+            ));
         }
     
         if ($settings['district']) {
@@ -188,8 +191,8 @@ class CompanyRepository extends Repository
         
         if (!empty($category)) {
             $constraint[] = $query->logicalOr(array(
-                $query->contains('mainTrade', $category),
-                $query->contains('trades', $category),
+                $query->contains('mainTrade.uid', $category),
+                $query->contains('trades.uid', $category),
             ));
         }
 

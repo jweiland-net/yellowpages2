@@ -18,9 +18,9 @@
 							</config>
 						</TCEforms>
 					</settings.showWspMembers>
-					<settings.presetMainTrade>
+					<settings.presetTrade>
 						<TCEforms>
-							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:presetMainTrade</label>
+							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:presetTrade</label>
 							<config>
 								<type>select</type>
 								<renderType>selectTree</renderType>
@@ -41,7 +41,7 @@
 								</treeConfig>
 							</config>
 						</TCEforms>
-					</settings.presetMainTrade>
+					</settings.presetTrade>
 					<settings.district>
 						<TCEforms>
 							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:district</label>

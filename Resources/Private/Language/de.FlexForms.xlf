@@ -12,9 +12,9 @@
 				<source>Show only WSP Members</source>
 				<target>Zeige nur WSP Mitglieder</target>
 			</trans-unit>
-			<trans-unit id="presetMainTrade" xml:space="preserve">
-				<source>Preset main trade</source>
-				<target>Vorauswahl Hauptbranche</target>
+			<trans-unit id="presetTrade" xml:space="preserve">
+				<source>Preset trade</source>
+				<target>Vorauswahl Branche</target>
 			</trans-unit>
 			<trans-unit id="district" xml:space="preserve">
 				<source>District</source>
