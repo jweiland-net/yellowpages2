@@ -10,6 +10,24 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<switchableControllerActions>
+						<TCEforms>
+							<label>LLL:EXT:yellowpages/Resources/Private/Language/FlexForms.xlf:chooseAction</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0">LLL:EXT:yellowpages/Resources/Private/Language/FlexForms.xlf:list</numIndex>
+										<numIndex index="1" />
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:yellowpages/Resources/Private/Language/FlexForms.xlf:show</numIndex>
+										<numIndex index="1"><![CDATA[Company->show]]></numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</switchableControllerActions>
 					<settings.showWspMembers>
 						<TCEforms>
 							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:showWspMembers</label>
