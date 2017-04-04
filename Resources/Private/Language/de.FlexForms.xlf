@@ -24,6 +24,14 @@
 				<source>Detail view</source>
 				<target>Detailansicht</target>
 			</trans-unit>
+			<trans-unit id="pidOfDetailPage">
+				<source>PID of detail page</source>
+				<target>PID der Detailansicht</target>
+			</trans-unit>
+			<trans-unit id="pidOfListPage">
+				<source>PID of list page</source>
+				<target>PID der Listenansicht. Sinnvoll, wenn auch eine Deteilansicht definiert wurde</target>
+			</trans-unit>
 			<trans-unit id="presetTrade" xml:space="preserve">
 				<source>Preset trade</source>
 				<target>Vorauswahl Branche</target>

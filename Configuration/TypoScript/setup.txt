@@ -1,77 +1,78 @@
 plugin.tx_yellowpages2 {
-	view {
-		templateRootPath = {$plugin.tx_yellowpages2.view.templateRootPath}
-		partialRootPath = {$plugin.tx_yellowpages2.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_yellowpages2.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_yellowpages2.persistence.storagePid}
-		classes {
-			JWeiland\Yellowpages2\Domain\Model\FeUser {
-				mapping {
-					tableName = fe_users
-					recordType =
-				}
-			}
-			JWeiland\Yellowpages2\Domain\Model\FileReference {
-				mapping {
-					tableName = sys_file_reference
-				}
-			}
- 			JWeiland\Yellowpages2\Domain\Model\Category {
- 				mapping {
- 					tableName = sys_category
- 				}
-			}
-		}
-	}
-	features {
-		rewrittenPropertyMapper = 1
-	}
-	settings {
-		includeJQueryLibrary = {$plugin.tx_yellowpages2.settings.includeJQueryLibrary}
-		pidOfMaps2Plugin = {$plugin.tx_yellowpages2.settings.pidOfMaps2Plugin}
-		startingUidForCategories = {$plugin.tx_yellowpages2.settings.startingUidForCategories}
-		uidOfDefaultDistrict = {$plugin.tx_yellowpages2.settings.uidOfDefaultDistrict}
-		pidOfDetailPage = {$plugin.tx_yellowpages2.settings.pidOfDetailPage}
-		userGroup = {$plugin.tx_yellowpages2.settings.userGroup}
-		mapOptions {
-			zoom = 12
-			mapTypeId = google.maps.MapTypeId.HYBRID
-			panControl = 1
-			zoomControl = 1
-			mapTypeControl = 1
-			scaleControl = 1
-			streetViewControl = 1
-			overviewMapControl = 1
-		}
-		list {
-			image {
-				width = 50c
-				height= 50c
-				minWidth = 50
-				maxWidth = 50
-				minHeight = 50
-				maxHeight = 50
-			}
-		}
-		pageBrowser {
-			itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
-			insertAbove = {$plugin.tx_yellowpages2.settings.pageBrowser.insertAbove}
-			insertBelow = {$plugin.tx_yellowpages2.settings.pageBrowser.insertBelow}
-			maximumNumberOfLinks = {$plugin.tx_yellowpages2.settings.pageBrowser.maximumNumberOfLinks}
-		}
-	}
+  view {
+    templateRootPath = {$plugin.tx_yellowpages2.view.templateRootPath}
+    partialRootPath = {$plugin.tx_yellowpages2.view.partialRootPath}
+    layoutRootPath = {$plugin.tx_yellowpages2.view.layoutRootPath}
+  }
+  persistence {
+    storagePid = {$plugin.tx_yellowpages2.persistence.storagePid}
+    classes {
+      JWeiland\Yellowpages2\Domain\Model\FeUser {
+        mapping {
+          tableName = fe_users
+          recordType =
+        }
+      }
+      JWeiland\Yellowpages2\Domain\Model\FileReference {
+        mapping {
+          tableName = sys_file_reference
+        }
+      }
+      JWeiland\Yellowpages2\Domain\Model\Category {
+        mapping {
+          tableName = sys_category
+        }
+      }
+    }
+  }
+  features {
+    rewrittenPropertyMapper = 1
+  }
+  settings {
+    includeJQueryLibrary = {$plugin.tx_yellowpages2.settings.includeJQueryLibrary}
+    pidOfMaps2Plugin = {$plugin.tx_yellowpages2.settings.pidOfMaps2Plugin}
+    startingUidForCategories = {$plugin.tx_yellowpages2.settings.startingUidForCategories}
+    uidOfDefaultDistrict = {$plugin.tx_yellowpages2.settings.uidOfDefaultDistrict}
+    pidOfDetailPage = {$plugin.tx_yellowpages2.settings.pidOfDetailPage}
+    pidOfListPage = {$plugin.tx_yellowpages2.settings.pidOfListPage}
+    userGroup = {$plugin.tx_yellowpages2.settings.userGroup}
+    mapOptions {
+      zoom = 12
+      mapTypeId = google.maps.MapTypeId.HYBRID
+      panControl = 1
+      zoomControl = 1
+      mapTypeControl = 1
+      scaleControl = 1
+      streetViewControl = 1
+      overviewMapControl = 1
+    }
+    list {
+      image {
+        width = 50c
+        height= 50c
+        minWidth = 50
+        maxWidth = 50
+        minHeight = 50
+        maxHeight = 50
+      }
+    }
+    pageBrowser {
+      itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
+      insertAbove = {$plugin.tx_yellowpages2.settings.pageBrowser.insertAbove}
+      insertBelow = {$plugin.tx_yellowpages2.settings.pageBrowser.insertBelow}
+      maximumNumberOfLinks = {$plugin.tx_yellowpages2.settings.pageBrowser.maximumNumberOfLinks}
+    }
+  }
 }
 
 plugin.tx_yellowpages2._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
+  textarea.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+  }
 
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
+  input.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+  }
 )

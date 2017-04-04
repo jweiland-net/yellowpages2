@@ -210,6 +210,9 @@ class AbstractController extends ActionController
         if (empty($this->settings['pidOfDetailPage'])) {
             $this->settings['pidOfDetailPage'] = null;
         }
+        if (empty($this->settings['pidOfListPage'])) {
+            $this->settings['pidOfListPage'] = null;
+        }
     }
 
     /**

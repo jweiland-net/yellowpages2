@@ -16,6 +16,12 @@
 			<trans-unit id="show" xml:space="preserve">
 				<source>Detail view</source>
 			</trans-unit>
+			<trans-unit id="pidOfDetailPage">
+				<source>PID of detail page</source>
+			</trans-unit>
+			<trans-unit id="pidOfListPage">
+				<source>PID of list page</source>
+			</trans-unit>
 			<trans-unit id="showWspMembers" xml:space="preserve">
 				<source>Show only WSP Members</source>
 			</trans-unit>
