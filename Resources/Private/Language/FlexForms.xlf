@@ -7,6 +7,15 @@
 			<trans-unit id="sheetGeneral" xml:space="preserve">
 				<source>General</source>
 			</trans-unit>
+			<trans-unit id="chooseAction" xml:space="preserve">
+				<source>Choose action</source>
+			</trans-unit>
+			<trans-unit id="list" xml:space="preserve">
+				<source>List view</source>
+			</trans-unit>
+			<trans-unit id="show" xml:space="preserve">
+				<source>Detail view</source>
+			</trans-unit>
 			<trans-unit id="showWspMembers" xml:space="preserve">
 				<source>Show only WSP Members</source>
 			</trans-unit>

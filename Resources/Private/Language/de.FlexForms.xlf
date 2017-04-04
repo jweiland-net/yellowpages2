@@ -8,9 +8,21 @@
 				<source>General</source>
 				<target>Allgemein</target>
 			</trans-unit>
-			<trans-unit id="showWspMembers" xml:space="preserve">
-				<source>Show only WSP Members</source>
-				<target>Zeige nur WSP Mitglieder</target>
+			<trans-unit id="chooseAction" xml:space="preserve">
+				<source>Choose action</source>
+				<target>Ansicht wählen</target>
+			</trans-unit>
+			<trans-unit id="chooseAction" xml:space="preserve">
+				<source>Choose action</source>
+				<target>Ansicht wählen</target>
+			</trans-unit>
+			<trans-unit id="list" xml:space="preserve">
+				<source>List view</source>
+				<target>Listenansicht</target>
+			</trans-unit>
+			<trans-unit id="show" xml:space="preserve">
+				<source>Detail view</source>
+				<target>Detailansicht</target>
 			</trans-unit>
 			<trans-unit id="presetTrade" xml:space="preserve">
 				<source>Preset trade</source>
