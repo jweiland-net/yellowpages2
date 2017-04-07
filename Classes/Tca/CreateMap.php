@@ -122,7 +122,6 @@ class CreateMap
     public function getAddress()
     {
         $address = array();
-        $address[] = $this->currentRecord['company'];
         $address[] = $this->currentRecord['street'];
         $address[] = $this->currentRecord['house_number'];
         $address[] = $this->currentRecord['zip'];
