@@ -5,7 +5,7 @@ namespace JWeiland\Yellowpages2\Tasks;
  *  Copyright notice
  *
  *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -112,7 +112,7 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                 if ($company->getEmail()) {
                     $this->informUser($company, 'deactivated');
                 }
-                $this->informAdmin($company, 'deactivated');
+                $this->informAdmin($company);
             }
             $this->persistenceManager->persistAll();
         }

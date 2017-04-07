@@ -24,6 +24,7 @@ namespace JWeiland\Yellowpages2\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder;
 use TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper;
@@ -56,6 +57,7 @@ class GrayScaleImageViewHelper extends ImageViewHelper
         if (is_null($src) && is_null($image) || !is_null($src) && !is_null($image)) {
             throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('You must either specify a string src or a File object.', 1382284105);
         }
+        /** @var File $image */
         $image = $this->imageService->getImage($src, $image, $treatIdAsReference);
         $processingInstructions = array(
             'width' => $width,

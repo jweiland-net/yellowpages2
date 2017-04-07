@@ -141,7 +141,7 @@ class UploadOneFileConverter extends AbstractTypeConverter
      */
     protected function getExtbaseFileReference($source)
     {
-        /** @var $reference \TYPO3\CMS\Extbase\Domain\Model\FileReference */
+        /** @var \TYPO3\CMS\Extbase\Domain\Model\FileReference $extbaseFileReference */
         $extbaseFileReference = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference');
         $extbaseFileReference->setOriginalResource($this->getCoreFileReference($source));
         

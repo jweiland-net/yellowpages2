@@ -24,9 +24,12 @@ namespace JWeiland\Yellowpages2\Tca;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use JWeiland\Maps2\Domain\Model\Location;
+use JWeiland\Maps2\Domain\Model\RadiusResult;
 use JWeiland\Maps2\Utility\GeocodeUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * @package yellowpages2
@@ -89,12 +92,14 @@ class CreateMap
         } else {
             // create new map-record and set them in relation
             $response = $this->geocodeUtility->findPositionByAddress($this->getAddress());
-            if (count($response)) {
-                $location = $response['results'][0]['geometry']['location'];
-                $address = $response['results'][0]['formatted_address'];
+            if ($response instanceof ObjectStorage && $response->count()) {
+                /** @var RadiusResult $firstResult */
+                $firstResult = $response->current();
+                $location = $firstResult->getGeometry()->getLocation();
+                $address = $firstResult->getFormattedAddress();
                 $poiUid = $this->createNewPoiCollection($location, $address);
                 $this->updateCurrentRecord($poiUid);
-
+    
                 // sync categories
                 $this->updateMmEntries();
             }
@@ -128,7 +133,7 @@ class CreateMap
         $address[] = $this->currentRecord['city'];
         $address[] = 'Deutschland';
 
-        return rawurlencode(implode(' ', $address));
+        return implode(' ', $address);
     }
 
     /**
@@ -172,11 +177,12 @@ class CreateMap
     /**
      * creates a new poiCollection before updating the current yellowPages record
      *
-     * @param array $location
+     * @param Location $location
      * @param string $address Formatted Address returned from Google
+     *
      * @return int insert UID
      */
-    public function createNewPoiCollection(array $location, $address)
+    public function createNewPoiCollection(Location $location, $address)
     {
         $tsConfig = $this->getTsConfig();
 
@@ -187,8 +193,8 @@ class CreateMap
         $fieldValues['cruser_id'] = $GLOBALS['BE_USER']->user['uid'];
         $fieldValues['hidden'] = 0;
         $fieldValues['deleted'] = 0;
-        $fieldValues['latitude'] = $location['lat'];
-        $fieldValues['longitude'] = $location['lng'];
+        $fieldValues['latitude'] = $location->getLat();
+        $fieldValues['longitude'] = $location->getLng();
         $fieldValues['collection_type'] = 'Point';
         $fieldValues['title'] = $this->currentRecord['company'];
         $fieldValues['address'] = $address;
