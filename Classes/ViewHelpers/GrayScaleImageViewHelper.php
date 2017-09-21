@@ -36,8 +36,8 @@ class GrayScaleImageViewHelper extends ImageViewHelper
      */
     public function render()
     {
-        if ((null === $this->arguments['src'] && null === $this->arguments['image']) ||
-            (null !== $this->arguments['src'] && null !== $this->arguments['image'])) {
+        if (($this->arguments['src'] === null && $this->arguments['image'] === null) ||
+            ($this->arguments['src'] !== null && $this->arguments['image'] !== null)) {
             throw new Exception('You must either specify a string src or a File object.', 1382284105);
         }
         $image = $this->imageService->getImage(

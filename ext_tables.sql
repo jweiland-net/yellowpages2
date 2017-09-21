@@ -101,5 +101,5 @@ CREATE TABLE tx_yellowpages2_domain_model_district (
 # Table structure for table 'sys_category'
 #
 CREATE TABLE sys_category (
-	icon varchar(255) DEFAULT '' NOT NULL,
+	icon varchar(255) DEFAULT '' NOT NULL
 );

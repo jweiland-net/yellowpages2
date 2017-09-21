@@ -1,7 +1,5 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
 $GLOBALS['TCA']['sys_category']['columns']['icon'] = [
     'exclude' => 1,

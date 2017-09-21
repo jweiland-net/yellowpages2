@@ -390,30 +390,6 @@ return [
                 ],
                 'softref' => 'typolink[linkList]'
             ]
-        ],
-        'main_trade' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.mainTrade',
-            'config' => \TYPO3\CMS\Core\Category\CategoryRegistry::getTcaFieldConfiguration(
-                'tx_yellowpages2_domain_model_company',
-                'main_trade',
-                [
-                    'maxitems' => 1,
-                    'minitems' => 0
-                ]
-            )
-        ],
-        'trades' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.trades',
-            'config' => \TYPO3\CMS\Core\Category\CategoryRegistry::getTcaFieldConfiguration(
-                'tx_yellowpages2_domain_model_company',
-                'trades',
-                [
-                    'maxitems' => 2,
-                    'minitems' => 0
-                ]
-            )
         ]
     ],
     'types' => [

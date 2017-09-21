@@ -147,7 +147,7 @@ class CompanyRepository extends Repository
             SELECT UPPER(LEFT(company, 1)) as letter
             FROM tx_yellowpages2_domain_model_company
             WHERE 1=1 ' . $addWhere .
-            BackendUtility::BEenableFields('tx_yellowpages2_domain_model_company') .
+            BackendUtility::BEenableFields('tx_yellowpages2_domain_model_company', true) .
             BackendUtility::deleteClause('tx_yellowpages2_domain_model_company') . '
             GROUP BY letter
             ORDER by letter;

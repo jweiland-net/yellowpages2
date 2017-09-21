@@ -19,7 +19,6 @@ use JWeiland\Maps2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -42,12 +41,6 @@ class MapController extends AbstractController
     public function injectExtConfOfMaps2(ExtConf $extConfOfMaps2)
     {
         $this->extConfOfMaps2 = $extConfOfMaps2;
-    }
-
-    public function errorAction()
-    {
-        /** @var Company $company */
-        $company = $this->arguments->getArgument('company')->getValue();
     }
 
     /**

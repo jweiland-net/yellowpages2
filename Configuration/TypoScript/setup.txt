@@ -1,16 +1,16 @@
 plugin.tx_yellowpages2 {
   view {
     templateRootPaths {
-      0 = {$plugin.tx_yellowpages2.view.templateRootPath}
-      1 = EXT:yellowpages2/Resources/Private/Templates/
+      0 = EXT:yellowpages2/Resources/Private/Templates/
+      1 = {$plugin.tx_yellowpages2.view.templateRootPath}
     }
     partialRootPaths {
-      0 = {$plugin.tx_yellowpages2.view.partialRootPath}
-      1 = EXT:yellowpages2/Resources/Private/Partials/
+      0 = EXT:yellowpages2/Resources/Private/Partials/
+      1 = {$plugin.tx_yellowpages2.view.partialRootPath}
     }
     layoutRootPaths {
-      0 = {$plugin.tx_yellowpages2.view.layoutRootPath}
-      1 = EXT:yellowpages2/Resources/Private/Layouts/
+      0 = EXT:yellowpages2/Resources/Private/Layouts/
+      1 = {$plugin.tx_yellowpages2.view.layoutRootPath}
     }
   }
   persistence {
