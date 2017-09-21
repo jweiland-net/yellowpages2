@@ -1,56 +1,49 @@
 <?php
+declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Controller;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
+
+use JWeiland\Yellowpages2\Configuration\ExtConf;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EmailController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class EmailController extends ActionController
 {
-
     /**
-     * @var \TYPO3\CMS\Core\Mail\MailMessage
+     * @var MailMessage
      */
     protected $mail;
 
     /**
-     * @var \JWeiland\Yellowpages2\Configuration\ExtConf
+     * @var ExtConf
      */
     protected $extConf;
 
     /**
      * inject mail
      *
-     * @param \TYPO3\CMS\Core\Mail\MailMessage $mail
+     * @param MailMessage $mail
      * @return void
      */
-    public function injectMail(\TYPO3\CMS\Core\Mail\MailMessage $mail)
+    public function injectMail(MailMessage $mail)
     {
         $this->mail = $mail;
     }
@@ -58,10 +51,10 @@ class EmailController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * inject extConf
      *
-     * @param \JWeiland\Yellowpages2\Configuration\ExtConf $extConf
+     * @param ExtConf $extConf
      * @return void
      */
-    public function injectExtConf(\JWeiland\Yellowpages2\Configuration\ExtConf $extConf)
+    public function injectExtConf(ExtConf $extConf)
     {
         $this->extConf = $extConf;
     }
@@ -74,7 +67,7 @@ class EmailController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param array $redirect An Array containing action, controller and maybe some more informations for redirekt after mail processing
      * @return void
      */
-    public function sendAction($templateFile = null, array $assignVariables = array(), array $redirect = array())
+    public function sendAction($templateFile = null, array $assignVariables = [], array $redirect = [])
     {
         if ($templateFile !== null) {
             $this->view->setTemplatePathAndFilename($this->getTemplatePath() . ucfirst($templateFile));

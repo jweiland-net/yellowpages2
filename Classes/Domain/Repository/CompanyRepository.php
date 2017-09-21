@@ -1,31 +1,23 @@
 <?php
+declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
+
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Database\PreparedStatement;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -41,31 +33,41 @@ class CompanyRepository extends Repository
     /**
      * @var array
      */
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'company' => QueryInterface::ORDER_ASCENDING
-    );
+    ];
 
     /**
      * charset converter
      * We need some UTF-8 compatible functions for search
      *
-     * @var \TYPO3\CMS\Core\Charset\CharsetConverter
-     * @inject
+     * @var CharsetConverter
      */
     protected $charsetConverter;
+
+    /**
+     * injects charsetConverter
+     *
+     * @param CharsetConverter $charsetConverter
+     * @return void
+     */
+    public function injectCharsetConverter(CharsetConverter $charsetConverter)
+    {
+        $this->charsetConverter = $charsetConverter;
+    }
 
     /**
      * find company by uid whether it is hidden or not
      *
      * @param int $companyUid
-     * @return \JWeiland\Yellowpages2\Domain\Model\Company
+     * @return Company
      */
     public function findHiddenEntryByUid($companyUid)
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
-        $query->getQuerySettings()->setEnableFieldsToBeIgnored(array('disabled'));
-        
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
+
         /** @var Company $company */
         $company = $query->matching($query->equals('uid', (int)$companyUid))->execute()->getFirst();
         return $company;
@@ -78,14 +80,14 @@ class CompanyRepository extends Repository
      * @param array $settings
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByStartingLetter($letter, array $settings = array())
+    public function findByStartingLetter($letter, array $settings = [])
     {
         $query = $this->createQuery();
 
-        $constraintAnd = array();
+        $constraintAnd = [];
 
         if ($letter) {
-            $constraintOr = array();
+            $constraintOr = [];
             if ($letter == '0-9') {
                 $constraintOr[] = $query->like('company', '0%');
                 $constraintOr[] = $query->like('company', '1%');
@@ -102,27 +104,29 @@ class CompanyRepository extends Repository
             }
             $constraintAnd[] = $query->logicalOr($constraintOr);
         }
-    
+
         if ($settings['showWspMembers']) {
             $constraintAnd[] = $query->equals('wspMember', $settings['showWspMembers']);
         }
-    
+
         if ($settings['presetTrade']) {
-            $constraintAnd[] = $query->logicalOr(array(
+            $constraintAnd[] = $query->logicalOr(
+                [
                 $query->contains('mainTrade', $settings['presetTrade']),
                 $query->contains('trades', $settings['presetTrade'])
-            ));
+                ]
+            );
         }
-    
+
         if ($settings['district']) {
             $constraintAnd[] = $query->equals('district', $settings['district']);
         }
-    
+
         if (count($constraintAnd)) {
             return $query->matching($query->logicalAnd($constraintAnd))->execute();
-        } else {
-            return $query->execute();
         }
+
+        return $query->execute();
     }
 
     /**
@@ -161,46 +165,48 @@ class CompanyRepository extends Repository
     {
         /** @var Query $query */
         $query = $this->createQuery();
-    
+
         // strtolower is not UTF-8 compatible
         // $search = strtolower($search);
         $longStreetSearch = trim($search);
         $smallStreetSearch = trim($search);
 
         // unify street search
-        if (strtolower($this->charsetConverter->utf8_substr($search, -6) === 'straße')) {
+        if (strtolower(mb_substr($search, -6)) === 'straße') {
             $smallStreetSearch = str_ireplace('straße', 'str', $search);
         }
-        if (strtolower($this->charsetConverter->utf8_substr($search, -4)) === 'str.') {
+        if (strtolower(mb_substr($search, -4)) === 'str.') {
             $longStreetSearch = str_ireplace('str.', 'straße', $search);
             $smallStreetSearch = str_ireplace('str.', 'str', $search);
         }
-        if (strtolower($this->charsetConverter->utf8_substr($search, -3)) === 'str') {
+        if (strtolower(mb_substr($search, -3)) === 'str') {
             $longStreetSearch = str_ireplace('str', 'straße', $search);
         }
-        
-        $constraint = array();
-        
+
+        $constraint = [];
+
         if (!empty($longStreetSearch)) {
-            $searchConstraint = array();
+            $searchConstraint = [];
             $searchConstraint[] = $query->like('company', '%' . $search . '%');
             $searchConstraint[] = $query->like('street', '%' . $smallStreetSearch . '%');
             $searchConstraint[] = $query->like('street', '%' . $longStreetSearch . '%');
             $constraint[] = $query->logicalOr($searchConstraint);
         }
-        
+
         if (!empty($category)) {
-            $constraint[] = $query->logicalOr(array(
+            $constraint[] = $query->logicalOr(
+                [
                 $query->contains('mainTrade', $category),
-                $query->contains('trades', $category),
-            ));
+                $query->contains('trades', $category)
+                ]
+            );
         }
 
         if (!empty($constraint)) {
             return $query->matching($query->logicalAnd($constraint))->execute();
-        } else {
-            return $query->execute();
         }
+
+        return $query->execute();
     }
 
     /**
@@ -210,14 +216,14 @@ class CompanyRepository extends Repository
      */
     public function getGroupedCategories()
     {
-        $where = array();
+        $where = [];
         $where[] = ' sys_category_record_mm.tablenames=?';
         $where[] = ' AND sys_category_record_mm.fieldname=?';
         $where[] = BackendUtility::BEenableFields('sys_category');
         $where[] = BackendUtility::deleteClause('sys_category');
         $where[] = BackendUtility::BEenableFields('tx_yellowpages2_domain_model_company');
         $where[] = BackendUtility::deleteClause('tx_yellowpages2_domain_model_company');
-    
+
         $sql = '
             SELECT sys_category.uid, sys_category.title
             
@@ -234,10 +240,10 @@ class CompanyRepository extends Repository
             GROUP BY sys_category.uid
             ORDER BY sys_category.title
         ';
-    
+
         /** @var PreparedStatement $preparedStatement */
         $preparedStatement = $this->objectManager->get(
-            'TYPO3\\CMS\\Core\\Database\\PreparedStatement',
+            PreparedStatement::class,
             $sql,
             'tx_yellowpages2_domain_model_company'
         );
@@ -246,13 +252,13 @@ class CompanyRepository extends Repository
         $query = $this->createQuery();
         $results = $query->statement(
             $preparedStatement,
-            array(
+            [
                 'tx_yellowpages2_domain_model_company',
                 'main_trade'
-            )
+            ]
         )->execute(true);
 
-        $groupedCategories = array();
+        $groupedCategories = [];
         $groupedCategories[] = LocalizationUtility::translate('allBranches', 'yellowpages2');
         foreach ($results as $result) {
             $groupedCategories[$result['uid']] = $result['title'];

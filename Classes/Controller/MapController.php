@@ -1,32 +1,25 @@
 <?php
+declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Controller;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
+
+use JWeiland\Maps2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -36,19 +29,25 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class MapController extends AbstractController
 {
     /**
-     * @var \JWeiland\Maps2\Configuration\ExtConf
+     * @var ExtConf
      */
     protected $extConfOfMaps2;
 
     /**
      * inject extConfOfMaps2
      *
-     * @param \JWeiland\Maps2\Configuration\ExtConf $extConfOfMaps2
+     * @param ExtConf $extConfOfMaps2
      * @return void
      */
-    public function injectExtConfOfMaps2(\JWeiland\Maps2\Configuration\ExtConf $extConfOfMaps2)
+    public function injectExtConfOfMaps2(ExtConf $extConfOfMaps2)
     {
         $this->extConfOfMaps2 = $extConfOfMaps2;
+    }
+
+    public function errorAction()
+    {
+        /** @var Company $company */
+        $company = $this->arguments->getArgument('company')->getValue();
     }
 
     /**
@@ -60,6 +59,10 @@ class MapController extends AbstractController
      */
     public function newAction(Company $company = null)
     {
+        if ($company === null) {
+            $company = $this->objectManager->get(Company::class);
+        }
+
         $this->addNewPoiCollectionToCompany($company);
         $this->companyRepository->update($company);
         $this->persistenceManager->persistAll();
@@ -76,7 +79,7 @@ class MapController extends AbstractController
     public function initializeCreateAction()
     {
         $maps2Request = GeneralUtility::_POST('tx_maps2');
-        if (isset($maps2Request)) {
+        if ($maps2Request !== null) {
             $company = $this->request->getArgument('company');
             $company['txMaps2Uid'] = $maps2Request;
             $this->request->setArgument('company', $company);
@@ -132,7 +135,7 @@ class MapController extends AbstractController
     public function initializeUpdateAction()
     {
         $maps2Request = GeneralUtility::_POST('tx_maps2');
-        if (isset($maps2Request)) {
+        if ($maps2Request !== null) {
             $company = $this->request->getArgument('company');
             $company['txMaps2Uid'] = $maps2Request;
             $this->request->setArgument('company', $company);

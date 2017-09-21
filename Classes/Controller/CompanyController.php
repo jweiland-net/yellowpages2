@@ -1,30 +1,28 @@
 <?php
+declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Controller;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
+
+use JWeiland\Maps2\Domain\Model\PoiCollection;
+use JWeiland\Maps2\Domain\Model\RadiusResult;
+use JWeiland\Yellowpages2\Domain\Model\Company;
+use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
+use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
+use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -43,7 +41,7 @@ class CompanyController extends AbstractController
     public function listAction($letter = null)
     {
         $companies = $this->companyRepository->findByStartingLetter($letter, $this->settings);
-    
+
         $this->view->assign('companies', $companies);
         $this->view->assign('glossar', $this->getGlossar($this->settings['showWspMembers']));
         $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
@@ -110,10 +108,10 @@ class CompanyController extends AbstractController
      */
     public function newAction()
     {
-        /** @var \JWeiland\Yellowpages2\Domain\Model\Company $company */
-        $company = $this->objectManager->get('JWeiland\\Yellowpages2\\Domain\\Model\\Company');
+        /** @var Company $company */
+        $company = $this->objectManager->get(Company::class);
         $district = $this->districtRepository->findByUid($this->settings['uidOfDefaultDistrict']);
-        if ($district instanceof \JWeiland\Yellowpages2\Domain\Model\District) {
+        if ($district instanceof District) {
             $company->setDistrict($district);
         }
 
@@ -133,11 +131,11 @@ class CompanyController extends AbstractController
      */
     public function initializeCreateAction()
     {
-        /** @var \JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter $oneFileTypeConverter */
-        $oneFileTypeConverter = $this->objectManager->get('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadOneFileConverter');
+        /** @var UploadOneFileConverter $oneFileTypeConverter */
+        $oneFileTypeConverter = $this->objectManager->get(UploadOneFileConverter::class);
         $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->forProperty('logo')->setTypeConverter($oneFileTypeConverter);
-        /** @var \JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter $multipleFilesTypeConverter */
-        $multipleFilesTypeConverter = $this->objectManager->get('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadMultipleFilesConverter');
+        /** @var UploadMultipleFilesConverter $multipleFilesTypeConverter */
+        $multipleFilesTypeConverter = $this->objectManager->get(UploadMultipleFilesConverter::class);
         $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->forProperty('images')->setTypeConverter($multipleFilesTypeConverter);
         $this->removeEmptyArgumentsFromRequest();
     }
@@ -145,10 +143,10 @@ class CompanyController extends AbstractController
     /**
      * action create
      *
-     * @param \JWeiland\Yellowpages2\Domain\Model\Company $company
+     * @param Company $company
      * @return void
      */
-    public function createAction(\JWeiland\Yellowpages2\Domain\Model\Company $company)
+    public function createAction(Company $company)
     {
         $this->deleteUploadedFilesOnValidationErrors('company');
 
@@ -161,10 +159,10 @@ class CompanyController extends AbstractController
         $results = $this->geocodeUtility->findPositionByAddress($company->getAddress());
         if (count($results)) {
             $results->rewind();
-            /** @var \JWeiland\Maps2\Domain\Model\RadiusResult $result */
+            /** @var RadiusResult $result */
             $result = $results->current();
-            /** @var \JWeiland\Maps2\Domain\Model\PoiCollection $poi */
-            $poi = $this->objectManager->get('JWeiland\\Maps2\\Domain\\Model\\PoiCollection');
+            /** @var PoiCollection $poi */
+            $poi = $this->objectManager->get(PoiCollection::class);
             $poi->setCollectionType('Point');
             $poi->setTitle($company->getCompany());
             $poi->setAddress($result->getFormattedAddress());
@@ -179,10 +177,10 @@ class CompanyController extends AbstractController
             $this->companyRepository->add($company);
             $this->persistenceManager->persistAll();
             $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
-            $this->redirect('new', 'Map', 'yellowpages2', array('company' => $company));
+            $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
         } else {
             $this->addFlashMessage('Error while creating a poi. Please add some more informations about your address');
-            $this->forward('new', 'Company', 'yellowpages2', array('company' => $company));
+            $this->forward('new', 'Company', 'yellowpages2', ['company' => $company]);
         }
     }
 
@@ -200,12 +198,12 @@ class CompanyController extends AbstractController
     /**
      * action edit
      *
-     * @param int $company
+     * @param Company $company
      * @return void
      */
-    public function editAction($company)
+    public function editAction(Company $company)
     {
-        $companyObject = $this->companyRepository->findByIdentifier($company);
+        $companyObject = $company;
         // get available categories and add "Please choose" to first position
         $categories = $this->categoryRepository->findByParent($this->settings['startingUidForCategories']);
 
@@ -222,14 +220,16 @@ class CompanyController extends AbstractController
      */
     public function initializeUpdateAction()
     {
-        /** @var \JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter $oneFileTypeConverter */
-        $oneFileTypeConverter = $this->objectManager->get('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadOneFileConverter');
+        $this->registerCompanyFromRequest('company');
+
+        /** @var UploadOneFileConverter $oneFileTypeConverter */
+        $oneFileTypeConverter = $this->objectManager->get(UploadOneFileConverter::class);
         $this->arguments->getArgument('company')
             ->getPropertyMappingConfiguration()
             ->forProperty('logo')
             ->setTypeConverter($oneFileTypeConverter);
-        /** @var \JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter $multipleFilesTypeConverter */
-        $multipleFilesTypeConverter = $this->objectManager->get('JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadMultipleFilesConverter');
+        /** @var UploadMultipleFilesConverter $multipleFilesTypeConverter */
+        $multipleFilesTypeConverter = $this->objectManager->get(UploadMultipleFilesConverter::class);
         $this->arguments->getArgument('company')
             ->getPropertyMappingConfiguration()
             ->forProperty('images')
@@ -239,10 +239,10 @@ class CompanyController extends AbstractController
     /**
      * action update
      *
-     * @param \JWeiland\Yellowpages2\Domain\Model\Company $company
+     * @param Company $company
      * @return void
      */
-    public function updateAction(\JWeiland\Yellowpages2\Domain\Model\Company $company)
+    public function updateAction(Company $company)
     {
         $this->companyRepository->update($company);
 
@@ -251,9 +251,9 @@ class CompanyController extends AbstractController
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
         if ($company->getTxMaps2Uid() === null) {
-            $this->redirect('new', 'Map', 'yellowpages2', array('company' => $company));
+            $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
         } else {
-            $this->redirect('edit', 'Map', 'yellowpages2', array('company' => $company));
+            $this->redirect('edit', 'Map', 'yellowpages2', ['company' => $company]);
         }
     }
 

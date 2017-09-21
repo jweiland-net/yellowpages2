@@ -34,7 +34,7 @@
 				<source>Street</source>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
-				<source>house number</source>
+				<source>House number</source>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
 				<source>Zip</source>

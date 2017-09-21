@@ -1,67 +1,63 @@
 <?php
+declare(strict_types=true);
 namespace JWeiland\Yellowpages2\Tasks;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2013 Stefan Froemken <projects@jweiland.net>, jweiland.net
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
+
+use JWeiland\Yellowpages2\Configuration\ExtConf;
+use JWeiland\Yellowpages2\Domain\Model\Company;
+use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class Update extends AbstractTask
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var ObjectManager
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     * @var PersistenceManager
      */
     protected $persistenceManager;
 
     /**
-     * @var \JWeiland\Yellowpages2\Domain\Repository\CompanyRepository
+     * @var CompanyRepository
      */
     protected $companyRepository;
 
     /**
-     * @var \TYPO3\CMS\Core\Mail\MailMessage
+     * @var MailMessage
      */
     protected $mail;
 
     /**
-     * @var \JWeiland\Yellowpages2\Configuration\ExtConf
+     * @var ExtConf
      */
     protected $extConf;
-
-
-
-
 
     /**
      * constructor of this class
@@ -72,23 +68,23 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         parent::__construct();
 
         // initialize some global variables
-        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-        $this->mail = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-        $this->extConf = $this->objectManager->get('JWeiland\\Yellowpages2\\Configuration\\ExtConf');
-        $this->companyRepository = $this->objectManager->get('JWeiland\\Yellowpages2\\Domain\\Repository\\CompanyRepository');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->persistenceManager = $this->objectManager->get(PersistenceManager::class);
+        $this->mail = $this->objectManager->get(MailMessage::class);
+        $this->extConf = $this->objectManager->get(ExtConf::class);
+        $this->companyRepository = $this->objectManager->get(CompanyRepository::class);
         $this->companyRepository->setDefaultQuerySettings($this->getDefaultQuerySettings());
     }
 
     /**
      * generate default query settings to access all records
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface
+     * @return QuerySettingsInterface
      */
     protected function getDefaultQuerySettings()
     {
-        /** @var \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $settings */
-        $settings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface');
+        /** @var QuerySettingsInterface $settings */
+        $settings = $this->objectManager->get(QuerySettingsInterface::class);
         $settings->setIgnoreEnableFields(true);
         $settings->setRespectSysLanguage(false);
         $settings->setRespectStoragePage(false);
@@ -104,8 +100,8 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     {
         // hide companies which are older than 13 months
         $companies = $this->companyRepository->findOlderThan(396);
-        if ($companies instanceof \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult) {
-            /** @var $company \JWeiland\Yellowpages2\Domain\Model\Company */
+        if ($companies instanceof QueryResult) {
+            /** @var $company Company */
             foreach ($companies as $company) {
                 $company->setHidden(true);
                 $this->companyRepository->update($company);
@@ -119,8 +115,8 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         // inform users about entries older than 12 month
         $companies = $this->companyRepository->findOlderThan(365);
-        if ($companies instanceof \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult) {
-            /** @var $company \JWeiland\Yellowpages2\Domain\Model\Company */
+        if ($companies instanceof QueryResult) {
+            /** @var $company Company */
             foreach ($companies as $company) {
                 $this->informUser($company, 'inform');
             }
@@ -133,11 +129,11 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     /**
      * mail to user
      *
-     * @param \JWeiland\Yellowpages2\Domain\Model\Company $company
+     * @param Company $company
      * @param string $type "inform" or "deactivated"
      * @return void
      */
-    public function informUser(\JWeiland\Yellowpages2\Domain\Model\Company $company, $type)
+    public function informUser(Company $company, $type)
     {
         $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
         $this->mail->setTo($company->getEmail(), $company->getCompany());
@@ -146,11 +142,11 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             LocalizationUtility::translate(
                 'email.body.' . $type . '.user',
                 'yellowpages2',
-                array(
+                [
                     $company->getUid(),
                     $company->getCompany(),
                     $this->extConf->getEditLink()
-                )
+                ]
             ),
             'text/html'
         );
@@ -161,10 +157,10 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     /**
      * inform admin about old company entries
      *
-     * @param \JWeiland\Yellowpages2\Domain\Model\Company $company
+     * @param Company $company
      * @return void
      */
-    public function informAdmin(\JWeiland\Yellowpages2\Domain\Model\Company $company)
+    public function informAdmin(Company $company)
     {
         $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
         $this->mail->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName());
@@ -173,10 +169,10 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             LocalizationUtility::translate(
                 'email.body.deactivated.admin',
                 'yellowpages2',
-                array(
+                [
                     $company->getUid(),
                     $company->getCompany()
-                )
+                ]
             ),
             'text/html'
         );
@@ -191,11 +187,11 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function __wakeup()
     {
-        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-        $this->mail = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-        $this->extConf = $this->objectManager->get('JWeiland\\Yellowpages2\\Configuration\\ExtConf');
-        $this->companyRepository = $this->objectManager->get('JWeiland\\Yellowpages2\\Domain\\Repository\\CompanyRepository');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->persistenceManager = $this->objectManager->get(PersistenceManager::class);
+        $this->mail = $this->objectManager->get(MailMessage::class);
+        $this->extConf = $this->objectManager->get(ExtConf::class);
+        $this->companyRepository = $this->objectManager->get(CompanyRepository::class);
         $this->companyRepository->setDefaultQuerySettings($this->getDefaultQuerySettings());
     }
 
@@ -206,6 +202,6 @@ class Update extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function __sleep()
     {
-        return array('scheduler', 'taskUid', 'disabled', 'execution', 'executionTime');
+        return ['scheduler', 'taskUid', 'disabled', 'execution', 'executionTime'];
     }
 }

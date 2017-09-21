@@ -1,6 +1,6 @@
 <?php
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title'    => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company',
         'label' => 'company',
         'tstamp' => 'tstamp',
@@ -16,283 +16,287 @@ return array(
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
-            'endtime' => 'endtime',
-        ),
+            'endtime' => 'endtime'
+        ],
         'searchFields' => 'company,logo,street,house_number,zip,city,telephone,fax,contact_person,email,website,opening_times,barrier_free,description,district,fe_user,',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('yellowpages2') . 'Resources/Public/Icons/tx_yellowpages2_domain_model_company.gif'
-    ),
-    'interface' => array(
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, wsp_member, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, tx_maps2_uid, fe_user, facebook, twitter, google, main_trade, trades',
-    ),
-    'columns' => array(
-        'sys_language_uid' => array(
-            'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
-            'config' => array(
+        'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_company.gif'
+    ],
+    'interface' => [
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, wsp_member, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, tx_maps2_uid, fe_user, facebook, twitter, google, main_trade, trades'
+    ],
+    'columns' => [
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
+            'config' => [
                 'type' => 'select',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => array(
-                    array('LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1),
-                    array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
-                ),
-            ),
-        ),
-        'l10n_parent' => array(
+                'renderType' => 'selectSingle',
+                'special' => 'languages',
+                'items' => [
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ]
+                ],
+                'default' => 0
+            ]
+        ],
+        'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
-            'config' => array(
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
+            'config' => [
                 'type' => 'select',
-                'items' => array(
-                    array('', 0),
-                ),
+                'items' => [
+                    ['', 0]
+                ],
                 'foreign_table' => 'tx_yellowpages2_domain_model_company',
-                'foreign_table_where' => 'AND tx_yellowpages2_domain_model_company.pid=###CURRENT_PID### AND tx_yellowpages2_domain_model_company.sys_language_uid IN (-1,0)',
-            ),
-        ),
-        'l10n_diffsource' => array(
-            'config' => array(
-                'type' => 'passthrough',
-            ),
-        ),
-        't3ver_label' => array(
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.versionLabel',
-            'config' => array(
+                'foreign_table_where' => 'AND tx_yellowpages2_domain_model_company.pid=###CURRENT_PID### AND tx_yellowpages2_domain_model_company.sys_language_uid IN (-1,0)'
+            ]
+        ],
+        'l10n_diffsource' => [
+            'config' => [
+                'type' => 'passthrough'
+            ]
+        ],
+        't3ver_label' => [
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'max' => 255,
-            )
-        ),
-        'hidden' => array(
+                'max' => 255
+            ]
+        ],
+        'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-            'config' => array(
-                'type' => 'check',
-            ),
-        ),
-        'starttime' => array(
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'config' => [
+                'type' => 'check'
+            ]
+        ],
+        'starttime' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
-            'config' => array(
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
+                'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'endtime' => array(
+                ]
+            ]
+        ],
+        'endtime' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
-            'config' => array(
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
+                'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'wsp_member' => array(
+                ]
+            ]
+        ],
+        'wsp_member' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.wspMember',
-            'config' => array(
-                'type' => 'check',
-            ),
-        ),
-        'company' => array(
+            'config' => [
+                'type' => 'check'
+            ]
+        ],
+        'company' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.company',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
-            ),
-        ),
-        'logo' => array(
+            ]
+        ],
+        'logo' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.logo',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'logo', array(
+                'logo',
+                [
                     'minitems' => 0,
                     'maxitems' => 1,
-                    'foreign_match_fields' => array(
+                    'foreign_match_fields' => [
                         'fieldname' => 'logo',
                         'tablenames' => 'tx_yellowpages2_domain_model_company',
-                        'table_local' => 'sys_file',
-                    ),
-                )
-            ),
-        ),
-        'images' => array(
+                        'table_local' => 'sys_file'
+                    ]
+                ]
+            )
+        ],
+        'images' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.images',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'images', array(
+                'images', [
                     'minitems' => 0,
                     'maxitems' => 5,
-                    'foreign_match_fields' => array(
+                    'foreign_match_fields' => [
                         'fieldname' => 'images',
                         'tablenames' => 'tx_yellowpages2_domain_model_company',
-                        'table_local' => 'sys_file',
-                    ),
-                )
-            ),
-        ),
-        'street' => array(
+                        'table_local' => 'sys_file'
+                    ]
+                ]
+            )
+        ],
+        'street' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.street',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'house_number' => array(
+            ]
+        ],
+        'house_number' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.houseNumber',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
-            ),
-        ),
-        'zip' => array(
+            ]
+        ],
+        'zip' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.zip',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'city' => array(
+            ]
+        ],
+        'city' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.city',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'telephone' => array(
+            ]
+        ],
+        'telephone' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.telephone',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'fax' => array(
+            ]
+        ],
+        'fax' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.fax',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'contact_person' => array(
+            ]
+        ],
+        'contact_person' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.contactPerson',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'email' => array(
+            ]
+        ],
+        'email' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.email',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'website' => array(
+            ]
+        ],
+        'website' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.website',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'opening_times' => array(
+            ]
+        ],
+        'opening_times' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.openingTimes',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 5,
                 'eval' => 'trim'
-            ),
-        ),
-        'barrier_free' => array(
+            ]
+        ],
+        'barrier_free' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.barrierFree',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
                 'default' => 0
-            ),
-        ),
-        'description' => array(
+            ]
+        ],
+        'description' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.description',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim,required',
-                'wizards' => array(
-                    'RTE' => array(
+                'wizards' => [
+                    'RTE' => [
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
                         'type' => 'script',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
                         'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_rte'
-                        )
-                    ),
-                )
-            ),
-            'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
-        ),
-        'district' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]'
+        ],
+        'district' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'foreign_table' => 'tx_yellowpages2_domain_model_district',
                 'foreign_table_where' => 'ORDER BY tx_yellowpages2_domain_model_district.district',
-                'items' => array(
-                    array('LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose', ''),
-                ),
+                'items' => [
+                    ['LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose', '']
+                ],
                 'minitems' => 0,
-                'maxitems' => 1,
-                'default' => 12,
-            ),
-        ),
-        'tx_maps2_uid' => array(
+                'maxitems' => 1
+            ]
+        ],
+        'tx_maps2_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:maps2/Resources/Private/Language/locallang_db.xlf:tx_maps2_uid',
-            'config' => array(
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_maps2_domain_model_poicollection',
@@ -300,122 +304,122 @@ return array(
                 'show_thumbs' => false,
                 'size' => 1,
                 'maxitems' => 1,
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                        'default' => array(
+                        'default' => [
                             'searchWholePhrase' => true
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'fe_user' => array(
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'fe_user' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.feUser',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'foreign_table' => 'fe_users',
                 'foreign_table_where' => 'ORDER BY fe_users.username',
-                'items' => array(
-                    array('', ''),
-                ),
+                'items' => [
+                    ['', '']
+                ],
                 'minitems' => 0,
-                'maxitems' => 1,
-            ),
-        ),
-        'facebook' => array(
+                'maxitems' => 1
+            ]
+        ],
+        'facebook' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.facebook',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-                'wizards' => array(
-                    'link' => array(
+                'wizards' => [
+                    'link' => [
                         'type' => 'popup',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
                         'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-                        'module' => array(
-                            'name' => 'wizard_link',
-                        ),
+                        'module' => [
+                            'name' => 'wizard_link'
+                        ],
                         'JSopenParams' => 'width=800,height=600,status=0,menubar=0,scrollbars=1'
-                    ),
-                ),
-                'softref' => 'typolink[linkList]',
-            ),
-        ),
-        'twitter' => array(
+                    ]
+                ],
+                'softref' => 'typolink[linkList]'
+            ]
+        ],
+        'twitter' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.twitter',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-                'wizards' => array(
-                    'link' => array(
+                'wizards' => [
+                    'link' => [
                         'type' => 'popup',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
                         'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-                        'module' => array(
-                            'name' => 'wizard_link',
-                        ),
+                        'module' => [
+                            'name' => 'wizard_link'
+                        ],
                         'JSopenParams' => 'width=800,height=600,status=0,menubar=0,scrollbars=1'
-                    ),
-                ),
-                'softref' => 'typolink[linkList]',
-            ),
-        ),
-        'google' => array(
+                    ]
+                ],
+                'softref' => 'typolink[linkList]'
+            ]
+        ],
+        'google' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.google',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-                'wizards' => array(
-                    'link' => array(
+                'wizards' => [
+                    'link' => [
                         'type' => 'popup',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
                         'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-                        'module' => array(
-                            'name' => 'wizard_link',
-                        ),
+                        'module' => [
+                            'name' => 'wizard_link'
+                        ],
                         'JSopenParams' => 'width=800,height=600,status=0,menubar=0,scrollbars=1'
-                    ),
-                ),
-                'softref' => 'typolink[linkList]',
-            ),
-        ),
-        'main_trade' => array(
+                    ]
+                ],
+                'softref' => 'typolink[linkList]'
+            ]
+        ],
+        'main_trade' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.mainTrade',
             'config' => \TYPO3\CMS\Core\Category\CategoryRegistry::getTcaFieldConfiguration(
                 'tx_yellowpages2_domain_model_company',
                 'main_trade',
-                array(
+                [
                     'maxitems' => 1,
-                    'minitems' => 0,
-                )
-            ),
-        ),
-        'trades' => array(
+                    'minitems' => 0
+                ]
+            )
+        ],
+        'trades' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.trades',
             'config' => \TYPO3\CMS\Core\Category\CategoryRegistry::getTcaFieldConfiguration(
                 'tx_yellowpages2_domain_model_company',
                 'trades',
-                array(
+                [
                     'maxitems' => 2,
-                    'minitems' => 0,
-                )
-            ),
-        ),
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, wsp_member, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, tx_maps2_uid, fe_user,--div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, google,--div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.trades, main_trade, trades,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-);
+                    'minitems' => 0
+                ]
+            )
+        ]
+    ],
+    'types' => [
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, wsp_member, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, tx_maps2_uid, fe_user,--div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, google,--div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.trades, main_trade, trades,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime']
+    ],
+    'palettes' => [
+        '1' => ['showitem' => '']
+    ]
+];
