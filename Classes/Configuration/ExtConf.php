@@ -28,35 +28,35 @@ class ExtConf implements SingletonInterface
      *
      * @var string
      */
-    protected $editLink;
+    protected $editLink = '';
 
     /**
      * email from address
      *
      * @var string
      */
-    protected $emailFromAddress;
+    protected $emailFromAddress = '';
 
     /**
      * email from name
      *
      * @var string
      */
-    protected $emailFromName;
+    protected $emailFromName = '';
 
     /**
      * email to address
      *
      * @var string
      */
-    protected $emailToAddress;
+    protected $emailToAddress = '';
 
     /**
      * email to name
      *
      * @var string
      */
-    protected $emailToName;
+    protected $emailToName = '';
 
     /**
      * constructor of this class
@@ -93,9 +93,9 @@ class ExtConf implements SingletonInterface
      * @param string $editLink
      * @return void
      */
-    public function setEditLink($editLink)
+    public function setEditLink(string $editLink)
     {
-        $this->editLink = (string) $editLink;
+        $this->editLink = $editLink;
     }
 
     /**
@@ -113,9 +113,8 @@ class ExtConf implements SingletonInterface
             }
 
             return $senderMail;
-        } else {
-            return $this->emailFromAddress;
         }
+        return $this->emailFromAddress;
     }
 
     /**
@@ -124,9 +123,9 @@ class ExtConf implements SingletonInterface
      * @param string $emailFromAddress
      * @return void
      */
-    public function setEmailFromAddress($emailFromAddress)
+    public function setEmailFromAddress(string $emailFromAddress)
     {
-        $this->emailFromAddress = (string) $emailFromAddress;
+        $this->emailFromAddress = $emailFromAddress;
     }
 
     /**
@@ -155,9 +154,9 @@ class ExtConf implements SingletonInterface
      * @param string $emailFromName
      * @return void
      */
-    public function setEmailFromName($emailFromName)
+    public function setEmailFromName(string $emailFromName)
     {
-        $this->emailFromName = (string) $emailFromName;
+        $this->emailFromName = $emailFromName;
     }
 
     /**
@@ -176,9 +175,9 @@ class ExtConf implements SingletonInterface
      * @param string $emailToAddress
      * @return void
      */
-    public function setEmailToAddress($emailToAddress)
+    public function setEmailToAddress(string $emailToAddress)
     {
-        $this->emailToAddress = (string) $emailToAddress;
+        $this->emailToAddress = $emailToAddress;
     }
 
     /**
@@ -197,8 +196,8 @@ class ExtConf implements SingletonInterface
      * @param string $emailToName
      * @return void
      */
-    public function setEmailToName($emailToName)
+    public function setEmailToName(string $emailToName)
     {
-        $this->emailToName = (string) $emailToName;
+        $this->emailToName = $emailToName;
     }
 }

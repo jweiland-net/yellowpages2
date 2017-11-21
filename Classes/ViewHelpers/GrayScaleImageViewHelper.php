@@ -21,7 +21,7 @@ use TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper;
 /**
  * Class GrayScaleImageViewHelper
  *
- * @package JWeiland\Clubdirectory\ViewHelpers
+ * @package JWeiland\Yellowpages2\ViewHelpers
  */
 class GrayScaleImageViewHelper extends ImageViewHelper
 {
