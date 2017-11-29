@@ -7,7 +7,7 @@
 
       <trans-unit id="plugin.title">
         <source>Industry Directory</source>
-        <target>Branchenverzeichnis [---neu---]</target>
+        <target>Branchenverzeichnis</target>
       </trans-unit>
 
       <trans-unit id="tabs.trades" xml:space="preserve">
