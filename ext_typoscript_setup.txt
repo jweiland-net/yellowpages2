@@ -1,0 +1,21 @@
+# ==============================================
+# Persistence object mapping configuration
+# ==============================================
+config.tx_extbase.persistence.classes {
+  JWeiland\Yellowpages2\Domain\Model\FeUser {
+    mapping {
+      tableName = fe_users
+      recordType =
+    }
+  }
+  JWeiland\Yellowpages2\Domain\Model\FileReference {
+    mapping {
+      tableName = sys_file_reference
+    }
+  }
+  JWeiland\Yellowpages2\Domain\Model\Category {
+    mapping {
+      tableName = sys_category
+    }
+  }
+}
