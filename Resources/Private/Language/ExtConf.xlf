@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2">
-		<header/>
-		<body>
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2">
+    <header/>
+    <body>
 
-			<trans-unit id="poiCollectionPid" xml:space="preserve">
-				<source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
-			</trans-unit>
-			<trans-unit id="editLink" xml:space="preserve">
-				<source>Link to edit form: Set the URI where the user can edit his company record.</source>
-			</trans-unit>
-			<trans-unit id="emailFromAddress" xml:space="preserve">
-				<source>email from address: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
-			</trans-unit>
-			<trans-unit id="emailFromName" xml:space="preserve">
-				<source>email from name: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
-			</trans-unit>
-			<trans-unit id="emailToAddress" xml:space="preserve">
-				<source>email to address: The recipients email address.</source>
-			</trans-unit>
-			<trans-unit id="emailToName" xml:space="preserve">
-				<source>email to name: The recipients email name.</source>
-			</trans-unit>
+      <trans-unit id="poiCollectionPid" xml:space="preserve">
+        <source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
+      </trans-unit>
+      <trans-unit id="editLink" xml:space="preserve">
+        <source>Link to edit form: Set the URI where the user can edit his company record.</source>
+      </trans-unit>
+      <trans-unit id="emailFromAddress" xml:space="preserve">
+        <source>email from address: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
+      </trans-unit>
+      <trans-unit id="emailFromName" xml:space="preserve">
+        <source>email from name: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
+      </trans-unit>
+      <trans-unit id="emailToAddress" xml:space="preserve">
+        <source>email to address: The recipients email address.</source>
+      </trans-unit>
+      <trans-unit id="emailToName" xml:space="preserve">
+        <source>email to name: The recipients email name.</source>
+      </trans-unit>
 
-		</body>
-	</file>
+    </body>
+  </file>
 </xliff>

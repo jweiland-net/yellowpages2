@@ -1,20 +1,20 @@
 <f:if condition="{company.telephone}">
-	<span aria-hidden="true" class="icon-phone_pf"></span>{company.telephone}
+  <span aria-hidden="true" class="icon-phone_pf"></span>{company.telephone}
 </f:if>
 <br/>
 
 <f:if condition="{company.fax}">
-	<span aria-hidden="true" class="icon-fax_pf"></span>{company.fax}
+  <span aria-hidden="true" class="icon-fax_pf"></span>{company.fax}
 </f:if>
 <br/>
 
 <f:if condition="{company.email}">
-	<span aria-hidden="true" class="icon-email"></span>
-	<f:link.email title="{company.email}" email="{company.email}">E-Mail</f:link.email>
+  <span aria-hidden="true" class="icon-email"></span>
+  <f:link.email title="{company.email}" email="{company.email}">E-Mail</f:link.email>
 </f:if>
 <br/>
 
 <f:if condition="{company.website}">
-	<span aria-hidden="true" class="icon-earth"></span>
-	<f:link.external title="{company.website}"  uri="{company.website}">Website</f:link.external>
+  <span aria-hidden="true" class="icon-earth"></span>
+  <f:link.external title="{company.website}"  uri="{company.website}">Website</f:link.external>
 </f:if>
