@@ -1,25 +1,9 @@
-{namespace yp=JWeiland\Yellowpages2\ViewHelpers}
-
 <f:if condition="{companies}">
   <f:then>
     <div class="list gridright scroll-container">
       <f:widget.paginate objects="{companies}" as="paginatedCompanies" configuration="{itemsPerPage: settings.pageBrowser.itemsPerPage, insertAbove: settings.pageBrowser.insertAbove, insertBelow: settings.pageBrowser.insertBelow, maximumNumberOfLinks: settings.pageBrowser.maximumNumberOfLinks}">
         <f:for each="{paginatedCompanies}" as="company">
           <div class="marginbottom scroll-item clearfix">
-            <div class="thumbnail grid_2 floatleft">
-              <figure class="gridrightstd">
-                <f:if condition="{company.logo}">
-                  <f:then>
-                    <yp:grayScaleImage image="{company.logo}" alt="Logo: {company.company}" width="{settings.list.image.width}" height="{settings.list.image.height}" minWidth="{settings.list.image.minWidth}" maxWidth="{settings.list.image.maxWidth}" minHeight="{settings.list.image.minHeight}" maxHeight="{settings.list.image.maxHeight}" />
-                  </f:then>
-                  <f:else>
-                    <f:if condition="{company.mainTrade.icon}">
-                      <yp:grayScaleImage src="uploads/tx_yellowpages2/{company.mainTrade.icon}" alt="Logo: {company.mainTrade.title}" width="{settings.list.image.width}" height="{settings.list.image.height}" minWidth="{settings.list.image.minWidth}" maxWidth="{settings.list.image.maxWidth}" minHeight="{settings.list.image.minHeight}" maxHeight="{settings.list.image.maxHeight}" />
-                    </f:if>
-                  </f:else>
-                </f:if>
-              </figure>
-            </div>
             <div class="entry grid_10 floatleft borderbottom">
               <h2 class="noborder nomargin"><f:link.action action="show" pageUid="{settings.pidOfDetailPage}" arguments="{company: company}">{company.company}</f:link.action></h2>
               <f:translate key="branch" />: {company.mainTrade.title}
