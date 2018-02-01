@@ -58,10 +58,7 @@ class ext_update
     {
         $grantAccess = $this->getDatabaseConnection()->exec_SELECTquery(
             'COUNT(*) AS rowsToUpdate',
-            'tx_yellowpages2_domain_model_company LEFT OUTER JOIN sys_category_record_mm ON tx_yellowpages2_domain_model_company.uid = sys_category_record_mm.uid_foreign'
-            . ' AND tx_yellowpages2_domain_model_company.main_trade != sys_category_record_mm.uid_local'
-            . ' AND sys_category_record_mm.tablenames = \'tx_yellowpages2_domain_model_company\''
-            . ' AND sys_category_record_mm.fieldname = \'main_trade\'',
+            'tx_yellowpages2_domain_model_company',
             'tx_yellowpages2_domain_model_company.main_trade != 0'
         );
 
@@ -86,10 +83,7 @@ class ext_update
     {
         $companyMainTradeMapping = $this->getDatabaseConnection()->exec_SELECTquery(
             'tx_yellowpages2_domain_model_company.main_trade AS uid_local, tx_yellowpages2_domain_model_company.uid AS uid_foreign',
-            'tx_yellowpages2_domain_model_company LEFT OUTER JOIN sys_category_record_mm ON tx_yellowpages2_domain_model_company.uid = sys_category_record_mm.uid_foreign'
-            . ' AND tx_yellowpages2_domain_model_company.main_trade != sys_category_record_mm.uid_local'
-            . ' AND sys_category_record_mm.tablenames = \'tx_yellowpages2_domain_model_company\''
-            . ' AND sys_category_record_mm.fieldname = \'main_trade\'',
+            'tx_yellowpages2_domain_model_company',
             'tx_yellowpages2_domain_model_company.main_trade != 0'
         );
 
