@@ -96,9 +96,11 @@ class ext_update
             }
         }
 
+        DebuggerUtility::var_dump($rows);
+
         $insertSuccessfull = $this->getDatabaseConnection()->exec_INSERTmultipleRows(
             'sys_category_record_mm',
-            ['uid_foreign', 'uid_local', 'tablenames', 'fieldname'],
+            ['uid_local', 'uid_foreign', 'tablenames', 'fieldname'],
             $rows
         );
 
