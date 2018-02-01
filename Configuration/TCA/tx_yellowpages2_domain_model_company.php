@@ -390,26 +390,6 @@ return [
                 ],
                 'softref' => 'typolink[linkList]'
             ]
-        ],
-        'main_trade' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.mainTrade',
-            'config' => [
-                'type' => 'select',
-                'foreign_table' => 'sys_category',
-                'renderMode' => 'tree',
-                'size' => 10,
-                'autoSizeMax' => 50,
-                'treeConfig' => [
-                    'parentField' => 'parent',
-                    'appearance' => [
-                        'showHeader' => true,
-                        'expandAll' => true
-                    ]
-                ],
-                'minitems' => 0,
-                'maxitems' => 1
-            ]
         ]
     ],
     'types' => [
