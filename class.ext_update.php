@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageRendererResolver;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Update class for the extension manager.
@@ -95,8 +94,6 @@ class ext_update
                 $rows[] = $row;
             }
         }
-
-        DebuggerUtility::var_dump($rows);
 
         $insertSuccessfull = $this->getDatabaseConnection()->exec_INSERTmultipleRows(
             'sys_category_record_mm',
