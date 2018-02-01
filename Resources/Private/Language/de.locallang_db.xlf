@@ -116,8 +116,8 @@
       </trans-unit>
 
       <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
-        <source>District (yp)</source>
-        <target>Stadtteil (yp)</target>
+        <source>Yellowpages District</source>
+        <target>Stadtteil der Branchenadresse</target>
       </trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
         <source>District</source>

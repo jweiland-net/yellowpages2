@@ -92,7 +92,7 @@
       </trans-unit>
 
       <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
-        <source>District (yp)</source>
+        <source>Yellowpages District</source>
       </trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
         <source>District</source>
