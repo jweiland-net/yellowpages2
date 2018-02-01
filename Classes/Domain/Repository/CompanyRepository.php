@@ -254,7 +254,7 @@ class CompanyRepository extends Repository
             $preparedStatement,
             [
                 'tx_yellowpages2_domain_model_company',
-                'trades'
+                'main_trade'
             ]
         )->execute(true);
 
