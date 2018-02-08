@@ -27,18 +27,6 @@ return [
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, district'
     ],
-    'types' => [
-        '1' => [
-            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, district,
-            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access, 
-            --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access'
-        ]
-    ],
-    'palettes' => [
-        'access' => [
-            'showitem' => 'starttime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:starttime_formlabel,endtime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:endtime_formlabel',
-        ]
-    ],
     'columns' => [
         'sys_language_uid' => [
             'exclude' => true,
@@ -52,79 +40,75 @@ return [
                         'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
                         -1,
                         'flags-multiple'
-                    ],
+                    ]
                 ],
-                'default' => 0,
+                'default' => 0
             ]
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => true,
+            'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['', 0]
                 ],
                 'foreign_table' => 'tx_yellowpages2_domain_model_district',
-                'foreign_table_where' => 'AND tx_yellowpages2_domain_model_district.pid=###CURRENT_PID### AND tx_yellowpages2_domain_model_district.sys_language_uid IN (-1,0)',
-                'showIconTable' => false,
-                'default' => 0,
+                'foreign_table_where' => 'AND tx_yellowpages2_domain_model_district.pid=###CURRENT_PID### AND tx_yellowpages2_domain_model_district.sys_language_uid IN (-1,0)'
             ]
         ],
         'l10n_diffsource' => [
             'config' => [
-                'type' => 'passthrough',
-                'default' => ''
+                'type' => 'passthrough'
             ]
         ],
         't3ver_label' => [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
-                'max' => '255'
+                'size' => 30,
+                'max' => 255
             ]
         ],
         'hidden' => [
-            'exclude' => true,
+            'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
-                'type' => 'check',
-                'items' => [
-                    '1' => [
-                        '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0'
-                    ]
-                ]
+                'type' => 'check'
             ]
         ],
         'starttime' => [
-            'exclude' => true,
+            'exclude' => 1,
+            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
-                'size' => '13',
+                'size' => 13,
+                'max' => 20,
                 'eval' => 'datetime',
-                'default' => 0
-            ],
-            'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+                'checkbox' => 0,
+                'default' => 0,
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                ]
+            ]
         ],
         'endtime' => [
-            'exclude' => true,
+            'exclude' => 1,
+            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
-                'size' => '13',
+                'size' => 13,
+                'max' => 20,
                 'eval' => 'datetime',
+                'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ]
-            ],
-            'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            ]
         ],
         'district' => [
             'exclude' => 1,
@@ -135,5 +119,11 @@ return [
                 'eval' => 'trim'
             ]
         ]
+    ],
+    'types' => [
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, district,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime, endtime']
+    ],
+    'palettes' => [
+        '1' => ['showitem' => '']
     ]
 ];
