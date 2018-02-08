@@ -56,10 +56,6 @@ plugin.tx_yellowpages2 {
   }
 }
 
-page.includeJSFooterlibs {
-  yellowpages2_dialogue = EXT:yellowpages2/Resources/Public/JavaScript/dialogue.js
-}
-
 plugin.tx_yellowpages2._CSS_DEFAULT_STYLE (
   textarea.f3-form-error {
     background-color:#FF9F9F;
