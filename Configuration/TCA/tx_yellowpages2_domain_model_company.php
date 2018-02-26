@@ -56,9 +56,9 @@ return [
                         'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
                         -1,
                         'flags-multiple'
-                    ],
+                    ]
                 ],
-                'default' => 0,
+                'default' => 0
             ]
         ],
         'l10n_parent' => [
@@ -69,12 +69,12 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['', 0]
                 ],
                 'foreign_table' => 'tx_yellowpages2_domain_model_company',
                 'foreign_table_where' => 'AND tx_yellowpages2_domain_model_company.pid=###CURRENT_PID### AND tx_yellowpages2_domain_model_company.sys_language_uid IN (-1,0)',
                 'showIconTable' => false,
-                'default' => 0,
+                'default' => 0
             ]
         ],
         'l10n_diffsource' => [
@@ -87,8 +87,8 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
-                'max' => '255'
+                'size' => 30,
+                'max' => 255
             ]
         ],
         'hidden' => [
@@ -120,7 +120,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
-                'size' => '13',
+                'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
                 'range' => [
@@ -289,8 +289,8 @@ return [
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
                         'type' => 'script',
-                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
+                        'title' => 'Full screen Rich Text Editing',
+                        'icon' => 'actions-wizard-rte',
                         'module' => [
                             'name' => 'wizard_rte'
                         ]
@@ -359,7 +359,7 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
                             'name' => 'wizard_link'
                         ],
@@ -380,7 +380,7 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
                             'name' => 'wizard_link'
                         ],
@@ -401,7 +401,7 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
                             'name' => 'wizard_link'
                         ],

@@ -15,6 +15,9 @@
   <f:if condition="{0: type} == {0: 'trades'}">
     <f:render partial="Company/Fields/Trades" arguments="{field: field, options: options, company: company}" />
   </f:if>
+  <f:if condition="{0: type} == {0: 'mainTrade'}">
+    <f:render partial="Company/Fields/MainTrade" arguments="{field: field, options: options, company: company}" />
+  </f:if>
   <f:if condition="{0: type} == {0: 'logo'}">
     <f:render partial="Company/Fields/Logo" arguments="{field: field, company: company}" />
   </f:if>

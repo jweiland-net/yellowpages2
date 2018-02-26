@@ -162,7 +162,7 @@ class Company extends AbstractEntity
     /**
      * MainTrade
      *
-     * @var \JWeiland\Yellowpages2\Domain\Model\Category
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
      * @validate NotEmpty
      * @lazy
      */
@@ -617,7 +617,7 @@ class Company extends AbstractEntity
     /**
      * Returns the mainTrade
      *
-     * @return Category $mainTrade
+     * @return ObjectStorage $mainTrade
      */
     public function getMainTrade()
     {
@@ -627,10 +627,10 @@ class Company extends AbstractEntity
     /**
      * Sets the mainTrade
      *
-     * @param Category $mainTrade
+     * @param ObjectStorage $mainTrade
      * @return void
      */
-    public function setMainTrade(Category $mainTrade = null)
+    public function setMainTrade(ObjectStorage $mainTrade)
     {
         $this->mainTrade = $mainTrade;
     }
