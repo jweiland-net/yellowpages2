@@ -10,7 +10,7 @@ if (!defined('TYPO3_MODE')) {
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    'JWeiland' . $_EXTKEY,
+    $_EXTKEY,
     'Configuration/TypoScript',
     'Industry Directory'
 );
