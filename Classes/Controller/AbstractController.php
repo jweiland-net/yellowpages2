@@ -31,6 +31,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -338,8 +339,11 @@ class AbstractController extends ActionController
     {
         $response = $this->geocodeUtility->findPositionByAddress($company->getAddress());
         /* @var \JWeiland\Maps2\Domain\Model\RadiusResult $location */
-        $location = $response->current();
-        if ($location instanceof RadiusResult) {
+        if (
+            $response instanceof ObjectStorage
+            && ($location = $response->current())
+            && $location instanceof RadiusResult
+        ) {
             /** @var PoiCollection $poiCollection */
             $poiCollection = $this->objectManager->get(PoiCollection::class);
             $poiCollection->setCollectionType('Point');
