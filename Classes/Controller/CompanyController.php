@@ -22,6 +22,7 @@ use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -156,7 +157,7 @@ class CompanyController extends AbstractController
 
         // set map record
         $results = $this->geocodeUtility->findPositionByAddress($company->getAddress());
-        if (count($results)) {
+        if ($results instanceof ObjectStorage && $results->count()) {
             $results->rewind();
             /** @var RadiusResult $result */
             $result = $results->current();
