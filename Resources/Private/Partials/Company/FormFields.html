@@ -17,7 +17,7 @@
 <f:render partial="Company/Field" arguments="{number: 15, field: 'description', type: 'textarea', css: 'input'}" />
 <f:render partial="Company/Field" arguments="{number: 14, field: 'barrierFree', type: 'check', css: 'input'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
-<f:render partial="Company/Field" arguments="{number: 17, field: 'mainTrade', type: 'mainTrade', options: categories, value: company.mainTrade.uid, css: 'select'}" />
+<f:render partial="Company/Field" arguments="{number: 17, field: 'mainTrade', type: 'mainTrade', options: categories, value: company.mainTrade.uid, css: 'select', mandatory:'yes'}" />
 <f:render partial="Company/Field" arguments="{number: 18, field: 'trades', type: 'trades', options: categories, company: company, css: 'select'}" />
 <div class="csc-frame-rulerAfter clearer"></div>
 <f:render partial="Company/Field" arguments="{number: 19, field: 'facebook', type: 'text', css: 'input'}" />
