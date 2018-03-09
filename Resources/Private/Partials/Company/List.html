@@ -6,7 +6,7 @@
           <div class="marginbottom scroll-item clearfix">
             <div class="entry grid_10 floatleft borderbottom">
               <h2 class="noborder nomargin"><f:link.action action="show" pageUid="{settings.pidOfDetailPage}" arguments="{company: company}">{company.company}</f:link.action></h2>
-              <f:translate key="branch" />: {company.mainTrade.title}
+              <f:translate key="branch" />: {company.mainTrade.0.title}
             </div>
           </div>
         </f:for>
