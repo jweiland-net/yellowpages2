@@ -15,7 +15,7 @@
         <f:image image="{company.logo}" alt="Logo: {company.company}" width="{settings.list.image.width}" height="{settings.list.image.height}" />
       </f:then>
       <f:else>
-        <f:image src="uploads/tx_yellowpages2/{company.mainTrade.icon}" alt="Logo: {company.mainTrade.title}" width="{settings.list.image.width}" height="{settings.list.image.height}" />
+        <f:image src="uploads/tx_yellowpages2/{company.mainTrade.0.icon}" alt="Logo: {company.mainTrade.0.title}" width="{settings.list.image.width}" height="{settings.list.image.height}" />
       </f:else>
     </f:if>
   </figure>
