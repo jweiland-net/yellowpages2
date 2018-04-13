@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=true);
+declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tasks;
 
 /*
