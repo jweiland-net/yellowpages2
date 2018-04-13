@@ -18,7 +18,6 @@ namespace JWeiland\Yellowpages2\Configuration;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
- * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ExtConf implements SingletonInterface

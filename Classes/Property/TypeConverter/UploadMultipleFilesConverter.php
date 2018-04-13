@@ -52,7 +52,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      * @param mixed $source the source data
      * @param string $targetType the type to convert to.
      *
-     * @return boolean TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
+     * @return bool TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
      */
     public function canConvertFrom($source, $targetType)
     {

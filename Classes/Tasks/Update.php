@@ -28,7 +28,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
- * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Update extends AbstractTask
@@ -94,7 +93,7 @@ class Update extends AbstractTask
     /**
      * The first method which will be executed when task starts
      *
-     * @return boolean
+     * @return bool
      */
     public function execute()
     {

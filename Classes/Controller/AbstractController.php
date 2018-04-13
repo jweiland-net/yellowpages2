@@ -36,7 +36,6 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class AbstractController extends ActionController
@@ -220,7 +219,7 @@ class AbstractController extends ActionController
     /**
      * get an array with letters as keys for the glossar
      *
-     * @param boolean $isWsp
+     * @param bool $isWsp
      * @return array Array with starting letters as keys
      */
     protected function getGlossar($isWsp)

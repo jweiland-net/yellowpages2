@@ -25,7 +25,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * @package yellowpages2
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CompanyRepository extends Repository
@@ -132,7 +131,7 @@ class CompanyRepository extends Repository
     /**
      * get an array with available starting letters
      *
-     * @param boolean $isWsp
+     * @param bool $isWsp
      * @return array
      */
     public function getStartingLetters($isWsp)
