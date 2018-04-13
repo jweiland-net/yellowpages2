@@ -216,8 +216,9 @@ class Company extends AbstractEntity
      */
     public function __construct()
     {
-        $this->trades = new ObjectStorage();
         $this->images = new ObjectStorage();
+        $this->mainTrade = new ObjectStorage();
+        $this->trades = new ObjectStorage();
     }
 
     /**
@@ -329,6 +330,22 @@ class Company extends AbstractEntity
     public function setImages(ObjectStorage $images)
     {
         $this->images = $images;
+    }
+
+    /**
+     * @param FileReference $image
+     */
+    public function addImage(FileReference $image)
+    {
+        $this->images->attach($image);
+    }
+
+    /**
+     * @param FileReference $image
+     */
+    public function removeImage(FileReference $image)
+    {
+        $this->images->detach($image);
     }
 
     /**
@@ -636,6 +653,22 @@ class Company extends AbstractEntity
     }
 
     /**
+     * @param Category $mainTrade
+     */
+    public function addMainTrade(Category $mainTrade)
+    {
+        $this->mainTrade->attach($mainTrade);
+    }
+
+    /**
+     * @param Category $mainTrade
+     */
+    public function removeMainTrade(Category $mainTrade)
+    {
+        $this->mainTrade->detach($mainTrade);
+    }
+
+    /**
      * Returns the trades
      *
      * @return ObjectStorage $trades
@@ -654,6 +687,22 @@ class Company extends AbstractEntity
     public function setTrades(ObjectStorage $trades)
     {
         $this->trades = $trades;
+    }
+
+    /**
+     * @param Category $trade
+     */
+    public function addTrade(Category $trade)
+    {
+        $this->trades->attach($trade);
+    }
+
+    /**
+     * @param Category $trade
+     */
+    public function removeTrade(Category $trade)
+    {
+        $this->trades->detach($trade);
     }
 
     /**

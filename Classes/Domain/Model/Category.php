@@ -26,7 +26,7 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
      *
      * @var string
      */
-    protected $icon;
+    protected $icon = '';
 
     /**
      * Returns the icon
@@ -46,6 +46,6 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
      */
     public function setIcon($icon)
     {
-        $this->icon = $icon;
+        $this->icon = (string)$icon;
     }
 }

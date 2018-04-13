@@ -1,32 +1,54 @@
 {
-    "name": "jweiland/yellowpages2",
-    "type": "typo3-cms-extension",
-    "description": "With this extension you can build your own industry directory",
-    "license": "GPL-2.0-or-later",
-    "keywords": ["typo3", "TYPO3 CMS", "yellowpages", "industry", "directory"],
-    "homepage": "http://www.jweiland.net",
-    "authors": [
-      {
-        "name": "Stefan Froemken",
-        "email": "sfroemken@jweiland.net",
-        "role": "Lead Developer"
-      }
-    ],
-    "support": {
-      "email": "projects@jweiland.net",
-      "issues": "https://github.com/jweiland-net/yellowpages2/issues",
-      "source": "https://github.com/jweiland-net/yellowpages2"
-    },
-    "require": {
-      "typo3/cms-core": "~8.7",
-      "jweiland/maps2": "~3.0"
-    },
-    "require-dev": {
-      "phpunit/phpunit": "~4.8.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "JWeiland\\Yellowpages2\\": "Classes"
-        }
-    }
+	"name": "jweiland/yellowpages2",
+	"type": "typo3-cms-extension",
+	"description": "With this extension you can build your own industry directory",
+	"license": "GPL-2.0-or-later",
+	"keywords": ["typo3", "TYPO3 CMS", "yellowpages", "industry", "directory"],
+	"homepage": "http://www.jweiland.net",
+	"authors": [
+		{
+			"name": "Stefan Froemken",
+			"email": "sfroemken@jweiland.net",
+			"role": "Lead Developer"
+		}
+	],
+	"support": {
+		"email": "projects@jweiland.net",
+		"issues": "https://github.com/jweiland-net/yellowpages2/issues",
+		"source": "https://github.com/jweiland-net/yellowpages2"
+	},
+	"require": {
+		"typo3/cms-core": "~8.7",
+		"jweiland/maps2": "~3.0"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2",
+		"nimut/testing-framework": "^3"
+	},
+	"autoload": {
+		"psr-4": {
+			"JWeiland\\Yellowpages2\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"JWeiland\\Yellowpages2\\Tests\\": "Tests"
+		}
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"mkdir -p .Build/Web/typo3conf/ext/",
+			"[ -L .Build/Web/typo3conf/ext/yellowpages2 ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/yellowpages2"
+		]
+	},
+	"extra": {
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
+		}
+	}
 }
