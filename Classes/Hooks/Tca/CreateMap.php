@@ -19,7 +19,7 @@ use JWeiland\Maps2\Domain\Model\Location;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\RadiusResult;
 use JWeiland\Maps2\Domain\Repository\PoiCollectionRepository;
-use JWeiland\Maps2\Utility\GeocodeUtility;
+use JWeiland\Maps2\Service\GoogleMapsService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -40,9 +40,9 @@ class CreateMap
     protected $objectManager;
 
     /**
-     * @var GeocodeUtility
+     * @var GoogleMapsService
      */
-    protected $geocodeUtility;
+    protected $googleMapsService;
 
     /**
      * @var array
@@ -72,7 +72,7 @@ class CreateMap
     public function init()
     {
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->geocodeUtility = $this->objectManager->get(GeocodeUtility::class);
+        $this->googleMapsService = $this->objectManager->get(GoogleMapsService::class);
 
         $this->persistenceManager = $this->objectManager->get(PersistenceManager::class);
         $this->companyRepository = $this->objectManager->get(CompanyRepository::class);
@@ -105,13 +105,11 @@ class CreateMap
         $this->currentRecord = $this->getFullRecord($table, $uid);
 
         // create new map-record and set them in relation
-        $response = $this->geocodeUtility->findPositionByAddress($this->getAddress());
+        $radiusResult = $this->googleMapsService->getFirstFoundPositionByAddress($this->getAddress());
 
-        if ($response instanceof ObjectStorage && $response->count()) {
-            /** @var RadiusResult $firstResult */
-            $firstResult = $response->current();
-            $location = $firstResult->getGeometry()->getLocation();
-            $address = $firstResult->getFormattedAddress();
+        if ($radiusResult instanceof RadiusResult) {
+            $location = $radiusResult->getGeometry()->getLocation();
+            $address = $radiusResult->getFormattedAddress();
             $poiUid = $this->createNewPoiCollection($location, $address);
             $this->updateCurrentRecord($poiUid);
         }

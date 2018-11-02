@@ -17,7 +17,7 @@ namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\RadiusResult;
-use JWeiland\Maps2\Utility\GeocodeUtility;
+use JWeiland\Maps2\Service\GoogleMapsService;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
@@ -91,9 +91,9 @@ class AbstractController extends ActionController
     protected $session;
 
     /**
-     * @var GeocodeUtility
+     * @var GoogleMapsService
      */
-    protected $geocodeUtility;
+    protected $googleMapsService;
 
     /**
      * @var string
@@ -189,14 +189,14 @@ class AbstractController extends ActionController
     }
 
     /**
-     * inject geocodeUtility
+     * inject googleMapsService
      *
-     * @param GeocodeUtility $geocodeUtility
+     * @param GoogleMapsService $googleMapsService
      * @return void
      */
-    public function injectGeocodeUtility(GeocodeUtility $geocodeUtility)
+    public function injectGoogleMapsService(GoogleMapsService $googleMapsService)
     {
-        $this->geocodeUtility = $geocodeUtility;
+        $this->googleMapsService = $googleMapsService;
     }
 
     /**
@@ -336,23 +336,18 @@ class AbstractController extends ActionController
      */
     protected function addNewPoiCollectionToCompany(Company $company)
     {
-        $response = $this->geocodeUtility->findPositionByAddress($company->getAddress());
-        /* @var \JWeiland\Maps2\Domain\Model\RadiusResult $location */
-        if (
-            $response instanceof ObjectStorage
-            && ($location = $response->current())
-            && $location instanceof RadiusResult
-        ) {
+        $radiusResult = $this->googleMapsService->getFirstFoundPositionByAddress($company->getAddress());
+        if ($radiusResult instanceof RadiusResult) {
             /** @var PoiCollection $poiCollection */
             $poiCollection = $this->objectManager->get(PoiCollection::class);
             $poiCollection->setCollectionType('Point');
             $poiCollection->setTitle($company->getCompany());
-            $poiCollection->setLatitude($location->getGeometry()->getLocation()->getLatitude());
-            $poiCollection->setLongitude($location->getGeometry()->getLocation()->getLongitude());
-            $poiCollection->setAddress($location->getFormattedAddress());
+            $poiCollection->setLatitude($radiusResult->getGeometry()->getLocation()->getLatitude());
+            $poiCollection->setLongitude($radiusResult->getGeometry()->getLocation()->getLongitude());
+            $poiCollection->setAddress($radiusResult->getFormattedAddress());
             $company->setTxMaps2Uid($poiCollection);
         } else {
-            DebuggerUtility::var_dump($response);
+            DebuggerUtility::var_dump($radiusResult);
             throw new \Exception('Can\'t find a result for address: ' . $company->getAddress() . '. Activate Debugging for a more detailed output.', 1465474954);
         }
     }

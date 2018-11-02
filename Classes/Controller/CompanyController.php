@@ -155,20 +155,15 @@ class CompanyController extends AbstractController
         $company->setFeUser($feUser);
 
         // set map record
-        $results = $this->geocodeUtility->findPositionByAddress($company->getAddress());
-        if ($results instanceof ObjectStorage && $results->count()) {
-            $results->rewind();
-            /** @var RadiusResult $result */
-            $result = $results->current();
+        $radiusResult = $this->googleMapsService->getFirstFoundPositionByAddress($company->getAddress());
+        if ($radiusResult instanceof RadiusResult) {
             /** @var PoiCollection $poi */
             $poi = $this->objectManager->get(PoiCollection::class);
             $poi->setCollectionType('Point');
             $poi->setTitle($company->getCompany());
-            $poi->setAddress($result->getFormattedAddress());
-            $poi->setLatitude($result->getGeometry()->getLocation()->getLatitude());
-            $poi->setLongitude($result->getGeometry()->getLocation()->getLongitude());
-            $poi->setLatitudeOrig($result->getGeometry()->getLocation()->getLatitude());
-            $poi->setLongitudeOrig($result->getGeometry()->getLocation()->getLongitude());
+            $poi->setAddress($radiusResult->getFormattedAddress());
+            $poi->setLatitude($radiusResult->getGeometry()->getLocation()->getLatitude());
+            $poi->setLongitude($radiusResult->getGeometry()->getLocation()->getLongitude());
             $company->setTxMaps2Uid($poi);
 
             // save company
