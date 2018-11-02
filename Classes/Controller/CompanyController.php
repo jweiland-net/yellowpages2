@@ -22,7 +22,6 @@ use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
