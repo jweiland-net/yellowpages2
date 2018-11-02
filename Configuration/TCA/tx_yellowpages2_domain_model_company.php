@@ -23,13 +23,13 @@ return [
         'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_company.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, wsp_member, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, tx_maps2_uid, fe_user, facebook, twitter, google, main_trade, trades'
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, wsp_member, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, fe_user, facebook, twitter, google, main_trade, trades'
     ],
     'types' => [
         '1' => [
             'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, wsp_member, company,
             logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website,
-            opening_times, barrier_free, description, district, tx_maps2_uid, fe_user,
+            opening_times, barrier_free, description, district, fe_user,
             --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, google,
             --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.trades, main_trade, trades,
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access, 
@@ -300,27 +300,6 @@ return [
                 ],
                 'minitems' => 0,
                 'maxitems' => 1
-            ]
-        ],
-        'tx_maps2_uid' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:maps2/Resources/Private/Language/locallang_db.xlf:tx_maps2_uid',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'tx_maps2_domain_model_poicollection',
-                'prepend_tname' => false,
-                'show_thumbs' => false,
-                'size' => 1,
-                'maxitems' => 1,
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                        'default' => [
-                            'searchWholePhrase' => true
-                        ]
-                    ]
-                ]
             ]
         ],
         'fe_user' => [
