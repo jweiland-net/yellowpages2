@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'JWeiland.' . $_EXTKEY,
+    'JWeiland.yellowpages2',
     'Directory',
     [
         'Company' => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
@@ -18,11 +18,8 @@ if (!defined('TYPO3_MODE')) {
     ]
 );
 
-// use hook to automatically add a map record to current yellow page
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = JWeiland\Yellowpages2\Hooks\Tca\CreateMap::class;
-
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][JWeiland\Yellowpages2\Tasks\Update::class] = [
-    'extension'        => $_EXTKEY,
+    'extension'        => 'yellowpages2',
     'title'            => 'Update yellowpages',
     'description'      => 'Hide all yellowpages records which are older than the secified age.'
 ];
