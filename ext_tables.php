@@ -4,23 +4,23 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'JWeiland.' . $_EXTKEY,
+    'JWeiland.yellowpages2',
     'Directory',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.title'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    $_EXTKEY,
+    'yellowpages2',
     'Configuration/TypoScript',
     'Industry Directory'
 );
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_directory'] = 'pi_flexform';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_directory'] = 'select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['yellowpages2_directory'] = 'pi_flexform';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['yellowpages2_directory'] = 'select_key';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $_EXTKEY . '_directory',
-    'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/YellowPages.xml'
+    'yellowpages2_directory',
+    'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
