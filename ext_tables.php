@@ -35,7 +35,3 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['yellowpa
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_yellowpages2_domain_model_district');
-
-$extConf = unserialize($_EXTCONF);
-$tsConfig = 'ext.yellowpages2.pid = ' . (int)$extConf['poiCollectionPid'];
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig($tsConfig);
