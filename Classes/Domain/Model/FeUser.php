@@ -18,7 +18,7 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Domain model for frontend users
  */
 class FeUser extends FrontendUser
 {

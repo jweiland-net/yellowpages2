@@ -25,7 +25,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Repository to retrieve company records
  */
 class CompanyRepository extends Repository
 {

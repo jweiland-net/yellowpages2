@@ -16,7 +16,7 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
  */
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * As we have our own Category domain model we need our own CategoryRepository
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {
