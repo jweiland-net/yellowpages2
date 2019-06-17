@@ -18,7 +18,7 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Repository to manage frontend users
  */
 class FeUserRepository extends Repository
 {

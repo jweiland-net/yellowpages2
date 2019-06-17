@@ -18,7 +18,7 @@ namespace JWeiland\Yellowpages2\Configuration;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Class to get configuration from ExtensionManager of this extension
  */
 class ExtConf implements SingletonInterface
 {

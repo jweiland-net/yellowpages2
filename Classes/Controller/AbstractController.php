@@ -35,7 +35,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * An abstract controller which keeps useful methods for all other controllers
  */
 class AbstractController extends ActionController
 {

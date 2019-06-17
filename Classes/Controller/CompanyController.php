@@ -25,7 +25,7 @@ use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Controller to list, show and search for companies
  */
 class CompanyController extends AbstractController
 {
