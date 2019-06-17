@@ -64,7 +64,10 @@ class ExtConf implements SingletonInterface
     public function __construct()
     {
         // get global configuration
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2']);
+        $extConf = unserialize(
+            $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'],
+            ['allowed_classes' => false]
+        );
         if (is_array($extConf) && count($extConf)) {
             // call setter method foreach configuration entry
             foreach ($extConf as $key => $value) {
