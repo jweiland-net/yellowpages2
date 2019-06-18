@@ -1,27 +1,27 @@
 <div id="powermail_fieldwrap_{number}" class="powermail_fieldwrap powermail_fieldwrap_{css} powermail_fieldwrap_{number}">
-  <label for="{field}" class="powermail_label"><f:translate key="tx_yellowpages2_domain_model_company.{field}" /></label>
-  <f:if condition="{0: type} == {0: 'text'}">
-    <f:render partial="Company/Fields/Text" arguments="{field: field}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'check'}">
-    <f:render partial="Company/Fields/Check" arguments="{field: field}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'textarea'}">
-    <f:render partial="Company/Fields/Textarea" arguments="{field: field}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'select'}">
-    <f:render partial="Company/Fields/Select" arguments="{field: field, options: options, value: value}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'trades'}">
-    <f:render partial="Company/Fields/Trades" arguments="{field: field, options: options, company: company}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'mainTrade'}">
-    <f:render partial="Company/Fields/MainTrade" arguments="{field: field, options: options, company: company}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'logo'}">
-    <f:render partial="Company/Fields/Logo" arguments="{field: field, company: company}" />
-  </f:if>
-  <f:if condition="{0: type} == {0: 'images'}">
-    <f:render partial="Company/Fields/Images" arguments="{field: field, company: company}" />
-  </f:if>
+	<label for="{field}" class="powermail_label"><f:translate key="tx_yellowpages2_domain_model_company.{field}" /></label>
+	<f:if condition="{0: type} == {0: 'text'}">
+		<f:render partial="Company/Fields/Text" arguments="{field: field}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'check'}">
+		<f:render partial="Company/Fields/Check" arguments="{field: field}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'textarea'}">
+		<f:render partial="Company/Fields/Textarea" arguments="{field: field}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'select'}">
+		<f:render partial="Company/Fields/Select" arguments="{field: field, options: options, value: value}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'trades'}">
+		<f:render partial="Company/Fields/Trades" arguments="{field: field, options: options, company: company}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'mainTrade'}">
+		<f:render partial="Company/Fields/MainTrade" arguments="{field: field, options: options, company: company}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'logo'}">
+		<f:render partial="Company/Fields/Logo" arguments="{field: field, company: company}" />
+	</f:if>
+	<f:if condition="{0: type} == {0: 'images'}">
+		<f:render partial="Company/Fields/Images" arguments="{field: field, company: company}" />
+	</f:if>
 </div>
