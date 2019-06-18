@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageRendererResolver;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -55,13 +56,20 @@ class ext_update
      */
     public function access()
     {
-        $grantAccess = $this->getDatabaseConnection()->exec_SELECTquery(
-            'COUNT(*) AS rowsToUpdate',
-            'tx_yellowpages2_domain_model_company',
-            'tx_yellowpages2_domain_model_company.main_trade != 0'
-        );
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $rowsToUpdate = $queryBuilder
+            ->count('*')
+            ->from('tx_yellowpages2_domain_model_company')
+            ->where(
+                $queryBuilder->expr()->neq(
+                    'main_trade',
+                    0
+                )
+            )
+            ->execute()
+            ->fetchColumn(0);
 
-        return (bool)$grantAccess->fetch_assoc()['rowsToUpdate'];
+        return (bool)$rowsToUpdate;
     }
 
     /**
@@ -80,11 +88,18 @@ class ext_update
      */
     protected function migrateMainTradeToMM()
     {
-        $companyMainTradeMapping = $this->getDatabaseConnection()->exec_SELECTquery(
-            'tx_yellowpages2_domain_model_company.main_trade AS uid_local, tx_yellowpages2_domain_model_company.uid AS uid_foreign',
-            'tx_yellowpages2_domain_model_company',
-            'tx_yellowpages2_domain_model_company.main_trade != 0'
-        );
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $companyMainTradeMapping = $queryBuilder
+            ->select('main_trade AS uid_local', 'uid AS uid_foreign')
+            ->from('tx_yellowpages2_domain_model_company')
+            ->where(
+                $queryBuilder->expr()->neq(
+                    'main_trade',
+                    0
+                )
+            )
+            ->execute()
+            ->fetchAll();
 
         $rows = [];
         foreach ($companyMainTradeMapping as $row) {
@@ -95,18 +110,20 @@ class ext_update
             }
         }
 
-        $insertSuccessfull = $this->getDatabaseConnection()->exec_INSERTmultipleRows(
+        $connection = $this->getConnectionPool()->getConnectionForTable('sys_category_record_mm');
+        $insertSuccessfull = $connection->bulkInsert(
             'sys_category_record_mm',
-            ['uid_local', 'uid_foreign', 'tablenames', 'fieldname'],
-            $rows
+            $rows,
+            ['uid_local', 'uid_foreign', 'tablenames', 'fieldname']
         );
 
         if ($insertSuccessfull) {
             foreach ($rows as $row) {
-                $this->getDatabaseConnection()->exec_UPDATEquery(
+                $connection = $this->getConnectionPool()->getConnectionForTable('tx_yellowpages2_domain_model_company');
+                $connection->update(
                     'tx_yellowpages2_domain_model_company',
-                    'uid = ' . $row['uid_foreign'],
-                    ['main_trade' => 1]
+                    ['main_trade' => 1],
+                    ['uid' => $row['uid_foreign']]
                 );
             }
 
@@ -114,12 +131,6 @@ class ext_update
                 FlashMessage::OK,
                 'Update records successful',
                 'Update records successful'
-            ];
-        } else {
-            $this->messageArray[] = [
-                FlashMessage::ERROR,
-                'Error while selecting tt_content records',
-                'SQL-Error: ' . $this->getDatabaseConnection()->sql_error()
             ];
         }
     }
@@ -153,12 +164,12 @@ class ext_update
     }
 
     /**
-     * Get TYPO3s Database Connection
+     * Get TYPO3s Connection Pool
      *
-     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     * @return ConnectionPool
      */
-    protected function getDatabaseConnection()
+    protected function getConnectionPool(): ConnectionPool
     {
-        return $GLOBALS['TYPO3_DB'];
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }
