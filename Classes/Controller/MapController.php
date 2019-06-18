@@ -35,7 +35,6 @@ class MapController extends AbstractController
      * inject extConfOfMaps2
      *
      * @param ExtConf $extConfOfMaps2
-     * @return void
      */
     public function injectExtConfOfMaps2(ExtConf $extConfOfMaps2)
     {
@@ -47,7 +46,6 @@ class MapController extends AbstractController
      * Hint: no "validate" Annotation: company was saved in previously called action
      *
      * @param Company $company
-     * @return void
      */
     public function newAction(Company $company = null)
     {
@@ -65,13 +63,12 @@ class MapController extends AbstractController
      * initialize create action
      * allow modification of submodel
      * Hint: submodel was created already in companyController, that's why we need modification here
-     *
-     * @return void
      */
     public function initializeCreateAction()
     {
         $maps2Request = GeneralUtility::_POST('tx_maps2');
         if ($maps2Request !== null) {
+            /** @var array $company */
             $company = $this->request->getArgument('company');
             $company['txMaps2Uid'] = $maps2Request;
             $this->request->setArgument('company', $company);
@@ -87,7 +84,6 @@ class MapController extends AbstractController
      * "create" means adding a new poi to company, but company itself has to be updated
      *
      * @param Company $company
-     * @return void
      */
     public function createAction(Company $company)
     {
@@ -99,8 +95,6 @@ class MapController extends AbstractController
 
     /**
      * initialize edit action
-     *
-     * @return void
      */
     public function initializeEditAction()
     {
@@ -111,7 +105,6 @@ class MapController extends AbstractController
      * action edit
      *
      * @param Company $company
-     * @return void
      */
     public function editAction(Company $company)
     {
@@ -121,13 +114,12 @@ class MapController extends AbstractController
     /**
      * initialize update action
      * allow editing of SubModel
-     *
-     * @return void
      */
     public function initializeUpdateAction()
     {
         $maps2Request = GeneralUtility::_POST('tx_maps2');
         if ($maps2Request !== null) {
+            /** @var array $company */
             $company = $this->request->getArgument('company');
             $company['txMaps2Uid'] = $maps2Request;
             $this->request->setArgument('company', $company);
@@ -143,7 +135,6 @@ class MapController extends AbstractController
      * action update
      *
      * @param Company $company
-     * @return void
      */
     public function updateAction(Company $company)
     {

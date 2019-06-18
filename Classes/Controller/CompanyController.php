@@ -16,12 +16,14 @@ namespace JWeiland\Yellowpages2\Controller;
  */
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
-use JWeiland\Maps2\Domain\Model\RadiusResult;
+use JWeiland\Maps2\Domain\Model\Position;
+use JWeiland\Maps2\Service\GeoCodeService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -34,7 +36,6 @@ class CompanyController extends AbstractController
      *
      * @param string $letter Show only records starting with this letter
      * @validate $letter String, StringLength(minimum=0,maximum=3)
-     * @return void
      */
     public function listAction($letter = null)
     {
@@ -47,8 +48,6 @@ class CompanyController extends AbstractController
 
     /**
      * action listMyCompanies
-     *
-     * @return void
      */
     public function listMyCompaniesAction()
     {
@@ -61,7 +60,6 @@ class CompanyController extends AbstractController
      * action show
      *
      * @param int $company
-     * @return void
      */
     public function showAction($company)
     {
@@ -71,8 +69,6 @@ class CompanyController extends AbstractController
 
     /**
      * secure search parameter
-     *
-     * @return void
      */
     public function initializeSearchAction()
     {
@@ -87,7 +83,6 @@ class CompanyController extends AbstractController
      *
      * @param string $search
      * @param int $category
-     * @return void
      */
     public function searchAction($search, $category = 0)
     {
@@ -101,8 +96,6 @@ class CompanyController extends AbstractController
 
     /**
      * action new
-     *
-     * @return void
      */
     public function newAction()
     {
@@ -124,8 +117,6 @@ class CompanyController extends AbstractController
     /**
      * initialize create action
      * allow creation of submodel category
-     *
-     * @return void
      */
     public function initializeCreateAction()
     {
@@ -142,7 +133,6 @@ class CompanyController extends AbstractController
      * action create
      *
      * @param Company $company
-     * @return void
      */
     public function createAction(Company $company)
     {
@@ -154,15 +144,15 @@ class CompanyController extends AbstractController
         $company->setFeUser($feUser);
 
         // set map record
-        $radiusResult = $this->googleMapsService->getFirstFoundPositionByAddress($company->getAddress());
-        if ($radiusResult instanceof RadiusResult) {
-            /** @var PoiCollection $poi */
+        $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
+        $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
+        if ($position instanceof Position) {
             $poi = $this->objectManager->get(PoiCollection::class);
             $poi->setCollectionType('Point');
             $poi->setTitle($company->getCompany());
-            $poi->setAddress($radiusResult->getFormattedAddress());
-            $poi->setLatitude($radiusResult->getGeometry()->getLocation()->getLatitude());
-            $poi->setLongitude($radiusResult->getGeometry()->getLocation()->getLongitude());
+            $poi->setAddress($position->getFormattedAddress());
+            $poi->setLatitude($position->getLatitude());
+            $poi->setLongitude($position->getLongitude());
             $company->setTxMaps2Uid($poi);
 
             // save company
@@ -180,8 +170,6 @@ class CompanyController extends AbstractController
     /**
      * initialize edit action
      * This only happens if webko clicks on edit link in mail
-     *
-     * @return void
      */
     public function initializeEditAction()
     {
@@ -192,7 +180,6 @@ class CompanyController extends AbstractController
      * action edit
      *
      * @param Company $company
-     * @return void
      */
     public function editAction(Company $company)
     {
@@ -208,8 +195,6 @@ class CompanyController extends AbstractController
     /**
      * initialize update action
      * allow editing of submodel category
-     *
-     * @return void
      */
     public function initializeUpdateAction()
     {
@@ -233,7 +218,6 @@ class CompanyController extends AbstractController
      * action update
      *
      * @param Company $company
-     * @return void
      */
     public function updateAction(Company $company)
     {
@@ -252,8 +236,6 @@ class CompanyController extends AbstractController
 
     /**
      * initialize activate action
-     *
-     * @return void
      */
     public function initializeActivateAction()
     {
@@ -264,7 +246,6 @@ class CompanyController extends AbstractController
      * action activate
      *
      * @param int $company
-     * @return void
      */
     public function activateAction($company)
     {
