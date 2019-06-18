@@ -46,7 +46,7 @@ class UploadOneFileConverter extends AbstractTypeConverter
     protected $priority = 2;
 
     /**
-     * @var \TYPO3\CMS\Core\Resource\ResourceFactory
+     * @var ResourceFactory
      */
     protected $fileFactory;
 

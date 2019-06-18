@@ -164,7 +164,7 @@ class CompanyRepository extends Repository
      *
      * @param string $search
      * @param int $category
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return QueryResultInterface
      */
     public function searchCompanies($search, $category)
     {
@@ -274,7 +274,7 @@ class CompanyRepository extends Repository
      * Hint: Needed by scheduler
      *
      * @param int $days
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return QueryResultInterface
      */
     public function findOlderThan($days)
     {
