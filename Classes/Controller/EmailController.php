@@ -40,7 +40,6 @@ class EmailController extends ActionController
      * inject mail
      *
      * @param MailMessage $mail
-     * @return void
      */
     public function injectMail(MailMessage $mail)
     {
@@ -51,7 +50,6 @@ class EmailController extends ActionController
      * inject extConf
      *
      * @param ExtConf $extConf
-     * @return void
      */
     public function injectExtConf(ExtConf $extConf)
     {
@@ -64,7 +62,6 @@ class EmailController extends ActionController
      * @param string $templateFile Template to use for sending
      * @param array $assignVariables Array containing variables to replace in template
      * @param array $redirect An Array containing action, controller and maybe some more informations for redirekt after mail processing
-     * @return void
      */
     public function sendAction($templateFile = null, array $assignVariables = [], array $redirect = [])
     {
