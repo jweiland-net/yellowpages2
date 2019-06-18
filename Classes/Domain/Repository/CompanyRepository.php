@@ -16,11 +16,12 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
  */
 
 use JWeiland\Yellowpages2\Domain\Model\Company;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
-use TYPO3\CMS\Core\Database\PreparedStatement;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -48,7 +49,6 @@ class CompanyRepository extends Repository
      * injects charsetConverter
      *
      * @param CharsetConverter $charsetConverter
-     * @return void
      */
     public function injectCharsetConverter(CharsetConverter $charsetConverter)
     {
@@ -77,7 +77,7 @@ class CompanyRepository extends Repository
      *
      * @param string $letter
      * @param array $settings
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return QueryResultInterface
      */
     public function findByStartingLetter($letter, array $settings = [])
     {
@@ -136,21 +136,27 @@ class CompanyRepository extends Repository
      */
     public function getStartingLetters($isWsp)
     {
-        $addWhere = '';
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $queryBuilder
+            ->selectLiteral('UPPER(LEFT(company, 1)) as letter')
+            ->from('tx_yellowpages2_domain_model_company')
+            ->add('groupBy', 'letter')
+            ->add('orderBy', 'letter ASC');
+
         if ($isWsp) {
-            $addWhere = 'AND wsp_member=1';
+            $queryBuilder->where(
+                $queryBuilder->expr()->eq(
+                    'wsp_member',
+                    1
+                )
+            );
         }
+
         /** @var Query $query */
         $query = $this->createQuery();
-        return $query->statement('
-            SELECT UPPER(LEFT(company, 1)) as letter
-            FROM tx_yellowpages2_domain_model_company
-            WHERE 1=1 ' . $addWhere .
-            BackendUtility::BEenableFields('tx_yellowpages2_domain_model_company') .
-            BackendUtility::deleteClause('tx_yellowpages2_domain_model_company') . '
-            GROUP BY letter
-            ORDER by letter;
-        ')->execute(true);
+        return $query
+            ->statement($queryBuilder)
+            ->execute(true);
     }
 
     /**
@@ -215,47 +221,44 @@ class CompanyRepository extends Repository
      */
     public function getGroupedCategories()
     {
-        $where = [];
-        $where[] = ' sys_category_record_mm.tablenames=?';
-        $where[] = ' AND sys_category_record_mm.fieldname=?';
-        $where[] = BackendUtility::BEenableFields('sys_category');
-        $where[] = BackendUtility::deleteClause('sys_category');
-        $where[] = BackendUtility::BEenableFields('tx_yellowpages2_domain_model_company');
-        $where[] = BackendUtility::deleteClause('tx_yellowpages2_domain_model_company');
-
-        $sql = '
-            SELECT sys_category.uid, sys_category.title
-            
-            FROM tx_yellowpages2_domain_model_company
-            
-            LEFT JOIN sys_category_record_mm
-            ON tx_yellowpages2_domain_model_company.uid = sys_category_record_mm.uid_foreign
-            
-            LEFT JOIN sys_category
-            ON sys_category_record_mm.uid_local = sys_category.uid
-            
-            WHERE ' . implode(LF, $where) . '
-            
-            GROUP BY sys_category.uid
-            ORDER BY sys_category.title
-        ';
-
-        /** @var PreparedStatement $preparedStatement */
-        $preparedStatement = $this->objectManager->get(
-            PreparedStatement::class,
-            $sql,
-            'tx_yellowpages2_domain_model_company'
-        );
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $queryBuilder
+            ->select('sc.uid', 'sc.title')
+            ->from('tx_yellowpages2_domain_model_company', 'c')
+            ->leftJoin(
+                'c',
+                'sys_category_record_mm',
+                'mm',
+                (string)$queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq(
+                        'c.uid',
+                        $queryBuilder->quoteIdentifier('uid_foreign')
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'mm.fieldname',
+                        $queryBuilder->createNamedParameter('main_trade', \PDO::PARAM_STR)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'mm.fieldname',
+                        $queryBuilder->createNamedParameter('main_trade', \PDO::PARAM_STR)
+                    )
+                )
+            )
+            ->leftJoin(
+                'mm',
+                'sys_category',
+                'sc',
+                $queryBuilder->expr()->eq(
+                    'mm.uid_local',
+                    $queryBuilder->quoteIdentifier('sc.uid')
+                )
+            )
+            ->groupBy('sc.uid')
+            ->orderBy('sc.title', 'ASC');
 
         /** @var Query $query */
         $query = $this->createQuery();
-        $results = $query->statement(
-            $preparedStatement,
-            [
-                'tx_yellowpages2_domain_model_company',
-                'main_trade'
-            ]
-        )->execute(true);
+        $results = $query->statement($queryBuilder)->execute(true);
 
         $groupedCategories = [];
         $groupedCategories[] = LocalizationUtility::translate('allBranches', 'yellowpages2');
@@ -280,5 +283,15 @@ class CompanyRepository extends Repository
         $history = $today - ($days * 60 * 60 * 24);
         $query = $this->createQuery();
         return $query->matching($query->lessThan('tstamp', $history))->execute();
+    }
+
+    /**
+     * Get TYPO3s Connection Pool
+     *
+     * @return ConnectionPool
+     */
+    protected function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }

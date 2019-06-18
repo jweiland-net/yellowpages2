@@ -25,16 +25,12 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
 {
     /**
-     * Icon
-     *
      * @var string
      */
     protected $icon = '';
 
     /**
-     * Returns the icon
-     *
-     * @return string $icon
+     * @return string
      */
     public function getIcon()
     {
@@ -45,7 +41,6 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
      * Sets the icon
      *
      * @param string $icon
-     * @return void
      */
     public function setIcon($icon)
     {

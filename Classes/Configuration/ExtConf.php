@@ -23,48 +23,37 @@ use TYPO3\CMS\Core\SingletonInterface;
 class ExtConf implements SingletonInterface
 {
     /**
-     * editLink
-     *
      * @var string
      */
     protected $editLink = '';
 
     /**
-     * email from address
-     *
      * @var string
      */
     protected $emailFromAddress = '';
 
     /**
-     * email from name
-     *
      * @var string
      */
     protected $emailFromName = '';
 
     /**
-     * email to address
-     *
      * @var string
      */
     protected $emailToAddress = '';
 
     /**
-     * email to name
-     *
      * @var string
      */
     protected $emailToName = '';
 
-    /**
-     * constructor of this class
-     * This method reads the global configuration and calls the setter methods
-     */
     public function __construct()
     {
         // get global configuration
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2']);
+        $extConf = unserialize(
+            $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'],
+            ['allowed_classes' => false]
+        );
         if (is_array($extConf) && count($extConf)) {
             // call setter method foreach configuration entry
             foreach ($extConf as $key => $value) {
@@ -77,20 +66,15 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * getter for editLink
-     *
      * @return string
      */
-    public function getEditLink()
+    public function getEditLink(): string
     {
         return $this->editLink;
     }
 
     /**
-     * setter for editLink
-     *
      * @param string $editLink
-     * @return void
      */
     public function setEditLink(string $editLink)
     {
@@ -98,12 +82,10 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * getter for email from address
-     *
      * @throws \Exception
      * @return string
      */
-    public function getEmailFromAddress()
+    public function getEmailFromAddress(): string
     {
         if (empty($this->emailFromAddress)) {
             $senderMail = $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'];
@@ -117,10 +99,7 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * setter for email from address
-     *
      * @param string $emailFromAddress
-     * @return void
      */
     public function setEmailFromAddress(string $emailFromAddress)
     {
@@ -128,12 +107,10 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * getter for email from name
-     *
      * @throws \Exception
      * @return string
      */
-    public function getEmailFromName()
+    public function getEmailFromName(): string
     {
         if (empty($this->emailFromName)) {
             $senderName = $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'];
@@ -148,10 +125,7 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * setter for emailFromName
-     *
      * @param string $emailFromName
-     * @return void
      */
     public function setEmailFromName(string $emailFromName)
     {
@@ -159,20 +133,15 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * getter for email to address
-     *
      * @return string
      */
-    public function getEmailToAddress()
+    public function getEmailToAddress(): string
     {
         return $this->emailToAddress;
     }
 
     /**
-     * setter for email to address
-     *
      * @param string $emailToAddress
-     * @return void
      */
     public function setEmailToAddress(string $emailToAddress)
     {
@@ -180,20 +149,15 @@ class ExtConf implements SingletonInterface
     }
 
     /**
-     * getter for email to name
-     *
      * @return string
      */
-    public function getEmailToName()
+    public function getEmailToName(): string
     {
         return $this->emailToName;
     }
 
     /**
-     * setter for emailToName
-     *
      * @param string $emailToName
-     * @return void
      */
     public function setEmailToName(string $emailToName)
     {
