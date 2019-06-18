@@ -1,23 +1,23 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-  <f:if condition="{company.hasValidUser}">
-    <f:then>
-      <f:render partial="FormErrors" arguments="{object: Company}"/>
+	<f:if condition="{company.hasValidUser}">
+		<f:then>
+			<f:render partial="FormErrors" arguments="{object: Company}"/>
 
-      <f:form action="update" name="company" object="{company}" enctype="multipart/form-data">
-        <fieldset class="powermail_fieldset powermail_fieldset_1">
-          <legend class="powermail_legend">Test Formular Seite</legend>
-          <f:render partial="Company/FormFields" arguments="{company: company, districts: districts, categories: categories}" />
-          <div class="powermail_fieldwrap powermail_fieldwrap_submit">
-            <f:form.submit class="powermail_submit" value="{f:translate(key: 'update')}" />
-          </div>
-        </fieldset>
-      </f:form>
-    </f:then>
-    <f:else>
-      <div>You do not have access to visit this page</div>
-    </f:else>
-  </f:if>
+			<f:form action="update" name="company" object="{company}" enctype="multipart/form-data">
+				<fieldset class="powermail_fieldset powermail_fieldset_1">
+					<legend class="powermail_legend">Test Formular Seite</legend>
+					<f:render partial="Company/FormFields" arguments="{company: company, districts: districts, categories: categories}" />
+					<div class="powermail_fieldwrap powermail_fieldwrap_submit">
+						<f:form.submit class="powermail_submit" value="{f:translate(key: 'update')}" />
+					</div>
+				</fieldset>
+			</f:form>
+		</f:then>
+		<f:else>
+			<div>You do not have access to visit this page</div>
+		</f:else>
+	</f:if>
 
 </f:section>

@@ -1,14 +1,14 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-  <f:flashMessages />
+	<f:flashMessages />
 
-  <f:security.ifHasRole role="{settings.userGroup}">
-    <f:then>
-      <f:render partial="Company/List" arguments="{companies: companies}" />
-    </f:then>
-    <f:else>
-      <div>You do not have access to visit this page</div>
-    </f:else>
-  </f:security.ifHasRole>
+	<f:security.ifHasRole role="{settings.userGroup}">
+		<f:then>
+			<f:render partial="Company/List" arguments="{companies: companies}" />
+		</f:then>
+		<f:else>
+			<div>You do not have access to visit this page</div>
+		</f:else>
+	</f:security.ifHasRole>
 </f:section>

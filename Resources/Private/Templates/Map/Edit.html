@@ -3,10 +3,10 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-  <f:render partial="FormErrors" arguments="{object: Company}"/>
+	<f:render partial="FormErrors" arguments="{object: Company}"/>
 
-  <f:form action="update" name="company" object="{company}" enctype="multipart/form-data">
-    <maps2:widget.editPoi property="txMaps2Uid" poiCollection="{company.txMaps2Uid}" override="{settings: {mapWidth: '100%', mapHeight: '300'}}" />
-    <f:form.submit class="powermail_submit" value="{f:translate(key: 'update')}" />
-  </f:form>
+	<f:form action="update" name="company" object="{company}" enctype="multipart/form-data">
+		<maps2:widget.editPoi property="txMaps2Uid" poiCollection="{company.txMaps2Uid}" override="{settings: {mapWidth: '100%', mapHeight: '300'}}" />
+		<f:form.submit class="powermail_submit" value="{f:translate(key: 'update')}" />
+	</f:form>
 </f:section>
