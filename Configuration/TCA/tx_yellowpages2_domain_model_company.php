@@ -315,7 +315,8 @@ return [
                     ['LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose', '']
                 ],
                 'minitems' => 0,
-                'maxitems' => 1
+                'maxitems' => 1,
+                'default' => 0
             ]
         ],
         'fe_user' => [
@@ -330,7 +331,8 @@ return [
                     ['', '']
                 ],
                 'minitems' => 0,
-                'maxitems' => 1
+                'maxitems' => 1,
+                'default' => 0
             ]
         ],
         'facebook' => [
