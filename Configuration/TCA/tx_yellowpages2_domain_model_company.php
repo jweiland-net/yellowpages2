@@ -301,6 +301,7 @@ return [
                 'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
                 'richtextConfiguration' => 'default',
+                'eval' => 'required,trim'
             ],
         ],
         'district' => [
