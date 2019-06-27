@@ -54,7 +54,6 @@ class UploadOneFileConverter extends AbstractTypeConverter
      * injects fileFactory
      *
      * @param ResourceFactory $fileFactory
-     * @return void
      */
     public function injectFileFactory(ResourceFactory $fileFactory)
     {

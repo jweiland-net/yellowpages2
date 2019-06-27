@@ -131,7 +131,6 @@ class Update extends AbstractTask
      *
      * @param Company $company
      * @param string $type "inform" or "deactivated"
-     * @return void
      */
     public function informUser(Company $company, $type)
     {
@@ -158,7 +157,6 @@ class Update extends AbstractTask
      * inform admin about old company entries
      *
      * @param Company $company
-     * @return void
      */
     public function informAdmin(Company $company)
     {
@@ -182,8 +180,6 @@ class Update extends AbstractTask
 
     /**
      * scheduler serializes this object so we have to tell unserialize() what to do
-     *
-     * @return void
      */
     public function __wakeup()
     {
