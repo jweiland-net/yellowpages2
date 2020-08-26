@@ -1,20 +1,17 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Controller;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
 
+namespace JWeiland\Yellowpages2\Controller;
+
+use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
@@ -32,24 +29,34 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class CompanyController extends AbstractController
 {
     /**
+     * @var GlossaryService
+     */
+    protected $glossaryService;
+
+    public function injectGlossaryService(GlossaryService $glossaryService): void
+    {
+        $this->glossaryService = $glossaryService;
+    }
+
+    /**
      * action list
      *
-     * @param string $letter Show only records starting with this letter
-     * @validate $letter String, StringLength(minimum=0,maximum=3)
+     * @param string|null $letter Show only records starting with this letter
+     * @TYPO3\CMS\Extbase\Annotation\Validate("StringLength", param="letter", options={"minimum": 0, "maximum": 3})
      */
-    public function listAction($letter = null)
+    public function listAction(?string $letter = null): void
     {
-        $companies = $this->companyRepository->findByStartingLetter($letter, $this->settings);
+        $companies = $this->companyRepository->findByStartingLetter((string)$letter, $this->settings);
 
         $this->view->assign('companies', $companies);
-        $this->view->assign('glossar', $this->getGlossar($this->settings['showWspMembers']));
+        $this->assignGlossary();
         $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
     }
 
     /**
      * action listMyCompanies
      */
-    public function listMyCompaniesAction()
+    public function listMyCompaniesAction(): void
     {
         $companies = $this->companyRepository->findByFeUser($GLOBALS['TSFE']->fe_user->user['uid']);
         $this->view->assign('companies', $companies);
@@ -61,7 +68,7 @@ class CompanyController extends AbstractController
      *
      * @param int $company
      */
-    public function showAction($company)
+    public function showAction(int $company): void
     {
         $companyObject = $this->companyRepository->findByIdentifier($company);
         $this->view->assign('company', $companyObject);
@@ -70,7 +77,7 @@ class CompanyController extends AbstractController
     /**
      * secure search parameter
      */
-    public function initializeSearchAction()
+    public function initializeSearchAction(): void
     {
         if ($this->request->hasArgument('search')) {
             $search = $this->request->getArgument('search');
@@ -84,20 +91,20 @@ class CompanyController extends AbstractController
      * @param string $search
      * @param int $category
      */
-    public function searchAction($search, $category = 0)
+    public function searchAction(string $search, int $category = 0): void
     {
         $companies = $this->companyRepository->searchCompanies($search, $category);
         $this->view->assign('search', $search);
         $this->view->assign('category', $category);
         $this->view->assign('companies', $companies);
-        $this->view->assign('glossar', $this->getGlossar($this->settings['showWspMembers']));
+        $this->assignGlossary();
         $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
     }
 
     /**
      * action new
      */
-    public function newAction()
+    public function newAction(): void
     {
         /** @var Company $company */
         $company = $this->objectManager->get(Company::class);
@@ -118,7 +125,7 @@ class CompanyController extends AbstractController
      * initialize create action
      * allow creation of submodel category
      */
-    public function initializeCreateAction()
+    public function initializeCreateAction(): void
     {
         /** @var UploadOneFileConverter $oneFileTypeConverter */
         $oneFileTypeConverter = $this->objectManager->get(UploadOneFileConverter::class);
@@ -134,7 +141,7 @@ class CompanyController extends AbstractController
      *
      * @param Company $company
      */
-    public function createAction(Company $company)
+    public function createAction(Company $company): void
     {
         $this->deleteUploadedFilesOnValidationErrors('company');
 
@@ -171,7 +178,7 @@ class CompanyController extends AbstractController
      * initialize edit action
      * This only happens if webko clicks on edit link in mail
      */
-    public function initializeEditAction()
+    public function initializeEditAction(): void
     {
         $this->registerCompanyFromRequest('company');
     }
@@ -181,7 +188,7 @@ class CompanyController extends AbstractController
      *
      * @param Company $company
      */
-    public function editAction(Company $company)
+    public function editAction(Company $company): void
     {
         $companyObject = $company;
         // get available categories and add "Please choose" to first position
@@ -196,7 +203,7 @@ class CompanyController extends AbstractController
      * initialize update action
      * allow editing of submodel category
      */
-    public function initializeUpdateAction()
+    public function initializeUpdateAction(): void
     {
         $this->registerCompanyFromRequest('company');
 
@@ -219,7 +226,7 @@ class CompanyController extends AbstractController
      *
      * @param Company $company
      */
-    public function updateAction(Company $company)
+    public function updateAction(Company $company): void
     {
         $this->companyRepository->update($company);
 
@@ -237,7 +244,7 @@ class CompanyController extends AbstractController
     /**
      * initialize activate action
      */
-    public function initializeActivateAction()
+    public function initializeActivateAction(): void
     {
         $this->registerCompanyFromRequest('company');
     }
@@ -247,7 +254,7 @@ class CompanyController extends AbstractController
      *
      * @param int $company
      */
-    public function activateAction($company)
+    public function activateAction(int $company): void
     {
         $companyObject = $this->companyRepository->findByIdentifier($company);
         $companyObject->setHidden(false);
@@ -262,9 +269,29 @@ class CompanyController extends AbstractController
             $this->mail->addCc($companyObject->getEmail(), $companyObject->getCompany());
         }
         $this->mail->setSubject(LocalizationUtility::translate('email.subject.activate', 'yellowpages2'));
-        $this->mail->setBody($this->view->render(), 'text/html');
+        if (method_exists($this->mail, 'addPart')) {
+            // TYPO3 < 10 (Swift_Message)
+            $this->mail->setBody($this->view->render(), 'text/html');
+        } else {
+            $isSymfonyEmail = true;
+            // TYPO3 >= 10 (Symfony Mail)
+            $this->mail->html($this->view->render());
+        }
         $this->mail->send();
 
         $this->redirect('list', 'Company');
+    }
+
+    protected function assignGlossary(): void
+    {
+        $this->view->assign('glossar', $this->glossaryService->buildGlossary(
+            $this->companyRepository->getQueryBuilderToFindAllEntries(),
+            [
+                'extensionName' => 'yellowpages2',
+                'pluginName' => 'directory',
+                'controllerName' => 'Company',
+                'column' => 'company'
+            ]
+        ));
     }
 }

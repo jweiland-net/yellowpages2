@@ -1,19 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Controller;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -36,22 +32,12 @@ class EmailController extends ActionController
      */
     protected $extConf;
 
-    /**
-     * inject mail
-     *
-     * @param MailMessage $mail
-     */
-    public function injectMail(MailMessage $mail)
+    public function injectMail(MailMessage $mail): void
     {
         $this->mail = $mail;
     }
 
-    /**
-     * inject extConf
-     *
-     * @param ExtConf $extConf
-     */
-    public function injectExtConf(ExtConf $extConf)
+    public function injectExtConf(ExtConf $extConf): void
     {
         $this->extConf = $extConf;
     }
@@ -63,7 +49,7 @@ class EmailController extends ActionController
      * @param array $assignVariables Array containing variables to replace in template
      * @param array $redirect An Array containing action, controller and maybe some more informations for redirekt after mail processing
      */
-    public function sendAction($templateFile = null, array $assignVariables = [], array $redirect = [])
+    public function sendAction($templateFile = null, array $assignVariables = [], array $redirect = []): void
     {
         if ($templateFile !== null) {
             $this->view->setTemplatePathAndFilename($this->getTemplatePath() . ucfirst($templateFile));
@@ -72,7 +58,14 @@ class EmailController extends ActionController
             $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
             $this->mail->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName());
             $this->mail->setSubject(LocalizationUtility::translate(lcfirst($templateFile), 'yellowpages2'));
-            $this->mail->setBody($this->view->render(), 'text/html');
+            if (method_exists($this->mail, 'addPart')) {
+                // TYPO3 < 10 (Swift_Message)
+                $this->mail->setBody($this->view->render(), 'text/html');
+            } else {
+                $isSymfonyEmail = true;
+                // TYPO3 >= 10 (Symfony Mail)
+                $this->mail->html($this->view->render());
+            }
 
             $this->mail->send();
         }
@@ -85,7 +78,7 @@ class EmailController extends ActionController
      *
      * @return string email template path
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
         $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         $controllerName = $this->controllerContext->getRequest()->getControllerName();

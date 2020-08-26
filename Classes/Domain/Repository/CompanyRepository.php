@@ -1,23 +1,22 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Domain\Repository;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Domain\Repository;
 
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -50,7 +49,7 @@ class CompanyRepository extends Repository
      *
      * @param CharsetConverter $charsetConverter
      */
-    public function injectCharsetConverter(CharsetConverter $charsetConverter)
+    public function injectCharsetConverter(CharsetConverter $charsetConverter): void
     {
         $this->charsetConverter = $charsetConverter;
     }
@@ -61,14 +60,14 @@ class CompanyRepository extends Repository
      * @param int $companyUid
      * @return Company
      */
-    public function findHiddenEntryByUid($companyUid)
+    public function findHiddenEntryByUid(int $companyUid): Company
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
 
         /** @var Company $company */
-        $company = $query->matching($query->equals('uid', (int)$companyUid))->execute()->getFirst();
+        $company = $query->matching($query->equals('uid', $companyUid))->execute()->getFirst();
         return $company;
     }
 
@@ -79,7 +78,7 @@ class CompanyRepository extends Repository
      * @param array $settings
      * @return QueryResultInterface
      */
-    public function findByStartingLetter($letter, array $settings = [])
+    public function findByStartingLetter(string $letter, array $settings = []): QueryResultInterface
     {
         $query = $this->createQuery();
 
@@ -129,44 +128,13 @@ class CompanyRepository extends Repository
     }
 
     /**
-     * get an array with available starting letters
-     *
-     * @param bool $isWsp
-     * @return array
-     */
-    public function getStartingLetters($isWsp)
-    {
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
-        $queryBuilder
-            ->selectLiteral('UPPER(LEFT(company, 1)) as letter')
-            ->from('tx_yellowpages2_domain_model_company')
-            ->add('groupBy', 'letter')
-            ->add('orderBy', 'letter ASC');
-
-        if ($isWsp) {
-            $queryBuilder->where(
-                $queryBuilder->expr()->eq(
-                    'wsp_member',
-                    1
-                )
-            );
-        }
-
-        /** @var Query $query */
-        $query = $this->createQuery();
-        return $query
-            ->statement($queryBuilder)
-            ->execute(true);
-    }
-
-    /**
      * search records
      *
      * @param string $search
      * @param int $category
      * @return QueryResultInterface
      */
-    public function searchCompanies($search, $category)
+    public function searchCompanies(string $search, int $category): QueryResultInterface
     {
         /** @var Query $query */
         $query = $this->createQuery();
@@ -219,7 +187,7 @@ class CompanyRepository extends Repository
      *
      * @return array
      */
-    public function getGroupedCategories()
+    public function getGroupedCategories(): array
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
         $queryBuilder
@@ -276,13 +244,39 @@ class CompanyRepository extends Repository
      * @param int $days
      * @return QueryResultInterface
      */
-    public function findOlderThan($days)
+    public function findOlderThan(int $days): QueryResultInterface
     {
-        $days = (int) $days;
+        $days = (int)$days;
         $today = date('U');
         $history = $today - ($days * 60 * 60 * 24);
         $query = $this->createQuery();
         return $query->matching($query->lessThan('tstamp', $history))->execute();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function getQueryBuilderToFindAllEntries(): QueryBuilder
+    {
+        $table = 'tx_yellowpages2_domain_model_company';
+        $query = $this->createQuery();
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($table);
+        $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
+
+        // Do not set any SELECT, ORDER BY, GROUP BY statement. It will be set by glossary2 API
+        $queryBuilder
+            ->from($table)
+            ->where(
+                $queryBuilder->expr()->in(
+                    'pid',
+                    $queryBuilder->createNamedParameter(
+                        $query->getQuerySettings()->getStoragePageIds(),
+                        Connection::PARAM_INT_ARRAY
+                    )
+                )
+            );
+
+        return $queryBuilder;
     }
 
     /**

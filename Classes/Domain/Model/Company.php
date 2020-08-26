@@ -1,18 +1,13 @@
 <?php
-namespace JWeiland\Yellowpages2\Domain\Model;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -36,7 +31,7 @@ class Company extends AbstractEntity
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $company = '';
 
@@ -47,31 +42,31 @@ class Company extends AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $images;
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $street = '';
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $houseNumber = '';
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $zip = '';
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $city = '';
 
@@ -112,26 +107,26 @@ class Company extends AbstractEntity
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $description = '';
 
     /**
      * @var \JWeiland\Yellowpages2\Domain\Model\District
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $district;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
-     * @validate NotEmpty
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $mainTrade;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $trades;
 
@@ -178,7 +173,7 @@ class Company extends AbstractEntity
     /**
      * @param bool $hidden
      */
-    public function setHidden(bool $hidden)
+    public function setHidden(bool $hidden): void
     {
         $this->hidden = $hidden;
     }
@@ -194,7 +189,7 @@ class Company extends AbstractEntity
     /**
      * @param bool $wspMember
      */
-    public function setWspMember(bool $wspMember)
+    public function setWspMember(bool $wspMember): void
     {
         $this->wspMember = $wspMember;
     }
@@ -210,15 +205,15 @@ class Company extends AbstractEntity
     /**
      * @param string $company
      */
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
 
     /**
-     * @return FileReference
+     * @return FileReference|null
      */
-    public function getLogo()
+    public function getLogo(): ?FileReference
     {
         return $this->logo;
     }
@@ -226,7 +221,7 @@ class Company extends AbstractEntity
     /**
      * @param FileReference $logo
      */
-    public function setLogo(FileReference $logo = null)
+    public function setLogo(FileReference $logo): void
     {
         $this->logo = $logo;
     }
@@ -246,7 +241,7 @@ class Company extends AbstractEntity
     /**
      * @param ObjectStorage $images A minimized Array from $_FILES
      */
-    public function setImages(ObjectStorage $images)
+    public function setImages(ObjectStorage $images): void
     {
         $this->images = $images;
     }
@@ -254,7 +249,7 @@ class Company extends AbstractEntity
     /**
      * @param FileReference $image
      */
-    public function addImage(FileReference $image)
+    public function addImage(FileReference $image): void
     {
         $this->images->attach($image);
     }
@@ -262,7 +257,7 @@ class Company extends AbstractEntity
     /**
      * @param FileReference $image
      */
-    public function removeImage(FileReference $image)
+    public function removeImage(FileReference $image): void
     {
         $this->images->detach($image);
     }
@@ -278,7 +273,7 @@ class Company extends AbstractEntity
     /**
      * @param string $street
      */
-    public function setStreet(string $street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
@@ -294,7 +289,7 @@ class Company extends AbstractEntity
     /**
      * @param string $houseNumber
      */
-    public function setHouseNumber(string $houseNumber)
+    public function setHouseNumber(string $houseNumber): void
     {
         $this->houseNumber = $houseNumber;
     }
@@ -310,7 +305,7 @@ class Company extends AbstractEntity
     /**
      * @param string $zip
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -326,7 +321,7 @@ class Company extends AbstractEntity
     /**
      * @param string $city
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -342,7 +337,7 @@ class Company extends AbstractEntity
     /**
      * @param string $telephone
      */
-    public function setTelephone(string $telephone)
+    public function setTelephone(string $telephone): void
     {
         $this->telephone = $telephone;
     }
@@ -358,7 +353,7 @@ class Company extends AbstractEntity
     /**
      * @param string $fax
      */
-    public function setFax(string $fax)
+    public function setFax(string $fax): void
     {
         $this->fax = $fax;
     }
@@ -374,7 +369,7 @@ class Company extends AbstractEntity
     /**
      * @param string $contactPerson
      */
-    public function setContactPerson(string $contactPerson)
+    public function setContactPerson(string $contactPerson): void
     {
         $this->contactPerson = $contactPerson;
     }
@@ -390,7 +385,7 @@ class Company extends AbstractEntity
     /**
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -406,7 +401,7 @@ class Company extends AbstractEntity
     /**
      * @param string $website
      */
-    public function setWebsite(string $website)
+    public function setWebsite(string $website): void
     {
         $this->website = $website;
     }
@@ -422,7 +417,7 @@ class Company extends AbstractEntity
     /**
      * @param string $openingTimes
      */
-    public function setOpeningTimes(string $openingTimes)
+    public function setOpeningTimes(string $openingTimes): void
     {
         $this->openingTimes = $openingTimes;
     }
@@ -438,7 +433,7 @@ class Company extends AbstractEntity
     /**
      * @param bool $barrierFree
      */
-    public function setBarrierFree(bool $barrierFree)
+    public function setBarrierFree(bool $barrierFree): void
     {
         $this->barrierFree = $barrierFree;
     }
@@ -462,15 +457,15 @@ class Company extends AbstractEntity
     /**
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return District
+     * @return District|null
      */
-    public function getDistrict()
+    public function getDistrict(): ?District
     {
         return $this->district;
     }
@@ -478,7 +473,7 @@ class Company extends AbstractEntity
     /**
      * @param District $district
      */
-    public function setDistrict(District $district = null)
+    public function setDistrict(District $district): void
     {
         $this->district = $district;
     }
@@ -486,7 +481,7 @@ class Company extends AbstractEntity
     /**
      * @return ObjectStorage
      */
-    public function getMainTrade()
+    public function getMainTrade(): ObjectStorage
     {
         return $this->mainTrade;
     }
@@ -494,7 +489,7 @@ class Company extends AbstractEntity
     /**
      * @param ObjectStorage $mainTrade
      */
-    public function setMainTrade(ObjectStorage $mainTrade)
+    public function setMainTrade(ObjectStorage $mainTrade): void
     {
         $this->mainTrade = $mainTrade;
     }
@@ -502,7 +497,7 @@ class Company extends AbstractEntity
     /**
      * @param Category $mainTrade
      */
-    public function addMainTrade(Category $mainTrade)
+    public function addMainTrade(Category $mainTrade): void
     {
         $this->mainTrade->attach($mainTrade);
     }
@@ -510,7 +505,7 @@ class Company extends AbstractEntity
     /**
      * @param Category $mainTrade
      */
-    public function removeMainTrade(Category $mainTrade)
+    public function removeMainTrade(Category $mainTrade): void
     {
         $this->mainTrade->detach($mainTrade);
     }
@@ -518,7 +513,7 @@ class Company extends AbstractEntity
     /**
      * @return ObjectStorage
      */
-    public function getTrades()
+    public function getTrades(): ObjectStorage
     {
         return $this->trades;
     }
@@ -526,7 +521,7 @@ class Company extends AbstractEntity
     /**
      * @param ObjectStorage $trades
      */
-    public function setTrades(ObjectStorage $trades)
+    public function setTrades(ObjectStorage $trades): void
     {
         $this->trades = $trades;
     }
@@ -534,7 +529,7 @@ class Company extends AbstractEntity
     /**
      * @param Category $trade
      */
-    public function addTrade(Category $trade)
+    public function addTrade(Category $trade): void
     {
         $this->trades->attach($trade);
     }
@@ -542,7 +537,7 @@ class Company extends AbstractEntity
     /**
      * @param Category $trade
      */
-    public function removeTrade(Category $trade)
+    public function removeTrade(Category $trade): void
     {
         $this->trades->detach($trade);
     }
@@ -558,7 +553,7 @@ class Company extends AbstractEntity
     /**
      * @param string $facebook
      */
-    public function setFacebook(string $facebook)
+    public function setFacebook(string $facebook): void
     {
         $this->facebook = $facebook;
     }
@@ -574,7 +569,7 @@ class Company extends AbstractEntity
     /**
      * @param string $twitter
      */
-    public function setTwitter(string $twitter)
+    public function setTwitter(string $twitter): void
     {
         $this->twitter = $twitter;
     }
@@ -590,15 +585,15 @@ class Company extends AbstractEntity
     /**
      * @param string $google
      */
-    public function setGoogle(string $google)
+    public function setGoogle(string $google): void
     {
         $this->google = $google;
     }
 
     /**
-     * @return PoiCollection
+     * @return PoiCollection|null
      */
-    public function getTxMaps2Uid()
+    public function getTxMaps2Uid(): ?PoiCollection
     {
         return $this->txMaps2Uid;
     }
@@ -606,15 +601,15 @@ class Company extends AbstractEntity
     /**
      * @param PoiCollection $txMaps2Uid
      */
-    public function setTxMaps2Uid(PoiCollection $txMaps2Uid = null)
+    public function setTxMaps2Uid(PoiCollection $txMaps2Uid): void
     {
         $this->txMaps2Uid = $txMaps2Uid;
     }
 
     /**
-     * @return FeUser
+     * @return FeUser|null
      */
-    public function getFeUser()
+    public function getFeUser(): ?FeUser
     {
         return $this->feUser;
     }
@@ -622,7 +617,7 @@ class Company extends AbstractEntity
     /**
      * @param FeUser $feUser
      */
-    public function setFeUser(FeUser $feUser)
+    public function setFeUser(FeUser $feUser): void
     {
         $this->feUser = $feUser;
     }
@@ -641,7 +636,7 @@ class Company extends AbstractEntity
             && $GLOBALS['TSFE']->fe_user->user['uid'] > 0
             && $this->feUser !== null && $this->feUser->getUid() > 0
         ) {
-            return (int) $GLOBALS['TSFE']->fe_user->user['uid'] === $this->feUser->getUid();
+            return (int)$GLOBALS['TSFE']->fe_user->user['uid'] === $this->feUser->getUid();
         }
         return false;
     }

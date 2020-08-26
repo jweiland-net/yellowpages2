@@ -1,19 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Property\TypeConverter;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Property\TypeConverter;
 
 use TYPO3\CMS\Core\Resource\DuplicationBehavior;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -54,7 +50,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      *
      * @return bool TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
      */
-    public function canConvertFrom($source, $targetType)
+    public function canConvertFrom($source, string $targetType): bool
     {
         // check if $source consists of uploaded files
         foreach ($source as $uploadedFile) {
@@ -94,7 +90,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      */
     public function convertFrom(
         $source,
-        $targetType,
+        string $targetType,
         array $convertedChildProperties = [],
         PropertyMappingConfigurationInterface $configuration = null
     ) {
@@ -180,7 +176,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      *
      * @return FileReference
      */
-    protected function getExtbaseFileReference($source)
+    protected function getExtbaseFileReference(array $source): FileReference
     {
         /** @var FileReference $extbaseFileReference */
         $extbaseFileReference = $this->objectManager->get(FileReference::class);
@@ -196,13 +192,13 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      *
      * @return \TYPO3\CMS\Core\Resource\FileReference
      */
-    protected function getCoreFileReference(array $source)
+    protected function getCoreFileReference(array $source): \TYPO3\CMS\Core\Resource\FileReference
     {
         // upload file
-        $uploadFolder = ResourceFactory::getInstance()->retrieveFileOrFolderObject('uploads/tx_yellowpages2/');
+        $uploadFolder = GeneralUtility::makeInstance(ResourceFactory::class)->retrieveFileOrFolderObject('uploads/tx_yellowpages2/');
         $uploadedFile = $uploadFolder->addUploadedFile($source, DuplicationBehavior::RENAME);
         // create Core FileReference
-        return ResourceFactory::getInstance()->createFileReferenceObject(
+        return GeneralUtility::makeInstance(ResourceFactory::class)->createFileReferenceObject(
             [
                 'uid_local' => $uploadedFile->getUid(),
                 'uid_foreign' => uniqid('NEW_', true),

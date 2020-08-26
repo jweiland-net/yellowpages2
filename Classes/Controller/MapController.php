@@ -1,19 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Controller;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Maps2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
@@ -31,12 +27,7 @@ class MapController extends AbstractController
      */
     protected $extConfOfMaps2;
 
-    /**
-     * inject extConfOfMaps2
-     *
-     * @param ExtConf $extConfOfMaps2
-     */
-    public function injectExtConfOfMaps2(ExtConf $extConfOfMaps2)
+    public function injectExtConfOfMaps2(ExtConf $extConfOfMaps2): void
     {
         $this->extConfOfMaps2 = $extConfOfMaps2;
     }
@@ -45,9 +36,9 @@ class MapController extends AbstractController
      * action new
      * Hint: no "validate" Annotation: company was saved in previously called action
      *
-     * @param Company $company
+     * @param Company|null $company
      */
-    public function newAction(Company $company = null)
+    public function newAction(?Company $company = null): void
     {
         if ($company === null) {
             $company = $this->objectManager->get(Company::class);
@@ -64,7 +55,7 @@ class MapController extends AbstractController
      * allow modification of submodel
      * Hint: submodel was created already in companyController, that's why we need modification here
      */
-    public function initializeCreateAction()
+    public function initializeCreateAction(): void
     {
         $maps2Request = GeneralUtility::_POST('tx_maps2');
         if ($maps2Request !== null) {
@@ -85,7 +76,7 @@ class MapController extends AbstractController
      *
      * @param Company $company
      */
-    public function createAction(Company $company)
+    public function createAction(Company $company): void
     {
         $this->sendMail('create', $company);
         $company->setHidden(true);
@@ -96,7 +87,7 @@ class MapController extends AbstractController
     /**
      * initialize edit action
      */
-    public function initializeEditAction()
+    public function initializeEditAction(): void
     {
         $this->registerCompanyFromRequest('company');
     }
@@ -106,7 +97,7 @@ class MapController extends AbstractController
      *
      * @param Company $company
      */
-    public function editAction(Company $company)
+    public function editAction(Company $company): void
     {
         $this->view->assign('company', $company);
     }
@@ -115,7 +106,7 @@ class MapController extends AbstractController
      * initialize update action
      * allow editing of SubModel
      */
-    public function initializeUpdateAction()
+    public function initializeUpdateAction(): void
     {
         $maps2Request = GeneralUtility::_POST('tx_maps2');
         if ($maps2Request !== null) {
@@ -136,7 +127,7 @@ class MapController extends AbstractController
      *
      * @param Company $company
      */
-    public function updateAction(Company $company)
+    public function updateAction(Company $company): void
     {
         // if webko edits this hidden record, mail should not be send
         if (!$company->getHidden()) {
@@ -152,16 +143,23 @@ class MapController extends AbstractController
      *
      * @param string $subjectKey
      * @param Company $company
-     * @return int The amount of email receivers
+     * @return bool
      */
-    public function sendMail($subjectKey, Company $company)
+    public function sendMail(string $subjectKey, Company $company): bool
     {
         $this->view->assign('company', $company);
 
         $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
         $this->mail->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName());
         $this->mail->setSubject(LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'));
-        $this->mail->setBody($this->view->render(), 'text/html');
+        if (method_exists($this->mail, 'addPart')) {
+            // TYPO3 < 10 (Swift_Message)
+            $this->mail->setBody($this->view->render(), 'text/html');
+        } else {
+            $isSymfonyEmail = true;
+            // TYPO3 >= 10 (Symfony Mail)
+            $this->mail->html($this->view->render());
+        }
 
         return $this->mail->send();
     }
@@ -171,7 +169,7 @@ class MapController extends AbstractController
      *
      * @return string email template path
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
         $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         return ExtensionManagementUtility::extPath($extKey) . 'Resources/Private/Templates/Email/';

@@ -16,9 +16,6 @@ plugin.tx_yellowpages2 {
   persistence {
     storagePid = {$plugin.tx_yellowpages2.persistence.storagePid}
   }
-  features {
-    rewrittenPropertyMapper = 1
-  }
   settings {
     includeJQueryLibrary = {$plugin.tx_yellowpages2.settings.includeJQueryLibrary}
     pidOfMaps2Plugin = {$plugin.tx_yellowpages2.settings.pidOfMaps2Plugin}

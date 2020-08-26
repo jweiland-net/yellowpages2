@@ -1,19 +1,14 @@
 <?php
 
-namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
-
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
+
 use JWeiland\Yellowpages2\Domain\Model\Category;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
@@ -49,8 +44,9 @@ class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIconInitiallyReturnsEmptyString() {
-        $this->assertSame(
+    public function getIconInitiallyReturnsEmptyString()
+    {
+        self::assertSame(
             '',
             $this->subject->getIcon()
         );
@@ -59,10 +55,11 @@ class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function setIconSetsIcon() {
+    public function setIconSetsIcon()
+    {
         $this->subject->setIcon('foo bar');
 
-        $this->assertSame(
+        self::assertSame(
             'foo bar',
             $this->subject->getIcon()
         );
@@ -71,16 +68,18 @@ class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function setIconWithIntegerResultsInString() {
+    public function setIconWithIntegerResultsInString()
+    {
         $this->subject->setIcon(123);
-        $this->assertSame('123', $this->subject->getIcon());
+        self::assertSame('123', $this->subject->getIcon());
     }
 
     /**
      * @test
      */
-    public function setIconWithBooleanResultsInString() {
+    public function setIconWithBooleanResultsInString()
+    {
         $this->subject->setIcon(true);
-        $this->assertSame('1', $this->subject->getIcon());
+        self::assertSame('1', $this->subject->getIcon());
     }
 }

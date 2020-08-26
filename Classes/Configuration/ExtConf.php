@@ -1,19 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Configuration;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Configuration;
 
 use TYPO3\CMS\Core\SingletonInterface;
 
@@ -50,10 +46,15 @@ class ExtConf implements SingletonInterface
     public function __construct()
     {
         // get global configuration
-        $extConf = unserialize(
-            $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'],
-            ['allowed_classes' => false]
-        );
+        $extConf = [];
+        if (class_exists(ExtensionConfiguration::class)) {
+            $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('yellowpages2');
+        } elseif (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'])) {
+            $extConf = unserialize(
+                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'],
+                ['allowed_classes' => false]
+            );
+        }
         if (is_array($extConf) && count($extConf)) {
             // call setter method foreach configuration entry
             foreach ($extConf as $key => $value) {
@@ -76,7 +77,7 @@ class ExtConf implements SingletonInterface
     /**
      * @param string $editLink
      */
-    public function setEditLink(string $editLink)
+    public function setEditLink(string $editLink): void
     {
         $this->editLink = $editLink;
     }
@@ -101,7 +102,7 @@ class ExtConf implements SingletonInterface
     /**
      * @param string $emailFromAddress
      */
-    public function setEmailFromAddress(string $emailFromAddress)
+    public function setEmailFromAddress(string $emailFromAddress): void
     {
         $this->emailFromAddress = $emailFromAddress;
     }
@@ -119,15 +120,14 @@ class ExtConf implements SingletonInterface
             }
 
             return $senderName;
-        } else {
-            return $this->emailFromName;
         }
+        return $this->emailFromName;
     }
 
     /**
      * @param string $emailFromName
      */
-    public function setEmailFromName(string $emailFromName)
+    public function setEmailFromName(string $emailFromName): void
     {
         $this->emailFromName = $emailFromName;
     }
@@ -143,7 +143,7 @@ class ExtConf implements SingletonInterface
     /**
      * @param string $emailToAddress
      */
-    public function setEmailToAddress(string $emailToAddress)
+    public function setEmailToAddress(string $emailToAddress): void
     {
         $this->emailToAddress = $emailToAddress;
     }
@@ -159,7 +159,7 @@ class ExtConf implements SingletonInterface
     /**
      * @param string $emailToName
      */
-    public function setEmailToName(string $emailToName)
+    public function setEmailToName(string $emailToName): void
     {
         $this->emailToName = $emailToName;
     }

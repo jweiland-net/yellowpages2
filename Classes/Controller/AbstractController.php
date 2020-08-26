@@ -1,19 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Controller;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
@@ -27,7 +23,6 @@ use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
@@ -89,87 +84,42 @@ class AbstractController extends ActionController
      */
     protected $session;
 
-    /**
-     * @var string
-     */
-    protected $letters = '0-9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
-
-    /**
-     * inject mail
-     *
-     * @param MailMessage $mail
-     */
-    public function injectMail(MailMessage $mail)
+    public function injectMail(MailMessage $mail): void
     {
         $this->mail = $mail;
     }
 
-    /**
-     * inject extConf
-     *
-     * @param ExtConf $extConf
-     */
-    public function injectExtConf(ExtConf $extConf)
+    public function injectExtConf(ExtConf $extConf): void
     {
         $this->extConf = $extConf;
     }
 
-    /**
-     * inject persistenceManager
-     *
-     * @param PersistenceManager $persistenceManager
-     */
-    public function injectPersistenceManager(PersistenceManager $persistenceManager)
+    public function injectPersistenceManager(PersistenceManager $persistenceManager): void
     {
         $this->persistenceManager = $persistenceManager;
     }
 
-    /**
-     * inject companyRepository
-     *
-     * @param CompanyRepository $companyRepository
-     */
-    public function injectCompanyRepository(CompanyRepository $companyRepository)
+    public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
         $this->companyRepository = $companyRepository;
     }
 
-    /**
-     * inject districtRepository
-     *
-     * @param DistrictRepository $districtRepository
-     */
-    public function injectDistrictRepository(DistrictRepository $districtRepository)
+    public function injectDistrictRepository(DistrictRepository $districtRepository): void
     {
         $this->districtRepository = $districtRepository;
     }
 
-    /**
-     * inject categoryRepository
-     *
-     * @param CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
     {
         $this->categoryRepository = $categoryRepository;
     }
 
-    /**
-     * inject feUserRepository
-     *
-     * @param FeUserRepository $feUserRepository
-     */
-    public function injectFeUserRepository(FeUserRepository $feUserRepository)
+    public function injectFeUserRepository(FeUserRepository $feUserRepository): void
     {
         $this->feUserRepository = $feUserRepository;
     }
 
-    /**
-     * inject session
-     *
-     * @param Session $session
-     */
-    public function injectSession(Session $session)
+    public function injectSession(Session $session): void
     {
         $this->session = $session;
     }
@@ -177,7 +127,7 @@ class AbstractController extends ActionController
     /**
      * PreProcessing of all actions
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         // if this value was not set, then it will be filled with 0
         // but that is not good, because UriBuilder accepts 0 as pid, so it's better to set it to NULL
@@ -190,46 +140,11 @@ class AbstractController extends ActionController
     }
 
     /**
-     * get an array with letters as keys for the glossar
-     *
-     * @param bool $isWsp
-     * @return array Array with starting letters as keys
-     */
-    protected function getGlossar($isWsp)
-    {
-        $glossar = [];
-        $availableLetters = $this->companyRepository->getStartingLetters($isWsp);
-        $possibleLetters = GeneralUtility::trimExplode(',', $this->letters);
-
-        // add all letters which we have found in DB
-        foreach ($availableLetters as $availableLetter) {
-            if (MathUtility::canBeInterpretedAsInteger($availableLetter['letter'])) {
-                $availableLetter['letter'] = '0-9';
-            }
-            // add only letters which are valid (do not add "§$%")
-            if (in_array($availableLetter['letter'], $possibleLetters, true)) {
-                $glossar[$availableLetter['letter']] = true;
-            }
-        }
-
-        // add all valid letters which are not set/found by previous foreach
-        foreach ($possibleLetters as $possibleLetter) {
-            if (!array_key_exists($possibleLetter, $glossar)) {
-                $glossar[$possibleLetter] = false;
-            }
-        }
-
-        ksort($glossar, SORT_STRING);
-
-        return $glossar;
-    }
-
-    /**
      * This is a workaround to help controller actions to find (hidden) companies
      *
-     * @param $argumentName
+     * @param string $argumentName
      */
-    protected function registerCompanyFromRequest($argumentName)
+    protected function registerCompanyFromRequest(string $argumentName): void
     {
         $argument = $this->request->getArgument($argumentName);
         if (is_array($argument)) {
@@ -250,7 +165,7 @@ class AbstractController extends ActionController
      * @return string The flash message or FALSE if no flash message should be set
      * @api
      */
-    protected function getErrorFlashMessage()
+    protected function getErrorFlashMessage(): string
     {
         return LocalizationUtility::translate(
             'errorFlashMessage',
@@ -265,7 +180,7 @@ class AbstractController extends ActionController
     /**
      * remove empty arguments from request
      */
-    protected function removeEmptyArgumentsFromRequest()
+    protected function removeEmptyArgumentsFromRequest(): void
     {
         $company = $this->request->getArgument('company');
         $company['trades'] = ArrayUtility::removeArrayEntryByValue($company['trades'], '');
@@ -281,7 +196,7 @@ class AbstractController extends ActionController
      *
      * @param string $argument
      */
-    protected function deleteUploadedFilesOnValidationErrors($argument)
+    protected function deleteUploadedFilesOnValidationErrors(string $argument): void
     {
         if ($this->getControllerContext()->getRequest()->hasArgument($argument)) {
             /** @var array $company */
@@ -302,7 +217,7 @@ class AbstractController extends ActionController
      * @param Company $company
      * @throws \Exception
      */
-    protected function addNewPoiCollectionToCompany(Company $company)
+    protected function addNewPoiCollectionToCompany(Company $company): void
     {
         $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
         $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());

@@ -1,19 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace JWeiland\Yellowpages2\Tasks;
 
 /*
- * This file is part of the yellowpages2 project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the package jweiland/yellowpages2.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace JWeiland\Yellowpages2\Tasks;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
@@ -33,7 +29,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  */
 class Update extends AbstractTask
 {
-
     /**
      * @var ObjectManager
      */
@@ -81,7 +76,7 @@ class Update extends AbstractTask
      *
      * @return QuerySettingsInterface
      */
-    protected function getDefaultQuerySettings()
+    protected function getDefaultQuerySettings(): QuerySettingsInterface
     {
         /** @var QuerySettingsInterface $settings */
         $settings = $this->objectManager->get(QuerySettingsInterface::class);
@@ -96,7 +91,7 @@ class Update extends AbstractTask
      *
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         // hide companies which are older than 13 months
         $companies = $this->companyRepository->findOlderThan(396);
@@ -132,24 +127,28 @@ class Update extends AbstractTask
      * @param Company $company
      * @param string $type "inform" or "deactivated"
      */
-    public function informUser(Company $company, $type)
+    public function informUser(Company $company, string $type): void
     {
         $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
         $this->mail->setTo($company->getEmail(), $company->getCompany());
         $this->mail->setSubject(LocalizationUtility::translate('email.subject.' . $type . '.user', 'yellowpages2'));
-        $this->mail->setBody(
-            LocalizationUtility::translate(
-                'email.body.' . $type . '.user',
-                'yellowpages2',
-                [
-                    $company->getUid(),
-                    $company->getCompany(),
-                    $this->extConf->getEditLink()
-                ]
-            ),
-            'text/html'
+        $bodyHtml = LocalizationUtility::translate(
+            'email.body.' . $type . '.user',
+            'yellowpages2',
+            [
+                $company->getUid(),
+                $company->getCompany(),
+                $this->extConf->getEditLink()
+            ]
         );
-
+        if (method_exists($this->mail, 'addPart')) {
+            // TYPO3 < 10 (Swift_Message)
+            $this->mail->setBody($bodyHtml, 'text/html');
+        } else {
+            $isSymfonyEmail = true;
+            // TYPO3 >= 10 (Symfony Mail)
+            $this->mail->html($bodyHtml);
+        }
         $this->mail->send();
     }
 
@@ -158,23 +157,27 @@ class Update extends AbstractTask
      *
      * @param Company $company
      */
-    public function informAdmin(Company $company)
+    public function informAdmin(Company $company): void
     {
         $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
         $this->mail->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName());
         $this->mail->setSubject(LocalizationUtility::translate('email.subject.deactivated.admin', 'yellowpages2'));
-        $this->mail->setBody(
-            LocalizationUtility::translate(
-                'email.body.deactivated.admin',
-                'yellowpages2',
-                [
-                    $company->getUid(),
-                    $company->getCompany()
-                ]
-            ),
-            'text/html'
+        $bodyHtml = LocalizationUtility::translate(
+            'email.body.deactivated.admin',
+            'yellowpages2',
+            [
+                $company->getUid(),
+                $company->getCompany()
+            ]
         );
-
+        if (method_exists($this->mail, 'addPart')) {
+            // TYPO3 < 10 (Swift_Message)
+            $this->mail->setBody($bodyHtml, 'text/html');
+        } else {
+            $isSymfonyEmail = true;
+            // TYPO3 >= 10 (Symfony Mail)
+            $this->mail->html($bodyHtml);
+        }
         $this->mail->send();
     }
 
