@@ -45,36 +45,26 @@ class AbstractController extends ActionController
     protected $extConf;
 
     /**
-     * persistenceManager
-     *
      * @var PersistenceManager
      */
     protected $persistenceManager;
 
     /**
-     * companyRepository
-     *
      * @var CompanyRepository
      */
     protected $companyRepository;
 
     /**
-     * districtRepository
-     *
      * @var DistrictRepository
      */
     protected $districtRepository;
 
     /**
-     * categoryRepository
-     *
      * @var CategoryRepository
      */
     protected $categoryRepository;
 
     /**
-     * feUserRepository
-     *
      * @var FeUserRepository
      */
     protected $feUserRepository;
@@ -124,9 +114,6 @@ class AbstractController extends ActionController
         $this->session = $session;
     }
 
-    /**
-     * PreProcessing of all actions
-     */
     public function initializeAction(): void
     {
         // if this value was not set, then it will be filled with 0
@@ -162,8 +149,7 @@ class AbstractController extends ActionController
      * display no flash message at all on errors. Override this to customize
      * the flash message in your action controller.
      *
-     * @return string The flash message or FALSE if no flash message should be set
-     * @api
+     * @return string
      */
     protected function getErrorFlashMessage(): string
     {
@@ -178,7 +164,7 @@ class AbstractController extends ActionController
     }
 
     /**
-     * remove empty arguments from request
+     * Remove empty arguments from request
      */
     protected function removeEmptyArgumentsFromRequest(): void
     {

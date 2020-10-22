@@ -39,12 +39,10 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * action list
-     *
      * @param string|null $letter Show only records starting with this letter
      * @TYPO3\CMS\Extbase\Annotation\Validate("StringLength", param="letter", options={"minimum": 0, "maximum": 3})
      */
-    public function listAction(?string $letter = null): void
+    public function listAction(?string $letter): void
     {
         $companies = $this->companyRepository->findByStartingLetter((string)$letter, $this->settings);
 
@@ -53,9 +51,6 @@ class CompanyController extends AbstractController
         $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
     }
 
-    /**
-     * action listMyCompanies
-     */
     public function listMyCompaniesAction(): void
     {
         $companies = $this->companyRepository->findByFeUser($GLOBALS['TSFE']->fe_user->user['uid']);
@@ -64,8 +59,6 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * action show
-     *
      * @param int $company
      */
     public function showAction(int $company): void
@@ -75,7 +68,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * secure search parameter
+     * Secure search parameter
      */
     public function initializeSearchAction(): void
     {
@@ -86,8 +79,6 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * search show
-     *
      * @param string $search
      * @param int $category
      */
@@ -101,9 +92,6 @@ class CompanyController extends AbstractController
         $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
     }
 
-    /**
-     * action new
-     */
     public function newAction(): void
     {
         /** @var Company $company */
@@ -122,8 +110,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * initialize create action
-     * allow creation of submodel category
+     * Allow creation of submodel category
      */
     public function initializeCreateAction(): void
     {
@@ -137,8 +124,6 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * action create
-     *
      * @param Company $company
      */
     public function createAction(Company $company): void
@@ -175,8 +160,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * initialize edit action
-     * This only happens if webko clicks on edit link in mail
+     * Will be called when link in mail will be clicked
      */
     public function initializeEditAction(): void
     {
@@ -184,8 +168,6 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * action edit
-     *
      * @param Company $company
      */
     public function editAction(Company $company): void
@@ -200,8 +182,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * initialize update action
-     * allow editing of submodel category
+     * Allow editing of submodel category
      */
     public function initializeUpdateAction(): void
     {
@@ -222,8 +203,6 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * action update
-     *
      * @param Company $company
      */
     public function updateAction(Company $company): void
@@ -241,17 +220,12 @@ class CompanyController extends AbstractController
         }
     }
 
-    /**
-     * initialize activate action
-     */
     public function initializeActivateAction(): void
     {
         $this->registerCompanyFromRequest('company');
     }
 
     /**
-     * action activate
-     *
      * @param int $company
      */
     public function activateAction(int $company): void

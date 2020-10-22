@@ -33,12 +33,11 @@ class MapController extends AbstractController
     }
 
     /**
-     * action new
      * Hint: no "validate" Annotation: company was saved in previously called action
      *
      * @param Company|null $company
      */
-    public function newAction(?Company $company = null): void
+    public function newAction(?Company $company): void
     {
         if ($company === null) {
             $company = $this->objectManager->get(Company::class);
@@ -51,8 +50,7 @@ class MapController extends AbstractController
     }
 
     /**
-     * initialize create action
-     * allow modification of submodel
+     * Allow modification of submodel
      * Hint: submodel was created already in companyController, that's why we need modification here
      */
     public function initializeCreateAction(): void
@@ -71,7 +69,6 @@ class MapController extends AbstractController
     }
 
     /**
-     * action create
      * "create" means adding a new poi to company, but company itself has to be updated
      *
      * @param Company $company
@@ -84,17 +81,12 @@ class MapController extends AbstractController
         $this->redirect('listMyCompanies', 'Company');
     }
 
-    /**
-     * initialize edit action
-     */
     public function initializeEditAction(): void
     {
         $this->registerCompanyFromRequest('company');
     }
 
     /**
-     * action edit
-     *
      * @param Company $company
      */
     public function editAction(Company $company): void
@@ -103,8 +95,7 @@ class MapController extends AbstractController
     }
 
     /**
-     * initialize update action
-     * allow editing of SubModel
+     * Allow editing of SubModel
      */
     public function initializeUpdateAction(): void
     {
@@ -123,8 +114,6 @@ class MapController extends AbstractController
     }
 
     /**
-     * action update
-     *
      * @param Company $company
      */
     public function updateAction(Company $company): void
@@ -164,12 +153,7 @@ class MapController extends AbstractController
         return $this->mail->send();
     }
 
-    /**
-     * get template path for email templates
-     *
-     * @return string email template path
-     */
-    public function getTemplatePath(): string
+    public function getTemplatePathForMail(): string
     {
         $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         return ExtensionManagementUtility::extPath($extKey) . 'Resources/Private/Templates/Email/';
