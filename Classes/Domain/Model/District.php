@@ -23,17 +23,11 @@ class District extends AbstractEntity
      */
     protected $district = '';
 
-    /**
-     * @return string
-     */
     public function getDistrict(): string
     {
         return $this->district;
     }
 
-    /**
-     * @param string $district
-     */
     public function setDistrict(string $district): void
     {
         $this->district = $district;

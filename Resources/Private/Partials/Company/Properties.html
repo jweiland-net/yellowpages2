@@ -11,21 +11,14 @@
 <div class="thumbnail grid_1 floatleft">
 	<figure class="marginbottom gridrightstd">
 		<f:if condition="{company.logo}">
-			<f:then>
-				<f:image image="{company.logo}" alt="Logo: {company.company}" width="{settings.list.image.width}" height="{settings.list.image.height}" />
-			</f:then>
-			<f:else>
-				<f:if condition="{company.mainTrade.0.icon}">
-					<f:image src="uploads/tx_yellowpages2/{company.mainTrade.0.icon}" alt="Logo: {company.mainTrade.0.title}" width="{settings.list.image.width}" height="{settings.list.image.height}" />
-				</f:if>
-			</f:else>
+			<f:image image="{company.logo}" alt="Logo: {company.company}" width="{settings.list.image.width}" height="{settings.list.image.height}" />
 		</f:if>
 	</figure>
 </div>
 <header class="grid_11 floatleft marginbottom"><h1>{company.company}</h1></header>
 <div class="grid_12 clearer clearfix">
 	<div class="grid_6 floatleft">
-		<f:if condition="{company.images->f:count()}">
+		<f:if condition="{company.images -> f:count()}">
 			<figure class="gridright marginbottom2">
 				<f:render partial="Company/Images" arguments="{company: company}" />
 			</figure>

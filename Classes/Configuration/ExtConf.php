@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Configuration;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class to get configuration from ExtensionManager of this extension
@@ -46,46 +48,28 @@ class ExtConf implements SingletonInterface
     public function __construct()
     {
         // get global configuration
-        $extConf = [];
-        if (class_exists(ExtensionConfiguration::class)) {
-            $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('yellowpages2');
-        } elseif (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'])) {
-            $extConf = unserialize(
-                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yellowpages2'],
-                ['allowed_classes' => false]
-            );
-        }
+        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('yellowpages2');
         if (is_array($extConf) && count($extConf)) {
             // call setter method foreach configuration entry
             foreach ($extConf as $key => $value) {
                 $methodName = 'set' . ucfirst($key);
                 if (method_exists($this, $methodName)) {
-                    $this->$methodName($value);
+                    $this->$methodName((string)$value);
                 }
             }
         }
     }
 
-    /**
-     * @return string
-     */
     public function getEditLink(): string
     {
         return $this->editLink;
     }
 
-    /**
-     * @param string $editLink
-     */
     public function setEditLink(string $editLink): void
     {
         $this->editLink = $editLink;
     }
 
-    /**
-     * @throws \Exception
-     * @return string
-     */
     public function getEmailFromAddress(): string
     {
         if (empty($this->emailFromAddress)) {
@@ -99,18 +83,11 @@ class ExtConf implements SingletonInterface
         return $this->emailFromAddress;
     }
 
-    /**
-     * @param string $emailFromAddress
-     */
     public function setEmailFromAddress(string $emailFromAddress): void
     {
         $this->emailFromAddress = $emailFromAddress;
     }
 
-    /**
-     * @throws \Exception
-     * @return string
-     */
     public function getEmailFromName(): string
     {
         if (empty($this->emailFromName)) {
@@ -124,41 +101,26 @@ class ExtConf implements SingletonInterface
         return $this->emailFromName;
     }
 
-    /**
-     * @param string $emailFromName
-     */
     public function setEmailFromName(string $emailFromName): void
     {
         $this->emailFromName = $emailFromName;
     }
 
-    /**
-     * @return string
-     */
     public function getEmailToAddress(): string
     {
         return $this->emailToAddress;
     }
 
-    /**
-     * @param string $emailToAddress
-     */
     public function setEmailToAddress(string $emailToAddress): void
     {
         $this->emailToAddress = $emailToAddress;
     }
 
-    /**
-     * @return string
-     */
     public function getEmailToName(): string
     {
         return $this->emailToName;
     }
 
-    /**
-     * @param string $emailToName
-     */
     public function setEmailToName(string $emailToName): void
     {
         $this->emailToName = $emailToName;

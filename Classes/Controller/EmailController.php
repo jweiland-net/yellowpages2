@@ -43,16 +43,14 @@ class EmailController extends ActionController
     }
 
     /**
-     * action send
-     *
      * @param string $templateFile Template to use for sending
      * @param array $assignVariables Array containing variables to replace in template
      * @param array $redirect An Array containing action, controller and maybe some more informations for redirekt after mail processing
      */
-    public function sendAction($templateFile = null, array $assignVariables = [], array $redirect = []): void
+    public function sendAction(string $templateFile, array $assignVariables = [], array $redirect = []): void
     {
         if ($templateFile !== null) {
-            $this->view->setTemplatePathAndFilename($this->getTemplatePath() . ucfirst($templateFile));
+            $this->view->setTemplatePathAndFilename($this->getTemplatePathForMail() . ucfirst($templateFile));
             $this->view->assignMultiple($assignVariables);
 
             $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
@@ -73,12 +71,7 @@ class EmailController extends ActionController
         $this->redirect($redirect['actionName'], $redirect['controllerName'], $redirect['extensionName'], $redirect['arguments'], $redirect['pageUid'], $redirect['delay'], $redirect['statusCode']);
     }
 
-    /**
-     * get template path for email templates
-     *
-     * @return string email template path
-     */
-    public function getTemplatePath(): string
+    public function getTemplatePathForMail(): string
     {
         $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         $controllerName = $this->controllerContext->getRequest()->getControllerName();

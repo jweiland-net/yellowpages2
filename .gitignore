@@ -1,3 +1,7 @@
+# Git global ignore file
+# for local exclude patterns please edit .git/info/exclude
+# Example file see https://github.com/TYPO3-Documentation/T3DocTeam/blob/master/.gitignore
+
 # ignore generated documentation
 *GENERATED*
 
@@ -10,15 +14,4 @@
 *.swp
 .project
 .webprj
-nbproject
 
-# Ignore temporary files
-*.DS_Store
-
-# Ignore composer stuff
-bin/*
-vendor/*
-
-.build
-composer.lock
-.php_cs.cache
