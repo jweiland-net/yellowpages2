@@ -246,7 +246,6 @@ class CompanyController extends AbstractController
             // TYPO3 < 10 (Swift_Message)
             $this->mail->setBody($this->view->render(), 'text/html');
         } else {
-            $isSymfonyEmail = true;
             // TYPO3 >= 10 (Symfony Mail)
             $this->mail->html($this->view->render());
         }
