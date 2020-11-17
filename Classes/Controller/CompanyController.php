@@ -43,18 +43,19 @@ class CompanyController extends AbstractController
      */
     public function listAction(string $letter = ''): void
     {
-        $companies = $this->companyRepository->findByLetter($letter, $this->settings);
-
-        $this->view->assign('companies', $companies);
+        $this->view->assignMultiple([
+            'companies' => $this->companyRepository->findByLetter($letter, $this->settings),
+            'categories' => $this->companyRepository->getTranslatedCategories()
+        ]);
         $this->assignGlossary();
-        $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
     }
 
     public function listMyCompaniesAction(): void
     {
-        $companies = $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']);
-        $this->view->assign('companies', $companies);
-        $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
+        $this->view->assignMultiple([
+            'companies' => $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']),
+            'categories' => $this->companyRepository->getTranslatedCategories()
+        ]);
     }
 
     /**
@@ -83,12 +84,13 @@ class CompanyController extends AbstractController
      */
     public function searchAction(string $search, int $category = 0): void
     {
-        $companies = $this->companyRepository->searchCompanies($search, $category);
-        $this->view->assign('search', $search);
-        $this->view->assign('category', $category);
-        $this->view->assign('companies', $companies);
+        $this->view->assignMultiple([
+            'search' => $search,
+            'category' => $category,
+            'companies' => $this->companyRepository->searchCompanies($search, $category),
+            'categories' => $this->companyRepository->getTranslatedCategories()
+        ]);
         $this->assignGlossary();
-        $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
     }
 
     public function newAction(): void
@@ -100,12 +102,11 @@ class CompanyController extends AbstractController
             $company->setDistrict($district);
         }
 
-        // get available categories and add "Please choose" to first position
-        $categories = $this->categoryRepository->findByParent($this->settings['startingUidForCategories']);
-
-        $this->view->assign('company', $company);
-        $this->view->assign('districts', $this->districtRepository->getDistricts());
-        $this->view->assign('categories', $categories);
+        $this->view->assignMultiple([
+            'company' => $company,
+            'districts' => $this->districtRepository->getDistricts(),
+            'categories' => $this->categoryRepository->findByParent($this->settings['startingUidForCategories'])
+        ]);
     }
 
     /**
@@ -174,13 +175,11 @@ class CompanyController extends AbstractController
      */
     public function editAction(Company $company): void
     {
-        $companyObject = $company;
-        // get available categories and add "Please choose" to first position
-        $categories = $this->categoryRepository->findByParent($this->settings['startingUidForCategories']);
-
-        $this->view->assign('company', $companyObject);
-        $this->view->assign('districts', $this->districtRepository->getDistricts());
-        $this->view->assign('categories', $categories);
+        $this->view->assignMultiple([
+            'company' => $company,
+            'districts' => $this->districtRepository->getDistricts(),
+            'categories' => $this->categoryRepository->findByParent((int)$this->settings['startingUidForCategories'])
+        ]);
     }
 
     /**
