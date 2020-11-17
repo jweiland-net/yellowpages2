@@ -1,19 +1,20 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<div class="grid_8 floatleft">
-		<f:flashMessages />
+	<f:flashMessages />
 
-		<f:render partial="FormErrors" arguments="{object: Company}" />
+	<f:render partial="FormErrors" arguments="{object: Company}" />
 
-		<f:form action="create" name="company" object="{company}" enctype="multipart/form-data">
-			<fieldset class="powermail_fieldset powermail_fieldset_1">
-				<legend class="powermail_legend">{f:translate(key: 'newCompany')}</legend>
-				<f:render partial="Company/FormFields" arguments="{company: company, districts: districts, categories: categories}" />
-				<div class="powermail_fieldwrap powermail_fieldwrap_submit">
-					<f:form.submit class="powermail_submit" value="{f:translate(key: 'create')}" />
-				</div>
-			</fieldset>
-		</f:form>
-	</div>
+	<f:form action="create" name="company" object="{company}" enctype="multipart/form-data">
+		<fieldset>
+			<legend>{f:translate(key: 'newCompany')}</legend>
+
+			<f:render partial="Company/FormFields"
+					  arguments="{company: company, districts: districts, categories: categories}" />
+
+			<div>
+				<f:form.submit value="{f:translate(key: 'create')}" />
+			</div>
+		</fieldset>
+	</f:form>
 </f:section>
