@@ -203,6 +203,16 @@ class Company extends AbstractEntity
         $this->logo = $logo;
     }
 
+    public function addLogo(FileReference $logo): void
+    {
+        $this->logo->attach($logo);
+    }
+
+    public function removeLogo(FileReference $logo): void
+    {
+        $this->logo->detach($logo);
+    }
+
     /**
      * @return array|FileReference[]
      */
