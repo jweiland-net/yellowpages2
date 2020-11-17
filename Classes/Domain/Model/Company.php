@@ -25,11 +25,6 @@ class Company extends AbstractEntity
     protected $hidden = false;
 
     /**
-     * @var bool
-     */
-    protected $wspMember = false;
-
-    /**
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
@@ -170,16 +165,6 @@ class Company extends AbstractEntity
     public function setHidden(bool $hidden): void
     {
         $this->hidden = $hidden;
-    }
-
-    public function getWspMember(): bool
-    {
-        return $this->wspMember;
-    }
-
-    public function setWspMember(bool $wspMember): void
-    {
-        $this->wspMember = $wspMember;
     }
 
     public function getCompany(): string

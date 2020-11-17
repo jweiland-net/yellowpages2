@@ -1,187 +1,182 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2">
-    <header/>
-    <body>
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2">
+		<header/>
+		<body>
+			<trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
+				<source>Logo</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
+				<source>House number</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
+				<source>Contact person</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
+				<source>Website</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
+				<source>Opening times</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
+				<source>Barrier-free</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
+				<source>District</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+				<source>FeUser</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
+				<source>Facebook</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
+				<source>Twitter</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.google" xml:space="preserve">
+				<source>Google+</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
+				<source>Main Trade</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
+				<source>Sub Trades</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
+				<source>District</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
+				<source>District</source>
+			</trans-unit>
 
-      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
-        <source>Company</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.wspMember" xml:space="preserve">
-        <source>WSP Member</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
-        <source>Company</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
-        <source>Logo</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
-        <source>Images</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
-        <source>Street</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
-        <source>house number</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
-        <source>Zip</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
-        <source>City</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
-        <source>Telephone</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
-        <source>Fax</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
-        <source>Contact person</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
-        <source>Email</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
-        <source>Website</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
-        <source>Opening times</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
-        <source>Barrier-free</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
-        <source>Description</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
-        <source>District</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
-        <source>FeUser</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
-        <source>Facebook</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
-        <source>Twitter</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.google" xml:space="preserve">
-        <source>Google+</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
-        <source>Main Trade</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
-        <source>Sub Trades</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
-        <source>District</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
-        <source>District</source>
-      </trans-unit>
+			<trans-unit id="search">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="noResults">
+				<source>No results found</source>
+			</trans-unit>
+			<trans-unit id="branch">
+				<source>Branch</source>
+			</trans-unit>
+			<trans-unit id="allBranches">
+				<source>All branches</source>
+			</trans-unit>
+			<trans-unit id="newCompany">
+				<source>New company</source>
+			</trans-unit>
+			<trans-unit id="editCompany">
+				<source>Edit company</source>
+			</trans-unit>
+			<trans-unit id="listMyCompanies">
+				<source>List my companies</source>
+			</trans-unit>
+			<trans-unit id="create">
+				<source>Create</source>
+			</trans-unit>
+			<trans-unit id="update">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="companyCreated">
+				<source>Thank you for your entry. Please note that your data will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
+			</trans-unit>
+			<trans-unit id="companyUpdated">
+				<source>Company updated</source>
+			</trans-unit>
+			<trans-unit id="rightsMessage">
+				<source>I give all rights of this image to city Pforzheim</source>
+			</trans-unit>
+			<trans-unit id="pleaseChoose">
+				<source>--- Please choose ---</source>
+			</trans-unit>
+			<trans-unit id="yes">
+				<source>Yes</source>
+			</trans-unit>
+			<trans-unit id="no">
+				<source>No</source>
+			</trans-unit>
+			<trans-unit id="altTextMapImg">
+				<source>Map</source>
+			</trans-unit>
 
-      <trans-unit id="search">
-        <source>Search</source>
-      </trans-unit>
-      <trans-unit id="noResults">
-        <source>No results found</source>
-      </trans-unit>
-      <trans-unit id="branch">
-        <source>Branch</source>
-      </trans-unit>
-      <trans-unit id="allBranches">
-        <source>All branches</source>
-      </trans-unit>
-      <trans-unit id="newCompany">
-        <source>New company</source>
-      </trans-unit>
-      <trans-unit id="editCompany">
-        <source>Edit company</source>
-      </trans-unit>
-      <trans-unit id="listMyCompanies">
-        <source>List my companies</source>
-      </trans-unit>
-      <trans-unit id="create">
-        <source>Create</source>
-      </trans-unit>
-      <trans-unit id="update">
-        <source>Edit</source>
-      </trans-unit>
-      <trans-unit id="companyCreated">
-        <source>Thank you for your entry. Please note that your data will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-      </trans-unit>
-      <trans-unit id="companyUpdated">
-        <source>Company updated</source>
-      </trans-unit>
-      <trans-unit id="rightsMessage">
-        <source>I give all rights of this image to city Pforzheim</source>
-      </trans-unit>
-      <trans-unit id="pleaseChoose">
-        <source>--- Please choose ---</source>
-      </trans-unit>
-      <trans-unit id="yes">
-        <source>Yes</source>
-      </trans-unit>
-      <trans-unit id="no">
-        <source>No</source>
-      </trans-unit>
-      <trans-unit id="altTextMapImg">
-        <source>Map</source>
-      </trans-unit>
+			<trans-unit id="email.subject.inform.user">
+				<source>Your company record is out of date</source>
+			</trans-unit>
+			<trans-unit id="email.subject.deactivated.user">
+				<source>Your company record has been deactivated</source>
+			</trans-unit>
+			<trans-unit id="email.subject.deactivated.admin">
+				<source>A company record has been deactivated</source>
+			</trans-unit>
+			<trans-unit id="email.subject.create">
+				<source>A new record was created</source>
+			</trans-unit>
+			<trans-unit id="email.subject.update">
+				<source>A record was updated</source>
+			</trans-unit>
+			<trans-unit id="email.subject.activate">
+				<source>A record was activated</source>
+			</trans-unit>
+			<trans-unit id="email.body.inform.user">
+				<source><![CDATA[
+					<p>Dear customer</p>
+					<p>Your company entry %2$s (%1$s) will be outdated next month</p>
+					<p>Please login at %3$s and update your data.</p>
+					<p>Your team of Pforzheim</p>]]>
+				</source>
+			</trans-unit>
+			<trans-unit id="email.body.deactivated.user">
+				<source><![CDATA[
+					<p>Dear customer</p>
+					<p>Your company entry %2$s (%1$s) now been deactivated</p>
+					<p>Your team of Pforzheim</p>]]>
+				</source>
+			</trans-unit>
+			<trans-unit id="email.body.deactivated.admin">
+				<source><![CDATA[
+					<p>Dear admin</p>
+					<p>The company entry %2$s (%1$s) has now been deactivated</p>]]>
+				</source>
+			</trans-unit>
 
-      <trans-unit id="email.subject.inform.user">
-        <source>Your company record is out of date</source>
-      </trans-unit>
-      <trans-unit id="email.subject.deactivated.user">
-        <source>Your company record has been deactivated</source>
-      </trans-unit>
-      <trans-unit id="email.subject.deactivated.admin">
-        <source>A company record has been deactivated</source>
-      </trans-unit>
-      <trans-unit id="email.subject.create">
-        <source>A new record was created</source>
-      </trans-unit>
-      <trans-unit id="email.subject.update">
-        <source>A record was updated</source>
-      </trans-unit>
-      <trans-unit id="email.subject.activate">
-        <source>A record was activated</source>
-      </trans-unit>
-      <trans-unit id="email.body.inform.user">
-        <source><![CDATA[
-          <p>Dear customer</p>
-          <p>Your company entry %2$s (%1$s) will be outdated next month</p>
-          <p>Please login at %3$s and update your data.</p>
-          <p>Your team of Pforzheim</p>]]>
-        </source>
-      </trans-unit>
-      <trans-unit id="email.body.deactivated.user">
-        <source><![CDATA[
-          <p>Dear customer</p>
-          <p>Your company entry %2$s (%1$s) now been deactivated</p>
-          <p>Your team of Pforzheim</p>]]>
-        </source>
-      </trans-unit>
-      <trans-unit id="email.body.deactivated.admin">
-        <source><![CDATA[
-          <p>Dear admin</p>
-          <p>The company entry %2$s (%1$s) has now been deactivated</p>]]>
-        </source>
-      </trans-unit>
-
-      <trans-unit id="error.upload">
-        <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-      </trans-unit>
-      <trans-unit id="error.uploadRights">
-        <source>You don\'t have checked the box for upload rights. So upload stops here</source>
-      </trans-unit>
-      <trans-unit id="errorFlashMessage">
-        <source>An error occurred while trying to call %1$s->%2$s()</source>
-      </trans-unit>
-
-    </body>
-  </file>
+			<trans-unit id="error.upload">
+				<source>Something went wrong with your uploaded files. Please try again. Error: </source>
+			</trans-unit>
+			<trans-unit id="error.uploadRights">
+				<source>You don\'t have checked the box for upload rights. So upload stops here</source>
+			</trans-unit>
+			<trans-unit id="errorFlashMessage">
+				<source>An error occurred while trying to call %1$s->%2$s()</source>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>

@@ -2,7 +2,6 @@
 # Table structure for table 'tx_yellowpages2_domain_model_company'
 #
 CREATE TABLE tx_yellowpages2_domain_model_company (
-	wsp_member tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	company varchar(255) DEFAULT '' NOT NULL,
 	logo int(11) unsigned DEFAULT '0' NOT NULL,
 	images int(11) unsigned DEFAULT '0' NOT NULL,

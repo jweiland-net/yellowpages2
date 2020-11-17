@@ -5,21 +5,27 @@
 		<body>
 			<trans-unit id="poiCollectionPid" xml:space="preserve">
 				<source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
+				<target>PID für POI Sammlungen: Definieren Sie eine Speicher-PID wo Datensätze vom Typ Point of Interest gespeichert werden sollen.</target>
 			</trans-unit>
 			<trans-unit id="editLink" xml:space="preserve">
 				<source>Link to edit form: Set the URI where the user can edit his company record.</source>
+				<target>Link zum Bearbeiten des Formulars: Legen Sie die URI fest, in der der Benutzer seinen Firmeneintrag bearbeiten kann.</target>
 			</trans-unit>
 			<trans-unit id="emailFromAddress" xml:space="preserve">
 				<source>email from address: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
+				<target>E-Mail von Adresse: Die E-Mail-Adresse des Absenders. Falls nicht angegeben versucht die Erweiterung eine von INSTALL_TOOL zu erhalten.</target>
 			</trans-unit>
 			<trans-unit id="emailFromName" xml:space="preserve">
 				<source>email from name: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
+				<target>E-Mail von Namen: Der Absender-E-Mail-Name. Falls nicht angegeben versucht die Erweiterung einen von INSTALL_TOOL zu erhalten.</target>
 			</trans-unit>
 			<trans-unit id="emailToAddress" xml:space="preserve">
 				<source>email to address: The recipients email address.</source>
+				<target>An E-Mail Adresse: Die E-Mail-Adresse des Empfängers.</target>
 			</trans-unit>
 			<trans-unit id="emailToName" xml:space="preserve">
 				<source>email to name: The recipients email name.</source>
+				<target>An E-Mail-Name: Der E-Mail-Name des Empfängers.</target>
 			</trans-unit>
 		</body>
 	</file>
