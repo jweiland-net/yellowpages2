@@ -258,7 +258,10 @@ class CompanyRepository extends Repository
                     ),
                     $queryBuilder->expr()->eq(
                         'category_mm.tablenames',
-                        $queryBuilder->quoteIdentifier('tx_yellowpages2_domain_model_company')
+                        $queryBuilder->createNamedParameter(
+                            'tx_yellowpages2_domain_model_company',
+                            \PDO::PARAM_STR
+                        )
                     ),
                     $queryBuilder->expr()->orX(
                         $queryBuilder->expr()->eq(
