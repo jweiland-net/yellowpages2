@@ -17,6 +17,7 @@ ChangeLog
 - Remove sys_category icon implementation.
 - Move ExtIcon to Resources/Public/Icons
 - Update UnitTests
+- Remove maps2 as requirement.
 
 **Version 3.0.0**
 
