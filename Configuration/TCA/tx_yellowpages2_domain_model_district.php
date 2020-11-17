@@ -19,7 +19,7 @@ return [
             'endtime' => 'endtime'
         ],
         'searchFields' => 'district,',
-        'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_district.gif'
+        'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_district.svg'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, district'
