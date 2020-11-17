@@ -98,6 +98,17 @@ If you have inserted the Industry Directory plugin for detail view onto another
 page, you can set the PID of list page here to have correct links back to list view.
 
 
+.. _userGroup:
+
+userGroup
+---------
+
+Default:
+
+If you will allow for frontend users to create and edit their own business listings you have
+assign them a frontend usergroup and add this group UID to this property.
+
+
 .. _pageBrowser:
 
 pageBrowser
