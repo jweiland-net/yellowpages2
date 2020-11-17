@@ -44,6 +44,9 @@ plugin.tx_yellowpages2 {
         maxHeight = 50
       }
     }
+    new {
+      uploadFolder = 1:user_upload/tx_yellowpages2/
+    }
     pageBrowser {
       itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
       insertAbove = {$plugin.tx_yellowpages2.settings.pageBrowser.insertAbove}

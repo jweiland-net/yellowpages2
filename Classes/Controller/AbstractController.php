@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use JWeiland\Clubdirectory\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
@@ -24,8 +25,10 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
+use TYPO3\CMS\Extbase\Property\TypeConverterInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -123,6 +126,47 @@ class AbstractController extends ActionController
         }
         if (empty($this->settings['pidOfListPage'])) {
             $this->settings['pidOfListPage'] = null;
+        }
+    }
+
+    /**
+     * Currently only "logo" and "images" are allowed properties.
+     *
+     * @param string $property
+     * @param MvcPropertyMappingConfiguration $propertyMappingConfigurationForClub
+     * @param mixed $converterOptionValue
+     */
+    protected function assignMediaTypeConverter(
+        string $property,
+        MvcPropertyMappingConfiguration $propertyMappingConfigurationForClub,
+        $converterOptionValue
+    ): void {
+        if ($property === 'logo' || $property === 'images') {
+            $className = UploadMultipleFilesConverter::class;
+            $converterOptionName = 'IMAGES';
+        } else {
+            return;
+        }
+
+        /** @var TypeConverterInterface $typeConverter */
+        $typeConverter = $this->objectManager->get($className);
+        $propertyMappingConfigurationForMediaFiles = $propertyMappingConfigurationForClub
+            ->forProperty($property)
+            ->setTypeConverter($typeConverter);
+
+        $propertyMappingConfigurationForMediaFiles->setTypeConverterOption(
+            $className,
+            'settings',
+            $this->settings
+        );
+
+        if (!empty($converterOptionValue)) {
+            // Do not use setTypeConverterOptions() as this will remove all existing options
+            $propertyMappingConfigurationForMediaFiles->setTypeConverterOption(
+                $className,
+                $converterOptionName,
+                $converterOptionValue
+            );
         }
     }
 

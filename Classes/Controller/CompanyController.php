@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use JWeiland\Clubdirectory\Domain\Model\Club;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
@@ -114,12 +115,13 @@ class CompanyController extends AbstractController
      */
     public function initializeCreateAction(): void
     {
-        /** @var UploadOneFileConverter $oneFileTypeConverter */
-        $oneFileTypeConverter = $this->objectManager->get(UploadOneFileConverter::class);
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->forProperty('logo')->setTypeConverter($oneFileTypeConverter);
-        /** @var UploadMultipleFilesConverter $multipleFilesTypeConverter */
-        $multipleFilesTypeConverter = $this->objectManager->get(UploadMultipleFilesConverter::class);
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->forProperty('images')->setTypeConverter($multipleFilesTypeConverter);
+        $companyMappingConfiguration = $this->arguments
+            ->getArgument('company')
+            ->getPropertyMappingConfiguration();
+
+        $this->assignMediaTypeConverter('logo', $companyMappingConfiguration, null);
+        $this->assignMediaTypeConverter('images', $companyMappingConfiguration, null);
+
         $this->removeEmptyArgumentsFromRequest();
     }
 
@@ -187,19 +189,17 @@ class CompanyController extends AbstractController
     public function initializeUpdateAction(): void
     {
         $this->registerCompanyFromRequest('company');
+        $requestArgument = $this->request->getArgument('company');
 
-        /** @var UploadOneFileConverter $oneFileTypeConverter */
-        $oneFileTypeConverter = $this->objectManager->get(UploadOneFileConverter::class);
-        $this->arguments->getArgument('company')
-            ->getPropertyMappingConfiguration()
-            ->forProperty('logo')
-            ->setTypeConverter($oneFileTypeConverter);
-        /** @var UploadMultipleFilesConverter $multipleFilesTypeConverter */
-        $multipleFilesTypeConverter = $this->objectManager->get(UploadMultipleFilesConverter::class);
-        $this->arguments->getArgument('company')
-            ->getPropertyMappingConfiguration()
-            ->forProperty('images')
-            ->setTypeConverter($multipleFilesTypeConverter);
+        $companyMappingConfiguration = $this->arguments
+            ->getArgument('company')
+            ->getPropertyMappingConfiguration();
+
+        // Needed to get the previously stored logo and images
+        /** @var Company $persistedCompany */
+        $persistedCompany = $this->companyRepository->findByIdentifier($requestArgument['__identity']);
+        $this->assignMediaTypeConverter('logo', $companyMappingConfiguration, $persistedCompany->getOriginalLogo());
+        $this->assignMediaTypeConverter('images', $companyMappingConfiguration, $persistedCompany->getOriginalImages());
     }
 
     /**
