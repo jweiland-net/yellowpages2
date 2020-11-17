@@ -22,7 +22,7 @@
 			</trans-unit>
 
 			<trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
-				<source>Company</source>
+				<source>Business listing</source>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
 				<source>Company</source>
