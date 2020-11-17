@@ -454,14 +454,22 @@ class Company extends AbstractEntity
         $this->google = $google;
     }
 
-    public function getTxMaps2Uid(): ?PoiCollection
+    /**
+     * SF: Do not add PoiCollection as strict_type to $txMaps2Uid
+     * as this will break DataMap in Extbase when maps2 is not installed.
+     *
+     * @param PoiCollection|null $txMaps2Uid
+     */
+    public function getTxMaps2Uid()
     {
         return $this->txMaps2Uid;
     }
 
-    public function setTxMaps2Uid(PoiCollection $txMaps2Uid): void
+    public function setTxMaps2Uid($txMaps2Uid): void
     {
-        $this->txMaps2Uid = $txMaps2Uid;
+        if ($txMaps2Uid instanceof PoiCollection) {
+            $this->txMaps2Uid = $txMaps2Uid;
+        }
     }
 
     public function getFeUser(): ?FeUser
