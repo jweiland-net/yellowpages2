@@ -149,10 +149,6 @@
 				<source>Company updated</source>
 				<target>Firma bearbeitet</target>
 			</trans-unit>
-			<trans-unit id="rightsMessage">
-				<source>I give all rights of this image to city Pforzheim</source>
-				<target>Hiermit räume ich der Stadt Pforzheim ein einfaches, unbeschränktes Nutzungsrecht an dem hochgeladenen Werk ein. Mit der Nutzung werden keine Rechte von Dritten verletzt.</target>
-			</trans-unit>
 			<trans-unit id="pleaseChoose">
 				<source>--- Please choose ---</source>
 				<target>--- Bitte auswählen ---</target>
@@ -255,8 +251,8 @@
 				<target>Laden Sie das Firmenlogo in quadratischem Format hoch (jpg,gif,png).</target>
 			</trans-unit>
 			<trans-unit id="cshimages_0">
-				<source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.Be sure to set the image rights. Otherwise the image will not be uploaded.</source>
-				<target>Laden Sie max. 5 Bilddateien (jpg, gif, png) hoch. Bitte benutzen Sie bei mehreren Bildern immer das gleiche Bildformat (z.B. 3:2, 4:3) um eine ruckelfrei Ausgabe der Bildergalerie zu gewährleisten. Bestätigen Sie, dass Sie über die Bilderrechte verfügen. Ansonsten wird das Bild nicht hochgeladen werden.</target>
+				<source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
+				<target>Laden Sie max. 5 Bilddateien (jpg, gif, png) hoch. Bitte benutzen Sie bei mehreren Bildern immer das gleiche Bildformat (z.B. 3:2, 4:3) um eine ruckelfrei Ausgabe der Bildergalerie zu gewährleisten.</target>
 			</trans-unit>
 
 			<trans-unit id="email.subject.inform.user">
@@ -324,14 +320,11 @@
 				<source>Something went wrong with your uploaded files. Please try again. Error: </source>
 				<target>Ein Fehler ist beim Upload der Dateien aufgetreten. Bitte versuchen Sie es zunächst erneut. Fehlermeldung: </target>
 			</trans-unit>
-			<trans-unit id="error.uploadRights">
-				<source>You don\'t have checked the box for upload rights. So upload stops here</source>
-				<target>Sie haben die Checkbox für die Uploadrechte nicht markiert. Der Upload wurde abgebrochen.</target>
-			</trans-unit>
 			<trans-unit id="error.fileExtension">
 				<source>You only can upload files with following file extensions: %1$s</source>
 				<target>Sie können nur Bilder mit folgenden Dateiendungen hochladen: %1$s</target>
 			</trans-unit>
+
 			<trans-unit id="errorFlashMessage">
 				<source>An error occurred while trying to call %1$s->%2$s()</source>
 				<target>Es ist ein Fehler aufgetreten während dem Aufruf zu %1$s->%2$s()</target>

@@ -12,5 +12,16 @@
 </f:if>
 
 <f:section name="renderMainTrade">
-	<f:form.select additionalAttributes="{required: 'required'}" name="company[{field}][]" id="{field}" class="powermail_field powermail_select marginbottom" options="{options}" size="1" value="{value}" optionValueField="uid" optionLabelField="title" sortByOptionLabel="1" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" prependOptionValue="" />
+	<f:form.select additionalAttributes="{required: 'required'}"
+								 name="company[{field}][]"
+								 id="{field}"
+								 class="powermail_field powermail_select marginbottom"
+								 options="{options}"
+								 size="1"
+								 value="{value}"
+								 optionValueField="uid"
+								 optionLabelField="title"
+								 sortByOptionLabel="1"
+								 prependOptionLabel="{f:translate(key: 'pleaseChoose')}"
+								 prependOptionValue="" />
 </f:section>
