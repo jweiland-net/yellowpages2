@@ -1,0 +1,30 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>Config</th>
+		<th>Value</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><strong>Plugin</strong></td>
+		<td>{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xml:plugin.title')}</td>
+	</tr>
+	<f:if condition="{pi_flexform_transformed.settings.pidOfDetailPage}">
+		<tr>
+			<td><strong>PID of detail view</strong></td>
+			<td>{pi_flexform_transformed.settings.pidOfDetailPage}</td>
+		</tr>
+	</f:if>
+	<f:if condition="{pi_flexform_transformed.settings.pidOfListPage}">
+		<tr>
+			<td><strong>PID of list view</strong></td>
+			<td>{pi_flexform_transformed.settings.pidOfListPage}</td>
+		</tr>
+	</f:if>
+	</tbody>
+</table>
+</html>

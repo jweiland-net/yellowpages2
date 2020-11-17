@@ -1,0 +1,16 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+  elements {
+    yellowpages2-directory {
+      iconIdentifier = ext-yellowpages2-directory-wizard-icon
+      title = LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.title
+      description = LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.description
+      tt_content_defValues {
+        CType = list
+        list_type = yellowpages2_directory
+      }
+    }
+  }
+}
+
+# Add CType Preview
+mod.web_layout.tt_content.preview.list.yellowpages2_directory = EXT:yellowpages2/Resources/Private/Templates/PluginPreview/TableView.html
