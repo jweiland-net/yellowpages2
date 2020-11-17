@@ -62,8 +62,13 @@ class MapController extends AbstractController
             $company['txMaps2Uid'] = $maps2Request;
             $this->request->setArgument('company', $company);
         }
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->allowModificationForSubProperty('txMaps2Uid');
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()
+
+        $companyMappingConfiguration = $this->arguments
+            ->getArgument('company')
+            ->getPropertyMappingConfiguration();
+
+        $companyMappingConfiguration->allowModificationForSubProperty('txMaps2Uid');
+        $companyMappingConfiguration
             ->allowProperties('txMaps2Uid')
             ->forProperty('txMaps2Uid')->allowProperties('latitude', 'longitude', '__identity');
     }
@@ -107,10 +112,17 @@ class MapController extends AbstractController
             $this->request->setArgument('company', $company);
         }
         $this->registerCompanyFromRequest('company');
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->allowCreationForSubProperty('txMaps2Uid');
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->allowModificationForSubProperty('txMaps2Uid');
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->allowProperties('txMaps2Uid');
-        $this->arguments->getArgument('company')->getPropertyMappingConfiguration()->forProperty('txMaps2Uid')->allowProperties('latitude', 'longitude');
+
+        $companyMappingConfiguration = $this->arguments
+            ->getArgument('company')
+            ->getPropertyMappingConfiguration();
+
+        $companyMappingConfiguration->allowCreationForSubProperty('txMaps2Uid');
+        $companyMappingConfiguration->allowModificationForSubProperty('txMaps2Uid');
+        $companyMappingConfiguration->allowProperties('txMaps2Uid');
+        $companyMappingConfiguration
+            ->forProperty('txMaps2Uid')
+            ->allowProperties('latitude', 'longitude');
     }
 
     /**
