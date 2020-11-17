@@ -1,46 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2">
-    <header/>
-    <body>
-
-      <trans-unit id="sheetGeneral" xml:space="preserve">
-        <source>General</source>
-        <target>Allgemein</target>
-      </trans-unit>
-      <trans-unit id="chooseAction" xml:space="preserve">
-        <source>Choose action</source>
-        <target>Ansicht wählen</target>
-      </trans-unit>
-      <trans-unit id="chooseAction" xml:space="preserve">
-        <source>Choose action</source>
-        <target>Ansicht wählen</target>
-      </trans-unit>
-      <trans-unit id="list" xml:space="preserve">
-        <source>List view</source>
-        <target>Listenansicht</target>
-      </trans-unit>
-      <trans-unit id="show" xml:space="preserve">
-        <source>Detail view</source>
-        <target>Detailansicht</target>
-      </trans-unit>
-      <trans-unit id="pidOfDetailPage">
-        <source>PID of detail page</source>
-        <target>PID der Detailansicht</target>
-      </trans-unit>
-      <trans-unit id="pidOfListPage">
-        <source>PID of list page</source>
-        <target>PID der Listenansicht. Sinnvoll, wenn auch eine Detailansicht definiert wurde</target>
-      </trans-unit>
-      <trans-unit id="presetTrade" xml:space="preserve">
-        <source>Preset trade</source>
-        <target>Vorauswahl Branche</target>
-      </trans-unit>
-      <trans-unit id="district" xml:space="preserve">
-        <source>District</source>
-        <target>Stadtteil</target>
-      </trans-unit>
-
-    </body>
-  </file>
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2">
+		<header/>
+		<body>
+			<trans-unit id="sheetGeneral" xml:space="preserve">
+				<source>General</source>
+				<target>Allgemein</target>
+			</trans-unit>
+			<trans-unit id="pidOfDetailPage" xml:space="preserve">
+				<source>PID of detail view</source>
+				<target>PID der Detailansicht</target>
+			</trans-unit>
+			<trans-unit id="pidOfListPage" xml:space="preserve">
+				<source>PID of list view</source>
+				<target>PID der Listenansicht</target>
+			</trans-unit>
+			<trans-unit id="presetTrade" xml:space="preserve">
+				<source>Preset trade</source>
+				<target>Vorauswahl Branche</target>
+			</trans-unit>
+			<trans-unit id="district" xml:space="preserve">
+				<source>District</source>
+				<target>Bezirk</target>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>

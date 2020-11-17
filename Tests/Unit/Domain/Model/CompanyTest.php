@@ -89,45 +89,6 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getwspMemberInitiallyReturnsFalse()
-    {
-        self::assertFalse(
-            $this->subject->getwspMember()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setwspMemberSetswspMember()
-    {
-        $this->subject->setwspMember(true);
-        self::assertTrue(
-            $this->subject->getwspMember()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setwspMemberWithStringReturnsTrue()
-    {
-        $this->subject->setwspMember('foo bar');
-        self::assertTrue($this->subject->getwspMember());
-    }
-
-    /**
-     * @test
-     */
-    public function setwspMemberWithZeroReturnsFalse()
-    {
-        $this->subject->setwspMember(0);
-        self::assertFalse($this->subject->getwspMember());
-    }
-
-    /**
-     * @test
-     */
     public function getCompanyInitiallyReturnsEmptyString()
     {
         self::assertSame(

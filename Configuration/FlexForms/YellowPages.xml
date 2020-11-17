@@ -10,25 +10,6 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<switchableControllerActions>
-						<TCEforms>
-							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:chooseAction</label>
-							<config>
-								<type>select</type>
-								<renderType>selectSingle</renderType>
-								<items>
-									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:list</numIndex>
-										<numIndex index="1"/>
-									</numIndex>
-									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:show</numIndex>
-										<numIndex index="1"><![CDATA[Company->show]]></numIndex>
-									</numIndex>
-								</items>
-							</config>
-						</TCEforms>
-					</switchableControllerActions>
 					<settings.pidOfDetailPage>
 						<TCEforms>
 							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfDetailPage</label>
@@ -49,14 +30,6 @@
 							</config>
 						</TCEforms>
 					</settings.pidOfListPage>
-					<settings.showWspMembers>
-						<TCEforms>
-							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:showWspMembers</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</settings.showWspMembers>
 					<settings.presetTrade>
 						<TCEforms>
 							<label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:presetTrade</label>
@@ -92,7 +65,7 @@
 								<items type="array">
 									<numIndex index="0">
 										<numIndex index="0">LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose</numIndex>
-										<numIndex index="1"></numIndex>
+										<numIndex index="1" />
 									</numIndex>
 								</items>
 								<size>1</size>

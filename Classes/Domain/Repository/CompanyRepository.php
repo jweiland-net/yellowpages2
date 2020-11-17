@@ -11,17 +11,19 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
-use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -37,29 +39,19 @@ class CompanyRepository extends Repository
     ];
 
     /**
-     * charset converter
-     * We need some UTF-8 compatible functions for search
-     *
-     * @var CharsetConverter
+     * @var Dispatcher
      */
-    protected $charsetConverter;
+    protected $dispatcher;
 
-    /**
-     * injects charsetConverter
-     *
-     * @param CharsetConverter $charsetConverter
-     */
-    public function injectCharsetConverter(CharsetConverter $charsetConverter): void
-    {
-        $this->charsetConverter = $charsetConverter;
+    public function __construct(
+        ObjectManager $objectManager,
+        Dispatcher $dispatcher
+    ) {
+        parent::__construct($objectManager);
+
+        $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * find company by uid whether it is hidden or not
-     *
-     * @param int $companyUid
-     * @return Company
-     */
     public function findHiddenEntryByUid(int $companyUid): Company
     {
         $query = $this->createQuery();
@@ -71,78 +63,59 @@ class CompanyRepository extends Repository
         return $company;
     }
 
-    /**
-     * find all records starting with given letter
-     *
-     * @param string $letter
-     * @param array $settings
-     * @return QueryResultInterface
-     */
-    public function findByStartingLetter(string $letter, array $settings = []): QueryResultInterface
+    public function findByLetter(string $letter, array $settings = []): QueryResultInterface
     {
+        /** @var Query $query */
         $query = $this->createQuery();
-
-        $constraintAnd = [];
+        $queryBuilder = $this->getQueryBuilderForCompany($query);
 
         if ($letter) {
-            $constraintOr = [];
-            if ($letter == '0-9') {
-                $constraintOr[] = $query->like('company', '0%');
-                $constraintOr[] = $query->like('company', '1%');
-                $constraintOr[] = $query->like('company', '2%');
-                $constraintOr[] = $query->like('company', '3%');
-                $constraintOr[] = $query->like('company', '4%');
-                $constraintOr[] = $query->like('company', '5%');
-                $constraintOr[] = $query->like('company', '6%');
-                $constraintOr[] = $query->like('company', '7%');
-                $constraintOr[] = $query->like('company', '8%');
-                $constraintOr[] = $query->like('company', '9%');
-            } else {
-                $constraintOr[] = $query->like('company', $letter . '%');
-            }
-            $constraintAnd[] = $query->logicalOr($constraintOr);
+            $glossaryService = GeneralUtility::makeInstance(GlossaryService::class);
+            $queryBuilder
+                ->where(
+                    $glossaryService->getLetterConstraintForDoctrineQuery(
+                        $queryBuilder,
+                        'c.company',
+                        $letter
+                    )
+                );
         }
 
-        if ($settings['showWspMembers']) {
+        /*if ($settings['showWspMembers']) {
             $constraintAnd[] = $query->equals('wspMember', $settings['showWspMembers']);
-        }
+        }*/
 
         if ($settings['presetTrade']) {
-            $constraintAnd[] = $query->logicalOr(
-                [
-                $query->contains('mainTrade', $settings['presetTrade']),
-                $query->contains('trades', $settings['presetTrade'])
-                ]
-            );
+            $this->addConstraintForTrades($queryBuilder, (int)$settings['presetTrade']);
         }
 
         if ($settings['district']) {
-            $constraintAnd[] = $query->equals('district', $settings['district']);
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->eq(
+                    'c.district',
+                    $queryBuilder->createNamedParameter($settings['district'], \PDO::PARAM_INT)
+                )
+            );
         }
 
-        if (count($constraintAnd)) {
-            return $query->matching($query->logicalAnd($constraintAnd))->execute();
-        }
+        $this->emitModifyQueryToFindCompanyByLetter($queryBuilder, $settings);
 
-        return $query->execute();
+        return $query->statement($queryBuilder)->execute();
     }
 
     /**
      * search records
      *
      * @param string $search
-     * @param int $category
+     * @param int $categoryUid
      * @return QueryResultInterface
      */
-    public function searchCompanies(string $search, int $category): QueryResultInterface
+    public function searchCompanies(string $search, int $categoryUid): QueryResultInterface
     {
         /** @var Query $query */
         $query = $this->createQuery();
-
-        // strtolower is not UTF-8 compatible
-        // $search = strtolower($search);
-        $longStreetSearch = trim($search);
-        $smallStreetSearch = trim($search);
+        $queryBuilder = $this->getQueryBuilderForCompany($query);
+        $longStreetSearch = $smallStreetSearch = trim($search);
 
         // unify street search
         if (strtolower(mb_substr($search, -6)) === 'straße') {
@@ -156,89 +129,174 @@ class CompanyRepository extends Repository
             $longStreetSearch = str_ireplace('str', 'straße', $search);
         }
 
-        $constraint = [];
-
         if (!empty($longStreetSearch)) {
-            $searchConstraint = [];
-            $searchConstraint[] = $query->like('company', '%' . $search . '%');
-            $searchConstraint[] = $query->like('street', '%' . $smallStreetSearch . '%');
-            $searchConstraint[] = $query->like('street', '%' . $longStreetSearch . '%');
-            $constraint[] = $query->logicalOr($searchConstraint);
-        }
-
-        if (!empty($category)) {
-            $constraint[] = $query->logicalOr(
-                [
-                $query->contains('mainTrade', $category),
-                $query->contains('trades', $category)
-                ]
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->like(
+                        'c.company',
+                        $queryBuilder->createNamedParameter('%' . $search . '%', \PDO::PARAM_STR)
+                    ),
+                    $queryBuilder->expr()->like(
+                        'c.street',
+                        $queryBuilder->createNamedParameter('%' . $smallStreetSearch . '%', \PDO::PARAM_STR)
+                    ),
+                    $queryBuilder->expr()->like(
+                        'c.street',
+                        $queryBuilder->createNamedParameter('%' . $longStreetSearch . '%', \PDO::PARAM_STR)
+                    )
+                )
             );
         }
 
-        if (!empty($constraint)) {
-            return $query->matching($query->logicalAnd($constraint))->execute();
+        if (!empty($categoryUid)) {
+            $this->addConstraintForTrades($queryBuilder, $categoryUid);
         }
 
-        return $query->execute();
+        $this->emitModifyQueryToSearchForCompanies($queryBuilder, $search, $categoryUid);
+
+        return $query->statement($queryBuilder)->execute();
+    }
+
+    protected function getQueryBuilderForCompany(QueryInterface $extbaseQuery): QueryBuilder
+    {
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
+        return $queryBuilder
+            ->select('*')
+            ->from('tx_yellowpages2_domain_model_company', 'c')
+            ->where(
+                $queryBuilder->expr()->in(
+                    'c.pid',
+                    $queryBuilder->createNamedParameter(
+                        $extbaseQuery->getQuerySettings()->getStoragePageIds(),
+                        Connection::PARAM_INT_ARRAY
+                    )
+                )
+            );
+    }
+
+    protected function addConstraintForStoragePages(QueryBuilder $queryBuilder, array $pages = []): void
+    {
+        $queryBuilder
+            ->select('*')
+            ->from('tx_yellowpages2_domain_model_company', 'c')
+            ->where(
+                $queryBuilder->expr()->in(
+                    'c.pid',
+                    $queryBuilder->createNamedParameter(
+                        $pages,
+                        Connection::PARAM_INT_ARRAY
+                    )
+                )
+            );
+    }
+
+    protected function addConstraintForTrades(QueryBuilder $queryBuilder, int $categoryUid): void
+    {
+        $queryBuilder->leftJoin(
+            'c',
+            'sys_category_record_mm',
+            'category_mm',
+            (string)$queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq(
+                    'c.uid',
+                    $queryBuilder->quoteIdentifier('category_mm.uid_foreign')
+                ),
+                $queryBuilder->expr()->eq(
+                    'category_mm.tablenames',
+                    $queryBuilder->createNamedParameter(
+                        'tx_yellowpages2_domain_model_company',
+                        \PDO::PARAM_STR
+                    )
+                )
+            )
+        );
+
+        $queryBuilder->andWhere(
+            $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->eq(
+                    'category_mm.fieldname',
+                    $queryBuilder->createNamedParameter(
+                        'main_trade',
+                        \PDO::PARAM_STR
+                    )
+                ),
+                $queryBuilder->expr()->eq(
+                    'category_mm.fieldname',
+                    $queryBuilder->createNamedParameter(
+                        'trades',
+                        \PDO::PARAM_STR
+                    )
+                )
+            ),
+            $queryBuilder->expr()->eq(
+                'category_mm.uid_local',
+                $queryBuilder->createNamedParameter($categoryUid, \PDO::PARAM_INT)
+            )
+        );
     }
 
     /**
-     * Collect all categories used as main_trade and group them
+     * Collect all translated categories used by main_trade and trades
      *
      * @return array
      */
-    public function getGroupedCategories(): array
+    public function getTranslatedCategories(): array
     {
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $query = $this->createQuery();
+        $queryBuilder = $this->getQueryBuilderForCompany($query);
         $queryBuilder
             ->select('sc.uid', 'sc.title')
-            ->from('tx_yellowpages2_domain_model_company', 'c')
             ->leftJoin(
                 'c',
                 'sys_category_record_mm',
-                'mm',
+                'category_mm',
                 (string)$queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
                         'c.uid',
-                        $queryBuilder->quoteIdentifier('uid_foreign')
+                        $queryBuilder->quoteIdentifier('category_mm.uid_foreign')
                     ),
                     $queryBuilder->expr()->eq(
-                        'mm.fieldname',
-                        $queryBuilder->createNamedParameter('main_trade', \PDO::PARAM_STR)
+                        'category_mm.tablenames',
+                        $queryBuilder->quoteIdentifier('tx_yellowpages2_domain_model_company')
                     ),
-                    $queryBuilder->expr()->eq(
-                        'mm.fieldname',
-                        $queryBuilder->createNamedParameter('main_trade', \PDO::PARAM_STR)
+                    $queryBuilder->expr()->orX(
+                        $queryBuilder->expr()->eq(
+                            'category_mm.fieldname',
+                            $queryBuilder->createNamedParameter('main_trade', \PDO::PARAM_STR)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'category_mm.fieldname',
+                            $queryBuilder->createNamedParameter('trades', \PDO::PARAM_STR)
+                        )
                     )
                 )
             )
             ->leftJoin(
-                'mm',
+                'category_mm',
                 'sys_category',
                 'sc',
                 $queryBuilder->expr()->eq(
-                    'mm.uid_local',
-                    $queryBuilder->quoteIdentifier('sc.uid')
+                    'sc.uid',
+                    $queryBuilder->quoteIdentifier('category_mm.uid_local')
                 )
             )
             ->groupBy('sc.uid')
             ->orderBy('sc.title', 'ASC');
 
-        /** @var Query $query */
-        $query = $this->createQuery();
         $results = $query->statement($queryBuilder)->execute(true);
 
-        $groupedCategories = [];
-        $groupedCategories[] = LocalizationUtility::translate('allBranches', 'yellowpages2');
+        $translatedCategories = [];
+        $translatedCategories[] = LocalizationUtility::translate('allBranches', 'yellowpages2');
         foreach ($results as $result) {
-            $groupedCategories[$result['uid']] = $result['title'];
+            $translatedCategories[$result['uid']] = $result['title'];
         }
 
-        return $groupedCategories;
+        return $translatedCategories;
     }
 
     /**
-     * find all records which are older than given days
+     * Find all records which are older than given days
      * Hint: Needed by scheduler
      *
      * @param int $days
@@ -253,37 +311,47 @@ class CompanyRepository extends Repository
         return $query->matching($query->lessThan('tstamp', $history))->execute();
     }
 
-    /**
-     * @return QueryBuilder
-     */
     public function getQueryBuilderToFindAllEntries(): QueryBuilder
     {
-        $table = 'tx_yellowpages2_domain_model_company';
-        $query = $this->createQuery();
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($table);
-        $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
-
-        // Do not set any SELECT, ORDER BY, GROUP BY statement. It will be set by glossary2 API
-        $queryBuilder
-            ->from($table)
-            ->where(
-                $queryBuilder->expr()->in(
-                    'pid',
-                    $queryBuilder->createNamedParameter(
-                        $query->getQuerySettings()->getStoragePageIds(),
-                        Connection::PARAM_INT_ARRAY
-                    )
-                )
-            );
-
-        return $queryBuilder;
+        return $this->getQueryBuilderForCompany($this->createQuery());
     }
 
     /**
-     * Get TYPO3s Connection Pool
+     * Use this signal, if you want to modify the query to find companies by letter
      *
-     * @return ConnectionPool
+     * @param QueryBuilder $queryBuilder
+     * @param array $settings
      */
+    protected function emitModifyQueryToFindCompanyByLetter(
+        QueryBuilder $queryBuilder,
+        array $settings
+    ): void {
+        $this->dispatcher->dispatch(
+            self::class,
+            'modifyQueryToFindCompanyByLetter',
+            [$queryBuilder, $settings]
+        );
+    }
+
+    /**
+     * Use this signal, if you want to modify the query to search companies
+     *
+     * @param QueryBuilder $queryBuilder
+     * @param string $search
+     * @param int $categoryUid
+     */
+    protected function emitModifyQueryToSearchForCompanies(
+        QueryBuilder $queryBuilder,
+        string $search,
+        int $categoryUid
+    ): void {
+        $this->dispatcher->dispatch(
+            self::class,
+            'modifyQueryToSearchCompanies',
+            [$queryBuilder, $search, $categoryUid]
+        );
+    }
+
     protected function getConnectionPool(): ConnectionPool
     {
         return GeneralUtility::makeInstance(ConnectionPool::class);
