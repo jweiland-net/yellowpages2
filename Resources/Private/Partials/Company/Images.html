@@ -3,7 +3,12 @@
 		<ul class="slides">
 			<f:for each="{company.images}" as="image" iteration="iterator">
 				<f:if condition="{image}">
-					<li><f:image image="{image}" alt="Sliderimage-{iterator.cycle}" width="{settings.show.image.width}" height="{settings.show.image.height}" /></li>
+					<li>
+						<f:image image="{image}"
+								 alt="Sliderimage-{iterator.cycle}"
+								 width="{settings.show.image.width}"
+								 height="{settings.show.image.height}" />
+					</li>
 				</f:if>
 			</f:for>
 		</ul>
