@@ -27,8 +27,10 @@ return [
     'types' => [
         '1' => [
             'showitem' => '--palette--;;languageHidden, company,
-            logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website,
-            opening_times, barrier_free, description, district, fe_user,
+            logo, images, 
+            --palette--;;streetHouseNumber, --palette--;;zipCity, --palette--;;districtBarrierFree,
+            --palette--;;telephoneFax, --palette--;;emailWebsite, contact_person,
+            opening_times, description, fe_user,
             --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, google,
             --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.trades, main_trade, trades,
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access, 
@@ -37,6 +39,11 @@ return [
     ],
     'palettes' => [
         'languageHidden' => ['showitem' => 'sys_language_uid, l10n_parent, hidden'],
+        'streetHouseNumber' => ['showitem' => 'street, house_number'],
+        'districtBarrierFree' => ['showitem' => 'district, barrier_free'],
+        'zipCity' => ['showitem' => 'zip, city'],
+        'telephoneFax' => ['showitem' => 'telephone, fax'],
+        'emailWebsite' => ['showitem' => 'email, website'],
         'access' => [
             'showitem' => 'starttime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:starttime_formlabel,endtime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:endtime_formlabel',
         ]
@@ -90,6 +97,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
+                'renderType' => 'checkboxToggle',
                 'default' => 0
             ]
         ],
@@ -291,7 +299,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim'
             ]
         ],
         'zip' => [
@@ -372,6 +380,7 @@ return [
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.barrierFree',
             'config' => [
                 'type' => 'check',
+                'renderType' => 'checkboxToggle',
                 'default' => 0
             ]
         ],
@@ -397,7 +406,7 @@ return [
                 'foreign_table' => 'tx_yellowpages2_domain_model_district',
                 'foreign_table_where' => 'ORDER BY tx_yellowpages2_domain_model_district.district',
                 'items' => [
-                    ['LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose', '']
+                    ['LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose', 0]
                 ],
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -407,13 +416,14 @@ return [
         'fe_user' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.feUser',
+            'description' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.feUser.description',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
                 'foreign_table_where' => 'ORDER BY fe_users.username',
                 'items' => [
-                    ['', '']
+                    ['LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.feUser.pleaseChoose', 0]
                 ],
                 'minitems' => 0,
                 'maxitems' => 1,
