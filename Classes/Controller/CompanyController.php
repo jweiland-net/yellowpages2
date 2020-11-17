@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use JWeiland\Clubdirectory\Domain\Model\Club;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
@@ -19,8 +18,6 @@ use JWeiland\Maps2\Service\GeoCodeService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
-use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
-use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -55,7 +52,7 @@ class CompanyController extends AbstractController
 
     public function listMyCompaniesAction(): void
     {
-        $companies = $this->companyRepository->findByFeUser($GLOBALS['TSFE']->fe_user->user['uid']);
+        $companies = $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']);
         $this->view->assign('companies', $companies);
         $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
     }
