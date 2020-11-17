@@ -27,12 +27,12 @@
 			</trans-unit>
 
 			<trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
-				<source>Company</source>
-				<target>Firma</target>
+				<source>Business listing</source>
+				<target>Brancheneintrag</target>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
 				<source>Company</source>
-				<target>Firmenbezeichnung</target>
+				<target>Firma</target>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
 				<source>Logo</source>
