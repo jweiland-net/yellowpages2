@@ -10,6 +10,7 @@
 namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -26,42 +27,43 @@ class Company extends AbstractEntity
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $company = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @Extbase\ORM\Lazy
      */
     protected $logo;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $images;
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $street = '';
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $houseNumber = '';
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $zip = '';
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $city = '';
 
@@ -102,26 +104,26 @@ class Company extends AbstractEntity
 
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $description = '';
 
     /**
      * @var \JWeiland\Yellowpages2\Domain\Model\District
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $district;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\Validate("NotEmpty")
+     * @Extbase\ORM\Lazy
      */
     protected $mainTrade;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $trades;
 
@@ -152,6 +154,7 @@ class Company extends AbstractEntity
 
     public function __construct()
     {
+        $this->logo = new ObjectStorage();
         $this->images = new ObjectStorage();
         $this->mainTrade = new ObjectStorage();
         $this->trades = new ObjectStorage();
@@ -177,23 +180,48 @@ class Company extends AbstractEntity
         $this->company = $company;
     }
 
-    public function getLogo(): ?FileReference
+    /**
+     * @return array|FileReference[]
+     */
+    public function getLogo(): array
+    {
+        $references = [];
+        foreach ($this->logo as $logo) {
+            $references[] = $logo;
+        }
+
+        return $references;
+    }
+
+    public function getOriginalLogo(): ObjectStorage
     {
         return $this->logo;
     }
 
-    public function setLogo(FileReference $logo): void
+    public function setLogo(ObjectStorage $logo): void
     {
         $this->logo = $logo;
     }
 
+    /**
+     * @return array|FileReference[]
+     */
     public function getImages(): array
     {
         $references = [];
         foreach ($this->images as $image) {
             $references[] = $image;
         }
+
         return $references;
+    }
+
+    /**
+     * @return ObjectStorage|\TYPO3\CMS\Core\Resource\FileReference[]
+     */
+    public function getOriginalImages(): ObjectStorage
+    {
+        return $this->images;
     }
 
     public function setImages(ObjectStorage $images): void

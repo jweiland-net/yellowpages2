@@ -1,30 +1,12 @@
-<f:if condition="{company.images.0}"><f:image image="{company.images.0}" alt="Bild1" /></f:if>
-<f:form.upload property="images.0" id="images_0" class="powermail_field powermail_file" />
-<div class="powermail_check_inner">
-	<f:form.checkbox name="company[images][0][rights]" class="powermail_field powermail_check" value="1" />
-	<f:translate key="rightsMessage"/>
-</div>
-<f:if condition="{company.images.1}"><f:image image="{company.images.1}" alt="Bild2" /></f:if>
-<f:form.upload property="images.1" id="images_1" class="powermail_field powermail_file" />
-<div class="powermail_check_inner">
-	<f:form.checkbox name="company[images][1][rights]" class="powermail_field powermail_check" value="1" />
-	<f:translate key="rightsMessage"/>
-</div>
-<f:if condition="{company.images.2}"><f:image image="{company.images.2}" alt="Bild3" /></f:if>
-<f:form.upload property="images.2" id="images_2" class="powermail_field powermail_file" />
-<div class="powermail_check_inner">
-	<f:form.checkbox name="company[images][2][rights]" class="powermail_field powermail_check" value="1" />
-	<f:translate key="rightsMessage"/>
-</div>
-<f:if condition="{company.images.3}"><f:image image="{company.images.3}" alt="Bild4" /></f:if>
-<f:form.upload property="images.3" id="images_3" class="powermail_field powermail_file" />
-<div class="powermail_check_inner">
-	<f:form.checkbox name="company[images][3][rights]" class="powermail_field powermail_check" value="1" />
-	<f:translate key="rightsMessage"/>
-</div>
-<f:if condition="{company.images.4}"><f:image image="{company.images.4}" alt="Bild5" /></f:if>
-<f:form.upload property="images.4" id="images_4" class="powermail_field powermail_file" />
-<div class="powermail_check_inner">
-	<f:form.checkbox name="company[images][4][rights]" class="powermail_field powermail_check" value="1" />
-	<f:translate key="rightsMessage"/>
-</div>
+<f:render section="uploadImage" arguments="{image: event.images.0, index: '0', position: '1'}" />
+<f:render section="uploadImage" arguments="{image: event.images.1, index: '1', position: '2'}" />
+<f:render section="uploadImage" arguments="{image: event.images.2, index: '2', position: '3'}" />
+<f:render section="uploadImage" arguments="{image: event.images.3, index: '3', position: '4'}" />
+<f:render section="uploadImage" arguments="{image: event.images.4, index: '4', position: '5'}" />
+
+<f:section name="uploadImage">
+	<f:if condition="{image}">
+		<f:image image="{image}" alt="Bild{position}" />
+	</f:if>
+	<f:form.upload property="images.{index}" id="images_{index}" class="powermail_field powermail_file" />
+</f:section>

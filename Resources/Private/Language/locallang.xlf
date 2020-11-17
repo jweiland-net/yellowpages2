@@ -112,9 +112,6 @@
 			<trans-unit id="companyUpdated">
 				<source>Company updated</source>
 			</trans-unit>
-			<trans-unit id="rightsMessage">
-				<source>I give all rights of this image to city Pforzheim</source>
-			</trans-unit>
 			<trans-unit id="pleaseChoose">
 				<source>--- Please choose ---</source>
 			</trans-unit>
@@ -171,9 +168,10 @@
 			<trans-unit id="error.upload">
 				<source>Something went wrong with your uploaded files. Please try again. Error: </source>
 			</trans-unit>
-			<trans-unit id="error.uploadRights">
-				<source>You don\'t have checked the box for upload rights. So upload stops here</source>
+			<trans-unit id="error.fileExtension">
+				<source>You only can upload files with following file extensions: %1$s</source>
 			</trans-unit>
+
 			<trans-unit id="errorFlashMessage">
 				<source>An error occurred while trying to call %1$s->%2$s()</source>
 			</trans-unit>
