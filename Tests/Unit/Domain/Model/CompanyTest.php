@@ -20,8 +20,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Test case.
- *
- * @author Stefan Froemken <projects@jweiland.net>
  */
 class CompanyTest extends UnitTestCase
 {
@@ -131,9 +129,12 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLogoInitiallyReturnsNull()
+    public function getLogoInitiallyReturnsObjectStorage()
     {
-        self::assertNull($this->subject->getLogo());
+        self::assertEquals(
+            new ObjectStorage(),
+            $this->subject->getOriginalLogo()
+        );
     }
 
     /**
@@ -141,23 +142,63 @@ class CompanyTest extends UnitTestCase
      */
     public function setLogoSetsLogo()
     {
-        $instance = new FileReference();
-        $this->subject->setLogo($instance);
+        $object = new FileReference();
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($object);
+        $this->subject->setLogo($objectStorage);
 
         self::assertSame(
-            $instance,
-            $this->subject->getLogo()
+            $objectStorage,
+            $this->subject->getOriginalLogo()
         );
     }
 
     /**
      * @test
      */
-    public function getImagesInitiallyReturnsArray()
+    public function addLogoAddsOneLogo()
+    {
+        $objectStorage = new ObjectStorage();
+        $this->subject->setLogo($objectStorage);
+
+        $object = new FileReference();
+        $this->subject->addLogo($object);
+
+        $objectStorage->attach($object);
+
+        self::assertSame(
+            $objectStorage,
+            $this->subject->getOriginalLogo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeLogoRemovesOneLogo()
+    {
+        $object = new FileReference();
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($object);
+        $this->subject->setLogo($objectStorage);
+
+        $this->subject->removeLogo($object);
+        $objectStorage->detach($object);
+
+        self::assertSame(
+            $objectStorage,
+            $this->subject->getOriginalLogo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getImagesInitiallyReturnsObjectStorage()
     {
         self::assertEquals(
-            [],
-            $this->subject->getImages()
+            new ObjectStorage(),
+            $this->subject->getOriginalImages()
         );
     }
 
@@ -172,10 +213,8 @@ class CompanyTest extends UnitTestCase
         $this->subject->setImages($objectStorage);
 
         self::assertSame(
-            [
-                $object
-            ],
-            $this->subject->getImages()
+            $objectStorage,
+            $this->subject->getOriginalImages()
         );
     }
 
@@ -193,10 +232,8 @@ class CompanyTest extends UnitTestCase
         $objectStorage->attach($object);
 
         self::assertSame(
-            [
-                $object
-            ],
-            $this->subject->getImages()
+            $objectStorage,
+            $this->subject->getOriginalImages()
         );
     }
 
@@ -214,8 +251,8 @@ class CompanyTest extends UnitTestCase
         $objectStorage->detach($object);
 
         self::assertSame(
-            [],
-            $this->subject->getImages()
+            $objectStorage,
+            $this->subject->getOriginalImages()
         );
     }
 
@@ -996,28 +1033,6 @@ class CompanyTest extends UnitTestCase
     {
         $this->subject->setGoogle(true);
         self::assertSame('1', $this->subject->getGoogle());
-    }
-
-    /**
-     * @test
-     */
-    public function getTxMaps2UidInitiallyReturnsNull()
-    {
-        self::assertNull($this->subject->getTxMaps2Uid());
-    }
-
-    /**
-     * @test
-     */
-    public function setTxMaps2UidSetsTxMaps2Uid()
-    {
-        $instance = new PoiCollection();
-        $this->subject->setTxMaps2Uid($instance);
-
-        self::assertSame(
-            $instance,
-            $this->subject->getTxMaps2Uid()
-        );
     }
 
     /**
