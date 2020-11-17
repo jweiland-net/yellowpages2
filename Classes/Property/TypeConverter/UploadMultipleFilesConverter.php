@@ -11,19 +11,23 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Property\TypeConverter;
 
+use JWeiland\Checkfaluploads\Service\FalUploadService;
 use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
+use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Property\Exception\TypeConverterException;
 use TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * Converter for uploads.
+/*
+ * A for PropertyMapper to convert multiple file uploads into an array
  */
 class UploadMultipleFilesConverter extends AbstractTypeConverter
 {
@@ -35,7 +39,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     /**
      * @var string
      */
-    protected $targetType = 'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage';
+    protected $targetType = ObjectStorage::class;
 
     /**
      * @var int
@@ -43,12 +47,38 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     protected $priority = 2;
 
     /**
-     * Return true, if images were uploaded
+     * @var Folder
+     */
+    protected $uploadFolder;
+
+    /**
+     * @var PropertyMappingConfigurationInterface
+     */
+    protected $converterConfiguration = [];
+
+    /**
+     * @var Dispatcher
+     */
+    protected $signalSlotDispatcher;
+
+    /**
+     * Do not inject this property, as EXT:checkfaluploads may not be loaded
      *
-     * @param mixed $source the source data
+     * @var FalUploadService
+     */
+    protected $falUploadService;
+
+    public function injectSignalSlotDispatcher(Dispatcher $signalSlotDispatcher): void
+    {
+        $this->signalSlotDispatcher = $signalSlotDispatcher;
+    }
+
+    /**
+     * This implementation always returns TRUE for this method.
+     *
+     * @param mixed  $source     the source data
      * @param string $targetType the type to convert to.
-     *
-     * @return bool TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
+     * @return bool true if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
      */
     public function canConvertFrom($source, string $targetType): bool
     {
@@ -68,70 +98,41 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         return true;
     }
 
-    /**
-     * Actually convert from $source to $targetType, taking into account the fully
-     * built $convertedChildProperties and $configuration.
-     *
-     * The return value can be one of three types:
-     * - an arbitrary object, or a simple type (which has been created while mapping).
-     *   This is the normal case.
-     * - NULL, indicating that this object should *not* be mapped (i.e. a "File Upload" Converter could return NULL if no file has been uploaded, and a silent failure should occur.
-     * - An instance of \TYPO3\CMS\Extbase\Error\Error -- This will be a user-visible error message later on.
-     * Furthermore, it should throw an Exception if an unexpected failure (like a security error) occurred or a configuration issue happened.
-     *
-     * @param mixed $source
-     * @param string $targetType
-     * @param array $convertedChildProperties
-     * @param PropertyMappingConfigurationInterface $configuration
-     *
-     * @return mixed|Error the target type, or an error object if a user-error occurred
-     *
-     * @throws TypeConverterException thrown in case a developer error occurred
-     */
     public function convertFrom(
         $source,
         string $targetType,
         array $convertedChildProperties = [],
         PropertyMappingConfigurationInterface $configuration = null
     ) {
-        $alreadyPersistedImages = $configuration->getConfigurationValue(
-            __CLASS__,
-            'IMAGES'
-        );
+        $this->initialize($configuration);
         $originalSource = $source;
         foreach ($originalSource as $key => $uploadedFile) {
-            // check if $source contains an uploaded file. 4 = no file uploaded
-            if ($uploadedFile['error'] === 4
-                || !isset(
-                    $uploadedFile['error'],
-                    $uploadedFile['name'],
-                    $uploadedFile['size'],
-                    $uploadedFile['tmp_name'],
-                    $uploadedFile['type']
-                )
-            ) {
-                if ($alreadyPersistedImages[$key] !== null) {
-                    $source[$key] = $alreadyPersistedImages[$key];
+            $alreadyPersistedImage = $this->getAlreadyPersistedFileReferenceByPosition(
+                $this->getAlreadyPersistedImages(),
+                $key
+            );
+
+            // If no file was uploaded use the already persisted one
+            if (!$this->isValidUploadFile($uploadedFile)) {
+                if (isset($uploadedFile['delete']) && $uploadedFile['delete'] === '1') {
+                    $this->deleteFile($alreadyPersistedImage);
+                    unset($source[$key]);
+                } elseif ($alreadyPersistedImage instanceof FileReference) {
+                    $source[$key] = $alreadyPersistedImage;
                 } else {
                     unset($source[$key]);
                 }
                 continue;
             }
-            // check if uploaded file returns an error
+            // Check if uploaded file returns an error
             if (!$uploadedFile['error'] === 0) {
                 return new Error(
                     LocalizationUtility::translate('error.upload', 'yellowpages2') . $uploadedFile['error'],
-                    1396957314
+                    1605617462
                 );
             }
-            // now we have a valid uploaded file. Check if user has rights to upload this file
-            if (!isset($uploadedFile['rights']) || empty($uploadedFile['rights'])) {
-                return new Error(
-                    LocalizationUtility::translate('error.uploadRights', 'yellowpages2'),
-                    1397464390
-                );
-            }
-            // check if file extension is allowed
+
+            // Check if file extension is allowed
             $fileParts = GeneralUtility::split_fileref($uploadedFile['name']);
             if (!GeneralUtility::inList($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'], $fileParts['fileext'])) {
                 return new Error(
@@ -142,22 +143,22 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                             $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
                         ]
                     ),
-                    1402981282
+                    1605617456
                 );
             }
-            // OK...we have a valid file and the user has the rights. It's time to check, if an old file can be deleted
-            if ($alreadyPersistedImages[$key] instanceof FileReference) {
-                /** @var FileReference $oldFile */
-                $oldFile = $alreadyPersistedImages[$key];
-                $oldFile->getOriginalResource()->getOriginalFile()->delete();
+
+            if (
+                ExtensionManagementUtility::isLoaded('checkfaluploads')
+                && $error = $this->getFalUploadService()->checkFile($uploadedFile)
+            ) {
+                return $error;
             }
+
+            $this->emitPostCheckFileReference($source, $key, $alreadyPersistedImage, $uploadedFile);
         }
 
-        // I will do two foreach here. First: everything must be OK, before files will be uploaded
-
-        // upload file and add it to ObjectStorage
-        /** @var ObjectStorage $references */
-        $references = $this->objectManager->get(ObjectStorage::class);
+        // Upload file and add it to ObjectStorage
+        $references = GeneralUtility::makeInstance(ObjectStorage::class);
         foreach ($source as $uploadedFile) {
             if ($uploadedFile instanceof FileReference) {
                 $references->attach($uploadedFile);
@@ -169,41 +170,164 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         return $references;
     }
 
-    /**
-     * upload file and get a file reference object.
-     *
-     * @param array  $source
-     *
-     * @return FileReference
-     */
-    protected function getExtbaseFileReference(array $source): FileReference
+    protected function initialize(?PropertyMappingConfigurationInterface $configuration)
     {
-        /** @var FileReference $extbaseFileReference */
-        $extbaseFileReference = $this->objectManager->get(FileReference::class);
-        $extbaseFileReference->setOriginalResource($this->getCoreFileReference($source));
+        if ($configuration === null) {
+            throw new \Exception(
+                'Missing PropertyMapper configuration in UploadMultipleFilesConverter',
+                1605617449
+            );
+        }
 
-        return $extbaseFileReference;
+        $this->converterConfiguration = $configuration;
+
+        $this->setUploadFolder();
+    }
+
+    protected function getAlreadyPersistedImages(): ObjectStorage
+    {
+        $alreadyPersistedImages = $this->converterConfiguration->getConfigurationValue(
+            self::class,
+            'IMAGES'
+        );
+
+        return $alreadyPersistedImages instanceof ObjectStorage ? $alreadyPersistedImages : new ObjectStorage();
+    }
+
+    protected function getAlreadyPersistedFileReferenceByPosition(
+        ObjectStorage $alreadyPersistedFileReferences,
+        int $position
+    ): ?FileReference {
+        return $alreadyPersistedFileReferences->toArray()[$position] ?? null;
+    }
+
+    protected function getTypoScriptPluginSettings(): array
+    {
+        $settings = $this->converterConfiguration->getConfigurationValue(
+            self::class,
+            'settings'
+        );
+
+        return $settings ?? [];
+    }
+
+    protected function setUploadFolder()
+    {
+        $combinedUploadFolderIdentifier = $this->getTypoScriptPluginSettings()['new']['uploadFolder'] ?? '';
+        if ($combinedUploadFolderIdentifier === '') {
+            throw new \Exception(
+                'You have forgotten to set an Upload Folder in TypoScript for yellowpages2',
+                1605617430
+            );
+        }
+
+        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+        try {
+            $uploadFolder = $resourceFactory->getObjectFromCombinedIdentifier($combinedUploadFolderIdentifier);
+        } catch (ResourceDoesNotExistException $exception) {
+            [$storageUid] = GeneralUtility::trimExplode(':', $combinedUploadFolderIdentifier);
+            $resourceStorage = $resourceFactory->getStorageObject((int)$storageUid);
+            $uploadFolder = $resourceStorage->createFolder($combinedUploadFolderIdentifier);
+        }
+
+        $this->uploadFolder = $uploadFolder;
+    }
+
+    /**
+     * Check, if we have a valid uploaded file
+     * Error = 4: No file uploaded
+     *
+     * @param array $uploadedFile
+     * @return bool
+     */
+    protected function isValidUploadFile(array $uploadedFile): bool
+    {
+        if ($uploadedFile['error'] === 4) {
+            return false;
+        }
+
+        return isset(
+            $uploadedFile['error'],
+            $uploadedFile['name'],
+            $uploadedFile['size'],
+            $uploadedFile['tmp_name'],
+            $uploadedFile['type']
+        );
+    }
+
+    /**
+     * If file is in our own upload folder we can delete it from filesystem and sys_file table.
+     *
+     * @param FileReference|null $fileReference
+     */
+    protected function deleteFile(?FileReference $fileReference)
+    {
+        if ($fileReference !== null) {
+            $fileReference = $fileReference->getOriginalResource();
+
+            if ($fileReference->getStorage()->isWithinFolder($this->uploadFolder, $fileReference)) {
+                try {
+                    $fileReference->getOriginalFile()->delete();
+                } catch (\Exception $exception) {
+                    // Do nothing. File already deleted or not found
+                }
+            }
+        }
     }
 
     /**
      * upload file and get a file reference object.
      *
      * @param array $source
+     * @return FileReference
+     */
+    protected function getExtbaseFileReference(array $source): FileReference
+    {
+        $extbaseFileReference = GeneralUtility::makeInstance(FileReference::class);
+        $extbaseFileReference->setOriginalResource($this->getCoreFileReference($source));
+
+        return $extbaseFileReference;
+    }
+
+    /**
+     * Upload file and get a file reference object.
      *
+     * @param array $source
      * @return \TYPO3\CMS\Core\Resource\FileReference
      */
     protected function getCoreFileReference(array $source): \TYPO3\CMS\Core\Resource\FileReference
     {
-        // upload file
-        $uploadFolder = GeneralUtility::makeInstance(ResourceFactory::class)->retrieveFileOrFolderObject('uploads/tx_yellowpages2/');
-        $uploadedFile = $uploadFolder->addUploadedFile($source, DuplicationBehavior::RENAME);
+        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+        $uploadedFile = $this->uploadFolder->addUploadedFile($source, DuplicationBehavior::RENAME);
+
         // create Core FileReference
-        return GeneralUtility::makeInstance(ResourceFactory::class)->createFileReferenceObject(
+        return $resourceFactory->createFileReferenceObject(
             [
                 'uid_local' => $uploadedFile->getUid(),
-                'uid_foreign' => uniqid('NEW_', true),
-                'uid' => uniqid('NEW_', true),
+                'uid_foreign' => uniqid('NEW_'),
+                'uid' => uniqid('NEW_'),
             ]
         );
+    }
+
+    protected function emitPostCheckFileReference(
+        array $source,
+        int $key,
+        ?FileReference $alreadyPersistedImage,
+        array $uploadedFile
+    ): void {
+        $this->signalSlotDispatcher->dispatch(
+            self::class,
+            'postCheckFileReference',
+            [$source, $key, $alreadyPersistedImage, $uploadedFile]
+        );
+    }
+
+    protected function getFalUploadService(): FalUploadService
+    {
+        if ($this->falUploadService === null) {
+            $this->falUploadService = GeneralUtility::makeInstance(FalUploadService::class);
+        }
+        return $this->falUploadService;
     }
 }
