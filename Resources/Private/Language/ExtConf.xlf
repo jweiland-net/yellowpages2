@@ -7,19 +7,19 @@
 				<source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
 			</trans-unit>
 			<trans-unit id="editLink" xml:space="preserve">
-				<source>Link to edit form: Set the URI where the user can edit his company record.</source>
+				<source>Link to edit view: Set the URI where the frontend user can edit his business listings.</source>
 			</trans-unit>
 			<trans-unit id="emailFromAddress" xml:space="preserve">
-				<source>email from address: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
+				<source>Email address FROM: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
 			</trans-unit>
 			<trans-unit id="emailFromName" xml:space="preserve">
-				<source>email from name: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
+				<source>Sender name FROM: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
 			</trans-unit>
 			<trans-unit id="emailToAddress" xml:space="preserve">
-				<source>email to address: The recipients email address.</source>
+				<source>Email address TO: The recipients email address.</source>
 			</trans-unit>
 			<trans-unit id="emailToName" xml:space="preserve">
-				<source>email to name: The recipients email name.</source>
+				<source>Recipient name TO: The recipients email name.</source>
 			</trans-unit>
 		</body>
 	</file>

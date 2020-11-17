@@ -8,24 +8,24 @@
 				<target>PID für POI Sammlungen: Definieren Sie eine Speicher-PID wo Datensätze vom Typ Point of Interest gespeichert werden sollen.</target>
 			</trans-unit>
 			<trans-unit id="editLink" xml:space="preserve">
-				<source>Link to edit form: Set the URI where the user can edit his company record.</source>
-				<target>Link zum Bearbeiten des Formulars: Legen Sie die URI fest, in der der Benutzer seinen Firmeneintrag bearbeiten kann.</target>
+				<source>Link to edit view: Set the URI where the frontend user can edit his business listings.</source>
+				<target>Link zur Bearbeitunsansicht: Tragen Sie die URI ein wo ein Frontend Benutzer seine Brancheneinträge bearbeiten kann.</target>
 			</trans-unit>
 			<trans-unit id="emailFromAddress" xml:space="preserve">
-				<source>email from address: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
-				<target>E-Mail von Adresse: Die E-Mail-Adresse des Absenders. Falls nicht angegeben versucht die Erweiterung eine von INSTALL_TOOL zu erhalten.</target>
+				<source>Email address FROM: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
+				<target>E-Mail Adresse FROM: Die E-Mail-Adresse des Absenders. Falls nicht angegeben versucht die Erweiterung eine von INSTALL_TOOL zu erhalten.</target>
 			</trans-unit>
 			<trans-unit id="emailFromName" xml:space="preserve">
-				<source>email from name: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
-				<target>E-Mail von Namen: Der Absender-E-Mail-Name. Falls nicht angegeben versucht die Erweiterung einen von INSTALL_TOOL zu erhalten.</target>
+				<source>Sender name FROM: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
+				<target>Absendername FROM: Der Absender-E-Mail-Name. Falls nicht angegeben versucht die Erweiterung einen von INSTALL_TOOL zu erhalten.</target>
 			</trans-unit>
 			<trans-unit id="emailToAddress" xml:space="preserve">
-				<source>email to address: The recipients email address.</source>
-				<target>An E-Mail Adresse: Die E-Mail-Adresse des Empfängers.</target>
+				<source>Email address TO: The recipients email address.</source>
+				<target>E-Mail Adresse TO: Die E-Mail-Adresse des Empfängers.</target>
 			</trans-unit>
 			<trans-unit id="emailToName" xml:space="preserve">
-				<source>email to name: The recipients email name.</source>
-				<target>An E-Mail-Name: Der E-Mail-Name des Empfängers.</target>
+				<source>Recipient name TO: The recipients email name.</source>
+				<target>Empfängername TO: Der E-Mail-Name des Empfängers.</target>
 			</trans-unit>
 		</body>
 	</file>
