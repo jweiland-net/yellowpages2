@@ -44,18 +44,18 @@ class CompanyController extends AbstractController
      */
     public function listAction(?string $letter): void
     {
-        $companies = $this->companyRepository->findByStartingLetter((string)$letter, $this->settings);
+        $companies = $this->companyRepository->findByLetter((string)$letter, $this->settings);
 
         $this->view->assign('companies', $companies);
         $this->assignGlossary();
-        $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
+        $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
     }
 
     public function listMyCompaniesAction(): void
     {
         $companies = $this->companyRepository->findByFeUser($GLOBALS['TSFE']->fe_user->user['uid']);
         $this->view->assign('companies', $companies);
-        $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
+        $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
     }
 
     /**
@@ -89,7 +89,7 @@ class CompanyController extends AbstractController
         $this->view->assign('category', $category);
         $this->view->assign('companies', $companies);
         $this->assignGlossary();
-        $this->view->assign('categories', $this->companyRepository->getGroupedCategories());
+        $this->view->assign('categories', $this->companyRepository->getTranslatedCategories());
     }
 
     public function newAction(): void
