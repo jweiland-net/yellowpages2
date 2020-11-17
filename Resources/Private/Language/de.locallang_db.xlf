@@ -110,6 +110,18 @@
 				<source>FeUser</source>
 				<target>Bearbeitung durch Frontend-Benutzer:</target>
 			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+				<source>Frontend user</source>
+				<target>Frontend Benutzer</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve">
+				<source>---Select FE user---</source>
+				<target>---FE Benutzer auswählen---</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve">
+				<source>Select a frontend editor who can edit this business listing in frontend context.</source>
+				<target>Wählen Sie einen Frontend Benutzer, der diesen Brancheneintrag im Frontend bearbeiten darf.</target>
+			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
 				<source>Facebook</source>
 			</trans-unit>

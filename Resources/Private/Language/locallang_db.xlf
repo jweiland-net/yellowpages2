@@ -82,7 +82,13 @@
 				<source>---Please choose a district---</source>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
-				<source>FeUser</source>
+				<source>Frontend user</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve">
+				<source>---Select FE user---</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve">
+				<source>Select a frontend editor who can edit this business listing in frontend context.</source>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
 				<source>Facebook</source>
