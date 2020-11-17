@@ -9,7 +9,6 @@
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
 
-use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Yellowpages2\Domain\Model\Category;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
