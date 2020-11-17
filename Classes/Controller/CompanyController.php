@@ -39,12 +39,12 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @param string|null $letter Show only records starting with this letter
+     * @param string $letter
      * @TYPO3\CMS\Extbase\Annotation\Validate("StringLength", param="letter", options={"minimum": 0, "maximum": 3})
      */
-    public function listAction(?string $letter): void
+    public function listAction(string $letter = ''): void
     {
-        $companies = $this->companyRepository->findByLetter((string)$letter, $this->settings);
+        $companies = $this->companyRepository->findByLetter($letter, $this->settings);
 
         $this->view->assign('companies', $companies);
         $this->assignGlossary();
