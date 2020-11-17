@@ -136,10 +136,10 @@ class AbstractController extends ActionController
         $argument = $this->request->getArgument($argumentName);
         if (is_array($argument)) {
             // get company from form ($_POST)
-            $company = $this->companyRepository->findHiddenEntryByUid($argument['__identity']);
+            $company = $this->companyRepository->findHiddenEntryByUid((int)$argument['__identity']);
         } else {
             // get company from UID
-            $company = $this->companyRepository->findHiddenEntryByUid($argument);
+            $company = $this->companyRepository->findHiddenEntryByUid((int)$argument);
         }
         $this->session->registerObject($company, $company->getUid());
     }
