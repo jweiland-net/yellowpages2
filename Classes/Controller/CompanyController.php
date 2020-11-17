@@ -21,6 +21,7 @@ use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadOneFileConverter;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -137,28 +138,30 @@ class CompanyController extends AbstractController
         $feUser = $this->feUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
         $company->setFeUser($feUser);
 
-        // set map record
-        $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
-        $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
-        if ($position instanceof Position) {
-            $poi = $this->objectManager->get(PoiCollection::class);
-            $poi->setCollectionType('Point');
-            $poi->setTitle($company->getCompany());
-            $poi->setAddress($position->getFormattedAddress());
-            $poi->setLatitude($position->getLatitude());
-            $poi->setLongitude($position->getLongitude());
-            $company->setTxMaps2Uid($poi);
+        if (ExtensionManagementUtility::isLoaded('maps2')) {
+            $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
+            $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
+            if ($position instanceof Position) {
+                $poi = $this->objectManager->get(PoiCollection::class);
+                $poi->setCollectionType('Point');
+                $poi->setTitle($company->getCompany());
+                $poi->setAddress($position->getFormattedAddress());
+                $poi->setLatitude($position->getLatitude());
+                $poi->setLongitude($position->getLongitude());
+                $company->setTxMaps2Uid($poi);
 
-            // save company
-            // for redirecting we need to persist current object
-            $this->companyRepository->add($company);
-            $this->persistenceManager->persistAll();
-            $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
-            $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
-        } else {
-            $this->addFlashMessage('Error while creating a poi. Please add some more informations about your address');
-            $this->forward('new', 'Company', 'yellowpages2', ['company' => $company]);
+                // save company
+                // for redirecting we need to persist current object
+                $this->companyRepository->add($company);
+                $this->persistenceManager->persistAll();
+                $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
+                $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
+            } else {
+                $this->addFlashMessage('Error while creating a poi. Please add some more informations about your address');
+                $this->forward('new', 'Company', 'yellowpages2', ['company' => $company]);
+            }
         }
+        $this->redirect('listMyCompanies', 'Company');
     }
 
     /**
