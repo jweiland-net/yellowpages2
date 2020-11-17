@@ -1,129 +1,141 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z"
-      product-name="yellowpages2">
-    <header/>
-    <body>
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2">
+		<header/>
+		<body>
+			<trans-unit id="plugin.title">
+				<source>Industry Directory</source>
+				<target>Branchenverzeichnis</target>
+			</trans-unit>
 
-      <trans-unit id="plugin.title">
-        <source>Industry Directory</source>
-        <target>Branchenverzeichnis</target>
-      </trans-unit>
+			<trans-unit id="plugin.directory.title">
+				<source>Industry Directory</source>
+				<target>Branchenverzeichnis</target>
+			</trans-unit>
+			<trans-unit id="plugin.directory.description">
+				<source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
+				<target>Einbindung eines Branchenverzeichnisses. Über dem Branchenverzeichnis kann mittels A-Z Navigation direkt zu gewählten Firmen navigiert werden.</target>
+			</trans-unit>
 
-      <trans-unit id="tabs.trades" xml:space="preserve">
-        <source>Trades</source>
-        <target>Branchen</target>
-      </trans-unit>
-      <trans-unit id="tabs.social" xml:space="preserve">
-        <source>Social</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
-        <source>Company</source>
-        <target>Firma</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.wspMember" xml:space="preserve">
-        <source>WSP Member</source>
-        <target>WSP Mitglied</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
-        <source>Company</source>
-        <target>Firmenbezeichnung</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
-        <source>Logo</source>
-        <target>Logo</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
-        <source>Images</source>
-        <target>Bilder</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
-        <source>Street</source>
-        <target>Straße</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
-        <source>house number</source>
-        <target>Hausnummer</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
-        <source>Zip</source>
-        <target>Postleitzahl</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
-        <source>City</source>
-        <target>Ort</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
-        <source>Telephone</source>
-        <target>Telefon</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
-        <source>Fax</source>
-        <target>Fax</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
-        <source>Contact person</source>
-        <target>Ansprechpartner</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
-        <source>Email</source>
-        <target>E-Mail Adresse</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
-        <source>Website</source>
-        <target>Webseite</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
-        <source>Opening times</source>
-        <target>Öffnungszeiten</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
-        <source>Barrier-free</source>
-        <target>Barrierefreier Zugang (Rollstuhl/Rollator)</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
-        <source>Description</source>
-        <target>Beschreibung</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
-        <source>District</source>
-        <target>Stadteil</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve">
-        <source>---Please choose a district---</source>
-        <target>---Stadtteil wählen---</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
-        <source>FeUser</source>
-        <target>Bearbeitung durch Frontend-Benutzer:</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
-        <source>Facebook</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
-        <source>Twitter</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.google" xml:space="preserve">
-        <source>Google+</source>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
-        <source>Main Trade</source>
-        <target>Hauptbranche</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
-        <source>Sub Trades</source>
-        <target>hier können Sie bis zu zwei weitere Branchen auswählen:</target>
-      </trans-unit>
+			<trans-unit id="tabs.trades" xml:space="preserve">
+				<source>Trades</source>
+				<target>Branchen</target>
+			</trans-unit>
+			<trans-unit id="tabs.social" xml:space="preserve">
+				<source>Social media</source>
+				<target>Soziale Medien</target>
+			</trans-unit>
 
-      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
-        <source>Yellowpages District</source>
-        <target>Stadtteil der Branchenadresse</target>
-      </trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
-        <source>District</source>
-        <target>Stadtteil</target>
-      </trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
+				<source>Company</source>
+				<target>Firma</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
+				<source>Company</source>
+				<target>Firmenbezeichnung</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
+				<source>Logo</source>
+				<target>Logo</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.logo.add" xml:space="preserve">
+				<source>Add logo</source>
+				<target>Logo hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
+				<source>Images</source>
+				<target>Bilder</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.images.add" xml:space="preserve">
+				<source>Add image</source>
+				<target>Bild hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
+				<source>Street</source>
+				<target>Straße</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
+				<source>house number</source>
+				<target>Hausnummer</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
+				<source>Zip</source>
+				<target>Postleitzahl</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
+				<source>City</source>
+				<target>Ort</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
+				<source>Telephone</source>
+				<target>Telefon</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
+				<source>Fax</source>
+				<target>Fax</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
+				<source>Contact person</source>
+				<target>Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
+				<source>Email</source>
+				<target>E-Mail Adresse</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
+				<source>Website</source>
+				<target>Webseite</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
+				<source>Opening times</source>
+				<target>Öffnungszeiten</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
+				<source>Barrier-free</source>
+				<target>Barrierefreier Zugang (Rollstuhl/Rollator)</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
+				<source>District</source>
+				<target>Stadteil</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve">
+				<source>---Please choose a district---</source>
+				<target>---Stadtteil wählen---</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+				<source>FeUser</source>
+				<target>Bearbeitung durch Frontend-Benutzer:</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
+				<source>Facebook</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
+				<source>Twitter</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.google" xml:space="preserve">
+				<source>Google+</source>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
+				<source>Main Trade</source>
+				<target>Hauptbranche</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
+				<source>Sub Trades</source>
+				<target>hier können Sie bis zu zwei weitere Branchen auswählen:</target>
+			</trans-unit>
 
-    </body>
-  </file>
+			<trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
+				<source>District for business listing</source>
+				<target>Bezirk für Brancheneinträge</target>
+			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
+				<source>District</source>
+				<target>Bezirk</target>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>
