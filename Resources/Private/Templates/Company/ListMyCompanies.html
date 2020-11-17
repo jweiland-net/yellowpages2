@@ -11,4 +11,10 @@
 			<div>You do not have access to visit this page</div>
 		</f:else>
 	</f:security.ifHasRole>
+
+	<div>
+		<f:link.action action="list" controller="Company" pageUid="{settings.pidOfListPage}">
+			{f:translate(key: 'backToList')}
+		</f:link.action>
+	</div>
 </f:section>

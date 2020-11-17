@@ -133,6 +133,10 @@
 				<source>List my companies</source>
 				<target>Zu meinen Firmen</target>
 			</trans-unit>
+			<trans-unit id="backToList">
+				<source>Back to list view</source>
+				<target>Zurück zur Listenansicht</target>
+			</trans-unit>
 			<trans-unit id="create">
 				<source>Create</source>
 				<target>Anlegen</target>
