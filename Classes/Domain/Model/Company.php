@@ -379,7 +379,7 @@ class Company extends AbstractEntity
         return $this->district;
     }
 
-    public function setDistrict(District $district): void
+    public function setDistrict(?District $district): void
     {
         $this->district = $district;
     }
