@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.3**
+
+- Set default sorting to company for QueryBuilder based statements
+
 **Version 4.0.2**
 
 - Change return value of mainTrade to nullable Category

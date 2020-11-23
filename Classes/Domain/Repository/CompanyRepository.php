@@ -172,23 +172,8 @@ class CompanyRepository extends Repository
                         Connection::PARAM_INT_ARRAY
                     )
                 )
-            );
-    }
-
-    protected function addConstraintForStoragePages(QueryBuilder $queryBuilder, array $pages = []): void
-    {
-        $queryBuilder
-            ->select('*')
-            ->from('tx_yellowpages2_domain_model_company', 'c')
-            ->where(
-                $queryBuilder->expr()->in(
-                    'c.pid',
-                    $queryBuilder->createNamedParameter(
-                        $pages,
-                        Connection::PARAM_INT_ARRAY
-                    )
-                )
-            );
+            )
+            ->orderBy('c.company', 'ASC');
     }
 
     protected function addConstraintForTrades(QueryBuilder $queryBuilder, int $categoryUid): void
