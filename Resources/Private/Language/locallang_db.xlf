@@ -27,6 +27,9 @@
 			<trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
 				<source>Company</source>
 			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.path_segment">
+				<source>Segment for URL</source>
+			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
 				<source>Logo</source>
 			</trans-unit>

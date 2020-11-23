@@ -39,6 +39,9 @@ call_user_func(function () {
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:yellowpages2/Configuration/TSconfig/ContentElementWizard.txt">'
     );
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['yellowpages2UpdateSlug']
+        = \JWeiland\Yellowpages2\Updater\Yellowpages2SlugUpdater::class;
+
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][JWeiland\Yellowpages2\Tasks\Update::class] = [
         'extension'        => 'yellowpages2',
         'title'            => 'Update yellowpages',

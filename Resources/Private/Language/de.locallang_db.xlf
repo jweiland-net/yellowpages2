@@ -34,6 +34,10 @@
 				<source>Company</source>
 				<target>Firma</target>
 			</trans-unit>
+			<trans-unit id="tx_yellowpages2_domain_model_company.path_segment">
+				<source>Segment for URL</source>
+				<target>Abschnitt für URL</target>
+			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
 				<source>Logo</source>
 				<target>Logo</target>
