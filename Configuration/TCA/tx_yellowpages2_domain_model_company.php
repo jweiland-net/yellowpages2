@@ -163,15 +163,16 @@ return [
             ]
         ],
         'path_segment' => [
-            'exclude' => true,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.path_segment',
+            'displayCond' => 'VERSION:IS:false',
             'config' => [
                 'type' => 'slug',
                 'size' => 50,
                 'generatorOptions' => [
                     'fields' => ['company'],
-                    // As pageSlug may contain slashes, we have to remove page slug
+                    // Do not add pageSlug, as we add pageSlug on our own in RouteEnhancer
                     'prefixParentPageSlug' => false,
+                    'fieldSeparator' => '-',
                     'replacements' => [
                         '/' => '-'
                     ],

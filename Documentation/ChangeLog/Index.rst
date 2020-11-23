@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.7**
+
+- Set slug field separator to -
+
 **Version 4.0.6**
 
 - Add uid to generated slugs in UpgradeWizard
