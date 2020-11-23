@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.6**
+
+- Add uid to generated slugs in UpgradeWizard
+
 **Version 4.0.5**
 
 - Add path_segment for human readable URLs to company records

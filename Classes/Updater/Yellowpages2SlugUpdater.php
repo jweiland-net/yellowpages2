@@ -42,11 +42,15 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
     public function __construct(SlugHelper $slugHelper = null)
     {
         if ($slugHelper === null) {
+            // Add uid to slug, to prevent duplicates
+            $config = $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config'];
+            $config['generatorOptions']['fields'] = ['company', 'uid'];
+
             $slugHelper = GeneralUtility::makeInstance(
                 SlugHelper::class,
                 $this->tableName,
                 $this->fieldName,
-                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config']
+                $config
             );
         }
         $this->slugHelper = $slugHelper;
@@ -76,6 +80,8 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
     public function updateNecessary(): bool
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
         $amountOfRecordsWithEmptySlug = $queryBuilder
             ->count('*')
             ->from($this->tableName)
@@ -104,8 +110,10 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
     public function executeUpdate(): bool
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
-        $recordsToUpdate = $queryBuilder
-            ->select('uid', 'pid', 'company', 'path_segment')
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+        $statement = $queryBuilder
+            ->select('uid', 'pid', 'company')
             ->from($this->tableName)
             ->where(
                 $queryBuilder->expr()->orX(
@@ -118,24 +126,16 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                     )
                 )
             )
-            ->execute()
-            ->fetchAll();
-
-        if ($recordsToUpdate === false) {
-            $recordsToUpdate = [];
-        }
+            ->execute();
 
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
-        foreach ($recordsToUpdate as $recordToUpdate) {
+        while ($recordToUpdate = $statement->fetch()) {
             if ((string)$recordToUpdate['company'] !== '') {
-                $slug = $this->slugHelper->generate($recordToUpdate, $recordToUpdate['pid']);
+                $slug = $this->slugHelper->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(
                     $this->tableName,
                     [
-                        $this->fieldName => $this->getUniqueValue(
-                            (int)$recordToUpdate['uid'],
-                            $slug
-                        )
+                        $this->fieldName => $slug
                     ],
                     [
                         'uid' => (int)$recordToUpdate['uid']
@@ -145,52 +145,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         }
 
         return true;
-    }
-
-    /**
-     * @param int $uid
-     * @param string $slug
-     * @return string
-     */
-    protected function getUniqueValue(int $uid, string $slug): string
-    {
-        $statement = $this->getUniqueCountStatement($uid, $slug);
-        if ($statement->fetchColumn(0)) {
-            for ($counter = 1; $counter <= 100; $counter++) {
-                $newSlug = $slug . '-' . $counter;
-                $statement->bindValue(1, $newSlug);
-                $statement->execute();
-                if (!$statement->fetchColumn()) {
-                    break;
-                }
-            }
-        }
-
-        return $newSlug ?? $slug;
-    }
-
-    protected function getUniqueCountStatement(int $uid, string $slug)
-    {
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
-        $queryBuilder
-            ->getRestrictions()
-            ->removeAll()
-            ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-
-        return $queryBuilder
-            ->count('uid')
-            ->from($this->tableName)
-            ->where(
-                $queryBuilder->expr()->eq(
-                    $this->fieldName,
-                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR)
-                ),
-                $queryBuilder->expr()->neq(
-                    'uid',
-                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT)
-                )
-            )
-            ->execute();
     }
 
     /**
