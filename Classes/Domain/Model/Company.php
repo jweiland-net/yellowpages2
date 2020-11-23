@@ -384,7 +384,13 @@ class Company extends AbstractEntity
         $this->district = $district;
     }
 
-    public function getMainTrade(): ObjectStorage
+    public function getMainTrade(): ?Category
+    {
+        $this->mainTrade->rewind();
+        return $this->mainTrade->current();
+    }
+
+    public function getOriginalMainTrade(): ObjectStorage
     {
         return $this->mainTrade;
     }
@@ -404,7 +410,15 @@ class Company extends AbstractEntity
         $this->mainTrade->detach($mainTrade);
     }
 
-    public function getTrades(): ObjectStorage
+    /**
+     * @return Category[]
+     */
+    public function getTrades(): array
+    {
+        return $this->trades->toArray();
+    }
+
+    public function getOriginalTrades(): ObjectStorage
     {
         return $this->trades;
     }
