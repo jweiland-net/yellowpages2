@@ -7,6 +7,15 @@
 ChangeLog
 =========
 
+**Version 4.0.2**
+
+- Change return value of mainTrade to nullable Category
+- Change return value of trades to array
+
+**Version 4.0.1**
+
+- Allow null for Distinct in Company model
+
 **Version 4.0.0**
 
 - Add TYPO3 10 compatibility

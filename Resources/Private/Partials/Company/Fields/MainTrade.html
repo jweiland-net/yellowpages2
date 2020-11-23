@@ -1,26 +1,11 @@
-<f:if condition="{company.mainTrade}">
-	<f:then>
-		<f:for each="{company.mainTrade}" as="category" iteration="iterator">
-			<f:if condition="{iterator.isFirst}">
-				<f:render section="renderMainTrade" arguments="{value: category.uid, field: field, options: options}" />
-			</f:if>
-		</f:for>
-	</f:then>
-	<f:else>
-		<f:render section="renderMainTrade" arguments="{value: 0, field: field, options: options}" />
-	</f:else>
-</f:if>
-
-<f:section name="renderMainTrade">
-	<f:form.select additionalAttributes="{required: 'required'}"
-								 name="company[{field}][]"
-								 id="{field}"
-								 options="{options}"
-								 size="1"
-								 value="{value}"
-								 optionValueField="uid"
-								 optionLabelField="title"
-								 sortByOptionLabel="1"
-								 prependOptionLabel="{f:translate(key: 'pleaseChoose')}"
-								 prependOptionValue="" />
-</f:section>
+<f:form.select additionalAttributes="{required: 'required'}"
+							 name="company[{field}][]"
+							 id="{field}"
+							 options="{options}"
+							 size="1"
+							 value="{f:if(condition: company.mainTrade, then: company.mainTrade.uid, else: 0)}"
+							 optionValueField="uid"
+							 optionLabelField="title"
+							 sortByOptionLabel="1"
+							 prependOptionLabel="{f:translate(key: 'pleaseChoose')}"
+							 prependOptionValue="" />

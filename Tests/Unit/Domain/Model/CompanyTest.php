@@ -785,6 +785,9 @@ class CompanyTest extends UnitTestCase
     {
         self::assertEquals(
             new ObjectStorage(),
+            $this->subject->getOriginalMainTrade()
+        );
+        self::assertNull(
             $this->subject->getMainTrade()
         );
     }
@@ -801,7 +804,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getMainTrade()
+            $this->subject->getOriginalMainTrade()
         );
     }
 
@@ -820,7 +823,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getMainTrade()
+            $this->subject->getOriginalMainTrade()
         );
     }
 
@@ -839,7 +842,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getMainTrade()
+            $this->subject->getOriginalMainTrade()
         );
     }
 
