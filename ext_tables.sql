@@ -3,6 +3,7 @@
 #
 CREATE TABLE tx_yellowpages2_domain_model_company (
 	company varchar(255) DEFAULT '' NOT NULL,
+	path_segment varchar(2048) DEFAULT '' NOT NULL,
 	logo int(11) unsigned DEFAULT '0' NOT NULL,
 	images int(11) unsigned DEFAULT '0' NOT NULL,
 	street varchar(255) DEFAULT '' NOT NULL,

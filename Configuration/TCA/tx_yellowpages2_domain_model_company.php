@@ -22,11 +22,11 @@ return [
         'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_company.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, fe_user, facebook, twitter, google, main_trade, trades'
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, path_segment, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, fe_user, facebook, twitter, google, main_trade, trades'
     ],
     'types' => [
         '1' => [
-            'showitem' => '--palette--;;languageHidden, company,
+            'showitem' => '--palette--;;languageHidden, company, path_segment,
             logo, images, 
             --palette--;;streetHouseNumber, --palette--;;zipCity, --palette--;;districtBarrierFree,
             --palette--;;telephoneFax, --palette--;;emailWebsite, contact_person,
@@ -160,6 +160,25 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
+            ]
+        ],
+        'path_segment' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.path_segment',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['company'],
+                    // As pageSlug may contain slashes, we have to remove page slug
+                    'prefixParentPageSlug' => false,
+                    'replacements' => [
+                        '/' => '-'
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
             ]
         ],
         'logo' => [
