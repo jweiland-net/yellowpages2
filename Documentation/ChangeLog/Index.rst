@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.4**
+
+- Add settings to CompanyRepository SignalSlots
+
 **Version 4.0.3**
 
 - Set default sorting to company for QueryBuilder based statements

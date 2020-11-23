@@ -81,10 +81,6 @@ class CompanyRepository extends Repository
                 );
         }
 
-        /*if ($settings['showWspMembers']) {
-            $constraintAnd[] = $query->equals('wspMember', $settings['showWspMembers']);
-        }*/
-
         if ($settings['presetTrade']) {
             $this->addConstraintForTrades($queryBuilder, (int)$settings['presetTrade']);
         }
@@ -108,9 +104,10 @@ class CompanyRepository extends Repository
      *
      * @param string $search
      * @param int $categoryUid
+     * @param array $settings
      * @return QueryResultInterface
      */
-    public function searchCompanies(string $search, int $categoryUid): QueryResultInterface
+    public function searchCompanies(string $search, int $categoryUid, array $settings): QueryResultInterface
     {
         /** @var Query $query */
         $query = $this->createQuery();
@@ -152,7 +149,7 @@ class CompanyRepository extends Repository
             $this->addConstraintForTrades($queryBuilder, $categoryUid);
         }
 
-        $this->emitModifyQueryToSearchForCompanies($queryBuilder, $search, $categoryUid);
+        $this->emitModifyQueryToSearchForCompanies($queryBuilder, $search, $categoryUid, $settings);
 
         return $query->statement($queryBuilder)->execute();
     }
@@ -327,16 +324,18 @@ class CompanyRepository extends Repository
      * @param QueryBuilder $queryBuilder
      * @param string $search
      * @param int $categoryUid
+     * @param array $settings
      */
     protected function emitModifyQueryToSearchForCompanies(
         QueryBuilder $queryBuilder,
         string $search,
-        int $categoryUid
+        int $categoryUid,
+        array $settings
     ): void {
         $this->dispatcher->dispatch(
             self::class,
             'modifyQueryToSearchCompanies',
-            [$queryBuilder, $search, $categoryUid]
+            [$queryBuilder, $search, $categoryUid, $settings]
         );
     }
 

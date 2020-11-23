@@ -87,7 +87,7 @@ class CompanyController extends AbstractController
         $this->view->assignMultiple([
             'search' => $search,
             'category' => $category,
-            'companies' => $this->companyRepository->searchCompanies($search, $category),
+            'companies' => $this->companyRepository->searchCompanies($search, $category, $this->settings),
             'categories' => $this->companyRepository->getTranslatedCategories()
         ]);
         $this->assignGlossary();
