@@ -7,6 +7,12 @@
 ChangeLog
 =========
 
+**Version 4.0.11**
+
+- Wrap Fluid Templates with html namespace
+- Return one logo when using getLogo
+- Differ between image sizes for list and show view
+
 **Version 4.0.10**
 
 - Add Services.yaml for TYPO3 10 compatibility
