@@ -7,6 +7,12 @@
 ChangeLog
 =========
 
+**Version 4.0.12**
+
+- Better structure of getGlossar()
+- Use SchemaManager to build column names in Repo
+- Add String validator to listAction()
+
 **Version 4.0.11**
 
 - Wrap Fluid Templates with html namespace
