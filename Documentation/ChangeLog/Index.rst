@@ -7,6 +7,14 @@
 ChangeLog
 =========
 
+**Version 4.0.10**
+
+- Add Services.yaml for TYPO3 10 compatibility
+
+**Version 4.0.9**
+
+- Remove useless @param from getMaps2Uid
+
 **Version 4.0.8**
 
 - Allow max one Image for Logo
