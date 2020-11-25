@@ -471,8 +471,6 @@ class Company extends AbstractEntity
     /**
      * SF: Do not add PoiCollection as strict_type to $txMaps2Uid
      * as this will break DataMap in Extbase when maps2 is not installed.
-     *
-     * @param PoiCollection|null $txMaps2Uid
      */
     public function getTxMaps2Uid()
     {
