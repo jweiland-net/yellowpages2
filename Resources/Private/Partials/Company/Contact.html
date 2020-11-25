@@ -1,3 +1,7 @@
+<html lang="en"
+			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+
 <f:if condition="{company.telephone}">
 	<span aria-hidden="true" class="icon-phone_pf"></span>{company.telephone}
 </f:if>
@@ -18,3 +22,4 @@
 	<span aria-hidden="true" class="icon-earth"></span>
 	<f:link.external title="{company.website}"  uri="{company.website}">Website</f:link.external>
 </f:if>
+</html>
