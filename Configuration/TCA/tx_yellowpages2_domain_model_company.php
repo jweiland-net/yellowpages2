@@ -189,7 +189,7 @@ return [
                 'logo',
                 [
                     'minitems' => 0,
-                    'maxitems' => 5,
+                    'maxitems' => 1,
                     'foreign_match_fields' => [
                         'fieldname' => 'logo',
                         'tablenames' => 'tx_yellowpages2_domain_model_company',

@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.8**
+
+- Allow max one Image for Logo
+
 **Version 4.0.7**
 
 - Set slug field separator to -
