@@ -159,7 +159,7 @@ class CompanyRepository extends Repository
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
         $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
         return $queryBuilder
-            ->select('*')
+            ->select(...$this->getColumnsForCompanyTable())
             ->from('tx_yellowpages2_domain_model_company', 'c')
             ->where(
                 $queryBuilder->expr()->in(
@@ -170,7 +170,27 @@ class CompanyRepository extends Repository
                     )
                 )
             )
+            ->groupBy(...$this->getColumnsForCompanyTable())
             ->orderBy('c.company', 'ASC');
+    }
+
+    /**
+     * ->select() and ->groupBy() has to be the same in DB configuration
+     * where only_full_group_by is activated.
+     *
+     * @return array
+     */
+    protected function getColumnsForCompanyTable(): array
+    {
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_yellowpages2_domain_model_company');
+        return array_map(
+            function ($column) {
+                return 'c.' . $column;
+            },
+            array_keys(
+                $connection->getSchemaManager()->listTableColumns('tx_yellowpages2_domain_model_company') ?? []
+            )
+        );
     }
 
     protected function addConstraintForTrades(QueryBuilder $queryBuilder, int $categoryUid): void
