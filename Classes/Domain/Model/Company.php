@@ -180,17 +180,10 @@ class Company extends AbstractEntity
         $this->company = $company;
     }
 
-    /**
-     * @return array|FileReference[]
-     */
-    public function getLogo(): array
+    public function getLogo(): ?FileReference
     {
-        $references = [];
-        foreach ($this->logo as $logo) {
-            $references[] = $logo;
-        }
-
-        return $references;
+        $this->logo->rewind();
+        return $this->logo->current();
     }
 
     public function getOriginalLogo(): ObjectStorage
@@ -218,12 +211,7 @@ class Company extends AbstractEntity
      */
     public function getImages(): array
     {
-        $references = [];
-        foreach ($this->images as $image) {
-            $references[] = $image;
-        }
-
-        return $references;
+        return $this->images->toArray();
     }
 
     /**
