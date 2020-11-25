@@ -1,3 +1,7 @@
+<html lang="en"
+			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+
 <f:render partial="Company/Field" arguments="{number: 1, field: 'company', type: 'text', css: 'input', mandatory: 'yes'}" />
 <f:render partial="Company/Field" arguments="{number: 4, field: 'street', type: 'text', css: 'input', mandatory: 'yes'}" />
 <f:render partial="Company/Field" arguments="{number: 5, field: 'houseNumber', type: 'text', css: 'input', mandatory: 'yes'}" />
@@ -26,3 +30,4 @@
 <div class="csc-frame-rulerAfter clearer"></div>
 <f:render partial="Company/Field" arguments="{number: 2, field: 'logo', type: 'logo', company: company, css: 'file'}"/>
 <f:render partial="Company/Field" arguments="{number: 3, field: 'images', type: 'images', company: company, css: 'file'}"/>
+</html>

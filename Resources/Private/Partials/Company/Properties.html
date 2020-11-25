@@ -1,4 +1,6 @@
-{namespace yp=JWeiland\Maps2\ViewHelpers}
+<html lang="en"
+			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			data-namespace-typo3-fluid="true">
 
 <f:if condition="{company.hasValidUser}">
 	<p>
@@ -14,8 +16,8 @@
 		<f:if condition="{company.logo}">
 			<f:image image="{company.logo}"
 							 alt="Logo: {company.company}"
-							 width="{settings.list.image.width}"
-							 height="{settings.list.image.height}" />
+							 width="{settings.show.logo.width}"
+							 height="{settings.show.logo.height}" />
 		</f:if>
 	</figure>
 </div>
@@ -56,15 +58,15 @@
 		<f:if condition="{company.txMaps2Uid}">
 			<dd>
 				<f:link.action title="Map detail"
-							   action="show"
-							   controller="PoiCollection"
-							   extensionName="maps2"
-							   pluginName="maps2"
-							   pageUid="{settings.pidOfMaps2Plugin}"
-							   arguments="{poiCollection: company.txMaps2Uid}">
+											 action="show"
+											 controller="PoiCollection"
+											 extensionName="maps2"
+											 pluginName="maps2"
+											 pageUid="{settings.pidOfMaps2Plugin}"
+											 arguments="{poiCollection: company.txMaps2Uid}">
 					<f:image class="floatright"
-							 src="EXT:yellowpages2/Resources/Public/Icons/ThumbMaps2.png"
-							 alt="{f:translate(key: 'altTextMapImg')}" />
+									 src="EXT:yellowpages2/Resources/Public/Icons/ThumbMaps2.png"
+									 alt="{f:translate(key: 'altTextMapImg')}" />
 				</f:link.action>
 			</dd>
 		</f:if>
@@ -85,3 +87,4 @@
 		</dd>
 	</dl>
 </div>
+</html>
