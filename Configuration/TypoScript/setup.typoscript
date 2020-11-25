@@ -35,13 +35,29 @@ plugin.tx_yellowpages2 {
       overviewMapControl = 1
     }
     list {
-      image {
+      logo {
         width = 50c
         height= 50c
         minWidth = 50
         maxWidth = 50
         minHeight = 50
         maxHeight = 50
+      }
+      # Deprecated
+      image < .logo
+    }
+    show {
+      logo {
+        width = 50c
+        height= 50c
+        minWidth = 50
+        maxWidth = 50
+        minHeight = 50
+        maxHeight = 50
+      }
+      images {
+        width = 240c
+        height= 180c
       }
     }
     new {
