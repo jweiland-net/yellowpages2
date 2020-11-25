@@ -39,6 +39,7 @@ class CompanyController extends AbstractController
 
     /**
      * @param string $letter
+     * @TYPO3\CMS\Extbase\Annotation\Validate("String", param="letter")
      * @TYPO3\CMS\Extbase\Annotation\Validate("StringLength", param="letter", options={"minimum": 0, "maximum": 3})
      */
     public function listAction(string $letter = ''): void
@@ -95,8 +96,7 @@ class CompanyController extends AbstractController
 
     public function newAction(): void
     {
-        /** @var Company $company */
-        $company = $this->objectManager->get(Company::class);
+        $company = GeneralUtility::makeInstance(Company::class);
         $district = $this->districtRepository->findByUid($this->settings['uidOfDefaultDistrict']);
         if ($district instanceof District) {
             $company->setDistrict($district);
@@ -256,14 +256,17 @@ class CompanyController extends AbstractController
 
     protected function assignGlossary(): void
     {
-        $this->view->assign('glossar', $this->glossaryService->buildGlossary(
-            $this->companyRepository->getQueryBuilderToFindAllEntries(),
-            [
-                'extensionName' => 'yellowpages2',
-                'pluginName' => 'directory',
-                'controllerName' => 'Company',
-                'column' => 'company'
-            ]
-        ));
+        $this->view->assign(
+            'glossar',
+            $this->glossaryService->buildGlossary(
+                $this->companyRepository->getQueryBuilderToFindAllEntries(),
+                [
+                    'extensionName' => 'yellowpages2',
+                    'pluginName' => 'directory',
+                    'controllerName' => 'Company',
+                    'column' => 'company'
+                ]
+            )
+        );
     }
 }
