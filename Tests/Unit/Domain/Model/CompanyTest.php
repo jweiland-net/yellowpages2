@@ -781,14 +781,32 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMainTradeInitiallyReturnsObjectStorage()
+    public function getMainTradeInitiallyReturnsEmptyArray()
+    {
+        self::assertSame(
+            [],
+            $this->subject->getMainTrade()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstMainTradeInitiallyReturnsNull()
+    {
+        self::assertNull(
+            $this->subject->getFirstMainTrade()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getOriginalMainTradeInitiallyReturnsObjectStorage()
     {
         self::assertEquals(
             new ObjectStorage(),
             $this->subject->getOriginalMainTrade()
-        );
-        self::assertNull(
-            $this->subject->getMainTrade()
         );
     }
 
