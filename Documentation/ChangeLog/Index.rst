@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.13**
+
+- Add getter to get first main trade
+
 **Version 4.0.12**
 
 - Better structure of getGlossar()

@@ -7,7 +7,7 @@
 							 id="{field}"
 							 options="{options}"
 							 size="1"
-							 value="{f:if(condition: company.mainTrade, then: company.mainTrade.uid, else: 0)}"
+							 value="{f:if(condition: company.firstMainTrade, then: company.firstMainTrade.uid, else: 0)}"
 							 optionValueField="uid"
 							 optionLabelField="title"
 							 sortByOptionLabel="1"

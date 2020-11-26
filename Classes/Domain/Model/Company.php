@@ -372,7 +372,15 @@ class Company extends AbstractEntity
         $this->district = $district;
     }
 
-    public function getMainTrade(): ?Category
+    /**
+     * @return Category[]
+     */
+    public function getMainTrade(): array
+    {
+        return $this->mainTrade->toArray();
+    }
+
+    public function getFirstMainTrade(): ?Category
     {
         $this->mainTrade->rewind();
         return $this->mainTrade->current();
