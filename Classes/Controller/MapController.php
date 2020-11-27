@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use JWeiland\Maps2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,16 +21,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class MapController extends AbstractController
 {
-    /**
-     * @var ExtConf
-     */
-    protected $extConfOfMaps2;
-
-    public function injectExtConfOfMaps2(ExtConf $extConfOfMaps2): void
-    {
-        $this->extConfOfMaps2 = $extConfOfMaps2;
-    }
-
     /**
      * Hint: no "validate" Annotation: company was saved in previously called action
      *

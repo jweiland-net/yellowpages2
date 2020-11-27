@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.14**
+
+- Remove injection of ExtConf of maps2 in MapController
+
 **Version 4.0.13**
 
 - Add getter to get first main trade
