@@ -63,8 +63,8 @@
 			<trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
 				<source>Twitter</source>
 			</trans-unit>
-			<trans-unit id="tx_yellowpages2_domain_model_company.google" xml:space="preserve">
-				<source>Google+</source>
+			<trans-unit id="tx_yellowpages2_domain_model_company.instagram" xml:space="preserve">
+				<source>Instagram</source>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
 				<source>Main Trade</source>

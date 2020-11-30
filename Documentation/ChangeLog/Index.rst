@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.15**
+
+- Replace Google+ column with Instagram
+
 **Version 4.0.14**
 
 - Remove injection of ExtConf of maps2 in MapController

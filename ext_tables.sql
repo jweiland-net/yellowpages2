@@ -23,7 +23,7 @@ CREATE TABLE tx_yellowpages2_domain_model_company (
 	trades int(11) unsigned DEFAULT '0' NOT NULL,
 	facebook varchar(255) DEFAULT '' NOT NULL,
 	twitter varchar(255) DEFAULT '' NOT NULL,
-	google varchar(255) DEFAULT '' NOT NULL,
+	instagram varchar(255) DEFAULT '' NOT NULL,
 	fe_user int(11) unsigned DEFAULT '0'
 );
 

@@ -22,7 +22,7 @@ return [
         'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_company.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, path_segment, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, fe_user, facebook, twitter, google, main_trade, trades'
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, path_segment, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, fe_user, facebook, twitter, instagram, main_trade, trades'
     ],
     'types' => [
         '1' => [
@@ -31,7 +31,7 @@ return [
             --palette--;;streetHouseNumber, --palette--;;zipCity, --palette--;;districtBarrierFree,
             --palette--;;telephoneFax, --palette--;;emailWebsite, contact_person,
             opening_times, description, fe_user,
-            --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, google,
+            --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, instagram,
             --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.trades, main_trade, trades,
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access, 
             --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access'
@@ -472,9 +472,9 @@ return [
                 'softref' => 'typolink[linkList]'
             ]
         ],
-        'google' => [
+        'instagram' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.google',
+            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.instagram',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
