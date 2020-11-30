@@ -83,9 +83,9 @@
 				<source>Twitter</source>
 				<target>Twitter</target>
 			</trans-unit>
-			<trans-unit id="tx_yellowpages2_domain_model_company.google" xml:space="preserve">
-				<source>Google+</source>
-				<target>Google+</target>
+			<trans-unit id="tx_yellowpages2_domain_model_company.instagram" xml:space="preserve">
+				<source>Instagram</source>
+				<target>Instagram</target>
 			</trans-unit>
 			<trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
 				<source>Main Trade</source>
@@ -246,9 +246,9 @@
 				<source>Enter a URL to twitter.</source>
 				<target>Geben Sie die URL zu Twitter Seite ein, falls vorhanden.</target>
 			</trans-unit>
-			<trans-unit id="cshgoogle">
-				<source>Enter a URL to google+.</source>
-				<target>Geben Sie die URL zu google+ Seite ein, falls vorhanden.</target>
+			<trans-unit id="cshinstagram">
+				<source>Enter a URL to Instagram.</source>
+				<target>Geben Sie die URL zur Instagram Seite ein, falls vorhanden.</target>
 			</trans-unit>
 			<trans-unit id="cshlogo">
 				<source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
