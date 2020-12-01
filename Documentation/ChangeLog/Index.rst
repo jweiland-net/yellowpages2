@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+**Version 4.0.18**
+
+- Repair new action, if POI could not be created
+- Add Error FlashMessage, why POI could not be created
+
 **Version 4.0.17**
 
 - Use correct logo/image TypeConverter of yellowpages2
