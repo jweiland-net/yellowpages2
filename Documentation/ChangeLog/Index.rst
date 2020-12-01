@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.17**
+
+- Use correct logo/image TypeConverter of yellowpages2
+
 **Version 4.0.16**
 
 - Remove GROUP BY from query, as it is not compatible with pageBrowser

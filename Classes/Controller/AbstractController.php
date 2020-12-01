@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use JWeiland\Clubdirectory\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
@@ -21,6 +20,7 @@ use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
+use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -133,12 +133,12 @@ class AbstractController extends ActionController
      * Currently only "logo" and "images" are allowed properties.
      *
      * @param string $property
-     * @param MvcPropertyMappingConfiguration $propertyMappingConfigurationForClub
+     * @param MvcPropertyMappingConfiguration $propertyMappingConfigurationForCompany
      * @param mixed $converterOptionValue
      */
     protected function assignMediaTypeConverter(
         string $property,
-        MvcPropertyMappingConfiguration $propertyMappingConfigurationForClub,
+        MvcPropertyMappingConfiguration $propertyMappingConfigurationForCompany,
         $converterOptionValue
     ): void {
         if ($property === 'logo' || $property === 'images') {
@@ -150,7 +150,7 @@ class AbstractController extends ActionController
 
         /** @var TypeConverterInterface $typeConverter */
         $typeConverter = $this->objectManager->get($className);
-        $propertyMappingConfigurationForMediaFiles = $propertyMappingConfigurationForClub
+        $propertyMappingConfigurationForMediaFiles = $propertyMappingConfigurationForCompany
             ->forProperty($property)
             ->setTypeConverter($typeConverter);
 
