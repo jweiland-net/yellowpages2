@@ -94,7 +94,10 @@ class CompanyController extends AbstractController
         $this->assignGlossary();
     }
 
-    public function newAction(): void
+    /**
+     * @param Company|null $company Do not remove that as this parameter will be used if a POI could not be created.
+     */
+    public function newAction(Company $company = null): void
     {
         $company = GeneralUtility::makeInstance(Company::class);
         $district = $this->districtRepository->findByUid($this->settings['uidOfDefaultDistrict']);
@@ -155,7 +158,7 @@ class CompanyController extends AbstractController
                 $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
                 $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
             } else {
-                $this->addFlashMessage('Error while creating a poi. Please add some more informations about your address');
+                $this->controllerContext->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
                 $this->forward('new', 'Company', 'yellowpages2', ['company' => $company]);
             }
         }
