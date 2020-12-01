@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.16**
+
+- Remove GROUP BY from query, as it is not compatible with pageBrowser
+
 **Version 4.0.15**
 
 - Replace Google+ column with Instagram
