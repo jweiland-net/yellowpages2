@@ -170,7 +170,6 @@ class CompanyRepository extends Repository
                     )
                 )
             )
-            ->groupBy(...$this->getColumnsForCompanyTable())
             ->orderBy('c.company', 'ASC');
     }
 
