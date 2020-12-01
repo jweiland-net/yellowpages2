@@ -128,7 +128,28 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLogoInitiallyReturnsObjectStorage()
+    public function getLogoInitiallyReturnsEmptyArray()
+    {
+        self::assertSame(
+            [],
+            $this->subject->getLogo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstLogoInitiallyReturnsNull()
+    {
+        self::assertNull(
+            $this->subject->getFirstLogo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getOriginalLogoInitiallyReturnsObjectStorage()
     {
         self::assertEquals(
             new ObjectStorage(),
