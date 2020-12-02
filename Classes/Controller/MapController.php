@@ -139,7 +139,7 @@ class MapController extends ActionController
             $this->persistenceManager->persistAll();
         } else {
             $this->controllerContext->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
-            $this->errorAction();
+            $this->redirect('edit', 'Company', null, ['company' => $company]);
         }
     }
 
