@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Updater;
 
+use JWeiland\Yellowpages2\Helper\PathSegmentHelper;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
-use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
@@ -35,25 +35,13 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
     protected $fieldName = 'path_segment';
 
     /**
-     * @var SlugHelper
+     * @var PathSegmentHelper
      */
-    protected $slugHelper;
+    protected $pathSegmentHelper;
 
-    public function __construct(SlugHelper $slugHelper = null)
+    public function __construct(PathSegmentHelper $pathSegmentHelper = null)
     {
-        if ($slugHelper === null) {
-            // Add uid to slug, to prevent duplicates
-            $config = $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config'];
-            $config['generatorOptions']['fields'] = ['company', 'uid'];
-
-            $slugHelper = GeneralUtility::makeInstance(
-                SlugHelper::class,
-                $this->tableName,
-                $this->fieldName,
-                $config
-            );
-        }
-        $this->slugHelper = $slugHelper;
+        $this->pathSegmentHelper = $pathSegmentHelper ?? GeneralUtility::makeInstance(PathSegmentHelper::class);
     }
 
     /**
@@ -82,6 +70,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
         $amountOfRecordsWithEmptySlug = $queryBuilder
             ->count('*')
             ->from($this->tableName)
@@ -112,6 +101,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
         $statement = $queryBuilder
             ->select('uid', 'pid', 'company')
             ->from($this->tableName)
@@ -131,11 +121,13 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
         while ($recordToUpdate = $statement->fetch()) {
             if ((string)$recordToUpdate['company'] !== '') {
-                $slug = $this->slugHelper->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(
                     $this->tableName,
                     [
-                        $this->fieldName => $slug
+                        $this->fieldName => $this->pathSegmentHelper->generatePathSegment(
+                            $recordToUpdate,
+                            (int)$recordToUpdate['pid']
+                        )
                     ],
                     [
                         'uid' => (int)$recordToUpdate['uid']

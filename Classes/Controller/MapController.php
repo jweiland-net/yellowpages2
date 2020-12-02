@@ -11,55 +11,50 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use JWeiland\Maps2\Domain\Model\PoiCollection;
+use JWeiland\Maps2\Domain\Model\Position;
+use JWeiland\Maps2\Service\GeoCodeService;
+use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
+use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
+use JWeiland\Yellowpages2\Helper\HiddenObjectHelper;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller to show and save PoiCollections on a map
  */
-class MapController extends AbstractController
+class MapController extends ActionController
 {
     /**
-     * Hint: no "validate" Annotation: company was saved in previously called action
-     *
-     * @param Company|null $company
+     * @var CompanyRepository
      */
-    public function newAction(?Company $company): void
-    {
-        if ($company === null) {
-            $company = $this->objectManager->get(Company::class);
-        }
+    protected $companyRepository;
 
-        $this->addNewPoiCollectionToCompany($company);
-        $this->companyRepository->update($company);
-        $this->persistenceManager->persistAll();
-        $this->view->assign('company', $company);
+    /**
+     * @var PersistenceManagerInterface
+     */
+    protected $persistenceManager;
+
+    public function __construct(
+        CompanyRepository $companyRepository,
+        PersistenceManagerInterface $persistenceManager
+    ) {
+        $this->companyRepository = $companyRepository;
+        $this->persistenceManager = $persistenceManager;
     }
 
     /**
-     * Allow modification of submodel
-     * Hint: submodel was created already in companyController, that's why we need modification here
+     * @param Company $company
      */
-    public function initializeCreateAction(): void
+    public function newAction(Company $company): void
     {
-        $maps2Request = GeneralUtility::_POST('tx_maps2');
-        if ($maps2Request !== null) {
-            /** @var array $company */
-            $company = $this->request->getArgument('company');
-            $company['txMaps2Uid'] = $maps2Request;
-            $this->request->setArgument('company', $company);
-        }
-
-        $companyMappingConfiguration = $this->arguments
-            ->getArgument('company')
-            ->getPropertyMappingConfiguration();
-
-        $companyMappingConfiguration->allowModificationForSubProperty('txMaps2Uid');
-        $companyMappingConfiguration
-            ->allowProperties('txMaps2Uid')
-            ->forProperty('txMaps2Uid')->allowProperties('latitude', 'longitude', '__identity');
+        $this->addNewPoiCollectionToCompany($company);
+        $this->view->assign('company', $company);
     }
 
     /**
@@ -72,12 +67,18 @@ class MapController extends AbstractController
         $this->sendMail('create', $company);
         $company->setHidden(true);
         $this->companyRepository->update($company);
+        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
         $this->redirect('listMyCompanies', 'Company');
     }
 
     public function initializeEditAction(): void
     {
-        $this->registerCompanyFromRequest('company');
+        $hiddenObjectHelper = $this->objectManager->get(HiddenObjectHelper::class);
+        $hiddenObjectHelper->registerHiddenObjectInExtbaseSession(
+            $this->companyRepository,
+            $this->request,
+            'company'
+        );
     }
 
     /**
@@ -93,25 +94,12 @@ class MapController extends AbstractController
      */
     public function initializeUpdateAction(): void
     {
-        $maps2Request = GeneralUtility::_POST('tx_maps2');
-        if ($maps2Request !== null) {
-            /** @var array $company */
-            $company = $this->request->getArgument('company');
-            $company['txMaps2Uid'] = $maps2Request;
-            $this->request->setArgument('company', $company);
-        }
-        $this->registerCompanyFromRequest('company');
-
-        $companyMappingConfiguration = $this->arguments
-            ->getArgument('company')
-            ->getPropertyMappingConfiguration();
-
-        $companyMappingConfiguration->allowCreationForSubProperty('txMaps2Uid');
-        $companyMappingConfiguration->allowModificationForSubProperty('txMaps2Uid');
-        $companyMappingConfiguration->allowProperties('txMaps2Uid');
-        $companyMappingConfiguration
-            ->forProperty('txMaps2Uid')
-            ->allowProperties('latitude', 'longitude');
+        $hiddenObjectHelper = $this->objectManager->get(HiddenObjectHelper::class);
+        $hiddenObjectHelper->registerHiddenObjectInExtbaseSession(
+            $this->companyRepository,
+            $this->request,
+            'company'
+        );
     }
 
     /**
@@ -119,13 +107,40 @@ class MapController extends AbstractController
      */
     public function updateAction(Company $company): void
     {
-        // if webko edits this hidden record, mail should not be send
+        // if an admin edits this hidden record mail should not be send
         if (!$company->getHidden()) {
             $this->sendMail('update', $company);
         }
         $company->setHidden(true);
         $this->companyRepository->update($company);
+        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
         $this->redirect('listMyCompanies', 'Company');
+    }
+
+    /**
+     * Add new PoiCollection to Company, if company is new
+     *
+     * @param Company $company
+     * @throws \Exception
+     */
+    protected function addNewPoiCollectionToCompany(Company $company): void
+    {
+        $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
+        $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
+        if ($position instanceof Position) {
+            $poiCollection = GeneralUtility::makeInstance(PoiCollection::class);
+            $poiCollection->setCollectionType('Point');
+            $poiCollection->setTitle($company->getCompany());
+            $poiCollection->setLatitude($position->getLatitude());
+            $poiCollection->setLongitude($position->getLongitude());
+            $poiCollection->setAddress($position->getFormattedAddress());
+            $company->setTxMaps2Uid($poiCollection);
+            $this->companyRepository->update($company);
+            $this->persistenceManager->persistAll();
+        } else {
+            $this->controllerContext->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
+            $this->errorAction();
+        }
     }
 
     /**
@@ -137,21 +152,23 @@ class MapController extends AbstractController
      */
     public function sendMail(string $subjectKey, Company $company): bool
     {
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        $extConf = GeneralUtility::makeInstance(ExtConf::class);
         $this->view->assign('company', $company);
+        $mailContent = $this->view->render();
 
-        $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
-        $this->mail->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName());
-        $this->mail->setSubject(LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'));
-        if (method_exists($this->mail, 'addPart')) {
+        $mail->setFrom($extConf->getEmailFromAddress(), $extConf->getEmailFromName());
+        $mail->setTo($extConf->getEmailToAddress(), $extConf->getEmailToName());
+        $mail->setSubject(LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'));
+        if (method_exists($mail, 'addPart')) {
             // TYPO3 < 10 (Swift_Message)
-            $this->mail->setBody($this->view->render(), 'text/html');
+            $mail->setBody($mailContent, 'text/html');
         } else {
-            $isSymfonyEmail = true;
             // TYPO3 >= 10 (Symfony Mail)
-            $this->mail->html($this->view->render());
+            $mail->html($mailContent);
         }
 
-        return $this->mail->send();
+        return $mail->send();
     }
 
     public function getTemplatePathForMail(): string
