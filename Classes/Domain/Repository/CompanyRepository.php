@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 /**
  * Repository to retrieve company records
  */
-class CompanyRepository extends Repository
+class CompanyRepository extends Repository implements HiddenRepositoryInterface
 {
     /**
      * @var array
@@ -52,15 +52,14 @@ class CompanyRepository extends Repository
         $this->dispatcher = $dispatcher;
     }
 
-    public function findHiddenEntryByUid(int $companyUid): Company
+    public function findHiddenObject($value, string $property = 'uid'): ?object
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
+        $query->getQuerySettings()->setRespectStoragePage(false);
 
-        /** @var Company $company */
-        $company = $query->matching($query->equals('uid', $companyUid))->execute()->getFirst();
-        return $company;
+        return $query->matching($query->equals($property, $value))->execute()->getFirst();
     }
 
     public function findByLetter(string $letter, array $settings = []): QueryResultInterface

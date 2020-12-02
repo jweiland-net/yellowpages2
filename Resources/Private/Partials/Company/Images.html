@@ -3,19 +3,17 @@
 			data-namespace-typo3-fluid="true">
 
 <f:if condition="{company.images}">
-	<div class="{f:if(condition: '{company.images -> f:count()} == 1', then: '', else: 'flexslider')}">
-		<ul class="slides">
-			<f:for each="{company.images}" as="image" iteration="iterator">
-				<f:if condition="{image}">
-					<li>
-						<f:image image="{image}"
-								 alt="Sliderimage-{iterator.cycle}"
-								 width="{settings.show.images.width}"
-								 height="{settings.show.images.height}" />
-					</li>
-				</f:if>
-			</f:for>
-		</ul>
-	</div>
+	<ul>
+		<f:for each="{company.images}" as="image" iteration="iterator">
+			<f:if condition="{image}">
+				<li>
+					<f:image image="{image}"
+							 alt="{image.title}"
+							 width="{settings.show.images.width}"
+							 height="{settings.show.images.height}" />
+				</li>
+			</f:if>
+		</f:for>
+	</ul>
 </f:if>
 </html>

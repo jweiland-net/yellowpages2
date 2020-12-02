@@ -10,7 +10,6 @@ call_user_func(function () {
         [
             'Company' => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
             'Map' => 'new, create, edit, update, activate',
-            'Email' => 'send'
         ],
         // non-cacheable actions
         [

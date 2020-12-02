@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.19**
+
+- Use errorAction to redirect to previous action on Geocoding error
+
 **Version 4.0.18**
 
 - Repair new action, if POI could not be created

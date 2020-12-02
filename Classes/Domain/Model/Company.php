@@ -32,6 +32,11 @@ class Company extends AbstractEntity
     protected $company = '';
 
     /**
+     * @var string
+     */
+    protected $pathSegment = '';
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
@@ -178,6 +183,16 @@ class Company extends AbstractEntity
     public function setCompany(string $company): void
     {
         $this->company = $company;
+    }
+
+    public function getPathSegment(): string
+    {
+        return $this->pathSegment;
+    }
+
+    public function setPathSegment(string $pathSegment): void
+    {
+        $this->pathSegment = $pathSegment;
     }
 
     /**
@@ -526,5 +541,20 @@ class Company extends AbstractEntity
     public function getAddress(): string
     {
         return $this->getStreet() . ' ' . $this->getHouseNumber() . ', ' . $this->getZip() . ' ' . $this->getCity();
+    }
+
+    /**
+     * Helper method to build a baseRecord for path_segment
+     * Needed in PathSegmentHelper
+     *
+     * @return array
+     */
+    public function getBaseRecordForPathSegment(): array
+    {
+        return [
+            'uid' => $this->getUid(),
+            'pid' => $this->getPid(),
+            'company' => $this->getCompany()
+        ];
     }
 }
