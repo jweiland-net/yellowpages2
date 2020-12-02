@@ -12,9 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Glossary2\Service\GlossaryService;
-use JWeiland\Maps2\Domain\Model\PoiCollection;
-use JWeiland\Maps2\Domain\Model\Position;
-use JWeiland\Maps2\Service\GeoCodeService;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
