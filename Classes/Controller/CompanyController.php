@@ -75,8 +75,7 @@ class CompanyController extends ActionController
         FeUserRepository $feUserRepository,
         PersistenceManagerInterface $persistenceManager,
         GlossaryService $glossaryService
-    )
-    {
+    ) {
         $this->companyRepository = $companyRepository;
         $this->categoryRepository = $categoryRepository;
         $this->districtRepository = $districtRepository;
