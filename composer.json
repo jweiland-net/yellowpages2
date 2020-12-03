@@ -24,7 +24,7 @@
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.14",
 		"nimut/testing-framework": "^5.1",
-		"jweiland/maps2": ">=8.0.0"
+		"jweiland/maps2": ">=9.3.0"
 	},
 	"autoload": {
 		"psr-4": {
