@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.20**
+
+- Remove title from SVG icons
+
 **Version 4.0.19**
 
 - Use errorAction to redirect to previous action on Geocoding error
