@@ -110,10 +110,10 @@
 				<source>Edit</source>
 			</trans-unit>
 			<trans-unit id="companyCreated">
-				<source>Thank you for your entry. Please note that your data will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
+				<source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
 			</trans-unit>
 			<trans-unit id="companyUpdated">
-				<source>Company updated</source>
+				<source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
 			</trans-unit>
 			<trans-unit id="pleaseChoose">
 				<source>--- Please choose ---</source>
