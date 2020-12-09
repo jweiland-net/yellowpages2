@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.21**
+
+- Update translation
+
 **Version 4.0.20**
 
 - Remove title from SVG icons

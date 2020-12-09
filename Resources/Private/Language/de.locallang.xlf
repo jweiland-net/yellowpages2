@@ -146,12 +146,12 @@
 				<target>Speichern</target>
 			</trans-unit>
 			<trans-unit id="companyCreated">
-				<source>Thank you for your entry. Please note that your data will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
+				<source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
 				<target>Vielen Dank für Ihren Eintrag. Beachten Sie bitte, dass Ihre Daten zunächst durch die Webkoordination der Stadt Pforzheim überprüft und freigeschaltet werden. Anschließend werden Sie per E-Mail über die Freischaltung benachrichtigt. Dieser Vorgang dauert max. 1-2 Werktage.</target>
 			</trans-unit>
 			<trans-unit id="companyUpdated">
-				<source>Company updated</source>
-				<target>Firma bearbeitet</target>
+				<source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
+				<target>Ihr Firma wurde bearbeitet. Beachten Sie bitte, dass Ihre Firma zunächst durch die Webkoordination der Stadt Pforzheim überprüft und freigeschaltet werden. Anschließend werden Sie per E-Mail über die Freischaltung benachrichtigt. Dieser Vorgang dauert max. 1-2 Werktage.</target>
 			</trans-unit>
 			<trans-unit id="pleaseChoose">
 				<source>--- Please choose ---</source>
