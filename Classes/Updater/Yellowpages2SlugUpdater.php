@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Updater;
 
+use Doctrine\DBAL\Driver\Statement;
 use JWeiland\Yellowpages2\Helper\PathSegmentHelper;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
+use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
@@ -35,13 +37,26 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
     protected $fieldName = 'path_segment';
 
     /**
-     * @var PathSegmentHelper
+     * @var SlugHelper
      */
-    protected $pathSegmentHelper;
+    protected $slugHelper;
 
-    public function __construct(PathSegmentHelper $pathSegmentHelper = null)
+    /**
+     * @var array
+     */
+    protected $slugCache = [];
+
+    public function __construct(SlugHelper $slugHelper = null)
     {
-        $this->pathSegmentHelper = $pathSegmentHelper ?? GeneralUtility::makeInstance(PathSegmentHelper::class);
+        if ($slugHelper === null) {
+            $slugHelper = GeneralUtility::makeInstance(
+                SlugHelper::class,
+                $this->tableName,
+                $this->fieldName,
+                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config']
+            );
+        }
+        $this->slugHelper = $slugHelper;
     }
 
     /**
@@ -121,12 +136,13 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
         while ($recordToUpdate = $statement->fetch()) {
             if ((string)$recordToUpdate['company'] !== '') {
+                $slug = $this->slugHelper->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(
                     $this->tableName,
                     [
-                        $this->fieldName => $this->pathSegmentHelper->generatePathSegment(
-                            $recordToUpdate,
-                            (int)$recordToUpdate['pid']
+                        $this->fieldName => $this->getUniqueValue(
+                            (int)$recordToUpdate['uid'],
+                            $slug
                         )
                     ],
                     [
@@ -137,6 +153,52 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param int $uid
+     * @param string $slug
+     * @return string
+     */
+    protected function getUniqueValue(int $uid, string $slug): string
+    {
+        $statement = $this->getUniqueSlugStatement($uid, $slug);
+        $counter = $this->slugCache[$slug] ?? 1;
+        while ($statement->fetch()) {
+            $newSlug = $slug . '-' . $counter;
+            $statement->bindValue(1, $newSlug);
+            $statement->execute();
+
+            // Do not cache every slug, because of memory consumption. I think 5 is a good value to start caching.
+            if ($counter > 5) {
+                $this->slugCache[$slug] = $counter;
+            }
+            $counter++;
+        }
+
+        return $newSlug ?? $slug;
+    }
+
+    protected function getUniqueSlugStatement(int $uid, string $slug): Statement
+    {
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
+        return $queryBuilder
+            ->select('uid')
+            ->from($this->tableName)
+            ->where(
+                $queryBuilder->expr()->eq(
+                    $this->fieldName,
+                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR)
+                ),
+                $queryBuilder->expr()->neq(
+                    'uid',
+                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT)
+                )
+            )
+            ->execute();
     }
 
     /**

@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.22**
+
+- Use a counter in URL for duplicate companies in Slug UpdateWizard
+
 **Version 4.0.21**
 
 - Update translation
