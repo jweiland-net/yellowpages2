@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.23**
+
+- Add activate action to non-cachable actions
+
 **Version 4.0.22**
 
 - Use a counter in URL for duplicate companies in Slug UpdateWizard

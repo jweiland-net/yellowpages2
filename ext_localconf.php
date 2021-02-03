@@ -13,7 +13,7 @@ call_user_func(function () {
         ],
         // non-cacheable actions
         [
-            'Company' => 'search, create, update',
+            'Company' => 'search, create, update, activate',
             'Map' => 'create, update'
         ]
     );
