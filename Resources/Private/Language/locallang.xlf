@@ -72,6 +72,7 @@
 			<trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
 				<source>Sub Trades</source>
 			</trans-unit>
+
 			<trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
 				<source>District</source>
 			</trans-unit>
@@ -126,6 +127,73 @@
 			</trans-unit>
 			<trans-unit id="altTextMapImg">
 				<source>Map</source>
+			</trans-unit>
+
+			<trans-unit id="hint">
+				<source>Hint</source>
+			</trans-unit>
+			<trans-unit id="cshcompany">
+				<source>Enter the company name.This is mandatory.</source>
+			</trans-unit>
+			<trans-unit id="cshstreet">
+				<source>Enter the street.This is mandatory.</source>
+			</trans-unit>
+			<trans-unit id="cshhouseNumber">
+				<source>Enter the house number.</source>
+			</trans-unit>
+			<trans-unit id="cshzip">
+				<source>Enter the zip code.This is mandatory.</source>
+			</trans-unit>
+			<trans-unit id="cshcity">
+				<source>Enter the city.This is mandatory.</source>
+			</trans-unit>
+			<trans-unit id="cshdistrict">
+				<source>Enter the district.This is mandatory.</source>
+			</trans-unit>
+			<trans-unit id="cshtelephone">
+				<source>Enter the phone number.</source>
+			</trans-unit>
+			<trans-unit id="cshfax">
+				<source>Enter the fax number.</source>
+			</trans-unit>
+			<trans-unit id="cshemail">
+				<source>Enter the email address.</source>
+			</trans-unit>
+			<trans-unit id="cshwebsite">
+				<source>Enter the URL of the website</source>
+			</trans-unit>
+			<trans-unit id="cshcontactPerson">
+				<source>Enter the contact person.</source>
+			</trans-unit>
+			<trans-unit id="cshopeningTimes">
+				<source>Enter the opening times.</source>
+			</trans-unit>
+			<trans-unit id="cshdescription">
+				<source>Describe your company.This is mandatory.</source>
+			</trans-unit>
+			<trans-unit id="cshbarrierFree">
+				<source>Is the company accessible</source>
+			</trans-unit>
+			<trans-unit id="cshmainTrade">
+				<source>Enter a main trade</source>
+			</trans-unit>
+			<trans-unit id="cshtrades_0">
+				<source>Enter max. 2 sub trades</source>
+			</trans-unit>
+			<trans-unit id="cshfacebook">
+				<source>Enter a URL to facebook.</source>
+			</trans-unit>
+			<trans-unit id="cshtwitter">
+				<source>Enter a URL to twitter.</source>
+			</trans-unit>
+			<trans-unit id="cshinstagram">
+				<source>Enter a URL to Instagram.</source>
+			</trans-unit>
+			<trans-unit id="cshlogo">
+				<source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
+			</trans-unit>
+			<trans-unit id="cshimages_0">
+				<source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
 			</trans-unit>
 
 			<trans-unit id="email.subject.inform.user">
