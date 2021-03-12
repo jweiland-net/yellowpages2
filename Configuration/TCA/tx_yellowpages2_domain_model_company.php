@@ -413,8 +413,7 @@ return [
                 'rows' => 15,
                 'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default',
-                'eval' => 'required,trim'
+                'eval' => 'required'
             ],
         ],
         'district' => [
