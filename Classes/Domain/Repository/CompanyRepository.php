@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
 use JWeiland\Glossary2\Service\GlossaryService;
-use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
