@@ -15,7 +15,6 @@ use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
-use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
@@ -27,6 +26,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
@@ -187,7 +187,7 @@ class CompanyController extends ActionController
     {
         $this->deleteUploadedFilesOnValidationErrors('company');
 
-        /** @var FeUser $feUser */
+        /** @var FrontendUser $feUser */
         $feUser = $this->feUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
         $company->setFeUser($feUser);
         $this->companyRepository->add($company);

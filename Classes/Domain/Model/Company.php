@@ -11,7 +11,9 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -120,14 +122,14 @@ class Company extends AbstractEntity
     protected $district;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      * @Extbase\Validate("NotEmpty")
      * @Extbase\ORM\Lazy
      */
     protected $mainTrade;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\JWeiland\Yellowpages2\Domain\Model\Category>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      * @Extbase\ORM\Lazy
      */
     protected $trades;
@@ -153,7 +155,7 @@ class Company extends AbstractEntity
     protected $txMaps2Uid;
 
     /**
-     * @var \JWeiland\Yellowpages2\Domain\Model\FeUser
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     protected $feUser;
 
@@ -503,12 +505,12 @@ class Company extends AbstractEntity
         }
     }
 
-    public function getFeUser(): ?FeUser
+    public function getFeUser(): ?FrontendUser
     {
         return $this->feUser;
     }
 
-    public function setFeUser(FeUser $feUser): void
+    public function setFeUser(FrontendUser $feUser): void
     {
         $this->feUser = $feUser;
     }
