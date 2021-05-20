@@ -170,6 +170,7 @@ class CompanyController extends ActionController
 
     public function initializeCreateAction(): void
     {
+        $this->removeEmptyTrades();
         $companyMappingConfiguration = $this->arguments
             ->getArgument('company')
             ->getPropertyMappingConfiguration();
@@ -233,6 +234,7 @@ class CompanyController extends ActionController
 
     public function initializeUpdateAction(): void
     {
+        $this->removeEmptyTrades();
         $hiddenObjectHelper = $this->objectManager->get(HiddenObjectHelper::class);
         $hiddenObjectHelper->registerHiddenObjectInExtbaseSession(
             $this->companyRepository,
@@ -385,6 +387,15 @@ class CompanyController extends ActionController
                 unset($company['logo']);
             }
             $this->getControllerContext()->getRequest()->setArgument($argument, $company);
+        }
+    }
+
+    protected function removeEmptyTrades(): void
+    {
+        if ($this->request->hasArgument('company')) {
+            $company = $this->request->getArgument('company');
+            $company['trades'] = array_filter($company['trades']);
+            $this->request->setArgument('company', $company);
         }
     }
 
