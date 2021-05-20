@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 4.0.26**
+
+- Remove empty trades from request before ProperyMapping
+
 **Version 4.0.23**
 
 - Add activate action to non-cachable actions
