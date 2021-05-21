@@ -8,7 +8,6 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'projects@jweiland.net',
     'author_company' => 'jweiland.net',
     'state' => 'stable',
-    'clearCacheOnLoad' => 0,
     'version' => '4.0.26',
     'constraints' => [
         'depends' => [
