@@ -7,6 +7,13 @@
 ChangeLog
 =========
 
+**Version 5.0.0**
+
+- Remove TYPO3 9 compatibility
+- Add TYPO3 10 compatibility
+- Replace f:widget.paginate with our own paginator
+- Restructure controllers. Move recurring code into EventListeners
+
 **Version 4.0.26**
 
 - Remove empty trades from request before ProperyMapping

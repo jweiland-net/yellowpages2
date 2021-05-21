@@ -117,24 +117,7 @@ pageBrowser
 You can fine tuning the page browser
 
 Example: plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage = 15
-Example: plugin.tx_yellowpages2.settings.pageBrowser.insertAbove = 1
-Example: plugin.tx_yellowpages2.settings.pageBrowser.insertBelow = 0
-Example: plugin.tx_yellowpages2.settings.pageBrowser.maximumNumberOfLinks = 5
 
 **itemsPerPage**
 
 Reduce result of company records to this value for a page
-
-**insertAbove**
-
-Insert page browser above list of company records
-
-**insertBelow**
-
-Insert page browser below list of company records. I remember a bug in TYPO3 CMS. So I can not guarantee
-that this option will work.
-
-**maximumNumberOfLinks**
-
-If you have many company records it makes sense to reduce the amount of pages in page browser to a fixed maximum
-value. Instead of 1, 2, 3, 4, 5, 6, 7, 8 you will get 1, 2, 3...8, 9 if you have configured this option to 5.
