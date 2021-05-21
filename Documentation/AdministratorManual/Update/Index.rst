@@ -5,6 +5,14 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Update to Version 5.0.0
+-----------------------
+
+We have moved a lot of code of yellowpages2 controllers to EventListeners. Please flush cache in
+maintenance module.
+
+As a developer you should check
+
 Update to Version 4.0.0
 -----------------------
 
