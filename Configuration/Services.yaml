@@ -12,3 +12,45 @@ services:
 
   JWeiland\Yellowpages2\Helper\HiddenObjectHelper:
     public: true
+
+  JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent
+  JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent
+        after: JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener
+
+  JWeiland\Yellowpages2\EventListener\AssignMediaTypeConverterEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
+  JWeiland\Yellowpages2\EventListener\RegisterHiddenCompanyEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
+  JWeiland\Yellowpages2\EventListener\RemoveEmptyTradesEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
+  JWeiland\Yellowpages2\EventListener\SanitizeSearchWordEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
+
+  JWeiland\Yellowpages2\EventListener\RedirectToMapControllerEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
+  JWeiland\Yellowpages2\EventListener\UpdateCompanyPathSegmentEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
+        before: JWeiland\Yellowpages2\EventListener\RedirectToMapControllerEventListener
+  JWeiland\Yellowpages2\EventListener\DeleteUploadedFilesEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
+        before: JWeiland\Yellowpages2\EventListener\RedirectToMapControllerEventListener

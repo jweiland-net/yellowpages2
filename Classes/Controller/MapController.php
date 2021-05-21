@@ -18,17 +18,17 @@ use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\HiddenObjectHelper;
+use JWeiland\Yellowpages2\Helper\MailHelper;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller to show and save PoiCollections on a map
  */
-class MapController extends ActionController
+class MapController extends AbstractController
 {
     /**
      * @var CompanyRepository
@@ -40,12 +40,19 @@ class MapController extends ActionController
      */
     protected $persistenceManager;
 
+    /**
+     * @var MailHelper
+     */
+    protected $mailHelper;
+
     public function __construct(
         CompanyRepository $companyRepository,
-        PersistenceManagerInterface $persistenceManager
+        PersistenceManagerInterface $persistenceManager,
+        MailHelper $mailHelper
     ) {
         $this->companyRepository = $companyRepository;
         $this->persistenceManager = $persistenceManager;
+        $this->mailHelper = $mailHelper;
     }
 
     /**
@@ -54,7 +61,10 @@ class MapController extends ActionController
     public function newAction(Company $company): void
     {
         $this->addNewPoiCollectionToCompany($company);
-        $this->view->assign('company', $company);
+
+        $this->postProcessAndAssignFluidVariables([
+            'company' => $company
+        ]);
     }
 
     /**
@@ -64,21 +74,19 @@ class MapController extends ActionController
      */
     public function createAction(Company $company): void
     {
-        $this->sendMail('create', $company);
         $company->setHidden(true);
         $this->companyRepository->update($company);
+        $this->postProcessControllerAction($company);
+
+        $this->sendMail('create', $company);
+
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
         $this->redirect('listMyCompanies', 'Company');
     }
 
     public function initializeEditAction(): void
     {
-        $hiddenObjectHelper = $this->objectManager->get(HiddenObjectHelper::class);
-        $hiddenObjectHelper->registerHiddenObjectInExtbaseSession(
-            $this->companyRepository,
-            $this->request,
-            'company'
-        );
+        $this->preProcessControllerAction();
     }
 
     /**
@@ -86,7 +94,9 @@ class MapController extends ActionController
      */
     public function editAction(Company $company): void
     {
-        $this->view->assign('company', $company);
+        $this->postProcessAndAssignFluidVariables([
+            'company' => $company
+        ]);
     }
 
     /**
@@ -94,12 +104,7 @@ class MapController extends ActionController
      */
     public function initializeUpdateAction(): void
     {
-        $hiddenObjectHelper = $this->objectManager->get(HiddenObjectHelper::class);
-        $hiddenObjectHelper->registerHiddenObjectInExtbaseSession(
-            $this->companyRepository,
-            $this->request,
-            'company'
-        );
+        $this->preProcessControllerAction();
     }
 
     /**
@@ -107,12 +112,16 @@ class MapController extends ActionController
      */
     public function updateAction(Company $company): void
     {
-        // if an admin edits this hidden record mail should not be send
+        // if an admin edits this hidden record, mail should not be send
         if (!$company->getHidden()) {
             $this->sendMail('update', $company);
         }
+
         $company->setHidden(true);
         $this->companyRepository->update($company);
+
+        $this->postProcessControllerAction($company);
+
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
         $this->redirect('listMyCompanies', 'Company');
     }
@@ -143,37 +152,16 @@ class MapController extends ActionController
         }
     }
 
-    /**
-     * send email on new/update
-     *
-     * @param string $subjectKey
-     * @param Company $company
-     * @return bool
-     */
-    public function sendMail(string $subjectKey, Company $company): bool
+    public function sendMail(string $subjectKey, Company $company): void
     {
-        $mail = GeneralUtility::makeInstance(MailMessage::class);
-        $extConf = GeneralUtility::makeInstance(ExtConf::class);
-        $this->view->assign('company', $company);
-        $mailContent = $this->view->render();
+        $this->postProcessAndAssignFluidVariables([
+            'company' => $company
+        ]);
 
-        $mail->setFrom($extConf->getEmailFromAddress(), $extConf->getEmailFromName());
-        $mail->setTo($extConf->getEmailToAddress(), $extConf->getEmailToName());
-        $mail->setSubject(LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'));
-        if (method_exists($mail, 'addPart')) {
-            // TYPO3 < 10 (Swift_Message)
-            $mail->setBody($mailContent, 'text/html');
-        } else {
-            // TYPO3 >= 10 (Symfony Mail)
-            $mail->html($mailContent);
-        }
-
-        return $mail->send();
-    }
-
-    public function getTemplatePathForMail(): string
-    {
-        $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
-        return ExtensionManagementUtility::extPath($extKey) . 'Resources/Private/Templates/Email/';
+        $this->mailHelper->sendMail(
+            $this->view->render(),
+            LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'),
+            $company
+        );
     }
 }

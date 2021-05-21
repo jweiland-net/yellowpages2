@@ -5,20 +5,20 @@
 <f:if condition="{companies}">
 	<f:then>
 		<div>
-			<f:widget.paginate objects="{companies}" as="paginatedCompanies" configuration="{itemsPerPage: settings.pageBrowser.itemsPerPage, insertAbove: settings.pageBrowser.insertAbove, insertBelow: settings.pageBrowser.insertBelow, maximumNumberOfLinks: settings.pageBrowser.maximumNumberOfLinks}">
-				<f:for each="{paginatedCompanies}" as="company">
-					<div>
-						<h2>
-							<f:link.action action="show"
-										   pageUid="{settings.pidOfDetailPage}"
-										   arguments="{company: company}">
-								{company.company}
-							</f:link.action>
-						</h2>
-						{f:translate(key: 'branch')}: {company.firstMainTrade.title}
-					</div>
-				</f:for>
-			</f:widget.paginate>
+			<f:for each="{companies}" as="company">
+				<div>
+					<h2>
+						<f:link.action action="show"
+										 pageUid="{settings.pidOfDetailPage}"
+										 arguments="{company: company}">
+							{company.company}
+						</f:link.action>
+					</h2>
+					{f:translate(key: 'branch')}: {company.firstMainTrade.title}
+				</div>
+			</f:for>
+			<f:render partial="Component/Pagination"
+								arguments="{pagination: pagination, paginator: paginator, actionName: actionName}" />
 		</div>
 	</f:then>
 	<f:else>

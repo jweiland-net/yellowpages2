@@ -21,9 +21,6 @@ return [
         'searchFields' => 'company,logo,street,house_number,zip,city,telephone,fax,contact_person,email,website,opening_times,barrier_free,description,district,fe_user,',
         'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_company.svg'
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, path_segment, logo, images, street, house_number, zip, city, telephone, fax, contact_person, email, website, opening_times, barrier_free, description, district, fe_user, facebook, twitter, instagram, main_trade, trades'
-    ],
     'types' => [
         '1' => [
             'showitem' => '--palette--;;languageHidden, company, path_segment,
@@ -68,7 +65,6 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',

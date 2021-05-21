@@ -5,16 +5,16 @@ if (!defined('TYPO3_MODE')) {
 
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'JWeiland.yellowpages2',
+        'yellowpages2',
         'Directory',
         [
-            'Company' => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
-            'Map' => 'new, create, edit, update, activate',
+            \JWeiland\Yellowpages2\Controller\CompanyController::class => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
+            \JWeiland\Yellowpages2\Controller\MapController::class => 'new, create, edit, update, activate',
         ],
         // non-cacheable actions
         [
-            'Company' => 'search, create, update, activate',
-            'Map' => 'create, update'
+            \JWeiland\Yellowpages2\Controller\CompanyController::class => 'search, create, update, activate',
+            \JWeiland\Yellowpages2\Controller\MapController::class => 'create, update'
         ]
     );
 
