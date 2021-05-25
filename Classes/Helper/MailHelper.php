@@ -13,11 +13,7 @@ namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
-use JWeiland\Yellowpages2\Domain\Repository\HiddenRepositoryInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Persistence\Generic\Session;
-use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
 
 /*
  * Helper class to send a mail.
@@ -50,10 +46,12 @@ class MailHelper
         $this->mailMessage
             ->setFrom(
                 $this->extConf->getEmailFromAddress(),
-                $this->extConf->getEmailFromName())
+                $this->extConf->getEmailFromName()
+            )
             ->setTo(
                 $this->extConf->getEmailToAddress(),
-                $this->extConf->getEmailToName())
+                $this->extConf->getEmailToName()
+            )
             ->setSubject($subject)
             ->html($mailContent);
 
