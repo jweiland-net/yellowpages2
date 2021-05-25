@@ -23,7 +23,8 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  */
 class PathSegmentHelper
 {
-    public function generatePathSegment(array $baseRecord, int $pid): string {
+    public function generatePathSegment(array $baseRecord, int $pid): string
+    {
         return $this->getSlugHelper()->generate($baseRecord, $pid);
     }
 
