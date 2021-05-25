@@ -18,6 +18,7 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -159,6 +160,16 @@ class CompanyController extends AbstractController
         $this->companyRepository->add($company);
 
         $this->postProcessControllerAction($company);
+
+        if (ExtensionManagementUtility::isLoaded('maps2')) {
+            $this->redirect(
+                'new',
+                'Map',
+                'yellowpages2',
+                ['company' => $company]
+            );
+        }
+
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
         $this->redirect('listMyCompanies', 'Company');
     }
@@ -196,6 +207,16 @@ class CompanyController extends AbstractController
     {
         $this->companyRepository->update($company);
         $this->postProcessControllerAction($company);
+
+        if (ExtensionManagementUtility::isLoaded('maps2')) {
+            $this->redirect(
+                'update',
+                'Map',
+                'yellowpages2',
+                ['company' => $company]
+            );
+        }
+
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
         $this->redirect('listMyCompanies', 'Company');
     }
