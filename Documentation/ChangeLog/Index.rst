@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 5.0.1**
+
+- Move redirects to MapController back to CompanyController
+
 **Version 5.0.0**
 
 - Remove TYPO3 9 compatibility
