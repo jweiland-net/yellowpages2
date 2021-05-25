@@ -40,17 +40,11 @@ services:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
 
-  JWeiland\Yellowpages2\EventListener\RedirectToMapControllerEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
   JWeiland\Yellowpages2\EventListener\UpdateCompanyPathSegmentEventListener:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
-        before: JWeiland\Yellowpages2\EventListener\RedirectToMapControllerEventListener
   JWeiland\Yellowpages2\EventListener\DeleteUploadedFilesEventListener:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
-        before: JWeiland\Yellowpages2\EventListener\RedirectToMapControllerEventListener
