@@ -13,6 +13,7 @@ ChangeLog
 - Add TYPO3 10 compatibility
 - Replace f:widget.paginate with our own paginator
 - Restructure controllers. Move recurring code into EventListeners
+- Move SlugHelper from constructor argument into getSlugHelper()
 
 **Version 4.0.26**
 

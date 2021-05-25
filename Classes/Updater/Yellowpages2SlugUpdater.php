@@ -45,19 +45,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
      */
     protected $slugCache = [];
 
-    public function __construct(SlugHelper $slugHelper = null)
-    {
-        if ($slugHelper === null) {
-            $slugHelper = GeneralUtility::makeInstance(
-                SlugHelper::class,
-                $this->tableName,
-                $this->fieldName,
-                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config']
-            );
-        }
-        $this->slugHelper = $slugHelper;
-    }
-
     /**
      * Return the identifier for this wizard
      * This should be the same string as used in the ext_localconf class registration
@@ -135,7 +122,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
         while ($recordToUpdate = $statement->fetch()) {
             if ((string)$recordToUpdate['company'] !== '') {
-                $slug = $this->slugHelper->generate($recordToUpdate, (int)$recordToUpdate['pid']);
+                $slug = $this->getSlugHelper()->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(
                     $this->tableName,
                     [
@@ -198,6 +185,20 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 )
             )
             ->execute();
+    }
+
+    protected function getSlugHelper(): SlugHelper
+    {
+        if ($this->slugHelper === null) {
+            $this->slugHelper = GeneralUtility::makeInstance(
+                SlugHelper::class,
+                $this->tableName,
+                $this->fieldName,
+                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config']
+            );
+        }
+
+        return $this->slugHelper;
     }
 
     /**

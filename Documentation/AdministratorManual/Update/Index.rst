@@ -11,7 +11,8 @@ Update to Version 5.0.0
 We have moved a lot of code of yellowpages2 controllers to EventListeners. Please flush cache in
 maintenance module.
 
-As a developer you should check
+As a developer you should check, if you have overwritten some methods of MapController or CompanyController and
+adopt them to new structure.
 
 Update to Version 4.0.0
 -----------------------
