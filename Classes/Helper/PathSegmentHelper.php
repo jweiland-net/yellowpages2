@@ -23,36 +23,8 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  */
 class PathSegmentHelper
 {
-    /**
-     * @var SlugHelper
-     */
-    protected $slugHelper;
-
-    public function __construct(SlugHelper $slugHelper = null)
-    {
-        if ($slugHelper === null) {
-            // Add uid to slug, to prevent duplicates
-            $config = $GLOBALS['TCA']['tx_yellowpages2_domain_model_company']['columns']['path_segment']['config'];
-            $config['generatorOptions']['fields'] = ['company', 'uid'];
-
-            $slugHelper = GeneralUtility::makeInstance(
-                SlugHelper::class,
-                'tx_yellowpages2_domain_model_company',
-                'path_segment',
-                $config
-            );
-        }
-        $this->slugHelper = $slugHelper;
-    }
-
-    public function generatePathSegment(
-        array $baseRecord,
-        int $pid
-    ): string {
-        return $this->slugHelper->generate(
-            $baseRecord,
-            $pid
-        );
+    public function generatePathSegment(array $baseRecord, int $pid): string {
+        return $this->getSlugHelper()->generate($baseRecord, $pid);
     }
 
     public function updatePathSegmentForCompany(Company $company): void
@@ -69,6 +41,20 @@ class PathSegmentHelper
                 $company->getBaseRecordForPathSegment(),
                 $company->getPid()
             )
+        );
+    }
+
+    protected function getSlugHelper(): SlugHelper
+    {
+        // Add uid to slug, to prevent duplicates
+        $config = $GLOBALS['TCA']['tx_yellowpages2_domain_model_company']['columns']['path_segment']['config'];
+        $config['generatorOptions']['fields'] = ['company', 'uid'];
+
+        return GeneralUtility::makeInstance(
+            SlugHelper::class,
+            'tx_yellowpages2_domain_model_company',
+            'path_segment',
+            $config
         );
     }
 }
