@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
-use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /*
