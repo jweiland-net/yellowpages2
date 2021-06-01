@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 5.0.2**
+
+- User should not get admin mail to activate entry on its own.
+
 **Version 5.0.1**
 
 - Move redirects to MapController back to CompanyController

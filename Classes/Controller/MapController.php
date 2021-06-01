@@ -156,8 +156,7 @@ class MapController extends AbstractController
 
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'),
-            $company
+            LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2')
         );
     }
 }
