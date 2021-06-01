@@ -40,8 +40,7 @@ class MailHelper
 
     public function sendMail(
         string $mailContent,
-        string $subject,
-        ?Company $company
+        string $subject
     ): void {
         $this->mailMessage
             ->setFrom(
@@ -54,17 +53,6 @@ class MailHelper
             )
             ->setSubject($subject)
             ->html($mailContent);
-
-        if (
-            $company instanceof Company
-            && $company->getEmail()
-            && $company->getCompany()
-        ) {
-            $this->mailMessage->addCc(
-                $company->getEmail(),
-                $company->getCompany()
-            );
-        }
 
         $this->mailMessage->send();
     }

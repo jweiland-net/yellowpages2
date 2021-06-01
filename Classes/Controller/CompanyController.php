@@ -243,8 +243,7 @@ class CompanyController extends AbstractController
         ]);
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.activate', 'yellowpages2'),
-            $companyObject
+            LocalizationUtility::translate('email.subject.activate', 'yellowpages2')
         );
 
         $this->redirect('list', 'Company');
