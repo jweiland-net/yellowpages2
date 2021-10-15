@@ -407,9 +407,9 @@ return [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
-                'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
+                'softref' => 'typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
-                'eval' => 'required'
+                'eval' => 'trim,required'
             ],
         ],
         'district' => [
