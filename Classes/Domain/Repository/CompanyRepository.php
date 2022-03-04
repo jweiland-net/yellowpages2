@@ -245,7 +245,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $query = $this->createQuery();
         $queryBuilder = $this->getQueryBuilderForCompany($query);
         $queryBuilder
-            ->select('sc.uid', 'sc.title')
+            ->select('*')
             ->leftJoin(
                 'c',
                 'sys_category_record_mm',

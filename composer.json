@@ -18,8 +18,8 @@
 		"source": "https://github.com/jweiland-net/yellowpages2"
 	},
 	"require": {
-		"typo3/cms-core": "^10.4",
-		"jweiland/glossary2": "^4.1"
+		"typo3/cms-core": "^10.4.19 || ^11.5",
+		"jweiland/glossary2": "^5.0.5"
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-latest",
