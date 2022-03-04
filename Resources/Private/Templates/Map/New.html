@@ -1,6 +1,5 @@
 <html lang="en"
 			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			xmlns:maps2="http://typo3.org/ns/JWeiland/Maps2/ViewHelpers"
 			data-namespace-typo3-fluid="true">
 
 <f:layout name="Default" />
@@ -11,10 +10,9 @@
 	<f:render partial="FormErrors" arguments="{object: Company}"/>
 
 	<f:form action="create" name="company" object="{company}" enctype="multipart/form-data">
-		<maps2:widget.editPoi property="txMaps2Uid"
-													title="{company.company}"
-													poiCollection="{company.txMaps2Uid}"
-													override="{settings: {mapWidth: '100%', mapHeight: '300'}}" />
+		<f:render partial="Maps2/EditPoiCollection"
+							section="editMap"
+							arguments="{poiCollection: company.txMaps2Uid, property: 'txMaps2Uid', title: company.company, override: {settings: {mapWidth: '100%', mapHeight: '300', zoom: '14'}}}" />
 		<f:form.submit value="{f:translate(key: 'create')}" />
 	</f:form>
 </f:section>
