@@ -161,6 +161,11 @@ class Company extends AbstractEntity
 
     public function __construct()
     {
+        $this->initializeObjectStorages();
+    }
+
+    public function initializeObjectStorages(): void
+    {
         $this->logo = new ObjectStorage();
         $this->images = new ObjectStorage();
         $this->mainTrade = new ObjectStorage();
@@ -407,6 +412,10 @@ class Company extends AbstractEntity
 
     public function getFirstMainTrade(): ?Category
     {
+        if ($this->mainTrade === null || $this->mainTrade->count() === 0) {
+            return null;
+        }
+
         $this->mainTrade->rewind();
         return $this->mainTrade->current();
     }
