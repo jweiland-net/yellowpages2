@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the package jweiland/yellowpages2.
  *
@@ -30,14 +32,14 @@ class CompanyTest extends FunctionalTestCase
         'typo3conf/ext/maps2',
     ];
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setup();
 
         $this->subject = new Company();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset(
             $this->subject
@@ -49,7 +51,7 @@ class CompanyTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTxMaps2UidInitiallyReturnsNull()
+    public function getTxMaps2UidInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getTxMaps2Uid());
     }
@@ -57,7 +59,7 @@ class CompanyTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function setTxMaps2UidSetsTxMaps2Uid()
+    public function setTxMaps2UidSetsTxMaps2Uid(): void
     {
         $instance = new PoiCollection();
         $this->subject->setTxMaps2Uid($instance);
