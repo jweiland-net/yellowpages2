@@ -17,6 +17,7 @@ use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
@@ -25,6 +26,8 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
  */
 class AddGlossaryEventListenerTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var AddGlossaryEventListener
      */
