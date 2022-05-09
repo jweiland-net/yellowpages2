@@ -18,7 +18,6 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
