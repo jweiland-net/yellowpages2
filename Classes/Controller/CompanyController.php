@@ -53,17 +53,28 @@ class CompanyController extends AbstractController
      */
     protected $mailHelper;
 
-    public function __construct(
-        CompanyRepository $companyRepository,
-        CategoryRepository $categoryRepository,
-        DistrictRepository $districtRepository,
-        FeUserRepository $feUserRepository,
-        MailHelper $mailHelper
-    ) {
+    public function injectCompanyRepository(CompanyRepository $companyRepository): void
+    {
         $this->companyRepository = $companyRepository;
+    }
+
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
+    {
         $this->categoryRepository = $categoryRepository;
+    }
+
+    public function injectDistrictRepository(DistrictRepository $districtRepository): void
+    {
         $this->districtRepository = $districtRepository;
+    }
+
+    public function injectFeUserRepository(FeUserRepository $feUserRepository): void
+    {
         $this->feUserRepository = $feUserRepository;
+    }
+
+    public function injectMailHelper(MailHelper $mailHelper): void
+    {
         $this->mailHelper = $mailHelper;
     }
 

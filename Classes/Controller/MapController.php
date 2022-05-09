@@ -18,6 +18,7 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -41,13 +42,18 @@ class MapController extends AbstractController
      */
     protected $mailHelper;
 
-    public function __construct(
-        CompanyRepository $companyRepository,
-        PersistenceManagerInterface $persistenceManager,
-        MailHelper $mailHelper
-    ) {
+    public function injectCompanyRepository(CompanyRepository $companyRepository): void
+    {
         $this->companyRepository = $companyRepository;
+    }
+
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager): void
+    {
         $this->persistenceManager = $persistenceManager;
+    }
+
+    public function injectMailHelper(MailHelper $mailHelper): void
+    {
         $this->mailHelper = $mailHelper;
     }
 
