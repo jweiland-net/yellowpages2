@@ -7,6 +7,10 @@
 ChangeLog
 =========
 
+**Version 5.1.1**
+
+- Add TS settings for GlossaryService
+
 **Version 5.1.0**
 
 - Use inject methods in controllers
