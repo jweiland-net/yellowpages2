@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\EventListener;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 class AddGlossaryEventListener extends AbstractControllerEventListener
 {
@@ -47,14 +48,29 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
                 'glossar',
                 $this->glossaryService->buildGlossary(
                     $this->companyRepository->getQueryBuilderToFindAllEntries(),
-                    [
-                        'extensionName' => 'yellowpages2',
-                        'pluginName' => 'directory',
-                        'controllerName' => 'Company',
-                        'column' => 'company'
-                    ]
+                    $this->getOptions($event)
                 )
             );
         }
+    }
+
+    protected function getOptions(PostProcessFluidVariablesEvent $event): array
+    {
+        $options = [
+            'extensionName' => 'yellowpages2',
+            'pluginName' => 'directory',
+            'controllerName' => 'Company',
+            'column' => 'company',
+            'settings' => $event->getSettings()
+        ];
+
+        if (
+            isset($event->getSettings()['glossary'])
+            && is_array($event->getSettings()['glossary'])
+        ) {
+            ArrayUtility::mergeRecursiveWithOverrule($options, $event->getSettings()['glossary']);
+        }
+
+        return $options;
     }
 }
