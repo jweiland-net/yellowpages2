@@ -196,6 +196,19 @@
 				<source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
 			</trans-unit>
 
+			<trans-unit id="pageBrowser.first">
+				<source>First</source>
+			</trans-unit>
+			<trans-unit id="pageBrowser.previous">
+				<source>Previous</source>
+			</trans-unit>
+			<trans-unit id="pageBrowser.next">
+				<source>Next</source>
+			</trans-unit>
+			<trans-unit id="pageBrowser.last">
+				<source>Last</source>
+			</trans-unit>
+
 			<trans-unit id="email.subject.inform.user">
 				<source>Your company record is out of date</source>
 			</trans-unit>
