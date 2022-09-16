@@ -76,6 +76,9 @@ class AddGlossaryEventListenerTest extends UnitTestCase
         $this->eventProphecy
             ->getActionName()
             ->willReturn('list');
+        $this->eventProphecy
+            ->getSettings()
+            ->willReturn([]);
 
         $this->subject = new AddGlossaryEventListener(
             $this->glossaryServiceProphecy->reveal(),

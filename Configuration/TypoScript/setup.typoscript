@@ -34,6 +34,7 @@ plugin.tx_yellowpages2 {
       streetViewControl = 1
       overviewMapControl = 1
     }
+
     list {
       logo {
         width = 50c
@@ -46,6 +47,7 @@ plugin.tx_yellowpages2 {
       # Deprecated
       image < .logo
     }
+
     show {
       logo {
         width = 50c
@@ -60,14 +62,18 @@ plugin.tx_yellowpages2 {
         height= 180c
       }
     }
+
     new {
       uploadFolder = 1:user_upload/tx_yellowpages2/
     }
+
+    glossary {
+      mergeNumbers = 1
+      showAllLink = 1
+    }
+
     pageBrowser {
       itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
-      insertAbove = {$plugin.tx_yellowpages2.settings.pageBrowser.insertAbove}
-      insertBelow = {$plugin.tx_yellowpages2.settings.pageBrowser.insertBelow}
-      maximumNumberOfLinks = {$plugin.tx_yellowpages2.settings.pageBrowser.maximumNumberOfLinks}
     }
   }
 }

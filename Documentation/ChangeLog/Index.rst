@@ -7,6 +7,15 @@
 ChangeLog
 =========
 
+**Version 5.1.1**
+
+- Add TS settings for GlossaryService
+
+**Version 5.1.0**
+
+- Use inject methods in controllers
+- Update dependency for glossary2 to 5.0.0
+
 **Version 5.0.2**
 
 - User should not get admin mail to activate entry on its own.

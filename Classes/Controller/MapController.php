@@ -41,13 +41,18 @@ class MapController extends AbstractController
      */
     protected $mailHelper;
 
-    public function __construct(
-        CompanyRepository $companyRepository,
-        PersistenceManagerInterface $persistenceManager,
-        MailHelper $mailHelper
-    ) {
+    public function injectCompanyRepository(CompanyRepository $companyRepository): void
+    {
         $this->companyRepository = $companyRepository;
+    }
+
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager): void
+    {
         $this->persistenceManager = $persistenceManager;
+    }
+
+    public function injectMailHelper(MailHelper $mailHelper): void
+    {
         $this->mailHelper = $mailHelper;
     }
 
