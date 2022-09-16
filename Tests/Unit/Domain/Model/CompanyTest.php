@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the package jweiland/yellowpages2.
  *
@@ -27,27 +29,24 @@ class CompanyTest extends UnitTestCase
      */
     protected $subject;
 
-    /**
-     * set up.
-     */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Company();
     }
 
-    /**
-     * tear down.
-     */
-    public function tearDown()
+    protected function tearDown(): void
     {
-        unset($this->subject);
+        unset(
+            $this->subject
+        );
+
         parent::tearDown();
     }
 
     /**
      * @test
      */
-    public function getHiddenInitiallyReturnsFalse()
+    public function getHiddenInitiallyReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->getHidden()
@@ -57,7 +56,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHiddenSetsHidden()
+    public function setHiddenSetsHidden(): void
     {
         $this->subject->setHidden(true);
         self::assertTrue(
@@ -68,25 +67,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHiddenWithStringReturnsTrue()
-    {
-        $this->subject->setHidden('foo bar');
-        self::assertTrue($this->subject->getHidden());
-    }
-
-    /**
-     * @test
-     */
-    public function setHiddenWithZeroReturnsFalse()
-    {
-        $this->subject->setHidden(0);
-        self::assertFalse($this->subject->getHidden());
-    }
-
-    /**
-     * @test
-     */
-    public function getCompanyInitiallyReturnsEmptyString()
+    public function getCompanyInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -97,7 +78,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCompanySetsCompany()
+    public function setCompanySetsCompany(): void
     {
         $this->subject->setCompany('foo bar');
 
@@ -110,25 +91,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCompanyWithIntegerResultsInString()
-    {
-        $this->subject->setCompany(123);
-        self::assertSame('123', $this->subject->getCompany());
-    }
-
-    /**
-     * @test
-     */
-    public function setCompanyWithBooleanResultsInString()
-    {
-        $this->subject->setCompany(true);
-        self::assertSame('1', $this->subject->getCompany());
-    }
-
-    /**
-     * @test
-     */
-    public function getLogoInitiallyReturnsEmptyArray()
+    public function getLogoInitiallyReturnsEmptyArray(): void
     {
         self::assertSame(
             [],
@@ -139,7 +102,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstLogoInitiallyReturnsNull()
+    public function getFirstLogoInitiallyReturnsNull(): void
     {
         self::assertNull(
             $this->subject->getFirstLogo()
@@ -149,7 +112,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOriginalLogoInitiallyReturnsObjectStorage()
+    public function getOriginalLogoInitiallyReturnsObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -160,7 +123,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLogoSetsLogo()
+    public function setLogoSetsLogo(): void
     {
         $object = new FileReference();
         $objectStorage = new ObjectStorage();
@@ -176,7 +139,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function addLogoAddsOneLogo()
+    public function addLogoAddsOneLogo(): void
     {
         $objectStorage = new ObjectStorage();
         $this->subject->setLogo($objectStorage);
@@ -195,7 +158,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeLogoRemovesOneLogo()
+    public function removeLogoRemovesOneLogo(): void
     {
         $object = new FileReference();
         $objectStorage = new ObjectStorage();
@@ -214,7 +177,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImagesInitiallyReturnsObjectStorage()
+    public function getImagesInitiallyReturnsObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -225,7 +188,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setImagesSetsImages()
+    public function setImagesSetsImages(): void
     {
         $object = new FileReference();
         $objectStorage = new ObjectStorage();
@@ -241,7 +204,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function addImageAddsOneImage()
+    public function addImageAddsOneImage(): void
     {
         $objectStorage = new ObjectStorage();
         $this->subject->setImages($objectStorage);
@@ -260,7 +223,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeImageRemovesOneImage()
+    public function removeImageRemovesOneImage(): void
     {
         $object = new FileReference();
         $objectStorage = new ObjectStorage();
@@ -279,7 +242,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStreetInitiallyReturnsEmptyString()
+    public function getStreetInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -290,7 +253,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStreetSetsStreet()
+    public function setStreetSetsStreet(): void
     {
         $this->subject->setStreet('foo bar');
 
@@ -303,25 +266,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStreetWithIntegerResultsInString()
-    {
-        $this->subject->setStreet(123);
-        self::assertSame('123', $this->subject->getStreet());
-    }
-
-    /**
-     * @test
-     */
-    public function setStreetWithBooleanResultsInString()
-    {
-        $this->subject->setStreet(true);
-        self::assertSame('1', $this->subject->getStreet());
-    }
-
-    /**
-     * @test
-     */
-    public function getHouseNumberInitiallyReturnsEmptyString()
+    public function getHouseNumberInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -332,7 +277,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHouseNumberSetsHouseNumber()
+    public function setHouseNumberSetsHouseNumber(): void
     {
         $this->subject->setHouseNumber('foo bar');
 
@@ -345,25 +290,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHouseNumberWithIntegerResultsInString()
-    {
-        $this->subject->setHouseNumber(123);
-        self::assertSame('123', $this->subject->getHouseNumber());
-    }
-
-    /**
-     * @test
-     */
-    public function setHouseNumberWithBooleanResultsInString()
-    {
-        $this->subject->setHouseNumber(true);
-        self::assertSame('1', $this->subject->getHouseNumber());
-    }
-
-    /**
-     * @test
-     */
-    public function getZipInitiallyReturnsEmptyString()
+    public function getZipInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -374,7 +301,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipSetsZip()
+    public function setZipSetsZip(): void
     {
         $this->subject->setZip('foo bar');
 
@@ -387,25 +314,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipWithIntegerResultsInString()
-    {
-        $this->subject->setZip(123);
-        self::assertSame('123', $this->subject->getZip());
-    }
-
-    /**
-     * @test
-     */
-    public function setZipWithBooleanResultsInString()
-    {
-        $this->subject->setZip(true);
-        self::assertSame('1', $this->subject->getZip());
-    }
-
-    /**
-     * @test
-     */
-    public function getCityInitiallyReturnsEmptyString()
+    public function getCityInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -416,7 +325,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCitySetsCity()
+    public function setCitySetsCity(): void
     {
         $this->subject->setCity('foo bar');
 
@@ -429,25 +338,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCityWithIntegerResultsInString()
-    {
-        $this->subject->setCity(123);
-        self::assertSame('123', $this->subject->getCity());
-    }
-
-    /**
-     * @test
-     */
-    public function setCityWithBooleanResultsInString()
-    {
-        $this->subject->setCity(true);
-        self::assertSame('1', $this->subject->getCity());
-    }
-
-    /**
-     * @test
-     */
-    public function getTelephoneInitiallyReturnsEmptyString()
+    public function getTelephoneInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -458,7 +349,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTelephoneSetsTelephone()
+    public function setTelephoneSetsTelephone(): void
     {
         $this->subject->setTelephone('foo bar');
 
@@ -471,25 +362,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTelephoneWithIntegerResultsInString()
-    {
-        $this->subject->setTelephone(123);
-        self::assertSame('123', $this->subject->getTelephone());
-    }
-
-    /**
-     * @test
-     */
-    public function setTelephoneWithBooleanResultsInString()
-    {
-        $this->subject->setTelephone(true);
-        self::assertSame('1', $this->subject->getTelephone());
-    }
-
-    /**
-     * @test
-     */
-    public function getFaxInitiallyReturnsEmptyString()
+    public function getFaxInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -500,7 +373,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFaxSetsFax()
+    public function setFaxSetsFax(): void
     {
         $this->subject->setFax('foo bar');
 
@@ -513,25 +386,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFaxWithIntegerResultsInString()
-    {
-        $this->subject->setFax(123);
-        self::assertSame('123', $this->subject->getFax());
-    }
-
-    /**
-     * @test
-     */
-    public function setFaxWithBooleanResultsInString()
-    {
-        $this->subject->setFax(true);
-        self::assertSame('1', $this->subject->getFax());
-    }
-
-    /**
-     * @test
-     */
-    public function getContactPersonInitiallyReturnsEmptyString()
+    public function getContactPersonInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -542,7 +397,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setContactPersonSetsContactPerson()
+    public function setContactPersonSetsContactPerson(): void
     {
         $this->subject->setContactPerson('foo bar');
 
@@ -555,25 +410,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setContactPersonWithIntegerResultsInString()
-    {
-        $this->subject->setContactPerson(123);
-        self::assertSame('123', $this->subject->getContactPerson());
-    }
-
-    /**
-     * @test
-     */
-    public function setContactPersonWithBooleanResultsInString()
-    {
-        $this->subject->setContactPerson(true);
-        self::assertSame('1', $this->subject->getContactPerson());
-    }
-
-    /**
-     * @test
-     */
-    public function getEmailInitiallyReturnsEmptyString()
+    public function getEmailInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -584,7 +421,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEmailSetsEmail()
+    public function setEmailSetsEmail(): void
     {
         $this->subject->setEmail('foo bar');
 
@@ -597,25 +434,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEmailWithIntegerResultsInString()
-    {
-        $this->subject->setEmail(123);
-        self::assertSame('123', $this->subject->getEmail());
-    }
-
-    /**
-     * @test
-     */
-    public function setEmailWithBooleanResultsInString()
-    {
-        $this->subject->setEmail(true);
-        self::assertSame('1', $this->subject->getEmail());
-    }
-
-    /**
-     * @test
-     */
-    public function getWebsiteInitiallyReturnsEmptyString()
+    public function getWebsiteInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -626,7 +445,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setWebsiteSetsWebsite()
+    public function setWebsiteSetsWebsite(): void
     {
         $this->subject->setWebsite('foo bar');
 
@@ -639,25 +458,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setWebsiteWithIntegerResultsInString()
-    {
-        $this->subject->setWebsite(123);
-        self::assertSame('123', $this->subject->getWebsite());
-    }
-
-    /**
-     * @test
-     */
-    public function setWebsiteWithBooleanResultsInString()
-    {
-        $this->subject->setWebsite(true);
-        self::assertSame('1', $this->subject->getWebsite());
-    }
-
-    /**
-     * @test
-     */
-    public function getOpeningTimesInitiallyReturnsEmptyString()
+    public function getOpeningTimesInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -668,7 +469,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOpeningTimesSetsOpeningTimes()
+    public function setOpeningTimesSetsOpeningTimes(): void
     {
         $this->subject->setOpeningTimes('foo bar');
 
@@ -681,25 +482,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOpeningTimesWithIntegerResultsInString()
-    {
-        $this->subject->setOpeningTimes(123);
-        self::assertSame('123', $this->subject->getOpeningTimes());
-    }
-
-    /**
-     * @test
-     */
-    public function setOpeningTimesWithBooleanResultsInString()
-    {
-        $this->subject->setOpeningTimes(true);
-        self::assertSame('1', $this->subject->getOpeningTimes());
-    }
-
-    /**
-     * @test
-     */
-    public function getBarrierFreeInitiallyReturnsFalse()
+    public function getBarrierFreeInitiallyReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->getBarrierFree()
@@ -709,7 +492,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBarrierFreeSetsBarrierFree()
+    public function setBarrierFreeSetsBarrierFree(): void
     {
         $this->subject->setBarrierFree(true);
         self::assertTrue(
@@ -720,25 +503,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBarrierFreeWithStringReturnsTrue()
-    {
-        $this->subject->setBarrierFree('foo bar');
-        self::assertTrue($this->subject->getBarrierFree());
-    }
-
-    /**
-     * @test
-     */
-    public function setBarrierFreeWithZeroReturnsFalse()
-    {
-        $this->subject->setBarrierFree(0);
-        self::assertFalse($this->subject->getBarrierFree());
-    }
-
-    /**
-     * @test
-     */
-    public function getDescriptionInitiallyReturnsEmptyString()
+    public function getDescriptionInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -749,7 +514,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionSetsDescription()
+    public function setDescriptionSetsDescription(): void
     {
         $this->subject->setDescription('foo bar');
 
@@ -762,25 +527,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionWithIntegerResultsInString()
-    {
-        $this->subject->setDescription(123);
-        self::assertSame('123', $this->subject->getDescription());
-    }
-
-    /**
-     * @test
-     */
-    public function setDescriptionWithBooleanResultsInString()
-    {
-        $this->subject->setDescription(true);
-        self::assertSame('1', $this->subject->getDescription());
-    }
-
-    /**
-     * @test
-     */
-    public function getDistrictInitiallyReturnsNull()
+    public function getDistrictInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getDistrict());
     }
@@ -788,7 +535,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDistrictSetsDistrict()
+    public function setDistrictSetsDistrict(): void
     {
         $instance = new District();
         $this->subject->setDistrict($instance);
@@ -802,7 +549,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMainTradeInitiallyReturnsEmptyArray()
+    public function getMainTradeInitiallyReturnsEmptyArray(): void
     {
         self::assertSame(
             [],
@@ -813,7 +560,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstMainTradeInitiallyReturnsNull()
+    public function getFirstMainTradeInitiallyReturnsNull(): void
     {
         self::assertNull(
             $this->subject->getFirstMainTrade()
@@ -823,7 +570,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOriginalMainTradeInitiallyReturnsObjectStorage()
+    public function getOriginalMainTradeInitiallyReturnsObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -834,7 +581,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMainTradeSetsMainTrade()
+    public function setMainTradeSetsMainTrade(): void
     {
         $object = new Category();
         $objectStorage = new ObjectStorage();
@@ -850,7 +597,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function addMainTradeAddsOneMainTrade()
+    public function addMainTradeAddsOneMainTrade(): void
     {
         $objectStorage = new ObjectStorage();
         $this->subject->setMainTrade($objectStorage);
@@ -869,7 +616,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeMainTradeRemovesOneMainTrade()
+    public function removeMainTradeRemovesOneMainTrade(): void
     {
         $object = new Category();
         $objectStorage = new ObjectStorage();
@@ -888,7 +635,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTradesInitiallyReturnsObjectStorage()
+    public function getTradesInitiallyReturnsObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -904,7 +651,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTradesSetsTrades()
+    public function setTradesSetsTrades(): void
     {
         $object = new Category();
         $objectStorage = new ObjectStorage();
@@ -920,7 +667,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function addTradeAddsOneTrade()
+    public function addTradeAddsOneTrade(): void
     {
         $objectStorage = new ObjectStorage();
         $this->subject->setTrades($objectStorage);
@@ -939,7 +686,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeTradeRemovesOneTrade()
+    public function removeTradeRemovesOneTrade(): void
     {
         $object = new Category();
         $objectStorage = new ObjectStorage();
@@ -958,7 +705,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFacebookInitiallyReturnsEmptyString()
+    public function getFacebookInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -969,7 +716,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFacebookSetsFacebook()
+    public function setFacebookSetsFacebook(): void
     {
         $this->subject->setFacebook('foo bar');
 
@@ -982,25 +729,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFacebookWithIntegerResultsInString()
-    {
-        $this->subject->setFacebook(123);
-        self::assertSame('123', $this->subject->getFacebook());
-    }
-
-    /**
-     * @test
-     */
-    public function setFacebookWithBooleanResultsInString()
-    {
-        $this->subject->setFacebook(true);
-        self::assertSame('1', $this->subject->getFacebook());
-    }
-
-    /**
-     * @test
-     */
-    public function getTwitterInitiallyReturnsEmptyString()
+    public function getTwitterInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -1011,7 +740,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTwitterSetsTwitter()
+    public function setTwitterSetsTwitter(): void
     {
         $this->subject->setTwitter('foo bar');
 
@@ -1024,25 +753,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTwitterWithIntegerResultsInString()
-    {
-        $this->subject->setTwitter(123);
-        self::assertSame('123', $this->subject->getTwitter());
-    }
-
-    /**
-     * @test
-     */
-    public function setTwitterWithBooleanResultsInString()
-    {
-        $this->subject->setTwitter(true);
-        self::assertSame('1', $this->subject->getTwitter());
-    }
-
-    /**
-     * @test
-     */
-    public function getInstagramInitiallyReturnsEmptyString()
+    public function getInstagramInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -1053,7 +764,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setInstagramSetsInstagram()
+    public function setInstagramSetsInstagram(): void
     {
         $this->subject->setInstagram('foo bar');
 
@@ -1066,25 +777,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setInstagramWithIntegerResultsInString()
-    {
-        $this->subject->setInstagram(123);
-        self::assertSame('123', $this->subject->getInstagram());
-    }
-
-    /**
-     * @test
-     */
-    public function setInstagramWithBooleanResultsInString()
-    {
-        $this->subject->setInstagram(true);
-        self::assertSame('1', $this->subject->getInstagram());
-    }
-
-    /**
-     * @test
-     */
-    public function getFeUserInitiallyReturnsNull()
+    public function getFeUserInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getFeUser());
     }
@@ -1092,7 +785,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFeUserSetsFeUser()
+    public function setFeUserSetsFeUser(): void
     {
         $instance = new FrontendUser();
         $this->subject->setFeUser($instance);

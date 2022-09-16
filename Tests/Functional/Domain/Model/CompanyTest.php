@@ -30,14 +30,14 @@ class CompanyTest extends FunctionalTestCase
         'typo3conf/ext/maps2',
     ];
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setup();
 
         $this->subject = new Company();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset(
             $this->subject
@@ -49,7 +49,7 @@ class CompanyTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTxMaps2UidInitiallyReturnsNull()
+    public function getTxMaps2UidInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getTxMaps2Uid());
     }
@@ -57,7 +57,7 @@ class CompanyTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function setTxMaps2UidSetsTxMaps2Uid()
+    public function setTxMaps2UidSetsTxMaps2Uid(): void
     {
         $instance = new PoiCollection();
         $this->subject->setTxMaps2Uid($instance);

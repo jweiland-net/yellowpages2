@@ -13,6 +13,7 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
@@ -21,6 +22,8 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 class PostProcessFluidVariablesEventTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var PostProcessFluidVariablesEvent
      */
@@ -31,7 +34,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
      */
     protected $requestProphecy;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -54,7 +57,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->subject);
 

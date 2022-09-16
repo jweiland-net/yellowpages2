@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -24,6 +25,8 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 class PostProcessControllerActionEventTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var PostProcessControllerActionEvent
      */
@@ -49,7 +52,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
      */
     protected $companyControllerProphecy;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -82,7 +85,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->subject);
 
