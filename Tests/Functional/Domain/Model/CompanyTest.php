@@ -32,14 +32,14 @@ class CompanyTest extends FunctionalTestCase
         'typo3conf/ext/maps2',
     ];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setup();
 
         $this->subject = new Company();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset(
             $this->subject

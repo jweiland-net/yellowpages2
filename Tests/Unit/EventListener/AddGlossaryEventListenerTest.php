@@ -53,7 +53,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
      */
     protected $eventProphecy;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -86,7 +86,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset(
             $this->subject,

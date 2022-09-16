@@ -52,7 +52,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
      */
     protected $companyControllerProphecy;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -85,7 +85,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->subject);
 

@@ -41,7 +41,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
      */
     protected $argumentsProphecy;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -64,7 +64,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->subject);
 

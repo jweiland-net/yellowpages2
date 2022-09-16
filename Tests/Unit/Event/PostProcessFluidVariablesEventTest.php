@@ -34,7 +34,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
      */
     protected $requestProphecy;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -57,7 +57,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->subject);
 

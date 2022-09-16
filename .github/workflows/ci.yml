@@ -10,8 +10,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: [^10.4]
+        typo3: [^10.4, ^11.5]
         php: ['7.4']
+        include:
+        - typo3: ^11.5
+          php: '8.0'
 
     services:
       mysql:
@@ -39,11 +42,6 @@ jobs:
 
     - name: Validate composer.json and composer.lock
       run: composer validate
-
-    - name: Downgrade composer to 2.1 until problem with stream-wrapper is solved
-      # @see: https://github.com/composer/composer/issues/10387
-      # @see: https://github.com/sebastianbergmann/phpunit/pull/4846
-      run: composer self-update 2.1.14
 
     - name: Get composer cache directory
       id: composer-cache
