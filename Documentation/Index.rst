@@ -1,63 +1,60 @@
-.. include:: Includes.txt
+..  include:: /Includes.rst.txt
 
 
-.. Every manual should have a start label for cross-referencing to
-.. start page. Do not remove this!
+..  _start:
 
-.. _start:
-
-=============================================================
+============
 Yellowpages2
-=============================================================
+============
 
-.. only:: html
+:Extension key:
+    yellowpages2
 
-   :Classification:
-      yellowpages2
+:Package name:
+    jweiland/yellowpages2
 
-   :Version:
-      |release|
+:Version:
+    |release|
 
-   :Language:
-      en
+:Language:
+    en
 
-   :Description:
-      Manual covering TYPO3 extension yellowpages2
+:Author:
+    Stefan Froemken
 
-   :Keywords:
-      company, industry, directory, yellow pages, yellowpages
+:License:
+    This document is published under the
+    `Creative Commons BY 4.0 <https://creativecommons.org/licenses/by/4.0/>`__
+    license.
 
-   :Copyright:
-      2013-2020
+:Rendered:
+    |today|
 
-   :Author:
-      Stefan Froemken
+----
 
-   :Email:
-      projects@jweiland.net
+With `yellowpages2` you can build your own industry directory.
 
-   :License:
-      This document is published under the Open Publication License
-      available from http://www.opencontent.org/openpub/
+----
 
-   :Rendered:
-      |today|
+**Table of Contents:**
 
-   The content of this document is related to TYPO3,
-   a GNU/GPL CMS/Framework available from `www.typo3.org <https://typo3.org/>`__.
+..  toctree::
+    :maxdepth: 2
+    :titlesonly:
 
+    Introduction/Index
+    User/Index
+    Installation/Index
+    Configuration/Index
+    AdministratorManual/Index
+    KnownProblems/Index
+    ChangeLog/Index
+    Links
 
-   **Table of Contents**
+..  Meta Menu
 
-.. toctree::
-   :maxdepth: 3
+..  toctree::
+    :hidden:
 
-
-   Introduction/Index
-   User/Index
-   Installation/Index
-   Configuration/Index
-   AdministratorManual/Index
-   KnownProblems/Index
-   ChangeLog/Index
-   Links
+    Sitemap
+    genindex

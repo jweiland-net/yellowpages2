@@ -1,7 +1,7 @@
-.. include:: ../Includes.txt
+..  include:: /Includes.rst.txt
 
 
-.. _user-manual:
+..  _user-manual:
 
 ============
 Users Manual
@@ -9,15 +9,15 @@ Users Manual
 
 Target group: **Editors**
 
-#. Select a page where you want to insert yellowpages2
+#.  Select a page where you want to insert yellowpages2
 
-#. Insert a new content element of type: `General Plugin`
+#.  Insert a new content element of type: `General Plugin`
 
-#. On tab `Plugin` select `Industry Directory` from selectbox.
+#.  On tab `Plugin` select `Industry Directory` from selectbox.
 
-#. Confirm reload to load special input fields for our extension (FlexForm).
+#.  Confirm reload to load special input fields for our extension (FlexForm).
 
-#. Save
+#.  Save
 
 Plugin Options
 ==============
@@ -47,12 +47,12 @@ Reduce industry directory records on website to this district
 Company Record
 ==============
 
-#. Select a Storage Page
+#.  Select a Storage Page
 
-#. Create a new record of type `Company`
+#.  Create a new record of type `Company`
 
-#. Give it a title. We will use the first letter of title for our glossary navigation.
+#.  Give it a title. We will use the first letter of title for our glossary navigation.
 
-#. Enter a description and assign some trades to it.
+#.  Enter a description and assign some trades to it.
 
-#. By default you can insert up to 5 images, but only one logo.
+#.  By default you can insert up to 5 images, but only one logo.
