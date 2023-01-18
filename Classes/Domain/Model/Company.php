@@ -218,7 +218,7 @@ class Company extends AbstractEntity
 
     public function getFirstLogo(): ?FileReference
     {
-        return current($this->getLogo());
+        return current($this->getLogo()) ?: null;
     }
 
     public function getOriginalLogo(): ObjectStorage
@@ -421,7 +421,7 @@ class Company extends AbstractEntity
             return null;
         }
 
-        return current($this->getMainTrade());
+        return current($this->getMainTrade()) ?: null;
     }
 
     public function getOriginalMainTrade(): ObjectStorage
