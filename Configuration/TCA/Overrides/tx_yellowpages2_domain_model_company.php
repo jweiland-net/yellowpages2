@@ -13,15 +13,15 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('maps2')) {
             'defaultCountry' => 'Deutschland',
             'defaultStoragePid' => [
                 'extKey' => 'yellowpages2',
-                'property' => 'poiCollectionPid'
+                'property' => 'poiCollectionPid',
             ],
             'synchronizeColumns' => [
                 [
                     'foreignColumnName' => 'company',
-                    'poiCollectionColumnName' => 'title'
-                ]
-            ]
-        ]
+                    'poiCollectionColumnName' => 'title',
+                ],
+            ],
+        ],
     );
 }
 
@@ -33,9 +33,9 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('maps2')) {
         'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.mainTrade',
         'fieldConfiguration' => [
             'minitems' => 1,
-            'maxitems' => 1
-        ]
-    ]
+            'maxitems' => 1,
+        ],
+    ],
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
@@ -46,7 +46,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('maps2')) {
         'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.trades',
         'fieldConfiguration' => [
             'minitems' => 0,
-            'maxitems' => 2
-        ]
-    ]
+            'maxitems' => 2,
+        ],
+    ],
 );

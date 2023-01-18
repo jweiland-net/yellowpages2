@@ -13,25 +13,27 @@ if (PHP_SAPI !== 'cli') {
     die('This script supports command line usage only. Please check your command.');
 }
 
-// Return a Code Sniffing configuration using
-// all sniffers needed for PSR-2
-// and additionally:
-//  - Remove leading slashes in use clauses.
-//  - PHP single-line arrays should not have trailing comma.
-//  - Single-line whitespace before closing semicolon are prohibited.
-//  - Remove unused use statements in the PHP source code
-//  - Ensure Concatenation to have at least one whitespace around
-//  - Remove trailing whitespace at the end of blank lines.
+$headerComment = <<<COMMENT
+This file is part of the package jweiland/yellowpages2.
+
+For the full copyright and license information, please read the
+LICENSE file that was distributed with this source code.
+COMMENT;
+
+$finder = PhpCsFixer\Finder::create()
+    ->name('*.php')
+    ->exclude('.build')
+    ->in(__DIR__);
+
 return (new \PhpCsFixer\Config())
-    ->setFinder(
-        (new PhpCsFixer\Finder())
-            ->ignoreVCSIgnored(true)
-            ->in(realpath(__DIR__ . '/../../'))
-    )
+    ->setFinder($finder)
     ->setRiskyAllowed(true)
     ->setRules([
         '@DoctrineAnnotation' => true,
         '@PER' => true,
+        'header_comment' => [
+            'header' => $headerComment,
+        ],
         'array_syntax' => ['syntax' => 'short'],
         'blank_line_after_opening_tag' => true,
         'braces' => ['allow_single_line_closure' => true],

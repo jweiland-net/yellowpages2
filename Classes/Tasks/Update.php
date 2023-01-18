@@ -138,17 +138,11 @@ class Update extends AbstractTask
             [
                 $company->getUid(),
                 $company->getCompany(),
-                $this->extConf->getEditLink()
+                $this->extConf->getEditLink(),
             ]
         );
-        if (method_exists($this->mail, 'addPart')) {
-            // TYPO3 < 10 (Swift_Message)
-            $this->mail->setBody($bodyHtml, 'text/html');
-        } else {
-            $isSymfonyEmail = true;
-            // TYPO3 >= 10 (Symfony Mail)
-            $this->mail->html($bodyHtml);
-        }
+
+        $this->mail->html($bodyHtml);
         $this->mail->send();
     }
 
@@ -167,22 +161,16 @@ class Update extends AbstractTask
             'yellowpages2',
             [
                 $company->getUid(),
-                $company->getCompany()
+                $company->getCompany(),
             ]
         );
-        if (method_exists($this->mail, 'addPart')) {
-            // TYPO3 < 10 (Swift_Message)
-            $this->mail->setBody($bodyHtml, 'text/html');
-        } else {
-            $isSymfonyEmail = true;
-            // TYPO3 >= 10 (Symfony Mail)
-            $this->mail->html($bodyHtml);
-        }
+
+        $this->mail->html($bodyHtml);
         $this->mail->send();
     }
 
     /**
-     * scheduler serializes this object so we have to tell unserialize() what to do
+     * scheduler serializes this object, so we have to tell unserialize() what to do
      */
     public function __wakeup()
     {
@@ -195,9 +183,7 @@ class Update extends AbstractTask
     }
 
     /**
-     * the result of serialization is too big for db. So we reduce the return value
-     *
-     * @return array
+     * The result of serialization is too big for db. So we reduce the return value
      */
     public function __sleep()
     {

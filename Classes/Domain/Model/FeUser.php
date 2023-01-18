@@ -18,11 +18,6 @@ class FeUser extends AbstractEntity
     /**
      * @var string
      */
-    protected $username = '';
-
-    /**
-     * @var string
-     */
     protected $name = '';
 
     /**
