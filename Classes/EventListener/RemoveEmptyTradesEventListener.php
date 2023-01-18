@@ -13,13 +13,16 @@ namespace JWeiland\Yellowpages2\EventListener;
 
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 
+/**
+ * Remove empty trades from request to prevent errors while storing/updating the FE record
+ */
 class RemoveEmptyTradesEventListener extends AbstractControllerEventListener
 {
     protected $allowedControllerActions = [
         'Company' => [
             'create',
-            'update'
-        ]
+            'update',
+        ],
     ];
 
     public function __invoke(PreProcessControllerActionEvent $event): void

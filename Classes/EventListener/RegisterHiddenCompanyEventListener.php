@@ -15,6 +15,9 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Helper\HiddenObjectHelper;
 
+/**
+ * Access the request in an initialize action and try to make hidden objects available in origin action
+ */
 class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
 {
     /**
@@ -31,12 +34,12 @@ class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
         'Company' => [
             'edit',
             'update',
-            'activate'
+            'activate',
         ],
         'Map' => [
             'edit',
-            'update'
-        ]
+            'update',
+        ],
     ];
 
     public function __construct(

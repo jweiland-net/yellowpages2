@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use JWeiland\Glossary2\Service\GlossaryService;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -27,6 +28,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Repository to retrieve company records
+ *
+ * @method QueryResultInterface findByFeUser(int $frontendUserUid)
  */
 class CompanyRepository extends Repository implements HiddenRepositoryInterface
 {
@@ -34,7 +37,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      * @var array
      */
     protected $defaultOrderings = [
-        'company' => QueryInterface::ORDER_ASCENDING
+        'company' => QueryInterface::ORDER_ASCENDING,
     ];
 
     /**
@@ -129,15 +132,15 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->like(
                         'c.company',
-                        $queryBuilder->createNamedParameter('%' . $search . '%', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('%' . $search . '%')
                     ),
                     $queryBuilder->expr()->like(
                         'c.street',
-                        $queryBuilder->createNamedParameter('%' . $smallStreetSearch . '%', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('%' . $smallStreetSearch . '%')
                     ),
                     $queryBuilder->expr()->like(
                         'c.street',
-                        $queryBuilder->createNamedParameter('%' . $longStreetSearch . '%', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('%' . $longStreetSearch . '%')
                     )
                 )
             );
@@ -180,14 +183,18 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     protected function getColumnsForCompanyTable(): array
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_yellowpages2_domain_model_company');
-        return array_map(
-            function ($column) {
-                return 'c.' . $column;
-            },
-            array_keys(
-                $connection->getSchemaManager()->listTableColumns('tx_yellowpages2_domain_model_company') ?? []
-            )
-        );
+        if ($connection->getSchemaManager() instanceof AbstractSchemaManager) {
+            return array_map(
+                static function ($column) {
+                    return 'c.' . $column;
+                },
+                array_keys(
+                    $connection->getSchemaManager()->listTableColumns('tx_yellowpages2_domain_model_company') ?? []
+                )
+            );
+        }
+
+        return [];
     }
 
     protected function addConstraintForTrades(QueryBuilder $queryBuilder, int $categoryUid): void
@@ -203,10 +210,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                 ),
                 $queryBuilder->expr()->eq(
                     'category_mm.tablenames',
-                    $queryBuilder->createNamedParameter(
-                        'tx_yellowpages2_domain_model_company',
-                        \PDO::PARAM_STR
-                    )
+                    $queryBuilder->createNamedParameter('tx_yellowpages2_domain_model_company')
                 )
             )
         );
@@ -215,17 +219,11 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             $queryBuilder->expr()->orX(
                 $queryBuilder->expr()->eq(
                     'category_mm.fieldname',
-                    $queryBuilder->createNamedParameter(
-                        'main_trade',
-                        \PDO::PARAM_STR
-                    )
+                    $queryBuilder->createNamedParameter('main_trade')
                 ),
                 $queryBuilder->expr()->eq(
                     'category_mm.fieldname',
-                    $queryBuilder->createNamedParameter(
-                        'trades',
-                        \PDO::PARAM_STR
-                    )
+                    $queryBuilder->createNamedParameter('trades')
                 )
             ),
             $queryBuilder->expr()->eq(
@@ -257,19 +255,16 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                     ),
                     $queryBuilder->expr()->eq(
                         'category_mm.tablenames',
-                        $queryBuilder->createNamedParameter(
-                            'tx_yellowpages2_domain_model_company',
-                            \PDO::PARAM_STR
-                        )
+                        $queryBuilder->createNamedParameter('tx_yellowpages2_domain_model_company')
                     ),
                     $queryBuilder->expr()->orX(
                         $queryBuilder->expr()->eq(
                             'category_mm.fieldname',
-                            $queryBuilder->createNamedParameter('main_trade', \PDO::PARAM_STR)
+                            $queryBuilder->createNamedParameter('main_trade')
                         ),
                         $queryBuilder->expr()->eq(
                             'category_mm.fieldname',
-                            $queryBuilder->createNamedParameter('trades', \PDO::PARAM_STR)
+                            $queryBuilder->createNamedParameter('trades')
                         )
                     )
                 )
@@ -306,7 +301,6 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      */
     public function findOlderThan(int $days): QueryResultInterface
     {
-        $days = (int)$days;
         $today = date('U');
         $history = $today - ($days * 60 * 60 * 24);
         $query = $this->createQuery();

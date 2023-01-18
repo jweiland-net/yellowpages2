@@ -20,6 +20,9 @@ use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 
+/**
+ * Build up special configuration for media files in property mapper
+ */
 class AssignMediaTypeConverterEventListener extends AbstractControllerEventListener
 {
     /**
@@ -30,8 +33,8 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
     protected $allowedControllerActions = [
         'Company' => [
             'create',
-            'update'
-        ]
+            'update',
+        ],
     ];
 
     public function __construct(CompanyRepository $companyRepository)

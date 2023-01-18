@@ -13,12 +13,15 @@ namespace JWeiland\Yellowpages2\EventListener;
 
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 
+/**
+ * Remove or escape security related chars from search word
+ */
 class SanitizeSearchWordEventListener extends AbstractControllerEventListener
 {
     protected $allowedControllerActions = [
         'Company' => [
-            'search'
-        ]
+            'search',
+        ],
     ];
 
     public function __invoke(PreProcessControllerActionEvent $event): void

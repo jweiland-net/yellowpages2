@@ -24,22 +24,22 @@ class DistrictRepository extends Repository
      * @var array
      */
     protected $defaultOrderings = [
-        'district' => QueryInterface::ORDER_ASCENDING
+        'district' => QueryInterface::ORDER_ASCENDING,
     ];
 
     /**
-     * get all districts for selectbox
-     *
-     * @return array
+     * Get all districts for selectbox
      */
     public function getDistricts(): array
     {
         $query = $this->createQuery();
         $results = $query->execute(true);
+
         $districts = [];
         foreach ($results as $result) {
             $districts[$result['uid']] = $result['district'];
         }
+
         return $districts;
     }
 }

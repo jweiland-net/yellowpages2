@@ -15,6 +15,9 @@ use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\Pagination\CompanyPagination;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
+/**
+ * Register paginator to paginate through the company records in frontend
+ */
 class AddPaginatorEventListener extends AbstractControllerEventListener
 {
     /**
@@ -25,8 +28,8 @@ class AddPaginatorEventListener extends AbstractControllerEventListener
     protected $allowedControllerActions = [
         'Company' => [
             'list',
-            'search'
-        ]
+            'search',
+        ],
     ];
 
     public function __invoke(PostProcessFluidVariablesEvent $event): void
@@ -56,10 +59,6 @@ class AddPaginatorEventListener extends AbstractControllerEventListener
 
     protected function getItemsPerPage(PostProcessFluidVariablesEvent $event): int
     {
-        $itemsPerPage = $this->itemsPerPage;
-        if (isset($event->getSettings()['pageBrowser']['itemsPerPage'])) {
-            $itemsPerPage = $event->getSettings()['pageBrowser']['itemsPerPage'];
-        }
-        return (int)$itemsPerPage;
+        return (int)($event->getSettings()['pageBrowser']['itemsPerPage'] ?? $this->itemsPerPage);
     }
 }

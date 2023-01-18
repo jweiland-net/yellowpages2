@@ -125,7 +125,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                 continue;
             }
             // Check if uploaded file returns an error
-            if (!$uploadedFile['error'] === 0) {
+            if ($uploadedFile['error'] !== 0) {
                 return new Error(
                     LocalizationUtility::translate('error.upload', 'yellowpages2') . $uploadedFile['error'],
                     1605617462
@@ -140,7 +140,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                         'error.fileExtension',
                         'yellowpages2',
                         [
-                            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+                            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                         ]
                     ),
                     1605617456
@@ -173,7 +173,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     protected function initialize(?PropertyMappingConfigurationInterface $configuration): void
     {
         if ($configuration === null) {
-            throw new \Exception(
+            throw new \InvalidArgumentException(
                 'Missing PropertyMapper configuration in UploadMultipleFilesConverter',
                 1605617449
             );
@@ -215,7 +215,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     {
         $combinedUploadFolderIdentifier = $this->getTypoScriptPluginSettings()['new']['uploadFolder'] ?? '';
         if ($combinedUploadFolderIdentifier === '') {
-            throw new \Exception(
+            throw new \InvalidArgumentException(
                 'You have forgotten to set an Upload Folder in TypoScript for yellowpages2',
                 1605617430
             );
@@ -258,16 +258,16 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     /**
      * If file is in our own upload folder we can delete it from filesystem and sys_file table.
      *
-     * @param FileReference|null $fileReference
+     * @param FileReference|null $extbaseFileReference
      */
-    protected function deleteFile(?FileReference $fileReference): void
+    protected function deleteFile(?FileReference $extbaseFileReference): void
     {
-        if ($fileReference !== null) {
-            $fileReference = $fileReference->getOriginalResource();
+        if ($extbaseFileReference !== null) {
+            $coreFileReference = $extbaseFileReference->getOriginalResource();
 
-            if ($fileReference->getStorage()->isWithinFolder($this->uploadFolder, $fileReference)) {
+            if ($coreFileReference->getStorage()->isWithinFolder($this->uploadFolder, $coreFileReference)) {
                 try {
-                    $fileReference->getOriginalFile()->delete();
+                    $coreFileReference->getOriginalFile()->delete();
                 } catch (\Exception $exception) {
                     // Do nothing. File already deleted or not found
                 }

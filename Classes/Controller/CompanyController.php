@@ -99,7 +99,7 @@ class CompanyController extends AbstractController
     {
         $this->postProcessAndAssignFluidVariables([
             'companies' => $this->companyRepository->findByLetter($letter, $this->settings),
-            'categories' => $this->companyRepository->getTranslatedCategories()
+            'categories' => $this->companyRepository->getTranslatedCategories(),
         ]);
     }
 
@@ -107,7 +107,7 @@ class CompanyController extends AbstractController
     {
         $this->postProcessAndAssignFluidVariables([
             'companies' => $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']),
-            'categories' => $this->companyRepository->getTranslatedCategories()
+            'categories' => $this->companyRepository->getTranslatedCategories(),
         ]);
     }
 
@@ -117,7 +117,7 @@ class CompanyController extends AbstractController
     public function showAction(int $company): void
     {
         $this->postProcessAndAssignFluidVariables([
-            'company' => $this->companyRepository->findByIdentifier($company)
+            'company' => $this->companyRepository->findByIdentifier($company),
         ]);
     }
 
@@ -136,7 +136,7 @@ class CompanyController extends AbstractController
             'search' => $search,
             'category' => $category,
             'companies' => $this->companyRepository->searchCompanies($search, $category, $this->settings),
-            'categories' => $this->companyRepository->getTranslatedCategories()
+            'categories' => $this->companyRepository->getTranslatedCategories(),
         ]);
     }
 
@@ -151,7 +151,7 @@ class CompanyController extends AbstractController
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
             'districts' => $this->districtRepository->getDistricts(),
-            'categories' => $this->categoryRepository->findByParent($this->settings['startingUidForCategories'])
+            'categories' => $this->categoryRepository->findByParent($this->settings['startingUidForCategories']),
         ]);
     }
 
@@ -202,7 +202,7 @@ class CompanyController extends AbstractController
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
             'districts' => $this->districtRepository->getDistricts(),
-            'categories' => $this->categoryRepository->findByParent((int)$this->settings['startingUidForCategories'])
+            'categories' => $this->categoryRepository->findByParent((int)$this->settings['startingUidForCategories']),
         ]);
     }
 
@@ -250,7 +250,7 @@ class CompanyController extends AbstractController
         $this->postProcessControllerAction($companyObject);
 
         $this->postProcessAndAssignFluidVariables([
-            'company' =>$companyObject
+            'company' =>$companyObject,
         ]);
         $this->mailHelper->sendMail(
             $this->view->render(),
