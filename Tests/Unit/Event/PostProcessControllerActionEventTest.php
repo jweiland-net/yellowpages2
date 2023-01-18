@@ -80,7 +80,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
             $this->companyControllerProphecy->reveal(),
             $this->companyProphecy->reveal(),
             [
-                'foo' => 'bar'
+                'foo' => 'bar',
             ]
         );
     }

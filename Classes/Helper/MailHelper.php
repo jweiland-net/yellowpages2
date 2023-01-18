@@ -29,18 +29,14 @@ class MailHelper
      */
     protected $extConf;
 
-    public function __construct(
-        MailMessage $mailMessage,
-        ExtConf $extConf
-    ) {
+    public function __construct(MailMessage $mailMessage, ExtConf $extConf)
+    {
         $this->mailMessage = $mailMessage;
         $this->extConf = $extConf;
     }
 
-    public function sendMail(
-        string $mailContent,
-        string $subject
-    ): void {
+    public function sendMail(string $mailContent, string $subject): void
+    {
         $this->mailMessage
             ->setFrom(
                 $this->extConf->getEmailFromAddress(),

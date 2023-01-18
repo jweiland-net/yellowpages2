@@ -21,8 +21,8 @@ class DeleteUploadedFilesEventListener extends AbstractControllerEventListener
 {
     protected $allowedControllerActions = [
         'Company' => [
-            'create'
-        ]
+            'create',
+        ],
     ];
 
     public function __invoke(PostProcessControllerActionEvent $event): void

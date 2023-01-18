@@ -49,10 +49,10 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         $this->subject = new PostProcessFluidVariablesEvent(
             $this->requestProphecy->reveal(),
             [
-                'foo' => 'bar'
+                'foo' => 'bar',
             ],
             [
-                'name' => 'Stefan Froemken'
+                'name' => 'Stefan Froemken',
             ]
         );
     }
@@ -128,7 +128,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         self::assertSame(
             [
                 'name' => 'Stefan Froemken',
-                'company' => 'jweiland.net'
+                'company' => 'jweiland.net',
             ],
             $this->subject->getFluidVariables()
         );

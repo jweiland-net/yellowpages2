@@ -3,7 +3,7 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-call_user_func(function () {
+call_user_func(static function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'yellowpages2',
         'Directory',
@@ -14,7 +14,7 @@ call_user_func(function () {
         // non-cacheable actions
         [
             \JWeiland\Yellowpages2\Controller\CompanyController::class => 'search, create, update, activate',
-            \JWeiland\Yellowpages2\Controller\MapController::class => 'create, update'
+            \JWeiland\Yellowpages2\Controller\MapController::class => 'create, update',
         ]
     );
 
@@ -42,8 +42,8 @@ call_user_func(function () {
         = \JWeiland\Yellowpages2\Updater\Yellowpages2SlugUpdater::class;
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][JWeiland\Yellowpages2\Tasks\Update::class] = [
-        'extension'        => 'yellowpages2',
-        'title'            => 'Update yellowpages',
-        'description'      => 'Hide all yellowpages records which are older than the secified age.'
+        'extension' => 'yellowpages2',
+        'title' => 'Update yellowpages',
+        'description' => 'Hide all yellowpages records which are older than the secified age.',
     ];
 });

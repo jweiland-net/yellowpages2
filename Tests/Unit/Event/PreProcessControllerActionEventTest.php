@@ -59,7 +59,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
             $this->requestProphecy->reveal(),
             $this->argumentsProphecy->reveal(),
             [
-                'foo' => 'bar'
+                'foo' => 'bar',
             ]
         );
     }

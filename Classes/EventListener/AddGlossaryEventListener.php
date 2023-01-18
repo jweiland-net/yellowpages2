@@ -16,6 +16,9 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
+/**
+ * Add a glossary (A-Z list) on top of the company list view
+ */
 class AddGlossaryEventListener extends AbstractControllerEventListener
 {
     /**
@@ -31,8 +34,8 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
     protected $allowedControllerActions = [
         'Company' => [
             'list',
-            'search'
-        ]
+            'search',
+        ],
     ];
 
     public function __construct(GlossaryService $glossaryService, CompanyRepository $companyRepository)
@@ -61,7 +64,7 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
             'pluginName' => 'directory',
             'controllerName' => 'Company',
             'column' => 'company',
-            'settings' => $event->getSettings()
+            'settings' => $event->getSettings(),
         ];
 
         if (

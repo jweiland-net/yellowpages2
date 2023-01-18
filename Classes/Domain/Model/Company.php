@@ -161,15 +161,21 @@ class Company extends AbstractEntity
 
     public function __construct()
     {
-        $this->initializeObjectStorages();
-    }
-
-    public function initializeObjectStorages(): void
-    {
         $this->logo = new ObjectStorage();
         $this->images = new ObjectStorage();
         $this->mainTrade = new ObjectStorage();
         $this->trades = new ObjectStorage();
+    }
+
+    /**
+     * Called again with initialize object, as fetching an entity from the DB does not use the constructor
+     */
+    public function initializeObject(): void
+    {
+        $this->logo = $this->logo ?? new ObjectStorage();
+        $this->images = $this->images ?? new ObjectStorage();
+        $this->mainTrade = $this->mainTrade ?? new ObjectStorage();
+        $this->trades = $this->trades ?? new ObjectStorage();
     }
 
     public function getHidden(): bool
@@ -212,8 +218,7 @@ class Company extends AbstractEntity
 
     public function getFirstLogo(): ?FileReference
     {
-        $this->logo->rewind();
-        return $this->logo->current();
+        return current($this->getLogo()) ?: null;
     }
 
     public function getOriginalLogo(): ObjectStorage
@@ -416,8 +421,7 @@ class Company extends AbstractEntity
             return null;
         }
 
-        $this->mainTrade->rewind();
-        return $this->mainTrade->current();
+        return current($this->getMainTrade()) ?: null;
     }
 
     public function getOriginalMainTrade(): ObjectStorage
@@ -545,7 +549,7 @@ class Company extends AbstractEntity
 
     /**
      * Helper method to get the address of the record.
-     * This is needed by google maps geocode API
+     * This is needed by Google Maps geocode API
      *
      * @return string
      */
@@ -565,7 +569,7 @@ class Company extends AbstractEntity
         return [
             'uid' => $this->getUid(),
             'pid' => $this->getPid(),
-            'company' => $this->getCompany()
+            'company' => $this->getCompany(),
         ];
     }
 }

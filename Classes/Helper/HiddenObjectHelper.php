@@ -46,7 +46,7 @@ class HiddenObjectHelper
                 // get object from UID
                 $object = $repository->findHiddenObject((int)$objectRaw);
             }
-            $this->session->registerObject($object, $object->getUid());
+            $this->session->registerObject($object, $object ? $object->getUid() : null);
         }
     }
 }

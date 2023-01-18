@@ -40,8 +40,8 @@ class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListe
 
     protected $allowedControllerActions = [
         'Company' => [
-            'create'
-        ]
+            'create',
+        ],
     ];
 
     public function __construct(

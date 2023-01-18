@@ -64,7 +64,7 @@ class MapController extends AbstractController
         $this->addNewPoiCollectionToCompany($company);
 
         $this->postProcessAndAssignFluidVariables([
-            'company' => $company
+            'company' => $company,
         ]);
     }
 
@@ -96,7 +96,7 @@ class MapController extends AbstractController
     public function editAction(Company $company): void
     {
         $this->postProcessAndAssignFluidVariables([
-            'company' => $company
+            'company' => $company,
         ]);
     }
 
@@ -113,7 +113,7 @@ class MapController extends AbstractController
      */
     public function updateAction(Company $company): void
     {
-        // if an admin edits this hidden record, mail should not be send
+        // If an admin edits this hidden record, mail should not be sent.
         if (!$company->getHidden()) {
             $this->sendMail('update', $company);
         }
@@ -156,7 +156,7 @@ class MapController extends AbstractController
     public function sendMail(string $subjectKey, Company $company): void
     {
         $this->postProcessAndAssignFluidVariables([
-            'company' => $company
+            'company' => $company,
         ]);
 
         $this->mailHelper->sendMail(

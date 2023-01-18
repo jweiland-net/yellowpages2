@@ -87,7 +87,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 )
             )
             ->execute()
-            ->fetchColumn(0);
+            ->fetchColumn();
 
         return (bool)$amountOfRecordsWithEmptySlug;
     }
@@ -129,10 +129,10 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                         $this->fieldName => $this->getUniqueValue(
                             (int)$recordToUpdate['uid'],
                             $slug
-                        )
+                        ),
                     ],
                     [
-                        'uid' => (int)$recordToUpdate['uid']
+                        'uid' => (int)$recordToUpdate['uid'],
                     ]
                 );
             }
@@ -207,7 +207,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class
+            DatabaseUpdatedPrerequisite::class,
         ];
     }
 

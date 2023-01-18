@@ -1,12 +1,14 @@
-.. include:: ../../Includes.txt
+..  include:: /Includes.rst.txt
 
+
+========
 Updating
 ========
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
 Update to Version 5.0.0
------------------------
+=======================
 
 We have moved a lot of code of yellowpages2 controllers to EventListeners. Please flush cache in
 maintenance module.
@@ -15,7 +17,7 @@ As a developer you should check, if you have overwritten some methods of MapCont
 adopt them to new structure.
 
 Update to Version 4.0.0
------------------------
+=======================
 
 We have removed column wsp_member as this column was a specific column for one of our customers. If you have used it
 you have to add it back with help of EXT:extender.

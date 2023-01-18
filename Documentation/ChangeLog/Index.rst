@@ -1,164 +1,206 @@
-.. include:: ../Includes.txt
+..  include:: /Includes.rst.txt
 
 
-.. _changelog:
+..  _changelog:
 
 =========
 ChangeLog
 =========
 
-**Version 5.1.1**
+Version 6.0.0
+=============
 
-- Add TS settings for GlossaryService
+*   Add TYPO3 11 compatibility
+*   Remove TYPO3 9 compatibility
+*   Replace controller constructors with inject methods
+*   Add and update tests for TYPO3 11
+*   Update structure of documentation
 
-**Version 5.1.0**
+Version 5.1.1
+=============
 
-- Use inject methods in controllers
-- Update dependency for glossary2 to 5.0.0
+*   Add TS settings for GlossaryService
 
-**Version 5.0.2**
+Version 5.1.0
+=============
 
-- User should not get admin mail to activate entry on its own.
+*   Use inject methods in controllers
+*   Update dependency for glossary2 to 5.0.0
 
-**Version 5.0.1**
+Version 5.0.2
+=============
 
-- Move redirects to MapController back to CompanyController
+*   User should not get admin mail to activate entry on its own.
 
-**Version 5.0.0**
+Version 5.0.1
+=============
 
-- Remove TYPO3 9 compatibility
-- Add TYPO3 10 compatibility
-- Replace f:widget.paginate with our own paginator
-- Restructure controllers. Move recurring code into EventListeners
-- Move SlugHelper from constructor argument into getSlugHelper()
+*   Move redirects to MapController back to CompanyController
 
-**Version 4.0.26**
+Version 5.0.0
+=============
 
-- Remove empty trades from request before ProperyMapping
+*   Remove TYPO3 9 compatibility
+*   Add TYPO3 10 compatibility
+*   Replace f:widget.paginate with our own paginator
+*   Restructure controllers. Move recurring code into EventListeners
+*   Move SlugHelper from constructor argument into getSlugHelper()
 
-**Version 4.0.23**
+Version 4.0.26
+==============
 
-- Add activate action to non-cachable actions
+*   Remove empty trades from request before ProperyMapping
 
-**Version 4.0.22**
+Version 4.0.23
+==============
 
-- Use a counter in URL for duplicate companies in Slug UpdateWizard
+*   Add activate action to non-cachable actions
 
-**Version 4.0.21**
+Version 4.0.22
+==============
 
-- Update translation
+*   Use a counter in URL for duplicate companies in Slug UpdateWizard
 
-**Version 4.0.20**
+Version 4.0.21
+==============
 
-- Remove title from SVG icons
+*   Update translation
 
-**Version 4.0.19**
+Version 4.0.20
+==============
 
-- Use errorAction to redirect to previous action on Geocoding error
+*   Remove title from SVG icons
 
-**Version 4.0.18**
+Version 4.0.19
+==============
 
-- Repair new action, if POI could not be created
-- Add Error FlashMessage, why POI could not be created
+*   Use errorAction to redirect to previous action on Geocoding error
 
-**Version 4.0.17**
+Version 4.0.18
+==============
 
-- Use correct logo/image TypeConverter of yellowpages2
+*   Repair new action, if POI could not be created
+*   Add Error FlashMessage, why POI could not be created
 
-**Version 4.0.16**
+Version 4.0.17
+==============
 
-- Remove GROUP BY from query, as it is not compatible with pageBrowser
+*   Use correct logo/image TypeConverter of yellowpages2
 
-**Version 4.0.15**
+Version 4.0.16
+==============
 
-- Replace Google+ column with Instagram
+*   Remove GROUP BY from query, as it is not compatible with pageBrowser
 
-**Version 4.0.14**
+Version 4.0.15
+==============
 
-- Remove injection of ExtConf of maps2 in MapController
+*   Replace Google+ column with Instagram
 
-**Version 4.0.13**
+Version 4.0.14
+==============
 
-- Add getter to get first main trade
+*   Remove injection of ExtConf of maps2 in MapController
 
-**Version 4.0.12**
+Version 4.0.13
+==============
 
-- Better structure of getGlossar()
-- Use SchemaManager to build column names in Repo
-- Add String validator to listAction()
+*   Add getter to get first main trade
 
-**Version 4.0.11**
+Version 4.0.12
+==============
 
-- Wrap Fluid Templates with html namespace
-- Return one logo when using getLogo
-- Differ between image sizes for list and show view
+*   Better structure of getGlossar()
+*   Use SchemaManager to build column names in Repo
+*   Add String validator to listAction()
 
-**Version 4.0.10**
+Version 4.0.11
+==============
 
-- Add Services.yaml for TYPO3 10 compatibility
+*   Wrap Fluid Templates with html namespace
+*   Return one logo when using getLogo
+*   Differ between image sizes for list and show view
 
-**Version 4.0.9**
+Version 4.0.10
+==============
 
-- Remove useless @param from getMaps2Uid
+*   Add Services.yaml for TYPO3 10 compatibility
 
-**Version 4.0.8**
+Version 4.0.9
+=============
 
-- Allow max one Image for Logo
+*   Remove useless @param from getMaps2Uid
 
-**Version 4.0.7**
+Version 4.0.8
+=============
 
-- Set slug field separator to -
+*   Allow max one Image for Logo
 
-**Version 4.0.6**
+Version 4.0.7
+=============
 
-- Add uid to generated slugs in UpgradeWizard
+*   Set slug field separator to -
 
-**Version 4.0.5**
+Version 4.0.6
+=============
 
-- Add path_segment for human readable URLs to company records
-- Add Slug UpgradeWizard
+*   Add uid to generated slugs in UpgradeWizard
 
-**Version 4.0.4**
+Version 4.0.5
+=============
 
-- Add settings to CompanyRepository SignalSlots
+*   Add path_segment for human readable URLs to company records
+*   Add Slug UpgradeWizard
 
-**Version 4.0.3**
+Version 4.0.4
+=============
 
-- Set default sorting to company for QueryBuilder based statements
+*   Add settings to CompanyRepository SignalSlots
 
-**Version 4.0.2**
+Version 4.0.3
+=============
 
-- Change return value of mainTrade to nullable Category
-- Change return value of trades to array
+*   Set default sorting to company for QueryBuilder based statements
 
-**Version 4.0.1**
+Version 4.0.2
+=============
 
-- Allow null for Distinct in Company model
+*   Change return value of mainTrade to nullable Category
+*   Change return value of trades to array
 
-**Version 4.0.0**
+Version 4.0.1
+=============
 
-- Add TYPO3 10 compatibility
-- Remove TYPO3 8 compatibility
-- Update all PHP DocHeaders
-- Add strict types where possible
-- Add documentation
-- Remove sys_category icon implementation.
-- Move ExtIcon to Resources/Public/Icons
-- Update UnitTests
-- Remove maps2 as requirement.
+*   Allow null for Distinct in Company model
 
-**Version 3.0.0**
+Version 4.0.0
+=============
 
-- Add TYPO3 9 compatibility
-- Remove @return void lines
-- Set description as required
-- Update to new GeoCode Service of maps2
+*   Add TYPO3 10 compatibility
+*   Remove TYPO3 8 compatibility
+*   Update all PHP DocHeaders
+*   Add strict types where possible
+*   Add documentation
+*   Remove sys_category icon implementation.
+*   Move ExtIcon to Resources/Public/Icons
+*   Update UnitTests
+*   Remove maps2 as requirement.
 
-**Version 2.2.3**
+Version 3.0.0
+=============
 
-- Move all TCA modifying methods to TCA/Overrides
+*   Add TYPO3 9 compatibility
+*   Remove @return void lines
+*   Set description as required
+*   Update to new GeoCode Service of maps2
 
-**Version 2.2.2**
+Version 2.2.3
+=============
 
-- Remove idea directory
-- Remove default pageTSconfig for maps2
+*   Move all TCA modifying methods to TCA/Overrides
+
+Version 2.2.2
+=============
+
+*   Remove idea directory
+*   Remove default pageTSconfig for maps2
