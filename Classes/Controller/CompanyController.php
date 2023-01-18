@@ -18,6 +18,7 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use JWeiland\Yellowpages2\Utility\CacheUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
@@ -91,34 +92,36 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @param string $letter
      * @TYPO3\CMS\Extbase\Annotation\Validate("String", param="letter")
      * @TYPO3\CMS\Extbase\Annotation\Validate("StringLength", param="letter", options={"minimum": 0, "maximum": 3})
      */
     public function listAction(string $letter = ''): void
     {
+        $companies = $this->companyRepository->findByLetter($letter, $this->settings);
         $this->postProcessAndAssignFluidVariables([
-            'companies' => $this->companyRepository->findByLetter($letter, $this->settings),
+            'companies' => $companies,
             'categories' => $this->companyRepository->getTranslatedCategories(),
         ]);
+        CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
     }
 
     public function listMyCompaniesAction(): void
     {
+        $companies = $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']);
         $this->postProcessAndAssignFluidVariables([
-            'companies' => $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']),
+            'companies' => $companies,
             'categories' => $this->companyRepository->getTranslatedCategories(),
         ]);
+        CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
     }
 
-    /**
-     * @param int $company
-     */
     public function showAction(int $company): void
     {
+        $companyObject = $this->companyRepository->findByIdentifier($company);
         $this->postProcessAndAssignFluidVariables([
-            'company' => $this->companyRepository->findByIdentifier($company),
+            'company' => $companyObject,
         ]);
+        CacheUtility::addCacheTagsByCompanyRecords([$companyObject]);
     }
 
     public function initializeSearchAction(): void
@@ -126,10 +129,6 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param string $search
-     * @param int $category
-     */
     public function searchAction(string $search, int $category = 0): void
     {
         $this->postProcessAndAssignFluidVariables([
@@ -160,9 +159,6 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param Company $company
-     */
     public function createAction(Company $company): void
     {
         /** @var FrontendUser $feUser */
@@ -194,7 +190,6 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @param Company $company
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("company")
      */
     public function editAction(Company $company): void
@@ -211,9 +206,6 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param Company $company
-     */
     public function updateAction(Company $company): void
     {
         $this->companyRepository->update($company);
@@ -237,9 +229,6 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param int $company
-     */
     public function activateAction(int $company): void
     {
         /** @var Company $companyObject */

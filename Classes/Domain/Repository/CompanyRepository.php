@@ -13,6 +13,7 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
 
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use JWeiland\Glossary2\Service\GlossaryService;
+use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -29,6 +30,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 /**
  * Repository to retrieve company records
  *
+ * @method Company|null findByIdentifier(int $companyUid)
  * @method QueryResultInterface findByFeUser(int $frontendUserUid)
  */
 class CompanyRepository extends Repository implements HiddenRepositoryInterface

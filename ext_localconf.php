@@ -38,6 +38,10 @@ call_user_func(static function () {
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:yellowpages2/Configuration/TSconfig/ContentElementWizard.txt">'
     );
 
+    // Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['yellowpages2_clearcache']
+        = \JWeiland\Yellowpages2\Hook\ClearCacheHook::class . '->clearCachePostProc';
+
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['yellowpages2UpdateSlug']
         = \JWeiland\Yellowpages2\Updater\Yellowpages2SlugUpdater::class;
 
