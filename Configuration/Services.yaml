@@ -13,6 +13,9 @@ services:
   JWeiland\Yellowpages2\Helper\HiddenObjectHelper:
     public: true
 
+  JWeiland\Yellowpages2\Hook\ClearCacheHook:
+    public: true
+
   JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener:
     tags:
       - name: event.listener
