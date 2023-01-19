@@ -117,7 +117,6 @@ class Update extends AbstractTask
             }
         }
 
-        // Task must return TRUE to signal that it was executed successfully
         return true;
     }
 
