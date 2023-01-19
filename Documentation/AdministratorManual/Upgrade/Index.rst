@@ -7,8 +7,44 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
-Update to Version 5.0.0
-=======================
+Upgrade to Version 6.0.0
+========================
+
+As TYPO3 has deprecated the ObjectManager we have changed many properties in our
+scheduler task `Update yellowpages`. Please remove that scheduler task completely
+and create a new one of type `Inform users to update their company record`.
+
+We have changed a lot of classes. Please click `Flush Cache` button in Installtool
+to re-build the Dependency Injection cache.
+
+If you have maps2 version 9 installed you have to override or change following
+part in `Properties.html` from:
+
+..  code-block:: html
+
+    <f:link.action title="Map detail"
+                             action="show"
+                             controller="PoiCollection"
+                             extensionName="maps2"
+                             pluginName="maps2"
+                             pageUid="{settings.pidOfMaps2Plugin}"
+                             arguments="{poiCollectionUid: company.txMaps2Uid}">
+
+to:
+
+..  code-block:: html
+
+    <f:link.action title="Map detail"
+                             action="show"
+                             controller="PoiCollection"
+                             extensionName="maps2"
+                             pluginName="maps2"
+                             pageUid="{settings.pidOfMaps2Plugin}"
+                             arguments="{poiCollection: company.txMaps2Uid}">
+
+
+Upgrade to Version 5.0.0
+========================
 
 We have moved a lot of code of yellowpages2 controllers to EventListeners. Please flush cache in
 maintenance module.
@@ -16,8 +52,8 @@ maintenance module.
 As a developer you should check, if you have overwritten some methods of MapController or CompanyController and
 adopt them to new structure.
 
-Update to Version 4.0.0
-=======================
+Upgrade to Version 4.0.0
+========================
 
 We have removed column wsp_member as this column was a specific column for one of our customers. If you have used it
 you have to add it back with help of EXT:extender.

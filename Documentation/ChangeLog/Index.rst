@@ -11,10 +11,11 @@ Version 6.0.0
 =============
 
 *   Add TYPO3 11 compatibility
-*   Remove TYPO3 9 compatibility
 *   Replace controller constructors with inject methods
 *   Add and update tests for TYPO3 11
 *   Update structure of documentation
+*   Migrate makeCategorizeable to TCA directly
+*   Add defaults in TCA and ext_tables.sql
 
 Version 5.1.1
 =============
