@@ -92,24 +92,28 @@ return [
             'label' => 'cruser_id',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'pid' => [
             'label' => 'pid',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'crdate' => [
             'label' => 'crdate',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'starttime' => [
@@ -147,6 +151,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
     ],

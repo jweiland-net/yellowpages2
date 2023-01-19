@@ -101,24 +101,28 @@ return [
             'label' => 'cruser_id',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'pid' => [
             'label' => 'pid',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'crdate' => [
             'label' => 'crdate',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [
                 'type' => 'passthrough',
+                'default' => 0,
             ],
         ],
         'starttime' => [
@@ -156,6 +160,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required',
+                'default' => '',
             ],
         ],
         'path_segment' => [
@@ -307,6 +312,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'house_number' => [
@@ -316,6 +322,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'zip' => [
@@ -325,6 +332,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'city' => [
@@ -334,6 +342,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'telephone' => [
@@ -343,6 +352,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'fax' => [
@@ -352,6 +362,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'contact_person' => [
@@ -361,6 +372,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'email' => [
@@ -370,6 +382,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'website' => [
@@ -379,6 +392,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'opening_times' => [
@@ -389,6 +403,7 @@ return [
                 'cols' => 30,
                 'rows' => 5,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'barrier_free' => [
@@ -410,6 +425,7 @@ return [
                 'softref' => 'typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
                 'eval' => 'trim,required',
+                'default' => '',
             ],
         ],
         'district' => [
@@ -454,6 +470,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink[linkList]',
+                'default' => '',
             ],
         ],
         'twitter' => [
@@ -465,6 +482,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink[linkList]',
+                'default' => '',
             ],
         ],
         'instagram' => [
@@ -476,6 +494,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink[linkList]',
+                'default' => '',
             ],
         ],
         'main_trade' => [
