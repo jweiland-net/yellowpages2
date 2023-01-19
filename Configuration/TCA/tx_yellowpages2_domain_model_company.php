@@ -478,5 +478,59 @@ return [
                 'softref' => 'typolink[linkList]',
             ],
         ],
+        'main_trade' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.mainTrade',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectTree',
+                'foreign_table' => 'sys_category',
+                'foreign_table_where' => 'AND sys_category.sys_language_uid IN (-1, 0)',
+                'MM' => 'sys_category_record_mm',
+                'MM_match_fields' => [
+                    'fieldname' => 'main_trade',
+                    'tablenames' => 'tx_yellowpages2_domain_model_company',
+                ],
+                'MM_opposite_field' => 'items',
+                'treeConfig' => [
+                    'appearance' => [
+                        'expandAll' => 1,
+                        'maxLevels' => 99,
+                        'showHeader' => 1,
+                    ],
+                    'parentField' => 'parent',
+                ],
+                'size' => 20,
+                'maxitems' => 1,
+                'minitems' => 1,
+            ],
+        ],
+        'trades' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.trades',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectTree',
+                'foreign_table' => 'sys_category',
+                'foreign_table_where' => 'AND sys_category.sys_language_uid IN (-1, 0)',
+                'MM' => 'sys_category_record_mm',
+                'MM_match_fields' => [
+                    'fieldname' => 'trades',
+                    'tablenames' => 'tx_yellowpages2_domain_model_company',
+                ],
+                'MM_opposite_field' => 'items',
+                'treeConfig' => [
+                    'appearance' => [
+                        'expandAll' => 1,
+                        'maxLevels' => 99,
+                        'showHeader' => 1,
+                    ],
+                    'parentField' => 'parent',
+                ],
+                'size' => 20,
+                'maxitems' => 2,
+                'minitems' => 0,
+            ],
+        ],
     ],
 ];
