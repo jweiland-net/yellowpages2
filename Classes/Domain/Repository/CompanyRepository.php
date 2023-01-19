@@ -173,6 +173,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                     )
                 )
             )
+            ->groupBy(...$this->getColumnsForCompanyTable())
             ->orderBy('c.company', 'ASC');
     }
 
@@ -300,7 +301,9 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     {
         $today = date('U');
         $history = $today - ($days * 60 * 60 * 24);
+
         $query = $this->createQuery();
+
         return $query->matching($query->lessThan('tstamp', $history))->execute();
     }
 
