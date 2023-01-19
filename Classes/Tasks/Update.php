@@ -16,10 +16,8 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
@@ -30,132 +28,72 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class Update extends AbstractTask
 {
     /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
-    /**
-     * @var PersistenceManager
-     */
-    protected $persistenceManager;
-
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
-
-    /**
-     * @var MailMessage
-     */
-    protected $mail;
-
-    /**
-     * @var ExtConf
-     */
-    protected $extConf;
-
-    /**
-     * constructor of this class
-     */
-    public function __construct()
-    {
-        // first we have to call the parent constructor
-        parent::__construct();
-
-        // initialize some global variables
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->persistenceManager = $this->objectManager->get(PersistenceManager::class);
-        $this->mail = $this->objectManager->get(MailMessage::class);
-        $this->extConf = $this->objectManager->get(ExtConf::class);
-        $this->companyRepository = $this->objectManager->get(CompanyRepository::class);
-        $this->companyRepository->setDefaultQuerySettings($this->getDefaultQuerySettings());
-    }
-
-    /**
-     * generate default query settings to access all records
-     *
-     * @return QuerySettingsInterface
-     */
-    protected function getDefaultQuerySettings(): QuerySettingsInterface
-    {
-        /** @var QuerySettingsInterface $settings */
-        $settings = $this->objectManager->get(QuerySettingsInterface::class);
-        $settings->setIgnoreEnableFields(true);
-        $settings->setRespectSysLanguage(false);
-        $settings->setRespectStoragePage(false);
-        return $settings;
-    }
-
-    /**
      * The first method which will be executed when task starts
-     *
-     * @return bool
      */
     public function execute(): bool
     {
-        // hide companies which are older than 13 months
-        $companies = $this->companyRepository->findOlderThan(396);
-        if ($companies instanceof QueryResult) {
-            /** @var $company Company */
-            foreach ($companies as $company) {
-                $company->setHidden(true);
-                $this->companyRepository->update($company);
-                if ($company->getEmail()) {
-                    $this->informUser($company, 'deactivated');
-                }
-                $this->informAdmin($company);
+        $companyRepository = $this->getCompanyRepository();
+        $persistenceManager = $this->getPersistenceManager();
+
+        // Hide companies which are older than 13 months
+        $companies = $companyRepository->findOlderThan(396);
+        foreach ($companies as $company) {
+            $company->setHidden(true);
+            $companyRepository->update($company);
+            if ($company->getEmail()) {
+                $this->informUser($company, 'deactivated');
             }
-            $this->persistenceManager->persistAll();
+            $this->informAdmin($company);
+        }
+        $persistenceManager->persistAll();
+
+        // Inform users about entries older than 12 month
+        $companies = $companyRepository->findOlderThan(365);
+        foreach ($companies as $company) {
+            $this->informUser($company, 'inform');
         }
 
-        // inform users about entries older than 12 month
-        $companies = $this->companyRepository->findOlderThan(365);
-        if ($companies instanceof QueryResult) {
-            /** @var $company Company */
-            foreach ($companies as $company) {
-                $this->informUser($company, 'inform');
-            }
-        }
-
-        // Task must return TRUE to signal that it was executed successfully
         return true;
     }
 
     /**
-     * mail to user
-     *
-     * @param Company $company
-     * @param string $type "inform" or "deactivated"
+     * Inform user by mail
      */
     public function informUser(Company $company, string $type): void
     {
-        $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
-        $this->mail->setTo($company->getEmail(), $company->getCompany());
-        $this->mail->setSubject(LocalizationUtility::translate('email.subject.' . $type . '.user', 'yellowpages2'));
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        $extConf = GeneralUtility::makeInstance(ExtConf::class);
+
+        $mail->setFrom($extConf->getEmailFromAddress(), $extConf->getEmailFromName());
+        $mail->setTo($company->getEmail(), $company->getCompany());
+        $mail->setSubject(LocalizationUtility::translate('email.subject.' . $type . '.user', 'yellowpages2'));
+
         $bodyHtml = LocalizationUtility::translate(
             'email.body.' . $type . '.user',
             'yellowpages2',
             [
                 $company->getUid(),
                 $company->getCompany(),
-                $this->extConf->getEditLink(),
+                $extConf->getEditLink(),
             ]
         );
 
-        $this->mail->html($bodyHtml);
-        $this->mail->send();
+        $mail->html($bodyHtml);
+        $mail->send();
     }
 
     /**
-     * inform admin about old company entries
-     *
-     * @param Company $company
+     * Inform admin about old company entries
      */
     public function informAdmin(Company $company): void
     {
-        $this->mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName());
-        $this->mail->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName());
-        $this->mail->setSubject(LocalizationUtility::translate('email.subject.deactivated.admin', 'yellowpages2'));
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        $extConf = GeneralUtility::makeInstance(ExtConf::class);
+
+        $mail->setFrom($extConf->getEmailFromAddress(), $extConf->getEmailFromName());
+        $mail->setTo($extConf->getEmailToAddress(), $extConf->getEmailToName());
+        $mail->setSubject(LocalizationUtility::translate('email.subject.deactivated.admin', 'yellowpages2'));
+
         $bodyHtml = LocalizationUtility::translate(
             'email.body.deactivated.admin',
             'yellowpages2',
@@ -165,28 +103,38 @@ class Update extends AbstractTask
             ]
         );
 
-        $this->mail->html($bodyHtml);
-        $this->mail->send();
+        $mail->html($bodyHtml);
+        $mail->send();
     }
 
     /**
-     * scheduler serializes this object, so we have to tell unserialize() what to do
+     * Generate default query settings to access all records
      */
-    public function __wakeup()
+    protected function getDefaultQuerySettings(): QuerySettingsInterface
     {
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->persistenceManager = $this->objectManager->get(PersistenceManager::class);
-        $this->mail = $this->objectManager->get(MailMessage::class);
-        $this->extConf = $this->objectManager->get(ExtConf::class);
-        $this->companyRepository = $this->objectManager->get(CompanyRepository::class);
-        $this->companyRepository->setDefaultQuerySettings($this->getDefaultQuerySettings());
+        $settings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
+        $settings->setIgnoreEnableFields(true);
+        $settings->setRespectSysLanguage(false);
+        $settings->setRespectStoragePage(false);
+
+        return $settings;
     }
 
-    /**
-     * The result of serialization is too big for db. So we reduce the return value
-     */
-    public function __sleep()
+    public function getPersistenceManager(): PersistenceManagerInterface
     {
-        return ['scheduler', 'taskUid', 'disabled', 'execution', 'executionTime'];
+        return GeneralUtility::makeInstance(PersistenceManagerInterface::class);
+    }
+
+    public function getExtConf(): ExtConf
+    {
+        return GeneralUtility::makeInstance(ExtConf::class);
+    }
+
+    public function getCompanyRepository(): CompanyRepository
+    {
+        $companyRepository = GeneralUtility::makeInstance(CompanyRepository::class);
+        $companyRepository->setDefaultQuerySettings($this->getDefaultQuerySettings());
+
+        return $companyRepository;
     }
 }

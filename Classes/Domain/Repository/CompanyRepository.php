@@ -14,17 +14,18 @@ namespace JWeiland\Yellowpages2\Domain\Repository;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
+use JWeiland\Yellowpages2\Event\ModifyQueryToFindCompanyByLetterEvent;
+use JWeiland\Yellowpages2\Event\ModifyQueryToSearchForCompaniesEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -43,17 +44,13 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     ];
 
     /**
-     * @var Dispatcher
+     * @var EventDispatcherInterface
      */
-    protected $dispatcher;
+    protected $eventDispatcher;
 
-    public function __construct(
-        ObjectManager $objectManager,
-        Dispatcher $dispatcher
-    ) {
-        parent::__construct($objectManager);
-
-        $this->dispatcher = $dispatcher;
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
+    {
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function findHiddenObject($value, string $property = 'uid'): ?object
@@ -97,7 +94,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             );
         }
 
-        $this->emitModifyQueryToFindCompanyByLetter($queryBuilder, $settings);
+        $this->eventDispatcher->dispatch(new ModifyQueryToFindCompanyByLetterEvent($queryBuilder, $settings));
 
         return $query->statement($queryBuilder)->execute();
     }
@@ -152,7 +149,9 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             $this->addConstraintForTrades($queryBuilder, $categoryUid);
         }
 
-        $this->emitModifyQueryToSearchForCompanies($queryBuilder, $search, $categoryUid, $settings);
+        $this->eventDispatcher->dispatch(
+            new ModifyQueryToSearchForCompaniesEvent($queryBuilder, $search, $categoryUid, $settings)
+        );
 
         return $query->statement($queryBuilder)->execute();
     }
@@ -161,6 +160,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
         $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
+
         return $queryBuilder
             ->select(...$this->getColumnsForCompanyTable())
             ->from('tx_yellowpages2_domain_model_company', 'c')
@@ -173,14 +173,13 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                     )
                 )
             )
+            ->groupBy(...$this->getColumnsForCompanyTable())
             ->orderBy('c.company', 'ASC');
     }
 
     /**
      * ->select() and ->groupBy() has to be the same in DB configuration
      * where only_full_group_by is activated.
-     *
-     * @return array
      */
     protected function getColumnsForCompanyTable(): array
     {
@@ -237,8 +236,6 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
 
     /**
      * Collect all translated categories used by main_trade and trades
-     *
-     * @return array
      */
     public function getTranslatedCategories(): array
     {
@@ -298,58 +295,21 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      * Find all records which are older than given days
      * Hint: Needed by scheduler
      *
-     * @param int $days
-     * @return QueryResultInterface
+     * @return QueryResultInterface|Company[]
      */
     public function findOlderThan(int $days): QueryResultInterface
     {
         $today = date('U');
         $history = $today - ($days * 60 * 60 * 24);
+
         $query = $this->createQuery();
+
         return $query->matching($query->lessThan('tstamp', $history))->execute();
     }
 
     public function getQueryBuilderToFindAllEntries(): QueryBuilder
     {
         return $this->getQueryBuilderForCompany($this->createQuery());
-    }
-
-    /**
-     * Use this signal, if you want to modify the query to find companies by letter
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param array $settings
-     */
-    protected function emitModifyQueryToFindCompanyByLetter(
-        QueryBuilder $queryBuilder,
-        array $settings
-    ): void {
-        $this->dispatcher->dispatch(
-            self::class,
-            'modifyQueryToFindCompanyByLetter',
-            [$queryBuilder, $settings]
-        );
-    }
-
-    /**
-     * Use this signal, if you want to modify the query to search companies
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param string $search
-     * @param int $categoryUid
-     * @param array $settings
-     */
-    protected function emitModifyQueryToSearchForCompanies(
-        QueryBuilder $queryBuilder,
-        string $search,
-        int $categoryUid,
-        array $settings
-    ): void {
-        $this->dispatcher->dispatch(
-            self::class,
-            'modifyQueryToSearchCompanies',
-            [$queryBuilder, $search, $categoryUid, $settings]
-        );
     }
 
     protected function getConnectionPool(): ConnectionPool
