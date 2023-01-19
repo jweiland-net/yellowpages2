@@ -47,7 +47,7 @@ call_user_func(static function () {
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][JWeiland\Yellowpages2\Tasks\Update::class] = [
         'extension' => 'yellowpages2',
-        'title' => 'Update yellowpages',
-        'description' => 'Hide all yellowpages records which are older than the secified age.',
+        'title' => 'Inform users to update their company record',
+        'description' => 'Hide company records which are older than 13 month and inform users to update their company record  after 12 month.',
     ];
 });
