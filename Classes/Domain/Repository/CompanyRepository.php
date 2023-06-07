@@ -11,21 +11,20 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
-use JWeiland\Yellowpages2\Event\ModifyQueryToFindCompanyByLetterEvent;
 use JWeiland\Yellowpages2\Event\ModifyQueryToSearchForCompaniesEvent;
+use JWeiland\Yellowpages2\Persistence\QueryResult;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -34,7 +33,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * @method Company|null findByIdentifier(int $companyUid)
  * @method QueryResultInterface findByFeUser(int $frontendUserUid)
  */
-class CompanyRepository extends Repository implements HiddenRepositoryInterface
+class CompanyRepository extends AbstractRepository implements HiddenRepositoryInterface
 {
     /**
      * @var array
@@ -53,6 +52,16 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
+    /**
+     * @var ConfigurationManagerInterface
+     */
+    protected $configurationManager;
+
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
     public function findHiddenObject($value, string $property = 'uid'): ?object
     {
         $query = $this->createQuery();
@@ -66,37 +75,35 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     public function findByLetter(string $letter, array $settings = []): QueryResultInterface
     {
         /** @var Query $query */
-        $query = $this->createQuery();
-        $queryBuilder = $this->getQueryBuilderForCompany($query);
+        $query = $this->createContentObjectQuery();
+        $constraints = [];
 
         if ($letter) {
             $glossaryService = GeneralUtility::makeInstance(GlossaryService::class);
-            $queryBuilder
-                ->where(
-                    $glossaryService->getLetterConstraintForDoctrineQuery(
-                        $queryBuilder,
-                        'c.company',
-                        $letter
-                    )
-                );
-        }
-
-        if ($settings['presetTrade']) {
-            $this->addConstraintForTrades($queryBuilder, (int)$settings['presetTrade']);
-        }
-
-        if ($settings['district']) {
-            $queryBuilder->andWhere(
-                $queryBuilder->expr()->eq(
-                    'c.district',
-                    $queryBuilder->createNamedParameter($settings['district'], \PDO::PARAM_INT)
+            $constraints[] = $query->logicalAnd(
+                $glossaryService->getLetterConstraintForExtbaseQuery(
+                    $query,
+                    'company',
+                    $letter
                 )
             );
         }
 
-        $this->eventDispatcher->dispatch(new ModifyQueryToFindCompanyByLetterEvent($queryBuilder, $settings));
+        if ($settings['presetTrade']) {
+            $constraints[] = $this->addConstraintForTrades($query, (int)$settings['presetTrade']);
+        }
 
-        return $query->statement($queryBuilder)->execute();
+        if ($settings['district']) {
+            $constraints[] = $query->equals('district', (int)$settings['district']);
+        }
+
+        // $this->eventDispatcher->dispatch(new ModifyQueryToFindCompanyByLetterEvent($conf, $settings));
+
+        if ($constraints === []) {
+            return $query->execute();
+        }
+
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -162,7 +169,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
 
         return $queryBuilder
-            ->select(...$this->getColumnsForCompanyTable())
+            ->select('*')
             ->from('tx_yellowpages2_domain_model_company', 'c')
             ->where(
                 $queryBuilder->expr()->in(
@@ -173,29 +180,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                     )
                 )
             )
-            ->groupBy(...$this->getColumnsForCompanyTable())
             ->orderBy('c.company', 'ASC');
-    }
-
-    /**
-     * ->select() and ->groupBy() has to be the same in DB configuration
-     * where only_full_group_by is activated.
-     */
-    protected function getColumnsForCompanyTable(): array
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_yellowpages2_domain_model_company');
-        if ($connection->getSchemaManager() instanceof AbstractSchemaManager) {
-            return array_map(
-                static function ($column) {
-                    return 'c.' . $column;
-                },
-                array_keys(
-                    $connection->getSchemaManager()->listTableColumns('tx_yellowpages2_domain_model_company') ?? []
-                )
-            );
-        }
-
-        return [];
     }
 
     protected function addConstraintForTrades(QueryBuilder $queryBuilder, int $categoryUid): void
@@ -239,10 +224,10 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      */
     public function getTranslatedCategories(): array
     {
+        /** @var Query $query */
         $query = $this->createQuery();
         $queryBuilder = $this->getQueryBuilderForCompany($query);
         $queryBuilder
-            ->select('*')
             ->leftJoin(
                 'c',
                 'sys_category_record_mm',
@@ -277,7 +262,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
                     $queryBuilder->quoteIdentifier('category_mm.uid_local')
                 )
             )
-            ->groupBy('sc.uid')
+            ->addGroupBy('sc.uid')
             ->orderBy('sc.title', 'ASC');
 
         $results = $query->statement($queryBuilder)->execute(true);

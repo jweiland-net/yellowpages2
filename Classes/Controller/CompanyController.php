@@ -100,7 +100,7 @@ class CompanyController extends AbstractController
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,
-            'categories' => $this->companyRepository->getTranslatedCategories(),
+            //'categories' => $this->companyRepository->getTranslatedCategories(),
         ]);
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
     }

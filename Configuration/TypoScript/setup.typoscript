@@ -73,6 +73,8 @@ plugin.tx_yellowpages2 {
     }
 
     pageBrowser {
+      class = JWeiland\Yellowpages2\Pagination\CompanyPagination
+      # class = GeorgRinger\NumberedPagination\NumberedPagination
       itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
     }
   }
