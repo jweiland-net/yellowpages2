@@ -7,6 +7,16 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Upgrade to Version 6.1.0
+========================
+
+If you make use of `ModifyQueryToFindCompanyByLetterEvent` or
+`ModifyQueryToSearchForCompaniesEvent` event:
+We have changed the strict type of TYPO3 QueryBuilder to extbase
+QueryResult. Yes, this is a breaking change, but it seems that no one
+makes use of it. Please adopt your code to use QueryResult. You can retrieve
+the extbase query with method `getQuery()`.
+
 Upgrade to Version 6.0.0
 ========================
 
