@@ -19,7 +19,8 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Test case.
@@ -34,9 +35,9 @@ class AddGlossaryEventListenerTest extends UnitTestCase
     protected $subject;
 
     /**
-     * @var QueryBuilder|ObjectProphecy
+     * @var QueryResultInterface|ObjectProphecy
      */
-    protected $queryBuilderProphecy;
+    protected $queryResultProphecy;
 
     /**
      * @var GlossaryService|ObjectProphecy
@@ -57,7 +58,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->queryBuilderProphecy = $this->prophesize(QueryBuilder::class);
+        $this->queryResultProphecy = $this->prophesize(QueryResult::class);
 
         $this->glossaryServiceProphecy = $this->prophesize(GlossaryService::class);
         $this->glossaryServiceProphecy
@@ -67,7 +68,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
         $this->companyRepositoryProphecy = $this->prophesize(CompanyRepository::class);
         $this->companyRepositoryProphecy
             ->getExtbaseQueryToFindAllEntries()
-            ->willReturn($this->queryBuilderProphecy->reveal());
+            ->willReturn($this->queryResultProphecy->reveal());
 
         $this->eventProphecy = $this->prophesize(PostProcessFluidVariablesEvent::class);
         $this->eventProphecy
