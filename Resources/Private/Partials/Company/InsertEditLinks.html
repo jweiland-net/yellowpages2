@@ -1,21 +1,21 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
 <f:security.ifHasRole role="{settings.userGroup}">
-	<aside>
-		<p>
-			<f:link.action action="new">
-				<span>{f:translate(key: 'newCompany')}</span>
-				<span aria-hidden="true" class="icon-arrowright"></span>
-			</f:link.action>
-		</p>
-		<p>
-			<f:link.action action="listMyCompanies">
-				<span>{f:translate(key: 'listMyCompanies')}</span>
-				<span aria-hidden="true" class="icon-arrowright"></span>
-			</f:link.action>
-		</p>
-	</aside>
+    <aside>
+        <p>
+            <f:link.action action="new">
+                <span>{f:translate(key: 'newCompany')}</span>
+                <span aria-hidden="true" class="icon-arrowright"></span>
+            </f:link.action>
+        </p>
+        <p>
+            <f:link.action action="listMyCompanies">
+                <span>{f:translate(key: 'listMyCompanies')}</span>
+                <span aria-hidden="true" class="icon-arrowright"></span>
+            </f:link.action>
+        </p>
+    </aside>
 </f:security.ifHasRole>
 </html>

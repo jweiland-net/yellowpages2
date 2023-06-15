@@ -1,55 +1,82 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
 <p>Hallo,</p>
-<p><f:link.action action="edit" controller="Company" absolute="1" arguments="{company: company}">Datensatz bearbeiten</f:link.action></p>
-<p><f:link.action action="activate" controller="Company" absolute="1" arguments="{company: company}">Datensatz freischalten</f:link.action></p>
+<p>
+    <f:link.action action="edit" controller="Company" absolute="1" arguments="{company: company}">Datensatz bearbeiten
+    </f:link.action>
+</p>
+<p>
+    <f:link.action action="activate" controller="Company" absolute="1" arguments="{company: company}">Datensatz
+        freischalten
+    </f:link.action>
+</p>
 <p>hier die Daten des bearbeiteten Datensatzes:</p>
 <table>
-	<tr>
-		<th>Eigenschaft</th>
-		<th>Wert</th>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.company" /></td>
-		<td>{company.company}</td>
-	</tr>
-	<tr>
-		<td>Adresse</td>
-		<td><f:render partial="Company/Address" arguments="{company: company}" /></td>
-	</tr>
-	<tr>
-		<td>Kontakt</td>
-		<td><f:render partial="Company/Contact" arguments="{company: company}" /></td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.contactPerson" /></td>
-		<td>{company.contactPerson}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.openingTimes" /></td>
-		<td>{company.openingTimes}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.description" /></td>
-		<td>{company.description}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.district" /></td>
-		<td>{company.district.district}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.facebook" /></td>
-		<td>{company.facebook}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.twitter" /></td>
-		<td>{company.twitter}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_yellowpages2_domain_model_company.instagram" /></td>
-		<td>{company.instagram}</td>
-	</tr>
+    <tr>
+        <th>Eigenschaft</th>
+        <th>Wert</th>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.company"/>
+        </td>
+        <td>{company.company}</td>
+    </tr>
+    <tr>
+        <td>Adresse</td>
+        <td>
+            <f:render partial="Company/Address" arguments="{company: company}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Kontakt</td>
+        <td>
+            <f:render partial="Company/Contact" arguments="{company: company}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.contactPerson"/>
+        </td>
+        <td>{company.contactPerson}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.openingTimes"/>
+        </td>
+        <td>{company.openingTimes}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.description"/>
+        </td>
+        <td>{company.description}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.district"/>
+        </td>
+        <td>{company.district.district}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.facebook"/>
+        </td>
+        <td>{company.facebook}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.twitter"/>
+        </td>
+        <td>{company.twitter}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_yellowpages2_domain_model_company.instagram"/>
+        </td>
+        <td>{company.instagram}</td>
+    </tr>
 </table>
 </html>

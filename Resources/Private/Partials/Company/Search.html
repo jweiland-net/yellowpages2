@@ -1,20 +1,20 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
 <f:form action="search" name="search">
-	<div>
-		<div>
-			<f:form.select name="category" options="{categories}" value="{category}" />
-		</div>
-	</div>
+    <div>
+        <div>
+            <f:form.select name="category" options="{categories}" value="{category}"/>
+        </div>
+    </div>
 
-	<div>
-		<f:form.textfield name="search" value="{search}" />
-	</div>
+    <div>
+        <f:form.textfield name="search" value="{search}"/>
+    </div>
 
-	<div>
-		<f:form.submit value="{f:translate(key: 'search')}" />
-	</div>
+    <div>
+        <f:form.submit value="{f:translate(key: 'search')}"/>
+    </div>
 </f:form>
 </html>
