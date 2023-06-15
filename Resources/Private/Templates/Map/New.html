@@ -1,19 +1,19 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 <f:section name="main">
-	<f:flashMessages />
+    <f:flashMessages/>
 
-	<f:render partial="FormErrors" arguments="{object: Company}"/>
+    <f:render partial="FormErrors" arguments="{object: Company}"/>
 
-	<f:form action="create" name="company" object="{company}" enctype="multipart/form-data">
-		<f:render partial="Maps2/EditPoiCollection"
-							section="editMap"
-							arguments="{poiCollection: company.txMaps2Uid, property: 'txMaps2Uid', title: company.company, override: {settings: {mapWidth: '100%', mapHeight: '300', zoom: '14'}}}" />
-		<f:form.submit value="{f:translate(key: 'create')}" />
-	</f:form>
+    <f:form action="create" name="company" object="{company}" enctype="multipart/form-data">
+        <f:render partial="Maps2/EditPoiCollection"
+                  section="editMap"
+                  arguments="{poiCollection: company.txMaps2Uid, property: 'txMaps2Uid', title: company.company, override: {settings: {mapWidth: '100%', mapHeight: '300', zoom: '14'}}}"/>
+        <f:form.submit value="{f:translate(key: 'create')}"/>
+    </f:form>
 </f:section>
 </html>

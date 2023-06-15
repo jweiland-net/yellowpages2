@@ -100,7 +100,7 @@ class CompanyController extends AbstractController
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,
-            'categories' => $this->companyRepository->getTranslatedCategories(),
+            'categories' => $this->categoryRepository->findRelated(),
         ]);
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
     }
@@ -110,7 +110,7 @@ class CompanyController extends AbstractController
         $companies = $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']);
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,
-            'categories' => $this->companyRepository->getTranslatedCategories(),
+            'categories' => $this->categoryRepository->findRelated(),
         ]);
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
     }
@@ -135,7 +135,7 @@ class CompanyController extends AbstractController
             'search' => $search,
             'category' => $category,
             'companies' => $this->companyRepository->searchCompanies($search, $category, $this->settings),
-            'categories' => $this->companyRepository->getTranslatedCategories(),
+            'categories' => $this->categoryRepository->findRelated(),
         ]);
     }
 

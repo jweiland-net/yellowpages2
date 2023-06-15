@@ -13,6 +13,10 @@ namespace JWeiland\Yellowpages2\EventListener;
 
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\Pagination\CompanyPagination;
+use TYPO3\CMS\Core\Pagination\PaginationInterface;
+use TYPO3\CMS\Core\Pagination\PaginatorInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
@@ -25,6 +29,18 @@ class AddPaginatorEventListener extends AbstractControllerEventListener
      */
     protected $itemsPerPage = 15;
 
+    /**
+     * Fluid variable name for paginated records
+     *
+     * @var string
+     */
+    protected $fluidVariableForPaginatedRecords = 'companies';
+
+    /**
+     * @var string
+     */
+    protected $fallbackPaginationClass = CompanyPagination::class;
+
     protected $allowedControllerActions = [
         'Company' => [
             'list',
@@ -36,29 +52,52 @@ class AddPaginatorEventListener extends AbstractControllerEventListener
     {
         if ($this->isValidRequest($event)) {
             $paginator = new QueryResultPaginator(
-                $event->getFluidVariables()['companies'],
+                $event->getFluidVariables()[$this->fluidVariableForPaginatedRecords],
                 $this->getCurrentPage($event),
                 $this->getItemsPerPage($event)
             );
 
             $event->addFluidVariable('actionName', $event->getActionName());
             $event->addFluidVariable('paginator', $paginator);
-            $event->addFluidVariable('companies', $paginator->getPaginatedItems());
-            $event->addFluidVariable('pagination', new CompanyPagination($paginator));
+            $event->addFluidVariable($this->fluidVariableForPaginatedRecords, $paginator->getPaginatedItems());
+            $event->addFluidVariable('pagination', $this->getPagination($event, $paginator));
         }
     }
 
-    protected function getCurrentPage(PostProcessFluidVariablesEvent $event): int
+    protected function getCurrentPage(PostProcessFluidVariablesEvent $controllerActionEvent): int
     {
         $currentPage = 1;
-        if ($event->getRequest()->hasArgument('currentPage')) {
-            $currentPage = $event->getRequest()->getArgument('currentPage');
+        if ($controllerActionEvent->getRequest()->hasArgument('currentPage')) {
+            // $currentPage have to be positive and greater than 0
+            // See: AbstractPaginator::setCurrentPageNumber()
+            $currentPage = MathUtility::forceIntegerInRange(
+                (int)$controllerActionEvent->getRequest()->getArgument('currentPage'),
+                1
+            );
         }
-        return (int)$currentPage;
+
+        return $currentPage;
     }
 
     protected function getItemsPerPage(PostProcessFluidVariablesEvent $event): int
     {
         return (int)($event->getSettings()['pageBrowser']['itemsPerPage'] ?? $this->itemsPerPage);
+    }
+
+    protected function getPagination(
+        PostProcessFluidVariablesEvent $event,
+        PaginatorInterface $paginator
+    ): PaginationInterface {
+        $paginationClass = $event->getSettings()['pageBrowser']['class'] ?? $this->fallbackPaginationClass;
+
+        if (!class_exists($paginationClass)) {
+            $paginationClass = $this->fallbackPaginationClass;
+        }
+
+        if (!is_subclass_of($paginationClass, PaginationInterface::class)) {
+            $paginationClass = $this->fallbackPaginationClass;
+        }
+
+        return GeneralUtility::makeInstance($paginationClass, $paginator);
     }
 }

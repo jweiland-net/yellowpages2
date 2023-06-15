@@ -1,19 +1,19 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
 <f:if condition="{company.images}">
-	<ul>
-		<f:for each="{company.images}" as="image" iteration="iterator">
-			<f:if condition="{image}">
-				<li>
-					<f:image image="{image}"
-							 alt="{image.title}"
-							 width="{settings.show.images.width}"
-							 height="{settings.show.images.height}" />
-				</li>
-			</f:if>
-		</f:for>
-	</ul>
+    <ul>
+        <f:for each="{company.images}" as="image" iteration="iterator">
+            <f:if condition="{image}">
+                <li>
+                    <f:image image="{image}"
+                             alt="{image.title}"
+                             width="{settings.show.images.width}"
+                             height="{settings.show.images.height}"/>
+                </li>
+            </f:if>
+        </f:for>
+    </ul>
 </f:if>
 </html>

@@ -1,25 +1,25 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 <f:section name="main">
-	<f:flashMessages />
+    <f:flashMessages/>
 
-	<f:security.ifHasRole role="{settings.userGroup}">
-		<f:then>
-			<f:render partial="Company/List" arguments="{companies: companies}" />
-		</f:then>
-		<f:else>
-			<div>You do not have access to visit this page</div>
-		</f:else>
-	</f:security.ifHasRole>
+    <f:security.ifHasRole role="{settings.userGroup}">
+        <f:then>
+            <f:render partial="Company/List" arguments="{companies: companies}"/>
+        </f:then>
+        <f:else>
+            <div>You do not have access to visit this page</div>
+        </f:else>
+    </f:security.ifHasRole>
 
-	<div>
-		<f:link.action action="list" controller="Company" pageUid="{settings.pidOfListPage}">
-			{f:translate(key: 'backToList')}
-		</f:link.action>
-	</div>
+    <div>
+        <f:link.action action="list" controller="Company" pageUid="{settings.pidOfListPage}">
+            {f:translate(key: 'backToList')}
+        </f:link.action>
+    </div>
 </f:section>
 </html>

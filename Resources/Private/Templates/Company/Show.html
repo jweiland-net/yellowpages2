@@ -1,16 +1,16 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 <f:section name="main">
-	<f:render partial="Company/Properties" arguments="{company:company}" />
+    <f:render partial="Company/Properties" arguments="{company:company}"/>
 
-	<div>
-		<f:link.action action="list" controller="Company" pageUid="{settings.pidOfListPage}">
-			{f:translate(key: 'backToList')}
-		</f:link.action>
-	</div>
+    <div>
+        <f:link.action action="list" controller="Company" pageUid="{settings.pidOfListPage}">
+            {f:translate(key: 'backToList')}
+        </f:link.action>
+    </div>
 </f:section>
 </html>

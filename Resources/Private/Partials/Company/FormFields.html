@@ -1,33 +1,41 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:render partial="Company/Field" arguments="{number: 1, field: 'company', type: 'text', css: 'input', mandatory: 'yes'}" />
-<f:render partial="Company/Field" arguments="{number: 4, field: 'street', type: 'text', css: 'input', mandatory: 'yes'}" />
-<f:render partial="Company/Field" arguments="{number: 5, field: 'houseNumber', type: 'text', css: 'input', mandatory: 'yes'}" />
-<f:render partial="Company/Field" arguments="{number: 6, field: 'zip', type: 'text', css: 'input', mandatory: 'yes'}" />
-<f:render partial="Company/Field" arguments="{number: 7, field: 'city', type: 'text', css: 'input', mandatory: 'yes'}" />
-<f:render partial="Company/Field" arguments="{number: 16, field: 'district', type: 'select', options: districts, value: company.district.uid, css: 'input', mandatory: 'yes'}"/>
+<f:render partial="Company/Field"
+          arguments="{number: 1, field: 'company', type: 'text', css: 'input', mandatory: 'yes'}"/>
+<f:render partial="Company/Field"
+          arguments="{number: 4, field: 'street', type: 'text', css: 'input', mandatory: 'yes'}"/>
+<f:render partial="Company/Field"
+          arguments="{number: 5, field: 'houseNumber', type: 'text', css: 'input', mandatory: 'yes'}"/>
+<f:render partial="Company/Field" arguments="{number: 6, field: 'zip', type: 'text', css: 'input', mandatory: 'yes'}"/>
+<f:render partial="Company/Field" arguments="{number: 7, field: 'city', type: 'text', css: 'input', mandatory: 'yes'}"/>
+<f:render partial="Company/Field"
+          arguments="{number: 16, field: 'district', type: 'select', options: districts, value: company.district.uid, css: 'input', mandatory: 'yes'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
 <f:render partial="Company/Field" arguments="{number: 8, field: 'telephone', type: 'text', css: 'input'}"/>
 <f:render partial="Company/Field" arguments="{number: 9, field: 'fax', type: 'text', css: 'input'}"/>
-<f:render partial="Company/Field" arguments="{number: 11, field: 'email', type: 'text', css: 'input'}" />
-<f:render partial="Company/Field" arguments="{number: 12, field: 'website', type: 'text', css: 'input'}" />
+<f:render partial="Company/Field" arguments="{number: 11, field: 'email', type: 'text', css: 'input'}"/>
+<f:render partial="Company/Field" arguments="{number: 12, field: 'website', type: 'text', css: 'input'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
 <f:render partial="Company/Field" arguments="{number: 10, field: 'contactPerson', type: 'text', css: 'input'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
-<f:render partial="Company/Field" arguments="{number: 13, field: 'openingTimes', type: 'textarea', css: 'input'}" />
+<f:render partial="Company/Field" arguments="{number: 13, field: 'openingTimes', type: 'textarea', css: 'input'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
-<f:render partial="Company/Field" arguments="{number: 15, field: 'description', type: 'textarea', css: 'input', mandatory: 'yes'}" />
+<f:render partial="Company/Field"
+          arguments="{number: 15, field: 'description', type: 'textarea', css: 'input', mandatory: 'yes'}"/>
 <f:render partial="Company/Field" arguments="{number: 14, field: 'barrierFree', type: 'check', css: 'input'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
-<f:render partial="Company/Field" arguments="{number: 17, field: 'mainTrade', type: 'mainTrade', options: categories, company: company, css: 'select', mandatory: 'yes'}" />
-<f:render partial="Company/Field" arguments="{number: 18, field: 'trades', type: 'trades', options: categories, company: company, css: 'select'}" />
+<f:render partial="Company/Field"
+          arguments="{number: 17, field: 'mainTrade', type: 'mainTrade', options: categories, company: company, css: 'select', mandatory: 'yes'}"/>
+<f:render partial="Company/Field"
+          arguments="{number: 18, field: 'trades', type: 'trades', options: categories, company: company, css: 'select'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
-<f:render partial="Company/Field" arguments="{number: 19, field: 'facebook', type: 'text', css: 'input'}" />
-<f:render partial="Company/Field" arguments="{number: 20, field: 'twitter', type: 'text', css: 'input'}" />
-<f:render partial="Company/Field" arguments="{number: 21, field: 'instagram', type: 'text', css: 'input'}" />
+<f:render partial="Company/Field" arguments="{number: 19, field: 'facebook', type: 'text', css: 'input'}"/>
+<f:render partial="Company/Field" arguments="{number: 20, field: 'twitter', type: 'text', css: 'input'}"/>
+<f:render partial="Company/Field" arguments="{number: 21, field: 'instagram', type: 'text', css: 'input'}"/>
 <div class="csc-frame-rulerAfter clearer"></div>
 <f:render partial="Company/Field" arguments="{number: 2, field: 'logo', type: 'logo', company: company, css: 'file'}"/>
-<f:render partial="Company/Field" arguments="{number: 3, field: 'images', type: 'images', company: company, css: 'file'}"/>
+<f:render partial="Company/Field"
+          arguments="{number: 3, field: 'images', type: 'images', company: company, css: 'file'}"/>
 </html>

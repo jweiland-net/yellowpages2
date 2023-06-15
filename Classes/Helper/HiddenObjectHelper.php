@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Domain\Repository\HiddenRepositoryInterface;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
 use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
@@ -40,13 +42,16 @@ class HiddenObjectHelper
         if ($repository instanceof HiddenRepositoryInterface) {
             $objectRaw = $request->getArgument($argumentName);
             if (is_array($objectRaw)) {
-                // get object from form ($_POST)
+                // Get object from form ($_POST)
                 $object = $repository->findHiddenObject((int)$objectRaw['__identity']);
             } else {
-                // get object from UID
+                // Get object from UID
                 $object = $repository->findHiddenObject((int)$objectRaw);
             }
-            $this->session->registerObject($object, $object ? $object->getUid() : null);
+
+            if ($object instanceof DomainObjectInterface) {
+                $this->session->registerObject($object, $object->getUid());
+            }
         }
     }
 }

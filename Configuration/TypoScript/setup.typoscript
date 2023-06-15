@@ -73,6 +73,7 @@ plugin.tx_yellowpages2 {
     }
 
     pageBrowser {
+      class = JWeiland\Yellowpages2\Pagination\CompanyPagination
       itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
     }
   }

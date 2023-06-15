@@ -1,17 +1,17 @@
 <html lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:render section="uploadImage" arguments="{image: event.images.0, index: '0', position: '1'}" />
-<f:render section="uploadImage" arguments="{image: event.images.1, index: '1', position: '2'}" />
-<f:render section="uploadImage" arguments="{image: event.images.2, index: '2', position: '3'}" />
-<f:render section="uploadImage" arguments="{image: event.images.3, index: '3', position: '4'}" />
-<f:render section="uploadImage" arguments="{image: event.images.4, index: '4', position: '5'}" />
+<f:render section="uploadImage" arguments="{image: event.images.0, index: '0', position: '1'}"/>
+<f:render section="uploadImage" arguments="{image: event.images.1, index: '1', position: '2'}"/>
+<f:render section="uploadImage" arguments="{image: event.images.2, index: '2', position: '3'}"/>
+<f:render section="uploadImage" arguments="{image: event.images.3, index: '3', position: '4'}"/>
+<f:render section="uploadImage" arguments="{image: event.images.4, index: '4', position: '5'}"/>
 
 <f:section name="uploadImage">
-	<f:if condition="{image}">
-		<f:image image="{image}" alt="Bild{position}" />
-	</f:if>
-	<f:form.upload property="images.{index}" id="images_{index}" />
+    <f:if condition="{image}">
+        <f:image image="{image}" alt="Bild{position}"/>
+    </f:if>
+    <f:form.upload property="images.{index}" id="images_{index}"/>
 </f:section>
 </html>

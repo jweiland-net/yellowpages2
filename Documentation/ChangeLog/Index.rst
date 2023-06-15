@@ -7,6 +7,12 @@
 ChangeLog
 =========
 
+Version 6.1.0
+=============
+
+*   Migrate repo back to Extbase Query
+*   Simplify implementation of own Pagination with TypoScript
+
 Version 6.0.0
 =============
 

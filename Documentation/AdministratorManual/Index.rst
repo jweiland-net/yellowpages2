@@ -16,4 +16,5 @@ Administrator manual
     :titlesonly:
 
     Routes/Index
+    Pagination/Index
     Upgrade/Index
