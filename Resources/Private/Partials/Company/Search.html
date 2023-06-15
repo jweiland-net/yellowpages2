@@ -5,7 +5,11 @@
 <f:form action="search" name="search">
     <div>
         <div>
-            <f:form.select name="category" options="{categories}" value="{category}"/>
+            <f:form.select name="category"
+                           options="{categories}"
+                           value="{category}"
+                           optionValueField="uid"
+                           optionLabelField="title"/>
         </div>
     </div>
 

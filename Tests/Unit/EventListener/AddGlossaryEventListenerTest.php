@@ -66,7 +66,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
 
         $this->companyRepositoryProphecy = $this->prophesize(CompanyRepository::class);
         $this->companyRepositoryProphecy
-            ->getQueryBuilderToFindAllEntries()
+            ->getExtbaseQueryToFindAllEntries()
             ->willReturn($this->queryBuilderProphecy->reveal());
 
         $this->eventProphecy = $this->prophesize(PostProcessFluidVariablesEvent::class);

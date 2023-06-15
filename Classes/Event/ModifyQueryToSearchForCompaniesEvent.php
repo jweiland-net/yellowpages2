@@ -11,17 +11,17 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Event;
 
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
- * Modify query in CompanyRepository to search for companies by various constraints
+ * Modify QueryResult in CompanyRepository to search for companies by various constraints
  */
 class ModifyQueryToSearchForCompaniesEvent
 {
     /**
-     * @var QueryBuilder
+     * @var QueryResultInterface
      */
-    protected $queryBuilder;
+    protected $queryResult;
 
     /**
      * @var string
@@ -38,17 +38,17 @@ class ModifyQueryToSearchForCompaniesEvent
      */
     protected $settings;
 
-    public function __construct(QueryBuilder $queryBuilder, string $searchWord, int $categoryUid, array $settings)
+    public function __construct(QueryResultInterface $queryResult, string $searchWord, int $categoryUid, array $settings)
     {
-        $this->queryBuilder = $queryBuilder;
+        $this->queryResult = $queryResult;
         $this->searchWord = $searchWord;
         $this->categoryUid = $categoryUid;
         $this->settings = $settings;
     }
 
-    public function getQueryBuilder(): QueryBuilder
+    public function getQueryResult(): QueryResultInterface
     {
-        return $this->queryBuilder;
+        return $this->queryResult;
     }
 
     public function getSearchWord(): string
