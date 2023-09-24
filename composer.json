@@ -4,7 +4,7 @@
 	"description": "With this extension you can build your own industry directory",
 	"license": "GPL-2.0-or-later",
 	"keywords": ["typo3", "TYPO3 CMS", "yellowpages", "industry", "directory"],
-	"homepage": "https://www.jweiland.net",
+	"homepage": "https://jweiland.net",
 	"authors": [
 		{
 			"name": "Stefan Froemken",
@@ -28,6 +28,9 @@
 		"phpunit/phpunit": "^9.5",
 		"phpspec/prophecy-phpunit": "^2.0",
 		"jweiland/maps2": ">=9.3.0"
+	},
+	"replace": {
+		"typo3-ter/yellowpages2": "self.version"
 	},
 	"autoload": {
 		"psr-4": {
