@@ -91,7 +91,8 @@ class CategoryRepository extends Repository
                 $queryBuilder->expr()->isNotNull(
                     'c.uid'
                 )
-            );
+            )
+            ->orderBy('title');
 
         return $query->statement($queryBuilder)->execute();
     }
