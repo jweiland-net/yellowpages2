@@ -78,7 +78,7 @@ class CategoryRepository extends Repository
                     )
                 )
             )
-            ->join(
+            ->leftJoin(
                 'sc_mm',
                 'tx_yellowpages2_domain_model_company',
                 'c',
@@ -92,7 +92,8 @@ class CategoryRepository extends Repository
                     'c.uid'
                 )
             )
-            ->orderBy('title');
+            ->groupBy('sc.uid')
+            ->orderBy('sc.title');
 
         return $query->statement($queryBuilder)->execute();
     }
