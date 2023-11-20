@@ -11,9 +11,12 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use JWeiland\Yellowpages2\Domain\Traits\GetLanguageStatementTrait;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -26,12 +29,24 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CategoryRepository extends Repository
 {
+    use GetLanguageStatementTrait;
+
     /**
      * @var array
      */
     protected $defaultOrderings = [
         'title' => QueryInterface::ORDER_ASCENDING,
     ];
+
+    /**
+     * @var CompanyRepository
+     */
+    protected $companyRepository;
+
+    public function injectCompanyRepository(CompanyRepository $companyRepository): void
+    {
+        $this->companyRepository = $companyRepository;
+    }
 
     public function initializeObject(): void
     {
@@ -42,59 +57,93 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Find all sys_category records which have a relation to a company record
+     * Needed for search partial to just list categories which have a company record assigned.
+     * There is no possibility to get all categories which are assigned to a company with extbase
+     * query (col "items" may contain various kinds of records). That's why we have to use the
+     * Doctrine QueryBuilder here.
      */
     public function findRelated(): QueryResultInterface
     {
         $query = $this->createQuery();
 
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('sys_category');
-        $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->select('sc.*')
+            // Keep '*' for workspaces and translation
+            ->select('*')
+            ->from('tx_yellowpages2_domain_model_company', 'tx_yellowpages2_domain_model_company')
             ->leftJoin(
-                'sc',
+                'tx_yellowpages2_domain_model_company',
                 'sys_category_record_mm',
-                'sc_mm',
+                'sys_category_record_mm',
                 (string)$queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
-                        'sc_mm.tablenames',
+                        'sys_category_record_mm.tablenames',
                         $queryBuilder->createNamedParameter('tx_yellowpages2_domain_model_company')
                     ),
                     $queryBuilder->expr()->orX(
                         $queryBuilder->expr()->eq(
-                            'sc_mm.fieldname',
+                            'sys_category_record_mm.fieldname',
                             $queryBuilder->createNamedParameter('main_trade')
                         ),
                         $queryBuilder->expr()->eq(
-                            'sc_mm.fieldname',
-                            $queryBuilder->createNamedParameter('main_trade')
+                            'sys_category_record_mm.fieldname',
+                            $queryBuilder->createNamedParameter('trades')
                         ),
                     ),
                     $queryBuilder->expr()->eq(
-                        'sc_mm.uid_local',
-                        $queryBuilder->quoteIdentifier('sc.uid')
+                        'sys_category_record_mm.uid_foreign',
+                        $queryBuilder->quoteIdentifier('tx_yellowpages2_domain_model_company.uid')
                     )
                 )
             )
-            ->join(
-                'sc_mm',
-                'tx_yellowpages2_domain_model_company',
-                'c',
+            ->leftJoin(
+                'sys_category_record_mm',
+                'sys_category',
+                'sys_category',
                 $queryBuilder->expr()->eq(
-                    'sc_mm.uid_foreign',
-                    $queryBuilder->quoteIdentifier('c.uid')
+                    'sys_category_record_mm.uid_local',
+                    $queryBuilder->quoteIdentifier('sys_category.uid')
                 )
             )
-            ->from('sys_category', 'sc')
             ->where(
                 $queryBuilder->expr()->isNotNull(
-                    'c.uid'
+                    'sys_category.uid'
+                ),
+                $queryBuilder->expr()->in(
+                    'tx_yellowpages2_domain_model_company.pid',
+                    $this->getQuerySettingsOfCompany()->getStoragePageIds()
                 )
             )
-            ->orderBy('title');
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    ...$this->getLanguageStatement(
+                        'tx_yellowpages2_domain_model_company',
+                    'tx_yellowpages2_domain_model_company',
+                        $this->getQuerySettingsOfCompany(),
+                        $queryBuilder
+                    )
+                )
+            )
+            ->orderBy('sys_category.title', 'ASC')
+            ->groupBy('sys_category.uid');
 
         return $query->statement($queryBuilder)->execute();
+    }
+
+    /**
+     * Get QuerySettings for company records. Needed for translation and to select companies by requested PID.
+     */
+    protected function getQuerySettingsOfCompany(): QuerySettingsInterface
+    {
+        return $this->companyRepository->createQuery()->getQuerySettings();
+    }
+
+    protected function getQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('sys_category');
+        $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
+
+        return $queryBuilder;
     }
 
     protected function getConnectionPool(): ConnectionPool

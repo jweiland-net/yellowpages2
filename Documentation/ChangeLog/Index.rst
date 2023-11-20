@@ -7,6 +7,13 @@
 ChangeLog
 =========
 
+Version 6.1.1
+=============
+
+*   Order list of categories by their title in search partial
+*   Repair fetchRelated method to also fetch company records by trades
+*   Prevent cartesian product in fetchRelated method of CategoryRepository
+
 Version 6.1.0
 =============
 
