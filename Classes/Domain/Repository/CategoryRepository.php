@@ -42,7 +42,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Find all sys_category records which have a relation to a company record
+     * Needed for search partial to just list categories which have a company record assigned.
      */
     public function findRelated(): QueryResultInterface
     {
@@ -52,6 +52,7 @@ class CategoryRepository extends Repository
         $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
         $queryBuilder
             ->select('sc.*')
+            ->from('sys_category', 'sc')
             ->leftJoin(
                 'sc',
                 'sys_category_record_mm',
@@ -68,7 +69,7 @@ class CategoryRepository extends Repository
                         ),
                         $queryBuilder->expr()->eq(
                             'sc_mm.fieldname',
-                            $queryBuilder->createNamedParameter('main_trade')
+                            $queryBuilder->createNamedParameter('trades')
                         ),
                     ),
                     $queryBuilder->expr()->eq(
@@ -86,7 +87,6 @@ class CategoryRepository extends Repository
                     $queryBuilder->quoteIdentifier('c.uid')
                 )
             )
-            ->from('sys_category', 'sc')
             ->where(
                 $queryBuilder->expr()->isNotNull(
                     'c.uid'
