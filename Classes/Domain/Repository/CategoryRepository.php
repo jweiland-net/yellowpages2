@@ -11,18 +11,16 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
-use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Traits\GetLanguageStatementTrait;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
-use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Repository for TYPO3 categories
@@ -69,8 +67,7 @@ class CategoryRepository extends Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(true);
 
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_yellowpages2_domain_model_company');
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             // Keep '*' for workspaces and translation
             ->select('*')
@@ -140,5 +137,18 @@ class CategoryRepository extends Repository
     protected function getQuerySettingsOfCompany(): QuerySettingsInterface
     {
         return $this->companyRepository->createQuery()->getQuerySettings();
+    }
+
+    protected function getQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('sys_category');
+        $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
+
+        return $queryBuilder;
+    }
+
+    protected function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }
