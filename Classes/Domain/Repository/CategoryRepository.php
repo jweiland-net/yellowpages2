@@ -65,7 +65,6 @@ class CategoryRepository extends Repository
     public function findRelated(): QueryResultInterface
     {
         $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(true);
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
