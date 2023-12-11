@@ -19,15 +19,9 @@ use TYPO3\CMS\Core\Mail\MailMessage;
  */
 class MailHelper
 {
-    /**
-     * @var MailMessage
-     */
-    protected $mailMessage;
+    protected MailMessage $mailMessage;
 
-    /**
-     * @var ExtConf
-     */
-    protected $extConf;
+    protected ExtConf $extConf;
 
     public function __construct(MailMessage $mailMessage, ExtConf $extConf)
     {

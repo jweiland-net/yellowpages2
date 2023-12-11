@@ -24,10 +24,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class CompanyTest extends UnitTestCase
 {
-    /**
-     * @var Company
-     */
-    protected $subject;
+    protected Company $subject;
 
     protected function setUp(): void
     {

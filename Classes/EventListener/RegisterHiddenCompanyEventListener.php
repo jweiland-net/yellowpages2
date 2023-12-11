@@ -20,17 +20,11 @@ use JWeiland\Yellowpages2\Helper\HiddenObjectHelper;
  */
 class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
 {
-    /**
-     * @var HiddenObjectHelper
-     */
-    protected $hiddenObjectHelper;
+    protected HiddenObjectHelper $hiddenObjectHelper;
 
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    protected $allowedControllerActions = [
+    protected array $allowedControllerActions = [
         'Company' => [
             'edit',
             'update',

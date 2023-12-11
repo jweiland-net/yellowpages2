@@ -19,10 +19,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class DistrictTest extends UnitTestCase
 {
-    /**
-     * @var District
-     */
-    protected $subject;
+    protected District $subject;
 
     protected function setUp(): void
     {

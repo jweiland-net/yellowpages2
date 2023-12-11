@@ -20,15 +20,9 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
  */
 class CompanyTest extends FunctionalTestCase
 {
-    /**
-     * @var Company
-     */
-    protected $subject;
+    protected Company $subject;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/maps2',
     ];
 

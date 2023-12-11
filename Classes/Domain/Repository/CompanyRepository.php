@@ -34,10 +34,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         'company' => QueryInterface::ORDER_ASCENDING,
     ];
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
     public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
@@ -144,8 +141,6 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     /**
      * Find all records which are older than given days.
      * Hint: Needed by scheduler
-     *
-     * @return QueryResultInterface|Company[]
      */
     public function findOlderThan(int $days): QueryResultInterface
     {

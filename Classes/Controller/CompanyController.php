@@ -29,30 +29,15 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class CompanyController extends AbstractController
 {
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
 
-    /**
-     * @var DistrictRepository
-     */
-    protected $districtRepository;
+    protected DistrictRepository $districtRepository;
 
-    /**
-     * @var FeUserRepository
-     */
-    protected $feUserRepository;
+    protected FeUserRepository $feUserRepository;
 
-    /**
-     * @var MailHelper
-     */
-    protected $mailHelper;
+    protected MailHelper $mailHelper;
 
     public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {

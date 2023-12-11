@@ -29,10 +29,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var AddGlossaryEventListener
-     */
-    protected $subject;
+    protected AddGlossaryEventListener $subject;
 
     /**
      * @var QueryResultInterface|ObjectProphecy

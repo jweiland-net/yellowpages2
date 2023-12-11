@@ -25,10 +25,8 @@ class CacheUtility
      * Adds cache tags to page cache by event-records.
      * Following cache tags will be added to TSFE:
      * "tx_yellowpages2_uid_[company:uid]"
-     *
-     * @param array|QueryResultInterface $companyRecords
      */
-    public static function addCacheTagsByCompanyRecords($companyRecords): void
+    public static function addCacheTagsByCompanyRecords(QueryResultInterface $companyRecords): void
     {
         if (!self::getEnvironmentService()->isEnvironmentInFrontendMode()) {
             return;

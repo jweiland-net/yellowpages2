@@ -18,25 +18,13 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class ModifyQueryToSearchForCompaniesEvent
 {
-    /**
-     * @var QueryResultInterface
-     */
-    protected $queryResult;
+    protected QueryResultInterface $queryResult;
 
-    /**
-     * @var string
-     */
-    protected $searchWord;
+    protected string $searchWord;
 
-    /**
-     * @var int
-     */
-    protected $categoryUid;
+    protected int $categoryUid;
 
-    /**
-     * @var array
-     */
-    protected $settings;
+    protected array $settings;
 
     public function __construct(QueryResultInterface $queryResult, string $searchWord, int $categoryUid, array $settings)
     {

@@ -26,10 +26,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var PostProcessFluidVariablesEvent
-     */
-    protected $subject;
+    protected PostProcessFluidVariablesEvent $subject;
 
     /**
      * @var Request|ObjectProphecy

@@ -25,31 +25,17 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  */
 class Yellowpages2SlugUpdater implements UpgradeWizardInterface
 {
-    /**
-     * @var string
-     */
-    protected $tableName = 'tx_yellowpages2_domain_model_company';
+    protected string $tableName = 'tx_yellowpages2_domain_model_company';
 
-    /**
-     * @var string
-     */
-    protected $fieldName = 'path_segment';
+    protected string $fieldName = 'path_segment';
 
-    /**
-     * @var SlugHelper
-     */
-    protected $slugHelper;
+    protected SlugHelper $slugHelper;
 
-    /**
-     * @var array
-     */
-    protected $slugCache = [];
+    protected array $slugCache = [];
 
     /**
      * Return the identifier for this wizard
      * This should be the same string as used in the ext_localconf class registration
-     *
-     * @return string
      */
     public function getIdentifier(): string
     {
@@ -94,8 +80,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
 
     /**
      * Performs the accordant updates.
-     *
-     * @return bool Whether everything went smoothly or not
      */
     public function executeUpdate(): bool
     {
@@ -141,11 +125,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         return true;
     }
 
-    /**
-     * @param int $uid
-     * @param string $slug
-     * @return string
-     */
     protected function getUniqueValue(int $uid, string $slug): string
     {
         $statement = $this->getUniqueSlugStatement($uid, $slug);
@@ -201,9 +180,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         return $this->slugHelper;
     }
 
-    /**
-     * @return string[]
-     */
     public function getPrerequisites(): array
     {
         return [

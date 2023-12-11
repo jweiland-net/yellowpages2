@@ -33,10 +33,7 @@ class PostProcessControllerActionEvent implements ControllerActionEventInterface
      */
     protected $company;
 
-    /**
-     * @var array
-     */
-    protected $settings;
+    protected array $settings;
 
     public function __construct(
         ActionController $controller,
