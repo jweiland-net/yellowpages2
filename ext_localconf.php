@@ -1,5 +1,5 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
@@ -17,21 +17,6 @@ call_user_func(static function () {
             \JWeiland\Yellowpages2\Controller\MapController::class => 'create, update',
         ]
     );
-
-    // Register SVG Icon Identifier
-    $svgIcons = [
-        'ext-yellowpages2-directory-wizard-icon' => 'plugin_wizard.svg',
-    ];
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-        \TYPO3\CMS\Core\Imaging\IconRegistry::class
-    );
-    foreach ($svgIcons as $identifier => $fileName) {
-        $iconRegistry->registerIcon(
-            $identifier,
-            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:yellowpages2/Resources/Public/Icons/' . $fileName]
-        );
-    }
 
     // add yellowpages2 plugin to new element wizard
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(

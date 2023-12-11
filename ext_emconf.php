@@ -8,11 +8,11 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'projects@jweiland.net',
     'author_company' => 'jweiland.net',
     'state' => 'stable',
-    'version' => '6.1.1',
+    'version' => '7.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.37-11.5.99',
-            'glossary2' => '5.1.0-5.99.99',
+            'typo3' => '11.5.33-12.4.99',
+            'glossary2' => '6.0.0-6.99.99',
         ],
         'conflicts' => [
         ],
