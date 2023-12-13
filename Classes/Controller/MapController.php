@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
@@ -47,13 +48,14 @@ class MapController extends AbstractController
         $this->mailHelper = $mailHelper;
     }
 
-    public function newAction(Company $company): void
+    public function newAction(Company $company): ResponseInterface
     {
         $this->addNewPoiCollectionToCompany($company);
 
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
+        return $this->htmlResponse();
     }
 
     /**
@@ -76,11 +78,12 @@ class MapController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    public function editAction(Company $company): void
+    public function editAction(Company $company): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
+        return $this->htmlResponse();
     }
 
     /**
