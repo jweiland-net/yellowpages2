@@ -31,7 +31,7 @@ class SanitizeSearchWordEventListener extends AbstractControllerEventListener
             && $event->getRequest()->hasArgument('search')
         ) {
             $search = $event->getRequest()->getArgument('search');
-            $event->getRequest()->setArgument('search', htmlspecialchars($search));
+            $event->getRequest()->withArgument('search', htmlspecialchars($search));
         }
     }
 }
