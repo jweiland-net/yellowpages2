@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 6.1.2
+=============
+
+*   BUGFIX: Add tablemapping for FeUser object
+
 Version 6.1.1
 =============
 
