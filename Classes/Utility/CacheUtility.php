@@ -11,10 +11,9 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Utility;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Service\EnvironmentService;
 
 /*
  * Cache Utility class
@@ -26,9 +25,9 @@ class CacheUtility
      * Following cache tags will be added to TSFE:
      * "tx_yellowpages2_uid_[company:uid]"
      */
-    public static function addCacheTagsByCompanyRecords(QueryResultInterface $companyRecords): void
+    public static function addCacheTagsByCompanyRecords(array $companyRecords): void
     {
-        if (!self::getEnvironmentService()->isEnvironmentInFrontendMode()) {
+        if (!self::getApplicationType()->isFrontend()) {
             return;
         }
 
@@ -52,7 +51,7 @@ class CacheUtility
      */
     public static function addPageCacheTagsByQuery(QueryInterface $query): void
     {
-        if (!self::getEnvironmentService()->isEnvironmentInFrontendMode()) {
+        if (!self::getApplicationType()->isFrontend()) {
             return;
         }
 
@@ -68,8 +67,8 @@ class CacheUtility
         $GLOBALS['TSFE']->addCacheTags($cacheTags);
     }
 
-    protected static function getEnvironmentService(): EnvironmentService
+    protected static function getApplicationType(): ApplicationType
     {
-        return GeneralUtility::makeInstance(EnvironmentService::class);
+        return ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST']);
     }
 }
