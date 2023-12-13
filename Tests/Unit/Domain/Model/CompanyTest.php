@@ -13,10 +13,10 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
 
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
+use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -787,7 +787,7 @@ class CompanyTest extends UnitTestCase
      */
     public function setFeUserSetsFeUser(): void
     {
-        $instance = new FrontendUser();
+        $instance = new FeUser();
         $this->subject->setFeUser($instance);
 
         self::assertSame(
