@@ -61,5 +61,5 @@
 			"app-dir": ".Build",
 			"web-dir": ".Build/public"
 		}
-	},
+	}
 }
