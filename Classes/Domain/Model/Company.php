@@ -13,7 +13,6 @@ use JWeiland\Maps2\Domain\Model\PoiCollection;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -155,7 +154,7 @@ class Company extends AbstractEntity
     protected $txMaps2Uid;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @var \JWeiland\Yellowpages2\Domain\Model\FeUser
      */
     protected $feUser;
 
@@ -518,12 +517,12 @@ class Company extends AbstractEntity
         }
     }
 
-    public function getFeUser(): ?FrontendUser
+    public function getFeUser(): ?FeUser
     {
         return $this->feUser;
     }
 
-    public function setFeUser(FrontendUser $feUser): void
+    public function setFeUser(FeUser $feUser): void
     {
         $this->feUser = $feUser;
     }
