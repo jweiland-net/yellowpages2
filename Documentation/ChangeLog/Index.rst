@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 6.1.3
+=============
+
+*   TASK: Add .crowdin.yml to .gitattributes
+
 Version 6.1.2
 =============
 
