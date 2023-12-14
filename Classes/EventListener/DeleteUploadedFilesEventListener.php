@@ -40,7 +40,8 @@ class DeleteUploadedFilesEventListener extends AbstractControllerEventListener
             if ($company['logo'] !== []) {
                 unset($company['logo']);
             }
-            $event->getRequest()->setArgument($argumentName, $company);
+            // todo this needs to be changed
+            //$event->getRequest()->withArguments($company);
         }
     }
 }
