@@ -43,8 +43,3 @@ services:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
-
-  # Configure Middleware
-  JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware:
-    arguments:
-      $modifier: '@JWeiland\Yellowpages2\Modifier\NullModifier'
