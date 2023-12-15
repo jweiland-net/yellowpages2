@@ -7,6 +7,12 @@
 ChangeLog
 =========
 
+Version 7.0.0
+=============
+
+*   Compatibility fixes for TYPO3 12
+*   Deprecated methods replaced
+
 Version 6.1.3
 =============
 
