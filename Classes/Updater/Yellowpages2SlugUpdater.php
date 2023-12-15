@@ -62,7 +62,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             ->count('*')
             ->from($this->tableName)
             ->where(
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
                         $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
@@ -91,7 +91,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             ->select('uid', 'pid', 'company')
             ->from($this->tableName)
             ->where(
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
                         $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
