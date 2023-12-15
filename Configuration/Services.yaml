@@ -16,6 +16,7 @@ services:
   JWeiland\Yellowpages2\Hook\ClearCacheHook:
     public: true
 
+  # Register EventListeners
   JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener:
     tags:
       - name: event.listener
@@ -34,15 +35,6 @@ services:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
-  JWeiland\Yellowpages2\EventListener\RemoveEmptyTradesEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
-  JWeiland\Yellowpages2\EventListener\SanitizeSearchWordEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
-
   JWeiland\Yellowpages2\EventListener\UpdateCompanyPathSegmentEventListener:
     tags:
       - name: event.listener
@@ -51,3 +43,8 @@ services:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
+
+  # Configure Middleware
+  JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware:
+    arguments:
+      $modifier: '@JWeiland\Yellowpages2\Modifier\NullModifier'
