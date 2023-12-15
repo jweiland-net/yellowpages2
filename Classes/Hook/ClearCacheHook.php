@@ -18,10 +18,7 @@ use TYPO3\CMS\Core\Cache\CacheManager;
  */
 class ClearCacheHook
 {
-    /**
-     * @var CacheManager
-     */
-    protected $cacheManager;
+    protected CacheManager $cacheManager;
 
     public function __construct(CacheManager $cacheManager)
     {

@@ -18,15 +18,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class ModifyQueryToFindCompanyByLetterEvent
 {
-    /**
-     * @var QueryResultInterface
-     */
-    protected $queryResult;
+    protected QueryResultInterface $queryResult;
 
-    /**
-     * @var array
-     */
-    protected $settings;
+    protected array $settings;
 
     public function __construct(QueryResultInterface $queryResult, array $settings)
     {

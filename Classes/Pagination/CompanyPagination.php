@@ -17,20 +17,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CompanyPagination implements PaginationInterface
 {
-    /**
-     * @var string
-     */
-    protected $pluginNamespace = 'tx_yellowpages2_directory';
+    protected string $pluginNamespace = 'tx_yellowpages2_directory';
 
-    /**
-     * @var PaginatorInterface
-     */
-    protected $paginator;
+    protected PaginatorInterface $paginator;
 
-    /**
-     * @var array
-     */
-    protected $arguments = [];
+    protected array $arguments = [];
 
     public function __construct(PaginatorInterface $paginator)
     {

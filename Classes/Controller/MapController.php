@@ -26,20 +26,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class MapController extends AbstractController
 {
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    /**
-     * @var PersistenceManagerInterface
-     */
-    protected $persistenceManager;
+    protected PersistenceManagerInterface $persistenceManager;
 
-    /**
-     * @var MailHelper
-     */
-    protected $mailHelper;
+    protected MailHelper $mailHelper;
 
     public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
@@ -56,9 +47,6 @@ class MapController extends AbstractController
         $this->mailHelper = $mailHelper;
     }
 
-    /**
-     * @param Company $company
-     */
     public function newAction(Company $company): void
     {
         $this->addNewPoiCollectionToCompany($company);
@@ -70,8 +58,6 @@ class MapController extends AbstractController
 
     /**
      * "create" means adding a new poi to company, but company itself has to be updated
-     *
-     * @param Company $company
      */
     public function createAction(Company $company): void
     {
@@ -90,9 +76,6 @@ class MapController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param Company $company
-     */
     public function editAction(Company $company): void
     {
         $this->postProcessAndAssignFluidVariables([
@@ -108,9 +91,6 @@ class MapController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param Company $company
-     */
     public function updateAction(Company $company): void
     {
         // If an admin edits this hidden record, mail should not be sent.
@@ -129,8 +109,6 @@ class MapController extends AbstractController
 
     /**
      * Add new PoiCollection to Company, if company is new
-     *
-     * @param Company $company
      * @throws \Exception
      */
     protected function addNewPoiCollectionToCompany(Company $company): void

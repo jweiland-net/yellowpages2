@@ -10,7 +10,6 @@
 namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -21,21 +20,14 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Company extends AbstractEntity
 {
-    /**
-     * @var bool
-     */
-    protected $hidden = false;
+    protected bool $hidden = false;
 
     /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $company = '';
+    protected string $company = '';
 
-    /**
-     * @var string
-     */
-    protected $pathSegment = '';
+    protected string $pathSegment = '';
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
@@ -50,75 +42,48 @@ class Company extends AbstractEntity
     protected $images;
 
     /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $street = '';
+    protected string $street = '';
 
     /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $houseNumber = '';
+    protected string $houseNumber = '';
 
     /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $zip = '';
+    protected string $zip = '';
 
     /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $city = '';
+    protected string $city = '';
+
+    protected string $telephone = '';
+
+    protected string $fax = '';
+
+    protected string $contactPerson = '';
+
+    protected string $email = '';
+
+    protected string $website = '';
+
+    protected string $openingTimes = '';
+
+    protected bool $barrierFree = false;
 
     /**
-     * @var string
-     */
-    protected $telephone = '';
-
-    /**
-     * @var string
-     */
-    protected $fax = '';
-
-    /**
-     * @var string
-     */
-    protected $contactPerson = '';
-
-    /**
-     * @var string
-     */
-    protected $email = '';
-
-    /**
-     * @var string
-     */
-    protected $website = '';
-
-    /**
-     * @var string
-     */
-    protected $openingTimes = '';
-
-    /**
-     * @var bool
-     */
-    protected $barrierFree = false;
-
-    /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
-     * @var \JWeiland\Yellowpages2\Domain\Model\District
      * @Extbase\Validate("NotEmpty")
      */
-    protected $district;
+    protected District $district;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
@@ -133,30 +98,15 @@ class Company extends AbstractEntity
      */
     protected $trades;
 
-    /**
-     * @var string
-     */
-    protected $facebook = '';
+    protected string $facebook = '';
 
-    /**
-     * @var string
-     */
-    protected $twitter = '';
+    protected string $twitter = '';
 
-    /**
-     * @var string
-     */
-    protected $instagram = '';
+    protected string $instagram = '';
 
-    /**
-     * @var \JWeiland\Maps2\Domain\Model\PoiCollection
-     */
-    protected $txMaps2Uid;
+    protected PoiCollection $txMaps2Uid;
 
-    /**
-     * @var \JWeiland\Yellowpages2\Domain\Model\FeUser
-     */
-    protected $feUser;
+    protected FeUser $feUser;
 
     public function __construct()
     {
@@ -406,9 +356,6 @@ class Company extends AbstractEntity
         $this->district = $district;
     }
 
-    /**
-     * @return Category[]
-     */
     public function getMainTrade(): array
     {
         return $this->mainTrade->toArray();
@@ -443,9 +390,6 @@ class Company extends AbstractEntity
         $this->mainTrade->detach($mainTrade);
     }
 
-    /**
-     * @return Category[]
-     */
     public function getTrades(): array
     {
         return $this->trades->toArray();

@@ -21,21 +21,16 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 class Category extends AbstractEntity
 {
     /**
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $title = '';
+    protected string $title = '';
+
+    protected string $description = '';
 
     /**
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * @var \JWeiland\Yellowpages2\Domain\Model\Category|null
      * @Extbase\ORM\Lazy
      */
-    protected $parent;
+    protected ?Category $parent;
 
     public function getTitle(): string
     {

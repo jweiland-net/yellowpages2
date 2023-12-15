@@ -18,7 +18,7 @@ use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
  */
 class RemoveEmptyTradesEventListener extends AbstractControllerEventListener
 {
-    protected $allowedControllerActions = [
+    protected array $allowedControllerActions = [
         'Company' => [
             'create',
             'update',

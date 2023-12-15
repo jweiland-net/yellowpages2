@@ -19,7 +19,7 @@ use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
  */
 class DeleteUploadedFilesEventListener extends AbstractControllerEventListener
 {
-    protected $allowedControllerActions = [
+    protected array $allowedControllerActions = [
         'Company' => [
             'create',
         ],

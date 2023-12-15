@@ -18,10 +18,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class District extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $district = '';
+    protected string $district = '';
 
     public function getDistrict(): string
     {

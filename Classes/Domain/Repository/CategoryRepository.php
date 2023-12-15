@@ -38,10 +38,7 @@ class CategoryRepository extends Repository
         'title' => QueryInterface::ORDER_ASCENDING,
     ];
 
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
     public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
