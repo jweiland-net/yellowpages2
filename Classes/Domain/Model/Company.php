@@ -104,9 +104,9 @@ class Company extends AbstractEntity
 
     protected string $instagram = '';
 
-    protected PoiCollection $txMaps2Uid;
+    protected ?PoiCollection $txMaps2Uid;
 
-    protected FeUser $feUser;
+    protected ?FeUser $feUser = null;
 
     public function __construct()
     {
