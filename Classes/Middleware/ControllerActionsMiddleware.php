@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This middleware handles the request variable for createAction [Company]
  * 1. Remove empty trades from request to prevent errors while storing/updating the FE record
- * 2. Files will be process by TypeConverter
+ * 2. Files will be processed by TypeConverter
  * But, if an error occurs, we have to remove them.
  * 3. Sanitize search keyword with htmlspecialchars
  */
