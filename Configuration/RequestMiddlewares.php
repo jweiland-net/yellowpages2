@@ -9,17 +9,8 @@
 
 return [
     'frontend' => [
-        'jweiland/yellowpages2/company-create' => [
-            'target' => \JWeiland\Yellowpages2\Middleware\CompanyCreateActionMiddleware::class,
-            'before' => [
-                'typo3/cms-frontend/prepare-tsfe-rendering',
-            ],
-            'after' => [
-                'typo3/cms-frontend/tsfe',
-            ],
-        ],
-        'jweiland/yellowpages2/company-search' => [
-            'target' => \JWeiland\Yellowpages2\Middleware\SearchActionSanitizeMiddleware::class,
+        'jweiland/yellowpages2/controller-actions-middleware' => [
+            'target' => \JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware::class,
             'before' => [
                 'typo3/cms-frontend/prepare-tsfe-rendering',
             ],
