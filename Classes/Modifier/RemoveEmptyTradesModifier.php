@@ -18,7 +18,6 @@ class RemoveEmptyTradesModifier implements RequestFieldModifierInterface
      */
     public function modify($data): array
     {
-        debug(func_get_args());
         $data['trades'] = array_filter($data['trades']);
         return $data;
     }
