@@ -42,7 +42,8 @@ class AbstractController extends ActionController
             new PostProcessControllerActionEvent(
                 $this,
                 $company,
-                $this->settings
+                $this->settings,
+                $this->request
             )
         );
     }
