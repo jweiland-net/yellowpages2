@@ -26,6 +26,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * Controller to list, show and search for companies
@@ -152,11 +153,14 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    public function createAction(Company $company): void
+    public function createAction(Company $company): ResponseInterface
     {
-        /** @var FrontendUser $feUser */
-        $feUser = $this->feUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-        $company->setFeUser($feUser);
+        $frontendUserAuthenticationObject = $this->request->getAttribute('frontend.user');
+        if ((int) $frontendUserAuthenticationObject->user['uid'] > 0) {
+            $feUser = $this->feUserRepository->findByUid($frontendUserAuthenticationObject->user['uid']);
+            $company->setFeUser($feUser);
+        }
+
         $this->companyRepository->add($company);
 
         $this->postProcessControllerAction($company);
@@ -171,7 +175,8 @@ class CompanyController extends AbstractController
         }
 
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
-        $this->redirect('listMyCompanies', 'Company');
+
+        return $this->redirect('listMyCompanies');
     }
 
     /**

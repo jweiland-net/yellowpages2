@@ -129,7 +129,7 @@ class MapController extends AbstractController
             $this->companyRepository->update($company);
             $this->persistenceManager->persistAll();
         } else {
-            $this->controllerContext->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
+            $this->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
             $this->redirect('edit', 'Company', null, ['company' => $company]);
         }
     }
