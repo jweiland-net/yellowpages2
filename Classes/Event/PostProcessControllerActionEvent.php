@@ -35,14 +35,18 @@ class PostProcessControllerActionEvent implements ControllerActionEventInterface
 
     protected array $settings;
 
+    protected Request $request;
+
     public function __construct(
         ActionController $controller,
         ?Company $company,
-        array $settings
+        array $settings,
+        Request $request
     ) {
         $this->controller = $controller;
         $this->company = $company;
         $this->settings = $settings;
+        $this->request = $request;
     }
 
     public function getController(): ActionController
@@ -62,7 +66,7 @@ class PostProcessControllerActionEvent implements ControllerActionEventInterface
 
     public function getRequest(): Request
     {
-        return $this->getController()->getControllerContext()->getRequest();
+        return $this->request;
     }
 
     public function getControllerName(): string

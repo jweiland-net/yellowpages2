@@ -31,19 +31,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ControllerActionsMiddleware implements MiddlewareInterface
 {
-    protected RequestFieldModifierInterface $modifier;
-
-    public function __construct(RequestFieldModifierInterface $modifier)
-    {
-        $this->modifier = $modifier;
-    }
+    protected ?RequestFieldModifierInterface $modifier = null;
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $requestBody = $request->getParsedBody();
 
         // Continue processing the request if it doesn't have plugin variables
-        if (!isset($requestBody['tx_yellowpages2_directory'])) {
+        if (!is_array($requestBody) || !isset($requestBody['tx_yellowpages2_directory'])) {
             return $handler->handle($request);
         }
 
@@ -69,7 +64,7 @@ class ControllerActionsMiddleware implements MiddlewareInterface
         return $this->sanitizeRequestField($request, 'company');
     }
 
-    protected function sanitizeRequestField(ServerRequestInterface $request, string $field, callable $modifier = null): ServerRequestInterface
+    protected function sanitizeRequestField(ServerRequestInterface $request, string $field): ServerRequestInterface
     {
         try {
             $requestBody = $request->getParsedBody();
