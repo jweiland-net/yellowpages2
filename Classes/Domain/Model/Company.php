@@ -84,7 +84,7 @@ class Company extends AbstractEntity
     /**
      * @Extbase\Validate("NotEmpty")
      */
-    protected District $district;
+    protected ?District $district = null;
 
     /**
      * @var ObjectStorage<Category>
@@ -105,7 +105,7 @@ class Company extends AbstractEntity
 
     protected string $instagram = '';
 
-    protected ?PoiCollection $txMaps2Uid;
+    protected ?PoiCollection $txMaps2Uid = null;
 
     protected ?FeUser $feUser = null;
 
@@ -450,9 +450,14 @@ class Company extends AbstractEntity
      * SF: Do not add PoiCollection as strict_type to $txMaps2Uid
      * as this will break DataMap in Extbase when maps2 is not installed.
      */
-    public function getTxMaps2Uid()
+    public function getTxMaps2Uid(): ?PoiCollection
     {
         return $this->txMaps2Uid;
+    }
+
+    public function hasTxMaps2Uid(): bool
+    {
+        return $this->txMaps2Uid instanceof PoiCollection;
     }
 
     public function setTxMaps2Uid($txMaps2Uid): void

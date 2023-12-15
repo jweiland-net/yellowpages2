@@ -57,7 +57,7 @@ trait GetLanguageStatementTrait
             ->select($defLangTableAlias . '.uid')
             ->from($tableName, $defLangTableAlias)
             ->where(
-                $defaultLanguageRecordsSubSelect->expr()->andX(
+                $defaultLanguageRecordsSubSelect->expr()->and(
                     $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $transOrigPointerField, 0),
                     $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $languageField, 0)
                 )
@@ -67,7 +67,7 @@ trait GetLanguageStatementTrait
         // records in language 'all'
         $andConditions[] = $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, -1);
         // translated records where a default language exists
-        $andConditions[] = $queryBuilder->expr()->andX(
+        $andConditions[] = $queryBuilder->expr()->and(
             $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, $querySettings->getLanguageUid()),
             $queryBuilder->expr()->in(
                 $tableAlias . '.' . $transOrigPointerField,
@@ -85,13 +85,13 @@ trait GetLanguageStatementTrait
                 ->select($translatedOnlyTableAlias . '.' . $transOrigPointerField)
                 ->from($tableName, $translatedOnlyTableAlias)
                 ->where(
-                    $queryBuilderForSubselect->expr()->andX(
+                    $queryBuilderForSubselect->expr()->and(
                         $queryBuilderForSubselect->expr()->gt($translatedOnlyTableAlias . '.' . $transOrigPointerField, 0),
                         $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, (int)$querySettings->getLanguageUid())
                     )
                 );
             // records in default language, which do not have a translation
-            $andConditions[] = $queryBuilder->expr()->andX(
+            $andConditions[] = $queryBuilder->expr()->and(
                 $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, 0),
                 $queryBuilder->expr()->notIn(
                     $tableAlias . '.uid',

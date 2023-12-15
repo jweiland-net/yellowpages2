@@ -72,12 +72,12 @@ class CategoryRepository extends Repository
                 'tx_yellowpages2_domain_model_company',
                 'sys_category_record_mm',
                 'sys_category_record_mm',
-                (string)$queryBuilder->expr()->andX(
+                (string)$queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.tablenames',
                         $queryBuilder->createNamedParameter('tx_yellowpages2_domain_model_company')
                     ),
-                    $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->or(
                         $queryBuilder->expr()->eq(
                             'sys_category_record_mm.fieldname',
                             $queryBuilder->createNamedParameter('main_trade')
@@ -112,7 +112,7 @@ class CategoryRepository extends Repository
                 )
             )
             ->andWhere(
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     ...$this->getLanguageStatement(
                         'tx_yellowpages2_domain_model_company',
                     'tx_yellowpages2_domain_model_company',
