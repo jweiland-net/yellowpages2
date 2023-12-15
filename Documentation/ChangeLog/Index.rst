@@ -13,6 +13,16 @@ Version 7.0.0
 *   Compatibility fixes for TYPO3 12
 *   Deprecated methods replaced
 
+Version 6.1.3
+=============
+
+*   TASK: Add .crowdin.yml to .gitattributes
+
+Version 6.1.2
+=============
+
+*   BUGFIX: Add tablemapping for FeUser object
+
 Version 6.1.1
 =============
 
