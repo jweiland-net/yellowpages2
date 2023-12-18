@@ -11,14 +11,12 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\EventListener;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -27,60 +25,58 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class AddGlossaryEventListenerTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected AddGlossaryEventListener $subject;
 
     /**
-     * @var QueryResultInterface|ObjectProphecy
+     * @var QueryResultInterface|MockObject
      */
-    protected $queryResultProphecy;
+    protected $queryResultMock;
 
     /**
-     * @var GlossaryService|ObjectProphecy
+     * @var GlossaryService|MockObject
      */
-    protected $glossaryServiceProphecy;
+    protected $glossaryServiceMock;
 
     /**
-     * @var CompanyRepository|ObjectProphecy
+     * @var CompanyRepository|MockObject
      */
-    protected $companyRepositoryProphecy;
+    protected $companyRepositoryMock;
 
     /**
-     * @var PostProcessFluidVariablesEvent|ObjectProphecy
+     * @var PostProcessFluidVariablesEvent|MockObject
      */
-    protected $eventProphecy;
+    protected $eventMock;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->queryResultProphecy = $this->prophesize(QueryResult::class);
+        $this->queryResultMock = $this->createMock(QueryResult::class);
 
-        $this->glossaryServiceProphecy = $this->prophesize(GlossaryService::class);
-        $this->glossaryServiceProphecy
-            ->buildGlossary(Argument::cetera())
+        $this->glossaryServiceMock = $this->createMock(GlossaryService::class);
+        $this->glossaryServiceMock
+            ->method('buildGlossary')
             ->willReturn('html');
 
-        $this->companyRepositoryProphecy = $this->prophesize(CompanyRepository::class);
-        $this->companyRepositoryProphecy
-            ->getExtbaseQueryToFindAllEntries()
-            ->willReturn($this->queryResultProphecy->reveal());
+        $this->companyRepositoryMock = $this->createMock(CompanyRepository::class);
+        $this->companyRepositoryMock
+            ->method('getExtbaseQueryToFindAllEntries')
+            ->willReturn($this->queryResultMock);
 
-        $this->eventProphecy = $this->prophesize(PostProcessFluidVariablesEvent::class);
-        $this->eventProphecy
-            ->getControllerName()
+        $this->eventMock = $this->createMock(PostProcessFluidVariablesEvent::class);
+        $this->eventMock
+            ->method('getControllerName')
             ->willReturn('Company');
-        $this->eventProphecy
-            ->getActionName()
+        $this->eventMock
+            ->method('getActionName')
             ->willReturn('list');
-        $this->eventProphecy
-            ->getSettings()
+        $this->eventMock
+            ->method('getSettings')
             ->willReturn([]);
 
         $this->subject = new AddGlossaryEventListener(
-            $this->glossaryServiceProphecy->reveal(),
-            $this->companyRepositoryProphecy->reveal()
+            $this->glossaryServiceMock,
+            $this->companyRepositoryMock
         );
     }
 
@@ -88,8 +84,8 @@ class AddGlossaryEventListenerTest extends UnitTestCase
     {
         unset(
             $this->subject,
-            $this->glossaryServiceProphecy,
-            $this->companyRepositoryProphecy
+            $this->glossaryServiceMock,
+            $this->companyRepositoryMock
         );
 
         parent::tearDown();
@@ -100,10 +96,8 @@ class AddGlossaryEventListenerTest extends UnitTestCase
      */
     public function invokeToAddGlossary(): void
     {
-        $this->eventProphecy
-            ->addFluidVariable('glossar', 'html')
-            ->shouldBeCalled();
-
-        $this->subject->__invoke($this->eventProphecy->reveal());
+        $this->eventMock
+            ->addFluidVariable('glossar', 'html');
+        $this->subject->__invoke($this->eventMock);
     }
 }

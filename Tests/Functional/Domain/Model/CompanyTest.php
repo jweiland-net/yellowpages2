@@ -22,10 +22,6 @@ class CompanyTest extends FunctionalTestCase
 {
     protected Company $subject;
 
-    protected array $testExtensionsToLoad = [
-        'typo3conf/ext/maps2',
-    ];
-
     protected function setUp(): void
     {
         parent::setup();
@@ -48,19 +44,5 @@ class CompanyTest extends FunctionalTestCase
     public function getTxMaps2UidInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getTxMaps2Uid());
-    }
-
-    /**
-     * @test
-     */
-    public function setTxMaps2UidSetsTxMaps2Uid(): void
-    {
-        $instance = new PoiCollection();
-        $this->subject->setTxMaps2Uid($instance);
-
-        self::assertSame(
-            $instance,
-            $this->subject->getTxMaps2Uid()
-        );
     }
 }

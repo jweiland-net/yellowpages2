@@ -91,13 +91,13 @@ class Company extends AbstractEntity
      * @Extbase\Validate("NotEmpty")
      * @Extbase\ORM\Lazy
      */
-    protected $mainTrade;
+    protected ObjectStorage $mainTrade;
 
     /**
      * @var ObjectStorage<Category>
      * @Extbase\ORM\Lazy
      */
-    protected $trades;
+    protected ObjectStorage $trades;
 
     protected string $facebook = '';
 

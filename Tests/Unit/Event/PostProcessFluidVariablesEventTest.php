@@ -14,8 +14,6 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
 /**
@@ -33,14 +31,14 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
 
         $this->requestMock = $this->createMock(Request::class);
         $this->requestMock
-            ->getControllerName()
+            ->method('getControllerName')
             ->willReturn('Company');
         $this->requestMock
-            ->getControllerActionName()
+            ->method('getControllerActionName')
             ->willReturn('list');
 
         $this->subject = new PostProcessFluidVariablesEvent(
-            $this->requestMock->reveal(),
+            $this->requestMock,
             [
                 'foo' => 'bar',
             ],
@@ -63,7 +61,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
     public function getRequestReturnsControllerRequest(): void
     {
         self::assertSame(
-            $this->requestMock->reveal(),
+            $this->requestMock,
             $this->subject->getRequest()
         );
     }
