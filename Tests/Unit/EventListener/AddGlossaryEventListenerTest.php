@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\EventListener;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
@@ -24,8 +24,6 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 class PreProcessControllerActionEventTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected PostProcessFluidVariablesEvent $subject;
 
     /**

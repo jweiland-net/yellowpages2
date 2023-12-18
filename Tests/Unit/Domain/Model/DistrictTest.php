@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Domain\Model\District;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case.

@@ -11,10 +11,11 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
@@ -25,40 +26,23 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 class PostProcessControllerActionEventTest extends UnitTestCase
 {
-    use ProphecyTrait;
+    protected PostProcessControllerActionEvent $subject;
 
-    /**
-     * @var PostProcessControllerActionEvent
-     */
-    protected $subject;
+    protected Company $companyMock;
 
-    /**
-     * @var Company|ObjectProphecy
-     */
-    protected $companyProphecy;
+    protected Request $requestMock;
 
-    /**
-     * @var Request|ObjectProphecy
-     */
-    protected $requestProphecy;
+    protected ControllerContext $controllerContextMock;
 
-    /**
-     * @var ControllerContext|ObjectProphecy
-     */
-    protected $controllerContextProphecy;
-
-    /**
-     * @var CompanyController|ObjectProphecy
-     */
-    protected $companyControllerProphecy;
+    protected CompanyController $companyControllerMock;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->companyProphecy = $this->prophesize(Company::class);
+        $this->companyMock = $this->createMock(Company::class);
 
-        $this->requestProphecy = $this->prophesize(Request::class);
+        $this->requestProphecy = $this->createMock(Request::class);
         $this->requestProphecy
             ->getControllerName()
             ->willReturn('Company');

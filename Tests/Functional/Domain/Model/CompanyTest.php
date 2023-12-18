@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Functional\Domain\Model;
 
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Yellowpages2\Domain\Model\Company;
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 
 /**
  * Test case.
