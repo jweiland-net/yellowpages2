@@ -10,7 +10,11 @@ ChangeLog
 Version 7.0.0
 =============
 
-*   Compatibility fixes for TYPO3 12
+*   Compatibility fixes for TYPO3 12 LTS
+*   New Middleware implementations related to company create form
+*   New Test cases for testing Middleware
+*   Removed hard dependency with extension maps2
+*   Testing Framework migrated to TYPO3 Testing Framework
 *   Deprecated methods replaced
 
 Version 6.1.3
