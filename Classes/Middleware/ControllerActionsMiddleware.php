@@ -25,8 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This middleware handles the request variable for createAction [Company]
  * 1. Remove empty trades from request to prevent errors while storing/updating the FE record
- * 2. Files will be processed by TypeConverter
- * But, if an error occurs, we have to remove them.
+ * 2. Files will be processed by TypeConverter. But, if an error occurs, we have to remove them.
  * 3. Sanitize search keyword with htmlspecialchars
  */
 class ControllerActionsMiddleware implements MiddlewareInterface
@@ -37,11 +36,13 @@ class ControllerActionsMiddleware implements MiddlewareInterface
     {
         $requestBody = $request->getParsedBody();
 
-        // Continue processing the request if it doesn't have plugin variables
+        // Continue processing the request if it doesn't have the plugin variables
         if (!is_array($requestBody) || !isset($requestBody['tx_yellowpages2_directory'])) {
             return $handler->handle($request);
         }
 
+        // There are two implementation inside this middleware one for the company createAction
+        // and the other one is for searchAction
         if (isset($requestBody['tx_yellowpages2_directory']['company'])) {
             $request = $this->removeEmptyTradesFromRequestBody($request);
         } elseif (isset($requestBody['tx_yellowpages2_directory']['search'])) {
