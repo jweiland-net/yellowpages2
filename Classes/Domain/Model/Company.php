@@ -158,9 +158,6 @@ class Company extends AbstractEntity
         $this->pathSegment = $pathSegment;
     }
 
-    /**
-     * @return FileReference[]
-     */
     public function getLogo(): array
     {
         return $this->logo->toArray();
@@ -191,17 +188,11 @@ class Company extends AbstractEntity
         $this->logo->detach($logo);
     }
 
-    /**
-     * @return array|FileReference[]
-     */
     public function getImages(): array
     {
         return $this->images->toArray();
     }
 
-    /**
-     * @return ObjectStorage|\TYPO3\CMS\Core\Resource\FileReference[]
-     */
     public function getOriginalImages(): ObjectStorage
     {
         return $this->images;
@@ -482,8 +473,6 @@ class Company extends AbstractEntity
      *
      * Hint: In $GLOBALS all entries were saved as string. So uid has f.e. 3 chars
      * Security: An UID must be given. Else it can be that 0 === 0 returns true
-     *
-     * @return bool
      */
     public function getHasValidUser(): bool
     {
@@ -499,8 +488,6 @@ class Company extends AbstractEntity
     /**
      * Helper method to get the address of the record.
      * This is needed by Google Maps geocode API
-     *
-     * @return string
      */
     public function getAddress(): string
     {
@@ -510,8 +497,6 @@ class Company extends AbstractEntity
     /**
      * Helper method to build a baseRecord for path_segment
      * Needed in PathSegmentHelper
-     *
-     * @return array
      */
     public function getBaseRecordForPathSegment(): array
     {
