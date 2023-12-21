@@ -26,8 +26,8 @@ final class ControllerActionsTest extends UnitTestCase
         $handler = $this->createMock(RequestHandler::class);
         $handler->expects(self::atLeastOnce())
             ->method('handle')
-            ->with($this->callback(function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody) {
-                $this->assertEquals($expectedRequestBody, $capturedRequest->getParsedBody());
+            ->with($this->callback(static function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody): bool {
+                self::assertEquals($expectedRequestBody, $capturedRequest->getParsedBody());
                 return true;
             }))
             ->willReturn($this->createMock(ResponseInterface::class));
@@ -62,7 +62,7 @@ final class ControllerActionsTest extends UnitTestCase
                     ],
                 ],
             ],
-            'search action with null trades' => [
+            'search action with arguments needs to be sanitized html special chars' => [
                 'actual' => [
                     'tx_yellowpages2_directory' => [
                         'search' => 'bread & butter'
