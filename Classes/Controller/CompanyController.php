@@ -24,9 +24,7 @@ use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * Controller to list, show and search for companies
@@ -228,6 +226,9 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
+    /**
+     * @throws \Exception
+     */
     public function activateAction(int $company): void
     {
         /** @var Company $companyObject */
