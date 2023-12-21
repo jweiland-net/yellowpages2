@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <f:form.textfield name="search" value="{search}"/>
+        <f:form.textfield name="search" value="{f:format.htmlentitiesDecode(value: search)}"/>
     </div>
 
     <div>
