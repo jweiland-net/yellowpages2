@@ -11,14 +11,24 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
-class RemoveEmptyTradesModifierAbstract extends AbstractRequestFieldModifier
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
+
+class RemoveEmptyTradesModifier extends AbstractRequestFieldModifier
 {
-    /**
-     * @param mixed $data
-     */
-    public function modify($data): array
+    public function modify(array $requestBody): array
     {
-        $data['trades'] = array_filter($data['trades']);
-        return $data;
+        try {
+            $path = "tx_yellowpages2_directory/company";
+            $data = ArrayUtility::getValueByPath($requestBody, $path);
+
+            if (isset($data['trades']) && is_array($data['trades'])) {
+                $data['trades'] = array_filter($data['trades']);
+            }
+
+            return ArrayUtility::setValueByPath($requestBody, $path, $data);
+        } catch (MissingArrayPathException|\RuntimeException $exception) {
+            return  $requestBody;
+        }
     }
 }

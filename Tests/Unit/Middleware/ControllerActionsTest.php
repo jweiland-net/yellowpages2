@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Unit\Middleware;
 
 use JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware;
+use JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier;
+use JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Frontend\Http\RequestHandler;
@@ -32,7 +34,10 @@ final class ControllerActionsTest extends UnitTestCase
             }))
             ->willReturn($this->createMock(ResponseInterface::class));
 
+        // adding modifiers for the handler
         $subject = new ControllerActionsMiddleware();
+        $subject->addModifier(new HtmlspecialcharsModifier());
+        $subject->addModifier(new RemoveEmptyTradesModifier());
         $subject->process($request, $handler);
     }
 

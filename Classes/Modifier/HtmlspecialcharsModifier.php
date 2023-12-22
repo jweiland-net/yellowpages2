@@ -11,13 +11,23 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
+
 class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
 {
-    /**
-     * @param string $data
-     */
-    public function modify($data): string
+    public function modify(array $requestBody): array
     {
-        return htmlspecialchars($data);
+        try {
+            $path = "tx_yellowpages2_directory/search";
+
+            return ArrayUtility::setValueByPath(
+                $requestBody,
+                $path,
+                htmlspecialchars(ArrayUtility::getValueByPath($requestBody, $path))
+            );
+        } catch (MissingArrayPathException|\RuntimeException $exception) {
+            return  $requestBody;
+        }
     }
 }

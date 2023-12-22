@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
-class NullModifier extends AbstractRequestFieldModifier
+interface RequestFieldModifierInterface
 {
-    public function modify(array $requestBody): array
-    {
-        return $requestBody;
-    }
+    public function modify(array $requestBody): array;
 }
