@@ -154,7 +154,7 @@ class CompanyController extends AbstractController
     public function createAction(Company $company): ResponseInterface
     {
         $frontendUserAuthenticationObject = $this->request->getAttribute('frontend.user');
-        if ((int) $frontendUserAuthenticationObject->user['uid'] > 0) {
+        if ($frontendUserAuthenticationObject->user['uid'] > 0) {
             $feUser = $this->feUserRepository->findByUid($frontendUserAuthenticationObject->user['uid']);
             $company->setFeUser($feUser);
         }

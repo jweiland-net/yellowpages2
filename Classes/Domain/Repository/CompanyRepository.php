@@ -141,6 +141,8 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     /**
      * Find all records which are older than given days.
      * Hint: Needed by scheduler
+     *
+     * @return QueryResultInterface|Company[]
      */
     public function findOlderThan(int $days): QueryResultInterface
     {

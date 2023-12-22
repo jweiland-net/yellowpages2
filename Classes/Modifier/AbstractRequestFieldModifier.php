@@ -13,5 +13,4 @@ namespace JWeiland\Yellowpages2\Modifier;
 
 use JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware;
 
-abstract class AbstractRequestFieldModifier implements RequestFieldModifierInterface
-{}
+abstract class AbstractRequestFieldModifier implements RequestFieldModifierInterface {}

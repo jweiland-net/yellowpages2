@@ -158,6 +158,9 @@ class Company extends AbstractEntity
         $this->pathSegment = $pathSegment;
     }
 
+    /**
+     * @return FileReference[]
+     */
     public function getLogo(): array
     {
         return $this->logo->toArray();
@@ -188,11 +191,17 @@ class Company extends AbstractEntity
         $this->logo->detach($logo);
     }
 
+    /**
+     * @return array|FileReference[]
+     */
     public function getImages(): array
     {
         return $this->images->toArray();
     }
 
+    /**
+     * @return ObjectStorage|\TYPO3\CMS\Core\Resource\FileReference[]
+     */
     public function getOriginalImages(): ObjectStorage
     {
         return $this->images;
@@ -348,6 +357,9 @@ class Company extends AbstractEntity
         $this->district = $district;
     }
 
+    /**
+     * @return Category[]
+     */
     public function getMainTrade(): array
     {
         return $this->mainTrade->toArray();
@@ -441,7 +453,7 @@ class Company extends AbstractEntity
      * SF: Do not add PoiCollection as strict_type to $txMaps2Uid
      * as this will break DataMap in Extbase when maps2 is not installed.
      */
-    public function getTxMaps2Uid(): ?PoiCollection
+    public function getTxMaps2Uid()
     {
         return $this->txMaps2Uid;
     }

@@ -49,8 +49,8 @@
 								<foreign_table>tx_yellowpages2_domain_model_district</foreign_table>
 								<items type="array">
 									<numIndex index="0">
-										<label>LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose</label>
-										<value></value>
+										<numIndex index="0">LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose</numIndex>
+										<numIndex index="1" />
 									</numIndex>
 								</items>
 								<size>1</size>
