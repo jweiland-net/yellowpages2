@@ -394,6 +394,9 @@ class Company extends AbstractEntity
         $this->mainTrade->detach($mainTrade);
     }
 
+    /**
+     * @return Category[]
+     */
     public function getTrades(): array
     {
         return $this->trades->toArray();

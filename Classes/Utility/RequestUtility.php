@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace JWeiland\Yellowpages2\Utility;
-
 /*
  * This file is part of the package jweiland/yellowpages2.
  *
@@ -11,13 +9,14 @@ namespace JWeiland\Yellowpages2\Utility;
  * LICENSE file that was distributed with this source code.
  */
 
-/*
- * Request Utility class
- */
+namespace JWeiland\Yellowpages2\Utility;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use Psr\Http\Message\RequestInterface;
 
+/*
+ * Request Utility class
+ */
 class RequestUtility
 {
     /**
