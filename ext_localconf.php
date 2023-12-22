@@ -27,9 +27,6 @@ call_user_func(static function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['yellowpages2_clearcache']
         = \JWeiland\Yellowpages2\Hook\ClearCacheHook::class . '->clearCachePostProc';
 
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['yellowpages2UpdateSlug']
-        = \JWeiland\Yellowpages2\Updater\Yellowpages2SlugUpdater::class;
-
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][JWeiland\Yellowpages2\Tasks\Update::class] = [
         'extension' => 'yellowpages2',
         'title' => 'Inform users to update their company record',

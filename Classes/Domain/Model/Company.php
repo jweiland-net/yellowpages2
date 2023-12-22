@@ -11,6 +11,7 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -23,43 +24,33 @@ class Company extends AbstractEntity
 {
     protected bool $hidden = false;
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $company = '';
 
     protected string $pathSegment = '';
 
     /**
      * @var ObjectStorage<FileReference>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected $logo;
 
     /**
      * @var ObjectStorage<FileReference>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected $images;
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $street = '';
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $houseNumber = '';
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $zip = '';
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $city = '';
 
     protected string $telephone = '';
@@ -76,27 +67,23 @@ class Company extends AbstractEntity
 
     protected bool $barrierFree = false;
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $description = '';
 
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected ?District $district = null;
 
     /**
      * @var ObjectStorage<Category>
-     * @Extbase\Validate("NotEmpty")
-     * @Extbase\ORM\Lazy
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    #[Lazy]
     protected ObjectStorage $mainTrade;
 
     /**
      * @var ObjectStorage<Category>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $trades;
 
     protected string $facebook = '';

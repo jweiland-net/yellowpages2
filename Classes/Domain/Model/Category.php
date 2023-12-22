@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
@@ -20,16 +21,12 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
  */
 class Category extends AbstractEntity
 {
-    /**
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $title = '';
 
     protected string $description = '';
 
-    /**
-     * @Extbase\ORM\Lazy
-     */
+    #[Lazy]
     protected ?Category $parent;
 
     public function getTitle(): string

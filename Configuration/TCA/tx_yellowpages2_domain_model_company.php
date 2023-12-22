@@ -6,7 +6,6 @@ return [
         'label' => 'company',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY company',
         'versioningWS' => true,
         'origUid' => 't3_origuid',
@@ -49,19 +48,7 @@ return [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
-                        -1,
-                        'flags-multiple',
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -70,7 +57,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_yellowpages2_domain_model_company',
                 'foreign_table_where' => 'AND tx_yellowpages2_domain_model_company.pid=###CURRENT_PID### AND tx_yellowpages2_domain_model_company.sys_language_uid IN (-1,0)',
@@ -155,122 +142,22 @@ return [
         'logo' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.logo',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'logo',
-                [
-                    'minitems' => 0,
-                    'maxitems' => 1,
-                    'foreign_match_fields' => [
-                        'fieldname' => 'logo',
-                        'tablenames' => 'tx_yellowpages2_domain_model_company',
-                    ],
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true,
-                    ],
-                    'appearance' => [
-                        'createNewRelationLinkTitle' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.logo.add',
-                        'showPossibleLocalizationRecords' => true,
-                        'showRemovedLocalizationRecords' => true,
-                        'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true,
-                    ],
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_TEXT => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_AUDIO => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.audioOverlayPalette;audioOverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_VIDEO => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.videoOverlayPalette;videoOverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_APPLICATION => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                        ],
-                    ],
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'allowed' => 'common-media-types'
+            ],
         ],
         'images' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.images',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'images',
-                [
-                    'minitems' => 0,
-                    'maxitems' => 5,
-                    'foreign_match_fields' => [
-                        'fieldname' => 'images',
-                        'tablenames' => 'tx_yellowpages2_domain_model_company',
-                    ],
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true,
-                    ],
-                    'appearance' => [
-                        'createNewRelationLinkTitle' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.images.add',
-                        'showPossibleLocalizationRecords' => true,
-                        'showRemovedLocalizationRecords' => true,
-                        'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true,
-                    ],
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_TEXT => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_AUDIO => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.audioOverlayPalette;audioOverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_VIDEO => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.videoOverlayPalette;videoOverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                            \TYPO3\CMS\Core\Resource\AbstractFile::FILETYPE_APPLICATION => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette',
-                            ],
-                        ],
-                    ],
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'minitems' => 0,
+                'maxitems' => 5,
+                'allowed' => 'common-media-types'
+            ],
         ],
         'street' => [
             'exclude' => 1,

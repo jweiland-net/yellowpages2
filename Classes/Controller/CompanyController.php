@@ -78,10 +78,8 @@ class CompanyController extends AbstractController
         }
     }
 
-    /**
-     * @Validate("String", param="letter")
-     * @Validate("StringLength", param="letter", options={"minimum" = 0, "maximum" = 3})
-     */
+    #[Validate(['validator' => 'String', 'param' => 'letter'])]
+    #[Validate(['validator' => 'StringLength', 'param' => 'letter', 'options' => ['minimum' => 0, 'maximum' => 3]])]
     public function listAction(string $letter = ''): ResponseInterface
     {
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
@@ -185,9 +183,7 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @IgnoreValidation("company")
-     */
+    #[IgnoreValidation(['value' => 'company'])]
     public function editAction(Company $company): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([

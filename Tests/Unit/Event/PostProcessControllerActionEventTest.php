@@ -30,8 +30,6 @@ class PostProcessControllerActionEventTest extends UnitTestCase
 
     protected Request $requestMock;
 
-    protected ControllerContext $controllerContextMock;
-
     protected CompanyController $companyControllerMock;
 
     protected function setUp(): void

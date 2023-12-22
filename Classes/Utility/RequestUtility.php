@@ -47,7 +47,7 @@ class RequestUtility
      *
      * @return RequestInterface|null
      */
-    public static function getRequestFromGlobalVariable()
+    public static function getRequestFromGlobalVariable(): ?RequestInterface
     {
         return $GLOBALS['TYPO3_REQUEST'];
     }

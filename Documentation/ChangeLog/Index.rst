@@ -16,6 +16,7 @@ Version 7.0.0
 *   Removed hard dependency with extension maps2
 *   Testing Framework migrated to TYPO3 Testing Framework
 *   Deprecated methods replaced
+*   Removed support for TYPO3 11 LTS
 
 Version 6.1.3
 =============
