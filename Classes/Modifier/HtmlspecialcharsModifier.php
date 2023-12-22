@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
-class HtmlspecialcharsModifier implements RequestFieldModifierInterface
+class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
 {
     /**
      * @param string $data

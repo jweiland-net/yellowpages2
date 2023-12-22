@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
-class NullModifier implements RequestFieldModifierInterface
+class NullModifierAbstract extends AbstractRequestFieldModifier
 {
     /**
      * @param string $data

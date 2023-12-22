@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
-class RemoveEmptyTradesModifier implements RequestFieldModifierInterface
+class RemoveEmptyTradesModifierAbstract extends AbstractRequestFieldModifier
 {
     /**
      * @param mixed $data
