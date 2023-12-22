@@ -43,3 +43,22 @@ services:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
+
+  # Service Provider for tagged Modifier interfaces
+  yellowpages2.middleware.controller_actions_middleware:
+    class: JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware
+    arguments: [!tagged_iterator { tag: 'yellowpages2.request.modifiers' }]
+
+  # Modifiers for Middleware
+  JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier:
+    tags:
+      - name: 'yellowpages2.request.modifiers'
+        priority: 10
+  JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier:
+    tags:
+      - name: 'yellowpages2.request.modifiers'
+        priority: 20
+  JWeiland\Yellowpages2\Modifier\NullModifier:
+    tags:
+      - name: 'yellowpages2.request.modifiers'
+        priority: 30
