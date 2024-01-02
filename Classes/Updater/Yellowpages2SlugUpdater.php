@@ -90,7 +90,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
 
-        $statement = $queryBuilder
+        $queryResult = $queryBuilder
             ->select('uid', 'pid', 'company')
             ->from($this->tableName)
             ->where(
@@ -107,7 +107,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             ->executeQuery();
 
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
-        while ($recordToUpdate = $statement->fetchOne()) {
+        while ($recordToUpdate = $queryResult->fetchOne()) {
             if ((string)$recordToUpdate['company'] !== '') {
                 $slug = $this->getSlugHelper()->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(

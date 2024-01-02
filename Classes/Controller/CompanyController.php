@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use TYPO3\CMS\Extbase\Annotation\Validate;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
@@ -24,6 +22,8 @@ use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
