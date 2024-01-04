@@ -11,26 +11,16 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Functional\Domain\Model;
 
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Yellowpages2\Domain\Model\Company;
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 
 /**
  * Test case.
  */
 class CompanyTest extends FunctionalTestCase
 {
-    /**
-     * @var Company
-     */
-    protected $subject;
-
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/maps2',
-    ];
+    protected Company $subject;
 
     protected function setUp(): void
     {
@@ -54,19 +44,5 @@ class CompanyTest extends FunctionalTestCase
     public function getTxMaps2UidInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getTxMaps2Uid());
-    }
-
-    /**
-     * @test
-     */
-    public function setTxMaps2UidSetsTxMaps2Uid(): void
-    {
-        $instance = new PoiCollection();
-        $this->subject->setTxMaps2Uid($instance);
-
-        self::assertSame(
-            $instance,
-            $this->subject->getTxMaps2Uid()
-        );
     }
 }

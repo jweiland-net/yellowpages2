@@ -19,7 +19,7 @@ use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
  */
 class DeleteUploadedFilesEventListener extends AbstractControllerEventListener
 {
-    protected $allowedControllerActions = [
+    protected array $allowedControllerActions = [
         'Company' => [
             'create',
         ],
@@ -40,7 +40,8 @@ class DeleteUploadedFilesEventListener extends AbstractControllerEventListener
             if ($company['logo'] !== []) {
                 unset($company['logo']);
             }
-            $event->getRequest()->setArgument($argumentName, $company);
+            // todo this needs to be changed
+            //$event->getRequest()->withArguments($company);
         }
     }
 }

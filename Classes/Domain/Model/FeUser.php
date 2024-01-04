@@ -15,30 +15,15 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class FeUser extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @var string
-     */
-    protected $firstName = '';
+    protected string $firstName = '';
 
-    /**
-     * @var string
-     */
-    protected $middleName = '';
+    protected string $middleName = '';
 
-    /**
-     * @var string
-     */
-    protected $lastName = '';
+    protected string $lastName = '';
 
-    /**
-     * @var string
-     */
-    protected $company = '';
+    protected string $company = '';
 
     public function setName(string $name): void
     {

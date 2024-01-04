@@ -34,10 +34,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         'company' => QueryInterface::ORDER_ASCENDING,
     ];
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
     public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {

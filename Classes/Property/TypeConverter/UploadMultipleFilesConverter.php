@@ -76,10 +76,10 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     /**
      * This implementation always returns TRUE for this method.
+     * return true if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
      *
      * @param mixed  $source     the source data
      * @param string $targetType the type to convert to.
-     * @return bool true if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
      */
     public function canConvertFrom($source, string $targetType): bool
     {
@@ -239,9 +239,6 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     /**
      * Check, if we have a valid uploaded file
      * Error = 4: No file uploaded
-     *
-     * @param array $uploadedFile
-     * @return bool
      */
     protected function isValidUploadFile(array $uploadedFile): bool
     {
@@ -280,9 +277,6 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     /**
      * upload file and get a file reference object.
-     *
-     * @param array $source
-     * @return FileReference
      */
     protected function getExtbaseFileReference(array $source): FileReference
     {
@@ -294,9 +288,6 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     /**
      * Upload file and get a file reference object.
-     *
-     * @param array $source
-     * @return \TYPO3\CMS\Core\Resource\FileReference
      */
     protected function getCoreFileReference(array $source): \TYPO3\CMS\Core\Resource\FileReference
     {

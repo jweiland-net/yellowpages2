@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Model\FeUser;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -24,10 +24,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class CompanyTest extends UnitTestCase
 {
-    /**
-     * @var Company
-     */
-    protected $subject;
+    protected Company $subject;
 
     protected function setUp(): void
     {

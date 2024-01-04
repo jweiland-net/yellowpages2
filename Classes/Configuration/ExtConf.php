@@ -20,30 +20,15 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ExtConf implements SingletonInterface
 {
-    /**
-     * @var string
-     */
-    protected $editLink = '';
+    protected string $editLink = '';
 
-    /**
-     * @var string
-     */
-    protected $emailFromAddress = '';
+    protected string $emailFromAddress = '';
 
-    /**
-     * @var string
-     */
-    protected $emailFromName = '';
+    protected string $emailFromName = '';
 
-    /**
-     * @var string
-     */
-    protected $emailToAddress = '';
+    protected string $emailToAddress = '';
 
-    /**
-     * @var string
-     */
-    protected $emailToName = '';
+    protected string $emailToName = '';
 
     public function __construct()
     {

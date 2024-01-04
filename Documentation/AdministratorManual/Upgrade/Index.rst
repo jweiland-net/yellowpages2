@@ -7,6 +7,15 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Upgrade to Version 7.0.0
+========================
+
+This version is focussed on upgrading the compatibility version to TYPO3 version
+12 LTS. We moved some extension functionalities from PSR-14 Event Listeners to
+Middlewares as the request setArgument not possible anymore with TYPO3 version
+12.
+
+
 Upgrade to Version 6.1.0
 ========================
 

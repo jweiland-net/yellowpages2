@@ -11,45 +11,34 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Updater;
 
-use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Result;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * Updater to fill empty slug columns of company records
+ * Updated 12 LTS argument style as below for the Wizard
  */
+#[UpgradeWizard('yellowpages2UpdateSlug')]
 class Yellowpages2SlugUpdater implements UpgradeWizardInterface
 {
-    /**
-     * @var string
-     */
-    protected $tableName = 'tx_yellowpages2_domain_model_company';
+    protected string $tableName = 'tx_yellowpages2_domain_model_company';
 
-    /**
-     * @var string
-     */
-    protected $fieldName = 'path_segment';
+    protected string $fieldName = 'path_segment';
 
-    /**
-     * @var SlugHelper
-     */
-    protected $slugHelper;
+    protected SlugHelper $slugHelper;
 
-    /**
-     * @var array
-     */
-    protected $slugCache = [];
+    protected array $slugCache = [];
 
     /**
      * Return the identifier for this wizard
      * This should be the same string as used in the ext_localconf class registration
-     *
-     * @return string
      */
     public function getIdentifier(): string
     {
@@ -76,7 +65,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             ->count('*')
             ->from($this->tableName)
             ->where(
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
                         $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
@@ -86,16 +75,14 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                     )
                 )
             )
-            ->execute()
-            ->fetchColumn();
+            ->executeQuery()
+            ->fetchOne();
 
         return (bool)$amountOfRecordsWithEmptySlug;
     }
 
     /**
      * Performs the accordant updates.
-     *
-     * @return bool Whether everything went smoothly or not
      */
     public function executeUpdate(): bool
     {
@@ -103,11 +90,11 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
 
-        $statement = $queryBuilder
+        $queryResult = $queryBuilder
             ->select('uid', 'pid', 'company')
             ->from($this->tableName)
             ->where(
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
                         $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
@@ -117,10 +104,10 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                     )
                 )
             )
-            ->execute();
+            ->executeQuery();
 
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
-        while ($recordToUpdate = $statement->fetch()) {
+        while ($recordToUpdate = $queryResult->fetchOne()) {
             if ((string)$recordToUpdate['company'] !== '') {
                 $slug = $this->getSlugHelper()->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(
@@ -141,11 +128,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         return true;
     }
 
-    /**
-     * @param int $uid
-     * @param string $slug
-     * @return string
-     */
     protected function getUniqueValue(int $uid, string $slug): string
     {
         $statement = $this->getUniqueSlugStatement($uid, $slug);
@@ -165,7 +147,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         return $newSlug ?? $slug;
     }
 
-    protected function getUniqueSlugStatement(int $uid, string $slug): Statement
+    protected function getUniqueSlugStatement(int $uid, string $slug): Result
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
         $queryBuilder->getRestrictions()->removeAll();
@@ -184,7 +166,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                     $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT)
                 )
             )
-            ->execute();
+            ->executeQuery();
     }
 
     protected function getSlugHelper(): SlugHelper
@@ -201,9 +183,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
         return $this->slugHelper;
     }
 
-    /**
-     * @return string[]
-     */
     public function getPrerequisites(): array
     {
         return [

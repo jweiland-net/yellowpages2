@@ -23,22 +23,13 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  */
 class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListener
 {
-    /**
-     * @var PathSegmentHelper
-     */
-    protected $pathSegmentHelper;
+    protected PathSegmentHelper $pathSegmentHelper;
 
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    /**
-     * @var PersistenceManagerInterface
-     */
-    protected $persistenceManager;
+    protected PersistenceManagerInterface $persistenceManager;
 
-    protected $allowedControllerActions = [
+    protected array $allowedControllerActions = [
         'Company' => [
             'create',
         ],

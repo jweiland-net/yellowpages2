@@ -11,6 +11,7 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -21,142 +22,79 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Company extends AbstractEntity
 {
-    /**
-     * @var bool
-     */
-    protected $hidden = false;
+    protected bool $hidden = false;
+
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected string $company = '';
+
+    protected string $pathSegment = '';
 
     /**
-     * @var string
-     * @Extbase\Validate("NotEmpty")
+     * @var ObjectStorage<FileReference>
      */
-    protected $company = '';
-
-    /**
-     * @var string
-     */
-    protected $pathSegment = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Extbase\ORM\Lazy
-     */
+    #[Lazy]
     protected $logo;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Extbase\ORM\Lazy
+     * @var ObjectStorage<FileReference>
      */
+    #[Lazy]
     protected $images;
 
-    /**
-     * @var string
-     * @Extbase\Validate("NotEmpty")
-     */
-    protected $street = '';
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected string $street = '';
+
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected string $houseNumber = '';
+
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected string $zip = '';
+
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected string $city = '';
+
+    protected string $telephone = '';
+
+    protected string $fax = '';
+
+    protected string $contactPerson = '';
+
+    protected string $email = '';
+
+    protected string $website = '';
+
+    protected string $openingTimes = '';
+
+    protected bool $barrierFree = false;
+
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected string $description = '';
+
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    protected ?District $district = null;
 
     /**
-     * @var string
-     * @Extbase\Validate("NotEmpty")
+     * @var ObjectStorage<Category>
      */
-    protected $houseNumber = '';
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    #[Lazy]
+    protected ObjectStorage $mainTrade;
 
     /**
-     * @var string
-     * @Extbase\Validate("NotEmpty")
+     * @var ObjectStorage<Category>
      */
-    protected $zip = '';
+    #[Lazy]
+    protected ObjectStorage $trades;
 
-    /**
-     * @var string
-     * @Extbase\Validate("NotEmpty")
-     */
-    protected $city = '';
+    protected string $facebook = '';
 
-    /**
-     * @var string
-     */
-    protected $telephone = '';
+    protected string $twitter = '';
 
-    /**
-     * @var string
-     */
-    protected $fax = '';
+    protected string $instagram = '';
 
-    /**
-     * @var string
-     */
-    protected $contactPerson = '';
+    protected ?PoiCollection $txMaps2Uid = null;
 
-    /**
-     * @var string
-     */
-    protected $email = '';
-
-    /**
-     * @var string
-     */
-    protected $website = '';
-
-    /**
-     * @var string
-     */
-    protected $openingTimes = '';
-
-    /**
-     * @var bool
-     */
-    protected $barrierFree = false;
-
-    /**
-     * @var string
-     * @Extbase\Validate("NotEmpty")
-     */
-    protected $description = '';
-
-    /**
-     * @var \JWeiland\Yellowpages2\Domain\Model\District
-     * @Extbase\Validate("NotEmpty")
-     */
-    protected $district;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     * @Extbase\Validate("NotEmpty")
-     * @Extbase\ORM\Lazy
-     */
-    protected $mainTrade;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     * @Extbase\ORM\Lazy
-     */
-    protected $trades;
-
-    /**
-     * @var string
-     */
-    protected $facebook = '';
-
-    /**
-     * @var string
-     */
-    protected $twitter = '';
-
-    /**
-     * @var string
-     */
-    protected $instagram = '';
-
-    /**
-     * @var \JWeiland\Maps2\Domain\Model\PoiCollection
-     */
-    protected $txMaps2Uid;
-
-    /**
-     * @var \JWeiland\Yellowpages2\Domain\Model\FeUser
-     */
-    protected $feUser;
+    protected ?FeUser $feUser = null;
 
     public function __construct()
     {
@@ -510,6 +448,11 @@ class Company extends AbstractEntity
         return $this->txMaps2Uid;
     }
 
+    public function hasTxMaps2Uid(): bool
+    {
+        return $this->txMaps2Uid instanceof PoiCollection;
+    }
+
     public function setTxMaps2Uid($txMaps2Uid): void
     {
         if ($txMaps2Uid instanceof PoiCollection) {
@@ -532,8 +475,6 @@ class Company extends AbstractEntity
      *
      * Hint: In $GLOBALS all entries were saved as string. So uid has f.e. 3 chars
      * Security: An UID must be given. Else it can be that 0 === 0 returns true
-     *
-     * @return bool
      */
     public function getHasValidUser(): bool
     {
@@ -549,8 +490,6 @@ class Company extends AbstractEntity
     /**
      * Helper method to get the address of the record.
      * This is needed by Google Maps geocode API
-     *
-     * @return string
      */
     public function getAddress(): string
     {
@@ -560,8 +499,6 @@ class Company extends AbstractEntity
     /**
      * Helper method to build a baseRecord for path_segment
      * Needed in PathSegmentHelper
-     *
-     * @return array
      */
     public function getBaseRecordForPathSegment(): array
     {

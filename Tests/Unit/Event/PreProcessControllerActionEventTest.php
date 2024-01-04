@@ -11,11 +11,9 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
-use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
@@ -24,40 +22,35 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 class PreProcessControllerActionEventTest extends UnitTestCase
 {
-    use ProphecyTrait;
+    protected PreProcessControllerActionEvent $subject;
 
     /**
-     * @var PostProcessFluidVariablesEvent
+     * @var Request|MockObject
      */
-    protected $subject;
+    protected MockObject $requestMock;
 
     /**
-     * @var Request|ObjectProphecy
+     * @var Arguments|MockObject
      */
-    protected $requestProphecy;
-
-    /**
-     * @var Arguments|ObjectProphecy
-     */
-    protected $argumentsProphecy;
+    protected $argumentsMock;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->requestProphecy = $this->prophesize(Request::class);
-        $this->requestProphecy
-            ->getControllerName()
+        $this->requestMock = $this->createMock(Request::class);
+        $this->requestMock
+            ->method('getControllerName')
             ->willReturn('Company');
-        $this->requestProphecy
-            ->getControllerActionName()
+        $this->requestMock
+            ->method('getControllerActionName')
             ->willReturn('list');
 
-        $this->argumentsProphecy = $this->prophesize(Arguments::class);
+        $this->argumentsMock = $this->createMock(Arguments::class);
 
         $this->subject = new PreProcessControllerActionEvent(
-            $this->requestProphecy->reveal(),
-            $this->argumentsProphecy->reveal(),
+            $this->requestMock,
+            $this->argumentsMock,
             [
                 'foo' => 'bar',
             ]
@@ -77,7 +70,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
     public function getRequestReturnsControllerRequest(): void
     {
         self::assertSame(
-            $this->requestProphecy->reveal(),
+            $this->requestMock,
             $this->subject->getRequest()
         );
     }
@@ -110,7 +103,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
     public function getArgumentsReturnsArguments(): void
     {
         self::assertSame(
-            $this->argumentsProphecy->reveal(),
+            $this->argumentsMock,
             $this->subject->getArguments()
         );
     }

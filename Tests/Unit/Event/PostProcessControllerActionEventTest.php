@@ -11,12 +11,11 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
@@ -25,63 +24,36 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 class PostProcessControllerActionEventTest extends UnitTestCase
 {
-    use ProphecyTrait;
+    protected PostProcessControllerActionEvent $subject;
 
-    /**
-     * @var PostProcessControllerActionEvent
-     */
-    protected $subject;
+    protected Company $companyMock;
 
-    /**
-     * @var Company|ObjectProphecy
-     */
-    protected $companyProphecy;
+    protected Request $requestMock;
 
-    /**
-     * @var Request|ObjectProphecy
-     */
-    protected $requestProphecy;
-
-    /**
-     * @var ControllerContext|ObjectProphecy
-     */
-    protected $controllerContextProphecy;
-
-    /**
-     * @var CompanyController|ObjectProphecy
-     */
-    protected $companyControllerProphecy;
+    protected CompanyController $companyControllerMock;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->companyProphecy = $this->prophesize(Company::class);
+        $this->companyMock = $this->createMock(Company::class);
+        $this->companyControllerMock = $this->createMock(CompanyController::class);
 
-        $this->requestProphecy = $this->prophesize(Request::class);
-        $this->requestProphecy
-            ->getControllerName()
+        $this->requestMock = $this->createMock(Request::class);
+        $this->requestMock
+            ->method('getControllerName')
             ->willReturn('Company');
-        $this->requestProphecy
-            ->getControllerActionName()
+        $this->requestMock
+            ->method('getControllerActionName')
             ->willReturn('list');
 
-        $this->controllerContextProphecy = $this->prophesize(ControllerContext::class);
-        $this->controllerContextProphecy
-            ->getRequest()
-            ->willReturn($this->requestProphecy->reveal());
-
-        $this->companyControllerProphecy = $this->prophesize(CompanyController::class);
-        $this->companyControllerProphecy
-            ->getControllerContext()
-            ->willReturn($this->controllerContextProphecy->reveal());
-
         $this->subject = new PostProcessControllerActionEvent(
-            $this->companyControllerProphecy->reveal(),
-            $this->companyProphecy->reveal(),
+            $this->companyControllerMock,
+            $this->companyMock,
             [
                 'foo' => 'bar',
-            ]
+            ],
+            $this->requestMock
         );
     }
 
@@ -98,7 +70,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     public function getControllerReturnsActionController(): void
     {
         self::assertSame(
-            $this->companyControllerProphecy->reveal(),
+            $this->companyControllerMock,
             $this->subject->getController()
         );
     }
@@ -109,7 +81,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     public function getCompanyControllerReturnsCompanyController(): void
     {
         self::assertSame(
-            $this->companyControllerProphecy->reveal(),
+            $this->companyControllerMock,
             $this->subject->getCompanyController()
         );
     }
@@ -120,7 +92,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     public function getRequestReturnsControllerRequest(): void
     {
         self::assertSame(
-            $this->requestProphecy->reveal(),
+            $this->requestMock,
             $this->subject->getRequest()
         );
     }
@@ -153,7 +125,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     public function getCompanyReturnsCompany(): void
     {
         self::assertSame(
-            $this->companyProphecy->reveal(),
+            $this->companyMock,
             $this->subject->getCompany()
         );
     }

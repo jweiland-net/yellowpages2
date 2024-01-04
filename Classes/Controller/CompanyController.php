@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
@@ -21,7 +22,8 @@ use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -29,30 +31,15 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class CompanyController extends AbstractController
 {
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
 
-    /**
-     * @var DistrictRepository
-     */
-    protected $districtRepository;
+    protected DistrictRepository $districtRepository;
 
-    /**
-     * @var FeUserRepository
-     */
-    protected $feUserRepository;
+    protected FeUserRepository $feUserRepository;
 
-    /**
-     * @var MailHelper
-     */
-    protected $mailHelper;
+    protected MailHelper $mailHelper;
 
     public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
@@ -91,11 +78,9 @@ class CompanyController extends AbstractController
         }
     }
 
-    /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("String", param="letter")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("StringLength", param="letter", options={"minimum": 0, "maximum": 3})
-     */
-    public function listAction(string $letter = ''): void
+    #[Validate(['validator' => 'String', 'param' => 'letter'])]
+    #[Validate(['validator' => 'StringLength', 'param' => 'letter', 'options' => ['minimum' => 0, 'maximum' => 3]])]
+    public function listAction(string $letter = ''): ResponseInterface
     {
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
         $this->postProcessAndAssignFluidVariables([
@@ -103,9 +88,10 @@ class CompanyController extends AbstractController
             'categories' => $this->categoryRepository->findRelated(),
         ]);
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
+        return $this->htmlResponse();
     }
 
-    public function listMyCompaniesAction(): void
+    public function listMyCompaniesAction(): ResponseInterface
     {
         $companies = $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']);
         $this->postProcessAndAssignFluidVariables([
@@ -113,15 +99,17 @@ class CompanyController extends AbstractController
             'categories' => $this->categoryRepository->findRelated(),
         ]);
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
+        return $this->htmlResponse();
     }
 
-    public function showAction(int $company): void
+    public function showAction(int $company): ResponseInterface
     {
         $companyObject = $this->companyRepository->findByIdentifier($company);
         $this->postProcessAndAssignFluidVariables([
             'company' => $companyObject,
         ]);
         CacheUtility::addCacheTagsByCompanyRecords([$companyObject]);
+        return $this->htmlResponse();
     }
 
     public function initializeSearchAction(): void
@@ -129,7 +117,7 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    public function searchAction(string $search, int $category = 0): void
+    public function searchAction(string $search, int $category = 0): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([
             'search' => $search,
@@ -137,9 +125,10 @@ class CompanyController extends AbstractController
             'companies' => $this->companyRepository->searchCompanies($search, $category, $this->settings),
             'categories' => $this->categoryRepository->findRelated(),
         ]);
+        return $this->htmlResponse();
     }
 
-    public function newAction(): void
+    public function newAction(): ResponseInterface
     {
         $company = GeneralUtility::makeInstance(Company::class);
         $district = $this->districtRepository->findByUid($this->settings['uidOfDefaultDistrict']);
@@ -152,6 +141,7 @@ class CompanyController extends AbstractController
             'districts' => $this->districtRepository->getDistricts(),
             'categories' => $this->categoryRepository->findByParent($this->settings['startingUidForCategories']),
         ]);
+        return $this->htmlResponse();
     }
 
     public function initializeCreateAction(): void
@@ -159,11 +149,14 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    public function createAction(Company $company): void
+    public function createAction(Company $company): ResponseInterface
     {
-        /** @var FrontendUser $feUser */
-        $feUser = $this->feUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-        $company->setFeUser($feUser);
+        $frontendUserAuthenticationObject = $this->request->getAttribute('frontend.user');
+        if ($frontendUserAuthenticationObject->user['uid'] > 0) {
+            $feUser = $this->feUserRepository->findByUid($frontendUserAuthenticationObject->user['uid']);
+            $company->setFeUser($feUser);
+        }
+
         $this->companyRepository->add($company);
 
         $this->postProcessControllerAction($company);
@@ -178,7 +171,8 @@ class CompanyController extends AbstractController
         }
 
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
-        $this->redirect('listMyCompanies', 'Company');
+
+        return $this->redirect('listMyCompanies');
     }
 
     /**
@@ -189,16 +183,15 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("company")
-     */
-    public function editAction(Company $company): void
+    #[IgnoreValidation(['value' => 'company'])]
+    public function editAction(Company $company): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
             'districts' => $this->districtRepository->getDistricts(),
             'categories' => $this->categoryRepository->findByParent((int)$this->settings['startingUidForCategories']),
         ]);
+        return $this->htmlResponse();
     }
 
     public function initializeUpdateAction(): void
@@ -229,6 +222,9 @@ class CompanyController extends AbstractController
         $this->preProcessControllerAction();
     }
 
+    /**
+     * @throws \Exception
+     */
     public function activateAction(int $company): void
     {
         /** @var Company $companyObject */

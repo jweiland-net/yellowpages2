@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
@@ -26,20 +27,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class MapController extends AbstractController
 {
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    /**
-     * @var PersistenceManagerInterface
-     */
-    protected $persistenceManager;
+    protected PersistenceManagerInterface $persistenceManager;
 
-    /**
-     * @var MailHelper
-     */
-    protected $mailHelper;
+    protected MailHelper $mailHelper;
 
     public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
@@ -56,22 +48,18 @@ class MapController extends AbstractController
         $this->mailHelper = $mailHelper;
     }
 
-    /**
-     * @param Company $company
-     */
-    public function newAction(Company $company): void
+    public function newAction(Company $company): ResponseInterface
     {
         $this->addNewPoiCollectionToCompany($company);
 
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
+        return $this->htmlResponse();
     }
 
     /**
      * "create" means adding a new poi to company, but company itself has to be updated
-     *
-     * @param Company $company
      */
     public function createAction(Company $company): void
     {
@@ -90,14 +78,12 @@ class MapController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param Company $company
-     */
-    public function editAction(Company $company): void
+    public function editAction(Company $company): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
+        return $this->htmlResponse();
     }
 
     /**
@@ -108,9 +94,6 @@ class MapController extends AbstractController
         $this->preProcessControllerAction();
     }
 
-    /**
-     * @param Company $company
-     */
     public function updateAction(Company $company): void
     {
         // If an admin edits this hidden record, mail should not be sent.
@@ -129,8 +112,6 @@ class MapController extends AbstractController
 
     /**
      * Add new PoiCollection to Company, if company is new
-     *
-     * @param Company $company
      * @throws \Exception
      */
     protected function addNewPoiCollectionToCompany(Company $company): void
@@ -148,7 +129,7 @@ class MapController extends AbstractController
             $this->companyRepository->update($company);
             $this->persistenceManager->persistAll();
         } else {
-            $this->controllerContext->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
+            $this->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
             $this->redirect('edit', 'Company', null, ['company' => $company]);
         }
     }

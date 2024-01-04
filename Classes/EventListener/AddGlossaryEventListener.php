@@ -21,17 +21,11 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
  */
 class AddGlossaryEventListener extends AbstractControllerEventListener
 {
-    /**
-     * @var GlossaryService
-     */
-    protected $glossaryService;
+    protected GlossaryService $glossaryService;
 
-    /**
-     * @var CompanyRepository
-     */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
-    protected $allowedControllerActions = [
+    protected array $allowedControllerActions = [
         'Company' => [
             'list',
             'search',
@@ -51,7 +45,8 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
                 'glossar',
                 $this->glossaryService->buildGlossary(
                     $this->companyRepository->getExtbaseQueryToFindAllEntries(),
-                    $this->getOptions($event)
+                    $this->getOptions($event),
+                    $event->getRequest()
                 )
             );
         }

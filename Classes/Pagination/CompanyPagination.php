@@ -11,32 +11,22 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Pagination;
 
+use JWeiland\Yellowpages2\Utility\RequestUtility;
 use TYPO3\CMS\Core\Pagination\PaginationInterface;
 use TYPO3\CMS\Core\Pagination\PaginatorInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CompanyPagination implements PaginationInterface
 {
-    /**
-     * @var string
-     */
-    protected $pluginNamespace = 'tx_yellowpages2_directory';
+    protected string $pluginNamespace = 'tx_yellowpages2_directory';
 
-    /**
-     * @var PaginatorInterface
-     */
-    protected $paginator;
+    protected PaginatorInterface $paginator;
 
-    /**
-     * @var array
-     */
-    protected $arguments = [];
+    protected array $arguments = [];
 
     public function __construct(PaginatorInterface $paginator)
     {
         $this->paginator = $paginator;
-
-        foreach (GeneralUtility::_GPmerged($this->pluginNamespace) as $argumentName => $argument) {
+        foreach (RequestUtility::getMergedRequestArguments($this->pluginNamespace) as $argumentName => $argument) {
             if ($argumentName[0] === '_' && $argumentName[1] === '_') {
                 continue;
             }
