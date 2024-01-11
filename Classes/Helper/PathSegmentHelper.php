@@ -52,7 +52,7 @@ class PathSegmentHelper
     protected function getSlugHelper(): SlugHelper
     {
         // Add uid to slug, to prevent duplicates
-        $config = $GLOBALS['TCA']['tx_yellowpages2_domain_model_company']['columns']['path_segment']['config'];
+        $config = (array)($GLOBALS['TCA']['tx_yellowpages2_domain_model_company']['columns']['path_segment']['config'] ?? []);
         $config['generatorOptions']['fields'] = ['company', 'uid'];
 
         return GeneralUtility::makeInstance(

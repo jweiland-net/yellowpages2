@@ -36,15 +36,6 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
 
     protected array $slugCache = [];
 
-    /**
-     * Return the identifier for this wizard
-     * This should be the same string as used in the ext_localconf class registration
-     */
-    public function getIdentifier(): string
-    {
-        return 'yellowpages2UpdateSlug';
-    }
-
     public function getTitle(): string
     {
         return '[yellowpages2] Update Slug of company records';

@@ -55,6 +55,7 @@ class MapController extends AbstractController
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
+
         return $this->htmlResponse();
     }
 
@@ -70,6 +71,7 @@ class MapController extends AbstractController
         $this->sendMail('create', $company);
 
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
+
         $this->redirect('listMyCompanies', 'Company');
     }
 
@@ -107,6 +109,7 @@ class MapController extends AbstractController
         $this->postProcessControllerAction($company);
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
+
         $this->redirect('listMyCompanies', 'Company');
     }
 
@@ -117,6 +120,7 @@ class MapController extends AbstractController
     protected function addNewPoiCollectionToCompany(Company $company): void
     {
         $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
+
         $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
         if ($position instanceof Position) {
             $poiCollection = GeneralUtility::makeInstance(PoiCollection::class);

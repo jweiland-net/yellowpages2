@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Configuration;
 
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -32,16 +34,17 @@ class ExtConf implements SingletonInterface
 
     public function __construct()
     {
-        // get global configuration
-        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('yellowpages2');
-        if (is_array($extConf) && count($extConf)) {
-            // call setter method foreach configuration entry
-            foreach ($extConf as $key => $value) {
-                $methodName = 'set' . ucfirst($key);
-                if (method_exists($this, $methodName)) {
-                    $this->$methodName((string)$value);
+        try {
+            $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('yellowpages2');
+            if (is_array($extConf) && $extConf !== []) {
+                foreach ($extConf as $key => $value) {
+                    $methodName = 'set' . ucfirst($key);
+                    if (method_exists($this, $methodName)) {
+                        $this->$methodName((string)$value);
+                    }
                 }
             }
+        } catch (ExtensionConfigurationExtensionNotConfiguredException | ExtensionConfigurationPathDoesNotExistException) {
         }
     }
 
@@ -57,14 +60,14 @@ class ExtConf implements SingletonInterface
 
     public function getEmailFromAddress(): string
     {
-        if (empty($this->emailFromAddress)) {
-            $senderMail = $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'];
-            if (empty($senderMail)) {
+        if ($this->emailFromAddress === '') {
+            $senderMail = (string)($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] ?? '');
+            if ($senderMail === '') {
                 throw new \InvalidArgumentException('You have forgotten to set a sender email address in extension configuration or in install tool');
             }
-
             return $senderMail;
         }
+
         return $this->emailFromAddress;
     }
 
@@ -75,14 +78,14 @@ class ExtConf implements SingletonInterface
 
     public function getEmailFromName(): string
     {
-        if (empty($this->emailFromName)) {
-            $senderName = $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'];
-            if (empty($senderName)) {
+        if ($this->emailFromName === '') {
+            $senderName = (string)($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] ?? '');
+            if ($senderName === '') {
                 throw new \InvalidArgumentException('You have forgotten to set a sender name in extension configuration or in install tool');
             }
-
             return $senderName;
         }
+
         return $this->emailFromName;
     }
 

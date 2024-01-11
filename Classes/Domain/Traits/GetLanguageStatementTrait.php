@@ -26,15 +26,14 @@ trait GetLanguageStatementTrait
         Typo3QuerySettings $querySettings,
         QueryBuilder $queryBuilder
     ): array {
-        if (empty($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])) {
+        $languageField = (string)$GLOBALS['TCA'][$tableName]['ctrl']['languageField'];
+        if ($languageField === '') {
             return [];
         }
 
         // Select all entries for the current language
         // If any language is set -> get those entries which are not translated yet
         // They will be removed by \TYPO3\CMS\Core\Domain\Repository\PageRepository::getRecordOverlay if not matching overlay mode
-        $languageField = $GLOBALS['TCA'][$tableName]['ctrl']['languageField'];
-
         $transOrigPointerField = $GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'] ?? '';
         if (!$transOrigPointerField || !$querySettings->getLanguageUid()) {
             return [$queryBuilder->expr()->in(
