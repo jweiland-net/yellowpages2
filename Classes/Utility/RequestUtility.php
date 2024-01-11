@@ -14,7 +14,7 @@ namespace JWeiland\Yellowpages2\Utility;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use Psr\Http\Message\RequestInterface;
 
-/*
+/**
  * Request Utility class
  */
 class RequestUtility

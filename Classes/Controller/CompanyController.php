@@ -87,7 +87,9 @@ class CompanyController extends AbstractController
             'companies' => $companies,
             'categories' => $this->categoryRepository->findRelated(),
         ]);
+
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
+
         return $this->htmlResponse();
     }
 
@@ -98,7 +100,9 @@ class CompanyController extends AbstractController
             'companies' => $companies,
             'categories' => $this->categoryRepository->findRelated(),
         ]);
+
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
+
         return $this->htmlResponse();
     }
 
@@ -108,7 +112,9 @@ class CompanyController extends AbstractController
         $this->postProcessAndAssignFluidVariables([
             'company' => $companyObject,
         ]);
+
         CacheUtility::addCacheTagsByCompanyRecords([$companyObject]);
+
         return $this->htmlResponse();
     }
 
@@ -125,12 +131,14 @@ class CompanyController extends AbstractController
             'companies' => $this->companyRepository->searchCompanies($search, $category, $this->settings),
             'categories' => $this->categoryRepository->findRelated(),
         ]);
+
         return $this->htmlResponse();
     }
 
     public function newAction(): ResponseInterface
     {
         $company = GeneralUtility::makeInstance(Company::class);
+
         $district = $this->districtRepository->findByUid($this->settings['uidOfDefaultDistrict']);
         if ($district instanceof District) {
             $company->setDistrict($district);
@@ -141,6 +149,7 @@ class CompanyController extends AbstractController
             'districts' => $this->districtRepository->getDistricts(),
             'categories' => $this->categoryRepository->findByParent($this->settings['startingUidForCategories']),
         ]);
+
         return $this->htmlResponse();
     }
 
@@ -191,6 +200,7 @@ class CompanyController extends AbstractController
             'districts' => $this->districtRepository->getDistricts(),
             'categories' => $this->categoryRepository->findByParent((int)$this->settings['startingUidForCategories']),
         ]);
+
         return $this->htmlResponse();
     }
 
@@ -214,6 +224,7 @@ class CompanyController extends AbstractController
         }
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
+
         $this->redirect('listMyCompanies', 'Company');
     }
 
@@ -237,6 +248,7 @@ class CompanyController extends AbstractController
         $this->postProcessAndAssignFluidVariables([
             'company' =>$companyObject,
         ]);
+
         $this->mailHelper->sendMail(
             $this->view->render(),
             LocalizationUtility::translate('email.subject.activate', 'yellowpages2')
