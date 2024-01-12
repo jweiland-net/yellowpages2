@@ -10,6 +10,11 @@ ChangeLog
 Version 6.1.3
 =============
 
+*   BUGFIX: Fix for taking care of district FlexForm configuration
+
+Version 6.1.3
+=============
+
 *   TASK: Add .crowdin.yml to .gitattributes
 
 Version 6.1.2
