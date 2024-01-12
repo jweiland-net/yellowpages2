@@ -17,6 +17,7 @@ Version 7.0.0
 *   Testing Framework migrated to TYPO3 Testing Framework
 *   Deprecated methods replaced
 *   Removed support for TYPO3 11 LTS
+*   BUGFIX: Fix Issue with Search Filter not repects district filter
 
 Version 6.1.3
 =============
