@@ -19,6 +19,11 @@ Version 7.0.0
 *   Removed support for TYPO3 11 LTS
 *   BUGFIX: Fix Issue with Search Filter not repects district filter
 
+Version 6.1.4
+=============
+
+*   BUGFIX: Fix for taking care of district FlexForm configuration
+
 Version 6.1.3
 =============
 
