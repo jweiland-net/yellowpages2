@@ -7,7 +7,7 @@
 ChangeLog
 =========
 
-Version 6.1.3
+Version 6.1.4
 =============
 
 *   BUGFIX: Fix for taking care of district FlexForm configuration
