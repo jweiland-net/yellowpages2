@@ -129,7 +129,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             $constraints[] = $query->logicalOr(...$orConstraints);
         }
 
-        if (isset($settings['district']) && $settings['district'] > 0) {
+        if ((int)($settings['district'] ?? 0) > 0) {
             $constraints[] = $query->equals('district', (int)$settings['district']);
         }
 
