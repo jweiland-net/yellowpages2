@@ -27,7 +27,7 @@ class Category extends AbstractEntity
     protected string $description = '';
 
     #[Lazy]
-    protected ?Category $parent = null;
+    protected Category|LazyLoadingProxy|null $parent = null;
 
     public function getTitle(): string
     {

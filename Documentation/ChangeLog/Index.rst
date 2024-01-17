@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 7.0.1
+=============
+
+*   BUGFIX: Category parent property lazy loading with LazyLoadingProxy type
+
 Version 7.0.0
 =============
 
