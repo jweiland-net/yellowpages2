@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 7.0.2
+=============
+
+*   Removed Dialogue.js (jquery ui dependent) and it's inclusion from TypoScript
+
 Version 7.0.1
 =============
 

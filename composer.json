@@ -23,7 +23,7 @@
 		"source": "https://github.com/jweiland-net/yellowpages2"
 	},
 	"require": {
-		"typo3/cms-core": "^12.4.8",
+		"typo3/cms-core": "^12.4.9",
 		"jweiland/glossary2": ">=6.0.0"
 	},
 	"require-dev": {
