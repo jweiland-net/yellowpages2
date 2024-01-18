@@ -7,11 +7,15 @@
 ChangeLog
 =========
 
+Version 7.0.2
+=============
+
+*   Removed Dialogue.js (jquery ui dependent) and it's inclusion from TypoScript
+
 Version 7.0.1
 =============
 
 *   BUGFIX: Category parent property lazy loading with LazyLoadingProxy type
-*   Removed Dialogue.js (jquery ui dependent) and it's inclusion from TypoScript
 
 Version 7.0.0
 =============
