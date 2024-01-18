@@ -11,10 +11,13 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use JWeiland\Yellowpages2\Domain\Model\FeUser;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Repository to manage frontend users
+ *
+ * @method FeUser findByUid(int $frontendUserUid)
  */
 class FeUserRepository extends Repository
 {

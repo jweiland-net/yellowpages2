@@ -21,7 +21,6 @@ use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -139,6 +138,11 @@ class CompanyController extends AbstractController
         ]);
     }
 
+    public function initializeNewAction(): void
+    {
+        $this->preProcessControllerAction();
+    }
+
     public function newAction(): void
     {
         $company = GeneralUtility::makeInstance(Company::class);
@@ -161,7 +165,6 @@ class CompanyController extends AbstractController
 
     public function createAction(Company $company): void
     {
-        /** @var FrontendUser $feUser */
         $feUser = $this->feUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
         $company->setFeUser($feUser);
         $this->companyRepository->add($company);

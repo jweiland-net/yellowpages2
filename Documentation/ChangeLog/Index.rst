@@ -7,6 +7,12 @@
 ChangeLog
 =========
 
+Version 6.1.5
+=============
+
+*   TASK: Remove DeleteUploadedFilesEventListener as invalid images already
+    will not be assigned to company in TypeConverter.
+
 Version 6.1.4
 =============
 
