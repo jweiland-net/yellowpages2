@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class UploadMultipleFilesConverter extends AbstractTypeConverter
 {
     /**
-     * @var array<string>
+     * @var array
      */
     protected $sourceTypes = ['array'];
 
@@ -125,6 +125,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                 }
                 continue;
             }
+
             // Check if uploaded file returns an error
             if ($uploadedFile['error'] !== 0) {
                 return new Error(
@@ -225,6 +226,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         }
 
         $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+
         try {
             $uploadFolder = $resourceFactory->getObjectFromCombinedIdentifier($combinedUploadFolderIdentifier);
         } catch (ResourceDoesNotExistException $exception) {
@@ -239,9 +241,6 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     /**
      * Check, if we have a valid uploaded file
      * Error = 4: No file uploaded
-     *
-     * @param array $uploadedFile
-     * @return bool
      */
     protected function isValidUploadFile(array $uploadedFile): bool
     {
@@ -260,8 +259,6 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     /**
      * If file is in our own upload folder we can delete it from filesystem and sys_file table.
-     *
-     * @param FileReference|null $extbaseFileReference
      */
     protected function deleteFile(?FileReference $extbaseFileReference): void
     {
@@ -280,9 +277,6 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     /**
      * upload file and get a file reference object.
-     *
-     * @param array $source
-     * @return FileReference
      */
     protected function getExtbaseFileReference(array $source): FileReference
     {
@@ -294,16 +288,13 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     /**
      * Upload file and get a file reference object.
-     *
-     * @param array $source
-     * @return \TYPO3\CMS\Core\Resource\FileReference
      */
     protected function getCoreFileReference(array $source): \TYPO3\CMS\Core\Resource\FileReference
     {
         $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
         $uploadedFile = $this->uploadFolder->addUploadedFile($source, DuplicationBehavior::RENAME);
 
-        // create Core FileReference
+        // Create Core FileReference
         return $resourceFactory->createFileReferenceObject(
             [
                 'uid_local' => $uploadedFile->getUid(),
@@ -313,11 +304,15 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         );
     }
 
+    /**
+     * Do not use constructor injection for that class as EXT:checkfaluploads might not be loaded
+     */
     protected function getFalUploadService(): FalUploadService
     {
         if ($this->falUploadService === null) {
             $this->falUploadService = GeneralUtility::makeInstance(FalUploadService::class);
         }
+
         return $this->falUploadService;
     }
 }
