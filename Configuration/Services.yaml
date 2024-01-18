@@ -39,10 +39,6 @@ services:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
-  JWeiland\Yellowpages2\EventListener\DeleteUploadedFilesEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
 
   # Service Provider for tagged Modifier interfaces
   yellowpages2.middleware.controller_actions_middleware:
