@@ -11,6 +11,8 @@ Version 7.0.2
 =============
 
 *   Removed Dialogue.js (jquery ui dependent) and it's inclusion from TypoScript
+*   TASK: Remove DeleteUploadedFilesEventListener as invalid images already
+    will not be assigned to company in TypeConverter.
 
 Version 7.0.1
 =============
