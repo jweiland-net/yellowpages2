@@ -135,6 +135,11 @@ class CompanyController extends AbstractController
         return $this->htmlResponse();
     }
 
+    public function initializeNewAction(): void
+    {
+        $this->preProcessControllerAction();
+    }
+
     public function newAction(): ResponseInterface
     {
         $company = GeneralUtility::makeInstance(Company::class);

@@ -23,7 +23,7 @@
 		"source": "https://github.com/jweiland-net/yellowpages2"
 	},
 	"require": {
-		"typo3/cms-core": "^12.4.9",
+		"typo3/cms-core": "^12.4.8",
 		"jweiland/glossary2": ">=6.0.0"
 	},
 	"require-dev": {
@@ -32,9 +32,6 @@
 		"roave/security-advisories": "dev-latest",
 		"typo3/coding-standards": "^0.6",
 		"typo3/testing-framework": "^7.0.2"
-	},
-	"replace": {
-		"typo3-ter/yellowpages2": "self.version"
 	},
 	"autoload": {
 		"psr-4": {
@@ -45,6 +42,9 @@
 		"psr-4": {
 			"JWeiland\\Yellowpages2\\Tests\\": "Tests"
 		}
+	},
+	"replace": {
+		"typo3-ter/yellowpages2": "self.version"
 	},
 	"config": {
 		"sort-packages": true,
