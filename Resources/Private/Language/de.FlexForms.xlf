@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2">
-		<header/>
-		<body>
-			<trans-unit id="sheetGeneral" xml:space="preserve">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="sheetGeneral" xml:space="preserve">
 				<source>General</source>
-				<target>Allgemein</target>
-			</trans-unit>
-			<trans-unit id="pidOfDetailPage" xml:space="preserve">
-				<source>PID of detail view</source>
-				<target>PID der Detailansicht</target>
-			</trans-unit>
-			<trans-unit id="pidOfListPage" xml:space="preserve">
-				<source>PID of list view</source>
-				<target>PID der Listenansicht</target>
-			</trans-unit>
-			<trans-unit id="presetTrade" xml:space="preserve">
+			<target state="needs-translation">General</target></trans-unit>
+      <trans-unit id="pidOfDetailPage">
+        <source>PID of detail page</source>
+        <target state="needs-translation">PID of detail page</target>
+      </trans-unit>
+      <trans-unit id="pidOfListPage">
+        <source>PID of list page</source>
+        <target state="needs-translation">PID of list page</target>
+      </trans-unit>
+      <trans-unit id="showWspMembers" xml:space="preserve">
+				<source>Show only WSP Members</source>
+			<target state="needs-translation">Show only WSP Members</target></trans-unit>
+      <trans-unit id="presetTrade" xml:space="preserve">
 				<source>Preset trade</source>
-				<target>Vorauswahl Branche</target>
-			</trans-unit>
-			<trans-unit id="district" xml:space="preserve">
+			<target state="needs-translation">Preset trade</target></trans-unit>
+      <trans-unit id="district" xml:space="preserve">
 				<source>District</source>
-				<target>Bezirk</target>
-			</trans-unit>
-		</body>
-	</file>
+			<target state="needs-translation">District</target></trans-unit>
+    </body>
+  </file>
 </xliff>
