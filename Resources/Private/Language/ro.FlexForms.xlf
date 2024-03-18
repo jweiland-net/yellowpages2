@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2" target-language="ro">
+    <header/>
+    <body>
+      <trans-unit id="sheetGeneral" xml:space="preserve">
+				<source>General</source>
+			<target state="needs-translation">General</target></trans-unit>
+      <trans-unit id="pidOfDetailPage">
+        <source>PID of detail page</source>
+        <target state="needs-translation">PID of detail page</target>
+      </trans-unit>
+      <trans-unit id="pidOfListPage">
+        <source>PID of list page</source>
+        <target state="needs-translation">PID of list page</target>
+      </trans-unit>
+      <trans-unit id="showWspMembers" xml:space="preserve">
+				<source>Show only WSP Members</source>
+			<target state="needs-translation">Show only WSP Members</target></trans-unit>
+      <trans-unit id="presetTrade" xml:space="preserve">
+				<source>Preset trade</source>
+			<target state="needs-translation">Preset trade</target></trans-unit>
+      <trans-unit id="district" xml:space="preserve">
+				<source>District</source>
+			<target state="needs-translation">District</target></trans-unit>
+    </body>
+  </file>
+</xliff>
