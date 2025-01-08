@@ -6,7 +6,6 @@
 
 <f:section name="main">
     <f:flashMessages/>
-
     <f:security.ifHasRole role="{settings.userGroup}">
         <f:then>
             <f:render partial="Company/List" arguments="{companies: companies}"/>
