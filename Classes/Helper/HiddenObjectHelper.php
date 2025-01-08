@@ -24,13 +24,13 @@ use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
 class HiddenObjectHelper
 {
     public function __construct(
-        protected readonly Session $session
+        protected readonly Session $session,
     ) {}
 
     public function registerHiddenObjectInExtbaseSession(
         RepositoryInterface $repository,
         RequestInterface $request,
-        string $argumentName
+        string $argumentName,
     ): void {
         // Ensure the repository supports hidden objects
         if (!$repository instanceof HiddenRepositoryInterface) {
@@ -51,7 +51,7 @@ class HiddenObjectHelper
 
     private function resolveHiddenObject(
         HiddenRepositoryInterface $repository,
-        mixed $objectRaw
+        mixed $objectRaw,
     ): void {
         // Handle raw data from form (array) or UID (integer/string)
         if (is_array($objectRaw) && isset($objectRaw['__identity'])) {

@@ -23,7 +23,7 @@ ExtensionUtility::registerPlugin(
 ExtensionManagementUtility::addPiFlexFormValue(
     '*',
     'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
-    'yellowpages2_directory'
+    'yellowpages2_directory',
 );
 
 ExtensionManagementUtility::addToAllTCAtypes(

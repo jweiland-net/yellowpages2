@@ -62,7 +62,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             $constraints[] = $glossaryService->getLetterConstraintForExtbaseQuery(
                 $query,
                 'company',
-                $letter
+                $letter,
             );
         }
 
@@ -139,7 +139,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         }
 
         $this->eventDispatcher->dispatch(
-            new ModifyQueryToSearchForCompaniesEvent($queryResult, $search, $categoryUid, $settings)
+            new ModifyQueryToSearchForCompaniesEvent($queryResult, $search, $categoryUid, $settings),
         );
 
         return $queryResult;

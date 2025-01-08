@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Domain\Traits;
 
 use TYPO3\CMS\Core\Context\LanguageAspect;
-use TYPO3\CMS\Core\Database\Query\Expression\CompositeExpression;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
@@ -26,7 +25,7 @@ trait GetLanguageStatementTrait
         string $tableName,
         string $tableAlias,
         Typo3QuerySettings $querySettings,
-        QueryBuilder $queryBuilder
+        QueryBuilder $queryBuilder,
     ): array | string {
         if (empty($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])) {
             return [];
@@ -43,14 +42,14 @@ trait GetLanguageStatementTrait
         if (!$transOrigPointerField || !$languageAspect->getContentId()) {
             return $queryBuilder->expr()->in(
                 $tableAlias . '.' . $languageField,
-                [$languageAspect->getContentId(), -1]
+                [$languageAspect->getContentId(), -1],
             );
         }
 
         if (!$languageAspect->doOverlays()) {
             return $queryBuilder->expr()->in(
                 $tableAlias . '.' . $languageField,
-                [$languageAspect->getContentId(), -1]
+                [$languageAspect->getContentId(), -1],
             );
         }
 
@@ -62,8 +61,8 @@ trait GetLanguageStatementTrait
             ->where(
                 $defaultLanguageRecordsSubSelect->expr()->and(
                     $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $transOrigPointerField, 0),
-                    $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $languageField, 0)
-                )
+                    $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $languageField, 0),
+                ),
             );
 
         $andConditions = [];
@@ -74,8 +73,8 @@ trait GetLanguageStatementTrait
             $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, $languageAspect->getContentId()),
             $queryBuilder->expr()->in(
                 $tableAlias . '.' . $transOrigPointerField,
-                $defaultLanguageRecordsSubSelect->getSQL()
-            )
+                $defaultLanguageRecordsSubSelect->getSQL(),
+            ),
         );
 
         // Records in translation with no default language
@@ -85,8 +84,8 @@ trait GetLanguageStatementTrait
                 $queryBuilder->expr()->eq($tableAlias . '.' . $transOrigPointerField, 0),
                 $queryBuilder->expr()->notIn(
                     $tableAlias . '.' . $transOrigPointerField,
-                    $defaultLanguageRecordsSubSelect->getSQL()
-                )
+                    $defaultLanguageRecordsSubSelect->getSQL(),
+                ),
             );
         }
 
@@ -101,8 +100,8 @@ trait GetLanguageStatementTrait
                 ->where(
                     $queryBuilderForSubselect->expr()->and(
                         $queryBuilderForSubselect->expr()->gt($translatedOnlyTableAlias . '.' . $transOrigPointerField, 0),
-                        $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, $languageAspect->getContentId())
-                    )
+                        $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, $languageAspect->getContentId()),
+                    ),
                 );
 
             // records in default language, which do not have a translation
@@ -110,8 +109,8 @@ trait GetLanguageStatementTrait
                 $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, 0),
                 $queryBuilder->expr()->notIn(
                     $tableAlias . '.uid',
-                    $queryBuilderForSubselect->getSQL()
-                )
+                    $queryBuilderForSubselect->getSQL(),
+                ),
             );
         }
 

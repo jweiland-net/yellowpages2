@@ -29,8 +29,8 @@ class AbstractController extends ActionController
             new PostProcessFluidVariablesEvent(
                 $this->request,
                 $this->settings,
-                $variables
-            )
+                $variables,
+            ),
         );
 
         $this->view->assignMultiple($event->getFluidVariables());
@@ -43,8 +43,8 @@ class AbstractController extends ActionController
                 $this,
                 $company,
                 $this->settings,
-                $this->request
-            )
+                $this->request,
+            ),
         );
     }
 
@@ -54,8 +54,8 @@ class AbstractController extends ActionController
             new PreProcessControllerActionEvent(
                 $this->request,
                 $this->arguments,
-                $this->settings
-            )
+                $this->settings,
+            ),
         );
     }
 }

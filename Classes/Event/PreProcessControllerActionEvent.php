@@ -23,9 +23,9 @@ class PreProcessControllerActionEvent implements ControllerActionEventInterface
     protected array $settings = [];
 
     public function __construct(
-            Request $request,
+        Request $request,
         Arguments $arguments,
-        array $settings
+        array $settings,
     ) {
         $this->request = $request;
         $this->arguments = $arguments;

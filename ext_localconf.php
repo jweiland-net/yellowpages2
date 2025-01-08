@@ -1,9 +1,10 @@
 <?php
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Controller\MapController;
 use JWeiland\Yellowpages2\Hook\ClearCacheHook;
 use JWeiland\Yellowpages2\Tasks\Update;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 if (!defined('TYPO3')) {
     die('Access denied.');

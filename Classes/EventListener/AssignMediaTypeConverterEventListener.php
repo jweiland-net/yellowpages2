@@ -61,7 +61,7 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
         // Needed to get the previously stored logo and images
         /** @var Company $persistedCompany */
         $persistedCompany = $this->companyRepository->findByIdentifier(
-            $event->getRequest()->getArgument('company')['__identity']
+            $event->getRequest()->getArgument('company')['__identity'],
         );
 
         $this->setTypeConverterForProperty('logo', $persistedCompany->getOriginalLogo(), $event);
@@ -71,7 +71,7 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
     protected function setTypeConverterForProperty(
         string $property,
         ?ObjectStorage $persistedFiles,
-        PreProcessControllerActionEvent $event
+        PreProcessControllerActionEvent $event,
     ): void {
         $propertyMappingConfiguration = $this->getPropertyMappingConfigurationForCompany($event)
             ->forProperty($property)
@@ -81,20 +81,20 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
         $this->addOptionToUploadFilesConverter(
             $propertyMappingConfiguration,
             'settings',
-            $event->getSettings()
+            $event->getSettings(),
         );
 
         if ($persistedFiles instanceof ObjectStorage) {
             $this->addOptionToUploadFilesConverter(
                 $propertyMappingConfiguration,
                 'IMAGES',
-                $persistedFiles
+                $persistedFiles,
             );
         }
     }
 
     protected function getPropertyMappingConfigurationForCompany(
-        PreProcessControllerActionEvent $event
+        PreProcessControllerActionEvent $event,
     ): MvcPropertyMappingConfiguration {
         return $event->getArguments()
             ->getArgument('company')
@@ -104,12 +104,12 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
     protected function addOptionToUploadFilesConverter(
         PropertyMappingConfiguration $propertyMappingConfiguration,
         string $optionKey,
-        $optionValue
+        $optionValue,
     ): void {
         $propertyMappingConfiguration->setTypeConverterOption(
             UploadMultipleFilesConverter::class,
             $optionKey,
-            $optionValue
+            $optionValue,
         );
     }
 }

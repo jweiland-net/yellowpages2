@@ -9,8 +9,8 @@ use JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier;
 use JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Frontend\Http\RequestHandler;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Frontend\Http\RequestHandler;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ControllerActionsTest extends UnitTestCase
@@ -26,9 +26,9 @@ final class ControllerActionsTest extends UnitTestCase
 
         // Here we will assert the modifier request insider handler
         $handler = $this->createMock(RequestHandler::class);
-        $handler->expects(self::atLeastOnce())
+        $handler->expects(self::atLeast(1))
             ->method('handle')
-            ->with($this->callback(static function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody): bool {
+            ->with(self::callback(static function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody): bool {
                 self::assertEquals($expectedRequestBody, $capturedRequest->getParsedBody());
                 return true;
             }))
@@ -45,11 +45,11 @@ final class ControllerActionsTest extends UnitTestCase
      * This data provider is for prepared requests for company create action and
      * yellowpages2 search action.
      */
-    public function requestActionDataProvider(): array
+    public static function requestActionDataProvider(): array
     {
         return [
             'company create action with null trades' => [
-                'actual' => [
+                'requestBody' => [
                     'tx_yellowpages2_directory' => [
                         'company' => [
                             'trades' => [
@@ -59,7 +59,7 @@ final class ControllerActionsTest extends UnitTestCase
                         ],
                     ],
                 ],
-                'expected' => [
+                'expectedRequestBody' => [
                     'tx_yellowpages2_directory' => [
                         'company' => [
                             'trades' => [],
@@ -68,14 +68,14 @@ final class ControllerActionsTest extends UnitTestCase
                 ],
             ],
             'search action with arguments needs to be sanitized html special chars' => [
-                'actual' => [
+                'requestBody' => [
                     'tx_yellowpages2_directory' => [
-                        'search' => 'bread & butter'
+                        'search' => 'bread & butter',
                     ],
                 ],
-                'expected' => [
+                'expectedRequestBody' => [
                     'tx_yellowpages2_directory' => [
-                        'search' => htmlspecialchars('bread & butter')
+                        'search' => htmlspecialchars('bread & butter'),
                     ],
                 ],
             ],

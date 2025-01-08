@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Utility;
 
-use TYPO3\CMS\Core\Utility\ArrayUtility;
 use Psr\Http\Message\RequestInterface;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 /**
  * Request Utility class
@@ -38,7 +38,6 @@ class RequestUtility
 
         return $mergedParameters;
     }
-
 
     /**
      * TYPO3 provides the request object also in the global variable $GLOBALS['TYPO3_REQUEST'].
