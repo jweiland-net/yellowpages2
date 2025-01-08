@@ -62,3 +62,10 @@ services:
     tags:
       - name: 'yellowpages2.request.modifiers'
         priority: 30
+
+  # Symfony Commands
+  JWeiland\Yellowpages2\Command\CompanyUpdateCommand:
+    tags:
+      - name: console.command
+        command: 'yellowpages2:companyUpdateCommand'
+        description: 'Inform users to update their company record. Hide company records which are older than 13 month and inform users to update their company record  after 12 month.'

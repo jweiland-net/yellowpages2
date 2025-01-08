@@ -11,11 +11,14 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\ParameterType;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\ModifyQueryToFindCompanyByLetterEvent;
 use JWeiland\Yellowpages2\Event\ModifyQueryToSearchForCompaniesEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -30,15 +33,24 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CompanyRepository extends Repository implements HiddenRepositoryInterface
 {
+    private const COMPANY_TABLE_NAME = 'tx_yellowpages2_domain_model_company';
+
     protected $defaultOrderings = [
         'company' => QueryInterface::ORDER_ASCENDING,
     ];
 
     protected EventDispatcherInterface $eventDispatcher;
 
+    protected ConnectionPool $connectionPool;
+
     public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function injectConnectionPool(ConnectionPool $connectionPool): void
+    {
+        $this->connectionPool = $connectionPool;
     }
 
     public function findHiddenObject($value, string $property = 'uid'): ?object
@@ -150,15 +162,38 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      * Hint: Needed by scheduler
      *
      * @return QueryResultInterface|Company[]
+     * @throws Exception
      */
-    public function findOlderThan(int $days): QueryResultInterface
+    public function findOlderThan(int $days): array
     {
-        $today = date('U');
-        $history = $today - ($days * 60 * 60 * 24);
+        $today = time(); // Get current UNIX timestamp
+        $history = $today - ($days * 60 * 60 * 24); // Calculate the UNIX timestamp for the cutoff date
 
-        $query = $this->createQuery();
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::COMPANY_TABLE_NAME);
 
-        return $query->matching($query->lessThan('tstamp', $history))->execute();
+        // Fetch the results as associative arrays
+        return $queryBuilder
+            ->select('*')
+            ->from(self::COMPANY_TABLE_NAME) // Your table name
+            ->where(
+                $queryBuilder->expr()->lt('tstamp', $queryBuilder->createNamedParameter($history, ParameterType::INTEGER)),
+            )
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    public function hideCompany(int $companyId): void
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::COMPANY_TABLE_NAME);
+
+        // Build and execute the update query
+        $queryBuilder
+            ->update(self::COMPANY_TABLE_NAME)
+            ->set('hidden', 1)
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, ParameterType::INTEGER))
+            )
+            ->executeStatement();
     }
 
     /**
