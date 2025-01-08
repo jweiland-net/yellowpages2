@@ -21,7 +21,8 @@ call_user_func(static function () {
         [
             CompanyController::class => 'search, create, update, activate',
             MapController::class => 'create, update',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
     );
 
     // Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE
