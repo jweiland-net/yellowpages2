@@ -132,6 +132,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             if ($counter > 5) {
                 $this->slugCache[$slug] = $counter;
             }
+
             $counter++;
         }
 
