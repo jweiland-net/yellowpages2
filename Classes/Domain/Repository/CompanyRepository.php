@@ -57,7 +57,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $query = $this->createQuery();
         $constraints = [];
 
-        if ($letter) {
+        if ($letter !== '' && $letter !== '0') {
             $glossaryService = GeneralUtility::makeInstance(GlossaryService::class);
             $constraints[] = $glossaryService->getLetterConstraintForExtbaseQuery(
                 $query,
@@ -94,16 +94,19 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         /** @var Query $query */
         $query = $this->createQuery();
         $constraints = [];
-        $longStreetSearch = $smallStreetSearch = trim($search);
+        $longStreetSearch = trim($search);
+        $smallStreetSearch = $longStreetSearch;
 
         // unify street search
         if (strtolower(mb_substr($search, -6)) === 'straße') {
             $smallStreetSearch = str_ireplace('straße', 'str', $search);
         }
+
         if (strtolower(mb_substr($search, -4)) === 'str.') {
             $longStreetSearch = str_ireplace('str.', 'straße', $search);
             $smallStreetSearch = str_ireplace('str.', 'str', $search);
         }
+
         if (strtolower(mb_substr($search, -3)) === 'str') {
             $longStreetSearch = str_ireplace('str', 'straße', $search);
         }

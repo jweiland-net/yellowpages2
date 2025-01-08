@@ -12,8 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Domain\Repository\HiddenRepositoryInterface;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
 use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
@@ -22,33 +20,47 @@ use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
  * Helper class to register hidden objects in extbase session container.
  * That way it's possible to call Controller Actions with hidden objects.
  */
+
 class HiddenObjectHelper
 {
-    protected Session $session;
-
-    public function __construct(Session $session)
-    {
-        $this->session = $session;
-    }
+    public function __construct(
+        protected readonly Session $session
+    ) {}
 
     public function registerHiddenObjectInExtbaseSession(
         RepositoryInterface $repository,
         RequestInterface $request,
         string $argumentName
     ): void {
-        if ($repository instanceof HiddenRepositoryInterface) {
-            $objectRaw = $request->getArgument($argumentName);
-            if (is_array($objectRaw)) {
-                // Get object from form ($_POST)
-                $object = $repository->findHiddenObject((int)$objectRaw['__identity']);
-            } else {
-                // Get object from UID
-                $object = $repository->findHiddenObject((int)$objectRaw);
-            }
+        // Ensure the repository supports hidden objects
+        if (!$repository instanceof HiddenRepositoryInterface) {
+            return;
+        }
 
-            if ($object instanceof DomainObjectInterface) {
-                $this->session->registerObject($object, $object->getUid());
-            }
+        // Get the raw object data from the request
+        $objectRaw = $request->getArgument($argumentName);
+
+        // Resolve the object based on the raw data
+        $this->resolveHiddenObject($repository, $objectRaw);
+
+        // Register the resolved object in the session if it is valid
+        if ($object !== null) {
+            $this->session->registerObject($object, $object->getUid());
+        }
+    }
+
+    private function resolveHiddenObject(
+        HiddenRepositoryInterface $repository,
+        mixed $objectRaw
+    ): void {
+        // Handle raw data from form (array) or UID (integer/string)
+        if (is_array($objectRaw) && isset($objectRaw['__identity'])) {
+            $repository->findHiddenObject((int)$objectRaw['__identity']);
+            return;
+        }
+
+        if (is_numeric($objectRaw)) {
+            $repository->findHiddenObject((int)$objectRaw);
         }
     }
 }

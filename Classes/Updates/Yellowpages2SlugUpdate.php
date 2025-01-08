@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace JWeiland\Yellowpages2\Updater;
+namespace JWeiland\Yellowpages2\Updates;
 
 use Doctrine\DBAL\Result;
 use TYPO3\CMS\Core\Database\Connection;
@@ -26,7 +26,7 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  * Updated 12 LTS argument style as below for the Wizard
  */
 #[UpgradeWizard('yellowpages2UpdateSlug')]
-class Yellowpages2SlugUpdater implements UpgradeWizardInterface
+class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 {
     protected string $tableName = 'tx_yellowpages2_domain_model_company';
 

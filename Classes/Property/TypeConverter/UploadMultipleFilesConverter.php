@@ -14,7 +14,7 @@ namespace JWeiland\Yellowpages2\Property\TypeConverter;
 use JWeiland\Checkfaluploads\Service\FalUploadService;
 use JWeiland\Yellowpages2\Event\PostCheckFileReferenceEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -123,6 +123,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                 } else {
                     unset($source[$key]);
                 }
+
                 continue;
             }
 
@@ -176,7 +177,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     protected function initialize(?PropertyMappingConfigurationInterface $configuration): void
     {
-        if ($configuration === null) {
+        if (!$configuration instanceof PropertyMappingConfigurationInterface) {
             throw new \InvalidArgumentException(
                 'Missing PropertyMapper configuration in UploadMultipleFilesConverter',
                 1605617449
@@ -229,7 +230,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
         try {
             $uploadFolder = $resourceFactory->getObjectFromCombinedIdentifier($combinedUploadFolderIdentifier);
-        } catch (ResourceDoesNotExistException $exception) {
+        } catch (ResourceDoesNotExistException) {
             [$storageUid] = GeneralUtility::trimExplode(':', $combinedUploadFolderIdentifier);
             $resourceStorage = $resourceFactory->getStorageObject((int)$storageUid);
             $uploadFolder = $resourceStorage->createFolder($combinedUploadFolderIdentifier);
@@ -262,7 +263,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      */
     protected function deleteFile(?FileReference $extbaseFileReference): void
     {
-        if ($extbaseFileReference !== null) {
+        if ($extbaseFileReference instanceof FileReference) {
             $coreFileReference = $extbaseFileReference->getOriginalResource();
 
             if ($coreFileReference->getStorage()->isWithinFolder($this->uploadFolder, $coreFileReference)) {

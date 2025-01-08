@@ -20,6 +20,9 @@ use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Context\Exception\AspectPropertyNotFoundException;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -31,39 +34,14 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class CompanyController extends AbstractController
 {
-    protected CompanyRepository $companyRepository;
-
-    protected CategoryRepository $categoryRepository;
-
-    protected DistrictRepository $districtRepository;
-
-    protected FeUserRepository $feUserRepository;
-
-    protected MailHelper $mailHelper;
-
-    public function injectCompanyRepository(CompanyRepository $companyRepository): void
-    {
-        $this->companyRepository = $companyRepository;
-    }
-
-    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
-    public function injectDistrictRepository(DistrictRepository $districtRepository): void
-    {
-        $this->districtRepository = $districtRepository;
-    }
-
-    public function injectFeUserRepository(FeUserRepository $feUserRepository): void
-    {
-        $this->feUserRepository = $feUserRepository;
-    }
-
-    public function injectMailHelper(MailHelper $mailHelper): void
-    {
-        $this->mailHelper = $mailHelper;
+    public function __construct(
+        private readonly Context $context,
+        private readonly CompanyRepository $companyRepository,
+        private readonly CategoryRepository $categoryRepository,
+        private readonly DistrictRepository $districtRepository,
+        private readonly FeUserRepository $feUserRepository,
+        private readonly MailHelper $mailHelper,
+    ) {
     }
 
     public function initializeAction(): void
@@ -73,6 +51,7 @@ class CompanyController extends AbstractController
         if (empty($this->settings['pidOfDetailPage'])) {
             $this->settings['pidOfDetailPage'] = null;
         }
+
         if (empty($this->settings['pidOfListPage'])) {
             $this->settings['pidOfListPage'] = null;
         }
@@ -88,20 +67,25 @@ class CompanyController extends AbstractController
             'categories' => $this->categoryRepository->findRelated(),
         ]);
 
-        CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
+        CacheUtility::addPageCacheTagsByQuery($this->request, $companies->getQuery());
 
         return $this->htmlResponse();
     }
 
+    /**
+     * @throws AspectNotFoundException
+     * @throws AspectPropertyNotFoundException
+     */
     public function listMyCompaniesAction(): ResponseInterface
     {
-        $companies = $this->companyRepository->findByFeUser((int)$GLOBALS['TSFE']->fe_user->user['uid']);
+        $user = $this->context->getAspect('frontend.user')->get('id');
+        $companies = $this->companyRepository->findByFeUser((int)$user);
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,
             'categories' => $this->categoryRepository->findRelated(),
         ]);
 
-        CacheUtility::addPageCacheTagsByQuery($companies->getQuery());
+        CacheUtility::addPageCacheTagsByQuery($this->request, $companies->getQuery());
 
         return $this->htmlResponse();
     }
@@ -113,7 +97,7 @@ class CompanyController extends AbstractController
             'company' => $companyObject,
         ]);
 
-        CacheUtility::addCacheTagsByCompanyRecords([$companyObject]);
+        CacheUtility::addCacheTagsByCompanyRecords($this->request, [$companyObject]);
 
         return $this->htmlResponse();
     }
@@ -246,6 +230,7 @@ class CompanyController extends AbstractController
         /** @var Company $companyObject */
         $companyObject = $this->companyRepository->findByIdentifier($company);
         $companyObject->setHidden(false);
+
         $this->companyRepository->update($companyObject);
 
         $this->postProcessControllerAction($companyObject);

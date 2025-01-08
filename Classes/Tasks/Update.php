@@ -43,8 +43,10 @@ class Update extends AbstractTask
             if ($company->getEmail()) {
                 $this->informUser($company, 'deactivated');
             }
+
             $this->informAdmin($company);
         }
+
         $persistenceManager->persistAll();
 
         // Inform users about entries older than 12 month

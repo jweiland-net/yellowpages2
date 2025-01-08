@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Traits;
 
+use TYPO3\CMS\Core\Context\LanguageAspect;
+use TYPO3\CMS\Core\Database\Query\Expression\CompositeExpression;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
@@ -25,29 +27,31 @@ trait GetLanguageStatementTrait
         string $tableAlias,
         Typo3QuerySettings $querySettings,
         QueryBuilder $queryBuilder
-    ): array {
-        $languageField = (string)$GLOBALS['TCA'][$tableName]['ctrl']['languageField'];
-        if ($languageField === '') {
+    ): array | string {
+        if (empty($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])) {
             return [];
         }
 
         // Select all entries for the current language
         // If any language is set -> get those entries which are not translated yet
         // They will be removed by \TYPO3\CMS\Core\Domain\Repository\PageRepository::getRecordOverlay if not matching overlay mode
+        $languageField = (string)$GLOBALS['TCA'][$tableName]['ctrl']['languageField'];
+
+        $languageAspect = $querySettings->getLanguageAspect();
+
         $transOrigPointerField = $GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'] ?? '';
-        if (!$transOrigPointerField || !$querySettings->getLanguageUid()) {
-            return [$queryBuilder->expr()->in(
+        if (!$transOrigPointerField || !$languageAspect->getContentId()) {
+            return $queryBuilder->expr()->in(
                 $tableAlias . '.' . $languageField,
-                [$querySettings->getLanguageUid(), -1]
-            )];
+                [$languageAspect->getContentId(), -1]
+            );
         }
 
-        $mode = $querySettings->getLanguageOverlayMode();
-        if (!$mode) {
-            return [$queryBuilder->expr()->in(
+        if (!$languageAspect->doOverlays()) {
+            return $queryBuilder->expr()->in(
                 $tableAlias . '.' . $languageField,
-                [$querySettings->getLanguageUid(), -1]
-            )];
+                [$languageAspect->getContentId(), -1]
+            );
         }
 
         $defLangTableAlias = $tableAlias . '_dl';
@@ -67,16 +71,27 @@ trait GetLanguageStatementTrait
         $andConditions[] = $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, -1);
         // translated records where a default language exists
         $andConditions[] = $queryBuilder->expr()->and(
-            $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, $querySettings->getLanguageUid()),
+            $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, $languageAspect->getContentId()),
             $queryBuilder->expr()->in(
                 $tableAlias . '.' . $transOrigPointerField,
                 $defaultLanguageRecordsSubSelect->getSQL()
             )
         );
 
-        if ($mode !== 'hideNonTranslated') {
-            // $mode = TRUE
-            // returns records from current language which have default language
+        // Records in translation with no default language
+        if ($languageAspect->getOverlayType() === LanguageAspect::OVERLAYS_ON_WITH_FLOATING) {
+            $andConditions[] = $queryBuilder->expr()->and(
+                $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, $languageAspect->getContentId()),
+                $queryBuilder->expr()->eq($tableAlias . '.' . $transOrigPointerField, 0),
+                $queryBuilder->expr()->notIn(
+                    $tableAlias . '.' . $transOrigPointerField,
+                    $defaultLanguageRecordsSubSelect->getSQL()
+                )
+            );
+        }
+
+        if ($languageAspect->getOverlayType() === LanguageAspect::OVERLAYS_MIXED) {
+            // returns records from current language which have a default language
             // together with not translated default language records
             $translatedOnlyTableAlias = $tableAlias . '_to';
             $queryBuilderForSubselect = $queryBuilder->getConnection()->createQueryBuilder();
@@ -86,9 +101,10 @@ trait GetLanguageStatementTrait
                 ->where(
                     $queryBuilderForSubselect->expr()->and(
                         $queryBuilderForSubselect->expr()->gt($translatedOnlyTableAlias . '.' . $transOrigPointerField, 0),
-                        $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, (int)$querySettings->getLanguageUid())
+                        $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, $languageAspect->getContentId())
                     )
                 );
+
             // records in default language, which do not have a translation
             $andConditions[] = $queryBuilder->expr()->and(
                 $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, 0),
@@ -99,6 +115,6 @@ trait GetLanguageStatementTrait
             );
         }
 
-        return $andConditions;
+        return $queryBuilder->expr()->or(...$andConditions);
     }
 }

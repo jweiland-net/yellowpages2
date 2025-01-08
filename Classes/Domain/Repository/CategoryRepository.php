@@ -113,9 +113,9 @@ class CategoryRepository extends Repository
             )
             ->andWhere(
                 $queryBuilder->expr()->or(
-                    ...$this->getLanguageStatement(
+                    $this->getLanguageStatement(
                         'tx_yellowpages2_domain_model_company',
-                    'tx_yellowpages2_domain_model_company',
+                        'tx_yellowpages2_domain_model_company',
                         $this->getQuerySettingsOfCompany(),
                         $queryBuilder
                     )
