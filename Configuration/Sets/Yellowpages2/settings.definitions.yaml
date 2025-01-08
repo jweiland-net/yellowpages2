@@ -1,0 +1,107 @@
+categories:
+  Yellowpages2:
+    label: 'Yellowpages2'
+  Yellowpages2.templates:
+    label: 'Templates'
+    parent: Yellowpages2
+  Yellowpages2.pages:
+    label: 'Pages'
+    parent: Yellowpages2
+  Yellowpages2.pagination:
+    label: 'Pagination'
+    parent: Yellowpages2
+
+settings:
+  yellowpages2.templateRootPath:
+    label: 'Templates'
+    category: Yellowpages2.templates
+    description: 'Path to template root'
+    type: string
+    default: 'EXT:yellowpages2/Resources/Private/Templates/'
+  yellowpages2.partialRootPath:
+    label: 'Partials'
+    category: Yellowpages2.templates
+    description: 'Path to partial root'
+    type: string
+    default: 'EXT:yellowpages2/Resources/Private/Partials/'
+  yellowpages2.layoutRootPath:
+    label: 'Layouts'
+    category: Yellowpages2.templates
+    description: 'Path to layout root'
+    type: string
+    default: 'EXT:yellowpages2/Resources/Private/Layouts/'
+  yellowpages2.storagePid:
+    label: 'Default storage PID'
+    category: Yellowpages2.pages
+    description: 'Folder for storing records and fetched data'
+    type: int
+    default: 0
+  yellowpages2.pidOfMaps2Plugin:
+    label: 'PID for maps2'
+    category: Yellowpages2.pages
+    description: 'PID where maps2 plugin for detail view is inserted'
+    type: int
+    default: 0
+  yellowpages2.startingUidForCategories:
+    label: 'Root for categories'
+    category: Yellowpages2.pages
+    description: 'Starting/Parent UID of all available categories for this plugin'
+    type: int
+    default: 0
+  yellowpages2.uidOfDefaultDistrict:
+    label: 'Default District'
+    category: Yellowpages2.pages
+    description: 'UID of the default district to show in selectbox'
+    type: int
+    default: 2
+  yellowpages2.pidOfDetailPage:
+    label: 'PID of Detail page'
+    category: Yellowpages2.pages
+    description: 'Leave empty to show details on current page'
+    type: int
+    default: 0
+  yellowpages2.pidOfListPage:
+    label: 'PID of List page'
+    category: Yellowpages2.pages
+    description: 'List Page UID: If empty, the current page ID will be used.'
+    type: int
+    default: 0
+  yellowpages2.userGroup:
+    label: 'Usergroup Uid'
+    category: Yellowpages2.pages
+    description: 'The user group allowed to create new companies. This determines the rendering of the edit and create links on the list page.'
+    type: int
+    default: 1
+  yellowpages2.pageBrowser.itemsPerPage:
+    label: 'Records per page'
+    category: Yellowpages2.pagination
+    description: 'How many items should be displayed on one page'
+    type: int
+    default: 15
+  yellowpages2.pageBrowser.insertAbove:
+    label: 'Insert above'
+    category: Yellowpages2.pagination
+    description: 'Should pagebrowser be displayed on top of the list'
+    type: bool
+    default: 1
+  yellowpages2.pageBrowser.insertBelow:
+    label: 'Insert below'
+    category: Yellowpages2.pagination
+    description: 'Should pagebrowser be displayed at bottom of the list'
+    type: bool
+    default: 0
+  yellowpages2.pageBrowser.maximumNumberOfLinks:
+    label: 'Max. number of links'
+    category: Yellowpages2.pagination
+    description: 'Define maximum amount of pages which should be displayed'
+    type: int
+    default: 5
+
+
+
+
+
+
+
+
+

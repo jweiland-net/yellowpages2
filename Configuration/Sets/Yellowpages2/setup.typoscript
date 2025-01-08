@@ -2,27 +2,27 @@ plugin.tx_yellowpages2 {
   view {
     templateRootPaths {
       0 = EXT:yellowpages2/Resources/Private/Templates/
-      1 = {$plugin.tx_yellowpages2.view.templateRootPath}
+      1 = {$yellowpages2.templateRootPath}
     }
     partialRootPaths {
       0 = EXT:yellowpages2/Resources/Private/Partials/
-      1 = {$plugin.tx_yellowpages2.view.partialRootPath}
+      1 = {$yellowpages2.partialRootPath}
     }
     layoutRootPaths {
       0 = EXT:yellowpages2/Resources/Private/Layouts/
-      1 = {$plugin.tx_yellowpages2.view.layoutRootPath}
+      1 = {$yellowpages2.layoutRootPath}
     }
   }
   persistence {
-    storagePid = {$plugin.tx_yellowpages2.persistence.storagePid}
+    storagePid = {$yellowpages2.storagePid}
   }
   settings {
-    pidOfMaps2Plugin = {$plugin.tx_yellowpages2.settings.pidOfMaps2Plugin}
-    startingUidForCategories = {$plugin.tx_yellowpages2.settings.startingUidForCategories}
-    uidOfDefaultDistrict = {$plugin.tx_yellowpages2.settings.uidOfDefaultDistrict}
-    pidOfDetailPage = {$plugin.tx_yellowpages2.settings.pidOfDetailPage}
-    pidOfListPage = {$plugin.tx_yellowpages2.settings.pidOfListPage}
-    userGroup = {$plugin.tx_yellowpages2.settings.userGroup}
+    pidOfMaps2Plugin = {$yellowpages2.pidOfMaps2Plugin}
+    startingUidForCategories = {$yellowpages2.startingUidForCategories}
+    uidOfDefaultDistrict = {$yellowpages2.uidOfDefaultDistrict}
+    pidOfDetailPage = {$yellowpages2.pidOfDetailPage}
+    pidOfListPage = {$yellowpages2.pidOfListPage}
+    userGroup = {$yellowpages2.userGroup}
     mapOptions {
       zoom = 12
       mapTypeId = google.maps.MapTypeId.HYBRID
@@ -73,7 +73,7 @@ plugin.tx_yellowpages2 {
 
     pageBrowser {
       class = JWeiland\Yellowpages2\Pagination\CompanyPagination
-      itemsPerPage = {$plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage}
+      itemsPerPage = {$yellowpages2.pageBrowser.itemsPerPage}
     }
   }
 }

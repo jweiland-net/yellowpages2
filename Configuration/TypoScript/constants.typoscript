@@ -12,8 +12,6 @@ plugin.tx_yellowpages2 {
     storagePid =
   }
   settings {
-    # cat=plugin.tx_yellowpages2//b; type=boolean; label=Include jQuery
-    includeJQueryLibrary = 1
     # cat=plugin.tx_yellowpages2//c; type=int+; label=PID for maps2: PID where maps2 plugin for detail view is inserted
     pidOfMaps2Plugin =
     # cat=plugin.tx_yellowpages2//d; type=int+; label=Root for categories: Starting/Parent UID of all available categories for this plugin

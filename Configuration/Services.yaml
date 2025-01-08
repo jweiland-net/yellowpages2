@@ -7,6 +7,10 @@ services:
   JWeiland\Yellowpages2\:
     resource: '../Classes/*'
 
+  # Called by makeInstance in TYPO3's PluginPreview
+  JWeiland\Yellowpages2\Backend\Preview\Yellowpages2PluginPreview:
+    public: true
+
   JWeiland\Yellowpages2\Configuration\ExtConf:
     public: true
 

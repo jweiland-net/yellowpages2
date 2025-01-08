@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use JWeiland\Yellowpages2\DependenyInjection\ModifierServiceProvider;
-use JWeiland\Yellowpages2\Modifier\RequestFieldModifierInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
