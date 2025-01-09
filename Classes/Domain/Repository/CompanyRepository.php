@@ -191,7 +191,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             ->update(self::COMPANY_TABLE_NAME)
             ->set('hidden', 1)
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, ParameterType::INTEGER))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, ParameterType::INTEGER)),
             )
             ->executeStatement();
     }

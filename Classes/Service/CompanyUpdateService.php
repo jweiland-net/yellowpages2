@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Service;
 
 use Doctrine\DBAL\Exception;
-use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Mailer\NotificationMailer;
 
@@ -23,7 +22,7 @@ class CompanyUpdateService
 
     public function __construct(
         private readonly CompanyRepository $companyRepository,
-        private readonly NotificationMailer $notificationMailer
+        private readonly NotificationMailer $notificationMailer,
     ) {}
 
     /**

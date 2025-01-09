@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class CompanyUpdateCommand extends Command
 {
     public function __construct(
-        private readonly CompanyUpdateService $companyUpdateService
+        private readonly CompanyUpdateService $companyUpdateService,
     ) {
         parent::__construct();
     }

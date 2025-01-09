@@ -12,14 +12,13 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Mailer;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
-use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 final readonly class NotificationMailer
 {
     public function __construct(
-        private ExtConf $extConf
+        private ExtConf $extConf,
     ) {}
 
     public function informUser(array $company, string $type)
