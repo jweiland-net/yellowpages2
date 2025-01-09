@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CompanyRepository extends Repository implements HiddenRepositoryInterface
 {
-    private const COMPANY_TABLE_NAME = 'tx_yellowpages2_domain_model_company';
+    private const TABLE = 'tx_yellowpages2_domain_model_company';
 
     protected $defaultOrderings = [
         'company' => QueryInterface::ORDER_ASCENDING,
@@ -169,12 +169,12 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $today = time(); // Get current UNIX timestamp
         $history = $today - ($days * 60 * 60 * 24); // Calculate the UNIX timestamp for the cutoff date
 
-        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::COMPANY_TABLE_NAME);
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
 
         // Fetch the results as associative arrays
         return $queryBuilder
             ->select('*')
-            ->from(self::COMPANY_TABLE_NAME) // Your table name
+            ->from(self::TABLE) // Your table name
             ->where(
                 $queryBuilder->expr()->lt('tstamp', $queryBuilder->createNamedParameter($history, ParameterType::INTEGER)),
             )
@@ -184,11 +184,11 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
 
     public function hideCompany(int $companyId): void
     {
-        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::COMPANY_TABLE_NAME);
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
 
         // Build and execute the update query
         $queryBuilder
-            ->update(self::COMPANY_TABLE_NAME)
+            ->update(self::TABLE)
             ->set('hidden', 1)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, ParameterType::INTEGER)),
