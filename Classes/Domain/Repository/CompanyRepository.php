@@ -19,7 +19,6 @@ use JWeiland\Yellowpages2\Event\ModifyQueryToFindCompanyByLetterEvent;
 use JWeiland\Yellowpages2\Event\ModifyQueryToSearchForCompaniesEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -43,6 +42,8 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
 
     protected ConnectionPool $connectionPool;
 
+    protected GlossaryService $glossaryService;
+
     public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -51,6 +52,11 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     public function injectConnectionPool(ConnectionPool $connectionPool): void
     {
         $this->connectionPool = $connectionPool;
+    }
+
+    public function injectGlossaryService(GlossaryService $glossary): void
+    {
+        $this->glossaryService = $glossary;
     }
 
     public function findHiddenObject($value, string $property = 'uid'): ?object
@@ -70,8 +76,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $constraints = [];
 
         if ($letter !== '' && $letter !== '0') {
-            $glossaryService = GeneralUtility::makeInstance(GlossaryService::class);
-            $constraints[] = $glossaryService->getLetterConstraintForExtbaseQuery(
+            $constraints[] = $this->glossaryService->getLetterConstraintForExtbaseQuery(
                 $query,
                 'company',
                 $letter,
