@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 
 class CompanyPagination implements PaginationInterface
 {
-    protected string $pluginNamespace = 'tx_yellowpages2_directory';
+    protected const PLUGIN_NAMESPACE = 'tx_yellowpages2_directory';
 
     protected PaginatorInterface $paginator;
 
@@ -26,7 +26,7 @@ class CompanyPagination implements PaginationInterface
     public function __construct(PaginatorInterface $paginator)
     {
         $this->paginator = $paginator;
-        foreach (RequestUtility::getMergedRequestArguments($this->pluginNamespace) as $argumentName => $argument) {
+        foreach (RequestUtility::getMergedRequestArguments(self::PLUGIN_NAMESPACE) as $argumentName => $argument) {
             if ($argumentName[0] === '_' && $argumentName[1] === '_') {
                 continue;
             }
@@ -123,6 +123,6 @@ class CompanyPagination implements PaginationInterface
 
     public function getAllPageNumbers(): array
     {
-        // TODO: Implement getAllPageNumbers() method.
+        return range($this->getFirstPageNumber(), $this->getLastPageNumber());
     }
 }
