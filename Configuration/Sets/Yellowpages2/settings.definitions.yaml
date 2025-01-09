@@ -96,12 +96,3 @@ settings:
     description: 'Define maximum amount of pages which should be displayed'
     type: int
     default: 5
-
-
-
-
-
-
-
-
-
