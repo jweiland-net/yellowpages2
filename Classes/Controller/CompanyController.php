@@ -18,6 +18,9 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
+use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
+use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
@@ -27,13 +30,18 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller to list, show and search for companies
  */
-class CompanyController extends AbstractController
+class CompanyController extends ActionController
 {
+    use PostProcessFluidVariablesTrait;
+    use PostProcessControllerActionTrait;
+    use PreProcessControllerActionTrait;
+
     public function __construct(
         private readonly Context $context,
         private readonly CompanyRepository $companyRepository,
