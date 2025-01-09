@@ -12,12 +12,12 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\ParameterType;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\ModifyQueryToFindCompanyByLetterEvent;
 use JWeiland\Yellowpages2\Event\ModifyQueryToSearchForCompaniesEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -179,9 +179,9 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         // Fetch the results as associative arrays
         return $queryBuilder
             ->select('*')
-            ->from(self::TABLE) // Your table name
+            ->from(self::TABLE)
             ->where(
-                $queryBuilder->expr()->lt('tstamp', $queryBuilder->createNamedParameter($history, ParameterType::INTEGER)),
+                $queryBuilder->expr()->lt('tstamp', $queryBuilder->createNamedParameter($history, Connection::PARAM_INT)),
             )
             ->executeQuery()
             ->fetchAllAssociative();
@@ -191,12 +191,11 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
 
-        // Build and execute the update query
         $queryBuilder
             ->update(self::TABLE)
             ->set('hidden', 1)
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, ParameterType::INTEGER)),
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, Connection::PARAM_INT)),
             )
             ->executeStatement();
     }
