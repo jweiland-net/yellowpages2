@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package jweiland/yellowpages2.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Controller\MapController;
 use JWeiland\Yellowpages2\Hook\ClearCacheHook;

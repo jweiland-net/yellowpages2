@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package jweiland/yellowpages2.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Industry Directory',
     'description' => 'With this extension you can build your own industry directory',
