@@ -175,6 +175,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $history = $today - ($days * 60 * 60 * 24); // Calculate the UNIX timestamp for the cutoff date
 
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
+        $queryBuilder->getRestrictions()->removeAll();
 
         // Fetch the results as associative arrays
         return $queryBuilder
