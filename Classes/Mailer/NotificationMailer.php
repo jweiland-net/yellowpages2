@@ -46,7 +46,7 @@ final readonly class NotificationMailer
                 $this->translateBody('deactivated', 'admin', [
                     $company['uid'],
                     $company['company'],
-                ])
+                ]),
             )
             ->send();
     }
