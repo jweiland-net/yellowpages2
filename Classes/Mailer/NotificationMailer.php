@@ -18,7 +18,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 final readonly class NotificationMailer
 {
     public function __construct(
-        private ExtConf $extConf,
+        private readonly ExtConf $extConf,
+        private readonly MailMessage $mailMessage,
     ) {}
 
     public function informUser(array $company, string $type)
@@ -37,14 +38,16 @@ final readonly class NotificationMailer
 
     public function informAdmin(array $company): void
     {
-        $mail = new MailMessage();
-        $mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName())
+        $this->mailMessage
+            ->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName())
             ->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName())
             ->setSubject($this->translateSubject('deactivated', 'admin'))
-            ->html($this->translateBody('deactivated', 'admin', [
-                $company['uid'],
-                $company['company'],
-            ]))
+            ->html(
+                $this->translateBody('deactivated', 'admin', [
+                    $company['uid'],
+                    $company['company'],
+                ])
+            )
             ->send();
     }
 
