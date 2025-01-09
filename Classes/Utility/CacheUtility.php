@@ -26,7 +26,7 @@ class CacheUtility
      * Following cache tags will be added to TSFE:
      * "tx_yellowpages2_uid_[company:uid]"
      */
-    public static function addCacheTagsByCompanyRecords(ServerRequestInterface $request, array $companyRecords): void
+    public static function addCacheTagsByCompanyRecords(array $companyRecords, ServerRequestInterface $request): void
     {
         if (!self::getApplicationType()->isFrontend()) {
             return;
@@ -51,7 +51,7 @@ class CacheUtility
      * Adds page cache tags by used storagePages.
      * This adds tags with the scheme tx_yellowpages2_pid_[company:pid]
      */
-    public static function addPageCacheTagsByQuery(ServerRequestInterface $request, QueryInterface $query): void
+    public static function addPageCacheTagsByQuery(QueryInterface $query, ServerRequestInterface $request): void
     {
         if (!self::getApplicationType()->isFrontend()) {
             return;

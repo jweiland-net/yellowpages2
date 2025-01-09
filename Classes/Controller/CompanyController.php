@@ -74,7 +74,7 @@ class CompanyController extends ActionController
             'categories' => $this->categoryRepository->findRelated(),
         ]);
 
-        CacheUtility::addPageCacheTagsByQuery($this->request, $companies->getQuery());
+        CacheUtility::addPageCacheTagsByQuery($companies->getQuery(), $this->request);
 
         return $this->htmlResponse();
     }
@@ -92,7 +92,7 @@ class CompanyController extends ActionController
             'categories' => $this->categoryRepository->findRelated(),
         ]);
 
-        CacheUtility::addPageCacheTagsByQuery($this->request, $companies->getQuery());
+        CacheUtility::addPageCacheTagsByQuery($companies->getQuery(), $this->request);
 
         return $this->htmlResponse();
     }
@@ -104,7 +104,7 @@ class CompanyController extends ActionController
             'company' => $companyObject,
         ]);
 
-        CacheUtility::addCacheTagsByCompanyRecords($this->request, [$companyObject]);
+        CacheUtility::addCacheTagsByCompanyRecords([$companyObject], $this->request);
 
         return $this->htmlResponse();
     }
