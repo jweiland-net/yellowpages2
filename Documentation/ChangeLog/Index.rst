@@ -15,6 +15,7 @@ Version 8.0.0
 *   TASK: Migrate all list type general plugins to TYPO3 CType.
 *   TASK: Created migration script for list_type to new CType.
 *   Deprecated methods replaced.
+*   Removed support for TYPO3 12 LTS
 
 Version 7.0.2
 =============
