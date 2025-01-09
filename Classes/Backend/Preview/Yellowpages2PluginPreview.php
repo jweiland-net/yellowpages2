@@ -13,11 +13,11 @@ namespace JWeiland\Yellowpages2\Backend\Preview;
 
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Core\View\ViewInterface;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Add plugin preview for EXT:yellowpages2
@@ -88,7 +88,7 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
 
         $view->assign(
             'pluginName',
-            LocalizationUtility::translate('LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:' . $langKey),
+            $this->getLanguageService()->sL('LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:' . $langKey),
         );
     }
 
@@ -104,5 +104,10 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
         }
 
         return $data;
+    }
+
+    protected function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
     }
 }
