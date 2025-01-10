@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package jweiland/yellowpages2.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 return [
     'ctrl' => [
         'title'    => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company',
@@ -151,7 +158,7 @@ return [
                 'type' => 'file',
                 'minitems' => 0,
                 'maxitems' => 1,
-                'allowed' => 'common-media-types'
+                'allowed' => 'common-media-types',
             ],
         ],
         'images' => [
@@ -161,7 +168,7 @@ return [
                 'type' => 'file',
                 'minitems' => 0,
                 'maxitems' => 5,
-                'allowed' => 'common-media-types'
+                'allowed' => 'common-media-types',
             ],
         ],
         'street' => [

@@ -1,0 +1,91 @@
+plugin.tx_yellowpages2 {
+  view {
+    templateRootPaths {
+      0 = EXT:yellowpages2/Resources/Private/Templates/
+      1 = {$yellowpages2.templateRootPath}
+    }
+    partialRootPaths {
+      0 = EXT:yellowpages2/Resources/Private/Partials/
+      1 = {$yellowpages2.partialRootPath}
+    }
+    layoutRootPaths {
+      0 = EXT:yellowpages2/Resources/Private/Layouts/
+      1 = {$yellowpages2.layoutRootPath}
+    }
+  }
+  persistence {
+    storagePid = {$yellowpages2.storagePid}
+  }
+  settings {
+    pidOfMaps2Plugin = {$yellowpages2.pidOfMaps2Plugin}
+    startingUidForCategories = {$yellowpages2.startingUidForCategories}
+    uidOfDefaultDistrict = {$yellowpages2.uidOfDefaultDistrict}
+    pidOfDetailPage = {$yellowpages2.pidOfDetailPage}
+    pidOfListPage = {$yellowpages2.pidOfListPage}
+    userGroup = {$yellowpages2.userGroup}
+    mapOptions {
+      zoom = 12
+      mapTypeId = google.maps.MapTypeId.HYBRID
+      panControl = 1
+      zoomControl = 1
+      mapTypeControl = 1
+      scaleControl = 1
+      streetViewControl = 1
+      overviewMapControl = 1
+    }
+
+    list {
+      logo {
+        width = 50c
+        height= 50c
+        minWidth = 50
+        maxWidth = 50
+        minHeight = 50
+        maxHeight = 50
+      }
+      # Deprecated
+      image < .logo
+    }
+
+    show {
+      logo {
+        width = 50c
+        height= 50c
+        minWidth = 50
+        maxWidth = 50
+        minHeight = 50
+        maxHeight = 50
+      }
+      images {
+        width = 240c
+        height= 180c
+      }
+    }
+
+    new {
+      uploadFolder = 1:user_upload/tx_yellowpages2/
+    }
+
+    glossary {
+      mergeNumbers = 1
+      showAllLink = 1
+    }
+
+    pageBrowser {
+      class = JWeiland\Yellowpages2\Pagination\CompanyPagination
+      itemsPerPage = {$yellowpages2.pageBrowser.itemsPerPage}
+    }
+  }
+}
+
+plugin.tx_yellowpages2._CSS_DEFAULT_STYLE (
+  textarea.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+  }
+
+  input.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+  }
+)

@@ -19,6 +19,4 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  *
  * @method FeUser findByUid(int $frontendUserUid)
  */
-class FeUserRepository extends Repository
-{
-}
+class FeUserRepository extends Repository {}

@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 
 class CompanyPagination implements PaginationInterface
 {
-    protected string $pluginNamespace = 'tx_yellowpages2_directory';
+    protected const PLUGIN_NAMESPACE = 'tx_yellowpages2_directory';
 
     protected PaginatorInterface $paginator;
 
@@ -26,13 +26,15 @@ class CompanyPagination implements PaginationInterface
     public function __construct(PaginatorInterface $paginator)
     {
         $this->paginator = $paginator;
-        foreach (RequestUtility::getMergedRequestArguments($this->pluginNamespace) as $argumentName => $argument) {
+        foreach (RequestUtility::getMergedRequestArguments(self::PLUGIN_NAMESPACE) as $argumentName => $argument) {
             if ($argumentName[0] === '_' && $argumentName[1] === '_') {
                 continue;
             }
+
             if (in_array($argumentName, ['@extension', '@subpackage', '@controller', '@action', '@format'], true)) {
                 continue;
             }
+
             if (in_array($argumentName, ['extension', 'plugin', 'controller', 'action'], true)) {
                 continue;
             }
@@ -117,5 +119,10 @@ class CompanyPagination implements PaginationInterface
         }
 
         return $this->paginator->getKeyOfLastPaginatedItem() + 1;
+    }
+
+    public function getAllPageNumbers(): array
+    {
+        return range($this->getFirstPageNumber(), $this->getLastPageNumber());
     }
 }

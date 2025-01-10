@@ -53,14 +53,6 @@ Example: `plugin.tx_yellowpages2.settings.pidOfMaps2Plugin = 21,45,3234`
 Settings
 ========
 
-settings.includeJQueryLibrary
------------------------------
-
-Default: 1
-
-Our JavaScript for frontend editing needs jquery to be present. Please disable this option
-if you have added your own jquery library within your SitePackage.
-
 settings.pidOfMaps2Plugin
 -------------------------
 

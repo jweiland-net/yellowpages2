@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace JWeiland\Yellowpages2\Updater;
+namespace JWeiland\Yellowpages2\Updates;
 
 use Doctrine\DBAL\Result;
 use TYPO3\CMS\Core\Database\Connection;
@@ -26,7 +26,7 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  * Updated 12 LTS argument style as below for the Wizard
  */
 #[UpgradeWizard('yellowpages2UpdateSlug')]
-class Yellowpages2SlugUpdater implements UpgradeWizardInterface
+class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 {
     protected string $tableName = 'tx_yellowpages2_domain_model_company';
 
@@ -59,12 +59,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
-                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
+                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR),
                     ),
                     $queryBuilder->expr()->isNull(
-                        $this->fieldName
-                    )
-                )
+                        $this->fieldName,
+                    ),
+                ),
             )
             ->executeQuery()
             ->fetchOne();
@@ -88,12 +88,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
-                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
+                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR),
                     ),
                     $queryBuilder->expr()->isNull(
-                        $this->fieldName
-                    )
-                )
+                        $this->fieldName,
+                    ),
+                ),
             )
             ->executeQuery();
 
@@ -106,12 +106,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                     [
                         $this->fieldName => $this->getUniqueValue(
                             (int)$recordToUpdate['uid'],
-                            $slug
+                            $slug,
                         ),
                     ],
                     [
                         'uid' => (int)$recordToUpdate['uid'],
-                    ]
+                    ],
                 );
             }
         }
@@ -132,6 +132,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             if ($counter > 5) {
                 $this->slugCache[$slug] = $counter;
             }
+
             $counter++;
         }
 
@@ -150,12 +151,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             ->where(
                 $queryBuilder->expr()->eq(
                     $this->fieldName,
-                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR)
+                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR),
                 ),
                 $queryBuilder->expr()->neq(
                     'uid',
-                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT)
-                )
+                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT),
+                ),
             )
             ->executeQuery();
     }
@@ -167,7 +168,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 SlugHelper::class,
                 $this->tableName,
                 $this->fieldName,
-                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config']
+                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config'],
             );
         }
 

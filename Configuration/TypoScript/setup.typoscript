@@ -17,7 +17,6 @@ plugin.tx_yellowpages2 {
     storagePid = {$plugin.tx_yellowpages2.persistence.storagePid}
   }
   settings {
-    includeJQueryLibrary = {$plugin.tx_yellowpages2.settings.includeJQueryLibrary}
     pidOfMaps2Plugin = {$plugin.tx_yellowpages2.settings.pidOfMaps2Plugin}
     startingUidForCategories = {$plugin.tx_yellowpages2.settings.startingUidForCategories}
     uidOfDefaultDistrict = {$plugin.tx_yellowpages2.settings.uidOfDefaultDistrict}

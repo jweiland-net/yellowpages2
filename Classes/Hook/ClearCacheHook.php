@@ -36,6 +36,7 @@ class ClearCacheHook
             if (isset($params['uid'])) {
                 $cacheTagsToFlush[] = 'tx_yellowpages2_uid_' . $params['uid'];
             }
+
             if (isset($params['uid_page'])) {
                 $cacheTagsToFlush[] = 'tx_yellowpages2_pid_' . $params['uid_page'];
             }

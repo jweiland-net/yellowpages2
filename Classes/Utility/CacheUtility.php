@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Utility;
 
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Cache Utility class
@@ -25,7 +26,7 @@ class CacheUtility
      * Following cache tags will be added to TSFE:
      * "tx_yellowpages2_uid_[company:uid]"
      */
-    public static function addCacheTagsByCompanyRecords(array $companyRecords): void
+    public static function addCacheTagsByCompanyRecords(array $companyRecords, ServerRequestInterface $request): void
     {
         if (!self::getApplicationType()->isFrontend()) {
             return;
@@ -34,14 +35,15 @@ class CacheUtility
         $cacheTags = [];
         foreach ($companyRecords as $companyRecord) {
             // cache tag for each companyRecord record
-            $cacheTags[] = 'tx_yellowpages2_uid_' . $companyRecord->getUid();
+            $cacheTags[] = new CacheTag('tx_yellowpages2_uid_' . $companyRecord->getUid());
 
             if ($companyRecord->_getProperty('_localizedUid')) {
-                $cacheTags[] = 'tx_yellowpages2_uid_' . $companyRecord->_getProperty('_localizedUid');
+                $cacheTags[] = new CacheTag('tx_yellowpages2_uid_' . $companyRecord->_getProperty('_localizedUid'));
             }
         }
+
         if (count($cacheTags) > 0) {
-            $GLOBALS['TSFE']->addCacheTags($cacheTags);
+            $request->getAttribute('frontend.cache.collector')->addCacheTags(...$cacheTags);
         }
     }
 
@@ -49,7 +51,7 @@ class CacheUtility
      * Adds page cache tags by used storagePages.
      * This adds tags with the scheme tx_yellowpages2_pid_[company:pid]
      */
-    public static function addPageCacheTagsByQuery(QueryInterface $query): void
+    public static function addPageCacheTagsByQuery(QueryInterface $query, ServerRequestInterface $request): void
     {
         if (!self::getApplicationType()->isFrontend()) {
             return;
@@ -59,12 +61,13 @@ class CacheUtility
         if ($query->getQuerySettings()->getStoragePageIds()) {
             // Add cache tags for each storage page
             foreach ($query->getQuerySettings()->getStoragePageIds() as $pageId) {
-                $cacheTags[] = 'tx_yellowpages2_pid_' . $pageId;
+                $cacheTags[] = new CacheTag('tx_yellowpages2_pid_' . $pageId);
             }
         } else {
-            $cacheTags[] = 'tx_yellowpages2_domain_model_company';
+            $cacheTags[] = new CacheTag('tx_yellowpages2_domain_model_company');
         }
-        $GLOBALS['TSFE']->addCacheTags($cacheTags);
+
+        $request->getAttribute('frontend.cache.collector')->addCacheTags(...$cacheTags);
     }
 
     protected static function getApplicationType(): ApplicationType

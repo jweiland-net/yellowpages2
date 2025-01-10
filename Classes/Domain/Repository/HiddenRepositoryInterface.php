@@ -21,8 +21,6 @@ interface HiddenRepositoryInterface
      * Find object by a given property value whether it is hidden or not.
      *
      * @param mixed $value The Value to compare against $property
-     * @param string $property
-     * @return object|null
      */
     public function findHiddenObject($value, string $property = 'uid'): ?object;
 }

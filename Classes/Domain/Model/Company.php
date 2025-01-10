@@ -10,6 +10,9 @@
 namespace JWeiland\Yellowpages2\Domain\Model;
 
 use JWeiland\Maps2\Domain\Model\PoiCollection;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
@@ -109,10 +112,10 @@ class Company extends AbstractEntity
      */
     public function initializeObject(): void
     {
-        $this->logo = $this->logo ?? new ObjectStorage();
-        $this->images = $this->images ?? new ObjectStorage();
-        $this->mainTrade = $this->mainTrade ?? new ObjectStorage();
-        $this->trades = $this->trades ?? new ObjectStorage();
+        $this->logo ??= new ObjectStorage();
+        $this->images ??= new ObjectStorage();
+        $this->mainTrade ??= new ObjectStorage();
+        $this->trades ??= new ObjectStorage();
     }
 
     public function getHidden(): bool
@@ -354,7 +357,7 @@ class Company extends AbstractEntity
 
     public function getFirstMainTrade(): ?Category
     {
-        if ($this->mainTrade === null || $this->mainTrade->count() === 0) {
+        if (!$this->mainTrade instanceof ObjectStorage || $this->mainTrade->count() === 0) {
             return null;
         }
 
@@ -478,12 +481,17 @@ class Company extends AbstractEntity
      */
     public function getHasValidUser(): bool
     {
-        if (is_array($GLOBALS['TSFE']->fe_user->user)
-            && $GLOBALS['TSFE']->fe_user->user['uid'] > 0
-            && $this->feUser !== null && $this->feUser->getUid() > 0
-        ) {
-            return (int)$GLOBALS['TSFE']->fe_user->user['uid'] === $this->feUser->getUid();
+        try {
+            $frontendUser = GeneralUtility::makeInstance(Context::class)
+                ->getPropertyFromAspect('frontend.user', 'id');
+
+            if ($frontendUser > 0 && $this->feUser instanceof FeUser && $this->feUser->getUid() > 0) {
+                return (int)$frontendUser === $this->feUser->getUid();
+            }
+        } catch (AspectNotFoundException $e) {
+            return false;
         }
+
         return false;
     }
 

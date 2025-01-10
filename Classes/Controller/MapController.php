@@ -11,22 +11,30 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use Psr\Http\Message\ResponseInterface;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
+use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
+use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller to show and save PoiCollections on a map
  */
-class MapController extends AbstractController
+class MapController extends ActionController
 {
+    use PostProcessFluidVariablesTrait;
+    use PostProcessControllerActionTrait;
+    use PreProcessControllerActionTrait;
+
     protected CompanyRepository $companyRepository;
 
     protected PersistenceManagerInterface $persistenceManager;
@@ -146,7 +154,7 @@ class MapController extends AbstractController
 
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2')
+            LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'),
         );
     }
 }

@@ -11,9 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Functional\Domain\Model;
 
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
-use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Yellowpages2\Domain\Model\Company;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case.
@@ -32,7 +31,7 @@ class CompanyTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         unset(
-            $this->subject
+            $this->subject,
         );
 
         parent::tearDown();

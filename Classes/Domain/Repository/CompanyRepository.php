@@ -11,12 +11,14 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use Doctrine\DBAL\Exception;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\ModifyQueryToFindCompanyByLetterEvent;
 use JWeiland\Yellowpages2\Event\ModifyQueryToSearchForCompaniesEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -30,15 +32,31 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CompanyRepository extends Repository implements HiddenRepositoryInterface
 {
+    private const TABLE = 'tx_yellowpages2_domain_model_company';
+
     protected $defaultOrderings = [
         'company' => QueryInterface::ORDER_ASCENDING,
     ];
 
     protected EventDispatcherInterface $eventDispatcher;
 
+    protected ConnectionPool $connectionPool;
+
+    protected GlossaryService $glossaryService;
+
     public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function injectConnectionPool(ConnectionPool $connectionPool): void
+    {
+        $this->connectionPool = $connectionPool;
+    }
+
+    public function injectGlossaryService(GlossaryService $glossary): void
+    {
+        $this->glossaryService = $glossary;
     }
 
     public function findHiddenObject($value, string $property = 'uid'): ?object
@@ -57,12 +75,11 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         $query = $this->createQuery();
         $constraints = [];
 
-        if ($letter) {
-            $glossaryService = GeneralUtility::makeInstance(GlossaryService::class);
-            $constraints[] = $glossaryService->getLetterConstraintForExtbaseQuery(
+        if ($letter !== '' && $letter !== '0') {
+            $constraints[] = $this->glossaryService->getLetterConstraintForExtbaseQuery(
                 $query,
                 'company',
-                $letter
+                $letter,
             );
         }
 
@@ -94,16 +111,19 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         /** @var Query $query */
         $query = $this->createQuery();
         $constraints = [];
-        $longStreetSearch = $smallStreetSearch = trim($search);
+        $longStreetSearch = trim($search);
+        $smallStreetSearch = $longStreetSearch;
 
         // unify street search
         if (strtolower(mb_substr($search, -6)) === 'straße') {
             $smallStreetSearch = str_ireplace('straße', 'str', $search);
         }
+
         if (strtolower(mb_substr($search, -4)) === 'str.') {
             $longStreetSearch = str_ireplace('str.', 'straße', $search);
             $smallStreetSearch = str_ireplace('str.', 'str', $search);
         }
+
         if (strtolower(mb_substr($search, -3)) === 'str') {
             $longStreetSearch = str_ireplace('str', 'straße', $search);
         }
@@ -136,7 +156,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         }
 
         $this->eventDispatcher->dispatch(
-            new ModifyQueryToSearchForCompaniesEvent($queryResult, $search, $categoryUid, $settings)
+            new ModifyQueryToSearchForCompaniesEvent($queryResult, $search, $categoryUid, $settings),
         );
 
         return $queryResult;
@@ -147,15 +167,38 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      * Hint: Needed by scheduler
      *
      * @return QueryResultInterface|Company[]
+     * @throws Exception
      */
-    public function findOlderThan(int $days): QueryResultInterface
+    public function findOlderThan(int $days): array
     {
-        $today = date('U');
-        $history = $today - ($days * 60 * 60 * 24);
+        $today = time(); // Get current UNIX timestamp
+        $history = $today - ($days * 60 * 60 * 24); // Calculate the UNIX timestamp for the cutoff date
 
-        $query = $this->createQuery();
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
+        $queryBuilder->getRestrictions()->removeAll();
 
-        return $query->matching($query->lessThan('tstamp', $history))->execute();
+        // Fetch the results as associative arrays
+        return $queryBuilder
+            ->select('*')
+            ->from(self::TABLE)
+            ->where(
+                $queryBuilder->expr()->lt('tstamp', $queryBuilder->createNamedParameter($history, Connection::PARAM_INT)),
+            )
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    public function hideCompany(int $companyId): void
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
+
+        $queryBuilder
+            ->update(self::TABLE)
+            ->set('hidden', 1)
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($companyId, Connection::PARAM_INT)),
+            )
+            ->executeStatement();
     }
 
     /**

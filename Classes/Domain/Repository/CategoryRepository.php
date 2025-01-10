@@ -75,23 +75,23 @@ class CategoryRepository extends Repository
                 (string)$queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.tablenames',
-                        $queryBuilder->createNamedParameter('tx_yellowpages2_domain_model_company')
+                        $queryBuilder->createNamedParameter('tx_yellowpages2_domain_model_company'),
                     ),
                     $queryBuilder->expr()->or(
                         $queryBuilder->expr()->eq(
                             'sys_category_record_mm.fieldname',
-                            $queryBuilder->createNamedParameter('main_trade')
+                            $queryBuilder->createNamedParameter('main_trade'),
                         ),
                         $queryBuilder->expr()->eq(
                             'sys_category_record_mm.fieldname',
-                            $queryBuilder->createNamedParameter('trades')
+                            $queryBuilder->createNamedParameter('trades'),
                         ),
                     ),
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.uid_foreign',
-                        $queryBuilder->quoteIdentifier('tx_yellowpages2_domain_model_company.uid')
-                    )
-                )
+                        $queryBuilder->quoteIdentifier('tx_yellowpages2_domain_model_company.uid'),
+                    ),
+                ),
             )
             ->leftJoin(
                 'sys_category_record_mm',
@@ -99,27 +99,27 @@ class CategoryRepository extends Repository
                 'sys_category',
                 $queryBuilder->expr()->eq(
                     'sys_category_record_mm.uid_local',
-                    $queryBuilder->quoteIdentifier('sys_category.uid')
-                )
+                    $queryBuilder->quoteIdentifier('sys_category.uid'),
+                ),
             )
             ->where(
                 $queryBuilder->expr()->isNotNull(
-                    'sys_category.uid'
+                    'sys_category.uid',
                 ),
                 $queryBuilder->expr()->in(
                     'tx_yellowpages2_domain_model_company.pid',
-                    $this->getQuerySettingsOfCompany()->getStoragePageIds()
-                )
+                    $this->getQuerySettingsOfCompany()->getStoragePageIds(),
+                ),
             )
             ->andWhere(
                 $queryBuilder->expr()->or(
-                    ...$this->getLanguageStatement(
+                    $this->getLanguageStatement(
                         'tx_yellowpages2_domain_model_company',
-                    'tx_yellowpages2_domain_model_company',
+                        'tx_yellowpages2_domain_model_company',
                         $this->getQuerySettingsOfCompany(),
-                        $queryBuilder
-                    )
-                )
+                        $queryBuilder,
+                    ),
+                ),
             )
             ->orderBy('sys_category.title', 'ASC')
             ->groupBy('sys_category.uid');
