@@ -51,7 +51,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly ResourceFactory $resourceFactory
+        private readonly ResourceFactory $resourceFactory,
     ) {}
 
     /**
@@ -102,8 +102,8 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                     $source,
                     $key,
                     $this->getPersistedFileByPosition($key),
-                    $uploadedFile
-                )
+                    $uploadedFile,
+                ),
             );
 
             // Upload and add file reference
@@ -130,7 +130,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     {
         $uploadFolderIdentifier = $configuration->getConfigurationValue(
             self::class,
-            self::CONFIGURATION_SETTINGS . '.uploadFolder'
+            self::CONFIGURATION_SETTINGS . '.uploadFolder',
         ) ?? self::DEFAULT_UPLOAD_FOLDER;
 
         try {
@@ -161,7 +161,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
     {
         $persistedFiles = $this->converterConfiguration->getConfigurationValue(
             self::class,
-            self::CONFIGURATION_IMAGES
+            self::CONFIGURATION_IMAGES,
         );
 
         return $persistedFiles instanceof ObjectStorage ? $persistedFiles->offsetGet($position) : null;
@@ -178,7 +178,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     private function uploadFile(UploadedFile $file): \TYPO3\CMS\Core\Resource\FileReference
     {
-         $uploadedFile = $this->uploadFolder->addUploadedFile(
+        $uploadedFile = $this->uploadFolder->addUploadedFile(
             [
                 'tmp_name' => $file->getStream()->getMetadata('uri'),
                 'name' => $file->getClientFilename(),
@@ -186,16 +186,16 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
                 'error' => $file->getError(),
                 'size' => $file->getSize(),
             ],
-            DuplicationBehavior::RENAME
+            DuplicationBehavior::RENAME,
         );
 
-         return $this->resourceFactory->createFileReferenceObject(
-             [
-                 'uid_local' => $uploadedFile->getUid(),
-                 'uid_foreign' => uniqid('NEW_', true),
-                 'uid' => uniqid('NEW_', true),
-             ],
-         );
+        return $this->resourceFactory->createFileReferenceObject(
+            [
+                'uid_local' => $uploadedFile->getUid(),
+                'uid_foreign' => uniqid('NEW_', true),
+                'uid' => uniqid('NEW_', true),
+            ],
+        );
     }
 
     protected function getTypoScriptPluginSettings(): array
