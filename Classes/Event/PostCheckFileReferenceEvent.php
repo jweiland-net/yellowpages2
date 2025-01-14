@@ -40,7 +40,7 @@ class PostCheckFileReferenceEvent
      * This is the value of the currently looped uploaded file.
      * It contains one file out of $_FILES
      */
-    protected ?UploadedFile $uploadedFile;
+    protected UploadedFile $uploadedFile;
 
     public function __construct(
         array $source,

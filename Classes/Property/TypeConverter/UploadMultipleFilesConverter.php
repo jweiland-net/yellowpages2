@@ -197,14 +197,4 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
             ],
         );
     }
-
-    protected function getTypoScriptPluginSettings(): array
-    {
-        $settings = $this->converterConfiguration->getConfigurationValue(
-            self::class,
-            'settings',
-        );
-
-        return $settings ?? [];
-    }
 }
