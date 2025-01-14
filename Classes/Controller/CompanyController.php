@@ -205,7 +205,7 @@ class CompanyController extends ActionController
         $this->preProcessControllerAction();
     }
 
-    public function updateAction(Company $company): void
+    public function updateAction(Company $company): ResponseInterface
     {
         $this->companyRepository->update($company);
         $this->postProcessControllerAction($company);
@@ -221,7 +221,7 @@ class CompanyController extends ActionController
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
 
-        $this->redirect('listMyCompanies', 'Company');
+        return $this->redirect('listMyCompanies', 'Company');
     }
 
     public function initializeActivateAction(): void

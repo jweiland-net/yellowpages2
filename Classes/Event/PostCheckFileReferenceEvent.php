@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Event;
 
+use TYPO3\CMS\Core\Http\UploadedFile;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /*
@@ -39,13 +40,13 @@ class PostCheckFileReferenceEvent
      * This is the value of the currently looped uploaded file.
      * It contains one file out of $_FILES
      */
-    protected array $uploadedFile = [];
+    protected UploadedFile $uploadedFile;
 
     public function __construct(
         array $source,
         int $key,
         ?FileReference $alreadyPersistedImage,
-        array $uploadedFile,
+        UploadedFile $uploadedFile,
     ) {
         $this->source = $source;
         $this->key = $key;
@@ -68,7 +69,7 @@ class PostCheckFileReferenceEvent
         return $this->alreadyPersistedImage;
     }
 
-    public function getUploadedFile(): array
+    public function getUploadedFile(): UploadedFile
     {
         return $this->uploadedFile;
     }
