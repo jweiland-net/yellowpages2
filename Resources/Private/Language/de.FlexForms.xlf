@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2">
-		<header/>
-		<body>
-			<trans-unit id="sheetGeneral" xml:space="preserve">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="sheetGeneral" xml:space="preserve" approved="yes">
 				<source>General</source>
-				<target>Allgemein</target>
-			</trans-unit>
-			<trans-unit id="pidOfDetailPage" xml:space="preserve">
-				<source>PID of detail view</source>
-				<target>PID der Detailansicht</target>
-			</trans-unit>
-			<trans-unit id="pidOfListPage" xml:space="preserve">
-				<source>PID of list view</source>
-				<target>PID der Listenansicht</target>
-			</trans-unit>
-			<trans-unit id="presetTrade" xml:space="preserve">
+			<target state="final">Allgemein</target></trans-unit>
+      <trans-unit id="pidOfDetailPage" approved="yes">
+        <source>PID of detail page</source>
+        <target state="final">PID der Detailseite</target>
+      </trans-unit>
+      <trans-unit id="pidOfListPage" approved="yes">
+        <source>PID of list page</source>
+        <target state="final">PID der Listenseite</target>
+      </trans-unit>
+      <trans-unit id="showWspMembers" xml:space="preserve" approved="yes">
+				<source>Show only WSP Members</source>
+			<target state="final">Nur WSP Mitglieder anzeigen</target></trans-unit>
+      <trans-unit id="presetTrade" xml:space="preserve" approved="yes">
 				<source>Preset trade</source>
-				<target>Vorauswahl Branche</target>
-			</trans-unit>
-			<trans-unit id="district" xml:space="preserve">
+			<target state="final">Voreinstellung Branche</target></trans-unit>
+      <trans-unit id="district" xml:space="preserve" approved="yes">
 				<source>District</source>
-				<target>Bezirk</target>
-			</trans-unit>
-		</body>
-	</file>
+			<target state="final">Bezirk</target></trans-unit>
+    </body>
+  </file>
 </xliff>

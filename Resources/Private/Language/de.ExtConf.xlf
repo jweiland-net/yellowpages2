@@ -1,32 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2">
-		<header/>
-		<body>
-			<trans-unit id="poiCollectionPid" xml:space="preserve">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="poiCollectionPid" xml:space="preserve" approved="yes">
 				<source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
-				<target>PID für POI Sammlungen: Definieren Sie eine Speicher-PID wo Datensätze vom Typ Point of Interest gespeichert werden sollen.</target>
-			</trans-unit>
-			<trans-unit id="editLink" xml:space="preserve">
+			<target state="final">PID für POI Sammlungen: Definieren Sie eine Speicher-PID wo Datensätze vom Typ Point of Interest gespeichert werden sollen.</target></trans-unit>
+      <trans-unit id="editLink" xml:space="preserve" approved="yes">
 				<source>Link to edit view: Set the URI where the frontend user can edit his business listings.</source>
-				<target>Link zur Bearbeitunsansicht: Tragen Sie die URI ein wo ein Frontend Benutzer seine Brancheneinträge bearbeiten kann.</target>
-			</trans-unit>
-			<trans-unit id="emailFromAddress" xml:space="preserve">
+			<target state="final">Link zum Bearbeiten der Ansicht: Legen Sie die URI fest, in der der Frontend-Benutzer seine Geschäftseinträge bearbeiten kann.</target></trans-unit>
+      <trans-unit id="emailFromAddress" xml:space="preserve" approved="yes">
 				<source>Email address FROM: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
-				<target>E-Mail Adresse FROM: Die E-Mail-Adresse des Absenders. Falls nicht angegeben versucht die Erweiterung eine von INSTALL_TOOL zu erhalten.</target>
-			</trans-unit>
-			<trans-unit id="emailFromName" xml:space="preserve">
+			<target state="final">E-Mail von Adresse: Die E-Mail-Adresse des Absenders. Falls nicht angegeben versucht die Erweiterung eine von INSTALL_TOOL zu erhalten.</target></trans-unit>
+      <trans-unit id="emailFromName" xml:space="preserve" approved="yes">
 				<source>Sender name FROM: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
-				<target>Absendername FROM: Der Absender-E-Mail-Name. Falls nicht angegeben versucht die Erweiterung einen von INSTALL_TOOL zu erhalten.</target>
-			</trans-unit>
-			<trans-unit id="emailToAddress" xml:space="preserve">
+			<target state="final">E-Mail von Namen: Der Absender-E-Mail-Name. Falls nicht angegeben versucht die Erweiterung einen von INSTALL_TOOL zu erhalten.</target></trans-unit>
+      <trans-unit id="emailToAddress" xml:space="preserve" approved="yes">
 				<source>Email address TO: The recipients email address.</source>
-				<target>E-Mail Adresse TO: Die E-Mail-Adresse des Empfängers.</target>
-			</trans-unit>
-			<trans-unit id="emailToName" xml:space="preserve">
+			<target state="final">An E-Mail Adresse: Die E-Mail-Adresse des Empfängers.</target></trans-unit>
+      <trans-unit id="emailToName" xml:space="preserve" approved="yes">
 				<source>Recipient name TO: The recipients email name.</source>
-				<target>Empfängername TO: Der E-Mail-Name des Empfängers.</target>
-			</trans-unit>
-		</body>
-	</file>
+			<target state="final">An E-Mail-Name: Der E-Mail-Name des Empfängers.</target></trans-unit>
+    </body>
+  </file>
 </xliff>
