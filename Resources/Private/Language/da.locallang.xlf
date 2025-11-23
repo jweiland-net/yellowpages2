@@ -3,314 +3,314 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2" target-language="da">
     <header/>
     <body>
-      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
+      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve" approved="yes">
 				<source>Company</source>
-			<target state="translated">Virksomhed</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
+			<target state="final">Virksomhed</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve" approved="yes">
 				<source>Company</source>
-			<target state="translated">Virksomhed</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
+			<target state="final">Virksomhed</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve" approved="yes">
 				<source>Logo</source>
-			<target state="translated">Logo</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
+			<target state="final">Logo</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve" approved="yes">
 				<source>Images</source>
-			<target state="translated">Billeder</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
+			<target state="final">Billeder</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve" approved="yes">
 				<source>Street</source>
-			<target state="translated">Gade</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
+			<target state="final">Gade</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve" approved="yes">
 				<source>House number</source>
-			<target state="translated">Husnummer</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
+			<target state="final">Husnummer</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve" approved="yes">
 				<source>Zip</source>
-			<target state="translated">Postnummer</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
+			<target state="final">Postnummer</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve" approved="yes">
 				<source>City</source>
-			<target state="translated">By</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
+			<target state="final">By</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve" approved="yes">
 				<source>Telephone</source>
-			<target state="translated">Telefon</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
+			<target state="final">Telefon</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve" approved="yes">
 				<source>Fax</source>
-			<target state="translated">Fax</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
+			<target state="final">Fax</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve" approved="yes">
 				<source>Contact person</source>
-			<target state="translated">Kontaktperson</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
+			<target state="final">Kontaktperson</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve" approved="yes">
 				<source>Email</source>
-			<target state="translated">E-mail</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
+			<target state="final">E-mail</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve" approved="yes">
 				<source>Website</source>
-			<target state="translated">Webside</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
+			<target state="final">Webside</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve" approved="yes">
 				<source>Opening times</source>
-			<target state="translated">Åbningstider</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
+			<target state="final">Åbningstider</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve" approved="yes">
 				<source>Barrier-free</source>
-			<target state="translated">Barrierfri</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
+			<target state="final">Barrierefri</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve" approved="yes">
 				<source>Description</source>
-			<target state="translated">Beskrivelse</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
+			<target state="final">Beskrivelse</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="translated">Distrikt</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+			<target state="final">Distrikt</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve" approved="yes">
 				<source>FeUser</source>
-			<target state="translated">FeUser</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
+			<target state="final">FeUser</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve" approved="yes">
 				<source>Facebook</source>
-			<target state="translated">Facebook</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
+			<target state="final">Facebook</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve" approved="yes">
 				<source>Twitter</source>
-			<target state="translated">Twitter</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.instagram" xml:space="preserve">
+			<target state="final">Twitter</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.instagram" xml:space="preserve" approved="yes">
 				<source>Instagram</source>
-			<target state="translated">Instagram</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
+			<target state="final">Instagram</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve" approved="yes">
 				<source>Main Trade</source>
-			<target state="translated">Hovedbranche</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
+			<target state="final">Hovedbranche</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve" approved="yes">
 				<source>Sub Trades</source>
-			<target state="translated">Underbranche</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
+			<target state="final">Underbranche</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="translated">Distrikt</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
+			<target state="final">Distrikt</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="translated">Distrikt</target></trans-unit>
-      <trans-unit id="search">
+			<target state="final">Distrikt</target></trans-unit>
+      <trans-unit id="search" approved="yes">
         <source>Search</source>
-        <target state="translated">Søg</target>
+        <target state="final">Søg</target>
       </trans-unit>
-      <trans-unit id="noResults">
+      <trans-unit id="noResults" approved="yes">
         <source>No results found</source>
-        <target state="translated">Ingen resultater fundet</target>
+        <target state="final">Ingen resultater fundet</target>
       </trans-unit>
-      <trans-unit id="branch">
+      <trans-unit id="branch" approved="yes">
         <source>Branch</source>
-        <target state="translated">Branche</target>
+        <target state="final">Branche</target>
       </trans-unit>
-      <trans-unit id="allBranches">
+      <trans-unit id="allBranches" approved="yes">
         <source>All branches</source>
-        <target state="translated">Alle brancher</target>
+        <target state="final">Alle brancher</target>
       </trans-unit>
-      <trans-unit id="newCompany">
+      <trans-unit id="newCompany" approved="yes">
         <source>New company</source>
-        <target state="translated">Ny virksomhed</target>
+        <target state="final">Ny virksomhed</target>
       </trans-unit>
-      <trans-unit id="editCompany">
+      <trans-unit id="editCompany" approved="yes">
         <source>Edit company</source>
-        <target state="translated">Redigér virksomhed</target>
+        <target state="final">Redigér virksomhed</target>
       </trans-unit>
-      <trans-unit id="listMyCompanies">
+      <trans-unit id="listMyCompanies" approved="yes">
         <source>List my companies</source>
-        <target state="translated">Vis mine virksomheder</target>
+        <target state="final">Vis mine virksomheder</target>
       </trans-unit>
-      <trans-unit id="backToList">
+      <trans-unit id="backToList" approved="yes">
         <source>Back to list view</source>
-        <target state="translated">Tilbage til listevisning</target>
+        <target state="final">Tilbage til listevisning</target>
       </trans-unit>
-      <trans-unit id="create">
+      <trans-unit id="create" approved="yes">
         <source>Create</source>
-        <target state="translated">Opret</target>
+        <target state="final">Opret</target>
       </trans-unit>
-      <trans-unit id="update">
+      <trans-unit id="update" approved="yes">
         <source>Edit</source>
-        <target state="translated">Redigér</target>
+        <target state="final">Redigér</target>
       </trans-unit>
-      <trans-unit id="companyCreated">
+      <trans-unit id="companyCreated" approved="yes">
         <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="translated">Tak for din indtastning. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager max. 1-2 hverdage.</target>
+        <target state="final">Tak for din indtastning. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager maks. 1-2 hverdage.</target>
       </trans-unit>
-      <trans-unit id="companyUpdated">
+      <trans-unit id="companyUpdated" approved="yes">
         <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="translated">Din virksomhed blev opdateret. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager max. 1-2 hverdage.</target>
+        <target state="final">Din virksomhed blev opdateret. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager maks. 1-2 hverdage.</target>
       </trans-unit>
-      <trans-unit id="pleaseChoose">
+      <trans-unit id="pleaseChoose" approved="yes">
         <source>--- Please choose ---</source>
-        <target state="translated">--- Vælg venligst ---</target>
+        <target state="final">--- Vælg venligst ---</target>
       </trans-unit>
-      <trans-unit id="yes">
+      <trans-unit id="yes" approved="yes">
         <source>Yes</source>
-        <target state="translated">Ja</target>
+        <target state="final">Ja</target>
       </trans-unit>
-      <trans-unit id="no">
+      <trans-unit id="no" approved="yes">
         <source>No</source>
-        <target state="translated">Nej</target>
+        <target state="final">Nej</target>
       </trans-unit>
-      <trans-unit id="altTextMapImg">
+      <trans-unit id="altTextMapImg" approved="yes">
         <source>Map</source>
-        <target state="translated">Kort</target>
+        <target state="final">Kort</target>
       </trans-unit>
-      <trans-unit id="hint">
+      <trans-unit id="hint" approved="yes">
         <source>Hint</source>
-        <target state="translated">Tip</target>
+        <target state="final">Tip</target>
       </trans-unit>
-      <trans-unit id="cshcompany">
+      <trans-unit id="cshcompany" approved="yes">
         <source>Enter the company name.This is mandatory.</source>
-        <target state="translated">Indtast virksomhedens navn. Dette er obligatorisk.</target>
+        <target state="final">Indtast virksomhedens navn. Dette er obligatorisk.</target>
       </trans-unit>
-      <trans-unit id="cshstreet">
+      <trans-unit id="cshstreet" approved="yes">
         <source>Enter the street.This is mandatory.</source>
-        <target state="translated">Indtast gadenavn. Dette er obligatorisk.</target>
+        <target state="final">Indtast gadenavn. Dette er obligatorisk.</target>
       </trans-unit>
-      <trans-unit id="cshhouseNumber">
+      <trans-unit id="cshhouseNumber" approved="yes">
         <source>Enter the house number.</source>
-        <target state="translated">Indtast husnummeret.</target>
+        <target state="final">Indtast husnummeret.</target>
       </trans-unit>
-      <trans-unit id="cshzip">
+      <trans-unit id="cshzip" approved="yes">
         <source>Enter the zip code.This is mandatory.</source>
-        <target state="translated">Indtast postnummeret. Dette er obligatorisk.</target>
+        <target state="final">Indtast postnummeret. Dette er obligatorisk.</target>
       </trans-unit>
-      <trans-unit id="cshcity">
+      <trans-unit id="cshcity" approved="yes">
         <source>Enter the city.This is mandatory.</source>
-        <target state="translated">Indtast bynavn. Dette er obligatorisk.</target>
+        <target state="final">Indtast bynavn. Dette er obligatorisk.</target>
       </trans-unit>
-      <trans-unit id="cshdistrict">
+      <trans-unit id="cshdistrict" approved="yes">
         <source>Enter the district.This is mandatory.</source>
-        <target state="translated">Indtast distriktet. Dette er obligatorisk.</target>
+        <target state="final">Indtast distriktet. Dette er obligatorisk.</target>
       </trans-unit>
-      <trans-unit id="cshtelephone">
+      <trans-unit id="cshtelephone" approved="yes">
         <source>Enter the phone number.</source>
-        <target state="translated">Indtast telefonnummeret.</target>
+        <target state="final">Indtast telefonnummeret.</target>
       </trans-unit>
-      <trans-unit id="cshfax">
+      <trans-unit id="cshfax" approved="yes">
         <source>Enter the fax number.</source>
-        <target state="translated">Indtast faxnummeret.</target>
+        <target state="final">Indtast faxnummeret.</target>
       </trans-unit>
-      <trans-unit id="cshemail">
+      <trans-unit id="cshemail" approved="yes">
         <source>Enter the email address.</source>
-        <target state="translated">Indtast e-mailadressen.</target>
+        <target state="final">Indtast e-mailadressen.</target>
       </trans-unit>
-      <trans-unit id="cshwebsite">
+      <trans-unit id="cshwebsite" approved="yes">
         <source>Enter the URL of the website</source>
-        <target state="translated">Indtast webadressen på webstedet</target>
+        <target state="final">Indtast webadressen på webstedet</target>
       </trans-unit>
-      <trans-unit id="cshcontactPerson">
+      <trans-unit id="cshcontactPerson" approved="yes">
         <source>Enter the contact person.</source>
-        <target state="translated">Indtast kontaktpersonen.</target>
+        <target state="final">Indtast kontaktpersonen.</target>
       </trans-unit>
-      <trans-unit id="cshopeningTimes">
+      <trans-unit id="cshopeningTimes" approved="yes">
         <source>Enter the opening times.</source>
-        <target state="translated">Indtast åbningstiderne.</target>
+        <target state="final">Indtast åbningstiderne.</target>
       </trans-unit>
-      <trans-unit id="cshdescription">
+      <trans-unit id="cshdescription" approved="yes">
         <source>Describe your company.This is mandatory.</source>
-        <target state="translated">Beskriv din virksomhed. Dette er obligatorisk.</target>
+        <target state="final">Beskriv din virksomhed. Dette er obligatorisk.</target>
       </trans-unit>
-      <trans-unit id="cshbarrierFree">
+      <trans-unit id="cshbarrierFree" approved="yes">
         <source>Is the company accessible</source>
-        <target state="translated">Er virksomheden tilgængelig</target>
+        <target state="final">Er virksomheden tilgængelig</target>
       </trans-unit>
-      <trans-unit id="cshmainTrade">
+      <trans-unit id="cshmainTrade" approved="yes">
         <source>Enter a main trade</source>
-        <target state="translated">Indtast en hovedbranche</target>
+        <target state="final">Indtast en hovedbranche</target>
       </trans-unit>
-      <trans-unit id="cshtrades_0">
+      <trans-unit id="cshtrades_0" approved="yes">
         <source>Enter max. 2 sub trades</source>
-        <target state="translated">Indtast maks. to underbrancher</target>
+        <target state="final">Indtast maks. to underbrancher</target>
       </trans-unit>
-      <trans-unit id="cshfacebook">
+      <trans-unit id="cshfacebook" approved="yes">
         <source>Enter a URL to facebook.</source>
-        <target state="translated">Indtast en URL til facebook.</target>
+        <target state="final">Indtast en URL til Facebook.</target>
       </trans-unit>
-      <trans-unit id="cshtwitter">
+      <trans-unit id="cshtwitter" approved="yes">
         <source>Enter a URL to twitter.</source>
-        <target state="translated">Angiv en URL til twitter.</target>
+        <target state="final">Angiv en URL til X / Twitter.</target>
       </trans-unit>
-      <trans-unit id="cshinstagram">
+      <trans-unit id="cshinstagram" approved="yes">
         <source>Enter a URL to Instagram.</source>
-        <target state="translated">Indtast en URL til Instagram.</target>
+        <target state="final">Indtast en URL til Instagram.</target>
       </trans-unit>
-      <trans-unit id="cshlogo">
+      <trans-unit id="cshlogo" approved="yes">
         <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
-        <target state="translated">Upload logofilen (jpg,gif,png) i en firkantet formatering.</target>
+        <target state="final">Upload logofil</target>
       </trans-unit>
-      <trans-unit id="cshimages_0">
+      <trans-unit id="cshimages_0" approved="yes">
         <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
-        <target state="translated">Upload maks. 5 billedfiler (jpg,gif,png). Brug de samme billeddimensioner (d.v.s. 3:2, 3:4) hvis du uploader mere end et billede.</target>
+        <target state="final">Upload maks. 5 billedfiler (jpg,gif,png). Brug de samme billeddimensioner (dvs. 3:2, 3:4) hvis du uploader mere end et billede.</target>
       </trans-unit>
-      <trans-unit id="pageBrowser.first">
+      <trans-unit id="pageBrowser.first" approved="yes">
         <source>First</source>
-        <target state="translated">Første</target>
+        <target state="final">Første</target>
       </trans-unit>
-      <trans-unit id="pageBrowser.previous">
+      <trans-unit id="pageBrowser.previous" approved="yes">
         <source>Previous</source>
-        <target state="translated">Forrige</target>
+        <target state="final">Forrige</target>
       </trans-unit>
-      <trans-unit id="pageBrowser.next">
+      <trans-unit id="pageBrowser.next" approved="yes">
         <source>Next</source>
-        <target state="translated">Næste</target>
+        <target state="final">Næste</target>
       </trans-unit>
-      <trans-unit id="pageBrowser.last">
+      <trans-unit id="pageBrowser.last" approved="yes">
         <source>Last</source>
-        <target state="translated">Sidste</target>
+        <target state="final">Sidste</target>
       </trans-unit>
-      <trans-unit id="email.subject.inform.user">
+      <trans-unit id="email.subject.inform.user" approved="yes">
         <source>Your company record is out of date</source>
-        <target state="translated">Din virksomheds optegnelse er forældet</target>
+        <target state="final">Din virksomheds optegnelse er forældet</target>
       </trans-unit>
-      <trans-unit id="email.subject.deactivated.user">
+      <trans-unit id="email.subject.deactivated.user" approved="yes">
         <source>Your company record has been deactivated</source>
-        <target state="translated">Din virksomheds optegnelse er blevet deaktiveret</target>
+        <target state="final">Din virksomheds optegnelse er blevet deaktiveret</target>
       </trans-unit>
-      <trans-unit id="email.subject.deactivated.admin">
+      <trans-unit id="email.subject.deactivated.admin" approved="yes">
         <source>A company record has been deactivated</source>
-        <target state="translated">Din virksomheds optegnelse er blevet deaktiveret</target>
+        <target state="final">Din virksomheds optegnelse er blevet deaktiveret</target>
       </trans-unit>
-      <trans-unit id="email.subject.create">
+      <trans-unit id="email.subject.create" approved="yes">
         <source>A new record was created</source>
-        <target state="translated">Et nyt element blev oprettet</target>
+        <target state="final">Et nyt element blev oprettet</target>
       </trans-unit>
-      <trans-unit id="email.subject.update">
+      <trans-unit id="email.subject.update" approved="yes">
         <source>A record was updated</source>
-        <target state="translated">Et nyt element blev opdateret</target>
+        <target state="final">Et nyt element blev opdateret</target>
       </trans-unit>
-      <trans-unit id="email.subject.activate">
+      <trans-unit id="email.subject.activate" approved="yes">
         <source>A record was activated</source>
-        <target state="translated">Et element blev aktiveret</target>
+        <target state="final">Et element blev aktiveret</target>
       </trans-unit>
-      <trans-unit id="email.body.inform.user">
+      <trans-unit id="email.body.inform.user" approved="yes">
         <source><![CDATA[
 					<p>Dear customer</p>
 					<p>Your company entry %2$s (%1$s) will be outdated next month</p>
 					<p>Please login at %3$s and update your data.</p>
 					<p>Your team of Pforzheim</p>]]></source>
-        <target state="translated"><![CDATA[
+        <target state="final"><![CDATA[
 					<p>Kære kunde</p>
 					<p>Din virksomheds indtastning %2$s (%1$s) vil være forældet i næste måned</p>
 					<p>Log venligst ind hos %3$s og opdater dine data.</p>
 					<p>Dit team</p>]]></target>
       </trans-unit>
-      <trans-unit id="email.body.deactivated.user">
+      <trans-unit id="email.body.deactivated.user" approved="yes">
         <source><![CDATA[
 					<p>Dear customer</p>
 					<p>Your company entry %2$s (%1$s) now been deactivated</p>
 					<p>Your team of Pforzheim</p>]]></source>
-        <target state="translated"><![CDATA[
+        <target state="final"><![CDATA[
 					<p>Kære kunde</p>
 					<p>Din virksomheds indtastning %2$s (%1$s) er nu blevet deaktiveret</p>
 					<p>Dit team</p>]]></target>
       </trans-unit>
-      <trans-unit id="email.body.deactivated.admin">
+      <trans-unit id="email.body.deactivated.admin" approved="yes">
         <source><![CDATA[
 					<p>Dear admin</p>
 					<p>The company entry %2$s (%1$s) has now been deactivated</p>]]></source>
-        <target state="translated"><![CDATA[
+        <target state="final"><![CDATA[
 					<p>Kære admin</p>
 					<p>Virksomhedsindtastningen %2$s (%1$s) er nu blevet deaktiveret</p>]]></target>
       </trans-unit>
-      <trans-unit id="error.upload">
+      <trans-unit id="error.upload" approved="yes">
         <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-        <target state="translated">Noget gik galt med dine uploadede filer. Prøv venligst igen. Fejl: </target>
+        <target state="final">Noget gik galt med dine uploadede filer. Prøv venligst igen. Fejl: </target>
       </trans-unit>
-      <trans-unit id="error.fileExtension">
+      <trans-unit id="error.fileExtension" approved="yes">
         <source>You only can upload files with following file extensions: %1$s</source>
-        <target state="translated">Du kan kun uploade filer med følgende filtyper: %1$s</target>
+        <target state="final">Du kan kun uploade filer med følgende filtyper: %1$s</target>
       </trans-unit>
-      <trans-unit id="errorFlashMessage">
+      <trans-unit id="errorFlashMessage" approved="yes">
         <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
-        <target state="translated">Der opstod en fejl under forsøget på at hente %1$s-&gt;%2$s()</target>
+        <target state="final">Der opstod en fejl under forsøget på at hente %1$s-&gt;%2$s()</target>
       </trans-unit>
     </body>
   </file>
