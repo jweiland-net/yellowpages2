@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2" target-language="de">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2" target-language="da">
     <header/>
     <body>
-      <trans-unit id="plugin.title" approved="yes">
+      <trans-unit id="plugin.title">
         <source>Industry Directory</source>
-        <target state="final">Branchenverzeichnis</target>
+        <target state="needs-translation">Industry Directory</target>
       </trans-unit>
-      <trans-unit id="plugin.directory.title" approved="yes">
+      <trans-unit id="plugin.directory.title">
         <source>Industry Directory</source>
-        <target state="final">Branchenverzeichnis</target>
+        <target state="needs-translation">Industry Directory</target>
       </trans-unit>
-      <trans-unit id="plugin.directory.description" approved="yes">
+      <trans-unit id="plugin.directory.description">
         <source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
-        <target state="final">Fügt ein leichtgewichtiges Branchenverzeichnis ein. Über dem Branchenverzeichnis können Sie die a-z-Navigation verwenden, um die Unternehmen auf ihren Startbuchstaben zu reduzieren.</target>
+        <target state="needs-translation">Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</target>
       </trans-unit>
-      <trans-unit id="tabs.trades" xml:space="preserve" approved="yes">
+      <trans-unit id="tabs.trades" xml:space="preserve">
 				<source>Trades</source>
-			<target state="final">Branchen</target></trans-unit>
+			<target state="needs-translation">Trades</target></trans-unit>
       <trans-unit id="tabs.social" xml:space="preserve" approved="yes">
 				<source>Social media</source>
-			<target state="final">Soziale Medien</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve" approved="yes">
+			<target state="final">Sociale medier</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
 				<source>Business listing</source>
-			<target state="final">Business-Angebot</target></trans-unit>
+			<target state="needs-translation">Business listing</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve" approved="yes">
 				<source>Company</source>
-			<target state="final">Firma</target></trans-unit>
+			<target state="final">Virksomhed</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.path_segment" approved="yes">
         <source>Segment for URL</source>
-        <target state="final">Segment für URL</target>
+        <target state="final">URL-segment</target>
       </trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve" approved="yes">
 				<source>Logo</source>
 			<target state="final">Logo</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.logo.add" xml:space="preserve" approved="yes">
+      <trans-unit id="tx_yellowpages2_domain_model_company.logo.add" xml:space="preserve">
 				<source>Add logo</source>
-			<target state="final">Logo hinzufügen</target></trans-unit>
+			<target state="needs-translation">Add logo</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve" approved="yes">
 				<source>Images</source>
-			<target state="final">Bilder</target></trans-unit>
+			<target state="final">Billeder</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.images.add" xml:space="preserve" approved="yes">
 				<source>Add image</source>
-			<target state="final">Bild hinzufügen</target></trans-unit>
+			<target state="final">Tilføj billede</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve" approved="yes">
 				<source>Street</source>
-			<target state="final">Straße</target></trans-unit>
+			<target state="final">Gade</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve" approved="yes">
 				<source>House number</source>
-			<target state="final">Hausnummer</target></trans-unit>
+			<target state="final">Husnummer</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve" approved="yes">
 				<source>Zip</source>
-			<target state="final">PLZ</target></trans-unit>
+			<target state="final">Postnummer</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve" approved="yes">
 				<source>City</source>
-			<target state="final">Stadt</target></trans-unit>
+			<target state="final">By</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve" approved="yes">
 				<source>Telephone</source>
 			<target state="final">Telefon</target></trans-unit>
@@ -66,34 +66,34 @@
 			<target state="final">Kontaktperson</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve" approved="yes">
 				<source>Email</source>
-			<target state="final">E-Mail</target></trans-unit>
+			<target state="final">E-mail</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve" approved="yes">
 				<source>Website</source>
-			<target state="final">Webseite</target></trans-unit>
+			<target state="final">Webside</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve" approved="yes">
 				<source>Opening times</source>
-			<target state="final">Öffnungszeiten</target></trans-unit>
+			<target state="final">Åbningstider</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve" approved="yes">
 				<source>Barrier-free</source>
-			<target state="final">Barrierefrei</target></trans-unit>
+			<target state="final">Barrierefri</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve" approved="yes">
 				<source>Description</source>
-			<target state="final">Beschreibung</target></trans-unit>
+			<target state="final">Beskrivelse</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="final">Bezirk</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve" approved="yes">
+			<target state="final">Distrikt</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve">
 				<source>---Please choose a district---</source>
-			<target state="final">---Bitte wählen Sie eine Position---</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve" approved="yes">
+			<target state="needs-translation">---Please choose a district---</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
 				<source>Frontend user</source>
-			<target state="final">Frontend Benutzer</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve" approved="yes">
+			<target state="needs-translation">Frontend user</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve">
 				<source>---Select FE user---</source>
-			<target state="final">--FE-Benutzer auswählen---</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve" approved="yes">
+			<target state="needs-translation">---Select FE user---</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve">
 				<source>Select a frontend editor who can edit this business listing in frontend context.</source>
-			<target state="final">Wählen Sie einen Frontend-Editor, der dieses Business-Listing im Frontend bearbeiten kann.</target></trans-unit>
+			<target state="needs-translation">Select a frontend editor who can edit this business listing in frontend context.</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve" approved="yes">
 				<source>Facebook</source>
 			<target state="final">Facebook</target></trans-unit>
@@ -105,16 +105,16 @@
 			<target state="final">Instagram</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve" approved="yes">
 				<source>Main Trade</source>
-			<target state="final">Hauptbranche</target></trans-unit>
+			<target state="final">Hovedbranche</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve" approved="yes">
 				<source>Sub Trades</source>
-			<target state="final">Branchen</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve" approved="yes">
+			<target state="final">Underbranche</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
 				<source>District for business listing</source>
-			<target state="final">Bezirk für Business-Listing</target></trans-unit>
+			<target state="needs-translation">District for business listing</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="final">Bezirk</target></trans-unit>
+			<target state="final">Distrikt</target></trans-unit>
     </body>
   </file>
 </xliff>

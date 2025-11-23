@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2" target-language="de">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2" target-language="da">
     <header/>
     <body>
       <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve" approved="yes">
 				<source>Company</source>
-			<target state="final">Firma</target></trans-unit>
+			<target state="final">Virksomhed</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve" approved="yes">
 				<source>Company</source>
-			<target state="final">Firma</target></trans-unit>
+			<target state="final">Virksomhed</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve" approved="yes">
 				<source>Logo</source>
 			<target state="final">Logo</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve" approved="yes">
 				<source>Images</source>
-			<target state="final">Bilder</target></trans-unit>
+			<target state="final">Billeder</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve" approved="yes">
 				<source>Street</source>
-			<target state="final">Straße</target></trans-unit>
+			<target state="final">Gade</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve" approved="yes">
 				<source>House number</source>
-			<target state="final">Hausnummer</target></trans-unit>
+			<target state="final">Husnummer</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve" approved="yes">
 				<source>Zip</source>
-			<target state="final">PLZ</target></trans-unit>
+			<target state="final">Postnummer</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve" approved="yes">
 				<source>City</source>
-			<target state="final">Stadt</target></trans-unit>
+			<target state="final">By</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve" approved="yes">
 				<source>Telephone</source>
 			<target state="final">Telefon</target></trans-unit>
@@ -38,22 +38,22 @@
 			<target state="final">Kontaktperson</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve" approved="yes">
 				<source>Email</source>
-			<target state="final">E-Mail</target></trans-unit>
+			<target state="final">E-mail</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve" approved="yes">
 				<source>Website</source>
-			<target state="final">Webseite</target></trans-unit>
+			<target state="final">Webside</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve" approved="yes">
 				<source>Opening times</source>
-			<target state="final">Öffnungszeiten</target></trans-unit>
+			<target state="final">Åbningstider</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve" approved="yes">
 				<source>Barrier-free</source>
-			<target state="final">Barrierefrei</target></trans-unit>
+			<target state="final">Barrierefri</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve" approved="yes">
 				<source>Description</source>
-			<target state="final">Beschreibung</target></trans-unit>
+			<target state="final">Beskrivelse</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="final">Bezirk</target></trans-unit>
+			<target state="final">Distrikt</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve" approved="yes">
 				<source>FeUser</source>
 			<target state="final">FeUser</target></trans-unit>
@@ -68,23 +68,23 @@
 			<target state="final">Instagram</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve" approved="yes">
 				<source>Main Trade</source>
-			<target state="final">Hauptbranche</target></trans-unit>
+			<target state="final">Hovedbranche</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve" approved="yes">
 				<source>Sub Trades</source>
-			<target state="final">Branchen</target></trans-unit>
+			<target state="final">Underbranche</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="final">Bezirk</target></trans-unit>
+			<target state="final">Distrikt</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="final">Bezirk</target></trans-unit>
+			<target state="final">Distrikt</target></trans-unit>
       <trans-unit id="search" approved="yes">
         <source>Search</source>
-        <target state="final">Suche</target>
+        <target state="final">Søg</target>
       </trans-unit>
       <trans-unit id="noResults" approved="yes">
         <source>No results found</source>
-        <target state="final">Keine Ergebnisse gefunden</target>
+        <target state="final">Ingen resultater fundet</target>
       </trans-unit>
       <trans-unit id="branch" approved="yes">
         <source>Branch</source>
@@ -92,43 +92,43 @@
       </trans-unit>
       <trans-unit id="allBranches" approved="yes">
         <source>All branches</source>
-        <target state="final">Alle Branchen</target>
+        <target state="final">Alle brancher</target>
       </trans-unit>
       <trans-unit id="newCompany" approved="yes">
         <source>New company</source>
-        <target state="final">Neue Firma</target>
+        <target state="final">Ny virksomhed</target>
       </trans-unit>
       <trans-unit id="editCompany" approved="yes">
         <source>Edit company</source>
-        <target state="final">Unternehmen bearbeiten</target>
+        <target state="final">Redigér virksomhed</target>
       </trans-unit>
       <trans-unit id="listMyCompanies" approved="yes">
         <source>List my companies</source>
-        <target state="final">Meine Unternehmen auflisten</target>
+        <target state="final">Vis mine virksomheder</target>
       </trans-unit>
       <trans-unit id="backToList" approved="yes">
         <source>Back to list view</source>
-        <target state="final">Zurück zur Listenansicht</target>
+        <target state="final">Tilbage til listevisning</target>
       </trans-unit>
       <trans-unit id="create" approved="yes">
         <source>Create</source>
-        <target state="final">Erstellen</target>
+        <target state="final">Opret</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Edit</source>
-        <target state="final">Bearbeiten</target>
+        <target state="final">Redigér</target>
       </trans-unit>
       <trans-unit id="companyCreated" approved="yes">
         <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="final">Vielen Dank für Ihren Eintrag. Bitte beachten Sie, dass Ihre Daten zuerst von der Webkoordination von Pforzheim überprüft und freigegeben werden. Sie werden dann per E-Mail über die Aktivierung benachrichtigt. Dieser Vorgang dauert höchstens 1-2 Werktage.</target>
+        <target state="final">Tak for din indtastning. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager maks. 1-2 hverdage.</target>
       </trans-unit>
       <trans-unit id="companyUpdated" approved="yes">
         <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="final">Vielen Dank für Ihren Eintrag. Bitte beachten Sie, dass Ihre Daten zuerst von der Webkoordination von Pforzheim überprüft und freigegeben werden. Sie werden dann per E-Mail über die Aktivierung benachrichtigt. Dieser Vorgang dauert höchstens 1-2 Werktage.</target>
+        <target state="final">Din virksomhed blev opdateret. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager maks. 1-2 hverdage.</target>
       </trans-unit>
       <trans-unit id="pleaseChoose" approved="yes">
         <source>--- Please choose ---</source>
-        <target state="final">--- Bitte wählen ---</target>
+        <target state="final">--- Vælg venligst ---</target>
       </trans-unit>
       <trans-unit id="yes" approved="yes">
         <source>Yes</source>
@@ -136,139 +136,139 @@
       </trans-unit>
       <trans-unit id="no" approved="yes">
         <source>No</source>
-        <target state="final">Nein</target>
+        <target state="final">Nej</target>
       </trans-unit>
       <trans-unit id="altTextMapImg" approved="yes">
         <source>Map</source>
-        <target state="final">Karte</target>
+        <target state="final">Kort</target>
       </trans-unit>
       <trans-unit id="hint" approved="yes">
         <source>Hint</source>
-        <target state="final">Hinweis</target>
+        <target state="final">Tip</target>
       </trans-unit>
       <trans-unit id="cshcompany" approved="yes">
         <source>Enter the company name.This is mandatory.</source>
-        <target state="final">Geben Sie den Firmennamen an. Dies ist ein Pflichtfeld.</target>
+        <target state="final">Indtast virksomhedens navn. Dette er obligatorisk.</target>
       </trans-unit>
       <trans-unit id="cshstreet" approved="yes">
         <source>Enter the street.This is mandatory.</source>
-        <target state="final">Geben Sie die Straße an. Dies ist ein Pflichtfeld.</target>
+        <target state="final">Indtast gadenavn. Dette er obligatorisk.</target>
       </trans-unit>
       <trans-unit id="cshhouseNumber" approved="yes">
         <source>Enter the house number.</source>
-        <target state="final">Geben Sie die Hausnummer an.</target>
+        <target state="final">Indtast husnummeret.</target>
       </trans-unit>
       <trans-unit id="cshzip" approved="yes">
         <source>Enter the zip code.This is mandatory.</source>
-        <target state="final">Geben Sie die PLZ an. Dies ist ein Pflichtfeld.</target>
+        <target state="final">Indtast postnummeret. Dette er obligatorisk.</target>
       </trans-unit>
       <trans-unit id="cshcity" approved="yes">
         <source>Enter the city.This is mandatory.</source>
-        <target state="final">Geben Sie die Stadt an. Dies ist ein Pflichtfeld.</target>
+        <target state="final">Indtast bynavn. Dette er obligatorisk.</target>
       </trans-unit>
       <trans-unit id="cshdistrict" approved="yes">
         <source>Enter the district.This is mandatory.</source>
-        <target state="final">Geben Sie den Stadtteil an. Dies ist ein Pflichtfeld.</target>
+        <target state="final">Indtast distriktet. Dette er obligatorisk.</target>
       </trans-unit>
       <trans-unit id="cshtelephone" approved="yes">
         <source>Enter the phone number.</source>
-        <target state="final">Geben Sie die Telefonnummer an. Format Beispiel: 07231 1234456</target>
+        <target state="final">Indtast telefonnummeret.</target>
       </trans-unit>
       <trans-unit id="cshfax" approved="yes">
         <source>Enter the fax number.</source>
-        <target state="final">Geben Sie die Faxnummer an. Format Beispiel: 07231 1234456</target>
+        <target state="final">Indtast faxnummeret.</target>
       </trans-unit>
       <trans-unit id="cshemail" approved="yes">
         <source>Enter the email address.</source>
-        <target state="final">Geben Sie die E-Mail Adresse an.</target>
+        <target state="final">Indtast e-mailadressen.</target>
       </trans-unit>
       <trans-unit id="cshwebsite" approved="yes">
         <source>Enter the URL of the website</source>
-        <target state="final">Geben Sie die URL zur Webseite ein</target>
+        <target state="final">Indtast webadressen på webstedet</target>
       </trans-unit>
       <trans-unit id="cshcontactPerson" approved="yes">
         <source>Enter the contact person.</source>
-        <target state="final">Geben Sie hier die Kontaktperson.</target>
+        <target state="final">Indtast kontaktpersonen.</target>
       </trans-unit>
       <trans-unit id="cshopeningTimes" approved="yes">
         <source>Enter the opening times.</source>
-        <target state="final">Geben Sie hier die Öffnungszeiten an. Bitte verwenden Sie als Zeitformat mm:hh (z.B. 08:30 Uhr). Zeilenumbrüche werden in der Ausgabe auf der Webseite berücksichtigt.</target>
+        <target state="final">Indtast åbningstiderne.</target>
       </trans-unit>
       <trans-unit id="cshdescription" approved="yes">
         <source>Describe your company.This is mandatory.</source>
-        <target state="final">Geben Sie ein Beschreibung Ihrer Firma an. Dies ist ein Pflichtfeld.</target>
+        <target state="final">Beskriv din virksomhed. Dette er obligatorisk.</target>
       </trans-unit>
       <trans-unit id="cshbarrierFree" approved="yes">
         <source>Is the company accessible</source>
-        <target state="final">Setzen Sie den Haken, wenn die Firma barrierefrei zugängig ist</target>
+        <target state="final">Er virksomheden tilgængelig</target>
       </trans-unit>
       <trans-unit id="cshmainTrade" approved="yes">
         <source>Enter a main trade</source>
-        <target state="final">Wählen Sie die Hauptkategorie für Ihre Firma aus</target>
+        <target state="final">Indtast en hovedbranche</target>
       </trans-unit>
       <trans-unit id="cshtrades_0" approved="yes">
         <source>Enter max. 2 sub trades</source>
-        <target state="final">Wählen Sie max. 2 Unterkategorien für Ihre Firma aus</target>
+        <target state="final">Indtast maks. to underbrancher</target>
       </trans-unit>
       <trans-unit id="cshfacebook" approved="yes">
         <source>Enter a URL to facebook.</source>
-        <target state="final">Geben Sie die URL zur Facebook Seite ein, falls vorhanden.</target>
+        <target state="final">Indtast en URL til Facebook.</target>
       </trans-unit>
       <trans-unit id="cshtwitter" approved="yes">
         <source>Enter a URL to twitter.</source>
-        <target state="final">Geben Sie die URL zu Twitter Seite ein, falls vorhanden.</target>
+        <target state="final">Angiv en URL til X / Twitter.</target>
       </trans-unit>
       <trans-unit id="cshinstagram" approved="yes">
         <source>Enter a URL to Instagram.</source>
-        <target state="final">Geben Sie die URL zur Instagram Seite ein, falls vorhanden.</target>
+        <target state="final">Indtast en URL til Instagram.</target>
       </trans-unit>
       <trans-unit id="cshlogo" approved="yes">
         <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
-        <target state="final">Laden Sie das Firmenlogo in quadratischem Format hoch (jpg,gif,png).</target>
+        <target state="final">Upload logofil</target>
       </trans-unit>
       <trans-unit id="cshimages_0" approved="yes">
         <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
-        <target state="final">Laden Sie max. 5 Bilddateien (jpg, gif, png) hoch. Bitte benutzen Sie bei mehreren Bildern immer das gleiche Bildformat (z.B. 3:2, 4:3) um eine ruckelfrei Ausgabe der Bildergalerie zu gewährleisten.</target>
+        <target state="final">Upload maks. 5 billedfiler (jpg,gif,png). Brug de samme billeddimensioner (dvs. 3:2, 3:4) hvis du uploader mere end et billede.</target>
       </trans-unit>
       <trans-unit id="pageBrowser.first" approved="yes">
         <source>First</source>
-        <target state="final">Erste</target>
+        <target state="final">Første</target>
       </trans-unit>
       <trans-unit id="pageBrowser.previous" approved="yes">
         <source>Previous</source>
-        <target state="final">Vorherige</target>
+        <target state="final">Forrige</target>
       </trans-unit>
       <trans-unit id="pageBrowser.next" approved="yes">
         <source>Next</source>
-        <target state="final">Nächste</target>
+        <target state="final">Næste</target>
       </trans-unit>
       <trans-unit id="pageBrowser.last" approved="yes">
         <source>Last</source>
-        <target state="final">Letzte</target>
+        <target state="final">Sidste</target>
       </trans-unit>
       <trans-unit id="email.subject.inform.user" approved="yes">
         <source>Your company record is out of date</source>
-        <target state="final">Ihre Firmendatei ist veraltet</target>
+        <target state="final">Din virksomheds optegnelse er forældet</target>
       </trans-unit>
       <trans-unit id="email.subject.deactivated.user" approved="yes">
         <source>Your company record has been deactivated</source>
-        <target state="final">Ihr Konto wurde deaktiviert</target>
+        <target state="final">Din virksomheds optegnelse er blevet deaktiveret</target>
       </trans-unit>
       <trans-unit id="email.subject.deactivated.admin" approved="yes">
         <source>A company record has been deactivated</source>
-        <target state="final">Unternehmen wurde deaktiviert!</target>
+        <target state="final">Din virksomheds optegnelse er blevet deaktiveret</target>
       </trans-unit>
       <trans-unit id="email.subject.create" approved="yes">
         <source>A new record was created</source>
-        <target state="final">Ein neuer Datensatz wurde erstellt</target>
+        <target state="final">Et nyt element blev oprettet</target>
       </trans-unit>
       <trans-unit id="email.subject.update" approved="yes">
         <source>A record was updated</source>
-        <target state="final">Ein Datensatz wurde aktualisiert</target>
+        <target state="final">Et nyt element blev opdateret</target>
       </trans-unit>
       <trans-unit id="email.subject.activate" approved="yes">
         <source>A record was activated</source>
-        <target state="final">Ein Datensatz wurde aktiviert</target>
+        <target state="final">Et element blev aktiveret</target>
       </trans-unit>
       <trans-unit id="email.body.inform.user" approved="yes">
         <source><![CDATA[
@@ -277,10 +277,10 @@
 					<p>Please login at %3$s and update your data.</p>
 					<p>Your team of Pforzheim</p>]]></source>
         <target state="final"><![CDATA[
-					<p>Lieber Kunde</p>
-					<p>Ihr Firmeneintrag %2$s (%1$s) wird im nächsten Monat veraltet sein</p>
-					<p>Bitte melden Sie sich bei %3$s an und aktualisieren Sie Ihre Daten.</p>
-					<p>Ihr Team von Pforzheim</p>]]></target>
+					<p>Kære kunde</p>
+					<p>Din virksomheds indtastning %2$s (%1$s) vil være forældet i næste måned</p>
+					<p>Log venligst ind hos %3$s og opdater dine data.</p>
+					<p>Dit team</p>]]></target>
       </trans-unit>
       <trans-unit id="email.body.deactivated.user" approved="yes">
         <source><![CDATA[
@@ -288,29 +288,29 @@
 					<p>Your company entry %2$s (%1$s) now been deactivated</p>
 					<p>Your team of Pforzheim</p>]]></source>
         <target state="final"><![CDATA[
-					<p>Lieber Kunde</p>
-					<p>Ihr Firmeneintrag %2$s (%1$s) wurde jetzt deaktiviert</p>
-					<p>Ihr Team von Pforzheim</p>]]></target>
+					<p>Kære kunde</p>
+					<p>Din virksomheds indtastning %2$s (%1$s) er nu blevet deaktiveret</p>
+					<p>Dit team</p>]]></target>
       </trans-unit>
       <trans-unit id="email.body.deactivated.admin" approved="yes">
         <source><![CDATA[
 					<p>Dear admin</p>
 					<p>The company entry %2$s (%1$s) has now been deactivated</p>]]></source>
         <target state="final"><![CDATA[
-					<p>Sehr geehrter Administrator</p>
-					<p>Der Firmeneintrag %2$s (%1$s) wurde nun deaktiviert</p>]]></target>
+					<p>Kære admin</p>
+					<p>Virksomhedsindtastningen %2$s (%1$s) er nu blevet deaktiveret</p>]]></target>
       </trans-unit>
       <trans-unit id="error.upload" approved="yes">
         <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-        <target state="final">Etwas ist mit Ihren hochgeladenen Dateien schief gelaufen. Bitte versuchen Sie es erneut. Fehler: </target>
+        <target state="final">Noget gik galt med dine uploadede filer. Prøv venligst igen. Fejl: </target>
       </trans-unit>
       <trans-unit id="error.fileExtension" approved="yes">
         <source>You only can upload files with following file extensions: %1$s</source>
-        <target state="final">Sie können nur Dateien mit folgenden Dateiendungen hochladen: %1$s</target>
+        <target state="final">Du kan kun uploade filer med følgende filtyper: %1$s</target>
       </trans-unit>
       <trans-unit id="errorFlashMessage" approved="yes">
         <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
-        <target state="final">Beim Aufruf von %1$s-&gt;%2$s () ist ein Fehler aufgetreten</target>
+        <target state="final">Der opstod en fejl under forsøget på at hente %1$s-&gt;%2$s()</target>
       </trans-unit>
     </body>
   </file>

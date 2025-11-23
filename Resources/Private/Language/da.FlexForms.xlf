@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2" target-language="de">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2" target-language="da">
     <header/>
     <body>
       <trans-unit id="sheetGeneral" xml:space="preserve" approved="yes">
 				<source>General</source>
-			<target state="final">Allgemein</target></trans-unit>
+			<target state="final">Generel</target></trans-unit>
       <trans-unit id="pidOfDetailPage" approved="yes">
         <source>PID of detail page</source>
-        <target state="final">PID der Detailseite</target>
+        <target state="final">PID for detaljeside</target>
       </trans-unit>
       <trans-unit id="pidOfListPage" approved="yes">
         <source>PID of list page</source>
-        <target state="final">PID der Listenseite</target>
+        <target state="final">PID på listeside</target>
       </trans-unit>
       <trans-unit id="showWspMembers" xml:space="preserve" approved="yes">
 				<source>Show only WSP Members</source>
-			<target state="final">Nur WSP Mitglieder anzeigen</target></trans-unit>
-      <trans-unit id="presetTrade" xml:space="preserve" approved="yes">
+			<target state="final">Vis kun WSP medlemmer</target></trans-unit>
+      <trans-unit id="presetTrade" xml:space="preserve">
 				<source>Preset trade</source>
-			<target state="final">Voreinstellung Branche</target></trans-unit>
+			<target state="needs-translation">Preset trade</target></trans-unit>
       <trans-unit id="district" xml:space="preserve" approved="yes">
 				<source>District</source>
-			<target state="final">Bezirk</target></trans-unit>
+			<target state="final">Distrikt</target></trans-unit>
     </body>
   </file>
 </xliff>
