@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 8.0.1
+=============
+
+*   [BUGFIX] TCA migration fixes
+
 Version 8.0.0
 =============
 

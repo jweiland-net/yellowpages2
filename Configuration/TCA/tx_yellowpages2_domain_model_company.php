@@ -31,12 +31,12 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-                --palette--;;languageHidden, company, path_segment, logo, images, 
+                --palette--;;languageHidden, company, path_segment, logo, images,
                 --palette--;;streetHouseNumber, --palette--;;zipCity, --palette--;;districtBarrierFree,
                 --palette--;;telephoneFax, --palette--;;emailWebsite, contact_person, opening_times, description, fe_user,
                 --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.social, facebook, twitter, instagram,
                 --div--;LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tabs.trades, main_trade, trades,
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access, 
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access,
                 --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access',
         ],
     ],
@@ -335,6 +335,7 @@ return [
                 'type' => 'link',
                 'size' => 30,
                 'eval' => 'trim',
+                'softref' => 'typolink[linkList]',
                 'default' => '',
             ],
         ],
@@ -345,6 +346,7 @@ return [
                 'type' => 'link',
                 'size' => 30,
                 'eval' => 'trim',
+                'softref' => 'typolink[linkList]',
                 'default' => '',
             ],
         ],
@@ -355,6 +357,7 @@ return [
                 'type' => 'link',
                 'size' => 30,
                 'eval' => 'trim',
+                'softref' => 'typolink[linkList]',
                 'default' => '',
             ],
         ],
