@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -64,9 +65,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRequestReturnsControllerRequest(): void
     {
         self::assertSame(
@@ -75,9 +74,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getControllerNameReturnsCompany(): void
     {
         self::assertSame(
@@ -86,9 +83,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getActionNameReturnsList(): void
     {
         self::assertSame(
@@ -97,9 +92,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getArgumentsReturnsArguments(): void
     {
         self::assertSame(
@@ -108,9 +101,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSettingsReturnsSettings(): void
     {
         self::assertSame(

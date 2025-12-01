@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Functional\Domain\Model;
 
 use JWeiland\Yellowpages2\Domain\Model\Company;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -37,9 +38,7 @@ class CompanyTest extends FunctionalTestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTxMaps2UidInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getTxMaps2Uid());

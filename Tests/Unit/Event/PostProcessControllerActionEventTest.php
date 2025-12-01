@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -62,9 +63,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getControllerReturnsActionController(): void
     {
         self::assertSame(
@@ -73,9 +72,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCompanyControllerReturnsCompanyController(): void
     {
         self::assertSame(
@@ -84,9 +81,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRequestReturnsControllerRequest(): void
     {
         self::assertSame(
@@ -95,9 +90,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getControllerNameReturnsCompany(): void
     {
         self::assertSame(
@@ -106,9 +99,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getActionNameReturnsList(): void
     {
         self::assertSame(
@@ -117,9 +108,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCompanyReturnsCompany(): void
     {
         self::assertSame(
@@ -128,9 +117,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSettingsReturnsSettings(): void
     {
         self::assertSame(
