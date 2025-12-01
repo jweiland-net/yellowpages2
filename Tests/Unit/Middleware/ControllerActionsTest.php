@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Middleware;
 use JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware;
 use JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier;
 use JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -22,9 +23,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ControllerActionsTest extends UnitTestCase
 {
-    /**
-     * @dataProvider requestActionDataProvider
-     */
+    #[DataProvider('requestActionDataProvider')]
     public function testRequestAction(array $requestBody, array $expectedRequestBody): void
     {
         // Make a request body with the prepared dataset request body
