@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -55,9 +56,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRequestReturnsControllerRequest(): void
     {
         self::assertSame(
@@ -66,9 +65,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getControllerNameReturnsCompany(): void
     {
         self::assertSame(
@@ -77,9 +74,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getActionNameReturnsList(): void
     {
         self::assertSame(
@@ -88,9 +83,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSettingsReturnsSettings(): void
     {
         self::assertSame(
@@ -99,9 +92,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFluidVariablesReturnsVariables(): void
     {
         self::assertSame(
@@ -110,9 +101,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addFluidVariablesWillAddFluidVariable(): void
     {
         $this->subject->addFluidVariable('company', 'jweiland.net');
