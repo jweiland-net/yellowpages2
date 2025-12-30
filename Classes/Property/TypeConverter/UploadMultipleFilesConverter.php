@@ -83,15 +83,33 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         $this->initialize($configuration);
 
         $references = new ObjectStorage();
+        $filesToProcess = [];
+        $rightsConfiguration = [];
 
-        foreach ($source as $key => $uploadedFile) {
+        foreach ($source as $sourceItem) {
+            if ($sourceItem instanceof UploadedFile) {
+                $filesToProcess[] = $sourceItem;
+            } elseif (is_array($sourceItem)) {
+                // Check if this array looks like the 'rights' container
+                if (isset($sourceItem['rights'])) {
+                    $rightsConfiguration[] = $sourceItem;
+                }
+            }
+        }
+
+        foreach ($filesToProcess as $key => $uploadedFile) {
             if (!$uploadedFile instanceof UploadedFile || !$this->isValidUploadFile($uploadedFile)) {
                 continue;
             }
 
+            $rights = null;
+            if (isset($rightsConfiguration[$key]['rights'])) {
+                $rights = $rightsConfiguration[$key];
+            }
+
             if (
                 ExtensionManagementUtility::isLoaded('checkfaluploads')
-                && $error = $this->getFalUploadService()->checkFile($uploadedFile)
+                && $error = $this->getFalUploadService()->checkFile($uploadedFile, $rights)
             ) {
                 return $error;
             }
