@@ -25,7 +25,7 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  * Updater to fill empty slug columns of company records
  * Updated 12 LTS argument style as below for the Wizard
  */
-#[UpgradeWizard('yellowpages2UpdateSlug')]
+#[UpgradeWizard('yellowpages2_updateSlug')]
 class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 {
     protected string $tableName = 'tx_yellowpages2_domain_model_company';
