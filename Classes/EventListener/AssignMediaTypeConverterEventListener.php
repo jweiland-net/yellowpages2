@@ -64,8 +64,10 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
             $event->getRequest()->getArgument('company')['__identity'],
         );
 
-        $this->setTypeConverterForProperty('logo', $persistedCompany->getOriginalLogo(), $event);
-        $this->setTypeConverterForProperty('images', $persistedCompany->getOriginalImages(), $event);
+        if ($persistedCompany instanceof Company) {
+            $this->setTypeConverterForProperty('logo', $persistedCompany->getOriginalLogo(), $event);
+            $this->setTypeConverterForProperty('images', $persistedCompany->getOriginalImages(), $event);
+        }
     }
 
     protected function setTypeConverterForProperty(
