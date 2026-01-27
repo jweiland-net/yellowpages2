@@ -23,6 +23,8 @@ use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -70,17 +72,18 @@ class MapController extends ActionController
     /**
      * "create" means adding a new poi to company, but company itself has to be updated
      */
-    public function createAction(Company $company): void
+    public function createAction(Company $company): ResponseInterface
     {
         $company->setHidden(true);
         $this->companyRepository->update($company);
+
         $this->postProcessControllerAction($company);
 
         $this->sendMail('create', $company);
 
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
 
-        $this->redirect('listMyCompanies', 'Company');
+        return $this->redirect('listMyCompanies', 'Company');
     }
 
     public function initializeEditAction(): void
