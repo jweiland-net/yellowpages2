@@ -167,7 +167,7 @@ class CompanyController extends ActionController
         $this->postProcessControllerAction($company);
 
         if (ExtensionManagementUtility::isLoaded('maps2')) {
-            $this->redirect(
+            return $this->redirect(
                 'new',
                 'Map',
                 'yellowpages2',
@@ -232,7 +232,7 @@ class CompanyController extends ActionController
     /**
      * @throws \Exception
      */
-    public function activateAction(int $company): void
+    public function activateAction(int $company): ResponseInterface
     {
         /** @var Company $companyObject */
         $companyObject = $this->companyRepository->findByIdentifier($company);
@@ -251,6 +251,6 @@ class CompanyController extends ActionController
             LocalizationUtility::translate('email.subject.activate', 'yellowpages2'),
         );
 
-        $this->redirect('list', 'Company');
+        return $this->redirect('list', 'Company');
     }
 }
