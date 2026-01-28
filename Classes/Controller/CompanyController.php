@@ -211,7 +211,7 @@ class CompanyController extends ActionController
         $this->postProcessControllerAction($company);
 
         if (ExtensionManagementUtility::isLoaded('maps2')) {
-            $this->redirect(
+            return $this->redirect(
                 'update',
                 'Map',
                 'yellowpages2',
