@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use JWeiland\Maps2\Domain\Model\PoiCollection;
-use JWeiland\Maps2\Domain\Model\Position;
-use JWeiland\Maps2\Service\GeoCodeService;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
@@ -22,7 +19,6 @@ use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -44,19 +40,6 @@ class MapController extends ActionController
 
     public function newAction(Company $company): ResponseInterface
     {
-        $poiMappingFound = $this->addNewPoiCollectionToCompany($company);
-
-        if (!$poiMappingFound) {
-            $company->setHidden(true);
-            $this->companyRepository->update($company);
-            $this->addFlashMessage(
-                LocalizationUtility::translate('errorAddressInvalid.body', ExtConf::EXT_KEY),
-                LocalizationUtility::translate('errorAddressInvalid.title', ExtConf::EXT_KEY),
-            );
-
-            return $this->redirect('edit', 'Company', null, ['company' => $company]);
-        }
-
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
@@ -117,35 +100,6 @@ class MapController extends ActionController
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies', 'Company');
-    }
-
-    /**
-     * Add new PoiCollection to Company, if company is new
-     * @throws \Exception
-     */
-    protected function addNewPoiCollectionToCompany(Company $company): bool
-    {
-        $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
-
-        $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
-
-        if ($position instanceof Position) {
-            $poiCollection = GeneralUtility::makeInstance(PoiCollection::class);
-            $poiCollection->setCollectionType('Point');
-            $poiCollection->setTitle($company->getCompany());
-            $poiCollection->setLatitude($position->getLatitude());
-            $poiCollection->setLongitude($position->getLongitude());
-            $poiCollection->setAddress($position->getFormattedAddress());
-            $company->setTxMaps2Uid($poiCollection);
-            $this->companyRepository->update($company);
-            $this->persistenceManager->persistAll();
-
-            return true;
-        }
-
-        $this->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
-
-        return false;
     }
 
     public function sendMail(string $subjectKey, Company $company): void
