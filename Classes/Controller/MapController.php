@@ -46,6 +46,9 @@ class MapController extends ActionController
         $poiMappingFound = $this->addNewPoiCollectionToCompany($company);
 
         if (!$poiMappingFound) {
+            $company->setHidden(true);
+            $this->companyRepository->update($company);
+
             return $this->redirect('edit', 'Company', null, ['company' => $company]);
         }
 
