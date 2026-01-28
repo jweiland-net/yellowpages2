@@ -35,30 +35,19 @@ class MapController extends ActionController
     use PostProcessControllerActionTrait;
     use PreProcessControllerActionTrait;
 
-    protected CompanyRepository $companyRepository;
-
-    protected PersistenceManagerInterface $persistenceManager;
-
-    protected MailHelper $mailHelper;
-
-    public function injectCompanyRepository(CompanyRepository $companyRepository): void
-    {
-        $this->companyRepository = $companyRepository;
-    }
-
-    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager): void
-    {
-        $this->persistenceManager = $persistenceManager;
-    }
-
-    public function injectMailHelper(MailHelper $mailHelper): void
-    {
-        $this->mailHelper = $mailHelper;
-    }
+    public function __construct(
+        protected readonly CompanyRepository $companyRepository,
+        protected readonly PersistenceManagerInterface $persistenceManager,
+        protected readonly MailHelper $mailHelper,
+    ) {}
 
     public function newAction(Company $company): ResponseInterface
     {
-        $this->addNewPoiCollectionToCompany($company);
+        $poiMappingFound = $this->addNewPoiCollectionToCompany($company);
+
+        if (!$poiMappingFound) {
+            return $this->redirect('edit', 'Company', null, ['company' => $company]);
+        }
 
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
@@ -94,6 +83,7 @@ class MapController extends ActionController
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
         ]);
+
         return $this->htmlResponse();
     }
 
@@ -105,7 +95,7 @@ class MapController extends ActionController
         $this->preProcessControllerAction();
     }
 
-    public function updateAction(Company $company): void
+    public function updateAction(Company $company): ResponseInterface
     {
         // If an admin edits this hidden record, mail should not be sent.
         if (!$company->getHidden()) {
@@ -114,19 +104,18 @@ class MapController extends ActionController
 
         $company->setHidden(true);
         $this->companyRepository->update($company);
-
         $this->postProcessControllerAction($company);
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
 
-        $this->redirect('listMyCompanies', 'Company');
+        return $this->redirect('listMyCompanies', 'Company');
     }
 
     /**
      * Add new PoiCollection to Company, if company is new
      * @throws \Exception
      */
-    protected function addNewPoiCollectionToCompany(Company $company): void
+    protected function addNewPoiCollectionToCompany(Company $company): bool
     {
         $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
 
@@ -141,10 +130,13 @@ class MapController extends ActionController
             $company->setTxMaps2Uid($poiCollection);
             $this->companyRepository->update($company);
             $this->persistenceManager->persistAll();
-        } else {
-            $this->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
-            $this->redirect('edit', 'Company', null, ['company' => $company]);
+
+            return true;
         }
+
+        $this->getFlashMessageQueue()->enqueue(...$geoCodeService->getErrors());
+
+        return false;
     }
 
     public function sendMail(string $subjectKey, Company $company): void
