@@ -12,37 +12,34 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
+use Symfony\Component\Mime\Address;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/*
- * Helper class to send a mail.
- */
 class MailHelper
 {
-    protected MailMessage $mailMessage;
-
-    protected ExtConf $extConf;
-
-    public function __construct(MailMessage $mailMessage, ExtConf $extConf)
-    {
-        $this->mailMessage = $mailMessage;
-        $this->extConf = $extConf;
-    }
+    public function __construct(
+        protected readonly MailerInterface $mailer,
+        protected readonly ExtConf $extConf,
+    ) {}
 
     public function sendMail(string $mailContent, string $subject): void
     {
-        $this->mailMessage
-            ->setFrom(
+        $mailMessage = GeneralUtility::makeInstance(MailMessage::class);
+
+        $mailMessage
+            ->from(new Address(
                 $this->extConf->getEmailFromAddress(),
                 $this->extConf->getEmailFromName(),
-            )
-            ->setTo(
+            ))
+            ->to(new Address(
                 $this->extConf->getEmailToAddress(),
                 $this->extConf->getEmailToName(),
-            )
-            ->setSubject($subject)
+            ))
+            ->subject($subject)
             ->html($mailContent);
 
-        $this->mailMessage->send();
+        $this->mailer->send($mailMessage);
     }
 }
