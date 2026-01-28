@@ -54,11 +54,11 @@ final readonly class NotificationMailer
     private function translateSubject(string $type, string $recipient): string
     {
         $translationKey = sprintf('email.subject.%s.%s', $type, $recipient);
-        return LocalizationUtility::translate($translationKey, 'yellowpages2') ?? '';
+        return LocalizationUtility::translate($translationKey, ExtConf::EXT_KEY) ?? '';
     }
 
     private function translateBody(string $type, string $recipient, array $arguments): string
     {
-        return LocalizationUtility::translate("email.body.{$type}.{$recipient}", 'yellowpages2', $arguments) ?? '';
+        return LocalizationUtility::translate("email.body.{$type}.{$recipient}", ExtConf::EXT_KEY, $arguments) ?? '';
     }
 }

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\EventListener;
 
 use JWeiland\Glossary2\Service\GlossaryService;
+use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -55,7 +56,7 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
     protected function getOptions(PostProcessFluidVariablesEvent $event): array
     {
         $options = [
-            'extensionName' => 'yellowpages2',
+            'extensionName' => ExtConf::EXT_KEY,
             'pluginName' => 'directory',
             'controllerName' => 'Company',
             'column' => 'company',

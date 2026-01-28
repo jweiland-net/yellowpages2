@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\Controller;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
+use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
@@ -48,6 +49,10 @@ class MapController extends ActionController
         if (!$poiMappingFound) {
             $company->setHidden(true);
             $this->companyRepository->update($company);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('errorAddressInvalid.body', ExtConf::EXT_KEY),
+                LocalizationUtility::translate('errorAddressInvalid.title', ExtConf::EXT_KEY),
+            );
 
             return $this->redirect('edit', 'Company', null, ['company' => $company]);
         }
@@ -71,7 +76,7 @@ class MapController extends ActionController
 
         $this->sendMail('create', $company);
 
-        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
+        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies', 'Company');
     }
@@ -109,7 +114,7 @@ class MapController extends ActionController
         $this->companyRepository->update($company);
         $this->postProcessControllerAction($company);
 
-        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
+        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies', 'Company');
     }
@@ -123,6 +128,7 @@ class MapController extends ActionController
         $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
 
         $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());
+
         if ($position instanceof Position) {
             $poiCollection = GeneralUtility::makeInstance(PoiCollection::class);
             $poiCollection->setCollectionType('Point');
@@ -150,7 +156,7 @@ class MapController extends ActionController
 
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.' . $subjectKey, 'yellowpages2'),
+            LocalizationUtility::translate('email.subject.' . $subjectKey, ExtConf::EXT_KEY),
         );
     }
 }

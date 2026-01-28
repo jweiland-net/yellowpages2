@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
@@ -170,12 +171,12 @@ class CompanyController extends ActionController
             return $this->redirect(
                 'new',
                 'Map',
-                'yellowpages2',
+                ExtConf::EXT_KEY,
                 ['company' => $company],
             );
         }
 
-        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
+        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies');
     }
@@ -214,12 +215,12 @@ class CompanyController extends ActionController
             return $this->redirect(
                 'update',
                 'Map',
-                'yellowpages2',
+                ExtConf::EXT_KEY,
                 ['company' => $company],
             );
         }
 
-        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
+        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies', 'Company');
     }
@@ -248,7 +249,7 @@ class CompanyController extends ActionController
 
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.activate', 'yellowpages2'),
+            LocalizationUtility::translate('email.subject.activate', ExtConf::EXT_KEY),
         );
 
         return $this->redirect('list', 'Company');
