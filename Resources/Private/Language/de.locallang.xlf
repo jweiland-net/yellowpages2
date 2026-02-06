@@ -114,9 +114,9 @@
         <source>Create</source>
         <target state="final">Erstellen</target>
       </trans-unit>
-      <trans-unit id="update" approved="yes">
-        <source>Edit</source>
-        <target state="final">Bearbeiten</target>
+      <trans-unit id="update">
+        <source>Update</source>
+        <target state="needs-translation">Update</target>
       </trans-unit>
       <trans-unit id="companyCreated" approved="yes">
         <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
@@ -311,6 +311,14 @@
       <trans-unit id="errorFlashMessage" approved="yes">
         <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
         <target state="final">Beim Aufruf von %1$s-&gt;%2$s () ist ein Fehler aufgetreten</target>
+      </trans-unit>
+      <trans-unit id="errorAddressInvalid.title">
+        <source>Invalid Address</source>
+        <target state="needs-translation">Invalid Address</target>
+      </trans-unit>
+      <trans-unit id="errorAddressInvalid.body">
+        <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
+        <target state="needs-translation">The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</target>
       </trans-unit>
     </body>
   </file>
