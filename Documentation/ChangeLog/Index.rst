@@ -7,6 +7,20 @@
 ChangeLog
 =========
 
+Version 8.1.0
+=============
+
+*   [TASK] Remove POI creation logic from MapController
+*   [TASK] Delegate POI creation to LocationService in CompanyController
+*   [TASK] Refactor: Extract POI creation to LocationService
+*   [TASK] Centralize extension key usage via ExtConf::EXT_KEY
+*   [TASK] Add localized labels for invalid address errors
+*   [TASK] Refactor ExtConf to modern immutable DI with factory method
+*   [TASK] Refactor MailHelper to use MailerInterface and fresh MailMessage
+*   [BUGFIX] Add maps2 partials to Yellowpages2 view paths
+*   [BUGFIX] Check for Company UID before path segment update
+*   [BUGFIX] Ensure company is hidden if POI mapping fails in newAction
+
 Version 8.0.4
 =============
 

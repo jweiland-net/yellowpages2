@@ -142,7 +142,7 @@
 				<target>Anlegen</target>
 			</trans-unit>
 			<trans-unit id="update">
-				<source>Edit</source>
+				<source>Update</source>
 				<target>Speichern</target>
 			</trans-unit>
 			<trans-unit id="companyCreated">
@@ -349,6 +349,14 @@
 			<trans-unit id="errorFlashMessage">
 				<source>An error occurred while trying to call %1$s->%2$s()</source>
 				<target>Es ist ein Fehler aufgetreten während dem Aufruf zu %1$s->%2$s()</target>
+			</trans-unit>
+			<trans-unit id="errorAddressInvalid.title">
+				<source>Invalid Address</source>
+				<target>Ungültige Adresse</target>
+			</trans-unit>
+			<trans-unit id="errorAddressInvalid.body">
+				<source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
+				<target>Die eingegebene Adresse konnte nicht gefunden werden. Bitte prüfen Sie die Schreibweise oder geben Sie genauere Details an (z. B. Hausnummer oder Postleitzahl).</target>
 			</trans-unit>
 		</body>
 	</file>

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
@@ -18,6 +19,7 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use JWeiland\Yellowpages2\Service\LocationService;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
@@ -30,7 +32,9 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -48,7 +52,9 @@ class CompanyController extends ActionController
         private readonly CategoryRepository $categoryRepository,
         private readonly DistrictRepository $districtRepository,
         private readonly FeUserRepository $feUserRepository,
+        private readonly LocationService $locationService,
         private readonly MailHelper $mailHelper,
+        protected readonly PersistenceManagerInterface $persistenceManager,
     ) {}
 
     public function initializeAction(): void
@@ -162,20 +168,29 @@ class CompanyController extends ActionController
             $company->setFeUser($feUser);
         }
 
-        $this->companyRepository->add($company);
-
         $this->postProcessControllerAction($company);
 
         if (ExtensionManagementUtility::isLoaded('maps2')) {
-            $this->redirect(
-                'new',
-                'Map',
-                'yellowpages2',
-                ['company' => $company],
-            );
+            $poiCreated = $this->locationService->createPoiForCompany($company, $this->getFlashMessageQueue());
+
+            if ($poiCreated) {
+                $this->companyRepository->add($company);
+                // Persist immediately to generate UIDs needed for the redirect logic or relations
+                $this->persistenceManager->persistAll();
+
+                $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
+                return $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
+            }
+
+            $response = new ForwardResponse('new');
+            $response = $response->withControllerName('Company');
+            $response = $response->withArguments(['company' => $company]);
+
+            return $response->withArguments(['company' => $company]);
         }
 
-        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
+        $this->companyRepository->add($company);
+        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies');
     }
@@ -211,15 +226,15 @@ class CompanyController extends ActionController
         $this->postProcessControllerAction($company);
 
         if (ExtensionManagementUtility::isLoaded('maps2')) {
-            $this->redirect(
+            return $this->redirect(
                 'update',
                 'Map',
-                'yellowpages2',
+                ExtConf::EXT_KEY,
                 ['company' => $company],
             );
         }
 
-        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', 'yellowpages2'));
+        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies', 'Company');
     }
@@ -232,7 +247,7 @@ class CompanyController extends ActionController
     /**
      * @throws \Exception
      */
-    public function activateAction(int $company): void
+    public function activateAction(int $company): ResponseInterface
     {
         /** @var Company $companyObject */
         $companyObject = $this->companyRepository->findByIdentifier($company);
@@ -248,9 +263,9 @@ class CompanyController extends ActionController
 
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.activate', 'yellowpages2'),
+            LocalizationUtility::translate('email.subject.activate', ExtConf::EXT_KEY),
         );
 
-        $this->redirect('list', 'Company');
+        return $this->redirect('list', 'Company');
     }
 }

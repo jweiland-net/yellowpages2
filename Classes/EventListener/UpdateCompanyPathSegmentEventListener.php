@@ -49,7 +49,7 @@ class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListe
     {
         if (
             $this->isValidRequest($event)
-            && $event->getCompany() instanceof Company
+            && $event->getCompany() instanceof Company && $event->getCompany()->getUid()
         ) {
             $this->pathSegmentHelper->updatePathSegmentForCompany($event->getCompany());
             $this->companyRepository->update($event->getCompany());
