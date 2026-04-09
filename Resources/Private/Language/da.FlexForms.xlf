@@ -17,9 +17,9 @@
       <trans-unit id="showWspMembers" xml:space="preserve" approved="yes">
 				<source>Show only WSP Members</source>
 			<target state="final">Vis kun WSP medlemmer</target></trans-unit>
-      <trans-unit id="presetTrade" xml:space="preserve">
+      <trans-unit id="presetTrade" xml:space="preserve" approved="yes">
 				<source>Preset trade</source>
-			<target state="needs-translation">Preset trade</target></trans-unit>
+			<target state="final">Forudindstillet branche</target></trans-unit>
       <trans-unit id="district" xml:space="preserve" approved="yes">
 				<source>District</source>
 			<target state="final">Distrikt</target></trans-unit>
