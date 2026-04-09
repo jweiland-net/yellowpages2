@@ -3,27 +3,27 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2" target-language="da">
     <header/>
     <body>
-      <trans-unit id="plugin.title">
+      <trans-unit id="plugin.title" approved="yes">
         <source>Industry Directory</source>
-        <target state="needs-translation">Industry Directory</target>
+        <target state="final">Industrimappe</target>
       </trans-unit>
-      <trans-unit id="plugin.directory.title">
+      <trans-unit id="plugin.directory.title" approved="yes">
         <source>Industry Directory</source>
-        <target state="needs-translation">Industry Directory</target>
+        <target state="final">Industrimappe</target>
       </trans-unit>
-      <trans-unit id="plugin.directory.description">
+      <trans-unit id="plugin.directory.description" approved="yes">
         <source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
-        <target state="needs-translation">Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</target>
+        <target state="final">Indsætter en industrimappe. Ovenfor industrimappen kan du bruge a-z navigation til at reducere virksomhederne til dens startbogstav.</target>
       </trans-unit>
-      <trans-unit id="tabs.trades" xml:space="preserve">
+      <trans-unit id="tabs.trades" xml:space="preserve" approved="yes">
 				<source>Trades</source>
-			<target state="needs-translation">Trades</target></trans-unit>
+			<target state="final">Brancher</target></trans-unit>
       <trans-unit id="tabs.social" xml:space="preserve" approved="yes">
 				<source>Social media</source>
 			<target state="final">Sociale medier</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
+      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve" approved="yes">
 				<source>Business listing</source>
-			<target state="needs-translation">Business listing</target></trans-unit>
+			<target state="final">Virksomhedsvisning</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve" approved="yes">
 				<source>Company</source>
 			<target state="final">Virksomhed</target></trans-unit>
@@ -34,9 +34,9 @@
       <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve" approved="yes">
 				<source>Logo</source>
 			<target state="final">Logo</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.logo.add" xml:space="preserve">
+      <trans-unit id="tx_yellowpages2_domain_model_company.logo.add" xml:space="preserve" approved="yes">
 				<source>Add logo</source>
-			<target state="needs-translation">Add logo</target></trans-unit>
+			<target state="final">Tilføj logo</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve" approved="yes">
 				<source>Images</source>
 			<target state="final">Billeder</target></trans-unit>
@@ -82,18 +82,18 @@
       <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve" approved="yes">
 				<source>District</source>
 			<target state="final">Distrikt</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve">
+      <trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve" approved="yes">
 				<source>---Please choose a district---</source>
-			<target state="needs-translation">---Please choose a district---</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+			<target state="final">---Vælg venligst et distrikt --</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve" approved="yes">
 				<source>Frontend user</source>
-			<target state="needs-translation">Frontend user</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve">
+			<target state="final">Frontendbruger</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve" approved="yes">
 				<source>---Select FE user---</source>
-			<target state="needs-translation">---Select FE user---</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve">
+			<target state="final">---Vælg FE bruger---</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve" approved="yes">
 				<source>Select a frontend editor who can edit this business listing in frontend context.</source>
-			<target state="needs-translation">Select a frontend editor who can edit this business listing in frontend context.</target></trans-unit>
+			<target state="final">Vælg en frontendredaktør, der kan redigere denne virksomheds oplistning i frontendkontekst.</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve" approved="yes">
 				<source>Facebook</source>
 			<target state="final">Facebook</target></trans-unit>
@@ -109,9 +109,9 @@
       <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve" approved="yes">
 				<source>Sub Trades</source>
 			<target state="final">Underbranche</target></trans-unit>
-      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
+      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve" approved="yes">
 				<source>District for business listing</source>
-			<target state="needs-translation">District for business listing</target></trans-unit>
+			<target state="final">Distrikt for virksomhedsvisning</target></trans-unit>
       <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve" approved="yes">
 				<source>District</source>
 			<target state="final">Distrikt</target></trans-unit>
