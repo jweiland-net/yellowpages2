@@ -114,9 +114,9 @@
         <source>Create</source>
         <target state="final">Opret</target>
       </trans-unit>
-      <trans-unit id="update">
+      <trans-unit id="update" approved="yes">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="final">Opdatér</target>
       </trans-unit>
       <trans-unit id="companyCreated" approved="yes">
         <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
@@ -312,13 +312,13 @@
         <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
         <target state="final">Der opstod en fejl under forsøget på at hente %1$s-&gt;%2$s()</target>
       </trans-unit>
-      <trans-unit id="errorAddressInvalid.title">
+      <trans-unit id="errorAddressInvalid.title" approved="yes">
         <source>Invalid Address</source>
-        <target state="needs-translation">Invalid Address</target>
+        <target state="final">Ugyldig adresse</target>
       </trans-unit>
-      <trans-unit id="errorAddressInvalid.body">
+      <trans-unit id="errorAddressInvalid.body" approved="yes">
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
-        <target state="needs-translation">The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</target>
+        <target state="final">Adressen du angav kunne ikke findes. Tjek stavning eller angiv mere specifikke detaljer (f.eks. gadenummer eller postnummer).</target>
       </trans-unit>
     </body>
   </file>
