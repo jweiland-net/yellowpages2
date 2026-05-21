@@ -35,7 +35,7 @@ ExtensionManagementUtility::addPiFlexFormValue(
 
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
-    '--div--;Configuration,pi_flexform, pages, recursive',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
     'yellowpages2_directory',
     'after:subheader',
 );
