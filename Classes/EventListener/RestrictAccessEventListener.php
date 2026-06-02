@@ -32,7 +32,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 #[AsEventListener('yellowpages2/restrictAccess')]
 final class RestrictAccessEventListener
 {
-
     protected const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'edit',
