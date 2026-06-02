@@ -358,6 +358,10 @@
 				<source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
 				<target>Die eingegebene Adresse konnte nicht gefunden werden. Bitte prüfen Sie die Schreibweise oder geben Sie genauere Details an (z. B. Hausnummer oder Postleitzahl).</target>
 			</trans-unit>
+			<trans-unit id="unauthorizedCompanyUser">
+				<source>You are not allowed to edit company records that do not assigned to you.</source>
+				<target>Sie dürfen keine Firmendaten bearbeiten, die Ihnen nicht zugewiesen sind.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
