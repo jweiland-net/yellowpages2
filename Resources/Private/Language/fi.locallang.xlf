@@ -320,6 +320,10 @@
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
         <target state="needs-translation">The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</target>
       </trans-unit>
+      <trans-unit id="unauthorizedCompanyUser">
+        <source>You are not allowed to edit company records that do not assigned to you.</source>
+        <target state="needs-translation">You are not allowed to edit company records that do not assigned to you.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
