@@ -320,9 +320,9 @@
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
         <target state="final">Adressen du angav kunne ikke findes. Tjek stavning eller angiv mere specifikke detaljer (f.eks. gadenummer eller postnummer).</target>
       </trans-unit>
-      <trans-unit id="unauthorizedCompanyUser">
+      <trans-unit id="unauthorizedCompanyUser" approved="yes">
         <source>You are not allowed to edit company records that do not assigned to you.</source>
-        <target state="needs-translation">You are not allowed to edit company records that do not assigned to you.</target>
+        <target state="final">Du har ikke tilladelse til at redigere virksomhedselementer, der ikke er tildelt dig.</target>
       </trans-unit>
     </body>
   </file>
