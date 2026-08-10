@@ -5,22 +5,22 @@
     <body>
       <trans-unit id="poiCollectionPid" xml:space="preserve">
 				<source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
-			<target state="needs-translation">PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</target></trans-unit>
+			<target state="translated">A poiCollections tárolási PID-je: Adja meg azt a tárolási pid-et, ahová a Point of Interest típusú rekordok kerülnek.</target></trans-unit>
       <trans-unit id="editLink" xml:space="preserve">
 				<source>Link to edit view: Set the URI where the frontend user can edit his business listings.</source>
-			<target state="needs-translation">Link to edit view: Set the URI where the frontend user can edit his business listings.</target></trans-unit>
+			<target state="translated">Hivatkozás a szerkesztési nézethez: Adja meg az URI-t, ahol a frontend felhasználó szerkesztheti üzleti bejegyzéseit.</target></trans-unit>
       <trans-unit id="emailFromAddress" xml:space="preserve">
 				<source>Email address FROM: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
-			<target state="needs-translation">Email address FROM: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</target></trans-unit>
+			<target state="translated">Küldő e-mail címe: A feladó e-mail címe. Ha nincs megadva, a bővítmény az INSTALL_TOOL-ból próbálja lekérni.</target></trans-unit>
       <trans-unit id="emailFromName" xml:space="preserve">
 				<source>Sender name FROM: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
-			<target state="needs-translation">Sender name FROM: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</target></trans-unit>
+			<target state="translated">Küldő neve: A feladó e-mail neve. Ha nincs megadva, a bővítmény az INSTALL_TOOL-ból próbálja lekérni.</target></trans-unit>
       <trans-unit id="emailToAddress" xml:space="preserve">
 				<source>Email address TO: The recipients email address.</source>
-			<target state="needs-translation">Email address TO: The recipients email address.</target></trans-unit>
+			<target state="translated">Címzett e-mail címe: A címzett e-mail címe.</target></trans-unit>
       <trans-unit id="emailToName" xml:space="preserve">
 				<source>Recipient name TO: The recipients email name.</source>
-			<target state="needs-translation">Recipient name TO: The recipients email name.</target></trans-unit>
+			<target state="translated">Címzett neve: A címzett e-mail neve.</target></trans-unit>
     </body>
   </file>
 </xliff>
