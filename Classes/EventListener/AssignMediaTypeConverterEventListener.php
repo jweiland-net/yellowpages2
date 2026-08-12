@@ -27,10 +27,8 @@ use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 #[AsEventListener(
     identifier: 'yellowpages2/assign-media-type-converter',
 )]
-class AssignMediaTypeConverterEventListener extends AbstractControllerEventListener
+final class AssignMediaTypeConverterEventListener extends AbstractControllerEventListener
 {
-    protected CompanyRepository $companyRepository;
-
     protected array $allowedControllerActions = [
         'Company' => [
             'create',
@@ -38,10 +36,9 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
         ],
     ];
 
-    public function __construct(CompanyRepository $companyRepository)
-    {
-        $this->companyRepository = $companyRepository;
-    }
+    public function __construct(
+        private readonly CompanyRepository $companyRepository,
+    ) {}
 
     public function __invoke(PreProcessControllerActionEvent $event): void
     {

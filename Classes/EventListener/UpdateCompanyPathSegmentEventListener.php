@@ -25,14 +25,8 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 #[AsEventListener(
     identifier: 'yellowpages2/update-company-path-segment',
 )]
-class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListener
+final class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListener
 {
-    protected PathSegmentHelper $pathSegmentHelper;
-
-    protected CompanyRepository $companyRepository;
-
-    protected PersistenceManagerInterface $persistenceManager;
-
     protected array $allowedControllerActions = [
         'Company' => [
             'create',
@@ -40,14 +34,10 @@ class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListe
     ];
 
     public function __construct(
-        PathSegmentHelper $pathSegmentHelper,
-        CompanyRepository $companyRepository,
-        PersistenceManagerInterface $persistenceManager,
-    ) {
-        $this->pathSegmentHelper = $pathSegmentHelper;
-        $this->companyRepository = $companyRepository;
-        $this->persistenceManager = $persistenceManager;
-    }
+        private readonly PathSegmentHelper $pathSegmentHelper,
+        private readonly CompanyRepository $companyRepository,
+        private readonly PersistenceManagerInterface $persistenceManager,
+    ) {}
 
     public function __invoke(PostProcessControllerActionEvent $event): void
     {

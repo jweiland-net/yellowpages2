@@ -22,12 +22,8 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 #[AsEventListener(
     identifier: 'yellowpages2/register-hidden-company',
 )]
-class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
+final class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
 {
-    protected HiddenObjectHelper $hiddenObjectHelper;
-
-    protected CompanyRepository $companyRepository;
-
     protected array $allowedControllerActions = [
         'Company' => [
             'edit',
@@ -41,12 +37,9 @@ class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
     ];
 
     public function __construct(
-        HiddenObjectHelper $hiddenObjectHelper,
-        CompanyRepository $companyRepository,
-    ) {
-        $this->hiddenObjectHelper = $hiddenObjectHelper;
-        $this->companyRepository = $companyRepository;
-    }
+        private readonly HiddenObjectHelper $hiddenObjectHelper,
+        private readonly CompanyRepository $companyRepository,
+    ) {}
 
     public function __invoke(PreProcessControllerActionEvent $event): void
     {

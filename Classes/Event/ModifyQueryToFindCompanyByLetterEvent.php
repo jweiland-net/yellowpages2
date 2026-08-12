@@ -16,17 +16,12 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 /**
  * Modify QueryResult in CompanyRepository to find company by letter
  */
-class ModifyQueryToFindCompanyByLetterEvent
+final readonly class ModifyQueryToFindCompanyByLetterEvent
 {
-    protected QueryResultInterface $queryResult;
-
-    protected array $settings;
-
-    public function __construct(QueryResultInterface $queryResult, array $settings)
-    {
-        $this->queryResult = $queryResult;
-        $this->settings = $settings;
-    }
+    public function __construct(
+        private QueryResultInterface $queryResult,
+        private array $settings,
+    ) {}
 
     public function getQueryResult(): QueryResultInterface
     {

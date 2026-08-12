@@ -16,14 +16,11 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 /**
  * Hook into DataHandler and clear special caches after saving a company.
  */
-class ClearCacheHook
+final readonly class ClearCacheHook
 {
-    protected CacheManager $cacheManager;
-
-    public function __construct(CacheManager $cacheManager)
-    {
-        $this->cacheManager = $cacheManager;
-    }
+    public function __construct(
+        private CacheManager $cacheManager,
+    ) {}
 
     /**
      * Flushes the cache if a company record was edited.

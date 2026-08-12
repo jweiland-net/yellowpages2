@@ -16,23 +16,14 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 /**
  * Modify QueryResult in CompanyRepository to search for companies by various constraints
  */
-class ModifyQueryToSearchForCompaniesEvent
+final readonly class ModifyQueryToSearchForCompaniesEvent
 {
-    protected QueryResultInterface $queryResult;
-
-    protected string $searchWord;
-
-    protected int $categoryUid;
-
-    protected array $settings;
-
-    public function __construct(QueryResultInterface $queryResult, string $searchWord, int $categoryUid, array $settings)
-    {
-        $this->queryResult = $queryResult;
-        $this->searchWord = $searchWord;
-        $this->categoryUid = $categoryUid;
-        $this->settings = $settings;
-    }
+    public function __construct(
+        private QueryResultInterface $queryResult,
+        private string $searchWord,
+        private int $categoryUid,
+        private array $settings,
+    ) {}
 
     public function getQueryResult(): QueryResultInterface
     {

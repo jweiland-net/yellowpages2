@@ -126,7 +126,7 @@ final class RestrictAccessEventListener
         return $this->flashMessageService->getMessageQueueByIdentifier($identifier);
     }
 
-    protected function isValidRequest(ControllerActionEventInterface $event): bool
+    private function isValidRequest(ControllerActionEventInterface $event): bool
     {
         return
             array_key_exists($event->getControllerName(), self::ALLOWED_CONTROLLER_ACTIONS)

@@ -26,16 +26,16 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 #[AsEventListener(
     identifier: 'yellowpages2/add-paginator',
 )]
-class AddPaginatorEventListener extends AbstractControllerEventListener
+final class AddPaginatorEventListener extends AbstractControllerEventListener
 {
-    protected int $itemsPerPage = 15;
+    private int $itemsPerPage = 15;
 
     /**
      * Fluid variable name for paginated records
      */
-    protected string $fluidVariableForPaginatedRecords = 'companies';
+    private string $fluidVariableForPaginatedRecords = 'companies';
 
-    protected string $fallbackPaginationClass = CompanyPagination::class;
+    private string $fallbackPaginationClass = CompanyPagination::class;
 
     protected array $allowedControllerActions = [
         'Company' => [

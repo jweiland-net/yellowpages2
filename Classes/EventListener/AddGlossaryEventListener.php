@@ -25,12 +25,8 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
     identifier: 'yellowpages2/add-glossary',
     after: 'yellowpages2/add-paginator',
 )]
-class AddGlossaryEventListener extends AbstractControllerEventListener
+final class AddGlossaryEventListener extends AbstractControllerEventListener
 {
-    protected GlossaryService $glossaryService;
-
-    protected CompanyRepository $companyRepository;
-
     protected array $allowedControllerActions = [
         'Company' => [
             'list',
@@ -38,11 +34,10 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
         ],
     ];
 
-    public function __construct(GlossaryService $glossaryService, CompanyRepository $companyRepository)
-    {
-        $this->glossaryService = $glossaryService;
-        $this->companyRepository = $companyRepository;
-    }
+    public function __construct(
+        private readonly GlossaryService $glossaryService,
+        private readonly CompanyRepository $companyRepository,
+    ) {}
 
     public function __invoke(PostProcessFluidVariablesEvent $event): void
     {
