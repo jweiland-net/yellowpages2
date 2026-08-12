@@ -6,6 +6,7 @@ services:
 
   JWeiland\Yellowpages2\:
     resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
 
   # Called by makeInstance in TYPO3's PluginPreview
   JWeiland\Yellowpages2\Backend\Preview\Yellowpages2PluginPreview:
