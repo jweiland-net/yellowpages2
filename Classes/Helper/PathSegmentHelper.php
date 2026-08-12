@@ -12,7 +12,9 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Domain\Model\Company;
+use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
@@ -22,41 +24,94 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  */
 readonly class PathSegmentHelper
 {
+    private const TABLE_NAME = 'tx_yellowpages2_domain_model_company';
+
+    private const FIELD_NAME = 'path_segment';
+
     public function __construct(
         protected PersistenceManagerInterface $persistenceManager,
     ) {}
 
+    /**
+     * @throws SiteNotFoundException
+     */
     public function generatePathSegment(array $baseRecord, int $pid): string
     {
-        return $this->getSlugHelper()->generate($baseRecord, $pid);
+        $slugHelper = $this->getSlugHelper();
+        $slug = $slugHelper->generate($baseRecord, $pid);
+
+        $recordState = RecordStateFactory::forName(self::TABLE_NAME)
+            ->fromArray($baseRecord, $pid, (int)($baseRecord['uid'] ?? 0));
+
+        // Mirror TYPO3 core's own dispatching in DataHandler::checkValueForSlug(), as a 3rd party
+        // extension could override "eval" of path_segment to a different uniqueness scope.
+        $evalCodes = $this->getEvalCodes();
+        if (in_array('unique', $evalCodes, true)) {
+            $slug = $slugHelper->buildSlugForUniqueInTable($slug, $recordState);
+        }
+        if (in_array('uniqueInSite', $evalCodes, true)) {
+            $slug = $slugHelper->buildSlugForUniqueInSite($slug, $recordState);
+        }
+        if (in_array('uniqueInPid', $evalCodes, true)) {
+            $slug = $slugHelper->buildSlugForUniqueInPid($slug, $recordState);
+        }
+
+        return $slug;
     }
 
+    /**
+     * @throws SiteNotFoundException
+     */
     public function updatePathSegmentForCompany(Company $company): void
     {
-        // First, we have to check if an UID is available
-        if (!$company->getUid()) {
+        // A 3rd party extension could override the TCA of path_segment (e.g. via
+        // Configuration/TCA/Overrides/) to add "uid" to generatorOptions.fields, or to switch
+        // "eval" to "uniqueInPid"/"uniqueInSite". All three cases need a real, already assigned
+        // uid/pid, which an Extbase object only gets once it has been added and persisted.
+        // Persisting the company here is safe even though createAction() persists it again later:
+        // Extbase skips the insert on that second run, as DomainObject::_isNew() is already false,
+        // and only writes properties changed afterwards (e.g. path_segment).
+        if (
+            !$company->getUid()
+            && (
+                in_array('uid', $this->getGeneratorFields(), true)
+                || array_intersect(['uniqueInPid', 'uniqueInSite'], $this->getEvalCodes()) !== []
+            )
+        ) {
+            $this->persistenceManager->add($company);
             $this->persistenceManager->persistAll();
         }
 
         $company->setPathSegment(
             $this->generatePathSegment(
                 $company->getBaseRecordForPathSegment(),
-                $company->getPid(),
+                $company->getPid() ?? 0,
             ),
         );
     }
 
     protected function getSlugHelper(): SlugHelper
     {
-        // Add uid to slug, to prevent duplicates
-        $config = (array)($GLOBALS['TCA']['tx_yellowpages2_domain_model_company']['columns']['path_segment']['config'] ?? []);
-        $config['generatorOptions']['fields'] = ['company', 'uid'];
-
         return GeneralUtility::makeInstance(
             SlugHelper::class,
-            'tx_yellowpages2_domain_model_company',
-            'path_segment',
-            $config,
+            self::TABLE_NAME,
+            self::FIELD_NAME,
+            $this->getFieldConfiguration(),
         );
+    }
+
+    protected function getGeneratorFields(): array
+    {
+        return (array)($this->getFieldConfiguration()['generatorOptions']['fields'] ?? []);
+    }
+
+    protected function getEvalCodes(): array
+    {
+        return GeneralUtility::trimExplode(',', (string)($this->getFieldConfiguration()['eval'] ?? ''), true);
+    }
+
+    protected function getFieldConfiguration(): array
+    {
+        return (array)($GLOBALS['TCA'][self::TABLE_NAME]['columns'][self::FIELD_NAME]['config'] ?? []);
     }
 }

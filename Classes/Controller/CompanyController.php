@@ -34,11 +34,13 @@ use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * Controller to list, show and search for companies
+ * Controller to list, show, and search for companies
  */
 class CompanyController extends ActionController
 {
@@ -91,8 +93,10 @@ class CompanyController extends ActionController
      */
     public function listMyCompaniesAction(): ResponseInterface
     {
-        $user = $this->context->getAspect('frontend.user')->get('id');
-        $companies = $this->companyRepository->findByFeUser((int)$user);
+        $companies = $this->companyRepository->findByFeUser(
+            (int)$this->context->getAspect('frontend.user')->get('id'),
+        );
+
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,
             'categories' => $this->categoryRepository->findRelated(),
@@ -160,11 +164,16 @@ class CompanyController extends ActionController
         $this->preProcessControllerAction();
     }
 
+    /**
+     * @throws AspectNotFoundException
+     * @throws AspectPropertyNotFoundException
+     * @throws IllegalObjectTypeException
+     */
     public function createAction(Company $company): ResponseInterface
     {
-        $frontendUserAuthenticationObject = $this->request->getAttribute('frontend.user');
-        if ($frontendUserAuthenticationObject->user['uid'] > 0) {
-            $feUser = $this->feUserRepository->findByUid($frontendUserAuthenticationObject->user['uid']);
+        $userAspect = $this->context->getAspect('frontend.user');
+        if ($userAspect->isLoggedIn()) {
+            $feUser = $this->feUserRepository->findByUid((int)$userAspect->get('id'));
             $company->setFeUser($feUser);
         }
 
@@ -196,7 +205,7 @@ class CompanyController extends ActionController
     }
 
     /**
-     * Will be called when link in mail will be clicked
+     * Will be called when the link in mail is clicked
      */
     public function initializeEditAction(): void
     {
@@ -220,6 +229,10 @@ class CompanyController extends ActionController
         $this->preProcessControllerAction();
     }
 
+    /**
+     * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
+     */
     public function updateAction(Company $company): ResponseInterface
     {
         $this->companyRepository->update($company);
