@@ -15,11 +15,16 @@ use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 /**
  * Add a glossary (A-Z list) on top of the company list view
  */
+#[AsEventListener(
+    identifier: 'yellowpages2/add-glossary',
+    after: 'yellowpages2/add-paginator',
+)]
 class AddGlossaryEventListener extends AbstractControllerEventListener
 {
     protected GlossaryService $glossaryService;

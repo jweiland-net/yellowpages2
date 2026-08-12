@@ -14,10 +14,14 @@ namespace JWeiland\Yellowpages2\EventListener;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Helper\HiddenObjectHelper;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 
 /**
  * Access the request in an initialize action and try to make hidden objects available in origin action
  */
+#[AsEventListener(
+    identifier: 'yellowpages2/register-hidden-company',
+)]
 class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
 {
     protected HiddenObjectHelper $hiddenObjectHelper;

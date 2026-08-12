@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -23,6 +24,9 @@ use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 /**
  * Build up special configuration for media files in property mapper
  */
+#[AsEventListener(
+    identifier: 'yellowpages2/assign-media-type-converter',
+)]
 class AssignMediaTypeConverterEventListener extends AbstractControllerEventListener
 {
     protected CompanyRepository $companyRepository;

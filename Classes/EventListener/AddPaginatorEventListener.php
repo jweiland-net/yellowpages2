@@ -13,6 +13,7 @@ namespace JWeiland\Yellowpages2\EventListener;
 
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\Pagination\CompanyPagination;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Pagination\PaginationInterface;
 use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,6 +23,9 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 /**
  * Register paginator to paginate through the company records in frontend
  */
+#[AsEventListener(
+    identifier: 'yellowpages2/add-paginator',
+)]
 class AddPaginatorEventListener extends AbstractControllerEventListener
 {
     protected int $itemsPerPage = 15;
