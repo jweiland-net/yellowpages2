@@ -6,6 +6,7 @@ services:
 
   JWeiland\Yellowpages2\:
     resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
 
   # Called by makeInstance in TYPO3's PluginPreview
   JWeiland\Yellowpages2\Backend\Preview\Yellowpages2PluginPreview:
@@ -19,30 +20,6 @@ services:
 
   JWeiland\Yellowpages2\Hook\ClearCacheHook:
     public: true
-
-  # Register EventListeners
-  JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent
-  JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent
-        after: JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener
-
-  JWeiland\Yellowpages2\EventListener\AssignMediaTypeConverterEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
-  JWeiland\Yellowpages2\EventListener\RegisterHiddenCompanyEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
-  JWeiland\Yellowpages2\EventListener\UpdateCompanyPathSegmentEventListener:
-    tags:
-      - name: event.listener
-        event: JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent
 
   # Service Provider for tagged Modifier interfaces
   yellowpages2.middleware.controller_actions_middleware:

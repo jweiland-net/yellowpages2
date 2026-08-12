@@ -17,11 +17,11 @@ use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class MailHelper
+readonly class MailHelper
 {
     public function __construct(
-        protected readonly MailerInterface $mailer,
-        protected readonly ExtConf $extConf,
+        protected MailerInterface $mailer,
+        protected ExtConf $extConf,
     ) {}
 
     public function sendMail(string $mailContent, string $subject): void

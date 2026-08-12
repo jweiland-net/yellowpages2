@@ -14,23 +14,13 @@ namespace JWeiland\Yellowpages2\Event;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
-class PreProcessControllerActionEvent implements ControllerActionEventInterface
+final class PreProcessControllerActionEvent implements ControllerActionEventInterface
 {
-    protected Request $request;
-
-    protected Arguments $arguments;
-
-    protected array $settings = [];
-
     public function __construct(
-        Request $request,
-        Arguments $arguments,
-        array $settings,
-    ) {
-        $this->request = $request;
-        $this->arguments = $arguments;
-        $this->settings = $settings;
-    }
+        private Request $request,
+        private Arguments $arguments,
+        private readonly array $settings,
+    ) {}
 
     public function getRequest(): Request
     {

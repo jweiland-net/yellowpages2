@@ -19,13 +19,11 @@ class CompanyPagination implements PaginationInterface
 {
     protected const PLUGIN_NAMESPACE = 'tx_yellowpages2_directory';
 
-    protected PaginatorInterface $paginator;
-
     protected array $arguments = [];
 
-    public function __construct(PaginatorInterface $paginator)
-    {
-        $this->paginator = $paginator;
+    public function __construct(
+        protected PaginatorInterface $paginator,
+    ) {
         foreach (RequestUtility::getMergedRequestArguments(self::PLUGIN_NAMESPACE) as $argumentName => $argument) {
             if ($argumentName[0] === '_' && $argumentName[1] === '_') {
                 continue;

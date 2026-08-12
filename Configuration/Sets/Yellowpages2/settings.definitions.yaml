@@ -34,13 +34,13 @@ settings:
     label: 'Default storage PID'
     category: Yellowpages2.pages
     description: 'Folder for storing records and fetched data'
-    type: int
+    type: page
     default: 0
   yellowpages2.pidOfMaps2Plugin:
     label: 'PID for maps2'
     category: Yellowpages2.pages
     description: 'PID where maps2 plugin for detail view is inserted'
-    type: int
+    type: page
     default: 0
   yellowpages2.startingUidForCategories:
     label: 'Root for categories'
@@ -58,13 +58,13 @@ settings:
     label: 'PID of Detail page'
     category: Yellowpages2.pages
     description: 'Leave empty to show details on current page'
-    type: int
+    type: page
     default: 0
   yellowpages2.pidOfListPage:
     label: 'PID of List page'
     category: Yellowpages2.pages
     description: 'List Page UID: If empty, the current page ID will be used.'
-    type: int
+    type: page
     default: 0
   yellowpages2.userGroup:
     label: 'Usergroup Uid'

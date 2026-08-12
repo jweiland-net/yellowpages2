@@ -15,6 +15,8 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
+use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -23,21 +25,23 @@ use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 /**
  * Build up special configuration for media files in property mapper
  */
-class AssignMediaTypeConverterEventListener extends AbstractControllerEventListener
+#[AsEventListener(
+    identifier: 'yellowpages2/assign-media-type-converter',
+)]
+final readonly class AssignMediaTypeConverterEventListener
 {
-    protected CompanyRepository $companyRepository;
+    use IsValidEventListenerRequestTrait;
 
-    protected array $allowedControllerActions = [
+    private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'create',
             'update',
         ],
     ];
 
-    public function __construct(CompanyRepository $companyRepository)
-    {
-        $this->companyRepository = $companyRepository;
-    }
+    public function __construct(
+        private CompanyRepository $companyRepository,
+    ) {}
 
     public function __invoke(PreProcessControllerActionEvent $event): void
     {
@@ -50,13 +54,13 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
         }
     }
 
-    protected function assignTypeConverterForCreateAction(PreProcessControllerActionEvent $event): void
+    private function assignTypeConverterForCreateAction(PreProcessControllerActionEvent $event): void
     {
         $this->setTypeConverterForProperty('logo', null, $event);
         $this->setTypeConverterForProperty('images', null, $event);
     }
 
-    protected function assignTypeConverterForUpdateAction(PreProcessControllerActionEvent $event): void
+    private function assignTypeConverterForUpdateAction(PreProcessControllerActionEvent $event): void
     {
         // Needed to get the previously stored logo and images
         /** @var Company $persistedCompany */
@@ -70,7 +74,7 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
         }
     }
 
-    protected function setTypeConverterForProperty(
+    private function setTypeConverterForProperty(
         string $property,
         ?ObjectStorage $persistedFiles,
         PreProcessControllerActionEvent $event,
@@ -95,7 +99,7 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
         }
     }
 
-    protected function getPropertyMappingConfigurationForCompany(
+    private function getPropertyMappingConfigurationForCompany(
         PreProcessControllerActionEvent $event,
     ): MvcPropertyMappingConfiguration {
         return $event->getArguments()
@@ -103,7 +107,7 @@ class AssignMediaTypeConverterEventListener extends AbstractControllerEventListe
             ->getPropertyMappingConfiguration();
     }
 
-    protected function addOptionToUploadFilesConverter(
+    private function addOptionToUploadFilesConverter(
         PropertyMappingConfiguration $propertyMappingConfiguration,
         string $optionKey,
         $optionValue,

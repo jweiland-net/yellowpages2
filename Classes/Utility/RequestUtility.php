@@ -14,10 +14,7 @@ namespace JWeiland\Yellowpages2\Utility;
 use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
-/**
- * Request Utility class
- */
-class RequestUtility
+readonly class RequestUtility
 {
     /**
      * Get request arguments merged from post
@@ -43,8 +40,6 @@ class RequestUtility
      * TYPO3 provides the request object also in the global variable $GLOBALS['TYPO3_REQUEST'].
      * Whenever it is possible the request should be retrieved within the contexts described above.
      * But this is not always possible by now.
-     *
-     * @return RequestInterface|null
      */
     public static function getRequestFromGlobalVariable(): ?RequestInterface
     {

@@ -17,23 +17,13 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  * Post process controller actions which assign fluid variables to view.
  * Often used by controller actions like "show" or "list". No redirects possible here.
  */
-class PostProcessFluidVariablesEvent implements ControllerActionEventInterface
+final class PostProcessFluidVariablesEvent implements ControllerActionEventInterface
 {
-    protected Request $request;
-
-    protected array $settings = [];
-
-    protected array $fluidVariables = [];
-
     public function __construct(
-        Request $request,
-        array $settings,
-        array $fluidVariables,
-    ) {
-        $this->request = $request;
-        $this->settings = $settings;
-        $this->fluidVariables = $fluidVariables;
-    }
+        private readonly Request $request,
+        private readonly array $settings,
+        private array $fluidVariables,
+    ) {}
 
     public function getRequest(): Request
     {

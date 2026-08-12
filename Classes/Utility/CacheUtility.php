@@ -16,10 +16,7 @@ use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
-/**
- * Cache Utility class
- */
-class CacheUtility
+readonly class CacheUtility
 {
     /**
      * Adds cache tags to page cache by event-records.

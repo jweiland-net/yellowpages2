@@ -13,8 +13,8 @@ namespace JWeiland\Yellowpages2\EventListener;
 
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
-use JWeiland\Yellowpages2\Event\ControllerActionEventInterface;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
+use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -32,7 +32,9 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 #[AsEventListener('yellowpages2/restrictAccess')]
 final class RestrictAccessEventListener
 {
-    protected const ALLOWED_CONTROLLER_ACTIONS = [
+    use IsValidEventListenerRequestTrait;
+
+    private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'edit',
             'update',
@@ -124,16 +126,5 @@ final class RestrictAccessEventListener
         }
 
         return $this->flashMessageService->getMessageQueueByIdentifier($identifier);
-    }
-
-    protected function isValidRequest(ControllerActionEventInterface $event): bool
-    {
-        return
-            array_key_exists($event->getControllerName(), self::ALLOWED_CONTROLLER_ACTIONS)
-            && in_array(
-                $event->getActionName(),
-                self::ALLOWED_CONTROLLER_ACTIONS[$event->getControllerName()],
-                true,
-            );
     }
 }

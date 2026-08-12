@@ -21,33 +21,17 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  * Post process controller actions which does not assign any variables to view.
  * Often used by controller actions like "update" or "create" which redirects after success.
  */
-class PostProcessControllerActionEvent implements ControllerActionEventInterface
+final readonly class PostProcessControllerActionEvent implements ControllerActionEventInterface
 {
-    /**
-     * @var ActionController|CompanyController|MapController
-     */
-    protected $controller;
-
-    /**
-     * @var Company|null
-     */
-    protected $company;
-
-    protected array $settings;
-
-    protected Request $request;
-
     public function __construct(
-        ActionController $controller,
-        ?Company $company,
-        array $settings,
-        Request $request,
-    ) {
-        $this->controller = $controller;
-        $this->company = $company;
-        $this->settings = $settings;
-        $this->request = $request;
-    }
+        /**
+         * @var ActionController|CompanyController|MapController
+         */
+        private ActionController $controller,
+        private ?Company $company,
+        private array $settings,
+        private Request $request,
+    ) {}
 
     public function getController(): ActionController
     {

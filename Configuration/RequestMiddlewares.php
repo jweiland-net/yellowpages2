@@ -9,10 +9,12 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
+use JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware;
+
 return [
     'frontend' => [
         'jweiland/yellowpages2/controller-actions-middleware' => [
-            'target' => \JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware::class,
+            'target' => ControllerActionsMiddleware::class,
             'before' => [
                 'typo3/cms-frontend/prepare-tsfe-rendering',
             ],

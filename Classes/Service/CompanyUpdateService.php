@@ -15,14 +15,14 @@ use Doctrine\DBAL\Exception;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Mailer\NotificationMailer;
 
-class CompanyUpdateService
+readonly class CompanyUpdateService
 {
     private const DAYS_TO_HIDE_COMPANY = 396; // 13 months
     private const DAYS_TO_INFORM_USER = 365; // 12 months
 
     public function __construct(
-        private readonly CompanyRepository $companyRepository,
-        private readonly NotificationMailer $notificationMailer,
+        private CompanyRepository $companyRepository,
+        private NotificationMailer $notificationMailer,
     ) {}
 
     /**

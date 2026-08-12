@@ -14,7 +14,7 @@ namespace JWeiland\Yellowpages2\Modifier;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 
-class RemoveEmptyTradesModifier extends AbstractRequestFieldModifier
+readonly class RemoveEmptyTradesModifier extends AbstractRequestFieldModifier
 {
     public function modify(array $requestBody): array
     {

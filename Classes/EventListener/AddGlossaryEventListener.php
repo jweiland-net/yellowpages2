@@ -15,29 +15,32 @@ use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
+use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 /**
  * Add a glossary (A-Z list) on top of the company list view
  */
-class AddGlossaryEventListener extends AbstractControllerEventListener
+#[AsEventListener(
+    identifier: 'yellowpages2/add-glossary',
+    after: 'yellowpages2/add-paginator',
+)]
+final readonly class AddGlossaryEventListener
 {
-    protected GlossaryService $glossaryService;
+    use IsValidEventListenerRequestTrait;
 
-    protected CompanyRepository $companyRepository;
-
-    protected array $allowedControllerActions = [
+    private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'list',
             'search',
         ],
     ];
 
-    public function __construct(GlossaryService $glossaryService, CompanyRepository $companyRepository)
-    {
-        $this->glossaryService = $glossaryService;
-        $this->companyRepository = $companyRepository;
-    }
+    public function __construct(
+        private GlossaryService $glossaryService,
+        private CompanyRepository $companyRepository,
+    ) {}
 
     public function __invoke(PostProcessFluidVariablesEvent $event): void
     {
@@ -53,7 +56,7 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
         }
     }
 
-    protected function getOptions(PostProcessFluidVariablesEvent $event): array
+    private function getOptions(PostProcessFluidVariablesEvent $event): array
     {
         $options = [
             'extensionName' => ExtConf::EXT_KEY,

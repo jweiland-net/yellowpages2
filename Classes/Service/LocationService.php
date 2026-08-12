@@ -18,12 +18,12 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class LocationService
+readonly class LocationService
 {
     public function createPoiForCompany(Company $company, FlashMessageQueue $flashMessageQueue): bool
     {
         $geoCodeService = GeneralUtility::makeInstance(GeoCodeService::class);
-        // Note: Ideally GeoCodeService should be injected, but if it's external and strictly static/utility based,
+        // Note: Ideally, GeoCodeService should be injected, but if it's external and strictly static/utility based,
         // makeInstance is acceptable in legacy transitions.
 
         $position = $geoCodeService->getFirstFoundPositionByAddress($company->getAddress());

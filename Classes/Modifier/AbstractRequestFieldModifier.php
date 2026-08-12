@@ -11,4 +11,4 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Modifier;
 
-abstract class AbstractRequestFieldModifier implements RequestFieldModifierInterface {}
+abstract readonly class AbstractRequestFieldModifier implements RequestFieldModifierInterface {}

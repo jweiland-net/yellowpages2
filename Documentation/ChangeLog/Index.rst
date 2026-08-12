@@ -7,6 +7,18 @@
 ChangeLog
 =========
 
+Version 8.1.3
+=============
+
+*   [BUGFIX] Fix broken hidden object registration in HiddenObjectHelper
+*   [BUGFIX] Use type page for PID site settings
+*   [BUGFIX] Load maps2 before yellowpages2 if present
+*   [BUGFIX] Remove now auto-created system TCA columns and ext_tables.sql
+*   [BUGFIX] Remove dead code in ext_localconf.php and Services.php
+*   [TASK] Use AsEventListener attribute instead of Services.yaml tags
+*   [TASK] Make Events, EventListeners and Hook final and readonly
+*   [TASK] Exclude Domain Models from DI autoconfiguration
+
 Version 8.1.2
 =============
 

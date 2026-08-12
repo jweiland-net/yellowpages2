@@ -17,6 +17,7 @@ use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -43,10 +44,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
      */
     protected $companyRepositoryMock;
 
-    /**
-     * @var PostProcessFluidVariablesEvent|MockObject
-     */
-    protected $eventMock;
+    protected PostProcessFluidVariablesEvent $event;
 
     protected function setUp(): void
     {
@@ -64,16 +62,15 @@ class AddGlossaryEventListenerTest extends UnitTestCase
             ->method('getExtbaseQueryToFindAllEntries')
             ->willReturn($this->queryResultMock);
 
-        $this->eventMock = $this->createMock(PostProcessFluidVariablesEvent::class);
-        $this->eventMock
+        $requestMock = $this->createMock(Request::class);
+        $requestMock
             ->method('getControllerName')
             ->willReturn('Company');
-        $this->eventMock
-            ->method('getActionName')
+        $requestMock
+            ->method('getControllerActionName')
             ->willReturn('list');
-        $this->eventMock
-            ->method('getSettings')
-            ->willReturn([]);
+
+        $this->event = new PostProcessFluidVariablesEvent($requestMock, [], []);
 
         $this->subject = new AddGlossaryEventListener(
             $this->glossaryServiceMock,
@@ -95,8 +92,11 @@ class AddGlossaryEventListenerTest extends UnitTestCase
     #[Test]
     public function invokeToAddGlossary(): void
     {
-        $this->eventMock
-            ->addFluidVariable('glossar', 'html');
-        $this->subject->__invoke($this->eventMock);
+        $this->subject->__invoke($this->event);
+
+        self::assertSame(
+            'html',
+            $this->event->getFluidVariables()['glossar'],
+        );
     }
 }

@@ -18,8 +18,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 final readonly class NotificationMailer
 {
     public function __construct(
-        private readonly ExtConf $extConf,
-        private readonly MailMessage $mailMessage,
+        private ExtConf $extConf,
+        private MailMessage $mailMessage,
     ) {}
 
     public function informUser(array $company, string $type)
