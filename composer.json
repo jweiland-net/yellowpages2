@@ -43,6 +43,9 @@
 	"replace": {
 		"typo3-ter/yellowpages2": "self.version"
 	},
+	"suggest": {
+		"jweiland/maps2": "To show company addresses on a map"
+	},
 	"autoload": {
 		"psr-4": {
 			"JWeiland\\Yellowpages2\\": "Classes"
