@@ -18,16 +18,13 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 /*
  * Helper class to generate a path segment (slug) for a company record.
- * Used while executing the UpgradeWizard and saving records in frontend.
+ * Used while executing the UpgradeWizard and saving records in the frontend.
  */
-class PathSegmentHelper
+readonly class PathSegmentHelper
 {
-    protected PersistenceManagerInterface $persistenceManager;
-
-    public function __construct(PersistenceManagerInterface $persistenceManager)
-    {
-        $this->persistenceManager = $persistenceManager;
-    }
+    public function __construct(
+        protected PersistenceManagerInterface $persistenceManager,
+    ) {}
 
     public function generatePathSegment(array $baseRecord, int $pid): string
     {
@@ -36,7 +33,7 @@ class PathSegmentHelper
 
     public function updatePathSegmentForCompany(Company $company): void
     {
-        // First of all, we have to check, if an UID is available
+        // First, we have to check if an UID is available
         if (!$company->getUid()) {
             $this->persistenceManager->persistAll();
         }

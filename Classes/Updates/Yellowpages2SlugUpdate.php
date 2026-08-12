@@ -32,8 +32,6 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 
     protected string $fieldName = 'path_segment';
 
-    protected SlugHelper $slugHelper;
-
     protected array $slugCache = [];
 
     public function getTitle(): string
@@ -163,16 +161,12 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 
     protected function getSlugHelper(): SlugHelper
     {
-        if ($this->slugHelper === null) {
-            $this->slugHelper = GeneralUtility::makeInstance(
-                SlugHelper::class,
-                $this->tableName,
-                $this->fieldName,
-                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config'],
-            );
-        }
-
-        return $this->slugHelper;
+        return GeneralUtility::makeInstance(
+            SlugHelper::class,
+            $this->tableName,
+            $this->fieldName,
+            $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config'],
+        );
     }
 
     public function getPrerequisites(): array

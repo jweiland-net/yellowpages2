@@ -14,7 +14,7 @@ namespace JWeiland\Yellowpages2\Traits;
 use JWeiland\Yellowpages2\Event\ControllerActionEventInterface;
 
 /**
- * Trait to validate, if incoming request is valid for specific EventListener
+ * Trait to validate if the incoming request is valid for a specific EventListener
  */
 trait IsValidEventListenerRequestTrait
 {

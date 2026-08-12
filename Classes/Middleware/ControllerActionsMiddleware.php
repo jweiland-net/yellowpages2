@@ -22,7 +22,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * 1. Remove empty trades from request to prevent errors while storing/updating the FE record [Company]
  * 2. Sanitize search keyword with htmlspecialchars [Search]
  */
-class ControllerActionsMiddleware implements MiddlewareInterface
+final class ControllerActionsMiddleware implements MiddlewareInterface
 {
     protected array $modifiers = [];
 
