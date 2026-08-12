@@ -40,7 +40,7 @@ final readonly class AddPaginatorEventListener
 
     private const FALLBACK_PAGINATION_CLASS = CompanyPagination::class;
 
-    protected const ALLOWED_CONTROLLER_ACTIONS = [
+    private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'list',
             'search',

@@ -34,7 +34,7 @@ final class RestrictAccessEventListener
 {
     use IsValidEventListenerRequestTrait;
 
-    protected const ALLOWED_CONTROLLER_ACTIONS = [
+    private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'edit',
             'update',

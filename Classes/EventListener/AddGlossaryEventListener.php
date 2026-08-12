@@ -30,7 +30,7 @@ final readonly class AddGlossaryEventListener
 {
     use IsValidEventListenerRequestTrait;
 
-    protected const ALLOWED_CONTROLLER_ACTIONS = [
+    private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'list',
             'search',
