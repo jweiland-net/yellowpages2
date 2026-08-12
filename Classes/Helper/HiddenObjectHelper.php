@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Domain\Repository\HiddenRepositoryInterface;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
 use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
@@ -32,35 +33,19 @@ readonly class HiddenObjectHelper
         RequestInterface $request,
         string $argumentName,
     ): void {
-        // Ensure the repository supports hidden objects
-        if (!$repository instanceof HiddenRepositoryInterface) {
-            return;
-        }
+        if ($repository instanceof HiddenRepositoryInterface) {
+            $objectRaw = $request->getArgument($argumentName);
+            if (is_array($objectRaw)) {
+                // get object from form ($_POST)
+                $object = $repository->findHiddenObject((int)$objectRaw['__identity']);
+            } else {
+                // get object from UID
+                $object = $repository->findHiddenObject((int)$objectRaw);
+            }
 
-        // Get the raw object data from the request
-        $objectRaw = $request->getArgument($argumentName);
-
-        // Resolve the object based on the raw data
-        $this->resolveHiddenObject($repository, $objectRaw);
-
-        // Register the resolved object in the session if it is valid
-        if ($object !== null) {
-            $this->session->registerObject($object, $object->getUid());
-        }
-    }
-
-    private function resolveHiddenObject(
-        HiddenRepositoryInterface $repository,
-        mixed $objectRaw,
-    ): void {
-        // Handle raw data from form (array) or UID (integer/string)
-        if (is_array($objectRaw) && isset($objectRaw['__identity'])) {
-            $repository->findHiddenObject((int)$objectRaw['__identity']);
-            return;
-        }
-
-        if (is_numeric($objectRaw)) {
-            $repository->findHiddenObject((int)$objectRaw);
+            if ($object instanceof AbstractDomainObject) {
+                $this->session->registerObject($object, (string)$object->getUid());
+            }
         }
     }
 }
