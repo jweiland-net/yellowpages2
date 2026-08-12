@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Helper\PathSegmentHelper;
+use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
@@ -25,18 +26,20 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 #[AsEventListener(
     identifier: 'yellowpages2/update-company-path-segment',
 )]
-final class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListener
+final readonly class UpdateCompanyPathSegmentEventListener
 {
-    protected array $allowedControllerActions = [
+    use IsValidEventListenerRequestTrait;
+
+    protected const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'create',
         ],
     ];
 
     public function __construct(
-        private readonly PathSegmentHelper $pathSegmentHelper,
-        private readonly CompanyRepository $companyRepository,
-        private readonly PersistenceManagerInterface $persistenceManager,
+        private PathSegmentHelper $pathSegmentHelper,
+        private CompanyRepository $companyRepository,
+        private PersistenceManagerInterface $persistenceManager,
     ) {}
 
     public function __invoke(PostProcessControllerActionEvent $event): void

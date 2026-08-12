@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\EventListener;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Helper\HiddenObjectHelper;
+use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 
 /**
@@ -22,9 +23,11 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 #[AsEventListener(
     identifier: 'yellowpages2/register-hidden-company',
 )]
-final class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
+final readonly class RegisterHiddenCompanyEventListener
 {
-    protected array $allowedControllerActions = [
+    use IsValidEventListenerRequestTrait;
+
+    protected const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'edit',
             'update',
@@ -37,8 +40,8 @@ final class RegisterHiddenCompanyEventListener extends AbstractControllerEventLi
     ];
 
     public function __construct(
-        private readonly HiddenObjectHelper $hiddenObjectHelper,
-        private readonly CompanyRepository $companyRepository,
+        private HiddenObjectHelper $hiddenObjectHelper,
+        private CompanyRepository $companyRepository,
     ) {}
 
     public function __invoke(PreProcessControllerActionEvent $event): void
