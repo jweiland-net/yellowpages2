@@ -9,9 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+
 return [
     'ext-yellowpages2-directory-wizard-icon' => [
-        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'provider' => SvgIconProvider::class,
         'source' => 'EXT:yellowpages2/Resources/Public/Icons/plugin_wizard.svg',
     ],
 ];
