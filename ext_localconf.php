@@ -16,23 +16,21 @@ if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-call_user_func(static function () {
-    ExtensionUtility::configurePlugin(
-        'yellowpages2',
-        'Directory',
-        [
-            CompanyController::class => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
-            MapController::class => 'new, create, edit, update, activate',
-        ],
-        // non-cacheable actions
-        [
-            CompanyController::class => 'search, create, update, activate',
-            MapController::class => 'create, update',
-        ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
-    );
+ExtensionUtility::configurePlugin(
+    'yellowpages2',
+    'Directory',
+    [
+        CompanyController::class => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
+        MapController::class => 'new, create, edit, update, activate',
+    ],
+    // non-cacheable actions
+    [
+        CompanyController::class => 'search, create, update, activate',
+        MapController::class => 'create, update',
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
+);
 
-    // Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['yellowpages2_clearcache']
-        = ClearCacheHook::class . '->clearCachePostProc';
-});
+// Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['yellowpages2_clearcache']
+    = ClearCacheHook::class . '->clearCachePostProc';
