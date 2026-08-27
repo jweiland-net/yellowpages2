@@ -13,7 +13,6 @@ namespace JWeiland\Yellowpages2\Utility;
 
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Cache Utility class

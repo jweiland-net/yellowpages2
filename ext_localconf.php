@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
@@ -15,7 +16,7 @@ call_user_func(static function () {
         [
             \JWeiland\Yellowpages2\Controller\CompanyController::class => 'search, create, update, activate',
             \JWeiland\Yellowpages2\Controller\MapController::class => 'create, update',
-        ]
+        ],
     );
 
     // Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE

@@ -46,8 +46,8 @@ class AddGlossaryEventListener extends AbstractControllerEventListener
                 $this->glossaryService->buildGlossary(
                     $this->companyRepository->getExtbaseQueryToFindAllEntries(),
                     $this->getOptions($event),
-                    $event->getRequest()
-                )
+                    $event->getRequest(),
+                ),
             );
         }
     }

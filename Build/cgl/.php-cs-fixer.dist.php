@@ -29,6 +29,11 @@ return (new Config())
             ->in(__DIR__ . '/../../')
             ->exclude(__DIR__ . '/../../.Build')
             ->exclude(__DIR__ . '/../../var')
+            // TYPO3 CGL: config files never get a license header, see project CLAUDE.md
+            ->exclude('Configuration')
+            ->notPath('/^ext_emconf\.php$/')
+            ->notPath('/^ext_localconf\.php$/')
+            ->notPath('/^ext_tables\.php$/')
     )
     ->setRiskyAllowed(true)
     ->setRules([

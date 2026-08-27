@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package jweiland/yellowpages2.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace JWeiland\Yellowpages2\Tests\Unit\Middleware;
 
 use JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware;
@@ -9,8 +16,8 @@ use JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier;
 use JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Frontend\Http\RequestHandler;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Frontend\Http\RequestHandler;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ControllerActionsTest extends UnitTestCase
@@ -28,7 +35,7 @@ final class ControllerActionsTest extends UnitTestCase
         $handler = $this->createMock(RequestHandler::class);
         $handler->expects(self::atLeastOnce())
             ->method('handle')
-            ->with($this->callback(static function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody): bool {
+            ->with(self::callback(static function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody): bool {
                 self::assertEquals($expectedRequestBody, $capturedRequest->getParsedBody());
                 return true;
             }))
@@ -70,12 +77,12 @@ final class ControllerActionsTest extends UnitTestCase
             'search action with arguments needs to be sanitized html special chars' => [
                 'actual' => [
                     'tx_yellowpages2_directory' => [
-                        'search' => 'bread & butter'
+                        'search' => 'bread & butter',
                     ],
                 ],
                 'expected' => [
                     'tx_yellowpages2_directory' => [
-                        'search' => htmlspecialchars('bread & butter')
+                        'search' => htmlspecialchars('bread & butter'),
                     ],
                 ],
             ],

@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\EventListener;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case.
@@ -76,7 +76,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
 
         $this->subject = new AddGlossaryEventListener(
             $this->glossaryServiceMock,
-            $this->companyRepositoryMock
+            $this->companyRepositoryMock,
         );
     }
 
@@ -85,7 +85,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
         unset(
             $this->subject,
             $this->glossaryServiceMock,
-            $this->companyRepositoryMock
+            $this->companyRepositoryMock,
         );
 
         parent::tearDown();

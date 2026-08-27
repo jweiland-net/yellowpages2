@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
-use Psr\Http\Message\ResponseInterface;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
@@ -20,6 +19,7 @@ use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -180,7 +180,7 @@ class CompanyController extends AbstractController
                 'new',
                 'Map',
                 'yellowpages2',
-                ['company' => $company]
+                ['company' => $company],
             );
         }
 
@@ -224,7 +224,7 @@ class CompanyController extends AbstractController
                 'update',
                 'Map',
                 'yellowpages2',
-                ['company' => $company]
+                ['company' => $company],
             );
         }
 
@@ -251,12 +251,12 @@ class CompanyController extends AbstractController
         $this->postProcessControllerAction($companyObject);
 
         $this->postProcessAndAssignFluidVariables([
-            'company' =>$companyObject,
+            'company' => $companyObject,
         ]);
 
         $this->mailHelper->sendMail(
             $this->view->render(),
-            LocalizationUtility::translate('email.subject.activate', 'yellowpages2')
+            LocalizationUtility::translate('email.subject.activate', 'yellowpages2'),
         );
 
         $this->redirect('list', 'Company');

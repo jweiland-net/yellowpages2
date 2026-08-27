@@ -24,7 +24,7 @@ trait GetLanguageStatementTrait
         string $tableName,
         string $tableAlias,
         Typo3QuerySettings $querySettings,
-        QueryBuilder $queryBuilder
+        QueryBuilder $queryBuilder,
     ): array {
         $languageField = (string)$GLOBALS['TCA'][$tableName]['ctrl']['languageField'];
         if ($languageField === '') {
@@ -38,7 +38,7 @@ trait GetLanguageStatementTrait
         if (!$transOrigPointerField || !$querySettings->getLanguageUid()) {
             return [$queryBuilder->expr()->in(
                 $tableAlias . '.' . $languageField,
-                [$querySettings->getLanguageUid(), -1]
+                [$querySettings->getLanguageUid(), -1],
             )];
         }
 
@@ -46,7 +46,7 @@ trait GetLanguageStatementTrait
         if (!$mode) {
             return [$queryBuilder->expr()->in(
                 $tableAlias . '.' . $languageField,
-                [$querySettings->getLanguageUid(), -1]
+                [$querySettings->getLanguageUid(), -1],
             )];
         }
 
@@ -58,8 +58,8 @@ trait GetLanguageStatementTrait
             ->where(
                 $defaultLanguageRecordsSubSelect->expr()->and(
                     $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $transOrigPointerField, 0),
-                    $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $languageField, 0)
-                )
+                    $defaultLanguageRecordsSubSelect->expr()->eq($defLangTableAlias . '.' . $languageField, 0),
+                ),
             );
 
         $andConditions = [];
@@ -70,8 +70,8 @@ trait GetLanguageStatementTrait
             $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, $querySettings->getLanguageUid()),
             $queryBuilder->expr()->in(
                 $tableAlias . '.' . $transOrigPointerField,
-                $defaultLanguageRecordsSubSelect->getSQL()
-            )
+                $defaultLanguageRecordsSubSelect->getSQL(),
+            ),
         );
 
         if ($mode !== 'hideNonTranslated') {
@@ -86,16 +86,16 @@ trait GetLanguageStatementTrait
                 ->where(
                     $queryBuilderForSubselect->expr()->and(
                         $queryBuilderForSubselect->expr()->gt($translatedOnlyTableAlias . '.' . $transOrigPointerField, 0),
-                        $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, (int)$querySettings->getLanguageUid())
-                    )
+                        $queryBuilderForSubselect->expr()->eq($translatedOnlyTableAlias . '.' . $languageField, (int)$querySettings->getLanguageUid()),
+                    ),
                 );
             // records in default language, which do not have a translation
             $andConditions[] = $queryBuilder->expr()->and(
                 $queryBuilder->expr()->eq($tableAlias . '.' . $languageField, 0),
                 $queryBuilder->expr()->notIn(
                     $tableAlias . '.uid',
-                    $queryBuilderForSubselect->getSQL()
-                )
+                    $queryBuilderForSubselect->getSQL(),
+                ),
             );
         }
 

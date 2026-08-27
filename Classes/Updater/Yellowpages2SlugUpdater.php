@@ -59,12 +59,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
-                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
+                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR),
                     ),
                     $queryBuilder->expr()->isNull(
-                        $this->fieldName
-                    )
-                )
+                        $this->fieldName,
+                    ),
+                ),
             )
             ->executeQuery()
             ->fetchOne();
@@ -88,12 +88,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         $this->fieldName,
-                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR)
+                        $queryBuilder->createNamedParameter('', Connection::PARAM_STR),
                     ),
                     $queryBuilder->expr()->isNull(
-                        $this->fieldName
-                    )
-                )
+                        $this->fieldName,
+                    ),
+                ),
             )
             ->executeQuery();
 
@@ -106,12 +106,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                     [
                         $this->fieldName => $this->getUniqueValue(
                             (int)$recordToUpdate['uid'],
-                            $slug
+                            $slug,
                         ),
                     ],
                     [
                         'uid' => (int)$recordToUpdate['uid'],
-                    ]
+                    ],
                 );
             }
         }
@@ -150,12 +150,12 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
             ->where(
                 $queryBuilder->expr()->eq(
                     $this->fieldName,
-                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR)
+                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR),
                 ),
                 $queryBuilder->expr()->neq(
                     'uid',
-                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT)
-                )
+                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT),
+                ),
             )
             ->executeQuery();
     }
@@ -167,7 +167,7 @@ class Yellowpages2SlugUpdater implements UpgradeWizardInterface
                 SlugHelper::class,
                 $this->tableName,
                 $this->fieldName,
-                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config']
+                $GLOBALS['TCA'][$this->tableName]['columns']['path_segment']['config'],
             );
         }
 

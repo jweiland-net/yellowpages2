@@ -151,7 +151,7 @@ return [
                 'type' => 'file',
                 'minitems' => 0,
                 'maxitems' => 1,
-                'allowed' => 'common-media-types'
+                'allowed' => 'common-media-types',
             ],
         ],
         'images' => [
@@ -161,7 +161,7 @@ return [
                 'type' => 'file',
                 'minitems' => 0,
                 'maxitems' => 5,
-                'allowed' => 'common-media-types'
+                'allowed' => 'common-media-types',
             ],
         ],
         'street' => [

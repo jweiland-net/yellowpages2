@@ -44,8 +44,8 @@ class PathSegmentHelper
         $company->setPathSegment(
             $this->generatePathSegment(
                 $company->getBaseRecordForPathSegment(),
-                $company->getPid()
-            )
+                $company->getPid(),
+            ),
         );
     }
 
@@ -59,7 +59,7 @@ class PathSegmentHelper
             SlugHelper::class,
             'tx_yellowpages2_domain_model_company',
             'path_segment',
-            $config
+            $config,
         );
     }
 }
