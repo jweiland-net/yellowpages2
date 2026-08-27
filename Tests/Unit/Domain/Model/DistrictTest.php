@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Domain\Model;
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Domain\Model\District;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case.
@@ -29,7 +29,7 @@ class DistrictTest extends UnitTestCase
     protected function tearDown(): void
     {
         unset(
-            $this->subject
+            $this->subject,
         );
 
         parent::tearDown();
@@ -42,7 +42,7 @@ class DistrictTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getDistrict()
+            $this->subject->getDistrict(),
         );
     }
 
@@ -55,7 +55,7 @@ class DistrictTest extends UnitTestCase
 
         self::assertSame(
             'foo bar',
-            $this->subject->getDistrict()
+            $this->subject->getDistrict(),
         );
     }
 }

@@ -38,7 +38,7 @@ class UpdateCompanyPathSegmentEventListener extends AbstractControllerEventListe
     public function __construct(
         PathSegmentHelper $pathSegmentHelper,
         CompanyRepository $companyRepository,
-        PersistenceManagerInterface $persistenceManager
+        PersistenceManagerInterface $persistenceManager,
     ) {
         $this->pathSegmentHelper = $pathSegmentHelper;
         $this->companyRepository = $companyRepository;

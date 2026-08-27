@@ -24,10 +24,10 @@ class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
             return ArrayUtility::setValueByPath(
                 $requestBody,
                 $path,
-                htmlspecialchars(ArrayUtility::getValueByPath($requestBody, $path))
+                htmlspecialchars(ArrayUtility::getValueByPath($requestBody, $path)),
             );
         } catch (MissingArrayPathException|\RuntimeException $exception) {
-            return  $requestBody;
+            return $requestBody;
         }
     }
 }

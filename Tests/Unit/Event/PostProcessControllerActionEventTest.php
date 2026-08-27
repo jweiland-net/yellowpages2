@@ -11,13 +11,11 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
-use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case.
@@ -53,7 +51,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
             [
                 'foo' => 'bar',
             ],
-            $this->requestMock
+            $this->requestMock,
         );
     }
 
@@ -71,7 +69,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             $this->companyControllerMock,
-            $this->subject->getController()
+            $this->subject->getController(),
         );
     }
 
@@ -82,7 +80,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             $this->companyControllerMock,
-            $this->subject->getCompanyController()
+            $this->subject->getCompanyController(),
         );
     }
 
@@ -93,7 +91,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             $this->requestMock,
-            $this->subject->getRequest()
+            $this->subject->getRequest(),
         );
     }
 
@@ -104,7 +102,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             'Company',
-            $this->subject->getControllerName()
+            $this->subject->getControllerName(),
         );
     }
 
@@ -115,7 +113,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             'list',
-            $this->subject->getActionName()
+            $this->subject->getActionName(),
         );
     }
 
@@ -126,7 +124,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             $this->companyMock,
-            $this->subject->getCompany()
+            $this->subject->getCompany(),
         );
     }
 
@@ -137,7 +135,7 @@ class PostProcessControllerActionEventTest extends UnitTestCase
     {
         self::assertSame(
             ['foo' => 'bar'],
-            $this->subject->getSettings()
+            $this->subject->getSettings(),
         );
     }
 }

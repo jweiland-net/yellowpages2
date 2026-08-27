@@ -41,7 +41,7 @@ class PostProcessControllerActionEvent implements ControllerActionEventInterface
         ActionController $controller,
         ?Company $company,
         array $settings,
-        Request $request
+        Request $request,
     ) {
         $this->controller = $controller;
         $this->company = $company;

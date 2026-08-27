@@ -38,7 +38,7 @@ class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
 
     public function __construct(
         HiddenObjectHelper $hiddenObjectHelper,
-        CompanyRepository $companyRepository
+        CompanyRepository $companyRepository,
     ) {
         $this->hiddenObjectHelper = $hiddenObjectHelper;
         $this->companyRepository = $companyRepository;
@@ -50,7 +50,7 @@ class RegisterHiddenCompanyEventListener extends AbstractControllerEventListener
             $this->hiddenObjectHelper->registerHiddenObjectInExtbaseSession(
                 $this->companyRepository,
                 $event->getRequest(),
-                'company'
+                'company',
             );
         }
     }

@@ -75,7 +75,7 @@ class Update extends AbstractTask
                 $company->getUid(),
                 $company->getCompany(),
                 $extConf->getEditLink(),
-            ]
+            ],
         );
 
         $mail->html($bodyHtml);
@@ -100,7 +100,7 @@ class Update extends AbstractTask
             [
                 $company->getUid(),
                 $company->getCompany(),
-            ]
+            ],
         );
 
         $mail->html($bodyHtml);

@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Helper;
 
 use JWeiland\Yellowpages2\Domain\Repository\HiddenRepositoryInterface;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Session;
@@ -34,7 +33,7 @@ class HiddenObjectHelper
     public function registerHiddenObjectInExtbaseSession(
         RepositoryInterface $repository,
         RequestInterface $request,
-        string $argumentName
+        string $argumentName,
     ): void {
         if ($repository instanceof HiddenRepositoryInterface) {
             $objectRaw = $request->getArgument($argumentName);

@@ -34,11 +34,11 @@ class MailHelper
         $this->mailMessage
             ->setFrom(
                 $this->extConf->getEmailFromAddress(),
-                $this->extConf->getEmailFromName()
+                $this->extConf->getEmailFromName(),
             )
             ->setTo(
                 $this->extConf->getEmailToAddress(),
-                $this->extConf->getEmailToName()
+                $this->extConf->getEmailToName(),
             )
             ->setSubject($subject)
             ->html($mailContent);

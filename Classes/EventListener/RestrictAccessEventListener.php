@@ -51,7 +51,7 @@ class RestrictAccessEventListener extends AbstractControllerEventListener
     public function __construct(
         FlashMessageService $flashMessageService,
         CompanyRepository $companyRepository,
-        ExtensionService $extensionService
+        ExtensionService $extensionService,
     ) {
         $this->flashMessageService = $flashMessageService;
         $this->companyRepository = $companyRepository;
@@ -71,11 +71,11 @@ class RestrictAccessEventListener extends AbstractControllerEventListener
         }
 
         $event->setRequest(
-            $this->request->withControllerActionName('error')
+            $this->request->withControllerActionName('error'),
         );
 
         $event->setArguments(
-            GeneralUtility::makeInstance(Arguments::class)
+            GeneralUtility::makeInstance(Arguments::class),
         );
     }
 
@@ -114,7 +114,7 @@ class RestrictAccessEventListener extends AbstractControllerEventListener
             (string)$messageBody,
             '',
             ContextualFeedbackSeverity::ERROR,
-            true
+            true,
         );
 
         $this->getFlashMessageQueue()->enqueue($flashMessage);
@@ -125,7 +125,7 @@ class RestrictAccessEventListener extends AbstractControllerEventListener
         if ($identifier === null) {
             $pluginNamespace = $this->extensionService->getPluginNamespace(
                 $this->request->getControllerExtensionName(),
-                $this->request->getPluginName()
+                $this->request->getPluginName(),
             );
             $identifier = 'extbase.flashmessages.' . $pluginNamespace;
         }
