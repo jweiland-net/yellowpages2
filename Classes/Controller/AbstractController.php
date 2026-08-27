@@ -56,5 +56,10 @@ class AbstractController extends ActionController
                 $this->settings
             )
         );
+
+        // A listener may have redirected the request to another action (e.g. "error") by
+        // mutating $this->request. The action method to call was already resolved and cached
+        // before this hook ran, so it must be re-resolved to actually take effect.
+        $this->actionMethodName = $this->resolveActionMethodName();
     }
 }

@@ -350,6 +350,10 @@
 				<source>An error occurred while trying to call %1$s->%2$s()</source>
 				<target>Es ist ein Fehler aufgetreten während dem Aufruf zu %1$s->%2$s()</target>
 			</trans-unit>
+			<trans-unit id="unauthorizedCompanyUser">
+				<source>You are not allowed to edit company records that do not assigned to you.</source>
+				<target>Sie dürfen keine Firmendaten bearbeiten, die Ihnen nicht zugewiesen sind.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
