@@ -35,6 +35,10 @@ services:
     tags:
       - name: event.listener
         event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
+  JWeiland\Yellowpages2\EventListener\RestrictAccessEventListener:
+    tags:
+      - name: event.listener
+        event: JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent
   JWeiland\Yellowpages2\EventListener\UpdateCompanyPathSegmentEventListener:
     tags:
       - name: event.listener
