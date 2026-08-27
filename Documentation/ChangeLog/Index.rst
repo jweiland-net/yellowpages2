@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 6.1.6
+=============
+
+*   [TASK] Add RestrictAccessEventListener to check update actions against unauthorised edits by non-owner fe_users
+
 Version 6.1.5
 =============
 
