@@ -259,6 +259,9 @@
 			<trans-unit id="errorFlashMessage">
 				<source>An error occurred while trying to call %1$s->%2$s()</source>
 			</trans-unit>
+			<trans-unit id="unauthorizedCompanyUser">
+				<source>You are not allowed to edit company records that do not assigned to you.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

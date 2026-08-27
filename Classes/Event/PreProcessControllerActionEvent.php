@@ -56,4 +56,14 @@ class PreProcessControllerActionEvent implements ControllerActionEventInterface
     {
         return $this->settings;
     }
+
+    public function setRequest(Request $request): void
+    {
+        $this->request = $request;
+    }
+
+    public function setArguments(Arguments $arguments): void
+    {
+        $this->arguments = $arguments;
+    }
 }

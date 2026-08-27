@@ -50,12 +50,15 @@ class AbstractController extends ActionController
 
     protected function preProcessControllerAction(): void
     {
-        $this->eventDispatcher->dispatch(
-            new PreProcessControllerActionEvent(
-                $this->request,
-                $this->arguments,
-                $this->settings
-            )
+        $actionEvent = new PreProcessControllerActionEvent(
+            $this->request,
+            $this->arguments,
+            $this->settings
         );
+        $this->eventDispatcher->dispatch($actionEvent);
+
+        $this->request = $actionEvent->getRequest();
+        $this->arguments = $actionEvent->getArguments();
+        $this->actionMethodName = $this->resolveActionMethodName();
     }
 }
