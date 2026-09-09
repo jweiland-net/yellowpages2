@@ -30,12 +30,13 @@ settings:
     description: 'Path to layout root'
     type: string
     default: 'EXT:yellowpages2/Resources/Private/Layouts/'
+
   yellowpages2.storagePid:
     label: 'Default storage PID'
     category: Yellowpages2.pages
     description: 'Folder for storing records and fetched data'
-    type: page
-    default: 0
+    type: string
+    default: ''
   yellowpages2.pidOfMaps2Plugin:
     label: 'PID for maps2'
     category: Yellowpages2.pages
@@ -72,6 +73,7 @@ settings:
     description: 'The user group allowed to create new companies. This determines the rendering of the edit and create links on the list page.'
     type: int
     default: 1
+
   yellowpages2.pageBrowser.itemsPerPage:
     label: 'Records per page'
     category: Yellowpages2.pagination
