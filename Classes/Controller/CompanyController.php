@@ -189,11 +189,14 @@ class CompanyController extends ActionController
             $poiCreated = $this->locationService->createPoiForCompany($company, $this->getFlashMessageQueue());
 
             if ($poiCreated) {
+                // Data entry is not finished yet - the user still has to confirm the POI position on the
+                // map in MapController::newAction()/createAction(). Keep the record hidden until then, so it
+                // does not become publicly visible on the frontend in the meantime.
+                $company->setHidden(true);
                 $this->companyRepository->add($company);
                 // Persist immediately to generate UIDs needed for the redirect logic or relations
                 $this->persistenceManager->persistAll();
 
-                $this->addFlashMessage(LocalizationUtility::translate('companyCreated', 'yellowpages2'));
                 return $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
             }
 

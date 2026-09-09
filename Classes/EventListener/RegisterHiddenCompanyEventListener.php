@@ -34,6 +34,8 @@ final readonly class RegisterHiddenCompanyEventListener
             'activate',
         ],
         'Map' => [
+            'new',
+            'create',
             'edit',
             'update',
         ],

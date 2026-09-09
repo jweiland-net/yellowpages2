@@ -38,6 +38,11 @@ class MapController extends ActionController
         protected readonly MailHelper $mailHelper,
     ) {}
 
+    public function initializeNewAction(): void
+    {
+        $this->preProcessControllerAction();
+    }
+
     public function newAction(Company $company): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([
@@ -45,6 +50,11 @@ class MapController extends ActionController
         ]);
 
         return $this->htmlResponse();
+    }
+
+    public function initializeCreateAction(): void
+    {
+        $this->preProcessControllerAction();
     }
 
     /**
