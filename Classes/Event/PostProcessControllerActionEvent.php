@@ -18,17 +18,16 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 /**
- * Post process controller actions which does not assign any variables to view.
- * Often used by controller actions like "update" or "create" which redirects after success.
+ * Post-process controller actions that do not assign any variables to view.
+ * Often used by controller actions like "update" or "create", which redirects after success.
  */
 final readonly class PostProcessControllerActionEvent implements ControllerActionEventInterface
 {
     /**
-     * @param ActionController|CompanyController|MapController $controller
      * @param array<string, mixed> $settings
      */
     public function __construct(
-        private ActionController $controller,
+        private ActionController|CompanyController|MapController $controller,
         private ?Company $company,
         private array $settings,
         private RequestInterface $request,
