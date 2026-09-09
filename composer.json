@@ -1,6 +1,6 @@
 {
 	"name": "jweiland/yellowpages2",
-	"description": "With this extension you can build your own industry directory",
+	"description": "Industry directory with frontend self-registration, moderation via signed mail links, EXT:maps2 integration and native FAL uploads for logo and images",
 	"license": "GPL-2.0-or-later",
 	"type": "typo3-cms-extension",
 	"keywords": [
