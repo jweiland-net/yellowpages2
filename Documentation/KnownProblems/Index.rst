@@ -4,7 +4,7 @@
 ..  _known-problems:
 
 ==============
-Known Problems
+Known problems
 ==============
 
-Currently, no problems known.
+Currently, no problems are known.

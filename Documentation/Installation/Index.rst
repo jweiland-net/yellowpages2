@@ -9,18 +9,33 @@ Installation
 
 Target group: **Administrators**
 
-The extension needs to be installed like any other extension of TYPO3 CMS:
+Install `yellowpages2` like any other TYPO3 extension.
 
-#.  Visit ExtensionManager
+Installation using Composer
+===========================
 
-#.  Switch over to `Get Extensions`
+..  code-block:: bash
 
-#.  Search for `yellowpages2`
+    composer require jweiland/yellowpages2
 
-#.  Install extension
+Installation using Extension Manager
+====================================
 
+If you cannot use Composer, install `yellowpages2` through the Extension Manager instead:
+
+..  rst-class:: bignums
+
+    1.  Open the Extension Manager
+
+    2.  Switch to `Get Extensions`
+
+    3.  Search for `yellowpages2`
+
+    4.  Install the extension
+
+..  _installation-next-step:
 
 Next step
 =========
 
-:ref:`Configure extension <configuration>`.
+:ref:`Configure the extension <configuration>`.

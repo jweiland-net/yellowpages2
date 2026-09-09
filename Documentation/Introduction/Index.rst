@@ -13,6 +13,6 @@ Introduction
 What does it do?
 ================
 
-With yellowpages2 you can build your own little industry directory for your TYPO3 website. It comes with a list and a
-configurable detail view. Above the list view we implemented an A-Z navigation to jump directly
-to industry directory entries which will start with clicked starting letter.
+`yellowpages2` builds a small industry directory for your TYPO3 website. It ships a list view and a configurable
+detail view, an A-Z glossary above the list to jump directly to entries starting with a given letter, and an
+optional frontend form so visitors can submit their own company entries for review.

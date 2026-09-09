@@ -1,16 +1,13 @@
 ..  include:: /Includes.rst.txt
 
 
-.. _links:
+..  _links:
 
 =====
 Links
 =====
 
-The links to issue and the GitHub repository are maintained in the Settings.cfg.
-
-You may want to remove this file if all important links are already handled in
-Settings.cfg.
+The issue tracker and GitHub repository links are maintained in `guides.xml`.
 
 :Packagist:
    https://packagist.org/packages/jweiland/yellowpages2

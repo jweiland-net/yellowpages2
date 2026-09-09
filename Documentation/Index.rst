@@ -48,6 +48,7 @@ With `yellowpages2` you can build your own industry directory.
     Configuration/Index
     AdministratorManual/Index
     KnownProblems/Index
+    Contribute/Index
     ChangeLog/Index
     Links
 
@@ -56,5 +57,4 @@ With `yellowpages2` you can build your own industry directory.
 ..  toctree::
     :hidden:
 
-    Sitemap
     genindex

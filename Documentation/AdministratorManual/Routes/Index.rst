@@ -1,16 +1,19 @@
 ..  include:: /Includes.rst.txt
 
 
+..  _routes:
+
 ======
 Routes
 ======
 
-With TYPO3 9 you have the possibility to configure RouteEnhancers
+Configure RouteEnhancers to get speaking URLs for the company list, letter, and detail views.
 
-Example Configuration
+Example configuration
 =====================
 
-..  code-block:: none
+..  code-block:: yaml
+    :caption: config/sites/my_site/config.yaml
 
     routeEnhancers:
       Yellowpages2Plugin:
