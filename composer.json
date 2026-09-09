@@ -44,7 +44,8 @@
 		"typo3-ter/yellowpages2": "self.version"
 	},
 	"suggest": {
-		"jweiland/maps2": "To show company addresses on a map"
+		"jweiland/maps2": "To show company addresses on a map",
+		"jweiland/checkfaluploads": "Adds a mandatory rights checkbox to the logo/images upload fields in yellowpages2's frontend forms. Requires at least version 6.0.0."
 	},
 	"autoload": {
 		"psr-4": {
