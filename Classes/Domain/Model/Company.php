@@ -36,13 +36,13 @@ class Company extends AbstractEntity
      * @var ObjectStorage<FileReference>
      */
     #[Lazy]
-    protected $logo;
+    protected ObjectStorage $logo;
 
     /**
      * @var ObjectStorage<FileReference>
      */
     #[Lazy]
-    protected $images;
+    protected ObjectStorage $images;
 
     #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected string $street = '';
