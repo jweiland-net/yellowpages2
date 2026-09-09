@@ -32,17 +32,17 @@ class AddGlossaryEventListenerTest extends UnitTestCase
     /**
      * @var QueryResultInterface|MockObject
      */
-    protected $queryResultMock;
+    protected MockObject $queryResultMock;
 
     /**
      * @var GlossaryService|MockObject
      */
-    protected $glossaryServiceMock;
+    protected MockObject $glossaryServiceMock;
 
     /**
      * @var CompanyRepository|MockObject
      */
-    protected $companyRepositoryMock;
+    protected MockObject $companyRepositoryMock;
 
     protected PostProcessFluidVariablesEvent $event;
 

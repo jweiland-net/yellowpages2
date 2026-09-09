@@ -22,7 +22,7 @@ final readonly class NotificationMailer
         private MailMessage $mailMessage,
     ) {}
 
-    public function informUser(array $company, string $type)
+    public function informUser(array $company, string $type): void
     {
         $mail = new MailMessage();
         $mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName())

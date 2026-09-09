@@ -78,7 +78,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         $source,
         string $targetType,
         array $convertedChildProperties = [],
-        PropertyMappingConfigurationInterface $configuration = null,
+        ?PropertyMappingConfigurationInterface $configuration = null,
     ) {
         $this->initialize($configuration);
 
@@ -98,7 +98,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         }
 
         foreach ($filesToProcess as $key => $uploadedFile) {
-            if (!$uploadedFile instanceof UploadedFile || !$this->isValidUploadFile($uploadedFile)) {
+            if (!$this->isValidUploadFile($uploadedFile)) {
                 continue;
             }
 
@@ -168,9 +168,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
      */
     protected function getFalUploadService(): FalUploadService
     {
-        if ($this->falUploadService === null) {
-            $this->falUploadService = GeneralUtility::makeInstance(FalUploadService::class);
-        }
+        $this->falUploadService ??= GeneralUtility::makeInstance(FalUploadService::class);
 
         return $this->falUploadService;
     }

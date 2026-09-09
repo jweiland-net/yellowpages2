@@ -32,7 +32,7 @@ final class ControllerActionsTest extends UnitTestCase
 
         // Here we will assert the modifier request insider handler
         $handler = $this->createMock(RequestHandler::class);
-        $handler->expects(self::atLeast(1))
+        $handler->expects($this->atLeast(1))
             ->method('handle')
             ->with(self::callback(static function (ServerRequestInterface $capturedRequest) use ($expectedRequestBody): bool {
                 self::assertEquals($expectedRequestBody, $capturedRequest->getParsedBody());

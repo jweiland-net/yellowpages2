@@ -26,7 +26,7 @@ trait GetLanguageStatementTrait
         string $tableAlias,
         Typo3QuerySettings $querySettings,
         QueryBuilder $queryBuilder,
-    ): array | string {
+    ): array|string {
         if (empty($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])) {
             return [];
         }

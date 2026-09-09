@@ -24,7 +24,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class ControllerActionsMiddleware implements MiddlewareInterface
 {
-    protected array $modifiers = [];
+    private array $modifiers = [];
 
     public function addModifier(RequestFieldModifierInterface $modifier): void
     {
@@ -46,7 +46,7 @@ final class ControllerActionsMiddleware implements MiddlewareInterface
         return $handler->handle($request->withParsedBody($requestBody));
     }
 
-    protected function applyModifiers(array &$requestBody): void
+    private function applyModifiers(array &$requestBody): void
     {
         foreach ($this->modifiers as $modifier) {
             $requestBody = $modifier->modify($requestBody);

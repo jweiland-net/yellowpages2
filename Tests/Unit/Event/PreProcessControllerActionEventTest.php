@@ -33,7 +33,7 @@ class PreProcessControllerActionEventTest extends UnitTestCase
     /**
      * @var Arguments|MockObject
      */
-    protected $argumentsMock;
+    protected MockObject $argumentsMock;
 
     protected function setUp(): void
     {

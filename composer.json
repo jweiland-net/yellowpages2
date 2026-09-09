@@ -34,9 +34,9 @@
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.44",
-		"friendsofphp/php-cs-fixer": "^3.14",
-		"phpstan/phpstan": "^1.10",
-		"roave/security-advisories": "dev-latest",
+		"phpstan/phpdoc-parser": "^1.33",
+		"ssch/typo3-rector": "^3.6",
+		"typo3/cms-install": "^13.4",
 		"typo3/coding-standards": "^0.8",
 		"typo3/testing-framework": "^9.0.1"
 	},

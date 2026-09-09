@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
@@ -25,11 +26,11 @@ class PostProcessControllerActionEventTest extends UnitTestCase
 {
     protected PostProcessControllerActionEvent $subject;
 
-    protected Company $companyMock;
+    protected MockObject $companyMock;
 
-    protected Request $requestMock;
+    protected MockObject $requestMock;
 
-    protected CompanyController $companyControllerMock;
+    protected MockObject $companyControllerMock;
 
     protected function setUp(): void
     {
