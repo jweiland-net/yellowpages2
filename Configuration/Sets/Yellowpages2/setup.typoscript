@@ -14,9 +14,11 @@ plugin.tx_yellowpages2 {
       1 = {$yellowpages2.layoutRootPath}
     }
   }
+
   persistence {
     storagePid = {$yellowpages2.storagePid}
   }
+
   settings {
     pidOfMaps2Plugin = {$yellowpages2.pidOfMaps2Plugin}
     startingUidForCategories = {$yellowpages2.startingUidForCategories}
