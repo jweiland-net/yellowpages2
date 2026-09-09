@@ -1,69 +1,67 @@
 ..  include:: /Includes.rst.txt
 
 
-..  _extensionSettings:
+..  _extension-settings:
 
+===================
+Extension settings
 ==================
-Extension Settings
-==================
 
-Some general settings for `yellowpages2` can be configured in *Admin Tools -> Settings*.
+Configure `yellowpages2` in the backend module *Admin Tools > Settings > Extension Configuration*.
 
-Tab: Basic
-==========
+..  confval:: poiCollectionPid
+    :name: confval-poicollectionpid
+    :type: integer
+    :default: 0
 
-poiCollectionPid
-----------------
+    Only relevant if EXT:maps2 is installed. While creating a company record on the frontend, the
+    address is geocoded and a maps2 record is created for it automatically. Define the storage page
+    ID for these records here.
 
-Default: 0
+..  confval:: editLink
+    :name: confval-editlink
+    :type: string
+    :default: (empty)
 
-Only valid, if you have installed EXT:maps2, too.
+    `yellowpages2` ships a console command that hides company records older than 13 months and
+    informs their owners 12 months after creation, asking them to renew the entry. The reminder
+    email links back to this page ID, which should have the plugin configured for editing.
 
-While creating location records we catch the address and automatically create a maps2 record
-for you. Define a storage PID where we should store these records.
+..  confval:: emailFromAddress
+    :name: confval-emailfromaddress
+    :type: string
+    :default: (empty, falls back to the install-wide default from address)
 
-editLink
---------
+    Sender address used for all notification emails triggered when a visitor creates or updates a
+    company record on the frontend.
 
-Default: empty
+..  confval:: emailFromName
+    :name: confval-emailfromname
+    :type: string
+    :default: (empty, falls back to the install-wide default from name)
 
-yellowpages2 comes with a scheduler task to invalidate records after 13 months. It informs
-the customers to renew their entries after 12 months.
-This information mail contains a link to review companies record.
-Define a page UID where you have added the plugin to review the companies record.
+    Sender name used for the notification emails described above.
 
-emailFromAddress
-----------------
+..  confval:: emailToAddress
+    :name: confval-emailtoaddress
+    :required: true
+    :type: string
+    :default: (empty)
 
-Default: empty (use value from INSTALL_TOOL)
+    Recipient address for the administrator notification sent whenever a visitor creates or updates
+    a company record on the frontend. This is also the address that receives the moderation link to
+    edit or activate the record. Unlike `emailFromAddress`, there is no fallback: leaving this empty
+    causes sending to fail once a company is created or updated on the frontend.
 
-With yellowpages2 you can give your website visitors the possibility to create new
-events. These created records will be hidden by default. Add an email address
-of the sender, if a new record was created over the frontend.
+..  confval:: emailToName
+    :name: confval-emailtoname
+    :type: string
+    :default: (empty)
 
-emailFromName
--------------
+    Recipient name for the administrator notification described above.
 
-Default: empty (use value from INSTALL_TOOL)
-
-With yellowpages2 you can give your website visitors the possibility to create new
-events. These created records will be hidden by default. Add a name
-of the sender, if a new record was created over the frontend.
-
-emailToAddress
---------------
-
-Default: empty
-
-With yellowpages2 you can give your website visitors the possibility to create new
-events. These created records will be hidden by default. Add an email address
-of the receiver, if a new record was created over the frontend.
-
-emailToName
------------
-
-Default: empty
-
-With yellowpages2 you can give your website visitors the possibility to create new
-events. These created records will be hidden by default. Add a name
-of the receiver, if a new record was created over the frontend.
+..  confval-menu::
+    :name: confval-extension-settings-menu
+    :display: table
+    :type:
+    :default:

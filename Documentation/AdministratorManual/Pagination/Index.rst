@@ -1,16 +1,16 @@
 ..  include:: /Includes.rst.txt
 
 
+..  _pagination:
+
 ==========
 Pagination
 ==========
 
-`yellowpages2` uses the `SimplePagination` from TYPO3 Core to navigate through
-your records with `first`, `previous`, `next` and `last` buttons. If
-you need something more complex like `1, 2 ... 56, 57, 58 ... 123, 124` you
-should use another pagination library or build your own one. In the next steps
-I explain you how to implement the numbered_pagination solution
-of Georg Ringers.
+`yellowpages2` uses TYPO3 Core's `SimplePagination` to navigate through records with `first`,
+`previous`, `next`, and `last` buttons. If you need something more complex, like
+`1, 2 ... 56, 57, 58 ... 123, 124`, use another pagination library or build your own. The following
+steps show how to plug in Georg Ringer's `numbered_pagination` extension instead.
 
 ..  rst-class:: bignums
 

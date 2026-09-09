@@ -4,55 +4,67 @@
 ..  _user-manual:
 
 ============
-Users Manual
+Users manual
 ============
 
 Target group: **Editors**
 
-#.  Select a page where you want to insert yellowpages2
+..  rst-class:: bignums
 
-#.  Insert a new content element of type: `General Plugin`
+    1.  Select a page where you want to insert `yellowpages2`
 
-#.  On tab `Plugin` select `Industry Directory` from selectbox.
+    2.  Insert a new content element of type `General Plugin`
 
-#.  Confirm reload to load special input fields for our extension (FlexForm).
+    3.  On tab `Plugin`, select `Industry Directory` from the selectbox
 
-#.  Save
+    4.  Confirm the reload to load the extension's FlexForm fields
 
-Plugin Options
+    5.  Save
+
+..  _user-manual-plugin-options:
+
+Plugin options
 ==============
 
-**Choose View**
+Choose view
+-----------
 
-You can select between List and Detail view
+Switch between the list and the detail view.
 
-**PID of detail page**
+PID of detail page
+------------------
 
-If you want another Style for detail view it may make sense to move indistry directory onto another page.
-Define its PID here.
+Move the detail view onto another page for a different layout. Set its page ID here.
 
-**PID of list page**
+PID of list page
+----------------
 
-If you have defined an PID for detail page, it may make sense to set this value within the plugin on detail page
-to generate correct links back to this list page.
+If you have set a PID for the detail page, set this value too, so the plugin can generate correct
+links back to the list page.
 
-**Preset trade**
+Preset trade
+------------
 
-Select a trade to reduce the result on website to your selection on startup.
+Preselect a trade to narrow down the result list on page load.
 
-**District**
+District
+--------
 
-Reduce industry directory records on website to this district
+Narrow down the result list to a single district.
 
-Company Record
+..  _user-manual-company-record:
+
+Company record
 ==============
 
-#.  Select a Storage Page
+..  rst-class:: bignums
 
-#.  Create a new record of type `Company`
+    1.  Select a storage page
 
-#.  Give it a title. We will use the first letter of title for our glossary navigation.
+    2.  Create a new record of type `Company`
 
-#.  Enter a description and assign some trades to it.
+    3.  Give it a title. The first letter of the title is used for the glossary navigation.
 
-#.  By default you can insert up to 5 images, but only one logo.
+    4.  Enter a description and assign one or more trades to it.
+
+    5.  Add a logo and up to two images. Both fields accept a maximum of two files.
