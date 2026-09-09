@@ -26,11 +26,11 @@ class PostProcessControllerActionEventTest extends UnitTestCase
 {
     protected PostProcessControllerActionEvent $subject;
 
-    protected Company|MockObject $companyMock;
+    protected Company&MockObject $companyMock;
 
-    protected Request|MockObject $requestMock;
+    protected Request&MockObject $requestMock;
 
-    protected CompanyController|MockObject $companyControllerMock;
+    protected CompanyController&MockObject $companyControllerMock;
 
     protected function setUp(): void
     {

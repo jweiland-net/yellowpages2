@@ -25,9 +25,9 @@ class PreProcessControllerActionEventTest extends UnitTestCase
 {
     protected PreProcessControllerActionEvent $subject;
 
-    protected Request|MockObject $requestMock;
+    protected Request&MockObject $requestMock;
 
-    protected Arguments|MockObject $argumentsMock;
+    protected Arguments&MockObject $argumentsMock;
 
     protected function setUp(): void
     {
