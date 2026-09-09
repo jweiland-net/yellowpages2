@@ -27,7 +27,7 @@ readonly class RemoveEmptyTradesModifier extends AbstractRequestFieldModifier
             }
 
             return ArrayUtility::setValueByPath($requestBody, $path, $data);
-        } catch (MissingArrayPathException|\RuntimeException $exception) {
+        } catch (MissingArrayPathException|\RuntimeException) {
             return $requestBody;
         }
     }

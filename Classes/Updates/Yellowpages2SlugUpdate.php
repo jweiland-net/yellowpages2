@@ -33,6 +33,9 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
     protected string $fieldName = 'path_segment';
 
     protected array $slugCache = [];
+    public function __construct(private readonly ConnectionPool $connectionPool)
+    {
+    }
 
     public function getTitle(): string
     {
@@ -121,7 +124,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
     {
         $statement = $this->getUniqueSlugStatement($uid, $slug);
         $counter = $this->slugCache[$slug] ?? 1;
-        while ($statement->fetch()) {
+        while ($statement->fetchAssociative()) {
             $newSlug = $slug . '-' . $counter;
             $statement->bindValue(1, $newSlug);
             $statement->execute();
@@ -178,6 +181,6 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 
     protected function getConnectionPool(): ConnectionPool
     {
-        return GeneralUtility::makeInstance(ConnectionPool::class);
+        return $this->connectionPool;
     }
 }

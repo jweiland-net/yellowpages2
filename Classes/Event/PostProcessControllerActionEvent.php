@@ -55,12 +55,12 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
 
     public function getControllerName(): string
     {
-        return $this->getRequest()->getControllerName();
+        return $this->request->getControllerName();
     }
 
     public function getActionName(): string
     {
-        return $this->getRequest()->getControllerActionName();
+        return $this->request->getControllerActionName();
     }
 
     public function getCompany(): ?Company

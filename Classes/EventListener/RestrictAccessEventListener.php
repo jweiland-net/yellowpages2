@@ -102,7 +102,7 @@ final class RestrictAccessEventListener
         return true;
     }
 
-    private function addFlashMessage($messageBody): void
+    private function addFlashMessage(?string $messageBody): void
     {
         $flashMessage = GeneralUtility::makeInstance(
             FlashMessage::class,

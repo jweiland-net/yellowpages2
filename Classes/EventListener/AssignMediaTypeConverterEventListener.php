@@ -110,7 +110,7 @@ final readonly class AssignMediaTypeConverterEventListener
     private function addOptionToUploadFilesConverter(
         PropertyMappingConfiguration $propertyMappingConfiguration,
         string $optionKey,
-        $optionValue,
+        array|ObjectStorage $optionValue,
     ): void {
         $propertyMappingConfiguration->setTypeConverterOption(
             UploadMultipleFilesConverter::class,

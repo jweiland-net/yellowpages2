@@ -40,6 +40,12 @@ class CategoryRepository extends Repository
 
     protected CompanyRepository $companyRepository;
 
+    public function __construct(
+        private readonly ConnectionPool $connectionPool,
+    ) {
+        parent::__construct();
+    }
+
     public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
         $this->companyRepository = $companyRepository;
@@ -137,14 +143,9 @@ class CategoryRepository extends Repository
 
     protected function getQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('sys_category');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('sys_category');
         $queryBuilder->setRestrictions(GeneralUtility::makeInstance(FrontendRestrictionContainer::class));
 
         return $queryBuilder;
-    }
-
-    protected function getConnectionPool(): ConnectionPool
-    {
-        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }
