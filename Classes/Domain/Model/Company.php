@@ -149,24 +149,16 @@ class Company extends AbstractEntity
     }
 
     /**
-     * @return FileReference[]
+     * @return ObjectStorage<FileReference>
      */
-    public function getLogo(): array
+    public function getLogo(): ObjectStorage
     {
-        return $this->logo->toArray();
+        return $this->logo;
     }
 
     public function getFirstLogo(): ?FileReference
     {
-        return current($this->getLogo()) ?: null;
-    }
-
-    /**
-     * @return ObjectStorage<FileReference>
-     */
-    public function getOriginalLogo(): ObjectStorage
-    {
-        return $this->logo;
+        return $this->logo->current() ?: null;
     }
 
     /**
@@ -188,17 +180,9 @@ class Company extends AbstractEntity
     }
 
     /**
-     * @return array|FileReference[]
-     */
-    public function getImages(): array
-    {
-        return $this->images->toArray();
-    }
-
-    /**
      * @return ObjectStorage<FileReference>
      */
-    public function getOriginalImages(): ObjectStorage
+    public function getImages(): ObjectStorage
     {
         return $this->images;
     }
@@ -357,11 +341,11 @@ class Company extends AbstractEntity
     }
 
     /**
-     * @return Category[]
+     * @return ObjectStorage<Category>
      */
-    public function getMainTrade(): array
+    public function getMainTrade(): ObjectStorage
     {
-        return $this->mainTrade->toArray();
+        return $this->mainTrade;
     }
 
     public function getFirstMainTrade(): ?Category
@@ -370,15 +354,7 @@ class Company extends AbstractEntity
             return null;
         }
 
-        return current($this->getMainTrade()) ?: null;
-    }
-
-    /**
-     * @return ObjectStorage<Category>
-     */
-    public function getOriginalMainTrade(): ObjectStorage
-    {
-        return $this->mainTrade;
+        return $this->mainTrade->current() ?: null;
     }
 
     /**
@@ -400,17 +376,9 @@ class Company extends AbstractEntity
     }
 
     /**
-     * @return Category[]
-     */
-    public function getTrades(): array
-    {
-        return $this->trades->toArray();
-    }
-
-    /**
      * @return ObjectStorage<Category>
      */
-    public function getOriginalTrades(): ObjectStorage
+    public function getTrades(): ObjectStorage
     {
         return $this->trades;
     }

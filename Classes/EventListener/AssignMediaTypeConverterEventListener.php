@@ -70,8 +70,8 @@ final readonly class AssignMediaTypeConverterEventListener
         );
 
         if ($persistedCompany instanceof Company) {
-            $this->setTypeConverterForProperty('logo', $persistedCompany->getOriginalLogo(), $event);
-            $this->setTypeConverterForProperty('images', $persistedCompany->getOriginalImages(), $event);
+            $this->setTypeConverterForProperty('logo', $persistedCompany->getLogo(), $event);
+            $this->setTypeConverterForProperty('images', $persistedCompany->getImages(), $event);
         }
     }
 

@@ -80,10 +80,10 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getLogoInitiallyReturnsEmptyArray(): void
+    public function getLogoInitiallyReturnsObjectStorage(): void
     {
-        self::assertSame(
-            [],
+        self::assertEquals(
+            new ObjectStorage(),
             $this->subject->getLogo(),
         );
     }
@@ -97,15 +97,6 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getOriginalLogoInitiallyReturnsObjectStorage(): void
-    {
-        self::assertEquals(
-            new ObjectStorage(),
-            $this->subject->getOriginalLogo(),
-        );
-    }
-
-    #[Test]
     public function setLogoSetsLogo(): void
     {
         $object = new FileReference();
@@ -115,7 +106,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalLogo(),
+            $this->subject->getLogo(),
         );
     }
 
@@ -132,7 +123,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalLogo(),
+            $this->subject->getLogo(),
         );
     }
 
@@ -149,7 +140,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalLogo(),
+            $this->subject->getLogo(),
         );
     }
 
@@ -158,7 +149,7 @@ class CompanyTest extends UnitTestCase
     {
         self::assertEquals(
             new ObjectStorage(),
-            $this->subject->getOriginalImages(),
+            $this->subject->getImages(),
         );
     }
 
@@ -172,7 +163,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalImages(),
+            $this->subject->getImages(),
         );
     }
 
@@ -189,7 +180,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalImages(),
+            $this->subject->getImages(),
         );
     }
 
@@ -206,7 +197,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalImages(),
+            $this->subject->getImages(),
         );
     }
 
@@ -466,10 +457,10 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getMainTradeInitiallyReturnsEmptyArray(): void
+    public function getMainTradeInitiallyReturnsObjectStorage(): void
     {
-        self::assertSame(
-            [],
+        self::assertEquals(
+            new ObjectStorage(),
             $this->subject->getMainTrade(),
         );
     }
@@ -483,15 +474,6 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getOriginalMainTradeInitiallyReturnsObjectStorage(): void
-    {
-        self::assertEquals(
-            new ObjectStorage(),
-            $this->subject->getOriginalMainTrade(),
-        );
-    }
-
-    #[Test]
     public function setMainTradeSetsMainTrade(): void
     {
         $object = new Category();
@@ -501,7 +483,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalMainTrade(),
+            $this->subject->getMainTrade(),
         );
     }
 
@@ -518,7 +500,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalMainTrade(),
+            $this->subject->getMainTrade(),
         );
     }
 
@@ -535,7 +517,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalMainTrade(),
+            $this->subject->getMainTrade(),
         );
     }
 
@@ -544,11 +526,6 @@ class CompanyTest extends UnitTestCase
     {
         self::assertEquals(
             new ObjectStorage(),
-            $this->subject->getOriginalTrades(),
-        );
-
-        self::assertSame(
-            [],
             $this->subject->getTrades(),
         );
     }
@@ -563,7 +540,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalTrades(),
+            $this->subject->getTrades(),
         );
     }
 
@@ -580,7 +557,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalTrades(),
+            $this->subject->getTrades(),
         );
     }
 
@@ -597,7 +574,7 @@ class CompanyTest extends UnitTestCase
 
         self::assertSame(
             $objectStorage,
-            $this->subject->getOriginalTrades(),
+            $this->subject->getTrades(),
         );
     }
 
