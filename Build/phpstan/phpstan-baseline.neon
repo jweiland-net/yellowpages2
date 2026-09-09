@@ -61,28 +61,10 @@ parameters:
 			path: ../../Classes/EventListener/AddGlossaryEventListener.php
 
 		-
-			message: '#^Call to method checkFile\(\) on an unknown class JWeiland\\Checkfaluploads\\Service\\FalUploadService\.$#'
+			message: '#^Class JWeiland\\Checkfaluploads\\Validation\\Validator\\CheckFalUploadValidator not found\.$#'
 			identifier: class.notFound
 			count: 1
-			path: ../../Classes/Property/TypeConverter/UploadMultipleFilesConverter.php
-
-		-
-			message: '#^Class JWeiland\\Checkfaluploads\\Service\\FalUploadService not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Property/TypeConverter/UploadMultipleFilesConverter.php
-
-		-
-			message: '#^Method JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadMultipleFilesConverter\:\:getFalUploadService\(\) has invalid return type JWeiland\\Checkfaluploads\\Service\\FalUploadService\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Property/TypeConverter/UploadMultipleFilesConverter.php
-
-		-
-			message: '#^Property JWeiland\\Yellowpages2\\Property\\TypeConverter\\UploadMultipleFilesConverter\:\:\$falUploadService has unknown class JWeiland\\Checkfaluploads\\Service\\FalUploadService as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Property/TypeConverter/UploadMultipleFilesConverter.php
+			path: ../../Classes/EventListener/CheckFalUploadsEventListener.php
 
 		-
 			message: '#^Call to method getErrors\(\) on an unknown class JWeiland\\Maps2\\Service\\GeoCodeService\.$#'

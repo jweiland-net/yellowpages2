@@ -47,13 +47,13 @@ class CompanyController extends ActionController
     use PreProcessControllerActionTrait;
 
     public function __construct(
-        private readonly Context $context,
-        private readonly CompanyRepository $companyRepository,
-        private readonly CategoryRepository $categoryRepository,
-        private readonly DistrictRepository $districtRepository,
-        private readonly FeUserRepository $feUserRepository,
-        private readonly LocationService $locationService,
-        private readonly MailHelper $mailHelper,
+        protected readonly Context $context,
+        protected readonly CompanyRepository $companyRepository,
+        protected readonly CategoryRepository $categoryRepository,
+        protected readonly DistrictRepository $districtRepository,
+        protected readonly FeUserRepository $feUserRepository,
+        protected readonly LocationService $locationService,
+        protected readonly MailHelper $mailHelper,
         protected readonly PersistenceManagerInterface $persistenceManager,
     ) {}
 
@@ -70,8 +70,18 @@ class CompanyController extends ActionController
         }
     }
 
-    #[Validate(['validator' => 'String', 'param' => 'letter'])]
-    #[Validate(['validator' => 'StringLength', 'param' => 'letter', 'options' => ['minimum' => 0, 'maximum' => 3]])]
+    #[Validate([
+        'validator' => 'String',
+        'param' => 'letter',
+    ])]
+    #[Validate([
+        'validator' => 'StringLength',
+        'param' => 'letter',
+        'options' => [
+            'minimum' => 0,
+            'maximum' => 3,
+        ],
+    ])]
     public function listAction(string $letter = ''): ResponseInterface
     {
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
@@ -101,6 +111,11 @@ class CompanyController extends ActionController
         CacheUtility::addPageCacheTagsByQuery($companies->getQuery(), $this->request);
 
         return $this->htmlResponse();
+    }
+
+    public function initializeShowAction(): void
+    {
+        $this->preProcessControllerAction();
     }
 
     public function showAction(int $company): ResponseInterface
@@ -196,7 +211,7 @@ class CompanyController extends ActionController
     }
 
     /**
-     * Will be called when link in mail will be clicked
+     * Will be called when the link in mail is clicked
      */
     public function initializeEditAction(): void
     {

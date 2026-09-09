@@ -12,6 +12,7 @@ namespace JWeiland\Yellowpages2\Domain\Model;
 use JWeiland\Maps2\Domain\Model\PoiCollection;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
@@ -33,15 +34,73 @@ class Company extends AbstractEntity
     protected string $pathSegment = '';
 
     /**
+     * Modifying the FileUpload is described here:
+     * @link https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.3/Feature-103511-IntroduceExtbaseFileUploadHandling.html#modifying-existing-configuration
+     *
      * @var ObjectStorage<FileReference>
      */
     #[Lazy]
+    #[Extbase\FileUpload([
+        'validation' => [
+            'required' => false,
+            'maxFiles' => 2,
+            'fileSize' => [
+                'minimum' => '0K',
+                'maximum' => '4M',
+            ],
+            'mimeType' => [
+                'allowedMimeTypes' => [
+                    'image/jpeg',
+                    'image/png',
+                ],
+            ],
+            'fileExtension' => [
+                'allowedFileExtensions' => [
+                    'jpg',
+                    'jpeg',
+                    'png',
+                ],
+            ],
+        ],
+        'uploadFolder' => '1:/user_upload/tx_yellowpages2/',
+        'duplicationBehavior' => DuplicationBehavior::RENAME,
+        'createUploadFolderIfNotExist' => true,
+    ])]
     protected ObjectStorage $logo;
 
     /**
+     * Modifying the FileUpload is described here:
+     * @link https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.3/Feature-103511-IntroduceExtbaseFileUploadHandling.html#modifying-existing-configuration
+     *
      * @var ObjectStorage<FileReference>
      */
     #[Lazy]
+    #[Extbase\FileUpload([
+        'validation' => [
+            'required' => false,
+            'maxFiles' => 2,
+            'fileSize' => [
+                'minimum' => '0K',
+                'maximum' => '4M',
+            ],
+            'mimeType' => [
+                'allowedMimeTypes' => [
+                    'image/jpeg',
+                    'image/png',
+                ],
+            ],
+            'fileExtension' => [
+                'allowedFileExtensions' => [
+                    'jpg',
+                    'jpeg',
+                    'png',
+                ],
+            ],
+        ],
+        'uploadFolder' => '1:/user_upload/tx_yellowpages2/',
+        'duplicationBehavior' => DuplicationBehavior::RENAME,
+        'createUploadFolderIfNotExist' => true,
+    ])]
     protected ObjectStorage $images;
 
     #[Extbase\Validate(['validator' => 'NotEmpty'])]
