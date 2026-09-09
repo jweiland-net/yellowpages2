@@ -9,7 +9,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Industry Directory',
-    'description' => 'With this extension you can build your own industry directory',
+    'description' => 'Industry directory with frontend self-registration, moderation via signed mail links, EXT:maps2 integration and native FAL uploads for logo and images',
     'category' => 'plugin',
     'author' => 'Stefan Froemken, Hoja Mustaffa Abdul Latheef',
     'author_email' => 'projects@jweiland.net',
