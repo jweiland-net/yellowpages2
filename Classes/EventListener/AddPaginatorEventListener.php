@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
- * Register paginator to paginate through the company records in frontend
+ * Register paginator to paginate through the company records in the frontend
  */
 #[AsEventListener(
     identifier: 'yellowpages2/add-paginator',

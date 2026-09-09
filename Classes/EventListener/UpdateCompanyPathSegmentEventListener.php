@@ -20,8 +20,8 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 /**
- * Update path_segment of company.
- * Please check, if this EventListener was loaded before other redirecting EventListeners.
+ * Update path_segment of the company.
+ * Please check if this EventListener was loaded before other redirecting EventListeners.
  */
 #[AsEventListener(
     identifier: 'yellowpages2/update-company-path-segment',

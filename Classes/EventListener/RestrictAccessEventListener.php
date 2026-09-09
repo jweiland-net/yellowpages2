@@ -27,9 +27,11 @@ use TYPO3\CMS\Extbase\Service\ExtensionService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * Restrict access to certain controller actions if logged-in user tries to access other user's records.
+ * Restrict access to certain controller actions if a logged-in user tries to access another user's records.
  */
-#[AsEventListener('yellowpages2/restrictAccess')]
+#[AsEventListener(
+    identifier: 'yellowpages2/restrictAccess',
+)]
 final class RestrictAccessEventListener
 {
     use IsValidEventListenerRequestTrait;

@@ -18,7 +18,7 @@ use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 
 /**
- * Access the request in an initialize action and try to make hidden objects available in origin action
+ * Access the request in an initialize action and try to make hidden objects available in the origin action
  */
 #[AsEventListener(
     identifier: 'yellowpages2/register-hidden-company',
