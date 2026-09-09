@@ -5,10 +5,10 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
+    <f:flashMessages/>
+
     <f:if condition="{company.hasValidUser}">
         <f:then>
-            <f:flashMessages/>
-
             <f:render partial="FormErrors" arguments="{object: Company}"/>
 
             <f:form action="update" name="company" object="{company}" enctype="multipart/form-data">
