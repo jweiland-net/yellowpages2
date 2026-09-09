@@ -72,7 +72,8 @@ final readonly class ExtConf
             $senderMail = (string)($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] ?? '');
             if ($senderMail === '') {
                 throw new \InvalidArgumentException(
-                    'You have forgotten to set a sender email address in extension configuration or in install tool', 9237970001,
+                    'You have forgotten to set a sender email address in extension configuration or in install tool',
+                    9237970001,
                 );
             }
 
@@ -88,7 +89,8 @@ final readonly class ExtConf
             $senderName = (string)($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] ?? '');
             if ($senderName === '') {
                 throw new \InvalidArgumentException(
-                    'You have forgotten to set a sender name in extension configuration or in install tool', 8710348230,
+                    'You have forgotten to set a sender name in extension configuration or in install tool',
+                    8710348230,
                 );
             }
 
