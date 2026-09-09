@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Updates;
 
-use Doctrine\DBAL\Result;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
@@ -32,6 +31,9 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 
     protected string $fieldName = 'path_segment';
 
+    /**
+     * @var array<string, int>
+     */
     protected array $slugCache = [];
     public function __construct(private readonly ConnectionPool $connectionPool)
     {
@@ -122,12 +124,11 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 
     protected function getUniqueValue(int $uid, string $slug): string
     {
-        $statement = $this->getUniqueSlugStatement($uid, $slug);
         $counter = $this->slugCache[$slug] ?? 1;
-        while ($statement->fetchAssociative()) {
+        $newSlug = $slug;
+
+        while ($this->slugExists($uid, $newSlug)) {
             $newSlug = $slug . '-' . $counter;
-            $statement->bindValue(1, $newSlug);
-            $statement->execute();
 
             // Do not cache every slug, because of memory consumption. I think 5 is a good value to start caching.
             if ($counter > 5) {
@@ -137,29 +138,32 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
             $counter++;
         }
 
-        return $newSlug ?? $slug;
+        return $newSlug;
     }
 
-    protected function getUniqueSlugStatement(int $uid, string $slug): Result
+    protected function slugExists(int $uid, string $slug): bool
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
 
-        return $queryBuilder
-            ->select('uid')
+        $numberOfMatches = $queryBuilder
+            ->count('uid')
             ->from($this->tableName)
             ->where(
                 $queryBuilder->expr()->eq(
                     $this->fieldName,
-                    $queryBuilder->createPositionalParameter($slug, Connection::PARAM_STR),
+                    $queryBuilder->createNamedParameter($slug, Connection::PARAM_STR),
                 ),
                 $queryBuilder->expr()->neq(
                     'uid',
-                    $queryBuilder->createPositionalParameter($uid, Connection::PARAM_INT),
+                    $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT),
                 ),
             )
-            ->executeQuery();
+            ->executeQuery()
+            ->fetchOne();
+
+        return (bool)$numberOfMatches;
     }
 
     protected function getSlugHelper(): SlugHelper
