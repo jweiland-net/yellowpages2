@@ -24,7 +24,7 @@ class PostProcessFluidVariablesEventTest extends UnitTestCase
 {
     protected PostProcessFluidVariablesEvent $subject;
 
-    protected MockObject $requestMock;
+    protected Request|MockObject $requestMock;
 
     protected function setUp(): void
     {
