@@ -4,13 +4,10 @@
 
 <p>Hallo,</p>
 <p>
-    <f:link.action action="edit" controller="Company" absolute="1" arguments="{company: company, moderationToken: moderationToken}">Datensatz bearbeiten
-    </f:link.action>
+    <f:link.action action="edit" controller="Company" absolute="1" arguments="{company: company, moderationToken: moderationToken}">Datensatz bearbeiten</f:link.action>
 </p>
 <p>
-    <f:link.action action="activate" controller="Company" absolute="1" arguments="{company: company, moderationToken: moderationToken}">Datensatz
-        freischalten
-    </f:link.action>
+    <f:link.action action="activate" controller="Company" absolute="1" arguments="{company: company, moderationToken: moderationToken}">Datensatz freischalten</f:link.action>
 </p>
 <p>hier die Daten des neu angelegten Datensatzes:</p>
 <table>
@@ -20,7 +17,7 @@
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.company"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.company')}
         </td>
         <td>{company.company}</td>
     </tr>
@@ -38,43 +35,43 @@
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.contactPerson"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.contactPerson')}
         </td>
         <td>{company.contactPerson}</td>
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.openingTimes"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.openingTimes')}
         </td>
         <td>{company.openingTimes}</td>
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.description"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.description')}
         </td>
         <td>{company.description}</td>
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.district"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.district')}
         </td>
         <td>{company.district.district}</td>
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.facebook"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.facebook')}
         </td>
         <td>{company.facebook}</td>
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.twitter"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.twitter')}
         </td>
         <td>{company.twitter}</td>
     </tr>
     <tr>
         <td>
-            <f:translate key="tx_yellowpages2_domain_model_company.instagram"/>
+            {f:translate(key: 'tx_yellowpages2_domain_model_company.instagram')}
         </td>
         <td>{company.instagram}</td>
     </tr>
