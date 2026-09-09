@@ -7,14 +7,14 @@ parameters:
 			path: ../../Classes/Domain/Model/Company.php
 
 		-
-			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$images \(TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage\<TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference\>\) on left side of \?\?\= is not nullable\.$#'
-			identifier: nullCoalesce.property
+			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$images on left side of \?\?\= is not nullable nor uninitialized\.$#'
+			identifier: nullCoalesce.initializedProperty
 			count: 1
 			path: ../../Classes/Domain/Model/Company.php
 
 		-
-			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$logo \(TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage\<TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference\>\) on left side of \?\?\= is not nullable\.$#'
-			identifier: nullCoalesce.property
+			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$logo on left side of \?\?\= is not nullable nor uninitialized\.$#'
+			identifier: nullCoalesce.initializedProperty
 			count: 1
 			path: ../../Classes/Domain/Model/Company.php
 
