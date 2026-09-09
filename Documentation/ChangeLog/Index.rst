@@ -7,6 +7,17 @@
 ChangeLog
 =========
 
+Version 9.0.0
+=============
+
+*   [SECURITY] Require a signed moderation token for the "activate" action to prevent unauthenticated activation of arbitrary companies
+*   [BUGFIX] Keep company record hidden until the POI position is confirmed on the map
+*   [BUGFIX] Fix broken uniqueness check in Yellowpages2SlugUpdate (Doctrine DBAL Result misuse)
+*   [BUGFIX] Fix storagePid Site Set setting type (string instead of page)
+*   [BREAKING] Migrate company logo/images upload to the native Extbase FileUpload API, remove UploadMultipleFilesConverter and AssignMediaTypeConverterEventListener
+*   [BREAKING] Consolidate Company::getOriginalLogo()/getOriginalImages()/getOriginalMainTrade()/getOriginalTrades() into getLogo()/getImages()/getMainTrade()/getTrades(), now returning ObjectStorage instead of array
+*   [BREAKING] Remove legacy Configuration/TypoScript static template registration in favor of the Yellowpages2 Site Set
+
 Version 8.1.3
 =============
 
