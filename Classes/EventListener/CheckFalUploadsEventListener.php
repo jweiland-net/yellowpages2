@@ -55,12 +55,7 @@ final readonly class CheckFalUploadsEventListener
             return;
         }
 
-        $uploadedFiles = $controllerActionEvent->getRequest()->getUploadedFiles();
         foreach (self::PROPERTY_NAMES as $propertyName) {
-            if (!isset($uploadedFiles['tx_yellowpages2_directory']['company'][$propertyName])) {
-                continue;
-            }
-
             $this->assignValidatorToFileUploadConfiguration($controllerActionEvent, $propertyName);
         }
     }
