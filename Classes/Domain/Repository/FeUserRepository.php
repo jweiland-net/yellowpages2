@@ -17,6 +17,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  * Repository to manage frontend users
  *
+ * @extends Repository<FeUser>
  * @method FeUser findByUid(int $frontendUserUid)
  */
 class FeUserRepository extends Repository {}

@@ -15,6 +15,9 @@ use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 
 trait PostProcessFluidVariablesTrait
 {
+    /**
+     * @param array<string, mixed> $variables
+     */
     protected function postProcessAndAssignFluidVariables(array $variables = []): void
     {
         $event = $this->eventDispatcher->dispatch(

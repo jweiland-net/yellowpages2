@@ -23,6 +23,8 @@ final readonly class PostCheckFileReferenceEvent
         /**
          * Array containing the original source (all files of $_FILES) of the request
          * just before PropertyMapping (UploadMultipleFilesConverter) will start
+         *
+         * @var array<int|string, mixed>
          */
         private array $source,
         /**
@@ -41,6 +43,9 @@ final readonly class PostCheckFileReferenceEvent
         private UploadedFile $uploadedFile,
     ) {}
 
+    /**
+     * @return array<int|string, mixed>
+     */
     public function getSource(): array
     {
         return $this->source;

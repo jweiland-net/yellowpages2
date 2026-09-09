@@ -19,6 +19,9 @@ class CompanyPagination implements PaginationInterface
 {
     protected const PLUGIN_NAMESPACE = 'tx_yellowpages2_directory';
 
+    /**
+     * @var array<string, mixed>
+     */
     protected array $arguments = [];
 
     public function __construct(
@@ -52,6 +55,9 @@ class CompanyPagination implements PaginationInterface
         return $previousPage >= $this->getFirstPageNumber() ? $previousPage : null;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getPreviousPageArguments(): ?array
     {
         $arguments = $this->arguments;
@@ -67,6 +73,9 @@ class CompanyPagination implements PaginationInterface
         return $nextPage <= $this->paginator->getNumberOfPages() ? $nextPage : null;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getNextPageArguments(): ?array
     {
         $arguments = $this->arguments;
@@ -80,6 +89,9 @@ class CompanyPagination implements PaginationInterface
         return 1;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getFirstPageArguments(): ?array
     {
         $arguments = $this->arguments;
@@ -93,6 +105,9 @@ class CompanyPagination implements PaginationInterface
         return $this->paginator->getNumberOfPages();
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getLastPageArguments(): ?array
     {
         $arguments = $this->arguments;

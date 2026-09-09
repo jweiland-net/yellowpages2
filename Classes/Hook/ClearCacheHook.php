@@ -25,6 +25,8 @@ final readonly class ClearCacheHook
     /**
      * Flushes the cache if a company record was edited.
      * This happens on two levels: by UID and by PID.
+     *
+     * @param array<string, mixed> $params
      */
     public function clearCachePostProc(array $params): void
     {

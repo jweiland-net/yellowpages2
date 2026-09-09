@@ -11,11 +11,13 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use JWeiland\Yellowpages2\Domain\Model\Category;
 use JWeiland\Yellowpages2\Domain\Traits\GetLanguageStatementTrait;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -25,14 +27,15 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  * Repository for TYPO3 categories
  *
- * @method QueryResultInterface findByParent(int $categoryUid)
+ * @extends Repository<Category>
+ * @method QueryResultInterface<int, Category> findByParent(int $categoryUid)
  */
 class CategoryRepository extends Repository
 {
     use GetLanguageStatementTrait;
 
     /**
-     * @var array
+     * @var array<non-empty-string, QueryInterface::ORDER_*>
      */
     protected $defaultOrderings = [
         'title' => QueryInterface::ORDER_ASCENDING,
@@ -65,8 +68,12 @@ class CategoryRepository extends Repository
      * query (col "items" may contain various kinds of records). That's why we have to use the
      * Doctrine QueryBuilder here.
      */
+    /**
+     * @return QueryResultInterface<int, Category>
+     */
     public function findRelated(): QueryResultInterface
     {
+        /** @var Query<Category> $query */
         $query = $this->createQuery();
 
         $queryBuilder = $this->getQueryBuilder();
@@ -130,7 +137,10 @@ class CategoryRepository extends Repository
             ->orderBy('sys_category.title', 'ASC')
             ->groupBy('sys_category.uid');
 
-        return $query->statement($queryBuilder)->execute();
+        /** @var QueryResultInterface<int, Category> $result */
+        $result = $query->statement($queryBuilder)->execute();
+
+        return $result;
     }
 
     /**

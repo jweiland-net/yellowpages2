@@ -15,7 +15,7 @@ use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Controller\MapController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 /**
  * Post process controller actions which does not assign any variables to view.
@@ -23,14 +23,15 @@ use TYPO3\CMS\Extbase\Mvc\Request;
  */
 final readonly class PostProcessControllerActionEvent implements ControllerActionEventInterface
 {
+    /**
+     * @param ActionController|CompanyController|MapController $controller
+     * @param array<string, mixed> $settings
+     */
     public function __construct(
-        /**
-         * @var ActionController|CompanyController|MapController
-         */
         private ActionController $controller,
         private ?Company $company,
         private array $settings,
-        private Request $request,
+        private RequestInterface $request,
     ) {}
 
     public function getController(): ActionController
@@ -48,7 +49,7 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
         return $this->controller;
     }
 
-    public function getRequest(): Request
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }
@@ -68,6 +69,9 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
         return $this->company;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSettings(): array
     {
         return $this->settings;

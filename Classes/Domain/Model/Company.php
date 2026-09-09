@@ -161,11 +161,17 @@ class Company extends AbstractEntity
         return current($this->getLogo()) ?: null;
     }
 
+    /**
+     * @return ObjectStorage<FileReference>
+     */
     public function getOriginalLogo(): ObjectStorage
     {
         return $this->logo;
     }
 
+    /**
+     * @param ObjectStorage<FileReference> $logo
+     */
     public function setLogo(ObjectStorage $logo): void
     {
         $this->logo = $logo;
@@ -190,13 +196,16 @@ class Company extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage|\TYPO3\CMS\Core\Resource\FileReference[]
+     * @return ObjectStorage<FileReference>
      */
     public function getOriginalImages(): ObjectStorage
     {
         return $this->images;
     }
 
+    /**
+     * @param ObjectStorage<FileReference> $images
+     */
     public function setImages(ObjectStorage $images): void
     {
         $this->images = $images;
@@ -357,18 +366,24 @@ class Company extends AbstractEntity
 
     public function getFirstMainTrade(): ?Category
     {
-        if (!$this->mainTrade instanceof ObjectStorage || $this->mainTrade->count() === 0) {
+        if ($this->mainTrade->count() === 0) {
             return null;
         }
 
         return current($this->getMainTrade()) ?: null;
     }
 
+    /**
+     * @return ObjectStorage<Category>
+     */
     public function getOriginalMainTrade(): ObjectStorage
     {
         return $this->mainTrade;
     }
 
+    /**
+     * @param ObjectStorage<Category> $mainTrade
+     */
     public function setMainTrade(ObjectStorage $mainTrade): void
     {
         $this->mainTrade = $mainTrade;
@@ -392,11 +407,17 @@ class Company extends AbstractEntity
         return $this->trades->toArray();
     }
 
+    /**
+     * @return ObjectStorage<Category>
+     */
     public function getOriginalTrades(): ObjectStorage
     {
         return $this->trades;
     }
 
+    /**
+     * @param ObjectStorage<Category> $trades
+     */
     public function setTrades(ObjectStorage $trades): void
     {
         $this->trades = $trades;
@@ -445,6 +466,8 @@ class Company extends AbstractEntity
     /**
      * SF: Do not add PoiCollection as strict_type to $txMaps2Uid
      * as this will break DataMap in Extbase when maps2 is not installed.
+     *
+     * @return mixed
      */
     public function getTxMaps2Uid()
     {
@@ -456,6 +479,9 @@ class Company extends AbstractEntity
         return $this->txMaps2Uid instanceof PoiCollection;
     }
 
+    /**
+     * @param mixed $txMaps2Uid
+     */
     public function setTxMaps2Uid($txMaps2Uid): void
     {
         if ($txMaps2Uid instanceof PoiCollection) {
@@ -507,6 +533,8 @@ class Company extends AbstractEntity
     /**
      * Helper method to build a baseRecord for path_segment
      * Needed in PathSegmentHelper
+     *
+     * @return array<string, int|string|null>
      */
     public function getBaseRecordForPathSegment(): array
     {

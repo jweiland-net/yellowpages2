@@ -18,6 +18,7 @@ use JWeiland\Yellowpages2\Property\TypeConverter\UploadMultipleFilesConverter;
 use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
@@ -74,6 +75,9 @@ final readonly class AssignMediaTypeConverterEventListener
         }
     }
 
+    /**
+     * @param ObjectStorage<FileReference>|null $persistedFiles
+     */
     private function setTypeConverterForProperty(
         string $property,
         ?ObjectStorage $persistedFiles,
@@ -107,6 +111,9 @@ final readonly class AssignMediaTypeConverterEventListener
             ->getPropertyMappingConfiguration();
     }
 
+    /**
+     * @param array<string, mixed>|ObjectStorage<FileReference> $optionValue
+     */
     private function addOptionToUploadFilesConverter(
         PropertyMappingConfiguration $propertyMappingConfiguration,
         string $optionKey,

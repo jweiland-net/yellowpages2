@@ -13,6 +13,10 @@ namespace JWeiland\Yellowpages2\Modifier;
 
 readonly class NullModifier extends AbstractRequestFieldModifier
 {
+    /**
+     * @param array<string, mixed> $requestBody
+     * @return array<string, mixed>
+     */
     public function modify(array $requestBody): array
     {
         return $requestBody;

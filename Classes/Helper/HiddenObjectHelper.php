@@ -28,6 +28,10 @@ readonly class HiddenObjectHelper
         protected Session $session,
     ) {}
 
+    /**
+     * @template T of object
+     * @param RepositoryInterface<T> $repository
+     */
     public function registerHiddenObjectInExtbaseSession(
         RepositoryInterface $repository,
         RequestInterface $request,

@@ -22,6 +22,9 @@ final readonly class NotificationMailer
         private MailMessage $mailMessage,
     ) {}
 
+    /**
+     * @param array<string, mixed> $company
+     */
     public function informUser(array $company, string $type): void
     {
         $mail = new MailMessage();
@@ -36,6 +39,9 @@ final readonly class NotificationMailer
             ->send();
     }
 
+    /**
+     * @param array<string, mixed> $company
+     */
     public function informAdmin(array $company): void
     {
         $this->mailMessage
@@ -57,6 +63,9 @@ final readonly class NotificationMailer
         return LocalizationUtility::translate($translationKey, ExtConf::EXT_KEY) ?? '';
     }
 
+    /**
+     * @param array<int, mixed> $arguments
+     */
     private function translateBody(string $type, string $recipient, array $arguments): string
     {
         return LocalizationUtility::translate("email.body.{$type}.{$recipient}", ExtConf::EXT_KEY, $arguments) ?? '';

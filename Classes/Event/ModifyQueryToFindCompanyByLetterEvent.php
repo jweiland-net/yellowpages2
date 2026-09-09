@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Event;
 
+use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
@@ -18,16 +19,26 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 final readonly class ModifyQueryToFindCompanyByLetterEvent
 {
+    /**
+     * @param QueryResultInterface<int, Company> $queryResult
+     * @param array<string, mixed> $settings
+     */
     public function __construct(
         private QueryResultInterface $queryResult,
         private array $settings,
     ) {}
 
+    /**
+     * @return QueryResultInterface<int, Company>
+     */
     public function getQueryResult(): QueryResultInterface
     {
         return $this->queryResult;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSettings(): array
     {
         return $this->settings;
