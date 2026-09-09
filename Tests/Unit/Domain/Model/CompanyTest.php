@@ -80,7 +80,7 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getLogoInitiallyReturnsObjectStorage(): void
+    public function getLogoInitiallyReturnsEmptyObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -145,7 +145,7 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getImagesInitiallyReturnsObjectStorage(): void
+    public function getImagesInitiallyReturnsEmptyObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -457,7 +457,7 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getMainTradeInitiallyReturnsObjectStorage(): void
+    public function getMainTradeInitiallyReturnsEmptyObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
@@ -522,7 +522,7 @@ class CompanyTest extends UnitTestCase
     }
 
     #[Test]
-    public function getTradesInitiallyReturnsObjectStorage(): void
+    public function getTradesInitiallyReturnsEmptyObjectStorage(): void
     {
         self::assertEquals(
             new ObjectStorage(),
