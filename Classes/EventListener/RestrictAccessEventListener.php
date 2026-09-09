@@ -15,7 +15,6 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
 use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
-use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
@@ -23,6 +22,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Service\ExtensionService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -45,7 +45,7 @@ final class RestrictAccessEventListener
         ],
     ];
 
-    private ?ServerRequestInterface $request = null;
+    private ?RequestInterface $request = null;
 
     public function __construct(
         private readonly FlashMessageService $flashMessageService,

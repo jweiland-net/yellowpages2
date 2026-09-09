@@ -27,8 +27,9 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  * Repository to retrieve company records
  *
+ * @extends Repository<Company>
  * @method Company|null findByIdentifier(int $companyUid)
- * @method QueryResultInterface findByFeUser(int $frontendUserUid)
+ * @method QueryResultInterface<int, Company> findByFeUser(int $frontendUserUid)
  */
 class CompanyRepository extends Repository implements HiddenRepositoryInterface
 {
@@ -69,9 +70,13 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         return $query->matching($query->equals($property, $value))->execute()->getFirst();
     }
 
+    /**
+     * @param array<string, mixed> $settings
+     * @return QueryResultInterface<int, Company>
+     */
     public function findByLetter(string $letter, array $settings = []): QueryResultInterface
     {
-        /** @var Query $query */
+        /** @var Query<Company> $query */
         $query = $this->createQuery();
         $constraints = [];
 
@@ -106,9 +111,13 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         return $queryResult;
     }
 
+    /**
+     * @param array<string, mixed> $settings
+     * @return QueryResultInterface<int, Company>
+     */
     public function searchCompanies(string $search, int $categoryUid, array $settings): QueryResultInterface
     {
-        /** @var Query $query */
+        /** @var Query<Company> $query */
         $query = $this->createQuery();
         $constraints = [];
         $longStreetSearch = trim($search);
@@ -166,7 +175,7 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
      * Find all records which are older than given days.
      * Hint: Needed by scheduler
      *
-     * @return QueryResultInterface|Company[]
+     * @return list<array<string, mixed>>
      * @throws Exception
      */
     public function findOlderThan(int $days): array
@@ -203,6 +212,8 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
 
     /**
      * Declared as "public" as needed by Glossary API
+     *
+     * @return QueryResultInterface<int, Company>
      */
     public function getExtbaseQueryToFindAllEntries(): QueryResultInterface
     {

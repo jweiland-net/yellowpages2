@@ -37,6 +37,9 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     private const CONFIGURATION_SETTINGS = 'settings';
 
+    /**
+     * @var array<int, string>
+     */
     protected array $sourceTypes = [UploadedFile::class, 'array'];
 
     protected string $targetType = ObjectStorage::class;
@@ -47,6 +50,9 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     protected ?FalUploadService $falUploadService = null;
 
+    /**
+     * @var array{}|PropertyMappingConfigurationInterface
+     */
     protected array|PropertyMappingConfigurationInterface $converterConfiguration = [];
 
     public function __construct(
@@ -74,6 +80,9 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
         return false;
     }
 
+    /**
+     * @param array<string, mixed> $convertedChildProperties
+     */
     public function convertFrom(
         $source,
         string $targetType,
@@ -194,6 +203,7 @@ class UploadMultipleFilesConverter extends AbstractTypeConverter
 
     private function uploadFile(UploadedFile $file): \TYPO3\CMS\Core\Resource\FileReference
     {
+        /** @var \TYPO3\CMS\Core\Resource\File $uploadedFile */
         $uploadedFile = $this->uploadFolder->addUploadedFile(
             [
                 'tmp_name' => $file->getStream()->getMetadata('uri'),

@@ -12,8 +12,9 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Domain\Traits;
 
 use TYPO3\CMS\Core\Context\LanguageAspect;
+use TYPO3\CMS\Core\Database\Query\Expression\CompositeExpression;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 
 /**
  * This is a modified copy of the Typo3DbQueryParser::getLanguageStatement as the TYPO3 method
@@ -21,12 +22,15 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  */
 trait GetLanguageStatementTrait
 {
+    /**
+     * @return array{}|string|CompositeExpression
+     */
     private function getLanguageStatement(
         string $tableName,
         string $tableAlias,
-        Typo3QuerySettings $querySettings,
+        QuerySettingsInterface $querySettings,
         QueryBuilder $queryBuilder,
-    ): array|string {
+    ): array|string|CompositeExpression {
         if (empty($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])) {
             return [];
         }

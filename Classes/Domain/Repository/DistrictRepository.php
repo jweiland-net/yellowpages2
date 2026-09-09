@@ -11,17 +11,20 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Domain\Repository;
 
+use JWeiland\Yellowpages2\Domain\Model\District;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * A repository to retrieve districts.
  * Needed for selectbox in frontend
+ *
+ * @extends Repository<District>
  */
 class DistrictRepository extends Repository
 {
     /**
-     * @var array
+     * @var array<non-empty-string, QueryInterface::ORDER_*>
      */
     protected $defaultOrderings = [
         'district' => QueryInterface::ORDER_ASCENDING,
@@ -29,6 +32,8 @@ class DistrictRepository extends Repository
 
     /**
      * Get all districts for selectbox
+     *
+     * @return array<int, string>
      */
     public function getDistricts(): array
     {

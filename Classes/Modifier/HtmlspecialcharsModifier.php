@@ -16,6 +16,10 @@ use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 
 readonly class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
 {
+    /**
+     * @param array<string, mixed> $requestBody
+     * @return array<string, mixed>
+     */
     public function modify(array $requestBody): array
     {
         try {

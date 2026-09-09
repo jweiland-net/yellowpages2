@@ -56,6 +56,9 @@ final readonly class AddGlossaryEventListener
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function getOptions(PostProcessFluidVariablesEvent $event): array
     {
         $options = [

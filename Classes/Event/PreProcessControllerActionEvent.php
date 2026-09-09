@@ -12,17 +12,20 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Event;
 
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
-use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 final class PreProcessControllerActionEvent implements ControllerActionEventInterface
 {
+    /**
+     * @param array<string, mixed> $settings
+     */
     public function __construct(
-        private Request $request,
+        private RequestInterface $request,
         private Arguments $arguments,
         private readonly array $settings,
     ) {}
 
-    public function getRequest(): Request
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }
@@ -42,12 +45,15 @@ final class PreProcessControllerActionEvent implements ControllerActionEventInte
         return $this->arguments;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSettings(): array
     {
         return $this->settings;
     }
 
-    public function setRequest(Request $request): void
+    public function setRequest(RequestInterface $request): void
     {
         $this->request = $request;
     }

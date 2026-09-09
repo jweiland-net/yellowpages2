@@ -11,13 +11,15 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Utility;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 readonly class RequestUtility
 {
     /**
      * Get request arguments merged from post
+     *
+     * @return array<string, mixed>
      */
     public static function getMergedRequestArguments(string $parameter): array
     {
@@ -41,7 +43,7 @@ readonly class RequestUtility
      * Whenever it is possible the request should be retrieved within the contexts described above.
      * But this is not always possible by now.
      */
-    public static function getRequestFromGlobalVariable(): ?RequestInterface
+    public static function getRequestFromGlobalVariable(): ?ServerRequestInterface
     {
         return $GLOBALS['TYPO3_REQUEST'];
     }
