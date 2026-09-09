@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
@@ -36,6 +37,7 @@ class MapController extends ActionController
         protected readonly CompanyRepository $companyRepository,
         protected readonly PersistenceManagerInterface $persistenceManager,
         protected readonly MailHelper $mailHelper,
+        protected readonly ModerationLinkTokenService $moderationLinkTokenService,
     ) {}
 
     public function initializeNewAction(): void
@@ -116,6 +118,7 @@ class MapController extends ActionController
     {
         $this->postProcessAndAssignFluidVariables([
             'company' => $company,
+            'moderationToken' => $this->moderationLinkTokenService->generateToken((int)$company->getUid()),
         ]);
 
         $this->mailHelper->sendMail(

@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\EventListener;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PreProcessControllerActionEvent;
+use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use JWeiland\Yellowpages2\Traits\IsValidEventListenerRequestTrait;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -40,6 +41,7 @@ final class RestrictAccessEventListener
         'Company' => [
             'edit',
             'update',
+            'activate',
         ],
         'Map' => [
             'update',
@@ -53,6 +55,7 @@ final class RestrictAccessEventListener
         private readonly FlashMessageService $flashMessageService,
         private readonly CompanyRepository $companyRepository,
         private readonly ExtensionService $extensionService,
+        private readonly ModerationLinkTokenService $moderationLinkTokenService,
     ) {}
 
     public function __invoke(PreProcessControllerActionEvent $controllerActionEvent): void
@@ -90,10 +93,26 @@ final class RestrictAccessEventListener
             ? (int)($companyArgument['__identity'] ?? 0)
             : (int)$companyArgument;
 
+        if ($companyUid <= 0) {
+            return true;
+        }
+
+        if ($this->hasValidModerationToken($request, $companyUid)) {
+            return true;
+        }
+
+        // "activate" is meant to be triggered by the administrator via the signed moderation link only,
+        // never by the company's own frontend user - that would bypass moderation entirely.
+        if ($controllerActionEvent->getActionName() === 'activate') {
+            $this->addFlashMessage(LocalizationUtility::translate('unauthorizedCompanyUser', 'yellowpages2'));
+
+            return false;
+        }
+
+        $company = $this->companyRepository->findHiddenObject($companyUid);
+
         if (
-            $companyUid > 0
-            && ($company = $this->companyRepository->findHiddenObject($companyUid))
-            && $company instanceof Company
+            $company instanceof Company
             && $company->getHasValidUser() === false
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('unauthorizedCompanyUser', 'yellowpages2'));
@@ -102,6 +121,18 @@ final class RestrictAccessEventListener
         }
 
         return true;
+    }
+
+    private function hasValidModerationToken(RequestInterface $request, int $companyUid): bool
+    {
+        if (!$request->hasArgument('moderationToken')) {
+            return false;
+        }
+
+        return $this->moderationLinkTokenService->isValidToken(
+            $companyUid,
+            (string)$request->getArgument('moderationToken'),
+        );
     }
 
     private function addFlashMessage(?string $messageBody): void
