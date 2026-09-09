@@ -35,9 +35,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
      * @var array<string, int>
      */
     protected array $slugCache = [];
-    public function __construct(private readonly ConnectionPool $connectionPool)
-    {
-    }
+    public function __construct(private readonly ConnectionPool $connectionPool) {}
 
     public function getTitle(): string
     {
