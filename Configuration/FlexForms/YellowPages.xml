@@ -1,6 +1,6 @@
 <T3DataStructure>
     <sheets>
-        <sDEFAULT>
+        <sDEF>
             <ROOT>
                 <sheetTitle>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:sheetGeneral</sheetTitle>
                 <type>array</type>
@@ -63,6 +63,6 @@
                     </settings.district>
                 </el>
             </ROOT>
-        </sDEFAULT>
+        </sDEF>
     </sheets>
 </T3DataStructure>
