@@ -8,7 +8,9 @@
  */
 
 use JWeiland\Yellowpages2\Controller\CompanyController;
+use JWeiland\Yellowpages2\Controller\ManagementController;
 use JWeiland\Yellowpages2\Controller\MapController;
+use JWeiland\Yellowpages2\Controller\SearchController;
 use JWeiland\Yellowpages2\Hook\ClearCacheHook;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
@@ -20,13 +22,37 @@ ExtensionUtility::configurePlugin(
     'yellowpages2',
     'Directory',
     [
-        CompanyController::class => 'list, listMyCompanies, show, search, new, create, edit, update, activate',
+        CompanyController::class => 'list, show',
+    ],
+    // non-cacheable actions
+    [],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
+);
+
+ExtensionUtility::configurePlugin(
+    'yellowpages2',
+    'Management',
+    [
+        ManagementController::class => 'listMyCompanies, new, create, edit, update, activate, perform',
         MapController::class => 'new, create, edit, update, activate',
     ],
     // non-cacheable actions
     [
-        CompanyController::class => 'search, create, update, activate',
+        ManagementController::class => 'create, update, activate',
         MapController::class => 'create, update',
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
+);
+
+ExtensionUtility::configurePlugin(
+    'yellowpages2',
+    'Search',
+    [
+        SearchController::class => 'show, listSearchResults',
+    ],
+    // non-cacheable actions
+    [
+        SearchController::class => 'listSearchResults',
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );

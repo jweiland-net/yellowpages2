@@ -5,13 +5,13 @@
 <f:security.ifHasRole role="{settings.userGroup}">
     <aside>
         <p>
-            <f:link.action action="new">
+            <f:link.action action="new" controller="Management">
                 <span>{f:translate(key: 'newCompany')}</span>
                 <span aria-hidden="true" class="icon-arrowright"></span>
             </f:link.action>
         </p>
         <p>
-            <f:link.action action="listMyCompanies">
+            <f:link.action action="listMyCompanies" controller="Management">
                 <span>{f:translate(key: 'listMyCompanies')}</span>
                 <span aria-hidden="true" class="icon-arrowright"></span>
             </f:link.action>

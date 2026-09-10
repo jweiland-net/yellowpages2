@@ -1,0 +1,19 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:sheetGeneral</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.pidOfSearchResults>
+                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfSearchResults</label>
+                        <config>
+                            <type>number</type>
+                            <default>0</default>
+                        </config>
+                    </settings.pidOfSearchResults>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

@@ -28,7 +28,7 @@ final readonly class RegisterHiddenCompanyEventListener
     use IsValidEventListenerRequestTrait;
 
     private const ALLOWED_CONTROLLER_ACTIONS = [
-        'Company' => [
+        'Management' => [
             'edit',
             'update',
             'activate',
