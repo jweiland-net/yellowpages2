@@ -15,7 +15,7 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\AbstractListTypeToCTypeUpdate;
 
 /**
- * With TYPO3 13 all plugins have to be declared as content elements (CType) insteadof "list_type"
+ * With TYPO3 13 plugins have to be declared as content elements (CType) instead of "list_type"
  */
 #[UpgradeWizard('yellowpages2_migratePluginsToContentElementsUpdate')]
 class PluginToContentElementUpdate extends AbstractListTypeToCTypeUpdate
@@ -34,7 +34,7 @@ class PluginToContentElementUpdate extends AbstractListTypeToCTypeUpdate
 
     public function getDescription(): string
     {
-        return 'The modern way to register plugins for TYPO3 is to register them as content element types. '
-            . 'Running this wizard will migrate all yellowpages2 plugins to content element (CType)';
+        return 'The modern way to register a plugin in TYPO3 is as a content element type (CType) instead '
+            . 'of the legacy "list_type". Running this wizard migrates the yellowpages2 directory plugin accordingly.';
     }
 }
