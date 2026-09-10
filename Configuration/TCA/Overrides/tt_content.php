@@ -17,7 +17,12 @@ use JWeiland\Yellowpages2\Backend\Preview\Yellowpages2PluginPreview;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pi_flexform,', 'yellowpages2_directory', 'after:subheader');
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
+    'yellowpages2_directory',
+    'after:subheader',
+);
 
 ExtensionUtility::registerPlugin(
     'yellowpages2',
@@ -32,13 +37,6 @@ ExtensionManagementUtility::addPiFlexFormValue(
     '*',
     'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
     'yellowpages2_directory',
-);
-
-ExtensionManagementUtility::addToAllTCAtypes(
-    'tt_content',
-    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
-    'yellowpages2_directory',
-    'after:subheader',
 );
 
 $GLOBALS['TCA']['tt_content']['types']['yellowpages2_directory']['previewRenderer'] = Yellowpages2PluginPreview::class;
