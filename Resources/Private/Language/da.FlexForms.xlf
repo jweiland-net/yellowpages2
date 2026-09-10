@@ -14,9 +14,10 @@
         <source>PID of list page</source>
         <target state="final">PID på listeside</target>
       </trans-unit>
-      <trans-unit id="showWspMembers" xml:space="preserve" approved="yes">
-				<source>Show only WSP Members</source>
-			<target state="final">Vis kun WSP medlemmer</target></trans-unit>
+      <trans-unit id="pidOfSearchResults">
+        <source>PID of search results page</source>
+        <target state="needs-translation">PID of search results page</target>
+      </trans-unit>
       <trans-unit id="presetTrade" xml:space="preserve" approved="yes">
 				<source>Preset trade</source>
 			<target state="final">Forudindstillet branche</target></trans-unit>
