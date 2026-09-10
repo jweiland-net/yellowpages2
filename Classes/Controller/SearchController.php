@@ -40,6 +40,10 @@ class SearchController extends ActionController
 
     public function showAction(): ResponseInterface
     {
+        $this->postProcessAndAssignFluidVariables([
+            'categories' => $this->categoryRepository->findRelated(),
+        ]);
+
         return $this->htmlResponse();
     }
 
