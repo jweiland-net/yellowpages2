@@ -98,7 +98,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
             ->executeQuery();
 
         $connection = $this->getConnectionPool()->getConnectionForTable($this->tableName);
-        while ($recordToUpdate = $queryResult->fetchOne()) {
+        while (($recordToUpdate = $queryResult->fetchAssociative()) !== false) {
             if ((string)$recordToUpdate['company'] !== '') {
                 $slug = $this->getSlugHelper()->generate($recordToUpdate, (int)$recordToUpdate['pid']);
                 $connection->update(
