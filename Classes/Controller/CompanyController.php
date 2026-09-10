@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 /**
- * Controller to list, show and search for companies
+ * Controller for the public industry directory: list and show companies
  */
 class CompanyController extends ActionController
 {

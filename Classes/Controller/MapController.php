@@ -25,7 +25,7 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * Controller to show and save PoiCollections on a map
+ * Controller to let the user place and confirm a company's position on the map, and to trigger the moderation mail
  */
 class MapController extends ActionController
 {
