@@ -5,6 +5,13 @@
                 <sheetTitle>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:sheetGeneral</sheetTitle>
                 <type>array</type>
                 <el>
+                    <settings.pidOfDetailPage>
+                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfDetailPage</label>
+                        <config>
+                            <type>number</type>
+                            <default>0</default>
+                        </config>
+                    </settings.pidOfDetailPage>
                     <settings.pidOfSearchResults>
                         <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfSearchResults</label>
                         <config>
