@@ -73,7 +73,7 @@ class MapController extends ActionController
 
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', ExtConf::EXT_KEY));
 
-        return $this->redirect('listMyCompanies', 'Company');
+        return $this->redirect('listMyCompanies', 'Management');
     }
 
     public function initializeEditAction(): void
@@ -111,7 +111,7 @@ class MapController extends ActionController
 
         $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', ExtConf::EXT_KEY));
 
-        return $this->redirect('listMyCompanies', 'Company');
+        return $this->redirect('listMyCompanies', 'Management');
     }
 
     public function sendMail(string $subjectKey, Company $company): void
