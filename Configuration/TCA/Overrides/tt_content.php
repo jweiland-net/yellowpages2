@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 ExtensionUtility::registerPlugin(
-    'yellowpages2',
+    'Yellowpages2',
     'Directory',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.title',
     'ext-yellowpages2-directory-wizard-icon',
@@ -26,23 +26,8 @@ ExtensionUtility::registerPlugin(
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.description',
 );
 
-// registerPlugin() creates $TCA['tt_content']['types']['yellowpages2_directory'] on the fly, so
-// addToAllTCAtypes() - which only touches already existing types - must run after it, not before.
-ExtensionManagementUtility::addToAllTCAtypes(
-    'tt_content',
-    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
-    'yellowpages2_directory',
-    'after:subheader',
-);
-
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
-    'yellowpages2_directory',
-);
-
 ExtensionUtility::registerPlugin(
-    'yellowpages2',
+    'Yellowpages2',
     'Management',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.management.title',
     'ext-yellowpages2-directory-wizard-icon',
@@ -50,15 +35,8 @@ ExtensionUtility::registerPlugin(
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.management.description',
 );
 
-ExtensionManagementUtility::addToAllTCAtypes(
-    'tt_content',
-    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
-    'yellowpages2_management',
-    'after:subheader',
-);
-
 ExtensionUtility::registerPlugin(
-    'yellowpages2',
+    'Yellowpages2',
     'Search',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.search.title',
     'ext-yellowpages2-directory-wizard-icon',
@@ -69,8 +47,28 @@ ExtensionUtility::registerPlugin(
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
     '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
+    'yellowpages2_directory',
+    'after:subheader',
+);
+
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
+    'yellowpages2_management',
+    'after:subheader',
+);
+
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
     'yellowpages2_search',
     'after:subheader',
+);
+
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
+    'yellowpages2_directory',
 );
 
 ExtensionManagementUtility::addPiFlexFormValue(
