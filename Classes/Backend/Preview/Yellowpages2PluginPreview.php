@@ -28,6 +28,7 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
 
     private const ALLOWED_PLUGINS = [
         'yellowpages2_directory',
+        'yellowpages2_search',
     ];
 
     public function __construct(

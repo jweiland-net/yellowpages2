@@ -78,3 +78,4 @@ ExtensionManagementUtility::addPiFlexFormValue(
 );
 
 $GLOBALS['TCA']['tt_content']['types']['yellowpages2_directory']['previewRenderer'] = Yellowpages2PluginPreview::class;
+$GLOBALS['TCA']['tt_content']['types']['yellowpages2_search']['previewRenderer'] = Yellowpages2PluginPreview::class;
