@@ -196,16 +196,6 @@ class ManagementController extends ActionController
         $this->preProcessControllerAction();
     }
 
-    public function initializePerformAction(): void
-    {
-        $this->preProcessControllerAction();
-    }
-
-    public function performAction(): ResponseInterface
-    {
-        return $this->htmlResponse();
-    }
-
     /**
      * @throws \Exception
      */
