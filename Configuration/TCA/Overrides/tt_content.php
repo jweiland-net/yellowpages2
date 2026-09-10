@@ -27,7 +27,7 @@ ExtensionManagementUtility::addToAllTCAtypes(
 ExtensionUtility::registerPlugin(
     'yellowpages2',
     'Directory',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.title',
+    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.title',
     'ext-yellowpages2-directory-wizard-icon',
     'plugins',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.description',
@@ -49,7 +49,7 @@ ExtensionManagementUtility::addToAllTCAtypes(
 ExtensionUtility::registerPlugin(
     'yellowpages2',
     'Management',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.title',
+    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.management.title',
     'ext-yellowpages2-directory-wizard-icon',
     'plugins',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.management.description',
@@ -65,7 +65,7 @@ ExtensionManagementUtility::addToAllTCAtypes(
 ExtensionUtility::registerPlugin(
     'yellowpages2',
     'Search',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.title',
+    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.search.title',
     'ext-yellowpages2-directory-wizard-icon',
     'plugins',
     'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.search.description',
