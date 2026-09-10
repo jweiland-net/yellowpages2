@@ -3,11 +3,6 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2">
 		<header/>
 		<body>
-			<trans-unit id="plugin.title">
-				<source>Industry Directory</source>
-				<target>Branchenverzeichnis</target>
-			</trans-unit>
-
 			<trans-unit id="plugin.directory.title">
 				<source>Industry Directory</source>
 				<target>Branchenverzeichnis</target>
@@ -17,11 +12,19 @@
 				<target>Einbindung eines Branchenverzeichnisses. Über dem Branchenverzeichnis kann mittels A-Z Navigation direkt zu gewählten Firmen navigiert werden.</target>
 			</trans-unit>
 
+			<trans-unit id="plugin.management.title">
+				<source>Industry Directory Management</source>
+				<target>Branchenverzeichnis Verwaltung</target>
+			</trans-unit>
 			<trans-unit id="plugin.management.description">
 				<source>Inserts a form to let frontend users create, edit and manage their own business listings.</source>
 				<target>Einbindung eines Formulars, mit dem Frontend-Benutzer ihre eigenen Firmeneinträge anlegen, bearbeiten und verwalten können.</target>
 			</trans-unit>
 
+			<trans-unit id="plugin.search.title">
+				<source>Industry Directory Search</source>
+				<target>Branchenverzeichnis Suche</target>
+			</trans-unit>
 			<trans-unit id="plugin.search.description">
 				<source>Inserts a search form to find business listings by name and category.</source>
 				<target>Einbindung eines Suchformulars, um Firmeneinträge nach Name und Branche zu finden.</target>
