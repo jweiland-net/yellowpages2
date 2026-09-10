@@ -22,7 +22,7 @@ use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
- * With yellowpages2 9.0.0 we have make use of the more default sDEF sheet instead of sDEFAULT.
+ * With yellowpages2 9.0.0 we use the more common sDEF sheet name instead of sDEFAULT.
  */
 #[UpgradeWizard('yellowpages2_moveFlexFormFields')]
 final readonly class MoveOldFlexFormSettingsUpgrade implements UpgradeWizardInterface
@@ -34,8 +34,8 @@ final readonly class MoveOldFlexFormSettingsUpgrade implements UpgradeWizardInte
 
     public function getDescription(): string
     {
-        return 'It seems that some fields of FlexForm have not been updated yet. '
-            . 'Please start this wizard to re-arrange the fields to their new location.';
+        return 'Moves the persisted FlexForm values of yellowpages2 plugins from the old sheet '
+            . '"sDEFAULT" to the new sheet "sDEF".';
     }
 
     public function __construct(

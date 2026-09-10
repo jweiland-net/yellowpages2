@@ -21,8 +21,7 @@ use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
- * Updater to fill empty slug columns of company records
- * Updated 12 LTS argument style as below for the Wizard
+ * Fill empty "path_segment" slug columns of company records with a URI compatible version of the company name
  */
 #[UpgradeWizard('yellowpages2_updateSlug')]
 class Yellowpages2SlugUpdate implements UpgradeWizardInterface
@@ -39,12 +38,12 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 
     public function getTitle(): string
     {
-        return '[yellowpages2] Update Slug of company records';
+        return '[yellowpages2] Update slug of company records';
     }
 
     public function getDescription(): string
     {
-        return 'Update empty slug column "path_segment" of company records with an URI compatible version of the company name';
+        return 'Update empty slug column "path_segment" of company records with a URI compatible version of the company name';
     }
 
     public function updateNecessary(): bool
