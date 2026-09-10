@@ -14,6 +14,14 @@
 				<source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
 			</trans-unit>
 
+			<trans-unit id="plugin.management.description">
+				<source>Inserts a form to let frontend users create, edit and manage their own business listings.</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.search.description">
+				<source>Inserts a search form to find business listings by name and category.</source>
+			</trans-unit>
+
 			<trans-unit id="tabs.trades" xml:space="preserve">
 				<source>Trades</source>
 			</trans-unit>

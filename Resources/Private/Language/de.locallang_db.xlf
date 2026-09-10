@@ -17,6 +17,16 @@
 				<target>Einbindung eines Branchenverzeichnisses. Über dem Branchenverzeichnis kann mittels A-Z Navigation direkt zu gewählten Firmen navigiert werden.</target>
 			</trans-unit>
 
+			<trans-unit id="plugin.management.description">
+				<source>Inserts a form to let frontend users create, edit and manage their own business listings.</source>
+				<target>Einbindung eines Formulars, mit dem Frontend-Benutzer ihre eigenen Firmeneinträge anlegen, bearbeiten und verwalten können.</target>
+			</trans-unit>
+
+			<trans-unit id="plugin.search.description">
+				<source>Inserts a search form to find business listings by name and category.</source>
+				<target>Einbindung eines Suchformulars, um Firmeneinträge nach Name und Branche zu finden.</target>
+			</trans-unit>
+
 			<trans-unit id="tabs.trades" xml:space="preserve">
 				<source>Trades</source>
 				<target>Branchen</target>

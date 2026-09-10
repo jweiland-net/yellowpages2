@@ -12,6 +12,9 @@
 			<trans-unit id="pidOfListPage">
 				<source>PID of list page</source>
 			</trans-unit>
+			<trans-unit id="pidOfSearchResults">
+				<source>PID of search results page</source>
+			</trans-unit>
 			<trans-unit id="showWspMembers" xml:space="preserve">
 				<source>Show only WSP Members</source>
 			</trans-unit>

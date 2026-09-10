@@ -4,7 +4,7 @@
 
 <f:if condition="{company.hasValidUser}">
     <p>
-        <f:link.action class="edit" action="edit" arguments="{company: company}">
+        <f:link.action class="edit" action="edit" controller="Management" arguments="{company: company}">
             <span>{f:translate(key: 'editCompany')}</span>
             <span aria-hidden="true" class="icon-arrowright"></span>
         </f:link.action>

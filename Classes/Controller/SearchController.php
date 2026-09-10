@@ -21,17 +21,15 @@ use JWeiland\Yellowpages2\Traits\InitializeActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
-use JWeiland\Yellowpages2\Utility\CacheUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 /**
  * Controller to list, show and search for companies
  */
-class CompanyController extends ActionController
+class SearchController extends ActionController
 {
     use InitializeActionTrait;
     use PostProcessFluidVariablesTrait;
@@ -49,49 +47,29 @@ class CompanyController extends ActionController
         protected readonly PersistenceManagerInterface $persistenceManager,
     ) {}
 
-    public function initializeListAction(): void
-    {
-        $this->preProcessControllerAction();
-    }
-
-    #[Validate([
-        'validator' => 'String',
-        'param' => 'letter',
-    ])]
-    #[Validate([
-        'validator' => 'StringLength',
-        'param' => 'letter',
-        'options' => [
-            'minimum' => 0,
-            'maximum' => 3,
-        ],
-    ])]
-    public function listAction(string $letter = ''): ResponseInterface
-    {
-        $companies = $this->companyRepository->findByLetter($letter, $this->settings);
-        $this->postProcessAndAssignFluidVariables([
-            'companies' => $companies,
-            'categories' => $this->categoryRepository->findRelated(),
-        ]);
-
-        CacheUtility::addPageCacheTagsByQuery($companies->getQuery(), $this->request);
-
-        return $this->htmlResponse();
-    }
-
     public function initializeShowAction(): void
     {
         $this->preProcessControllerAction();
     }
 
-    public function showAction(int $company): ResponseInterface
+    public function showAction(): ResponseInterface
     {
-        $companyObject = $this->companyRepository->findByIdentifier($company);
-        $this->postProcessAndAssignFluidVariables([
-            'company' => $companyObject,
-        ]);
+        return $this->htmlResponse();
+    }
 
-        CacheUtility::addCacheTagsByCompanyRecords([$companyObject], $this->request);
+    public function initializeListSearchResultsAction(): void
+    {
+        $this->preProcessControllerAction();
+    }
+
+    public function listSearchResultsAction(string $search, int $category = 0): ResponseInterface
+    {
+        $this->postProcessAndAssignFluidVariables([
+            'search' => $search,
+            'category' => $category,
+            'companies' => $this->companyRepository->searchCompanies($search, $category, $this->settings),
+            'categories' => $this->categoryRepository->findRelated(),
+        ]);
 
         return $this->htmlResponse();
     }
