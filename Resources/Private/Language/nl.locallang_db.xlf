@@ -3,10 +3,6 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2" target-language="nl">
     <header/>
     <body>
-      <trans-unit id="plugin.title">
-        <source>Industry Directory</source>
-        <target state="needs-translation">Industry Directory</target>
-      </trans-unit>
       <trans-unit id="plugin.directory.title">
         <source>Industry Directory</source>
         <target state="needs-translation">Industry Directory</target>
@@ -14,6 +10,22 @@
       <trans-unit id="plugin.directory.description">
         <source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
         <target state="needs-translation">Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</target>
+      </trans-unit>
+      <trans-unit id="plugin.management.title">
+        <source>Industry Directory Management</source>
+        <target state="needs-translation">Industry Directory Management</target>
+      </trans-unit>
+      <trans-unit id="plugin.management.description">
+        <source>Inserts a form to let frontend users create, edit and manage their own business listings.</source>
+        <target state="needs-translation">Inserts a form to let frontend users create, edit and manage their own business listings.</target>
+      </trans-unit>
+      <trans-unit id="plugin.search.title">
+        <source>Industry Directory Search</source>
+        <target state="needs-translation">Industry Directory Search</target>
+      </trans-unit>
+      <trans-unit id="plugin.search.description">
+        <source>Inserts a search form to find business listings by name and category.</source>
+        <target state="needs-translation">Inserts a search form to find business listings by name and category.</target>
       </trans-unit>
       <trans-unit id="tabs.trades" xml:space="preserve">
 				<source>Trades</source>
