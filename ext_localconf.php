@@ -34,7 +34,7 @@ ExtensionUtility::configurePlugin(
     'Management',
     [
         ManagementController::class => 'listMyCompanies, new, create, edit, update, activate, perform',
-        MapController::class => 'new, create, edit, update, activate',
+        MapController::class => 'new, create, edit, update',
     ],
     // non-cacheable actions
     [
