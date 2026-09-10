@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace JWeiland\Yellowpages2\Upgrade;
+namespace JWeiland\Yellowpages2\Updates;
 
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Database\Connection;
