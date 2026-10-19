@@ -11,21 +11,21 @@
         <source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
         <target state="final">Indsætter en industrimappe. Ovenfor industrimappen kan du bruge a-z navigation til at reducere virksomhederne til dens startbogstav.</target>
       </trans-unit>
-      <trans-unit id="plugin.management.title">
+      <trans-unit id="plugin.management.title" approved="yes">
         <source>Industry Directory Management</source>
-        <target state="needs-translation">Industry Directory Management</target>
+        <target state="final">Industriregister-håndtering</target>
       </trans-unit>
-      <trans-unit id="plugin.management.description">
+      <trans-unit id="plugin.management.description" approved="yes">
         <source>Inserts a form to let frontend users create, edit and manage their own business listings.</source>
-        <target state="needs-translation">Inserts a form to let frontend users create, edit and manage their own business listings.</target>
+        <target state="final">Indsætter en formular til at lade frontendbrugere oprette, redigere og administrere deres egne virksomhedsoversigter.</target>
       </trans-unit>
-      <trans-unit id="plugin.search.title">
+      <trans-unit id="plugin.search.title" approved="yes">
         <source>Industry Directory Search</source>
-        <target state="needs-translation">Industry Directory Search</target>
+        <target state="final">Industriregister-søgning</target>
       </trans-unit>
-      <trans-unit id="plugin.search.description">
+      <trans-unit id="plugin.search.description" approved="yes">
         <source>Inserts a search form to find business listings by name and category.</source>
-        <target state="needs-translation">Inserts a search form to find business listings by name and category.</target>
+        <target state="final">Indsætter en søgeformular for at finde virksomhedslister efter navn og kategori.</target>
       </trans-unit>
       <trans-unit id="tabs.trades" xml:space="preserve" approved="yes">
 				<source>Trades</source>
