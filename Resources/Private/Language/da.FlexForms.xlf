@@ -14,9 +14,9 @@
         <source>PID of list page</source>
         <target state="final">PID på listeside</target>
       </trans-unit>
-      <trans-unit id="pidOfSearchResults">
+      <trans-unit id="pidOfSearchResults" approved="yes">
         <source>PID of search results page</source>
-        <target state="needs-translation">PID of search results page</target>
+        <target state="final">PID på siden med søgeresultater</target>
       </trans-unit>
       <trans-unit id="presetTrade" xml:space="preserve" approved="yes">
 				<source>Preset trade</source>
