@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:40Z" product-name="yellowpages2" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="plugin.directory.title">
+        <source>Industry Directory</source>
+        <target>crwdns310720:0crwdne310720:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.directory.description">
+        <source>Inserts an industry directory. Above the industry directory you can use the a-z navigation to reduce the companies to its starting letter.</source>
+        <target>crwdns310722:0crwdne310722:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.management.title">
+        <source>Industry Directory Management</source>
+        <target>crwdns414591:0crwdne414591:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.management.description">
+        <source>Inserts a form to let frontend users create, edit and manage their own business listings.</source>
+        <target>crwdns414593:0crwdne414593:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.search.title">
+        <source>Industry Directory Search</source>
+        <target>crwdns414595:0crwdne414595:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.search.description">
+        <source>Inserts a search form to find business listings by name and category.</source>
+        <target>crwdns414597:0crwdne414597:0</target>
+      </trans-unit>
+      <trans-unit id="tabs.trades" xml:space="preserve">
+				<source>Trades</source>
+			<target>crwdns310724:0crwdne310724:0</target></trans-unit>
+      <trans-unit id="tabs.social" xml:space="preserve">
+				<source>Social media</source>
+			<target>crwdns310726:0crwdne310726:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
+				<source>Business listing</source>
+			<target>crwdns310728:0crwdne310728:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
+				<source>Company</source>
+			<target>crwdns310730:0crwdne310730:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.path_segment">
+        <source>Segment for URL</source>
+        <target>crwdns310732:0crwdne310732:0</target>
+      </trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
+				<source>Logo</source>
+			<target>crwdns310734:0crwdne310734:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.logo.add" xml:space="preserve">
+				<source>Add logo</source>
+			<target>crwdns310736:0crwdne310736:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
+				<source>Images</source>
+			<target>crwdns310738:0crwdne310738:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.images.add" xml:space="preserve">
+				<source>Add image</source>
+			<target>crwdns310740:0crwdne310740:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
+				<source>Street</source>
+			<target>crwdns310742:0crwdne310742:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
+				<source>House number</source>
+			<target>crwdns310744:0crwdne310744:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
+				<source>Zip</source>
+			<target>crwdns310746:0crwdne310746:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
+				<source>City</source>
+			<target>crwdns310748:0crwdne310748:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
+				<source>Telephone</source>
+			<target>crwdns310750:0crwdne310750:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
+				<source>Fax</source>
+			<target>crwdns310752:0crwdne310752:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
+				<source>Contact person</source>
+			<target>crwdns310754:0crwdne310754:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
+				<source>Email</source>
+			<target>crwdns310756:0crwdne310756:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
+				<source>Website</source>
+			<target>crwdns310758:0crwdne310758:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
+				<source>Opening times</source>
+			<target>crwdns310760:0crwdne310760:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
+				<source>Barrier-free</source>
+			<target>crwdns310762:0crwdne310762:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
+				<source>Description</source>
+			<target>crwdns310764:0crwdne310764:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
+				<source>District</source>
+			<target>crwdns310766:0crwdne310766:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.district.pleaseChoose" xml:space="preserve">
+				<source>---Please choose a district---</source>
+			<target>crwdns310768:0crwdne310768:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+				<source>Frontend user</source>
+			<target>crwdns310770:0crwdne310770:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.pleaseChoose" xml:space="preserve">
+				<source>---Select FE user---</source>
+			<target>crwdns310772:0crwdne310772:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser.description" xml:space="preserve">
+				<source>Select a frontend editor who can edit this business listing in frontend context.</source>
+			<target>crwdns310774:0crwdne310774:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
+				<source>Facebook</source>
+			<target>crwdns310776:0crwdne310776:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
+				<source>Twitter</source>
+			<target>crwdns310778:0crwdne310778:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.instagram" xml:space="preserve">
+				<source>Instagram</source>
+			<target>crwdns310780:0crwdne310780:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
+				<source>Main Trade</source>
+			<target>crwdns310782:0crwdne310782:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
+				<source>Sub Trades</source>
+			<target>crwdns310784:0crwdne310784:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
+				<source>District for business listing</source>
+			<target>crwdns310786:0crwdne310786:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
+				<source>District</source>
+			<target>crwdns310788:0crwdne310788:0</target></trans-unit>
+    </body>
+  </file>
+</xliff>
