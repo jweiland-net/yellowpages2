@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_yellowpages2_domain_model_company" xml:space="preserve">
+				<source>Company</source>
+			<target>crwdns310560:0crwdne310560:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.company" xml:space="preserve">
+				<source>Company</source>
+			<target>crwdns310562:0crwdne310562:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.logo" xml:space="preserve">
+				<source>Logo</source>
+			<target>crwdns310564:0crwdne310564:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.images" xml:space="preserve">
+				<source>Images</source>
+			<target>crwdns310566:0crwdne310566:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.street" xml:space="preserve">
+				<source>Street</source>
+			<target>crwdns310568:0crwdne310568:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.houseNumber" xml:space="preserve">
+				<source>House number</source>
+			<target>crwdns310570:0crwdne310570:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.zip" xml:space="preserve">
+				<source>Zip</source>
+			<target>crwdns310572:0crwdne310572:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.city" xml:space="preserve">
+				<source>City</source>
+			<target>crwdns310574:0crwdne310574:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.telephone" xml:space="preserve">
+				<source>Telephone</source>
+			<target>crwdns310576:0crwdne310576:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.fax" xml:space="preserve">
+				<source>Fax</source>
+			<target>crwdns310578:0crwdne310578:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.contactPerson" xml:space="preserve">
+				<source>Contact person</source>
+			<target>crwdns310580:0crwdne310580:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.email" xml:space="preserve">
+				<source>Email</source>
+			<target>crwdns310582:0crwdne310582:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.website" xml:space="preserve">
+				<source>Website</source>
+			<target>crwdns310584:0crwdne310584:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.openingTimes" xml:space="preserve">
+				<source>Opening times</source>
+			<target>crwdns310586:0crwdne310586:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.barrierFree" xml:space="preserve">
+				<source>Barrier-free</source>
+			<target>crwdns310588:0crwdne310588:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.description" xml:space="preserve">
+				<source>Description</source>
+			<target>crwdns310590:0crwdne310590:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.district" xml:space="preserve">
+				<source>District</source>
+			<target>crwdns310592:0crwdne310592:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.feUser" xml:space="preserve">
+				<source>FeUser</source>
+			<target>crwdns310594:0crwdne310594:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.facebook" xml:space="preserve">
+				<source>Facebook</source>
+			<target>crwdns310596:0crwdne310596:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.twitter" xml:space="preserve">
+				<source>Twitter</source>
+			<target>crwdns310598:0crwdne310598:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.instagram" xml:space="preserve">
+				<source>Instagram</source>
+			<target>crwdns310600:0crwdne310600:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.mainTrade" xml:space="preserve">
+				<source>Main Trade</source>
+			<target>crwdns310602:0crwdne310602:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_company.trades" xml:space="preserve">
+				<source>Sub Trades</source>
+			<target>crwdns310604:0crwdne310604:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district" xml:space="preserve">
+				<source>District</source>
+			<target>crwdns310606:0crwdne310606:0</target></trans-unit>
+      <trans-unit id="tx_yellowpages2_domain_model_district.district" xml:space="preserve">
+				<source>District</source>
+			<target>crwdns310608:0crwdne310608:0</target></trans-unit>
+      <trans-unit id="search">
+        <source>Search</source>
+        <target>crwdns310610:0crwdne310610:0</target>
+      </trans-unit>
+      <trans-unit id="noResults">
+        <source>No results found</source>
+        <target>crwdns310612:0crwdne310612:0</target>
+      </trans-unit>
+      <trans-unit id="branch">
+        <source>Branch</source>
+        <target>crwdns310614:0crwdne310614:0</target>
+      </trans-unit>
+      <trans-unit id="allBranches">
+        <source>All branches</source>
+        <target>crwdns310616:0crwdne310616:0</target>
+      </trans-unit>
+      <trans-unit id="newCompany">
+        <source>New company</source>
+        <target>crwdns310618:0crwdne310618:0</target>
+      </trans-unit>
+      <trans-unit id="editCompany">
+        <source>Edit company</source>
+        <target>crwdns310620:0crwdne310620:0</target>
+      </trans-unit>
+      <trans-unit id="listMyCompanies">
+        <source>List my companies</source>
+        <target>crwdns310622:0crwdne310622:0</target>
+      </trans-unit>
+      <trans-unit id="backToList">
+        <source>Back to list view</source>
+        <target>crwdns310624:0crwdne310624:0</target>
+      </trans-unit>
+      <trans-unit id="create">
+        <source>Create</source>
+        <target>crwdns310626:0crwdne310626:0</target>
+      </trans-unit>
+      <trans-unit id="update">
+        <source>Update</source>
+        <target>crwdns391374:0crwdne391374:0</target>
+      </trans-unit>
+      <trans-unit id="companyCreated">
+        <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
+        <target>crwdns310630:0crwdne310630:0</target>
+      </trans-unit>
+      <trans-unit id="companyUpdated">
+        <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
+        <target>crwdns310632:0crwdne310632:0</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose">
+        <source>--- Please choose ---</source>
+        <target>crwdns310634:0crwdne310634:0</target>
+      </trans-unit>
+      <trans-unit id="yes">
+        <source>Yes</source>
+        <target>crwdns310636:0crwdne310636:0</target>
+      </trans-unit>
+      <trans-unit id="no">
+        <source>No</source>
+        <target>crwdns310638:0crwdne310638:0</target>
+      </trans-unit>
+      <trans-unit id="altTextMapImg">
+        <source>Map</source>
+        <target>crwdns310640:0crwdne310640:0</target>
+      </trans-unit>
+      <trans-unit id="hint">
+        <source>Hint</source>
+        <target>crwdns310642:0crwdne310642:0</target>
+      </trans-unit>
+      <trans-unit id="cshcompany">
+        <source>Enter the company name.This is mandatory.</source>
+        <target>crwdns310644:0crwdne310644:0</target>
+      </trans-unit>
+      <trans-unit id="cshstreet">
+        <source>Enter the street.This is mandatory.</source>
+        <target>crwdns310646:0crwdne310646:0</target>
+      </trans-unit>
+      <trans-unit id="cshhouseNumber">
+        <source>Enter the house number.</source>
+        <target>crwdns310648:0crwdne310648:0</target>
+      </trans-unit>
+      <trans-unit id="cshzip">
+        <source>Enter the zip code.This is mandatory.</source>
+        <target>crwdns310650:0crwdne310650:0</target>
+      </trans-unit>
+      <trans-unit id="cshcity">
+        <source>Enter the city.This is mandatory.</source>
+        <target>crwdns310652:0crwdne310652:0</target>
+      </trans-unit>
+      <trans-unit id="cshdistrict">
+        <source>Enter the district.This is mandatory.</source>
+        <target>crwdns310654:0crwdne310654:0</target>
+      </trans-unit>
+      <trans-unit id="cshtelephone">
+        <source>Enter the phone number.</source>
+        <target>crwdns310656:0crwdne310656:0</target>
+      </trans-unit>
+      <trans-unit id="cshfax">
+        <source>Enter the fax number.</source>
+        <target>crwdns310658:0crwdne310658:0</target>
+      </trans-unit>
+      <trans-unit id="cshemail">
+        <source>Enter the email address.</source>
+        <target>crwdns310660:0crwdne310660:0</target>
+      </trans-unit>
+      <trans-unit id="cshwebsite">
+        <source>Enter the URL of the website</source>
+        <target>crwdns310662:0crwdne310662:0</target>
+      </trans-unit>
+      <trans-unit id="cshcontactPerson">
+        <source>Enter the contact person.</source>
+        <target>crwdns310664:0crwdne310664:0</target>
+      </trans-unit>
+      <trans-unit id="cshopeningTimes">
+        <source>Enter the opening times.</source>
+        <target>crwdns310666:0crwdne310666:0</target>
+      </trans-unit>
+      <trans-unit id="cshdescription">
+        <source>Describe your company.This is mandatory.</source>
+        <target>crwdns310668:0crwdne310668:0</target>
+      </trans-unit>
+      <trans-unit id="cshbarrierFree">
+        <source>Is the company accessible</source>
+        <target>crwdns310670:0crwdne310670:0</target>
+      </trans-unit>
+      <trans-unit id="cshmainTrade">
+        <source>Enter a main trade</source>
+        <target>crwdns310672:0crwdne310672:0</target>
+      </trans-unit>
+      <trans-unit id="cshtrades_0">
+        <source>Enter max. 2 sub trades</source>
+        <target>crwdns310674:0crwdne310674:0</target>
+      </trans-unit>
+      <trans-unit id="cshfacebook">
+        <source>Enter a URL to facebook.</source>
+        <target>crwdns310676:0crwdne310676:0</target>
+      </trans-unit>
+      <trans-unit id="cshtwitter">
+        <source>Enter a URL to twitter.</source>
+        <target>crwdns310678:0crwdne310678:0</target>
+      </trans-unit>
+      <trans-unit id="cshinstagram">
+        <source>Enter a URL to Instagram.</source>
+        <target>crwdns310680:0crwdne310680:0</target>
+      </trans-unit>
+      <trans-unit id="cshlogo">
+        <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
+        <target>crwdns310682:0crwdne310682:0</target>
+      </trans-unit>
+      <trans-unit id="cshimages_0">
+        <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
+        <target>crwdns310684:0crwdne310684:0</target>
+      </trans-unit>
+      <trans-unit id="pageBrowser.first">
+        <source>First</source>
+        <target>crwdns310686:0crwdne310686:0</target>
+      </trans-unit>
+      <trans-unit id="pageBrowser.previous">
+        <source>Previous</source>
+        <target>crwdns310688:0crwdne310688:0</target>
+      </trans-unit>
+      <trans-unit id="pageBrowser.next">
+        <source>Next</source>
+        <target>crwdns310690:0crwdne310690:0</target>
+      </trans-unit>
+      <trans-unit id="pageBrowser.last">
+        <source>Last</source>
+        <target>crwdns310692:0crwdne310692:0</target>
+      </trans-unit>
+      <trans-unit id="email.subject.inform.user">
+        <source>Your company record is out of date</source>
+        <target>crwdns310694:0crwdne310694:0</target>
+      </trans-unit>
+      <trans-unit id="email.subject.deactivated.user">
+        <source>Your company record has been deactivated</source>
+        <target>crwdns310696:0crwdne310696:0</target>
+      </trans-unit>
+      <trans-unit id="email.subject.deactivated.admin">
+        <source>A company record has been deactivated</source>
+        <target>crwdns310698:0crwdne310698:0</target>
+      </trans-unit>
+      <trans-unit id="email.subject.create">
+        <source>A new record was created</source>
+        <target>crwdns310700:0crwdne310700:0</target>
+      </trans-unit>
+      <trans-unit id="email.subject.update">
+        <source>A record was updated</source>
+        <target>crwdns310702:0crwdne310702:0</target>
+      </trans-unit>
+      <trans-unit id="email.subject.activate">
+        <source>A record was activated</source>
+        <target>crwdns310704:0crwdne310704:0</target>
+      </trans-unit>
+      <trans-unit id="email.body.inform.user">
+        <source><![CDATA[
+					<p>Dear customer</p>
+					<p>Your company entry %2$s (%1$s) will be outdated next month</p>
+					<p>Please login at %3$s and update your data.</p>
+					<p>Your team of Pforzheim</p>]]></source>
+        <target><![CDATA[crwdns310706:0%2$scrwdnd310706:0%1$scrwdnd310706:0%3$scrwdne310706:0]]></target>
+      </trans-unit>
+      <trans-unit id="email.body.deactivated.user">
+        <source><![CDATA[
+					<p>Dear customer</p>
+					<p>Your company entry %2$s (%1$s) now been deactivated</p>
+					<p>Your team of Pforzheim</p>]]></source>
+        <target><![CDATA[crwdns310708:0%2$scrwdnd310708:0%1$scrwdne310708:0]]></target>
+      </trans-unit>
+      <trans-unit id="email.body.deactivated.admin">
+        <source><![CDATA[
+					<p>Dear admin</p>
+					<p>The company entry %2$s (%1$s) has now been deactivated</p>]]></source>
+        <target><![CDATA[crwdns310710:0%2$scrwdnd310710:0%1$scrwdne310710:0]]></target>
+      </trans-unit>
+      <trans-unit id="error.upload">
+        <source>Something went wrong with your uploaded files. Please try again. Error: </source>
+        <target>crwdns310712:0crwdne310712:0</target>
+      </trans-unit>
+      <trans-unit id="error.fileExtension">
+        <source>You only can upload files with following file extensions: %1$s</source>
+        <target>crwdns310714:0%1$scrwdne310714:0</target>
+      </trans-unit>
+      <trans-unit id="errorFlashMessage">
+        <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
+        <target>crwdns310716:0%1$scrwdnd310716:0%2$scrwdne310716:0</target>
+      </trans-unit>
+      <trans-unit id="errorAddressInvalid.title">
+        <source>Invalid Address</source>
+        <target>crwdns391376:0crwdne391376:0</target>
+      </trans-unit>
+      <trans-unit id="errorAddressInvalid.body">
+        <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
+        <target>crwdns391378:0crwdne391378:0</target>
+      </trans-unit>
+      <trans-unit id="unauthorizedCompanyUser">
+        <source>You are not allowed to edit company records that do not assigned to you.</source>
+        <target>crwdns411229:0crwdne411229:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
