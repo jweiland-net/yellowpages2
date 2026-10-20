@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-08-28T08:23:04Z" product-name="yellowpages2" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="sheetGeneral" xml:space="preserve">
+				<source>General</source>
+			<target>crwdns310548:0crwdne310548:0</target></trans-unit>
+      <trans-unit id="pidOfDetailPage">
+        <source>PID of detail page</source>
+        <target>crwdns310550:0crwdne310550:0</target>
+      </trans-unit>
+      <trans-unit id="pidOfListPage">
+        <source>PID of list page</source>
+        <target>crwdns310552:0crwdne310552:0</target>
+      </trans-unit>
+      <trans-unit id="pidOfSearchResults">
+        <source>PID of search results page</source>
+        <target>crwdns414589:0crwdne414589:0</target>
+      </trans-unit>
+      <trans-unit id="presetTrade" xml:space="preserve">
+				<source>Preset trade</source>
+			<target>crwdns310556:0crwdne310556:0</target></trans-unit>
+      <trans-unit id="district" xml:space="preserve">
+				<source>District</source>
+			<target>crwdns310558:0crwdne310558:0</target></trans-unit>
+    </body>
+  </file>
+</xliff>
