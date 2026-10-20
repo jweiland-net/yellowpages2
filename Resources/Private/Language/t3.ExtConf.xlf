@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-03-28T08:36:00Z" product-name="yellowpages2" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="poiCollectionPid" xml:space="preserve">
+				<source>PID for poiCollections: Define a storage pid where to store records of type Point of Interest.</source>
+			<target>crwdns310536:0crwdne310536:0</target></trans-unit>
+      <trans-unit id="editLink" xml:space="preserve">
+				<source>Link to edit view: Set the URI where the frontend user can edit his business listings.</source>
+			<target>crwdns310538:0crwdne310538:0</target></trans-unit>
+      <trans-unit id="emailFromAddress" xml:space="preserve">
+				<source>Email address FROM: The senders email address. If not given the extension tries to get one from INSTALL_TOOL.</source>
+			<target>crwdns310540:0crwdne310540:0</target></trans-unit>
+      <trans-unit id="emailFromName" xml:space="preserve">
+				<source>Sender name FROM: The senders email name. If not given the extension tries to get one from INSTALL_TOOL.</source>
+			<target>crwdns310542:0crwdne310542:0</target></trans-unit>
+      <trans-unit id="emailToAddress" xml:space="preserve">
+				<source>Email address TO: The recipients email address.</source>
+			<target>crwdns310544:0crwdne310544:0</target></trans-unit>
+      <trans-unit id="emailToName" xml:space="preserve">
+				<source>Recipient name TO: The recipients email name.</source>
+			<target>crwdns310546:0crwdne310546:0</target></trans-unit>
+    </body>
+  </file>
+</xliff>
