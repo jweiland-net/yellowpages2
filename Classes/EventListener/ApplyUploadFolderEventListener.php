@@ -29,7 +29,7 @@ final readonly class ApplyUploadFolderEventListener
     use IsValidEventListenerRequestTrait;
 
     private const ALLOWED_CONTROLLER_ACTIONS = [
-        'Company' => [
+        'Management' => [
             'create',
             'update',
         ],

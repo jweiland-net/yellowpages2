@@ -56,7 +56,7 @@ final class ControllerActionsTest extends UnitTestCase
         return [
             'company create action with null trades' => [
                 'requestBody' => [
-                    'tx_yellowpages2_directory' => [
+                    'tx_yellowpages2_management' => [
                         'company' => [
                             'trades' => [
                                 '',
@@ -66,7 +66,7 @@ final class ControllerActionsTest extends UnitTestCase
                     ],
                 ],
                 'expectedRequestBody' => [
-                    'tx_yellowpages2_directory' => [
+                    'tx_yellowpages2_management' => [
                         'company' => [
                             'trades' => [],
                         ],
@@ -75,13 +75,35 @@ final class ControllerActionsTest extends UnitTestCase
             ],
             'search action with arguments needs to be sanitized html special chars' => [
                 'requestBody' => [
-                    'tx_yellowpages2_directory' => [
+                    'tx_yellowpages2_search' => [
                         'search' => 'bread & butter',
                     ],
                 ],
                 'expectedRequestBody' => [
-                    'tx_yellowpages2_directory' => [
+                    'tx_yellowpages2_search' => [
                         'search' => htmlspecialchars('bread & butter'),
+                    ],
+                ],
+            ],
+            'arguments of other plugins are not modified' => [
+                'requestBody' => [
+                    'tx_yellowpages2_directory' => [
+                        'search' => 'bread & butter',
+                        'company' => [
+                            'trades' => [
+                                '',
+                            ],
+                        ],
+                    ],
+                ],
+                'expectedRequestBody' => [
+                    'tx_yellowpages2_directory' => [
+                        'search' => 'bread & butter',
+                        'company' => [
+                            'trades' => [
+                                '',
+                            ],
+                        ],
                     ],
                 ],
             ],

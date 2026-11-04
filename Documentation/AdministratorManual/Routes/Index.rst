@@ -28,7 +28,7 @@ Example configuration
             routePath: '/company-page-{page}'
             _controller: 'Company::list'
             _arguments:
-              page: '@widget_0/currentPage'
+              page: 'currentPage'
           -
             routePath: '/company-by-letter/{letter}'
             _controller: 'Company::list'

@@ -7,6 +7,17 @@
 ChangeLog
 =========
 
+Version 9.0.1
+=============
+
+*   [BUGFIX] Apply checkfaluploads validator, upload folder and path segment for actions of ManagementController
+*   [BUGFIX] Process trades and search requests of the Management and Search plugin in ControllerActionsMiddleware
+*   [BUGFIX] Paginate search results of SearchController and keep the search arguments in the page browser links
+*   [BUGFIX] Fix forward to ManagementController::newAction() and redirect after activation to the Directory plugin
+*   [BUGFIX] Link to the Management, Search and Directory plugin with pluginName and pageUid in templates and mails
+*   [BUGFIX] Add site settings `yellowpages2.pidOfManagementPage` and `yellowpages2.pidOfSearchResults`
+*   [BUGFIX] Ignore empty FlexForm values for pidOfDetailPage, pidOfListPage and pidOfSearchResults
+
 Version 9.0.0
 =============
 

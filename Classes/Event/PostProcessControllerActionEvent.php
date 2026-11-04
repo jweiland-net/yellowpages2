@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Event;
 
 use JWeiland\Yellowpages2\Controller\CompanyController;
+use JWeiland\Yellowpages2\Controller\ManagementController;
 use JWeiland\Yellowpages2\Controller\MapController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -27,7 +28,7 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
      * @param array<string, mixed> $settings
      */
     public function __construct(
-        private ActionController|CompanyController|MapController $controller,
+        private ActionController|CompanyController|ManagementController|MapController $controller,
         private ?Company $company,
         private array $settings,
         private RequestInterface $request,
@@ -40,6 +41,22 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
 
     public function getCompanyController(): CompanyController
     {
+        return $this->controller;
+    }
+
+    /**
+     * Since 9.0.0 the "create", "update" and "activate" actions are
+     * located in ManagementController.
+     */
+    public function getManagementController(): ManagementController
+    {
+        if (!$this->controller instanceof ManagementController) {
+            throw new \UnexpectedValueException(
+                'Event was not dispatched by ManagementController, but by ' . $this->controller::class,
+                1793779200,
+            );
+        }
+
         return $this->controller;
     }
 

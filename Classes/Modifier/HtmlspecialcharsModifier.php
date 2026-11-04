@@ -23,7 +23,7 @@ readonly class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
     public function modify(array $requestBody): array
     {
         try {
-            $path = 'tx_yellowpages2_directory/search';
+            $path = 'tx_yellowpages2_search/search';
 
             return ArrayUtility::setValueByPath(
                 $requestBody,

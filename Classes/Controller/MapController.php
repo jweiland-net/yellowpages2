@@ -16,6 +16,7 @@ use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
+use JWeiland\Yellowpages2\Traits\InitializeActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
@@ -29,6 +30,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class MapController extends ActionController
 {
+    use InitializeActionTrait;
     use PostProcessFluidVariablesTrait;
     use PostProcessControllerActionTrait;
     use PreProcessControllerActionTrait;

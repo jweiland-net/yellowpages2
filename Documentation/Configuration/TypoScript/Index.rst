@@ -23,6 +23,10 @@ then override any of the following settings for your site in
 
     yellowpages2.storagePid: '21,45,3234'
     yellowpages2.pidOfMaps2Plugin: 12
+    yellowpages2.pidOfListPage: 20
+    yellowpages2.pidOfDetailPage: 21
+    yellowpages2.pidOfSearchResults: 22
+    yellowpages2.pidOfManagementPage: 23
 
 ..  typo3:site-set-settings:: PROJECT:/Configuration/Sets/Yellowpages2/settings.definitions.yaml
     :name: yellowpages2-site-set-settings

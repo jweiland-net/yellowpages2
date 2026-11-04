@@ -28,7 +28,7 @@ final readonly class CheckFalUploadsEventListener
     use IsValidEventListenerRequestTrait;
 
     private const ALLOWED_CONTROLLER_ACTIONS = [
-        'Company' => [
+        'Management' => [
             'create',
             'update',
         ],
