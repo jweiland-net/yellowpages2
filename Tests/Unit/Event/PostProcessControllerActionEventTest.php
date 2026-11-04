@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Unit\Event;
 
 use JWeiland\Yellowpages2\Controller\CompanyController;
+use JWeiland\Yellowpages2\Controller\ManagementController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Event\PostProcessControllerActionEvent;
 use PHPUnit\Framework\Attributes\Test;
@@ -71,6 +72,32 @@ class PostProcessControllerActionEventTest extends UnitTestCase
             $this->companyControllerMock,
             $this->subject->getController(),
         );
+    }
+
+    #[Test]
+    public function getManagementControllerReturnsManagementController(): void
+    {
+        $managementControllerMock = $this->createMock(ManagementController::class);
+        $subject = new PostProcessControllerActionEvent(
+            $managementControllerMock,
+            $this->companyMock,
+            [],
+            $this->requestMock,
+        );
+
+        self::assertSame(
+            $managementControllerMock,
+            $subject->getManagementController(),
+        );
+    }
+
+    #[Test]
+    public function getManagementControllerWithOtherControllerThrowsException(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1793779200);
+
+        $this->subject->getManagementController();
     }
 
     #[Test]

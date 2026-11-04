@@ -4,10 +4,20 @@
 
 <p>Hallo,</p>
 <p>
-    <f:link.action action="edit" controller="Company" absolute="1" arguments="{company: company, moderationToken: moderationToken}">Datensatz bearbeiten</f:link.action>
+    <f:link.action action="edit"
+                   controller="Management"
+                   pluginName="Management"
+                   pageUid="{settings.pidOfManagementPage}"
+                   absolute="1"
+                   arguments="{company: company, moderationToken: moderationToken}">Datensatz bearbeiten</f:link.action>
 </p>
 <p>
-    <f:link.action action="activate" controller="Company" absolute="1" arguments="{company: company, moderationToken: moderationToken}">Datensatz freischalten</f:link.action>
+    <f:link.action action="activate"
+                   controller="Management"
+                   pluginName="Management"
+                   pageUid="{settings.pidOfManagementPage}"
+                   absolute="1"
+                   arguments="{company: company, moderationToken: moderationToken}">Datensatz freischalten</f:link.action>
 </p>
 <p>hier die Daten des bearbeiteten Datensatzes:</p>
 <table>

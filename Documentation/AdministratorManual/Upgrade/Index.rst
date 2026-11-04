@@ -9,6 +9,40 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Upgrade to version 9.0.1
+========================
+
+Since version 9.0.0 the frontend functionality is split into three plugins: `Directory`
+(`CompanyController`: list, show), `Management` (`ManagementController` and `MapController`:
+create, edit and moderate companies) and `Search` (`SearchController`). Links between these
+plugins need the target plugin and page. Configure the new site settings
+`yellowpages2.pidOfManagementPage` and `yellowpages2.pidOfSearchResults` (see
+:ref:`site-set-settings`) to the pages where the `Management` and `Search` plugins are inserted.
+
+If you have overridden one of the following templates in your own site package, add `pluginName`
+and `pageUid` to the links and forms targeting another plugin:
+
+*   `Partials/Company/InsertEditLinks.html`, `Partials/Company/Properties.html`:
+    `pluginName="Management" pageUid="{settings.pidOfManagementPage}"`
+*   `Partials/Company/Search.html`:
+    `pluginName="Search" pageUid="{settings.pidOfSearchResults}"`
+*   `Partials/Company/List.html`, `Templates/Company/Show.html`,
+    `Templates/Management/ListMyCompanies.html`: `pluginName="Directory"`
+*   `Templates/Map/Create.html`, `Templates/Map/Update.html` (moderation mail): change
+    `controller="Company"` to `controller="Management"` and add
+    `pluginName="Management" pageUid="{settings.pidOfManagementPage}"`
+
+..  code-block:: html
+
+    <f:link.action action="edit"
+                   controller="Management"
+                   pluginName="Management"
+                   pageUid="{settings.pidOfManagementPage}"
+                   absolute="1"
+                   arguments="{company: company, moderationToken: moderationToken}">
+        Edit record
+    </f:link.action>
+
 Upgrade to version 9.0.0
 ========================
 
@@ -24,7 +58,7 @@ both `f:link.action` calls, otherwise the links in the email no longer work:
 
 ..  code-block:: html
 
-    <f:link.action action="edit" controller="Company" absolute="1"
+    <f:link.action action="edit" controller="Management" absolute="1"
                     arguments="{company: company, moderationToken: moderationToken}">
         Edit record
     </f:link.action>

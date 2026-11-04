@@ -24,10 +24,15 @@ class CompanyPagination implements PaginationInterface
      */
     protected array $arguments = [];
 
+    /**
+     * The plugin namespace is required to keep the request arguments (like
+     * the search word of the Search plugin) in the page browser links.
+     */
     public function __construct(
         protected PaginatorInterface $paginator,
+        string $pluginNamespace = self::PLUGIN_NAMESPACE,
     ) {
-        foreach (RequestUtility::getMergedRequestArguments(self::PLUGIN_NAMESPACE) as $argumentName => $argument) {
+        foreach (RequestUtility::getMergedRequestArguments($pluginNamespace) as $argumentName => $argument) {
             if ($argumentName[0] === '_' && $argumentName[1] === '_') {
                 continue;
             }

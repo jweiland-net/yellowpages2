@@ -23,7 +23,7 @@ readonly class RemoveEmptyTradesModifier extends AbstractRequestFieldModifier
     public function modify(array $requestBody): array
     {
         try {
-            $path = 'tx_yellowpages2_directory/company';
+            $path = 'tx_yellowpages2_management/company';
             $data = ArrayUtility::getValueByPath($requestBody, $path);
 
             if (isset($data['trades']) && is_array($data['trades'])) {

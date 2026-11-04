@@ -15,6 +15,7 @@ use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
 use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -98,5 +99,36 @@ class AddGlossaryEventListenerTest extends UnitTestCase
             'html',
             $this->event->getFluidVariables()['glossar'],
         );
+    }
+
+    /**
+     * @return array<string, array{string, string}>
+     */
+    public static function invalidControllerActionsDataProvider(): array
+    {
+        return [
+            'Company search (removed in 9.0.0)' => ['Company', 'search'],
+            'Company show' => ['Company', 'show'],
+            'Search listSearchResults' => ['Search', 'listSearchResults'],
+            'Management listMyCompanies' => ['Management', 'listMyCompanies'],
+        ];
+    }
+
+    #[Test]
+    #[DataProvider('invalidControllerActionsDataProvider')]
+    public function invokeWithInvalidControllerActionDoesNotAddGlossary(string $controller, string $action): void
+    {
+        $requestMock = $this->createMock(Request::class);
+        $requestMock
+            ->method('getControllerName')
+            ->willReturn($controller);
+        $requestMock
+            ->method('getControllerActionName')
+            ->willReturn($action);
+        $event = new PostProcessFluidVariablesEvent($requestMock, [], []);
+
+        $this->subject->__invoke($event);
+
+        self::assertArrayNotHasKey('glossar', $event->getFluidVariables());
     }
 }

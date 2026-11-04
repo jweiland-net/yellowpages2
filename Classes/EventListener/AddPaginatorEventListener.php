@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Service\ExtensionService;
 
 /**
  * Register paginator to paginate through the company records in the frontend
@@ -43,9 +44,15 @@ final readonly class AddPaginatorEventListener
     private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'list',
-            'search',
+        ],
+        'Search' => [
+            'listSearchResults',
         ],
     ];
+
+    public function __construct(
+        private ExtensionService $extensionService,
+    ) {}
 
     public function __invoke(PostProcessFluidVariablesEvent $event): void
     {
@@ -97,6 +104,16 @@ final readonly class AddPaginatorEventListener
             $paginationClass = self::FALLBACK_PAGINATION_CLASS;
         }
 
-        return GeneralUtility::makeInstance($paginationClass, $paginator);
+        // Custom pagination classes with just one constructor argument
+        // silently ignore the additional plugin namespace.
+        return GeneralUtility::makeInstance($paginationClass, $paginator, $this->getPluginNamespace($event));
+    }
+
+    private function getPluginNamespace(PostProcessFluidVariablesEvent $event): string
+    {
+        return $this->extensionService->getPluginNamespace(
+            $event->getRequest()->getControllerExtensionName(),
+            $event->getRequest()->getPluginName(),
+        );
     }
 }

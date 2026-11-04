@@ -134,11 +134,9 @@ class ManagementController extends ActionController
                 return $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
             }
 
-            $response = new ForwardResponse('new');
-            $response = $response->withControllerName('Company');
-            $response = $response->withArguments(['company' => $company]);
-
-            return $response->withArguments(['company' => $company]);
+            return (new ForwardResponse('new'))
+                ->withControllerName('Management')
+                ->withArguments(['company' => $company]);
         }
 
         $this->companyRepository->add($company);
@@ -217,6 +215,25 @@ class ManagementController extends ActionController
             LocalizationUtility::translate('email.subject.activate', ExtConf::EXT_KEY),
         );
 
-        return $this->redirect('list', 'Company');
+        return $this->redirectToCompanyList();
+    }
+
+    /**
+     * The list action of CompanyController belongs to another plugin
+     * ("Directory") on another page (settings.pidOfListPage), so
+     * ActionController::redirect() can not be used here.
+     */
+    protected function redirectToCompanyList(): ResponseInterface
+    {
+        $this->uriBuilder->reset();
+
+        $pidOfListPage = (int)($this->settings['pidOfListPage'] ?? 0);
+        if ($pidOfListPage > 0) {
+            $this->uriBuilder->setTargetPageUid($pidOfListPage);
+        }
+
+        return $this->redirectToUri(
+            $this->uriBuilder->uriFor('list', [], 'Company', ExtConf::EXT_KEY, 'Directory'),
+        );
     }
 }

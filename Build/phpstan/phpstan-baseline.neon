@@ -37,12 +37,6 @@ parameters:
 			path: ../../Classes/Domain/Model/Company.php
 
 		-
-			message: '#^Parameter \#1 \$extbaseQuery of method JWeiland\\Glossary2\\Service\\GlossaryService\:\:getLetterConstraintForExtbaseQuery\(\) expects TYPO3\\CMS\\Extbase\\Persistence\\QueryInterface\<JWeiland\\Glossary2\\Domain\\Model\\Glossary\>, TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Query\<JWeiland\\Yellowpages2\\Domain\\Model\\Company\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: ../../Classes/Domain/Repository/CompanyRepository.php
-
-		-
 			message: '#^Method JWeiland\\Yellowpages2\\Event\\PostProcessControllerActionEvent\:\:getCompanyController\(\) should return JWeiland\\Yellowpages2\\Controller\\CompanyController but returns TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ActionController\.$#'
 			identifier: return.type
 			count: 1
@@ -53,12 +47,6 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: ../../Classes/Event/PostProcessControllerActionEvent.php
-
-		-
-			message: '#^Parameter \#1 \$queryBuilder of method JWeiland\\Glossary2\\Service\\GlossaryService\:\:buildGlossary\(\) expects TYPO3\\CMS\\Core\\Database\\Query\\QueryBuilder\|TYPO3\\CMS\\Extbase\\Persistence\\QueryResultInterface\<int, JWeiland\\Glossary2\\Domain\\Model\\Glossary\>, TYPO3\\CMS\\Extbase\\Persistence\\QueryResultInterface\<int, JWeiland\\Yellowpages2\\Domain\\Model\\Company\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: ../../Classes/EventListener/AddGlossaryEventListener.php
 
 		-
 			message: '#^Class JWeiland\\Checkfaluploads\\Validation\\Validator\\CheckFalUploadValidator not found\.$#'

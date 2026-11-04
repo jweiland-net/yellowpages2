@@ -19,12 +19,17 @@ plugin.tx_yellowpages2 {
     storagePid = {$yellowpages2.storagePid}
   }
 
+  # Do not override the page settings of the Site Set with empty FlexForm values
+  ignoreFlexFormSettingsIfEmpty = pidOfDetailPage,pidOfListPage,pidOfSearchResults
+
   settings {
     pidOfMaps2Plugin = {$yellowpages2.pidOfMaps2Plugin}
     startingUidForCategories = {$yellowpages2.startingUidForCategories}
     uidOfDefaultDistrict = {$yellowpages2.uidOfDefaultDistrict}
     pidOfDetailPage = {$yellowpages2.pidOfDetailPage}
     pidOfListPage = {$yellowpages2.pidOfListPage}
+    pidOfManagementPage = {$yellowpages2.pidOfManagementPage}
+    pidOfSearchResults = {$yellowpages2.pidOfSearchResults}
     userGroup = {$yellowpages2.userGroup}
     mapOptions {
       zoom = 12

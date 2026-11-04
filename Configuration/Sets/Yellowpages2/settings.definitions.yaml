@@ -67,6 +67,18 @@ settings:
     description: 'List Page UID: If empty, the current page ID will be used.'
     type: page
     default: 0
+  yellowpages2.pidOfManagementPage:
+    label: 'PID of Management page'
+    category: Yellowpages2.pages
+    description: 'Page with the Management plugin to create and edit companies. Used by the create/edit links and the links in the moderation mail. If empty, the current page ID will be used.'
+    type: page
+    default: 0
+  yellowpages2.pidOfSearchResults:
+    label: 'PID of Search results page'
+    category: Yellowpages2.pages
+    description: 'Page with the Search plugin to show the search results. The search form submits to this page. If empty, the current page ID will be used.'
+    type: page
+    default: 0
   yellowpages2.userGroup:
     label: 'Usergroup Uid'
     category: Yellowpages2.pages

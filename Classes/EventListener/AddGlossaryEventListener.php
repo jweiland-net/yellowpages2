@@ -33,7 +33,6 @@ final readonly class AddGlossaryEventListener
     private const ALLOWED_CONTROLLER_ACTIONS = [
         'Company' => [
             'list',
-            'search',
         ],
     ];
 
