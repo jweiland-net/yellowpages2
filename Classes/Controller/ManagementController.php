@@ -20,7 +20,6 @@ use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
 use JWeiland\Yellowpages2\Service\LocationService;
-use JWeiland\Yellowpages2\Traits\InitializeActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
@@ -42,7 +41,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class ManagementController extends ActionController
 {
-    use InitializeActionTrait;
     use PostProcessFluidVariablesTrait;
     use PostProcessControllerActionTrait;
     use PreProcessControllerActionTrait;
