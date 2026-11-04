@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 9.0.2
+=============
+
+*   [BUGFIX] Generate path segment for new companies created in the frontend. The former event listener was called before the company was persisted and therefore never generated a path segment. Run the upgrade wizard "[yellowpages2] Update slug of company records" to fill empty path segments of existing companies.
+
 Version 9.0.1
 =============
 

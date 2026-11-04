@@ -19,6 +19,7 @@ use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
+use JWeiland\Yellowpages2\Helper\PathSegmentHelper;
 use JWeiland\Yellowpages2\Service\LocationService;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
@@ -54,6 +55,7 @@ class ManagementController extends ActionController
         protected readonly LocationService $locationService,
         protected readonly MailHelper $mailHelper,
         protected readonly PersistenceManagerInterface $persistenceManager,
+        protected readonly PathSegmentHelper $pathSegmentHelper,
     ) {}
 
     public function initializeListMyCompaniesAction(): void
@@ -125,9 +127,7 @@ class ManagementController extends ActionController
                 // map in MapController::newAction()/createAction(). Keep the record hidden until then, so it
                 // does not become publicly visible on the frontend in the meantime.
                 $company->setHidden(true);
-                $this->companyRepository->add($company);
-                // Persist immediately to generate UIDs needed for the redirect logic or relations
-                $this->persistenceManager->persistAll();
+                $this->persistNewCompany($company);
 
                 return $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
             }
@@ -137,10 +137,25 @@ class ManagementController extends ActionController
                 ->withArguments(['company' => $company]);
         }
 
-        $this->companyRepository->add($company);
+        $this->persistNewCompany($company);
         $this->addFlashMessage(LocalizationUtility::translate('companyCreated', ExtConf::EXT_KEY));
 
         return $this->redirect('listMyCompanies');
+    }
+
+    /**
+     * The company UID is required to build a unique path segment. It is
+     * available after the first persistAll() only.
+     */
+    protected function persistNewCompany(Company $company): void
+    {
+        $this->companyRepository->add($company);
+        $this->persistenceManager->persistAll();
+
+        $this->pathSegmentHelper->updatePathSegmentForCompany($company);
+
+        $this->companyRepository->update($company);
+        $this->persistenceManager->persistAll();
     }
 
     /**
