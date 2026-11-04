@@ -18,6 +18,7 @@ Version 9.0.1
 *   [BUGFIX] Add site settings `yellowpages2.pidOfManagementPage` and `yellowpages2.pidOfSearchResults`
 *   [BUGFIX] Ignore empty FlexForm values for pidOfDetailPage, pidOfListPage and pidOfSearchResults
 *   [TASK] Remove InitializeActionTrait, Fluid link ViewHelpers fall back to the current page for pageUid 0
+*   [TASK] Require glossary2 7.1.0 or higher, which declares a generic QueryInterface for GlossaryService
 
 Version 9.0.0
 =============
