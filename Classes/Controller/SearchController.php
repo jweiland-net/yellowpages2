@@ -13,7 +13,6 @@ namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
-use JWeiland\Yellowpages2\Traits\InitializeActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
 use Psr\Http\Message\ResponseInterface;
@@ -24,7 +23,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class SearchController extends ActionController
 {
-    use InitializeActionTrait;
     use PostProcessFluidVariablesTrait;
     use PreProcessControllerActionTrait;
 

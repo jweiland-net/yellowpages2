@@ -17,6 +17,7 @@ Version 9.0.1
 *   [BUGFIX] Link to the Management, Search and Directory plugin with pluginName and pageUid in templates and mails
 *   [BUGFIX] Add site settings `yellowpages2.pidOfManagementPage` and `yellowpages2.pidOfSearchResults`
 *   [BUGFIX] Ignore empty FlexForm values for pidOfDetailPage, pidOfListPage and pidOfSearchResults
+*   [TASK] Remove InitializeActionTrait, Fluid link ViewHelpers fall back to the current page for pageUid 0
 
 Version 9.0.0
 =============
