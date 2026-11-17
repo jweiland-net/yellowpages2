@@ -25,6 +25,10 @@ services:
   JWeiland\Yellowpages2\Hook\Form\GeocodeAddressHook:
     public: true
 
+  # Called by makeInstance from EXT:form
+  JWeiland\Yellowpages2\Hook\Form\RichTextEditorHook:
+    public: true
+
   # Service Provider for tagged Modifier interfaces
   yellowpages2.middleware.controller_actions_middleware:
     class: JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware

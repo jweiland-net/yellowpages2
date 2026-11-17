@@ -138,6 +138,7 @@ renderables:
         properties:
           dbMapping:
             column: description
+            # RichTextFormElementConfigurator sets "richText", if the rich text editor is enabled
             dataType: plainText
           fluidAdditionalAttributes:
             rows: 10
@@ -310,6 +311,8 @@ finishers:
             normalizePlainText: true
           description:
             mapOnDatabaseColumn: description
+            # RichTextFormElementConfigurator replaces this with "sanitizeRichText",
+            # if the rich text editor is enabled
             convertPlainTextToHtml: true
           barrier-free:
             mapOnDatabaseColumn: barrier_free

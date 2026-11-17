@@ -40,6 +40,7 @@
 		"phpstan/phpdoc-parser": "^1.33",
 		"ssch/typo3-rector": "^3.6",
 		"typo3/cms-install": "^13.4",
+		"typo3/cms-rte-ckeditor": "^13.4",
 		"typo3/coding-standards": "^0.8",
 		"typo3/testing-framework": "^9.0.1"
 	},
@@ -47,7 +48,8 @@
 		"typo3-ter/yellowpages2": "self.version"
 	},
 	"suggest": {
-		"jweiland/checkfaluploads": "Adds a mandatory rights checkbox to the logo/images upload fields in yellowpages2's frontend forms. Requires at least version 6.0.0."
+		"jweiland/checkfaluploads": "Adds a mandatory rights checkbox to the logo/images upload fields in yellowpages2's frontend forms. Requires at least version 6.0.0.",
+		"typo3/cms-rte-ckeditor": "Needed for the optional rich text editor (CKEditor 5) of the frontend company form (site setting yellowpages2.form.richText.enable)."
 	},
 	"autoload": {
 		"psr-4": {

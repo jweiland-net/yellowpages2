@@ -175,6 +175,9 @@
 			<trans-unit id="notAllowedToCreate">
 				<source>You are not allowed to create companies.</source>
 			</trans-unit>
+			<trans-unit id="richText.openInNewTab">
+				<source>Open in a new tab</source>
+			</trans-unit>
 			<trans-unit id="email.form.greeting">
 				<source>Hello,</source>
 			</trans-unit>
