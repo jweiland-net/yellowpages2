@@ -21,16 +21,16 @@ services:
   JWeiland\Yellowpages2\Hook\ClearCacheHook:
     public: true
 
+  # Called by makeInstance from EXT:form
+  JWeiland\Yellowpages2\Hook\Form\GeocodeAddressHook:
+    public: true
+
   # Service Provider for tagged Modifier interfaces
   yellowpages2.middleware.controller_actions_middleware:
     class: JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware
     arguments: [!tagged_iterator { tag: 'yellowpages2.request.modifiers' }]
 
   # Modifiers for Middleware
-  JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier:
-    tags:
-      - name: 'yellowpages2.request.modifiers'
-        priority: 10
   JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier:
     tags:
       - name: 'yellowpages2.request.modifiers'

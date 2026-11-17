@@ -1,2 +1,6 @@
 name: jweiland/yellowpages2
 label: Yellowpages2 Set
+
+# Provides the form element "Maps2PoiPosition" for the map step of the company form
+dependencies:
+  - jweiland/maps2-default

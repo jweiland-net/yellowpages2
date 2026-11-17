@@ -1,0 +1,55 @@
+<html lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:comment><!--
+    Based on the Field partial of the EXT:form template variant "version2".
+    The element description is rendered as small text below the element.
+--></f:comment>
+<f:form.validationResults for="{element.rootForm.identifier}.{element.identifier}">
+    <f:variable name="fieldProperties" value="{element.rootForm.renderingOptions.fieldProperties}"/>
+    <f:if condition="{renderFieldset} == 1">
+        <f:then>
+            <fieldset class="{element.properties.fieldsetClassAttribute}{f:if(condition: '{validationResults.errors.0}', then: ' {fieldProperties.errorClassAttribute}')}">
+                <legend class="{f:if(condition: '{doNotShowLabel} == 1', then: '{fieldProperties.visuallyHiddenClassAttribute}')}">
+                    {formvh:translateElementProperty(element: element, property: 'label')}
+                    <f:if condition="{element.required}">
+                        <f:render partial="Field/Required" arguments="{element: element}"/>
+                    </f:if>
+                </legend>
+                <f:render section="Element" arguments="{_all}"/>
+            </fieldset>
+        </f:then>
+        <f:else>
+            <div class="{element.properties.containerClassAttribute}{f:if(condition: '{validationResults.errors.0}', then: ' {fieldProperties.errorClassAttribute}')}">
+                <f:if condition="{doNotShowLabel} != 1">
+                    <label class="{element.properties.labelClassAttribute}" for="{element.uniqueIdentifier}">
+                        {formvh:translateElementProperty(element: element, property: 'label')}
+                        <f:if condition="{element.required}">
+                            <f:render partial="Field/Required" arguments="{element: element}"/>
+                        </f:if>
+                    </label>
+                </f:if>
+                <f:render section="Element" arguments="{_all}"/>
+            </div>
+        </f:else>
+    </f:if>
+</f:form.validationResults>
+
+<f:section name="Element">
+    <f:format.raw>{elementContent}</f:format.raw>
+    <f:comment><!-- Elements rendered as fieldset show their errors on their own --></f:comment>
+    <f:if condition="{validationResults.flattenedErrors} && {renderFieldset} != 1">
+        <div id="{element.uniqueIdentifier}-errors" class="{fieldProperties.errorMsgClassAttribute} d-block" role="alert">
+            <f:for each="{validationResults.errors}" as="error" iteration="errorIterator">
+                <f:format.htmlspecialchars>{formvh:translateElementError(element: element, error: error)}</f:format.htmlspecialchars>
+                <f:if condition="{errorIterator.isLast}"><f:else><br/></f:else></f:if>
+            </f:for>
+        </div>
+    </f:if>
+    <f:if condition="{element.properties.elementDescription}">
+        <small id="{element.uniqueIdentifier}-desc" class="form-text text-muted">{formvh:translateElementProperty(element: element, property: 'elementDescription')}</small>
+    </f:if>
+</f:section>
+</html>

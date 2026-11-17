@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:yellowpages2/Resources/Private/Language/locallang_form.xlf" date="2026-11-17T12:00:00Z" product-name="yellowpages2">
+		<header/>
+		<body>
+			<trans-unit id="yellowpages2Company.renderingOptions.submitButtonLabel">
+				<source>Save company</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.company-data.properties.label">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.company-data.renderingOptions.nextButtonLabel">
+				<source>Next step: position on the map</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.map.properties.label">
+				<source>Position on the map</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.map.renderingOptions.previousButtonLabel">
+				<source>Back to the company data</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.company.properties.label">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.street.properties.label">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.house-number.properties.label">
+				<source>House number</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.zip.properties.label">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.city.properties.label">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.district.properties.label">
+				<source>District</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.district.properties.prependOptionLabel">
+				<source>Please choose</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.telephone.properties.label">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.fax.properties.label">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.email.properties.label">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.website.properties.label">
+				<source>Website</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.contact-person.properties.label">
+				<source>Contact person</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.opening-times.properties.label">
+				<source>Opening times</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.description.properties.label">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.barrier-free.properties.label">
+				<source>Barrier-free</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.main-trade.properties.label">
+				<source>Main trade</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.main-trade.properties.prependOptionLabel">
+				<source>Please choose</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.trades.properties.label">
+				<source>Further trades</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.trades.properties.elementDescription">
+				<source>Choose up to two further trades</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.facebook.properties.label">
+				<source>Facebook</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.twitter.properties.label">
+				<source>Twitter</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.instagram.properties.label">
+				<source>Instagram</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.logo.properties.label">
+				<source>Logo</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.logo.properties.elementDescription">
+				<source>JPG or PNG, max. 4 MB</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.image-1.properties.label">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.image-1.properties.elementDescription">
+				<source>JPG or PNG, max. 4 MB</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.image-2.properties.label">
+				<source>Further image</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.image-2.properties.elementDescription">
+				<source>JPG or PNG, max. 4 MB</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.position.properties.label">
+				<source>Position on the map</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.element.position.properties.elementDescription">
+				<source>Move the marker, if the position of your company is not correct.</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.finisher.EmailToReceiver.subject">
+				<source>A company record was created or edited</source>
+			</trans-unit>
+			<trans-unit id="yellowpages2Company.finisher.FlashMessage.messageBody">
+				<source>Your company was saved. It will be visible after it was activated by our team.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

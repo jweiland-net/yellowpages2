@@ -25,6 +25,7 @@ final readonly class ExtConf
     public const EXT_KEY = 'yellowpages2';
 
     private const DEFAULT_SETTINGS = [
+        'poiCollectionPid' => 0,
         'editLink' => '',
         'emailFromAddress' => '',
         'emailFromName' => '',
@@ -33,6 +34,7 @@ final readonly class ExtConf
     ];
 
     public function __construct(
+        private int $poiCollectionPid = self::DEFAULT_SETTINGS['poiCollectionPid'],
         private string $editLink = self::DEFAULT_SETTINGS['editLink'],
         private string $emailFromAddress = self::DEFAULT_SETTINGS['emailFromAddress'],
         private string $emailFromName = self::DEFAULT_SETTINGS['emailFromName'],
@@ -53,12 +55,18 @@ final readonly class ExtConf
         }
 
         return new self(
+            poiCollectionPid: (int)$extensionSettings['poiCollectionPid'],
             editLink: $extensionSettings['editLink'],
             emailFromAddress: $extensionSettings['emailFromAddress'],
             emailFromName: $extensionSettings['emailFromName'],
             emailToAddress: $extensionSettings['emailToAddress'],
             emailToName: $extensionSettings['emailToName'],
         );
+    }
+
+    public function getPoiCollectionPid(): int
+    {
+        return $this->poiCollectionPid;
     }
 
     public function getEditLink(): string

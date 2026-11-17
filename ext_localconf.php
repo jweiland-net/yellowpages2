@@ -9,9 +9,9 @@
 
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Controller\ManagementController;
-use JWeiland\Yellowpages2\Controller\MapController;
 use JWeiland\Yellowpages2\Controller\SearchController;
 use JWeiland\Yellowpages2\Hook\ClearCacheHook;
+use JWeiland\Yellowpages2\Hook\Form\GeocodeAddressHook;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 if (!defined('TYPO3')) {
@@ -33,13 +33,11 @@ ExtensionUtility::configurePlugin(
     'yellowpages2',
     'Management',
     [
-        ManagementController::class => 'listMyCompanies, new, create, edit, update, activate',
-        MapController::class => 'new, create, edit, update',
+        ManagementController::class => 'listMyCompanies, perform, activate',
     ],
     // non-cacheable actions
     [
-        ManagementController::class => 'listMyCompanies, edit, create, update, activate',
-        MapController::class => 'create, update',
+        ManagementController::class => 'listMyCompanies, perform, activate',
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
@@ -60,3 +58,6 @@ ExtensionUtility::configurePlugin(
 // Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['yellowpages2_clearcache']
     = ClearCacheHook::class . '->clearCachePostProc';
+// Geocode the address of the company form for its map step
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterSubmit'][1763380801]
+    = GeocodeAddressHook::class;

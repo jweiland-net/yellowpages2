@@ -39,13 +39,7 @@ final class RestrictAccessEventListener
 
     private const ALLOWED_CONTROLLER_ACTIONS = [
         'Management' => [
-            'edit',
-            'update',
             'activate',
-        ],
-        'Map' => [
-            'update',
-            'create',
         ],
     ];
 

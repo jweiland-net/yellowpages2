@@ -18,9 +18,9 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * This middleware handles the request variable for different actions
- * 1. Remove empty trades from request to prevent errors while storing/updating the FE record [Management]
- * 2. Sanitize search keyword with htmlspecialchars [Search]
+ * This middleware modifies the request variables of the plugins with
+ * the tagged request field modifiers, e.g. it sanitizes the search keyword
+ * with htmlspecialchars [Search]
  */
 final class ControllerActionsMiddleware implements MiddlewareInterface
 {
@@ -28,7 +28,6 @@ final class ControllerActionsMiddleware implements MiddlewareInterface
      * Plugin namespaces of the plugins which receive POST requests
      */
     private const PLUGIN_NAMESPACES = [
-        'tx_yellowpages2_management',
         'tx_yellowpages2_search',
     ];
 

@@ -12,15 +12,10 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Controller;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
-use JWeiland\Yellowpages2\Domain\Model\Company;
-use JWeiland\Yellowpages2\Domain\Model\District;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
-use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
-use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
 use JWeiland\Yellowpages2\Helper\MailHelper;
-use JWeiland\Yellowpages2\Helper\PathSegmentHelper;
-use JWeiland\Yellowpages2\Service\LocationService;
+use JWeiland\Yellowpages2\Service\CompanyAccessService;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
@@ -29,16 +24,13 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Context\Exception\AspectPropertyNotFoundException;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
-use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * Controller to let frontend users create, edit and manage their own business listings
+ * Controller to let frontend users list their own companies, to render the
+ * company form based on EXT:form to create and edit companies and to let
+ * moderators activate companies created in frontend.
  */
 class ManagementController extends ActionController
 {
@@ -50,12 +42,8 @@ class ManagementController extends ActionController
         protected readonly Context $context,
         protected readonly CompanyRepository $companyRepository,
         protected readonly CategoryRepository $categoryRepository,
-        protected readonly DistrictRepository $districtRepository,
-        protected readonly FeUserRepository $feUserRepository,
-        protected readonly LocationService $locationService,
         protected readonly MailHelper $mailHelper,
-        protected readonly PersistenceManagerInterface $persistenceManager,
-        protected readonly PathSegmentHelper $pathSegmentHelper,
+        protected readonly CompanyAccessService $companyAccessService,
     ) {}
 
     public function initializeListMyCompaniesAction(): void
@@ -81,125 +69,23 @@ class ManagementController extends ActionController
         return $this->htmlResponse();
     }
 
-    public function initializeNewAction(): void
+    public function initializePerformAction(): void
     {
         $this->preProcessControllerAction();
-    }
-
-    public function newAction(): ResponseInterface
-    {
-        $company = GeneralUtility::makeInstance(Company::class);
-
-        $district = $this->districtRepository->findByUid($this->settings['uidOfDefaultDistrict']);
-        if ($district instanceof District) {
-            $company->setDistrict($district);
-        }
-
-        $this->postProcessAndAssignFluidVariables([
-            'company' => $company,
-            'districts' => $this->districtRepository->getDistricts(),
-            'categories' => $this->categoryRepository->findByParent($this->settings['startingUidForCategories']),
-        ]);
-
-        return $this->htmlResponse();
-    }
-
-    public function initializeCreateAction(): void
-    {
-        $this->preProcessControllerAction();
-    }
-
-    public function createAction(Company $company): ResponseInterface
-    {
-        $frontendUserAuthenticationObject = $this->request->getAttribute('frontend.user');
-        if ($frontendUserAuthenticationObject->user['uid'] > 0) {
-            $feUser = $this->feUserRepository->findByUid($frontendUserAuthenticationObject->user['uid']);
-            $company->setFeUser($feUser);
-        }
-
-        $this->postProcessControllerAction($company);
-
-        if (ExtensionManagementUtility::isLoaded('maps2')) {
-            $poiCreated = $this->locationService->createPoiForCompany($company, $this->getFlashMessageQueue());
-
-            if ($poiCreated) {
-                // Data entry is not finished yet - the user still has to confirm the POI position on the
-                // map in MapController::newAction()/createAction(). Keep the record hidden until then, so it
-                // does not become publicly visible on the frontend in the meantime.
-                $company->setHidden(true);
-                $this->persistNewCompany($company);
-
-                return $this->redirect('new', 'Map', 'yellowpages2', ['company' => $company]);
-            }
-
-            return (new ForwardResponse('new'))
-                ->withControllerName('Management')
-                ->withArguments(['company' => $company]);
-        }
-
-        $this->persistNewCompany($company);
-        $this->addFlashMessage(LocalizationUtility::translate('companyCreated', ExtConf::EXT_KEY));
-
-        return $this->redirect('listMyCompanies');
     }
 
     /**
-     * The company UID is required to build a unique path segment. It is
-     * available after the first persistAll() only.
+     * Renders the company form based on EXT:form to create and edit
+     * companies. The form reads the company to edit from the query on its
+     * own, see CompanyAccessService::getCompanyUid().
      */
-    protected function persistNewCompany(Company $company): void
-    {
-        $this->companyRepository->add($company);
-        $this->persistenceManager->persistAll();
-
-        $this->pathSegmentHelper->updatePathSegmentForCompany($company);
-
-        $this->companyRepository->update($company);
-        $this->persistenceManager->persistAll();
-    }
-
-    /**
-     * Will be called when the link in mail is clicked
-     */
-    public function initializeEditAction(): void
-    {
-        $this->preProcessControllerAction();
-    }
-
-    #[IgnoreValidation(['value' => 'company'])]
-    public function editAction(Company $company): ResponseInterface
+    public function performAction(): ResponseInterface
     {
         $this->postProcessAndAssignFluidVariables([
-            'company' => $company,
-            'districts' => $this->districtRepository->getDistricts(),
-            'categories' => $this->categoryRepository->findByParent((int)$this->settings['startingUidForCategories']),
+            'denialReason' => $this->companyAccessService->getDenialReason($this->request),
         ]);
 
         return $this->htmlResponse();
-    }
-
-    public function initializeUpdateAction(): void
-    {
-        $this->preProcessControllerAction();
-    }
-
-    public function updateAction(Company $company): ResponseInterface
-    {
-        $this->companyRepository->update($company);
-        $this->postProcessControllerAction($company);
-
-        if (ExtensionManagementUtility::isLoaded('maps2')) {
-            return $this->redirect(
-                'update',
-                'Map',
-                ExtConf::EXT_KEY,
-                ['company' => $company],
-            );
-        }
-
-        $this->addFlashMessage(LocalizationUtility::translate('companyUpdated', ExtConf::EXT_KEY));
-
-        return $this->redirect('listMyCompanies');
     }
 
     public function initializeActivateAction(): void

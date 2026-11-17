@@ -29,15 +29,7 @@ final readonly class RegisterHiddenCompanyEventListener
 
     private const ALLOWED_CONTROLLER_ACTIONS = [
         'Management' => [
-            'edit',
-            'update',
             'activate',
-        ],
-        'Map' => [
-            'new',
-            'create',
-            'edit',
-            'update',
         ],
     ];
 

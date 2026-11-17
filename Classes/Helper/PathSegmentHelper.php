@@ -11,10 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Helper;
 
-use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 /*
  * Helper class to generate a path segment (slug) for a company record.
@@ -22,11 +20,11 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  */
 readonly class PathSegmentHelper
 {
-    public function __construct(
-        protected PersistenceManagerInterface $persistenceManager,
-    ) {}
+    private const TABLE = 'tx_yellowpages2_domain_model_company';
 
     /**
+     * The record needs the columns "uid" and "company"
+     *
      * @param array<string, int|string|null> $baseRecord
      */
     public function generatePathSegment(array $baseRecord, int $pid): string
@@ -34,30 +32,15 @@ readonly class PathSegmentHelper
         return $this->getSlugHelper()->generate($baseRecord, $pid);
     }
 
-    public function updatePathSegmentForCompany(Company $company): void
-    {
-        // First, we have to check if an UID is available
-        if (!$company->getUid()) {
-            $this->persistenceManager->persistAll();
-        }
-
-        $company->setPathSegment(
-            $this->generatePathSegment(
-                $company->getBaseRecordForPathSegment(),
-                $company->getPid(),
-            ),
-        );
-    }
-
     protected function getSlugHelper(): SlugHelper
     {
         // Add uid to slug, to prevent duplicates
-        $config = (array)($GLOBALS['TCA']['tx_yellowpages2_domain_model_company']['columns']['path_segment']['config'] ?? []);
+        $config = (array)($GLOBALS['TCA'][self::TABLE]['columns']['path_segment']['config'] ?? []);
         $config['generatorOptions']['fields'] = ['company', 'uid'];
 
         return GeneralUtility::makeInstance(
             SlugHelper::class,
-            'tx_yellowpages2_domain_model_company',
+            self::TABLE,
             'path_segment',
             $config,
         );

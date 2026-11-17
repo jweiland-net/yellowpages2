@@ -1,0 +1,37 @@
+"pages"
+,"uid","pid","title","slug","doktype","is_siteroot"
+,1,0,"Root","/",1,1
+,2,1,"Management","/management",1,0
+,10,1,"Storage","/storage",254,0
+,11,1,"POI collections","/poi-collections",254,0
+"sys_category"
+,"uid","pid","title","parent","sys_language_uid"
+,1,10,"Trades",0,0
+,2,10,"Bakery",1,0
+,3,10,"Butcher",1,0
+,4,10,"Florist",1,0
+,5,10,"Other root",0,0
+"tx_yellowpages2_domain_model_district"
+,"uid","pid","district","sys_language_uid"
+,1,10,"Bernhausen",0
+,2,10,"Bonlanden",0
+"tx_maps2_domain_model_poicollection"
+,"uid","pid","title","collection_type","address","latitude","longitude"
+,1,11,"Bakery Müller","Point","Echterdinger Straße 57, 70794 Filderstadt",48.6853,9.2148
+"tx_yellowpages2_domain_model_company"
+,"uid","pid","hidden","company","path_segment","street","house_number","zip","city","district","description","opening_times","fe_user","main_trade","trades","tx_maps2_uid"
+,1,10,0,"Bakery Müller","bakery-mueller-1","Echterdinger Straße","57","70794","Filderstadt",1,"<p>Fresh <strong>bread</strong><br />every day</p>","Mo-Fr 6-18",5,1,2,1
+,2,10,1,"Florist without position","florist-2","Hauptstraße","1","70794","Filderstadt",2,"<p>Flowers</p>","",6,1,0,0
+"sys_category_record_mm"
+,"uid_local","uid_foreign","tablenames","fieldname","sorting_foreign"
+,2,1,"tx_yellowpages2_domain_model_company","main_trade",1
+,3,1,"tx_yellowpages2_domain_model_company","trades",1
+,4,1,"tx_yellowpages2_domain_model_company","trades",2
+,4,2,"tx_yellowpages2_domain_model_company","main_trade",1
+"fe_users"
+,"uid","pid","username","usergroup"
+,5,10,"owner","1"
+,6,10,"other","1"
+"fe_groups"
+,"uid","pid","title"
+,1,10,"Companies"

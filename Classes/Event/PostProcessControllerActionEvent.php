@@ -13,14 +13,13 @@ namespace JWeiland\Yellowpages2\Event;
 
 use JWeiland\Yellowpages2\Controller\CompanyController;
 use JWeiland\Yellowpages2\Controller\ManagementController;
-use JWeiland\Yellowpages2\Controller\MapController;
 use JWeiland\Yellowpages2\Domain\Model\Company;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 /**
  * Post-process controller actions that do not assign any variables to view.
- * Often used by controller actions like "update" or "create", which redirects after success.
+ * Used by controller actions like "activate", which redirect after success.
  */
 final readonly class PostProcessControllerActionEvent implements ControllerActionEventInterface
 {
@@ -28,7 +27,7 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
      * @param array<string, mixed> $settings
      */
     public function __construct(
-        private ActionController|CompanyController|ManagementController|MapController $controller,
+        private ActionController|CompanyController|ManagementController $controller,
         private ?Company $company,
         private array $settings,
         private RequestInterface $request,
@@ -57,11 +56,6 @@ final readonly class PostProcessControllerActionEvent implements ControllerActio
             );
         }
 
-        return $this->controller;
-    }
-
-    public function getMapController(): MapController
-    {
         return $this->controller;
     }
 

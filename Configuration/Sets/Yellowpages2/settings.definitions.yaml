@@ -10,6 +10,9 @@ categories:
   Yellowpages2.pagination:
     label: 'Pagination'
     parent: Yellowpages2
+  Yellowpages2.form:
+    label: 'Company form'
+    parent: Yellowpages2
 
 settings:
   yellowpages2.templateRootPath:
@@ -110,3 +113,10 @@ settings:
     description: 'Define maximum amount of pages which should be displayed'
     type: int
     default: 5
+
+  yellowpages2.form.storagePid:
+    label: 'Storage page of new companies'
+    category: Yellowpages2.form
+    description: 'Page UID, where companies created with the company form are stored. If empty, the first storage page of the plugin or else the current page is used.'
+    type: page
+    default: 0
