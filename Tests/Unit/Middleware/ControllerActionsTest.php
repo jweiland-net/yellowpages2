@@ -13,7 +13,6 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Middleware;
 
 use JWeiland\Yellowpages2\Middleware\ControllerActionsMiddleware;
 use JWeiland\Yellowpages2\Modifier\HtmlspecialcharsModifier;
-use JWeiland\Yellowpages2\Modifier\RemoveEmptyTradesModifier;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -43,36 +42,16 @@ final class ControllerActionsTest extends UnitTestCase
         // adding modifiers for the handler
         $subject = new ControllerActionsMiddleware();
         $subject->addModifier(new HtmlspecialcharsModifier());
-        $subject->addModifier(new RemoveEmptyTradesModifier());
         $subject->process($request, $handler);
     }
 
     /**
-     * This data provider is for prepared requests for company create action and
+     * This data provider is for prepared requests for the company form and the
      * yellowpages2 search action.
      */
     public static function requestActionDataProvider(): array
     {
         return [
-            'company create action with null trades' => [
-                'requestBody' => [
-                    'tx_yellowpages2_management' => [
-                        'company' => [
-                            'trades' => [
-                                '',
-                                '',
-                            ],
-                        ],
-                    ],
-                ],
-                'expectedRequestBody' => [
-                    'tx_yellowpages2_management' => [
-                        'company' => [
-                            'trades' => [],
-                        ],
-                    ],
-                ],
-            ],
             'search action with arguments needs to be sanitized html special chars' => [
                 'requestBody' => [
                     'tx_yellowpages2_search' => [
@@ -82,6 +61,22 @@ final class ControllerActionsTest extends UnitTestCase
                 'expectedRequestBody' => [
                     'tx_yellowpages2_search' => [
                         'search' => htmlspecialchars('bread & butter'),
+                    ],
+                ],
+            ],
+            'arguments of the company form are not modified' => [
+                'requestBody' => [
+                    'tx_yellowpages2_management' => [
+                        'yellowpages2Company-1' => [
+                            'description' => '<p>bread &amp; butter</p>',
+                        ],
+                    ],
+                ],
+                'expectedRequestBody' => [
+                    'tx_yellowpages2_management' => [
+                        'yellowpages2Company-1' => [
+                            'description' => '<p>bread &amp; butter</p>',
+                        ],
                     ],
                 ],
             ],

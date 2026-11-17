@@ -1,12 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Class JWeiland\\Maps2\\Domain\\Model\\PoiCollection not found\.$#'
-			identifier: class.notFound
-			count: 2
-			path: ../../Classes/Domain/Model/Company.php
-
-		-
 			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$images on left side of \?\?\= is not nullable nor uninitialized\.$#'
 			identifier: nullCoalesce.initializedProperty
 			count: 1
@@ -31,109 +25,7 @@ parameters:
 			path: ../../Classes/Domain/Model/Company.php
 
 		-
-			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$txMaps2Uid has unknown class JWeiland\\Maps2\\Domain\\Model\\PoiCollection as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Domain/Model/Company.php
-
-		-
 			message: '#^Method JWeiland\\Yellowpages2\\Event\\PostProcessControllerActionEvent\:\:getCompanyController\(\) should return JWeiland\\Yellowpages2\\Controller\\CompanyController but returns TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ActionController\.$#'
 			identifier: return.type
 			count: 1
 			path: ../../Classes/Event/PostProcessControllerActionEvent.php
-
-		-
-			message: '#^Method JWeiland\\Yellowpages2\\Event\\PostProcessControllerActionEvent\:\:getMapController\(\) should return JWeiland\\Yellowpages2\\Controller\\MapController but returns TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ActionController\.$#'
-			identifier: return.type
-			count: 1
-			path: ../../Classes/Event/PostProcessControllerActionEvent.php
-
-		-
-			message: '#^Class JWeiland\\Checkfaluploads\\Validation\\Validator\\CheckFalUploadValidator not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/EventListener/CheckFalUploadsEventListener.php
-
-		-
-			message: '#^Call to method getErrors\(\) on an unknown class JWeiland\\Maps2\\Service\\GeoCodeService\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method getFirstFoundPositionByAddress\(\) on an unknown class JWeiland\\Maps2\\Service\\GeoCodeService\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method getFormattedAddress\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\Position\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method getLatitude\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\Position\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method getLongitude\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\Position\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method setAddress\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\PoiCollection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method setCollectionType\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\PoiCollection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method setLatitude\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\PoiCollection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method setLongitude\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\PoiCollection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to method setTitle\(\) on an unknown class JWeiland\\Maps2\\Domain\\Model\\PoiCollection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Class JWeiland\\Maps2\\Domain\\Model\\Position not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Class JWeiland\\Maps2\\Service\\GeoCodeService not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Instantiated class JWeiland\\Maps2\\Domain\\Model\\PoiCollection not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Classes/Service/LocationService.php
-
-		-
-			message: '#^Call to static method getInstance\(\) on an unknown class JWeiland\\Maps2\\Tca\\Maps2Registry\.$#'
-			identifier: class.notFound
-			count: 1
-			path: ../../Configuration/TCA/Overrides/tx_yellowpages2_domain_model_company.php

@@ -1,0 +1,367 @@
+type: Form
+identifier: yellowpages2Company
+label: 'Company'
+prototypeName: standard
+renderingOptions:
+  submitButtonLabel: Submit
+  templateVariant: version2
+  partialRootPaths:
+    1763380800: 'EXT:yellowpages2/Resources/Private/FormFramework/Partials/'
+  translation:
+    translationFiles:
+      1763380800: 'EXT:yellowpages2/Resources/Private/Language/locallang_form.xlf'
+renderables:
+  - type: Page
+    identifier: company-data
+    label: 'Company'
+    renderingOptions:
+      nextButtonLabel: 'Next step: position on the map'
+    renderables:
+      - type: Text
+        identifier: company
+        label: 'Company'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: company
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: Text
+        identifier: street
+        label: 'Street'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: street
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: Text
+        identifier: house-number
+        label: 'House number'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: house_number
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: Text
+        identifier: zip
+        label: 'Zip'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: zip
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: Text
+        identifier: city
+        label: 'City'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: city
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: SingleSelect
+        identifier: district
+        label: District
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: district
+          # Options are added by the FormElementOptionsConfigurator
+          optionsProvider: districts
+          prependOptionLabel: 'Please choose'
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: Text
+        identifier: telephone
+        label: 'Telephone'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: telephone
+      - type: Text
+        identifier: fax
+        label: 'Fax'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: fax
+      - type: Email
+        identifier: email
+        label: 'Email'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: email
+        validators:
+          - identifier: EmailAddress
+      - type: Url
+        identifier: website
+        label: 'Website'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: website
+      - type: Text
+        identifier: contact-person
+        label: 'Contact person'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: contact_person
+      - type: Textarea
+        identifier: opening-times
+        label: 'Opening times'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: opening_times
+            dataType: plainText
+      - type: Textarea
+        identifier: description
+        label: Description
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: description
+            dataType: plainText
+          fluidAdditionalAttributes:
+            rows: 10
+        validators:
+          - identifier: NotEmpty
+      - type: Checkbox
+        identifier: barrier-free
+        label: 'Barrier-free'
+        properties:
+          dbMapping:
+            column: barrier_free
+      - type: SingleSelect
+        identifier: main-trade
+        label: 'Main trade'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: main_trade
+          # Options are added by the FormElementOptionsConfigurator
+          optionsProvider: categories
+          prependOptionLabel: 'Please choose'
+          fluidAdditionalAttributes:
+            required: required
+        validators:
+          - identifier: NotEmpty
+      - type: MultiCheckbox
+        identifier: trades
+        label: 'Further trades'
+        properties:
+          dbMapping:
+            column: trades
+          # Options are added by the FormElementOptionsConfigurator
+          optionsProvider: categories
+          elementDescription: 'Choose up to two further trades'
+        validators:
+          - identifier: Count
+            options:
+              minimum: 0
+              maximum: 2
+      - type: Text
+        identifier: facebook
+        label: 'Facebook'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: facebook
+      - type: Text
+        identifier: twitter
+        label: 'Twitter'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: twitter
+      - type: Text
+        identifier: instagram
+        label: 'Instagram'
+        defaultValue: ''
+        properties:
+          dbMapping:
+            column: instagram
+      - type: ImageUpload
+        identifier: logo
+        label: 'Logo'
+        properties:
+          dbMapping:
+            column: logo
+            position: 1
+          # Overridden by TypoScript "settings.new.uploadFolder"
+          saveToFileMount: '1:/user_upload/tx_yellowpages2/'
+          allowedMimeTypes:
+            - image/jpeg
+            - image/png
+          elementDescription: 'JPG or PNG, max. 4 MB'
+        validators:
+          - identifier: FileSize
+            options:
+              minimum: 0K
+              maximum: 4M
+      - type: ImageUpload
+        identifier: image-1
+        label: 'Image'
+        properties:
+          dbMapping:
+            column: images
+            position: 1
+          # Overridden by TypoScript "settings.new.uploadFolder"
+          saveToFileMount: '1:/user_upload/tx_yellowpages2/'
+          allowedMimeTypes:
+            - image/jpeg
+            - image/png
+          elementDescription: 'JPG or PNG, max. 4 MB'
+        validators:
+          - identifier: FileSize
+            options:
+              minimum: 0K
+              maximum: 4M
+      - type: ImageUpload
+        identifier: image-2
+        label: 'Further image'
+        properties:
+          dbMapping:
+            column: images
+            position: 2
+          # Overridden by TypoScript "settings.new.uploadFolder"
+          saveToFileMount: '1:/user_upload/tx_yellowpages2/'
+          allowedMimeTypes:
+            - image/jpeg
+            - image/png
+          elementDescription: 'JPG or PNG, max. 4 MB'
+        validators:
+          - identifier: FileSize
+            options:
+              minimum: 0K
+              maximum: 4M
+  - type: Page
+    identifier: map
+    label: 'Position on the map'
+    renderingOptions:
+      previousButtonLabel: 'Back to the company data'
+    renderables:
+      # Form element of EXT:maps2. The GeocodeAddressHook sets the position of
+      # the geocoded address, so the user can correct it.
+      - type: Maps2PoiPosition
+        identifier: position
+        label: 'Position on the map'
+        properties:
+          dbMapping:
+            column: tx_maps2_uid
+            dataType: poiPosition
+          # Identifiers of street, house number, zip and city for geocoding
+          addressElements:
+            - street
+            - house-number
+            - zip
+            - city
+          zoom: 15
+          height: 400
+          elementDescription: 'Move the marker, if the position of your company is not correct.'
+finishers:
+  1:
+    identifier: SaveCompanyFinisher
+    options:
+      table: tx_yellowpages2_domain_model_company
+      elements:
+          company:
+            mapOnDatabaseColumn: company
+          street:
+            mapOnDatabaseColumn: street
+          house-number:
+            mapOnDatabaseColumn: house_number
+          zip:
+            mapOnDatabaseColumn: zip
+          city:
+            mapOnDatabaseColumn: city
+          district:
+            mapOnDatabaseColumn: district
+          telephone:
+            mapOnDatabaseColumn: telephone
+          fax:
+            mapOnDatabaseColumn: fax
+          email:
+            mapOnDatabaseColumn: email
+          website:
+            mapOnDatabaseColumn: website
+          contact-person:
+            mapOnDatabaseColumn: contact_person
+          opening-times:
+            mapOnDatabaseColumn: opening_times
+            # Plain text column. Store it like the backend textarea.
+            normalizePlainText: true
+          description:
+            mapOnDatabaseColumn: description
+            convertPlainTextToHtml: true
+          barrier-free:
+            mapOnDatabaseColumn: barrier_free
+          main-trade:
+            mapOnDatabaseColumn: main_trade
+          trades:
+            mapOnDatabaseColumn: trades
+          facebook:
+            mapOnDatabaseColumn: facebook
+          twitter:
+            mapOnDatabaseColumn: twitter
+          instagram:
+            mapOnDatabaseColumn: instagram
+          logo:
+            mapOnDatabaseColumn: logo
+          image-1:
+            mapOnDatabaseColumn: images
+          image-2:
+            mapOnDatabaseColumn: images
+          position:
+            poiPosition: true
+      databaseColumnMappings:
+        # Overridden by TypoScript. Without a page UID, new companies are
+        # stored in the first storage page of the plugin.
+        pid:
+          value: 0
+        # Companies created or edited in frontend have to be activated by a moderator
+        hidden:
+          value: 1
+  2:
+    identifier: EmailToReceiver
+    options:
+      subject: 'A company record was created or edited'
+      useFluidEmail: 1
+      # Sender and recipient are taken from the extension settings,
+      # if they are not set here.
+      #recipients:
+      #  change-me@example.com: 'Change or overwrite me'
+      #senderAddress:
+      #senderName:
+      variables:
+        # Overridden by TypoScript. Page with the Management plugin for the links of the mail.
+        pidOfManagementPage: 0
+  3:
+    identifier: FlashMessage
+    options:
+      messageCode: 1763380802
+      messageTitle: ''
+      messageBody: 'Your company was saved. It will be visible after it was activated by our team.'
+      severity: 0
+  4:
+    identifier: Redirect
+    options:
+      # Overridden by TypoScript. The current page is used, if empty.
+      pageUid: 0

@@ -1,3 +1,6 @@
+# Register the finisher and the template paths of the company form based on EXT:form
+plugin.tx_form.settings.yamlConfigurations.1763380800 = EXT:yellowpages2/Configuration/Form/OverrideFormSettings.yaml
+
 plugin.tx_yellowpages2 {
   view {
     templateRootPaths {
@@ -7,7 +10,6 @@ plugin.tx_yellowpages2 {
     partialRootPaths {
       0 = EXT:yellowpages2/Resources/Private/Partials/
       1 = {$yellowpages2.partialRootPath}
-      2 = EXT:maps2/Resources/Private/Partials/
     }
     layoutRootPaths {
       0 = EXT:yellowpages2/Resources/Private/Layouts/
@@ -71,7 +73,20 @@ plugin.tx_yellowpages2 {
     }
 
     new {
-      uploadFolder = 1:user_upload/tx_yellowpages2/
+      # Folder of the logo and the images uploaded in the company form
+      uploadFolder = 1:/user_upload/tx_yellowpages2/
+    }
+
+    # Special configuration for the company form based on EXT:form
+    # See EXT:yellowpages2/Configuration/Form/Company.form.yaml which values are possible
+    overrideForm {
+      renderables.0.renderables.19.properties.saveToFileMount < plugin.tx_yellowpages2.settings.new.uploadFolder
+      renderables.0.renderables.20.properties.saveToFileMount < plugin.tx_yellowpages2.settings.new.uploadFolder
+      renderables.0.renderables.21.properties.saveToFileMount < plugin.tx_yellowpages2.settings.new.uploadFolder
+      # Be careful: Only ONE page UID is allowed here
+      finishers.1.options.databaseColumnMappings.pid.value = {$yellowpages2.form.storagePid}
+      finishers.2.options.variables.pidOfManagementPage = {$yellowpages2.pidOfManagementPage}
+      finishers.4.options.pageUid = {$yellowpages2.pidOfManagementPage}
     }
 
     glossary {
@@ -85,15 +100,3 @@ plugin.tx_yellowpages2 {
     }
   }
 }
-
-plugin.tx_yellowpages2._CSS_DEFAULT_STYLE (
-  textarea.f3-form-error {
-    background-color:#FF9F9F;
-    border: 1px #FF0000 solid;
-  }
-
-  input.f3-form-error {
-    background-color:#FF9F9F;
-    border: 1px #FF0000 solid;
-  }
-)

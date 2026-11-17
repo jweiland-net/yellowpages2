@@ -15,8 +15,6 @@ use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
 use JWeiland\Yellowpages2\Domain\Repository\FeUserRepository;
-use JWeiland\Yellowpages2\Helper\MailHelper;
-use JWeiland\Yellowpages2\Service\LocationService;
 use JWeiland\Yellowpages2\Traits\PostProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
@@ -42,8 +40,6 @@ class CompanyController extends ActionController
         protected readonly CategoryRepository $categoryRepository,
         protected readonly DistrictRepository $districtRepository,
         protected readonly FeUserRepository $feUserRepository,
-        protected readonly LocationService $locationService,
-        protected readonly MailHelper $mailHelper,
         protected readonly PersistenceManagerInterface $persistenceManager,
     ) {}
 
