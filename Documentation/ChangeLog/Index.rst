@@ -7,6 +7,17 @@
 ChangeLog
 =========
 
+Version 10.0.0
+==============
+
+*   [!!!][TASK] Create and edit companies in the frontend with a form based on EXT:form. The form has two steps: the company data and the position of the company on the map (form element `Maps2PoiPosition` of EXT:maps2 12.3.0). The address is geocoded when the first step is submitted.
+*   [!!!][TASK] Remove the Extbase form of the Management plugin incl. MapController, LocationService, their templates and the event listeners for uploads
+*   [!!!][TASK] Require EXT:form and EXT:maps2 12.3.0 or higher
+*   [FEATURE] Store the description of the company form like the backend RTE does and convert it back to plain text for editing
+*   [FEATURE] Add CKEditor 5 to the description of the company form (site setting `yellowpages2.form.richText.enable`)
+*   [FEATURE] Make the tags of the rich text sanitizer configurable with the PSR-14 event `ModifyRichTextSanitizerConfigurationEvent` and build the toolbar of the editor from them
+*   [FEATURE] Render rich text elements in the mail of the moderator with the `FormatRichTextViewHelper`
+
 Version 9.0.2
 =============
 
