@@ -9,6 +9,137 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Upgrade to version 10.0.0
+=========================
+
+Companies are created and edited in the frontend with a form based on
+EXT:form now, see :ref:`company-form`. The Extbase form of the `Management`
+plugin has been removed.
+
+Requirements
+------------
+
+*   The system extension EXT:form (:composer:`typo3/cms-form`) is required.
+*   EXT:maps2 12.3.0 or higher (:composer:`jweiland/maps2`) is required. It
+    was optional before. Its form element `Maps2PoiPosition` renders the map
+    step of the company form. The site set `jweiland/yellowpages2` depends on
+    the site set `jweiland/maps2-default` now. Configure the map provider of
+    EXT:maps2 as described in its documentation.
+
+Plugin configuration
+--------------------
+
+*   The `Management` plugin has the actions `listMyCompanies`, `perform` and
+    `activate`. The actions `new`, `create`, `edit` and `update` of the
+    `ManagementController` and the complete `MapController` (actions `new`,
+    `create`, `edit` and `update`) have been removed. Links to them do not
+    work anymore.
+*   Link to the action `perform` to create a company and to the action
+    `perform` with the argument `company` to edit a company:
+
+    ..  code-block:: html
+
+        <f:link.action action="perform"
+                       controller="Management"
+                       pluginName="Management"
+                       pageUid="{settings.pidOfManagementPage}"
+                       arguments="{company: company}">
+            Edit company
+        </f:link.action>
+
+*   Logged-in frontend users need to be member of the user group of
+    `yellowpages2.userGroup` to create companies. Before, everyone who could
+    open the page could create a company.
+
+Two steps instead of a separate map step
+----------------------------------------
+
+The map step of the `MapController` is the second page of the company form
+now. The address is geocoded when the first page is submitted, the user can
+correct the position on the second page. The company is stored only once,
+after the second page was submitted:
+
+*   A new company is no longer stored before the map step. So no hidden
+    company without confirmed position is left behind, if the user leaves
+    the form on the map step.
+*   Each company created **or edited** in the frontend is hidden and the
+    moderator gets a mail with links to edit and to activate it. Before, an
+    edited company was only hidden and announced, if the map step was
+    completed. Edits of moderators with the link of the mail are handled the
+    same way, so the moderator activates the company afterwards.
+*   The mail of the moderator is rendered with the templates of the
+    EXT:form finisher `EmailToReceiver` (see :ref:`company-form-moderation`)
+    and contains a text part now.
+*   The POI collection of a new company is created with the corrected
+    position. The POI collection of an edited company is updated, instead
+    of creating a new one.
+
+Removed templates
+-----------------
+
+If you have overridden one of these templates or partials in your site
+package, remove them. Adapt the form with a copy of
+:file:`EXT:yellowpages2/Configuration/Form/Company.form.yaml` instead (see
+:ref:`company-form-configuration`).
+
+*   `Templates/Management/New.html`, `Templates/Management/Edit.html`
+*   `Templates/Map/New.html`, `Templates/Map/Create.html`,
+    `Templates/Map/Edit.html`, `Templates/Map/Update.html` (the moderation
+    mail is :file:`Resources/Private/FormFramework/Templates/Finishers/Email/Default.html`
+    and :file:`Default.txt` now)
+*   `Partials/Company/FormFields.html`, `Partials/Company/Field.html`,
+    `Partials/Company/Fields/*.html`, `Partials/FormErrors.html`
+
+If you have overridden `Partials/Company/Properties.html` or
+`Partials/Company/InsertEditLinks.html`, change the action of the links
+from `edit` and `new` to `perform`. The partial root path
+`EXT:maps2/Resources/Private/Partials/` has been removed from
+:typoscript:`plugin.tx_yellowpages2.view.partialRootPaths`.
+
+TypoScript and site settings
+----------------------------
+
+*   New site settings `yellowpages2.form.storagePid`,
+    `yellowpages2.form.richText.enable` and
+    `yellowpages2.form.richText.elements`, see :ref:`site-set-settings` and
+    :ref:`frontend-rich-text-editor`.
+*   New TypoScript :typoscript:`plugin.tx_yellowpages2.settings.overrideForm`
+    to override values of the form definition, see
+    :ref:`company-form-configuration`.
+*   :typoscript:`plugin.tx_yellowpages2.settings.new.uploadFolder` is the
+    folder of the upload elements of the form now. Its default value is
+    `1:/user_upload/tx_yellowpages2/`.
+*   :typoscript:`plugin.tx_yellowpages2._CSS_DEFAULT_STYLE` has been removed.
+    The form is rendered with the Bootstrap 5 template variant `version2` of
+    EXT:form.
+
+Removed PHP code
+----------------
+
+*   :php:`MapController`, :php:`LocationService`,
+    :php:`ApplyUploadFolderEventListener`,
+    :php:`CheckFalUploadsEventListener` and
+    :php:`RemoveEmptyTradesModifier` have been removed.
+*   :php:`PostProcessControllerActionEvent::getMapController()` has been
+    removed.
+*   :php:`PathSegmentHelper::updatePathSegmentForCompany()` has been removed.
+    Use :php:`PathSegmentHelper::generatePathSegment()`.
+*   The `#[FileUpload]` and `#[Validate]` attributes of the
+    :php:`Company` model have been removed. The values of the form are
+    validated by the validators of the form definition.
+*   The rights checkbox of EXT:checkfaluploads has to be added to a copy of
+    the form definition, see :ref:`company-form-checkfaluploads`.
+
+Labels
+------
+
+The labels `create`, `update`, `companyCreated`, `companyUpdated`,
+`pleaseChoose`, `hint`, `error.upload`, `error.fileExtension`,
+`errorFlashMessage`, `errorAddressInvalid.title`, `email.subject.create`,
+`email.subject.update` and all `csh*` labels have been removed from
+:file:`locallang.xlf`. The labels of the form are part of
+:file:`locallang_form.xlf`.
+
 Upgrade to version 9.0.1
 ========================
 

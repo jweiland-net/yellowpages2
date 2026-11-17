@@ -14,9 +14,9 @@ Configure `yellowpages2` in the backend module *Admin Tools > Settings > Extensi
     :type: integer
     :default: 0
 
-    Only relevant if EXT:maps2 is installed. While creating a company record on the frontend, the
-    address is geocoded and a maps2 record is created for it automatically. Define the storage page
-    ID for these records here.
+    Storage page of the POI collections (EXT:maps2), which are created for companies of the
+    company form in the frontend (see :ref:`company-form-saving`). If empty, the POI collection is
+    stored on the page of the company.
 
 ..  confval:: editLink
     :name: confval-editlink

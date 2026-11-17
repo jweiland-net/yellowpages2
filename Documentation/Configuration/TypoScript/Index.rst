@@ -9,7 +9,8 @@ Site Set settings
 
 ..  tip::
 
-    Configure EXT:maps2 first if you want to show company addresses on a map.
+    Configure EXT:maps2 first. It is required for the map step of the company form and shows
+    company addresses on a map.
 
     `Maps2 documentation <https://docs.typo3.org/p/jweiland/maps2/master/en-us/>`__
 

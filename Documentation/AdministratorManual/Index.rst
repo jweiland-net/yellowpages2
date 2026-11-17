@@ -15,6 +15,8 @@ Administrator manual
     :maxdepth: 2
     :titlesonly:
 
+    CompanyForm/Index
+    FrontendRichTextEditor/Index
     Routes/Index
     Pagination/Index
     Upgrade/Index
