@@ -14,6 +14,7 @@ namespace JWeiland\Yellowpages2\Domain\Factory;
 use JWeiland\Yellowpages2\Form\CompanyFormConfigurator;
 use JWeiland\Yellowpages2\Form\CompanyFormPrefiller;
 use JWeiland\Yellowpages2\Form\FormElementOptionsConfigurator;
+use JWeiland\Yellowpages2\Form\RichTextFormElementConfigurator;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Form\Domain\Factory\ArrayFormFactory as CoreArrayFormFactory;
@@ -22,7 +23,7 @@ use TYPO3\CMS\Form\Domain\Model\FormDefinition;
 /**
  * Builds the company form based on EXT:form. The form definition is
  * configured for the current request before it is built (form action,
- * finishers and options). Afterward, the elements are
+ * finishers, options and rich text elements). Afterward, the elements are
  * prefilled with the values of the company to edit.
  *
  * Usage in Fluid:
@@ -35,6 +36,7 @@ class ArrayFormFactory extends CoreArrayFormFactory
     public function __construct(
         protected readonly CompanyFormConfigurator $companyFormConfigurator,
         protected readonly FormElementOptionsConfigurator $formElementOptionsConfigurator,
+        protected readonly RichTextFormElementConfigurator $richTextFormElementConfigurator,
         protected readonly CompanyFormPrefiller $companyFormPrefiller,
     ) {}
 
@@ -48,6 +50,7 @@ class ArrayFormFactory extends CoreArrayFormFactory
     ): FormDefinition {
         $configuration = $this->companyFormConfigurator->configure($configuration, $request);
         $configuration = $this->formElementOptionsConfigurator->configure($configuration, $request);
+        $configuration = $this->richTextFormElementConfigurator->configure($configuration, $request);
 
         $formDefinition = parent::build($configuration, $prototypeName, $request);
         if ($request instanceof ServerRequestInterface) {

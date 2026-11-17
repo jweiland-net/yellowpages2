@@ -38,7 +38,14 @@
                                     </f:for>
                                 </f:then>
                                 <f:else>
-                                    <f:format.nl2br>{formValue.processedValue}</f:format.nl2br>
+                                    <f:if condition="{formValue.element.properties.dbMapping.dataType} == 'richText'">
+                                        <f:then>
+                                            <yp:formatRichText element="{formValue.element}" value="{formValue.processedValue}"/>
+                                        </f:then>
+                                        <f:else>
+                                            <f:format.nl2br>{formValue.processedValue}</f:format.nl2br>
+                                        </f:else>
+                                    </f:if>
                                 </f:else>
                             </f:if>
                         </f:then>

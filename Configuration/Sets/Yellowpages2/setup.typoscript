@@ -75,6 +75,12 @@ plugin.tx_yellowpages2 {
     new {
       # Folder of the logo and the images uploaded in the company form
       uploadFolder = 1:/user_upload/tx_yellowpages2/
+      # CKEditor 5 of EXT:rte_ckeditor for rich text elements in the company form
+      richText {
+        enable = {$yellowpages2.form.richText.enable}
+        # Comma separated identifiers of form elements
+        elements = {$yellowpages2.form.richText.elements}
+      }
     }
 
     # Special configuration for the company form based on EXT:form

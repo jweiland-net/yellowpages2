@@ -238,6 +238,10 @@
 				<source>You are not allowed to create companies.</source>
 				<target>Sie dürfen keine Firmen anlegen.</target>
 			</trans-unit>
+			<trans-unit id="richText.openInNewTab">
+				<source>Open in a new tab</source>
+				<target>In neuem Tab öffnen</target>
+			</trans-unit>
 			<trans-unit id="email.form.greeting">
 				<source>Hello,</source>
 				<target>Hallo,</target>

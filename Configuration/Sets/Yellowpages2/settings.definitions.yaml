@@ -120,3 +120,15 @@ settings:
     description: 'Page UID, where companies created with the company form are stored. If empty, the first storage page of the plugin or else the current page is used.'
     type: page
     default: 0
+  yellowpages2.form.richText.enable:
+    label: 'Enable rich text editor'
+    category: Yellowpages2.form
+    description: 'Use CKEditor 5 of EXT:rte_ckeditor for the rich text elements of the company form. Requires EXT:rte_ckeditor.'
+    type: bool
+    default: false
+  yellowpages2.form.richText.elements:
+    label: 'Rich text elements'
+    category: Yellowpages2.form
+    description: 'Comma separated identifiers of form elements, which get the rich text editor. Elements with "dataType: richText" in the form definition get it, too.'
+    type: string
+    default: 'description'

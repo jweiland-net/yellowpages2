@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Form;
 
 use JWeiland\Yellowpages2\Converter\RteContentConverter;
+use JWeiland\Yellowpages2\Service\RichTextService;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
@@ -28,8 +29,8 @@ use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
  *       convertPlainTextToHtml: true
  *
  * The CompanyColumnType of the column decides, how the value is stored.
- * Text values can be converted with "convertPlainTextToHtml" or
- * "normalizePlainText". The value of an element with
+ * Text values can be converted with "convertPlainTextToHtml",
+ * "normalizePlainText" or "sanitizeRichText". The value of an element with
  * "poiPosition: true" (element type "Maps2PoiPosition" of EXT:maps2) is the
  * position of the POI collection of the company. Values of elements with
  * "options" (e.g. selects and checkboxes) are restricted to these options,
@@ -40,6 +41,7 @@ readonly class CompanyFormDataMapper
     public function __construct(
         private CompanyColumnTypeResolver $companyColumnTypeResolver,
         private RteContentConverter $rteContentConverter,
+        private RichTextService $richTextService,
     ) {}
 
     /**
@@ -107,6 +109,13 @@ readonly class CompanyFormDataMapper
         return match (true) {
             (bool)($configuration['convertPlainTextToHtml'] ?? false) => $this->rteContentConverter->convertPlainTextToHtml($text),
             (bool)($configuration['normalizePlainText'] ?? false) => $this->rteContentConverter->normalizePlainText($text),
+            (bool)($configuration['sanitizeRichText'] ?? false) => $this->richTextService->prepareForPersistence(
+                $text,
+                CompanyColumnTypeResolver::TABLE,
+                $column,
+                $companyUid,
+                $pid,
+            ),
             default => trim($text),
         };
     }
