@@ -88,17 +88,19 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
             );
         }
 
-        if ($settings['presetTrade']) {
+        $presetTrade = (int)($settings['presetTrade'] ?? 0);
+        if ($presetTrade > 0) {
             $orConstraints = [
-                $query->contains('mainTrade', (int)$settings['presetTrade']),
-                $query->contains('trades', (int)$settings['presetTrade']),
+                $query->contains('mainTrade', $presetTrade),
+                $query->contains('trades', $presetTrade),
             ];
 
             $constraints[] = $query->logicalOr(...$orConstraints);
         }
 
-        if ($settings['district']) {
-            $constraints[] = $query->equals('district', (int)$settings['district']);
+        $district = (int)($settings['district'] ?? 0);
+        if ($district > 0) {
+            $constraints[] = $query->equals('district', $district);
         }
 
         $queryResult = $query->execute();
