@@ -39,13 +39,12 @@ final readonly class RichTextEditorHook
     public function __construct(
         private RichTextEditorAssets $richTextEditorAssets,
         private RichTextSanitizer $richTextSanitizer,
-        private FormOwner $formOwner,
     ) {}
 
     public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable): void
     {
         if (
-            !$this->formOwner->isOwnForm($formRuntime)
+            !FormOwner::isYellowpages2Form($formRuntime->getFormDefinition())
             || !$renderable instanceof FormElementInterface
             || ($renderable->getProperties()['dbMapping']['dataType'] ?? '') !== RichTextFormElementConfigurator::DATA_TYPE
         ) {

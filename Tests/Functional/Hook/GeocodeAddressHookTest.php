@@ -213,7 +213,6 @@ class GeocodeAddressHookTest extends FunctionalTestCase
             $this->get(CompanyRecordService::class),
             $this->get(CompanyPoiCollectionService::class),
             $this->get(LanguageServiceFactory::class),
-            new FormOwner(),
         );
     }
 
@@ -250,7 +249,7 @@ class GeocodeAddressHookTest extends FunctionalTestCase
             ],
         ]);
 
-        $formDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, FormOwner::OWNER);
+        $formDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, FormOwner::YELLOWPAGES2);
 
         $addressPage = $formDefinition->createPage('company-data');
         foreach (array_keys(self::ADDRESS) as $identifier) {

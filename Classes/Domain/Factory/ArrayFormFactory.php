@@ -41,7 +41,6 @@ class ArrayFormFactory extends CoreArrayFormFactory
         protected readonly FormElementOptionsConfigurator $formElementOptionsConfigurator,
         protected readonly RichTextFormElementConfigurator $richTextFormElementConfigurator,
         protected readonly CompanyFormPrefiller $companyFormPrefiller,
-        protected readonly FormOwner $formOwner,
     ) {}
 
     /**
@@ -52,7 +51,7 @@ class ArrayFormFactory extends CoreArrayFormFactory
         ?string $prototypeName = null,
         ?ServerRequestInterface $request = null,
     ): FormDefinition {
-        $configuration = $this->formOwner->markAsOwnForm($configuration);
+        $configuration = FormOwner::markConfiguration($configuration);
         $configuration = $this->companyFormConfigurator->configure($configuration, $request);
         $configuration = $this->formElementOptionsConfigurator->configure($configuration, $request);
         $configuration = $this->richTextFormElementConfigurator->configure($configuration, $request);
