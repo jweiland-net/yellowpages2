@@ -1,0 +1,20 @@
+yellowpages2 {
+  templateRootPath = EXT:yellowpages2/Resources/Private/Templates/
+  partialRootPath = EXT:yellowpages2/Resources/Private/Partials/
+  layoutRootPath = EXT:yellowpages2/Resources/Private/Layouts/
+  storagePid = 10
+  pidOfMaps2Plugin = 0
+  startingUidForCategories = 1
+  uidOfDefaultDistrict = 2
+  pidOfDetailPage = 2
+  pidOfListPage = 2
+  pidOfManagementPage = 2
+  pidOfSearchResults = 2
+  userGroup = 1
+  pageBrowser.itemsPerPage = 15
+  form {
+    storagePid = 10
+    richText.enable = 0
+    richText.elements = description
+  }
+}

@@ -33,6 +33,9 @@ class CompanyFormTest extends FunctionalTestCase
 {
     use CompanyFormRequestTrait;
 
+    /**
+     * Same path as in Fixtures/Frontend/CompanyForm.typoscript
+     */
     private const MAPS2_FORM_SETUP = 'EXT:maps2/Configuration/Form/FormSetup.yaml';
 
     protected array $coreExtensionsToLoad = [

@@ -29,7 +29,11 @@ companies with the same form.
 Requirements of the company form
 ================================
 
-*   The system extension EXT:form (:composer:`typo3/cms-form`)
+*   The system extension EXT:form (:composer:`typo3/cms-form`). The site
+    set `jweiland/yellowpages2` depends on the site set `typo3/form`, which
+    provides the frontend configuration of EXT:form
+    (:typoscript:`plugin.tx_form`). Without it, the form can not be
+    rendered.
 *   EXT:maps2 12.3.0 or higher (:composer:`jweiland/maps2`) with its form
     element `Maps2PoiPosition`. The site set `jweiland/yellowpages2`
     depends on the site set `jweiland/maps2-default`, which provides the

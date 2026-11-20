@@ -1,6 +1,8 @@
 name: jweiland/yellowpages2
 label: Yellowpages2 Set
 
-# Provides the form element "Maps2PoiPosition" for the map step of the company form
 dependencies:
+  # Provides the frontend configuration of EXT:form (plugin.tx_form)
+  - typo3/form
+  # Provides the form element "Maps2PoiPosition" for the map step of the company form
   - jweiland/maps2-default
