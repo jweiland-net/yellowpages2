@@ -13,6 +13,7 @@ namespace JWeiland\Yellowpages2\Tests\Functional\Hook;
 
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
+use JWeiland\Yellowpages2\Form\FormOwner;
 use JWeiland\Yellowpages2\Hook\Form\GeocodeAddressHook;
 use JWeiland\Yellowpages2\Service\CompanyAccessService;
 use JWeiland\Yellowpages2\Service\CompanyPoiCollectionService;
@@ -212,6 +213,7 @@ class GeocodeAddressHookTest extends FunctionalTestCase
             $this->get(CompanyRecordService::class),
             $this->get(CompanyPoiCollectionService::class),
             $this->get(LanguageServiceFactory::class),
+            new FormOwner(),
         );
     }
 
@@ -247,6 +249,8 @@ class GeocodeAddressHookTest extends FunctionalTestCase
                 'Maps2PoiPosition' => ['implementationClassName' => GenericFormElement::class],
             ],
         ]);
+
+        $formDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, FormOwner::OWNER);
 
         $addressPage = $formDefinition->createPage('company-data');
         foreach (array_keys(self::ADDRESS) as $identifier) {

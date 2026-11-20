@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Hook\Form;
 
+use JWeiland\Yellowpages2\Form\FormOwner;
 use JWeiland\Yellowpages2\Form\RichTextEditorAssets;
 use JWeiland\Yellowpages2\Form\RichTextFormElementConfigurator;
 use JWeiland\Yellowpages2\Sanitizer\RichTextSanitizer;
@@ -20,7 +21,8 @@ use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 
 /**
  * Adds the CKEditor to the rich text elements (dataType "richText"), which
- * are rendered on the current page of the form. So the assets are loaded on
+ * are rendered on the current page of a form of yellowpages2 (see
+ * FormOwner). So the assets are loaded on
  * these pages only. Each textarea gets its own options as JSON.
  *
  * The toolbar of the editor is based on the tags, which the sanitizer allows
@@ -37,12 +39,14 @@ final readonly class RichTextEditorHook
     public function __construct(
         private RichTextEditorAssets $richTextEditorAssets,
         private RichTextSanitizer $richTextSanitizer,
+        private FormOwner $formOwner,
     ) {}
 
     public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable): void
     {
         if (
-            !$renderable instanceof FormElementInterface
+            !$this->formOwner->isOwnForm($formRuntime)
+            || !$renderable instanceof FormElementInterface
             || ($renderable->getProperties()['dbMapping']['dataType'] ?? '') !== RichTextFormElementConfigurator::DATA_TYPE
         ) {
             return;

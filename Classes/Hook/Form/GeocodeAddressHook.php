@@ -13,6 +13,7 @@ namespace JWeiland\Yellowpages2\Hook\Form;
 
 use JWeiland\Maps2\Domain\Model\Position;
 use JWeiland\Maps2\Service\GeoCodeService;
+use JWeiland\Yellowpages2\Form\FormOwner;
 use JWeiland\Yellowpages2\Form\PoiPosition;
 use JWeiland\Yellowpages2\Service\CompanyAccessService;
 use JWeiland\Yellowpages2\Service\CompanyPoiCollectionService;
@@ -27,8 +28,8 @@ use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
 use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 
 /**
- * Geocodes the address of the company, when the page with the address is
- * submitted. The element "Maps2PoiPosition" of EXT:maps2 on a following
+ * Geocodes the address of the company, when the page with the address of
+ * a form of yellowpages2 (see FormOwner) is submitted. The element "Maps2PoiPosition" of EXT:maps2 on a following
  * page (the map step) gets the found position, so the user can correct it.
  * The address is built of the submitted values of the elements in
  * "properties.addressElements" of the position element.
@@ -56,6 +57,7 @@ final readonly class GeocodeAddressHook
         private CompanyRecordService $companyRecordService,
         private CompanyPoiCollectionService $companyPoiCollectionService,
         private LanguageServiceFactory $languageServiceFactory,
+        private FormOwner $formOwner,
     ) {}
 
     /**
@@ -65,7 +67,9 @@ final readonly class GeocodeAddressHook
      */
     public function afterSubmit(FormRuntime $formRuntime, RenderableInterface $renderable, mixed $elementValue, array $requestArguments = []): mixed
     {
-        $positionElement = $renderable instanceof Page ? $this->getPositionElement($formRuntime->getFormDefinition(), $renderable) : null;
+        $positionElement = $renderable instanceof Page && $this->formOwner->isOwnForm($formRuntime)
+            ? $this->getPositionElement($formRuntime->getFormDefinition(), $renderable)
+            : null;
         if (!$positionElement instanceof FormElementInterface) {
             return $elementValue;
         }

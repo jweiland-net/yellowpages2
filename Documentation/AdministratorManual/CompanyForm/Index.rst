@@ -193,6 +193,33 @@ The form is rendered with the template variant `version2` of EXT:form
 :file:`EXT:yellowpages2/Resources/Private/FormFramework/Partials/Field/Field.html`
 renders the element description as text below the field.
 
+..  _company-form-hooks:
+
+Hooks of EXT:form and other forms
+---------------------------------
+
+The hooks of EXT:form are called for all forms of the installation.
+yellowpages2 registers the hooks `beforeRendering` (rich text editor, see
+:ref:`frontend-rich-text-editor`) and `afterSubmit` (geocoding of the
+address). They only act on forms, which are built by the
+:php:`\JWeiland\Yellowpages2\Domain\Factory\ArrayFormFactory` of
+yellowpages2. The factory sets the rendering option `formOwner` to
+`yellowpages2` (see :php:`\JWeiland\Yellowpages2\Form\FormOwner`).
+Other forms, e.g. contact forms or the forms of other extensions, are not
+changed, even if they contain elements with :yaml:`dataType: richText` or
+an element `Maps2PoiPosition`.
+
+If you render your own copy of :file:`Company.form.yaml`, use the factory
+of yellowpages2, as the `Management` plugin does:
+
+..  code-block:: html
+
+    <formvh:render persistenceIdentifier="EXT:my_sitepackage/Configuration/Form/Company.form.yaml"
+                   factoryClass="JWeiland\\Yellowpages2\\Domain\\Factory\\ArrayFormFactory"/>
+
+The form options, the prefill of an edited company and the configuration
+of the rich text elements are part of this factory, too.
+
 ..  _company-form-checkfaluploads:
 
 Rights checkbox of EXT:checkfaluploads
