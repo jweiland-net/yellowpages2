@@ -457,7 +457,7 @@ PSR-14 event :php:`ModifyRichTextSanitizerConfigurationEvent`. Links with
 If you use your own mail templates, add the ViewHelper to them:
 
 ..  code-block:: html
-    :caption: EXT:my_sitepackage/Resources/Private/FormFramework/Templates/Finishers/Email/Default.html (excerpt)
+    :caption: EXT:my_sitepackage/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.html (excerpt)
 
     <html xmlns:yp="http://typo3.org/ns/JWeiland/Yellowpages2/ViewHelpers"
           data-namespace-typo3-fluid="true">

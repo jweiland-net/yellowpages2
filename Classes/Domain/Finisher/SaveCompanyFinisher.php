@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Form\CompanyFormData;
 use JWeiland\Yellowpages2\Form\CompanyFormDataMapper;
 use JWeiland\Yellowpages2\Service\CompanyAccessService;
 use JWeiland\Yellowpages2\Service\CompanyRecordService;
+use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use JWeiland\Yellowpages2\Service\PluginSettingsService;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Routing\PageArguments;
@@ -37,7 +38,9 @@ use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
  * The company to edit is taken from the URI of the form. The rules of
  * CompanyAccessService are checked again before anything is stored, as the
  * form definition could be used in other places, too. The UID of the stored
- * company is available as finisher variable "SaveCompany.companyUid".
+ * company is available as finisher variable "SaveCompany.companyUid", the
+ * token for the signed edit and activation links of the moderation mail as
+ * "SaveCompany.moderationToken".
  */
 #[Autoconfigure(public: true, shared: false)]
 class SaveCompanyFinisher extends AbstractFinisher
@@ -47,6 +50,7 @@ class SaveCompanyFinisher extends AbstractFinisher
         protected readonly CompanyFormDataMapper $companyFormDataMapper,
         protected readonly CompanyRecordService $companyRecordService,
         protected readonly PluginSettingsService $pluginSettingsService,
+        protected readonly ModerationLinkTokenService $moderationLinkTokenService,
     ) {}
 
     /**
@@ -64,10 +68,12 @@ class SaveCompanyFinisher extends AbstractFinisher
             $this->companyAccessService->getFrontendUserUid(),
         );
 
-        $this->finisherContext->getFinisherVariableProvider()->add(
+        $finisherVariableProvider = $this->finisherContext->getFinisherVariableProvider();
+        $finisherVariableProvider->add($this->shortFinisherIdentifier, 'companyUid', $companyUid);
+        $finisherVariableProvider->add(
             $this->shortFinisherIdentifier,
-            'companyUid',
-            $companyUid,
+            'moderationToken',
+            $this->moderationLinkTokenService->generateToken($companyUid),
         );
 
         return null;

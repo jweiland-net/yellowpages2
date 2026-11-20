@@ -347,6 +347,11 @@ finishers:
     options:
       subject: 'A company record was created or edited'
       useFluidEmail: 1
+      # Template of this form only. Do not register it in the prototype, as
+      # it would be used for the mails of all forms of the installation.
+      templateName: CompanyModeration
+      templateRootPaths:
+        1763380800: 'EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/'
       # Sender and recipient are taken from the extension settings,
       # if they are not set here.
       #recipients:

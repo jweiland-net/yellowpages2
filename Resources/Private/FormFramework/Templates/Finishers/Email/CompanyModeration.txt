@@ -7,7 +7,7 @@
 <f:section name="Title">{title}</f:section>
 <f:section name="Main">
 <f:variable name="company">{finisherVariableProvider.SaveCompany.companyUid}</f:variable>
-<f:variable name="moderationToken">{yp:moderationToken(company: company)}</f:variable>
+<f:variable name="moderationToken">{finisherVariableProvider.SaveCompany.moderationToken}</f:variable>
 {f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.greeting')}
 
 {f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.edit')}:
