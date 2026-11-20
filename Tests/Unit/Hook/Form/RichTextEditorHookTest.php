@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Unit\Hook\Form;
 
 use JWeiland\Yellowpages2\Event\ModifyRichTextSanitizerConfigurationEvent;
+use JWeiland\Yellowpages2\Form\FormOwner;
 use JWeiland\Yellowpages2\Form\RichTextEditorAssets;
 use JWeiland\Yellowpages2\Hook\Form\RichTextEditorHook;
 use JWeiland\Yellowpages2\Sanitizer\RichTextSanitizer;
@@ -51,8 +52,11 @@ class RichTextEditorHookTest extends UnitTestCase
 
         $this->formRuntime = $this->createMock(FormRuntime::class);
         $this->formRuntime->method('getRequest')->willReturn($this->createMock(Request::class));
+        $ownFormDefinition = new FormDefinition('yellowpages2Company');
+        $ownFormDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, FormOwner::OWNER);
+        $this->formRuntime->method('getFormDefinition')->willReturn($ownFormDefinition);
 
-        $this->subject = new RichTextEditorHook($this->richTextEditorAssets, new RichTextSanitizer($this->createEventDispatcher()));
+        $this->subject = new RichTextEditorHook($this->richTextEditorAssets, new RichTextSanitizer($this->createEventDispatcher()), new FormOwner());
     }
 
     private function createEventDispatcher(): EventDispatcherInterface

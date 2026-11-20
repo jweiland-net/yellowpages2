@@ -69,6 +69,7 @@ class CompanyFormTest extends FunctionalTestCase
         self::assertSame('company-data', $formDefinition->getPageByIndex(0)->getIdentifier());
         self::assertSame('map', $formDefinition->getPageByIndex(1)->getIdentifier());
         self::assertSame('Maps2PoiPosition', $formDefinition->getElementByIdentifier('position')?->getType());
+        self::assertSame('yellowpages2', $formDefinition->getRenderingOptions()['formOwner']);
     }
 
     #[Test]
