@@ -33,8 +33,8 @@ Requirements
 Plugin configuration
 --------------------
 
-*   The `Management` plugin has the actions `listMyCompanies`, `perform` and
-    `activate`. The actions `new`, `create`, `edit` and `update` of the
+*   The `Management` plugin has the actions `listMyCompanies`, `perform`,
+    `confirmActivation` and `activate`. The actions `new`, `create`, `edit` and `update` of the
     `ManagementController` and the complete `MapController` (actions `new`,
     `create`, `edit` and `update`) have been removed. Links to them do not
     work anymore.
@@ -54,6 +54,22 @@ Plugin configuration
 *   Logged-in frontend users need to be member of the user group of
     `yellowpages2.userGroup` to create companies. Before, everyone who could
     open the page could create a company.
+
+Activation of companies
+-----------------------
+
+The activation link of the moderation mail opens the new action
+`confirmActivation`, which shows a summary of the company and a button.
+The button activates the company via POST. The action `activate` does not
+activate the company via GET anymore, but redirects to the confirmation
+page, so mail security scanners and link previews can not activate
+companies. The result is shown as flash message of the `Directory` plugin.
+If you have overridden `Templates/Company/List.html`, keep
+:html:`<f:flashMessages/>` in it.
+
+The `RestrictAccessEventListener` has been removed. The actions
+`confirmActivation` and `activate` check the `moderationToken` on their
+own and show an error message, if it is missing or invalid.
 
 Two steps instead of a separate map step
 ----------------------------------------

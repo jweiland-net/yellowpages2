@@ -1,0 +1,10 @@
+@import 'EXT:yellowpages2/Configuration/Sets/Yellowpages2/setup.typoscript'
+
+page = PAGE
+page {
+  10 = EXTBASEPLUGIN
+  10 {
+    extensionName = Yellowpages2
+    pluginName = Management
+  }
+}

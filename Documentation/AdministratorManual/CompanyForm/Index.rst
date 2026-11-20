@@ -127,8 +127,18 @@ links:
 
 *   **Edit record**: opens the company form with this company. The link
     contains a `moderationToken`, so no frontend login is needed.
-*   **Activate record**: activates the company (action `activate` of the
-    `ManagementController`).
+*   **Activate record**: opens a confirmation page with a summary of the
+    company (action `confirmActivation` of the `ManagementController`). Its
+    button activates the company via POST (action `activate`). Mail
+    security scanners and link previews open the links of a mail
+    automatically, so the link itself never activates the company.
+
+After the activation, the moderator is redirected to the list of the
+`Directory` plugin (site setting `yellowpages2.pidOfListPage`), which shows
+a success message. Without a valid `moderationToken`, e.g. for owners of
+the company, the company is not activated and an error message is shown.
+If the company is activated already, an information is shown. A request of
+the action `activate` via GET is redirected to the confirmation page.
 
 The mail is rendered with the templates
 :file:`EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.html`

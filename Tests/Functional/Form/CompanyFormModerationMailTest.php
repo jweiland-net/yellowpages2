@@ -120,7 +120,7 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
         self::assertGreaterThan(0, (int)$company['tx_maps2_uid']);
         self::assertStringContainsString('To: Moderator <moderator@example.com>', $mail);
         self::assertStringContainsString(urlencode(self::PLUGIN_NAMESPACE . '[action]') . '=perform', $mail);
-        self::assertStringContainsString(urlencode(self::PLUGIN_NAMESPACE . '[action]') . '=activate', $mail);
+        self::assertStringContainsString(urlencode(self::PLUGIN_NAMESPACE . '[action]') . '=confirmActivation', $mail);
         self::assertStringContainsString(urlencode(self::PLUGIN_NAMESPACE . '[company]') . '=' . $company['uid'], $mail);
         self::assertStringContainsString(
             urlencode(self::PLUGIN_NAMESPACE . '[moderationToken]') . '=' . $moderationToken,
@@ -131,14 +131,25 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
     }
 
     #[Test]
-    public function activationLinkOfMailActivatesCompany(): void
+    public function activationLinkOfMailShowsConfirmButtonAndActivatesCompany(): void
     {
         $this->submitMapPage();
         $company = $this->getNewCompany();
+        $moderationToken = $this->get(ModerationLinkTokenService::class)->generateToken((int)$company['uid']);
 
-        $this->request('activate', [
+        $content = (string)$this->request('confirmActivation', [
             'company' => (string)$company['uid'],
-            'moderationToken' => $this->get(ModerationLinkTokenService::class)->generateToken((int)$company['uid']),
+            'moderationToken' => $moderationToken,
+        ])->getBody();
+
+        self::assertStringContainsString('Flower shop', $content);
+        self::assertStringContainsString('name="' . self::PLUGIN_NAMESPACE . '[moderationToken]" value="' . $moderationToken . '"', $content);
+
+        $this->request('activate', [], [
+            self::PLUGIN_NAMESPACE => [
+                'company' => (string)$company['uid'],
+                'moderationToken' => $moderationToken,
+            ],
         ]);
 
         self::assertSame(0, (int)$this->getNewCompany()['hidden']);
