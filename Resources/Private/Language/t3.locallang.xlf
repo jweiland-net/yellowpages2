@@ -110,26 +110,6 @@
         <source>Back to list view</source>
         <target>crwdns310624:0crwdne310624:0</target>
       </trans-unit>
-      <trans-unit id="create">
-        <source>Create</source>
-        <target>crwdns310626:0crwdne310626:0</target>
-      </trans-unit>
-      <trans-unit id="update">
-        <source>Update</source>
-        <target>crwdns391374:0crwdne391374:0</target>
-      </trans-unit>
-      <trans-unit id="companyCreated">
-        <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target>crwdns310630:0crwdne310630:0</target>
-      </trans-unit>
-      <trans-unit id="companyUpdated">
-        <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target>crwdns310632:0crwdne310632:0</target>
-      </trans-unit>
-      <trans-unit id="pleaseChoose">
-        <source>--- Please choose ---</source>
-        <target>crwdns310634:0crwdne310634:0</target>
-      </trans-unit>
       <trans-unit id="yes">
         <source>Yes</source>
         <target>crwdns310636:0crwdne310636:0</target>
@@ -142,93 +122,9 @@
         <source>Map</source>
         <target>crwdns310640:0crwdne310640:0</target>
       </trans-unit>
-      <trans-unit id="hint">
-        <source>Hint</source>
-        <target>crwdns310642:0crwdne310642:0</target>
-      </trans-unit>
-      <trans-unit id="cshcompany">
-        <source>Enter the company name.This is mandatory.</source>
-        <target>crwdns310644:0crwdne310644:0</target>
-      </trans-unit>
-      <trans-unit id="cshstreet">
-        <source>Enter the street.This is mandatory.</source>
-        <target>crwdns310646:0crwdne310646:0</target>
-      </trans-unit>
-      <trans-unit id="cshhouseNumber">
-        <source>Enter the house number.</source>
-        <target>crwdns310648:0crwdne310648:0</target>
-      </trans-unit>
-      <trans-unit id="cshzip">
-        <source>Enter the zip code.This is mandatory.</source>
-        <target>crwdns310650:0crwdne310650:0</target>
-      </trans-unit>
-      <trans-unit id="cshcity">
-        <source>Enter the city.This is mandatory.</source>
-        <target>crwdns310652:0crwdne310652:0</target>
-      </trans-unit>
-      <trans-unit id="cshdistrict">
-        <source>Enter the district.This is mandatory.</source>
-        <target>crwdns310654:0crwdne310654:0</target>
-      </trans-unit>
-      <trans-unit id="cshtelephone">
-        <source>Enter the phone number.</source>
-        <target>crwdns310656:0crwdne310656:0</target>
-      </trans-unit>
-      <trans-unit id="cshfax">
-        <source>Enter the fax number.</source>
-        <target>crwdns310658:0crwdne310658:0</target>
-      </trans-unit>
-      <trans-unit id="cshemail">
-        <source>Enter the email address.</source>
-        <target>crwdns310660:0crwdne310660:0</target>
-      </trans-unit>
-      <trans-unit id="cshwebsite">
-        <source>Enter the URL of the website</source>
-        <target>crwdns310662:0crwdne310662:0</target>
-      </trans-unit>
-      <trans-unit id="cshcontactPerson">
-        <source>Enter the contact person.</source>
-        <target>crwdns310664:0crwdne310664:0</target>
-      </trans-unit>
-      <trans-unit id="cshopeningTimes">
-        <source>Enter the opening times.</source>
-        <target>crwdns310666:0crwdne310666:0</target>
-      </trans-unit>
-      <trans-unit id="cshdescription">
-        <source>Describe your company.This is mandatory.</source>
-        <target>crwdns310668:0crwdne310668:0</target>
-      </trans-unit>
-      <trans-unit id="cshbarrierFree">
-        <source>Is the company accessible</source>
-        <target>crwdns310670:0crwdne310670:0</target>
-      </trans-unit>
-      <trans-unit id="cshmainTrade">
-        <source>Enter a main trade</source>
-        <target>crwdns310672:0crwdne310672:0</target>
-      </trans-unit>
-      <trans-unit id="cshtrades_0">
-        <source>Enter max. 2 sub trades</source>
-        <target>crwdns310674:0crwdne310674:0</target>
-      </trans-unit>
-      <trans-unit id="cshfacebook">
-        <source>Enter a URL to facebook.</source>
-        <target>crwdns310676:0crwdne310676:0</target>
-      </trans-unit>
-      <trans-unit id="cshtwitter">
-        <source>Enter a URL to twitter.</source>
-        <target>crwdns310678:0crwdne310678:0</target>
-      </trans-unit>
-      <trans-unit id="cshinstagram">
-        <source>Enter a URL to Instagram.</source>
-        <target>crwdns310680:0crwdne310680:0</target>
-      </trans-unit>
-      <trans-unit id="cshlogo">
-        <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
-        <target>crwdns310682:0crwdne310682:0</target>
-      </trans-unit>
-      <trans-unit id="cshimages_0">
-        <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
-        <target>crwdns310684:0crwdne310684:0</target>
+      <trans-unit id="pageBrowser">
+        <source>Pagination</source>
+        <target>crwdns420333:0crwdne420333:0</target>
       </trans-unit>
       <trans-unit id="pageBrowser.first">
         <source>First</source>
@@ -258,14 +154,6 @@
         <source>A company record has been deactivated</source>
         <target>crwdns310698:0crwdne310698:0</target>
       </trans-unit>
-      <trans-unit id="email.subject.create">
-        <source>A new record was created</source>
-        <target>crwdns310700:0crwdne310700:0</target>
-      </trans-unit>
-      <trans-unit id="email.subject.update">
-        <source>A record was updated</source>
-        <target>crwdns310702:0crwdne310702:0</target>
-      </trans-unit>
       <trans-unit id="email.subject.activate">
         <source>A record was activated</source>
         <target>crwdns310704:0crwdne310704:0</target>
@@ -291,29 +179,73 @@
 					<p>The company entry %2$s (%1$s) has now been deactivated</p>]]></source>
         <target><![CDATA[crwdns310710:0%2$scrwdnd310710:0%1$scrwdne310710:0]]></target>
       </trans-unit>
-      <trans-unit id="error.upload">
-        <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-        <target>crwdns310712:0crwdne310712:0</target>
+      <trans-unit id="unauthorizedCompanyUser">
+        <source>You are not allowed to edit company records that do not assigned to you.</source>
+        <target>crwdns411229:0crwdne411229:0</target>
       </trans-unit>
-      <trans-unit id="error.fileExtension">
-        <source>You only can upload files with following file extensions: %1$s</source>
-        <target>crwdns310714:0%1$scrwdne310714:0</target>
+      <trans-unit id="userGroupNotConfigured">
+        <source>The user group, which is allowed to create companies, is not configured.</source>
+        <target>crwdns420335:0crwdne420335:0</target>
       </trans-unit>
-      <trans-unit id="errorFlashMessage">
-        <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
-        <target>crwdns310716:0%1$scrwdnd310716:0%2$scrwdne310716:0</target>
+      <trans-unit id="pluginNeedsLogin">
+        <source>Please log in to create or edit companies.</source>
+        <target>crwdns420337:0crwdne420337:0</target>
       </trans-unit>
-      <trans-unit id="errorAddressInvalid.title">
-        <source>Invalid Address</source>
-        <target>crwdns391376:0crwdne391376:0</target>
+      <trans-unit id="notAllowedToCreate">
+        <source>You are not allowed to create companies.</source>
+        <target>crwdns420339:0crwdne420339:0</target>
+      </trans-unit>
+      <trans-unit id="richText.openInNewTab">
+        <source>Open in a new tab</source>
+        <target>crwdns420341:0crwdne420341:0</target>
+      </trans-unit>
+      <trans-unit id="email.form.greeting">
+        <source>Hello,</source>
+        <target>crwdns420343:0crwdne420343:0</target>
+      </trans-unit>
+      <trans-unit id="email.form.edit">
+        <source>Edit record</source>
+        <target>crwdns420345:0crwdne420345:0</target>
+      </trans-unit>
+      <trans-unit id="email.form.activate">
+        <source>Activate record</source>
+        <target>crwdns420347:0crwdne420347:0</target>
+      </trans-unit>
+      <trans-unit id="email.form.values">
+        <source>These are the data of the created or edited record:</source>
+        <target>crwdns420349:0crwdne420349:0</target>
       </trans-unit>
       <trans-unit id="errorAddressInvalid.body">
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
         <target>crwdns391378:0crwdne391378:0</target>
       </trans-unit>
-      <trans-unit id="unauthorizedCompanyUser">
-        <source>You are not allowed to edit company records that do not assigned to you.</source>
-        <target>crwdns411229:0crwdne411229:0</target>
+      <trans-unit id="confirmActivation.header">
+        <source>Activate company</source>
+        <target>crwdns420351:0crwdne420351:0</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.description">
+        <source>Please check the company. It will be visible in frontend after the activation.</source>
+        <target>crwdns420353:0crwdne420353:0</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.address">
+        <source>Address</source>
+        <target>crwdns420355:0crwdne420355:0</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.submit">
+        <source>Activate company</source>
+        <target>crwdns420357:0crwdne420357:0</target>
+      </trans-unit>
+      <trans-unit id="activation.success">
+        <source>The company was activated and is now visible in frontend.</source>
+        <target>crwdns420359:0crwdne420359:0</target>
+      </trans-unit>
+      <trans-unit id="activation.alreadyActivated">
+        <source>The company is activated already.</source>
+        <target>crwdns420361:0crwdne420361:0</target>
+      </trans-unit>
+      <trans-unit id="activation.invalidToken">
+        <source>The company could not be activated. The link is invalid or the company does not exist anymore.</source>
+        <target>crwdns420363:0crwdne420363:0</target>
       </trans-unit>
     </body>
   </file>
