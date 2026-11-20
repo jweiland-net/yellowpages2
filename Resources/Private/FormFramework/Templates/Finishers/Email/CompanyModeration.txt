@@ -14,7 +14,7 @@
 <f:uri.action pageUid="{pidOfManagementPage}" action="perform" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}" />
 
 {f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.activate')}:
-<f:uri.action pageUid="{pidOfManagementPage}" action="activate" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}" />
+<f:uri.action pageUid="{pidOfManagementPage}" action="confirmActivation" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}" />
 
 {f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.values')}
 

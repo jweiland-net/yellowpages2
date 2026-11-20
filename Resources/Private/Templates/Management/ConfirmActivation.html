@@ -1,0 +1,43 @@
+<html lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <f:flashMessages/>
+
+    <h2>{f:translate(key: 'confirmActivation.header')}</h2>
+    <p>{f:translate(key: 'confirmActivation.description')}</p>
+
+    <dl>
+        <dt><f:translate key="tx_yellowpages2_domain_model_company.company"/></dt>
+        <dd>{company.company}</dd>
+        <dt>{f:translate(key: 'confirmActivation.address')}</dt>
+        <dd>
+            {company.street} {company.houseNumber}<br>
+            {company.zip} {company.city}
+        </dd>
+        <f:if condition="{company.district}">
+            <dt><f:translate key="tx_yellowpages2_domain_model_company.district"/></dt>
+            <dd>{company.district.district}</dd>
+        </f:if>
+        <f:if condition="{company.email}">
+            <dt><f:translate key="tx_yellowpages2_domain_model_company.email"/></dt>
+            <dd>{company.email}</dd>
+        </f:if>
+        <f:if condition="{company.website}">
+            <dt><f:translate key="tx_yellowpages2_domain_model_company.website"/></dt>
+            <dd>{company.website}</dd>
+        </f:if>
+        <dt><f:translate key="tx_yellowpages2_domain_model_company.description"/></dt>
+        <dd><f:format.html>{company.description}</f:format.html></dd>
+    </dl>
+
+    <f:form action="activate" controller="Management" method="post">
+        <f:form.hidden name="company" value="{company.uid}"/>
+        <f:form.hidden name="moderationToken" value="{moderationToken}"/>
+        <f:form.submit value="{f:translate(key: 'confirmActivation.submit')}"/>
+    </f:form>
+</f:section>
+</html>

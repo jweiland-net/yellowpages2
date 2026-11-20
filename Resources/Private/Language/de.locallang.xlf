@@ -262,6 +262,34 @@
 				<source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
 				<target>Die eingegebene Adresse konnte nicht gefunden werden. Bitte prüfen Sie die Schreibweise oder geben Sie genauere Details an (z. B. Hausnummer oder Postleitzahl).</target>
 			</trans-unit>
+			<trans-unit id="confirmActivation.header">
+				<source>Activate company</source>
+				<target>Firma freischalten</target>
+			</trans-unit>
+			<trans-unit id="confirmActivation.description">
+				<source>Please check the company. It will be visible in frontend after the activation.</source>
+				<target>Bitte prüfen Sie die Firma. Sie ist nach der Freischaltung im Frontend sichtbar.</target>
+			</trans-unit>
+			<trans-unit id="confirmActivation.address">
+				<source>Address</source>
+				<target>Adresse</target>
+			</trans-unit>
+			<trans-unit id="confirmActivation.submit">
+				<source>Activate company</source>
+				<target>Firma freischalten</target>
+			</trans-unit>
+			<trans-unit id="activation.success">
+				<source>The company was activated and is now visible in frontend.</source>
+				<target>Die Firma wurde freigeschaltet und ist jetzt im Frontend sichtbar.</target>
+			</trans-unit>
+			<trans-unit id="activation.alreadyActivated">
+				<source>The company is activated already.</source>
+				<target>Die Firma ist bereits freigeschaltet.</target>
+			</trans-unit>
+			<trans-unit id="activation.invalidToken">
+				<source>The company could not be activated. The link is invalid or the company does not exist anymore.</source>
+				<target>Die Firma konnte nicht freigeschaltet werden. Der Link ist ungültig oder die Firma existiert nicht mehr.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

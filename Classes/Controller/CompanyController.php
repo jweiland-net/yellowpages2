@@ -33,6 +33,12 @@ class CompanyController extends ActionController
     use PostProcessFluidVariablesTrait;
     use PostProcessControllerActionTrait;
     use PreProcessControllerActionTrait;
+    /**
+     * Flash messages of the Directory plugin. The Management plugin adds
+     * messages of the activation of a company here, as it redirects to the
+     * list of the Directory plugin.
+     */
+    public const FLASH_MESSAGE_QUEUE_IDENTIFIER = 'extbase.flashmessages.tx_yellowpages2_directory';
 
     public function __construct(
         protected readonly Context $context,

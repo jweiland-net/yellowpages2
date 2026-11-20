@@ -34,11 +34,11 @@ ExtensionUtility::configurePlugin(
     'yellowpages2',
     'Management',
     [
-        ManagementController::class => 'listMyCompanies, perform, activate',
+        ManagementController::class => 'listMyCompanies, perform, confirmActivation, activate',
     ],
     // non-cacheable actions
     [
-        ManagementController::class => 'listMyCompanies, perform, activate',
+        ManagementController::class => 'listMyCompanies, perform, confirmActivation, activate',
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
