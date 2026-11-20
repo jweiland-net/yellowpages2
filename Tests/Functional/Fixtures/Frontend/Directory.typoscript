@@ -1,0 +1,13 @@
+@import 'EXT:yellowpages2/Configuration/Sets/Yellowpages2/setup.typoscript'
+
+# One company per page, so the pagination is rendered with two companies
+plugin.tx_yellowpages2.settings.pageBrowser.itemsPerPage = 1
+
+page = PAGE
+page {
+  10 = EXTBASEPLUGIN
+  10 {
+    extensionName = Yellowpages2
+    pluginName = Directory
+  }
+}

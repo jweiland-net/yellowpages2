@@ -3,11 +3,12 @@
       data-namespace-typo3-fluid="true">
 
 <f:if condition="{company.images}">
-    <ul>
+    <ul class="list-unstyled">
         <f:for each="{company.images}" as="image" iteration="iterator">
             <f:if condition="{image}">
                 <li>
                     <f:image image="{image}"
+                             class="img-fluid img-thumbnail"
                              alt="{image.title}"
                              width="{settings.show.images.width}"
                              height="{settings.show.images.height}"/>

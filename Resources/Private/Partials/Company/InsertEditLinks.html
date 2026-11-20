@@ -4,22 +4,20 @@
 
 <f:security.ifHasRole role="{settings.userGroup}">
     <aside>
-        <p>
+        <p class="text-end">
             <f:link.action action="perform"
                            controller="Management"
                            pluginName="Management"
                            pageUid="{settings.pidOfManagementPage}">
                 <span>{f:translate(key: 'newCompany')}</span>
-                <span aria-hidden="true" class="icon-arrowright"></span>
             </f:link.action>
         </p>
-        <p>
+        <p class="text-end">
             <f:link.action action="listMyCompanies"
                            controller="Management"
                            pluginName="Management"
                            pageUid="{settings.pidOfManagementPage}">
                 <span>{f:translate(key: 'listMyCompanies')}</span>
-                <span aria-hidden="true" class="icon-arrowright"></span>
             </f:link.action>
         </p>
     </aside>
