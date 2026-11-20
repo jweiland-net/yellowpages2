@@ -15,6 +15,7 @@ Version 10.0.0
 *   [!!!][TASK] Require EXT:form and EXT:maps2 12.3.0 or higher
 *   [FEATURE] Store the description of the company form like the backend RTE does and convert it back to plain text for editing
 *   [FEATURE] Add CKEditor 5 to the description of the company form (site setting `yellowpages2.form.richText.enable`)
+*   [FEATURE] Load the assets of the rich text editor with the overridable Fluid partials `RichTextEditor/Textarea.html` (`renderingOptions.templateName` of rich text elements) and `RichTextEditor/LoadAssets.html` of the company form. The folder of the translations of CKEditor is the site setting `yellowpages2.form.richText.translationsPath`. `RichTextEditorOptions` builds the options of the editor only.
 *   [FEATURE] Make the tags of the rich text sanitizer configurable with the PSR-14 event `ModifyRichTextSanitizerConfigurationEvent` and build the toolbar of the editor from them
 *   [FEATURE] Render rich text elements in the mail of the moderator with the `FormatRichTextViewHelper`
 *   [!!!][TASK] Use Bootstrap 5 classes in the frontend templates: pagination, images, search form, links and messages. Remove the icon spans of an old theme. See :ref:`upgrade-10-0-0-bootstrap`.
