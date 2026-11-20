@@ -7,12 +7,12 @@
 <f:section name="main">
     <f:flashMessages/>
 
+    <f:render partial="Company/InsertEditLinks"/>
+
     <div>
         <f:render partial="Company/Search" arguments="{search: search, categories: categories}"/>
         <f:render partial="Company/Glossar" arguments="{glossar: glossar}"/>
         <f:render partial="Company/List" arguments="{_all}"/>
     </div>
-
-    <f:render partial="Company/InsertEditLinks"/>
 </f:section>
 </html>
