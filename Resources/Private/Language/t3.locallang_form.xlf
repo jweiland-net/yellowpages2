@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:yellowpages2/Resources/Private/Language/locallang_form.xlf" date="2026-11-17T12:00:00Z" product-name="yellowpages2" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="yellowpages2Company.renderingOptions.submitButtonLabel">
+        <source>Save company</source>
+        <target>crwdns420259:0crwdne420259:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.company-data.properties.label">
+        <source>Company</source>
+        <target>crwdns420261:0crwdne420261:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.company-data.renderingOptions.nextButtonLabel">
+        <source>Next step: position on the map</source>
+        <target>crwdns420263:0crwdne420263:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.map.properties.label">
+        <source>Position on the map</source>
+        <target>crwdns420265:0crwdne420265:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.map.renderingOptions.previousButtonLabel">
+        <source>Back to the company data</source>
+        <target>crwdns420267:0crwdne420267:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.company.properties.label">
+        <source>Company</source>
+        <target>crwdns420269:0crwdne420269:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.street.properties.label">
+        <source>Street</source>
+        <target>crwdns420271:0crwdne420271:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.house-number.properties.label">
+        <source>House number</source>
+        <target>crwdns420273:0crwdne420273:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.zip.properties.label">
+        <source>Zip</source>
+        <target>crwdns420275:0crwdne420275:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.city.properties.label">
+        <source>City</source>
+        <target>crwdns420277:0crwdne420277:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.district.properties.label">
+        <source>District</source>
+        <target>crwdns420279:0crwdne420279:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.district.properties.prependOptionLabel">
+        <source>Please choose</source>
+        <target>crwdns420281:0crwdne420281:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.telephone.properties.label">
+        <source>Telephone</source>
+        <target>crwdns420283:0crwdne420283:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.fax.properties.label">
+        <source>Fax</source>
+        <target>crwdns420285:0crwdne420285:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.email.properties.label">
+        <source>Email</source>
+        <target>crwdns420287:0crwdne420287:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.website.properties.label">
+        <source>Website</source>
+        <target>crwdns420289:0crwdne420289:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.contact-person.properties.label">
+        <source>Contact person</source>
+        <target>crwdns420291:0crwdne420291:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.opening-times.properties.label">
+        <source>Opening times</source>
+        <target>crwdns420293:0crwdne420293:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.description.properties.label">
+        <source>Description</source>
+        <target>crwdns420295:0crwdne420295:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.barrier-free.properties.label">
+        <source>Barrier-free</source>
+        <target>crwdns420297:0crwdne420297:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.main-trade.properties.label">
+        <source>Main trade</source>
+        <target>crwdns420299:0crwdne420299:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.main-trade.properties.prependOptionLabel">
+        <source>Please choose</source>
+        <target>crwdns420301:0crwdne420301:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.trades.properties.label">
+        <source>Further trades</source>
+        <target>crwdns420303:0crwdne420303:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.trades.properties.elementDescription">
+        <source>Choose up to two further trades</source>
+        <target>crwdns420305:0crwdne420305:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.facebook.properties.label">
+        <source>Facebook</source>
+        <target>crwdns420307:0crwdne420307:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.twitter.properties.label">
+        <source>Twitter</source>
+        <target>crwdns420309:0crwdne420309:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.instagram.properties.label">
+        <source>Instagram</source>
+        <target>crwdns420311:0crwdne420311:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.logo.properties.label">
+        <source>Logo</source>
+        <target>crwdns420313:0crwdne420313:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.logo.properties.elementDescription">
+        <source>JPG or PNG, max. 4 MB</source>
+        <target>crwdns420315:0crwdne420315:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-1.properties.label">
+        <source>Image</source>
+        <target>crwdns420317:0crwdne420317:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-1.properties.elementDescription">
+        <source>JPG or PNG, max. 4 MB</source>
+        <target>crwdns420319:0crwdne420319:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-2.properties.label">
+        <source>Further image</source>
+        <target>crwdns420321:0crwdne420321:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-2.properties.elementDescription">
+        <source>JPG or PNG, max. 4 MB</source>
+        <target>crwdns420323:0crwdne420323:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.position.properties.label">
+        <source>Position on the map</source>
+        <target>crwdns420325:0crwdne420325:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.position.properties.elementDescription">
+        <source>Move the marker, if the position of your company is not correct.</source>
+        <target>crwdns420327:0crwdne420327:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.finisher.EmailToReceiver.subject">
+        <source>A company record was created or edited</source>
+        <target>crwdns420329:0crwdne420329:0</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.finisher.FlashMessage.messageBody">
+        <source>Your company was saved. It will be visible after it was activated by our team.</source>
+        <target>crwdns420331:0crwdne420331:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
