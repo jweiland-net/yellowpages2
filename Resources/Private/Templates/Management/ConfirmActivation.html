@@ -37,7 +37,7 @@
     <f:form action="activate" controller="Management" method="post">
         <f:form.hidden name="company" value="{company.uid}"/>
         <f:form.hidden name="moderationToken" value="{moderationToken}"/>
-        <f:form.submit value="{f:translate(key: 'confirmActivation.submit')}"/>
+        <f:form.submit class="btn btn-primary" value="{f:translate(key: 'confirmActivation.submit')}"/>
     </f:form>
 </f:section>
 </html>

@@ -151,6 +151,10 @@
 			</trans-unit>
 
 
+			<trans-unit id="pageBrowser">
+				<source>Pagination</source>
+				<target>Seitennavigation</target>
+			</trans-unit>
 			<trans-unit id="pageBrowser.first">
 				<source>First</source>
 				<target>Erste</target>

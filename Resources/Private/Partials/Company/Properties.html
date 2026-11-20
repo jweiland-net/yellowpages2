@@ -3,7 +3,7 @@
       data-namespace-typo3-fluid="true">
 
 <f:if condition="{company.hasValidUser}">
-    <p>
+    <p class="text-end">
         <f:link.action class="edit"
                        action="perform"
                        controller="Management"
@@ -11,15 +11,15 @@
                        pageUid="{settings.pidOfManagementPage}"
                        arguments="{company: company}">
             <span>{f:translate(key: 'editCompany')}</span>
-            <span aria-hidden="true" class="icon-arrowright"></span>
         </f:link.action>
     </p>
 </f:if>
 
-<div class="thumbnail grid_1 floatleft">
+<div class="float-start me-3 mb-3">
     <figure>
         <f:if condition="{company.logo}">
             <f:image image="{company.firstLogo}"
+                     class="img-fluid img-thumbnail"
                      alt="Logo: {company.company}"
                      width="{settings.show.logo.width}"
                      height="{settings.show.logo.height}"/>
@@ -69,7 +69,7 @@
                                pluginName="maps2"
                                pageUid="{settings.pidOfMaps2Plugin}"
                                arguments="{poiCollectionUid: company.txMaps2Uid}">
-                    <f:image class="floatright"
+                    <f:image class="float-end img-fluid"
                              src="EXT:yellowpages2/Resources/Public/Icons/ThumbMaps2.png"
                              alt="{f:translate(key: 'altTextMapImg')}"/>
                 </f:link.action>
