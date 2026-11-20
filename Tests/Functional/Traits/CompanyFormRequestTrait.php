@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
@@ -61,7 +62,8 @@ trait CompanyFormRequestTrait
             ->withQueryParams(['tx_yellowpages2_management' => $pluginQueryParameters])
             ->withAttribute('frontend.typoscript', $frontendTypoScript)
             ->withAttribute('routing', new PageArguments(2, '0', []))
-            ->withAttribute('extbase', new ExtbaseRequestParameters());
+            ->withAttribute('extbase', new ExtbaseRequestParameters())
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
 
         return new Request($request);
     }
