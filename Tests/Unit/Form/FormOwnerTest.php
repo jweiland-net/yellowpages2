@@ -16,7 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
 use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
 use TYPO3\CMS\Form\Domain\Model\FormElements\Page;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -24,53 +23,57 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class FormOwnerTest extends UnitTestCase
 {
-    private FormOwner $subject;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->subject = new FormOwner();
-    }
-
     #[Test]
-    public function markAsOwnFormSetsRenderingOption(): void
+    public function markConfigurationSetsRenderingOption(): void
     {
         self::assertSame(
             ['renderingOptions' => ['submitButtonLabel' => 'Save', 'formOwner' => 'yellowpages2']],
-            $this->subject->markAsOwnForm(['renderingOptions' => ['submitButtonLabel' => 'Save', 'formOwner' => 'other']]),
+            FormOwner::markConfiguration(['renderingOptions' => ['submitButtonLabel' => 'Save', 'formOwner' => 'other']]),
         );
     }
 
     #[Test]
-    public function isOwnFormWithFormRuntimeOfOwnFormReturnsTrue(): void
+    public function isYellowpages2FormWithOwnFormReturnsTrue(): void
     {
-        $formRuntime = $this->createMock(FormRuntime::class);
-        $formRuntime->method('getFormDefinition')->willReturn($this->buildFormDefinition('yellowpages2'));
-
-        self::assertTrue($this->subject->isOwnForm($formRuntime));
+        self::assertTrue(FormOwner::isYellowpages2Form($this->buildFormDefinition('yellowpages2')));
     }
 
     #[Test]
-    public function isOwnFormWithElementOfOwnFormReturnsTrue(): void
+    public function isYellowpages2FormWithOtherFormReturnsFalse(): void
     {
-        $element = $this->buildFormDefinition('yellowpages2')->getElementByIdentifier('description');
-
-        self::assertTrue($this->subject->isOwnForm($element));
+        self::assertFalse(FormOwner::isYellowpages2Form($this->buildFormDefinition('events2')));
+        self::assertFalse(FormOwner::isYellowpages2Form($this->buildFormDefinition('')));
+        self::assertFalse(FormOwner::isYellowpages2Form(null));
     }
 
     #[Test]
-    public function isOwnFormWithElementOfForeignFormReturnsFalse(): void
+    public function isRenderableOfYellowpages2FormWithElementOfOwnFormReturnsTrue(): void
     {
-        self::assertFalse($this->subject->isOwnForm($this->buildFormDefinition('events2')->getElementByIdentifier('description')));
-        self::assertFalse($this->subject->isOwnForm($this->buildFormDefinition('')->getElementByIdentifier('description')));
+        $formDefinition = $this->buildFormDefinition('yellowpages2');
+
+        self::assertTrue(FormOwner::isRenderableOfYellowpages2Form($formDefinition));
+        self::assertTrue(FormOwner::isRenderableOfYellowpages2Form($this->getDescription($formDefinition)));
     }
 
     #[Test]
-    public function isOwnFormWithElementWithoutFormReturnsFalse(): void
+    public function isRenderableOfYellowpages2FormWithElementOfOtherFormReturnsFalse(): void
     {
-        self::assertFalse($this->subject->isOwnForm(new GenericFormElement('description', 'Textarea')));
-        self::assertFalse($this->subject->isOwnForm(null));
+        self::assertFalse(FormOwner::isRenderableOfYellowpages2Form($this->getDescription($this->buildFormDefinition('events2'))));
+        self::assertFalse(FormOwner::isRenderableOfYellowpages2Form($this->getDescription($this->buildFormDefinition(''))));
+    }
+
+    #[Test]
+    public function isRenderableOfYellowpages2FormWithElementWithoutFormReturnsFalse(): void
+    {
+        self::assertFalse(FormOwner::isRenderableOfYellowpages2Form(new GenericFormElement('description', 'Textarea')));
+    }
+
+    private function getDescription(FormDefinition $formDefinition): GenericFormElement
+    {
+        $element = $formDefinition->getElementByIdentifier('description');
+        self::assertInstanceOf(GenericFormElement::class, $element);
+
+        return $element;
     }
 
     private function buildFormDefinition(string $owner): FormDefinition
@@ -83,7 +86,7 @@ class FormOwnerTest extends UnitTestCase
             ],
         ]);
         if ($owner !== '') {
-            $formDefinition->setRenderingOption('formOwner', $owner);
+            $formDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, $owner);
         }
         $formDefinition->createPage('page')->createElement('description', 'Textarea');
 

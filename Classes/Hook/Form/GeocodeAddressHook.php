@@ -57,7 +57,6 @@ final readonly class GeocodeAddressHook
         private CompanyRecordService $companyRecordService,
         private CompanyPoiCollectionService $companyPoiCollectionService,
         private LanguageServiceFactory $languageServiceFactory,
-        private FormOwner $formOwner,
     ) {}
 
     /**
@@ -67,7 +66,7 @@ final readonly class GeocodeAddressHook
      */
     public function afterSubmit(FormRuntime $formRuntime, RenderableInterface $renderable, mixed $elementValue, array $requestArguments = []): mixed
     {
-        $positionElement = $renderable instanceof Page && $this->formOwner->isOwnForm($formRuntime)
+        $positionElement = $renderable instanceof Page && FormOwner::isYellowpages2Form($formRuntime->getFormDefinition())
             ? $this->getPositionElement($formRuntime->getFormDefinition(), $renderable)
             : null;
         if (!$positionElement instanceof FormElementInterface) {

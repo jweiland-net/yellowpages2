@@ -64,7 +64,7 @@ class FormOwnerTest extends FunctionalTestCase
     #[Test]
     public function ownFormGetsExactlyOneRichTextEditor(): void
     {
-        $formDefinition = $this->buildFormDefinition(FormOwner::OWNER);
+        $formDefinition = $this->buildFormDefinition(FormOwner::YELLOWPAGES2);
 
         $this->renderForm($formDefinition);
 
@@ -116,7 +116,7 @@ class FormOwnerTest extends FunctionalTestCase
     {
         $geoCodeService = $this->createMock(GeoCodeService::class);
         $geoCodeService->expects($this->once())->method('getFirstFoundPositionByAddress')->willReturn(null);
-        $formDefinition = $this->buildFormDefinition(FormOwner::OWNER);
+        $formDefinition = $this->buildFormDefinition(FormOwner::YELLOWPAGES2);
 
         $this->buildGeocodeAddressHook($geoCodeService)->afterSubmit(
             $this->buildFormRuntime($formDefinition, new FormState()),
@@ -171,7 +171,6 @@ class FormOwnerTest extends FunctionalTestCase
             $this->get(CompanyRecordService::class),
             $this->get(CompanyPoiCollectionService::class),
             $this->get(LanguageServiceFactory::class),
-            new FormOwner(),
         );
     }
 

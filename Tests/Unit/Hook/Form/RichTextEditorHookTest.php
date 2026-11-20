@@ -53,10 +53,10 @@ class RichTextEditorHookTest extends UnitTestCase
         $this->formRuntime = $this->createMock(FormRuntime::class);
         $this->formRuntime->method('getRequest')->willReturn($this->createMock(Request::class));
         $ownFormDefinition = new FormDefinition('yellowpages2Company');
-        $ownFormDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, FormOwner::OWNER);
+        $ownFormDefinition->setRenderingOption(FormOwner::RENDERING_OPTION, FormOwner::YELLOWPAGES2);
         $this->formRuntime->method('getFormDefinition')->willReturn($ownFormDefinition);
 
-        $this->subject = new RichTextEditorHook($this->richTextEditorAssets, new RichTextSanitizer($this->createEventDispatcher()), new FormOwner());
+        $this->subject = new RichTextEditorHook($this->richTextEditorAssets, new RichTextSanitizer($this->createEventDispatcher()));
     }
 
     private function createEventDispatcher(): EventDispatcherInterface

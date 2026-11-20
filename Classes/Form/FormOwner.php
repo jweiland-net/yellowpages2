@@ -11,56 +11,56 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Form;
 
+use TYPO3\CMS\Form\Domain\Model\Exception\FormDefinitionConsistencyException;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
+use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable;
 use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 
 /**
- * The hooks of EXT:form are called for all forms of the installation. They
- * must only act on the forms of yellowpages2, which are built by the
- * ArrayFormFactory of yellowpages2. The factory sets the rendering option
- * "formOwner" before the form is built, so it is available in all hooks,
- * incl. "initializeFormElement".
+ * The hooks of EXT:form are called for all forms of the installation. The
+ * hooks of yellowpages2 act on forms built by its ArrayFormFactory only.
+ * The factory marks these forms with the rendering option "formOwner".
+ * EXT:form sets the rendering options before it creates the elements, so
+ * the mark is available in the hook "initializeFormElement", too.
  */
-readonly class FormOwner
+final class FormOwner
 {
     public const RENDERING_OPTION = 'formOwner';
 
-    public const OWNER = 'yellowpages2';
+    public const YELLOWPAGES2 = 'yellowpages2';
 
     /**
      * @param array<string, mixed> $configuration Form definition
      * @return array<string, mixed>
      */
-    public function markAsOwnForm(array $configuration): array
+    public static function markConfiguration(array $configuration): array
     {
-        $configuration['renderingOptions'][self::RENDERING_OPTION] = self::OWNER;
+        $configuration['renderingOptions'][self::RENDERING_OPTION] = self::YELLOWPAGES2;
 
         return $configuration;
     }
 
-    /**
-     * Accepts the form runtime of the hooks "beforeRendering" and
-     * "afterSubmit" or a renderable of any other hook
-     */
-    public function isOwnForm(FormRuntime|RenderableInterface|null $subject): bool
+    public static function isYellowpages2Form(?FormDefinition $formDefinition): bool
     {
-        $formDefinition = $subject instanceof FormRuntime
-            ? $subject->getFormDefinition()
-            : $this->findFormDefinition($subject);
-
-        return ($formDefinition?->getRenderingOptions()[self::RENDERING_OPTION] ?? '') === self::OWNER;
+        return $formDefinition instanceof FormDefinition
+            && ($formDefinition->getRenderingOptions()[self::RENDERING_OPTION] ?? '') === self::YELLOWPAGES2;
     }
 
     /**
-     * The renderable may not be attached to a form yet
+     * Returns false, if the renderable is not attached to a form (yet)
      */
-    private function findFormDefinition(?RenderableInterface $renderable): ?FormDefinition
+    public static function isRenderableOfYellowpages2Form(RenderableInterface $renderable): bool
     {
-        while ($renderable !== null && !$renderable instanceof FormDefinition) {
-            $renderable = $renderable->getParentRenderable();
+        if ($renderable instanceof FormDefinition) {
+            return self::isYellowpages2Form($renderable);
         }
 
-        return $renderable;
+        try {
+            $formDefinition = $renderable instanceof AbstractRenderable ? $renderable->getRootForm() : null;
+        } catch (FormDefinitionConsistencyException) {
+            $formDefinition = null;
+        }
+
+        return self::isYellowpages2Form($formDefinition);
     }
 }
