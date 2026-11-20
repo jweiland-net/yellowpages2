@@ -85,14 +85,18 @@ readonly class CompanyFormConfigurator
      */
     private function configureEmailFinisher(array $finisher): array
     {
-        $finisher['options'] = array_replace(
-            [
-                'senderAddress' => $this->extConf->getEmailFromAddress(),
-                'senderName' => $this->extConf->getEmailFromName(),
-                'recipients' => [$this->extConf->getEmailToAddress() => $this->extConf->getEmailToName()],
-            ],
-            array_filter(is_array($finisher['options'] ?? null) ? $finisher['options'] : []),
-        );
+        // The extension settings are read only, if the form definition does not set the option
+        $defaults = [
+            'senderAddress' => $this->extConf->getEmailFromAddress(...),
+            'senderName' => $this->extConf->getEmailFromName(...),
+            'recipients' => fn(): array => [$this->extConf->getEmailToAddress() => $this->extConf->getEmailToName()],
+        ];
+
+        $options = array_filter(is_array($finisher['options'] ?? null) ? $finisher['options'] : []);
+        foreach ($defaults as $option => $getDefault) {
+            $options[$option] ??= $getDefault();
+        }
+        $finisher['options'] = $options;
 
         return $finisher;
     }

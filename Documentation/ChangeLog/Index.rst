@@ -21,6 +21,7 @@ Version 10.0.0
 *   [!!!][TASK] Use Bootstrap 5 classes in the frontend templates: pagination, images, search form, links and messages. Remove the icon spans of an old theme. See :ref:`upgrade-10-0-0-bootstrap`.
 *   [BUGFIX] Do not emit PHP warnings for missing settings `presetTrade` and `district` in the list of companies
 *   [BUGFIX] Select the categories of the search form with a sub query, which is valid with the SQL mode `only_full_group_by` of MySQL and on PostgreSQL
+*   [BUGFIX] Read sender and recipient of the moderation mail from the extension settings only, if the form definition does not set them
 *   [TASK] Render the links to create a company and to list the own companies above the search form, left aligned like the edit link of a company
 *   [!!!][TASK] Activate companies via a confirmation page (action `confirmActivation`) and POST only. The result is shown as flash message of the Directory plugin. Remove the `RestrictAccessEventListener`.
 

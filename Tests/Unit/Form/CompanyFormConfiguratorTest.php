@@ -79,13 +79,32 @@ class CompanyFormConfiguratorTest extends UnitTestCase
 
         self::assertSame(
             [
+                'subject' => 'Subject',
                 'senderAddress' => 'from@example.com',
                 'senderName' => 'From',
                 'recipients' => ['moderator@example.com' => 'Moderator'],
-                'subject' => 'Subject',
             ],
             $configuration['finishers'][2]['options'],
         );
+    }
+
+    /**
+     * Without sender address in extension settings and install tool,
+     * ExtConf throws an exception. It must not be called.
+     */
+    #[Test]
+    public function configureWithSenderAndRecipientOfFormDefinitionDoesNotReadExtensionSettings(): void
+    {
+        $subject = new CompanyFormConfigurator($this->companyAccessService, new ExtConf());
+        $options = [
+            'senderAddress' => 'own@example.com',
+            'senderName' => 'Own',
+            'recipients' => ['team@example.com' => 'Team'],
+        ];
+
+        $configuration = $subject->configure(['finishers' => [['identifier' => 'EmailToReceiver', 'options' => $options]]], null);
+
+        self::assertSame($options, $configuration['finishers'][0]['options']);
     }
 
     #[Test]
