@@ -110,26 +110,6 @@
         <source>Back to list view</source>
         <target state="final">Tilbage til listevisning</target>
       </trans-unit>
-      <trans-unit id="create" approved="yes">
-        <source>Create</source>
-        <target state="final">Opret</target>
-      </trans-unit>
-      <trans-unit id="update" approved="yes">
-        <source>Update</source>
-        <target state="final">Opdatér</target>
-      </trans-unit>
-      <trans-unit id="companyCreated" approved="yes">
-        <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="final">Tak for din indtastning. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager maks. 1-2 hverdage.</target>
-      </trans-unit>
-      <trans-unit id="companyUpdated" approved="yes">
-        <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="final">Din virksomhed blev opdateret. Bemærk, at din virksomhed først vil blive kontrolleret og udgivet af administratoren. Du vil derefter blive underrettet via e-mail om aktiveringen. Denne proces tager maks. 1-2 hverdage.</target>
-      </trans-unit>
-      <trans-unit id="pleaseChoose" approved="yes">
-        <source>--- Please choose ---</source>
-        <target state="final">--- Vælg venligst ---</target>
-      </trans-unit>
       <trans-unit id="yes" approved="yes">
         <source>Yes</source>
         <target state="final">Ja</target>
@@ -142,93 +122,9 @@
         <source>Map</source>
         <target state="final">Kort</target>
       </trans-unit>
-      <trans-unit id="hint" approved="yes">
-        <source>Hint</source>
-        <target state="final">Tip</target>
-      </trans-unit>
-      <trans-unit id="cshcompany" approved="yes">
-        <source>Enter the company name.This is mandatory.</source>
-        <target state="final">Indtast virksomhedens navn. Dette er obligatorisk.</target>
-      </trans-unit>
-      <trans-unit id="cshstreet" approved="yes">
-        <source>Enter the street.This is mandatory.</source>
-        <target state="final">Indtast gadenavn. Dette er obligatorisk.</target>
-      </trans-unit>
-      <trans-unit id="cshhouseNumber" approved="yes">
-        <source>Enter the house number.</source>
-        <target state="final">Indtast husnummeret.</target>
-      </trans-unit>
-      <trans-unit id="cshzip" approved="yes">
-        <source>Enter the zip code.This is mandatory.</source>
-        <target state="final">Indtast postnummeret. Dette er obligatorisk.</target>
-      </trans-unit>
-      <trans-unit id="cshcity" approved="yes">
-        <source>Enter the city.This is mandatory.</source>
-        <target state="final">Indtast bynavn. Dette er obligatorisk.</target>
-      </trans-unit>
-      <trans-unit id="cshdistrict" approved="yes">
-        <source>Enter the district.This is mandatory.</source>
-        <target state="final">Indtast distriktet. Dette er obligatorisk.</target>
-      </trans-unit>
-      <trans-unit id="cshtelephone" approved="yes">
-        <source>Enter the phone number.</source>
-        <target state="final">Indtast telefonnummeret.</target>
-      </trans-unit>
-      <trans-unit id="cshfax" approved="yes">
-        <source>Enter the fax number.</source>
-        <target state="final">Indtast faxnummeret.</target>
-      </trans-unit>
-      <trans-unit id="cshemail" approved="yes">
-        <source>Enter the email address.</source>
-        <target state="final">Indtast e-mailadressen.</target>
-      </trans-unit>
-      <trans-unit id="cshwebsite" approved="yes">
-        <source>Enter the URL of the website</source>
-        <target state="final">Indtast webadressen på webstedet</target>
-      </trans-unit>
-      <trans-unit id="cshcontactPerson" approved="yes">
-        <source>Enter the contact person.</source>
-        <target state="final">Indtast kontaktpersonen.</target>
-      </trans-unit>
-      <trans-unit id="cshopeningTimes" approved="yes">
-        <source>Enter the opening times.</source>
-        <target state="final">Indtast åbningstiderne.</target>
-      </trans-unit>
-      <trans-unit id="cshdescription" approved="yes">
-        <source>Describe your company.This is mandatory.</source>
-        <target state="final">Beskriv din virksomhed. Dette er obligatorisk.</target>
-      </trans-unit>
-      <trans-unit id="cshbarrierFree" approved="yes">
-        <source>Is the company accessible</source>
-        <target state="final">Er virksomheden tilgængelig</target>
-      </trans-unit>
-      <trans-unit id="cshmainTrade" approved="yes">
-        <source>Enter a main trade</source>
-        <target state="final">Indtast en hovedbranche</target>
-      </trans-unit>
-      <trans-unit id="cshtrades_0" approved="yes">
-        <source>Enter max. 2 sub trades</source>
-        <target state="final">Indtast maks. to underbrancher</target>
-      </trans-unit>
-      <trans-unit id="cshfacebook" approved="yes">
-        <source>Enter a URL to facebook.</source>
-        <target state="final">Indtast en URL til Facebook.</target>
-      </trans-unit>
-      <trans-unit id="cshtwitter" approved="yes">
-        <source>Enter a URL to twitter.</source>
-        <target state="final">Angiv en URL til X / Twitter.</target>
-      </trans-unit>
-      <trans-unit id="cshinstagram" approved="yes">
-        <source>Enter a URL to Instagram.</source>
-        <target state="final">Indtast en URL til Instagram.</target>
-      </trans-unit>
-      <trans-unit id="cshlogo" approved="yes">
-        <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
-        <target state="final">Upload logofil</target>
-      </trans-unit>
-      <trans-unit id="cshimages_0" approved="yes">
-        <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
-        <target state="final">Upload maks. 5 billedfiler (jpg,gif,png). Brug de samme billeddimensioner (dvs. 3:2, 3:4) hvis du uploader mere end et billede.</target>
+      <trans-unit id="pageBrowser">
+        <source>Pagination</source>
+        <target state="needs-translation">Pagination</target>
       </trans-unit>
       <trans-unit id="pageBrowser.first" approved="yes">
         <source>First</source>
@@ -257,14 +153,6 @@
       <trans-unit id="email.subject.deactivated.admin" approved="yes">
         <source>A company record has been deactivated</source>
         <target state="final">Din virksomheds optegnelse er blevet deaktiveret</target>
-      </trans-unit>
-      <trans-unit id="email.subject.create" approved="yes">
-        <source>A new record was created</source>
-        <target state="final">Et nyt element blev oprettet</target>
-      </trans-unit>
-      <trans-unit id="email.subject.update" approved="yes">
-        <source>A record was updated</source>
-        <target state="final">Et nyt element blev opdateret</target>
       </trans-unit>
       <trans-unit id="email.subject.activate" approved="yes">
         <source>A record was activated</source>
@@ -300,29 +188,73 @@
 					<p>Kære admin</p>
 					<p>Virksomhedsindtastningen %2$s (%1$s) er nu blevet deaktiveret</p>]]></target>
       </trans-unit>
-      <trans-unit id="error.upload" approved="yes">
-        <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-        <target state="final">Noget gik galt med dine uploadede filer. Prøv venligst igen. Fejl: </target>
+      <trans-unit id="unauthorizedCompanyUser" approved="yes">
+        <source>You are not allowed to edit company records that do not assigned to you.</source>
+        <target state="final">Du har ikke tilladelse til at redigere virksomhedselementer, der ikke er tildelt dig.</target>
       </trans-unit>
-      <trans-unit id="error.fileExtension" approved="yes">
-        <source>You only can upload files with following file extensions: %1$s</source>
-        <target state="final">Du kan kun uploade filer med følgende filtyper: %1$s</target>
+      <trans-unit id="userGroupNotConfigured">
+        <source>The user group, which is allowed to create companies, is not configured.</source>
+        <target state="needs-translation">The user group, which is allowed to create companies, is not configured.</target>
       </trans-unit>
-      <trans-unit id="errorFlashMessage" approved="yes">
-        <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
-        <target state="final">Der opstod en fejl under forsøget på at hente %1$s-&gt;%2$s()</target>
+      <trans-unit id="pluginNeedsLogin">
+        <source>Please log in to create or edit companies.</source>
+        <target state="needs-translation">Please log in to create or edit companies.</target>
       </trans-unit>
-      <trans-unit id="errorAddressInvalid.title" approved="yes">
-        <source>Invalid Address</source>
-        <target state="final">Ugyldig adresse</target>
+      <trans-unit id="notAllowedToCreate">
+        <source>You are not allowed to create companies.</source>
+        <target state="needs-translation">You are not allowed to create companies.</target>
+      </trans-unit>
+      <trans-unit id="richText.openInNewTab">
+        <source>Open in a new tab</source>
+        <target state="needs-translation">Open in a new tab</target>
+      </trans-unit>
+      <trans-unit id="email.form.greeting">
+        <source>Hello,</source>
+        <target state="needs-translation">Hello,</target>
+      </trans-unit>
+      <trans-unit id="email.form.edit">
+        <source>Edit record</source>
+        <target state="needs-translation">Edit record</target>
+      </trans-unit>
+      <trans-unit id="email.form.activate">
+        <source>Activate record</source>
+        <target state="needs-translation">Activate record</target>
+      </trans-unit>
+      <trans-unit id="email.form.values">
+        <source>These are the data of the created or edited record:</source>
+        <target state="needs-translation">These are the data of the created or edited record:</target>
       </trans-unit>
       <trans-unit id="errorAddressInvalid.body" approved="yes">
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
         <target state="final">Adressen du angav kunne ikke findes. Tjek stavning eller angiv mere specifikke detaljer (f.eks. gadenummer eller postnummer).</target>
       </trans-unit>
-      <trans-unit id="unauthorizedCompanyUser" approved="yes">
-        <source>You are not allowed to edit company records that do not assigned to you.</source>
-        <target state="final">Du har ikke tilladelse til at redigere virksomhedselementer, der ikke er tildelt dig.</target>
+      <trans-unit id="confirmActivation.header">
+        <source>Activate company</source>
+        <target state="needs-translation">Activate company</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.description">
+        <source>Please check the company. It will be visible in frontend after the activation.</source>
+        <target state="needs-translation">Please check the company. It will be visible in frontend after the activation.</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.address">
+        <source>Address</source>
+        <target state="needs-translation">Address</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.submit">
+        <source>Activate company</source>
+        <target state="needs-translation">Activate company</target>
+      </trans-unit>
+      <trans-unit id="activation.success">
+        <source>The company was activated and is now visible in frontend.</source>
+        <target state="needs-translation">The company was activated and is now visible in frontend.</target>
+      </trans-unit>
+      <trans-unit id="activation.alreadyActivated">
+        <source>The company is activated already.</source>
+        <target state="needs-translation">The company is activated already.</target>
+      </trans-unit>
+      <trans-unit id="activation.invalidToken">
+        <source>The company could not be activated. The link is invalid or the company does not exist anymore.</source>
+        <target state="needs-translation">The company could not be activated. The link is invalid or the company does not exist anymore.</target>
       </trans-unit>
     </body>
   </file>
