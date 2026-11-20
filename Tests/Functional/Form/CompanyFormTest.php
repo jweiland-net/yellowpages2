@@ -48,6 +48,17 @@ class CompanyFormTest extends FunctionalTestCase
         'jweiland/yellowpages2',
     ];
 
+    protected array $configurationToUseInTestInstance = [
+        'EXTENSIONS' => [
+            'yellowpages2' => [
+                'emailFromAddress' => 'sender@example.com',
+                'emailFromName' => 'Sender',
+                'emailToAddress' => 'moderator@example.com',
+                'emailToName' => 'Moderator',
+            ],
+        ],
+    ];
+
     protected function setUp(): void
     {
         parent::setUp();
