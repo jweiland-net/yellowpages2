@@ -20,6 +20,10 @@ Requirements
 ------------
 
 *   The system extension EXT:form (:composer:`typo3/cms-form`) is required.
+    The site set `jweiland/yellowpages2` depends on the site set
+    `typo3/form` now, which provides :typoscript:`plugin.tx_form` in the
+    frontend. If you include the TypoScript of yellowpages2 without the
+    site set, include the TypoScript of EXT:form, too.
 *   EXT:maps2 12.3.0 or higher (:composer:`jweiland/maps2`) is required. It
     was optional before. Its form element `Maps2PoiPosition` renders the map
     step of the company form. The site set `jweiland/yellowpages2` depends on
