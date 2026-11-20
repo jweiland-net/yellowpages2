@@ -110,26 +110,6 @@
         <source>Back to list view</source>
         <target state="translated">Vissza a listanézethez</target>
       </trans-unit>
-      <trans-unit id="create">
-        <source>Create</source>
-        <target state="translated">Létrehozás</target>
-      </trans-unit>
-      <trans-unit id="update">
-        <source>Update</source>
-        <target state="translated">Frissítés</target>
-      </trans-unit>
-      <trans-unit id="companyCreated">
-        <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="translated">Köszönjük a bejegyzését. Kérjük, vegye figyelembe, hogy cégét először a Pforzheim Webkoordináció ellenőrzi és engedélyezi. Az aktiválásról e-mailben értesítjük. Ez a folyamat legfeljebb 1-2 munkanapot vesz igénybe.</target>
-      </trans-unit>
-      <trans-unit id="companyUpdated">
-        <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="translated">Cégét frissítettük. Kérjük, vegye figyelembe, hogy cégét először a Pforzheim Webkoordináció ellenőrzi és engedélyezi. Az aktiválásról e-mailben értesítjük. Ez a folyamat legfeljebb 1-2 munkanapot vesz igénybe.</target>
-      </trans-unit>
-      <trans-unit id="pleaseChoose">
-        <source>--- Please choose ---</source>
-        <target state="translated">--- Kérem, válasszon ---</target>
-      </trans-unit>
       <trans-unit id="yes">
         <source>Yes</source>
         <target state="translated">Igen</target>
@@ -142,93 +122,9 @@
         <source>Map</source>
         <target state="translated">Térkép</target>
       </trans-unit>
-      <trans-unit id="hint">
-        <source>Hint</source>
-        <target state="translated">Tipp</target>
-      </trans-unit>
-      <trans-unit id="cshcompany">
-        <source>Enter the company name.This is mandatory.</source>
-        <target state="translated">Adja meg a cég nevét. Ez kötelező.</target>
-      </trans-unit>
-      <trans-unit id="cshstreet">
-        <source>Enter the street.This is mandatory.</source>
-        <target state="translated">Adja meg az utcát. Ez kötelező.</target>
-      </trans-unit>
-      <trans-unit id="cshhouseNumber">
-        <source>Enter the house number.</source>
-        <target state="translated">Adja meg a házszámot.</target>
-      </trans-unit>
-      <trans-unit id="cshzip">
-        <source>Enter the zip code.This is mandatory.</source>
-        <target state="translated">Adja meg az irányítószámot. Ez kötelező.</target>
-      </trans-unit>
-      <trans-unit id="cshcity">
-        <source>Enter the city.This is mandatory.</source>
-        <target state="translated">Adja meg a várost. Ez kötelező.</target>
-      </trans-unit>
-      <trans-unit id="cshdistrict">
-        <source>Enter the district.This is mandatory.</source>
-        <target state="translated">Adja meg a kerületet. Ez kötelező.</target>
-      </trans-unit>
-      <trans-unit id="cshtelephone">
-        <source>Enter the phone number.</source>
-        <target state="translated">Adja meg a telefonszámot.</target>
-      </trans-unit>
-      <trans-unit id="cshfax">
-        <source>Enter the fax number.</source>
-        <target state="translated">Adja meg a faxszámot.</target>
-      </trans-unit>
-      <trans-unit id="cshemail">
-        <source>Enter the email address.</source>
-        <target state="translated">Adja meg az e-mail címet.</target>
-      </trans-unit>
-      <trans-unit id="cshwebsite">
-        <source>Enter the URL of the website</source>
-        <target state="translated">Adja meg a weboldal URL-jét</target>
-      </trans-unit>
-      <trans-unit id="cshcontactPerson">
-        <source>Enter the contact person.</source>
-        <target state="translated">Adja meg a kapcsolattartót.</target>
-      </trans-unit>
-      <trans-unit id="cshopeningTimes">
-        <source>Enter the opening times.</source>
-        <target state="translated">Adja meg a nyitvatartási időt.</target>
-      </trans-unit>
-      <trans-unit id="cshdescription">
-        <source>Describe your company.This is mandatory.</source>
-        <target state="translated">Írja le cégét. Ez kötelező.</target>
-      </trans-unit>
-      <trans-unit id="cshbarrierFree">
-        <source>Is the company accessible</source>
-        <target state="translated">Akadálymentesen elérhető-e a cég?</target>
-      </trans-unit>
-      <trans-unit id="cshmainTrade">
-        <source>Enter a main trade</source>
-        <target state="translated">Adjon meg egy fő szakmát</target>
-      </trans-unit>
-      <trans-unit id="cshtrades_0">
-        <source>Enter max. 2 sub trades</source>
-        <target state="translated">Adjon meg legfeljebb 2 alszakmát</target>
-      </trans-unit>
-      <trans-unit id="cshfacebook">
-        <source>Enter a URL to facebook.</source>
-        <target state="translated">Adja meg a Facebook URL-jét.</target>
-      </trans-unit>
-      <trans-unit id="cshtwitter">
-        <source>Enter a URL to twitter.</source>
-        <target state="translated">Adja meg a Twitter URL-jét.</target>
-      </trans-unit>
-      <trans-unit id="cshinstagram">
-        <source>Enter a URL to Instagram.</source>
-        <target state="translated">Adja meg az Instagram URL-jét.</target>
-      </trans-unit>
-      <trans-unit id="cshlogo">
-        <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
-        <target state="translated">Töltse fel a logófájlt (jpg,gif,png) négyzetes formátumban.</target>
-      </trans-unit>
-      <trans-unit id="cshimages_0">
-        <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
-        <target state="translated">Töltsön fel legfeljebb 5 képfájlt (jpg,gif,png). Több kép feltöltése esetén kérjük, használja ugyanazokat a képméreteket (pl. 3:2, 3:4).</target>
+      <trans-unit id="pageBrowser">
+        <source>Pagination</source>
+        <target state="needs-translation">Pagination</target>
       </trans-unit>
       <trans-unit id="pageBrowser.first">
         <source>First</source>
@@ -257,14 +153,6 @@
       <trans-unit id="email.subject.deactivated.admin">
         <source>A company record has been deactivated</source>
         <target state="translated">Egy cégrekord deaktiválásra került</target>
-      </trans-unit>
-      <trans-unit id="email.subject.create">
-        <source>A new record was created</source>
-        <target state="translated">Új rekord jött létre</target>
-      </trans-unit>
-      <trans-unit id="email.subject.update">
-        <source>A record was updated</source>
-        <target state="translated">Egy rekord frissítésre került</target>
       </trans-unit>
       <trans-unit id="email.subject.activate">
         <source>A record was activated</source>
@@ -300,29 +188,73 @@
 					<p>Tisztelt rendszergazda!</p>
 					<p>A(z) %2$s (%1$s) cégbejegyzés deaktiválásra került</p>]]></target>
       </trans-unit>
-      <trans-unit id="error.upload">
-        <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-        <target state="translated">Hiba történt a feltöltött fájljaival. Kérjük, próbálja újra. Hiba: </target>
+      <trans-unit id="unauthorizedCompanyUser">
+        <source>You are not allowed to edit company records that do not assigned to you.</source>
+        <target state="translated">Ön nem szerkesztheti azokat a cégrekordokat, amelyek nincsenek Önhöz rendelve.</target>
       </trans-unit>
-      <trans-unit id="error.fileExtension">
-        <source>You only can upload files with following file extensions: %1$s</source>
-        <target state="translated">Csak a következő kiterjesztésű fájlokat töltheti fel: %1$s</target>
+      <trans-unit id="userGroupNotConfigured">
+        <source>The user group, which is allowed to create companies, is not configured.</source>
+        <target state="needs-translation">The user group, which is allowed to create companies, is not configured.</target>
       </trans-unit>
-      <trans-unit id="errorFlashMessage">
-        <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
-        <target state="translated">Hiba történt a(z) %1$s-&gt;%2$s() hívása közben</target>
+      <trans-unit id="pluginNeedsLogin">
+        <source>Please log in to create or edit companies.</source>
+        <target state="needs-translation">Please log in to create or edit companies.</target>
       </trans-unit>
-      <trans-unit id="errorAddressInvalid.title">
-        <source>Invalid Address</source>
-        <target state="translated">Érvénytelen cím</target>
+      <trans-unit id="notAllowedToCreate">
+        <source>You are not allowed to create companies.</source>
+        <target state="needs-translation">You are not allowed to create companies.</target>
+      </trans-unit>
+      <trans-unit id="richText.openInNewTab">
+        <source>Open in a new tab</source>
+        <target state="needs-translation">Open in a new tab</target>
+      </trans-unit>
+      <trans-unit id="email.form.greeting">
+        <source>Hello,</source>
+        <target state="needs-translation">Hello,</target>
+      </trans-unit>
+      <trans-unit id="email.form.edit">
+        <source>Edit record</source>
+        <target state="needs-translation">Edit record</target>
+      </trans-unit>
+      <trans-unit id="email.form.activate">
+        <source>Activate record</source>
+        <target state="needs-translation">Activate record</target>
+      </trans-unit>
+      <trans-unit id="email.form.values">
+        <source>These are the data of the created or edited record:</source>
+        <target state="needs-translation">These are the data of the created or edited record:</target>
       </trans-unit>
       <trans-unit id="errorAddressInvalid.body">
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
         <target state="translated">A megadott cím nem található. Ellenőrizze a helyesírást, vagy adjon meg pontosabb adatokat (pl. házszámot vagy irányítószámot).</target>
       </trans-unit>
-      <trans-unit id="unauthorizedCompanyUser">
-        <source>You are not allowed to edit company records that do not assigned to you.</source>
-        <target state="translated">Ön nem szerkesztheti azokat a cégrekordokat, amelyek nincsenek Önhöz rendelve.</target>
+      <trans-unit id="confirmActivation.header">
+        <source>Activate company</source>
+        <target state="needs-translation">Activate company</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.description">
+        <source>Please check the company. It will be visible in frontend after the activation.</source>
+        <target state="needs-translation">Please check the company. It will be visible in frontend after the activation.</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.address">
+        <source>Address</source>
+        <target state="needs-translation">Address</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.submit">
+        <source>Activate company</source>
+        <target state="needs-translation">Activate company</target>
+      </trans-unit>
+      <trans-unit id="activation.success">
+        <source>The company was activated and is now visible in frontend.</source>
+        <target state="needs-translation">The company was activated and is now visible in frontend.</target>
+      </trans-unit>
+      <trans-unit id="activation.alreadyActivated">
+        <source>The company is activated already.</source>
+        <target state="needs-translation">The company is activated already.</target>
+      </trans-unit>
+      <trans-unit id="activation.invalidToken">
+        <source>The company could not be activated. The link is invalid or the company does not exist anymore.</source>
+        <target state="needs-translation">The company could not be activated. The link is invalid or the company does not exist anymore.</target>
       </trans-unit>
     </body>
   </file>
