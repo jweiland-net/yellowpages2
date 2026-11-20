@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:yellowpages2/Resources/Private/Language/locallang_form.xlf" date="2026-11-17T12:00:00Z" product-name="yellowpages2" target-language="hu">
+    <header/>
+    <body>
+      <trans-unit id="yellowpages2Company.renderingOptions.submitButtonLabel">
+        <source>Save company</source>
+        <target state="needs-translation">Save company</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.company-data.properties.label">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.company-data.renderingOptions.nextButtonLabel">
+        <source>Next step: position on the map</source>
+        <target state="needs-translation">Next step: position on the map</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.map.properties.label">
+        <source>Position on the map</source>
+        <target state="needs-translation">Position on the map</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.map.renderingOptions.previousButtonLabel">
+        <source>Back to the company data</source>
+        <target state="needs-translation">Back to the company data</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.company.properties.label">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.street.properties.label">
+        <source>Street</source>
+        <target state="needs-translation">Street</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.house-number.properties.label">
+        <source>House number</source>
+        <target state="needs-translation">House number</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.zip.properties.label">
+        <source>Zip</source>
+        <target state="needs-translation">Zip</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.city.properties.label">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.district.properties.label">
+        <source>District</source>
+        <target state="needs-translation">District</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.district.properties.prependOptionLabel">
+        <source>Please choose</source>
+        <target state="needs-translation">Please choose</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.telephone.properties.label">
+        <source>Telephone</source>
+        <target state="needs-translation">Telephone</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.fax.properties.label">
+        <source>Fax</source>
+        <target state="needs-translation">Fax</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.email.properties.label">
+        <source>Email</source>
+        <target state="needs-translation">Email</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.website.properties.label">
+        <source>Website</source>
+        <target state="needs-translation">Website</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.contact-person.properties.label">
+        <source>Contact person</source>
+        <target state="needs-translation">Contact person</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.opening-times.properties.label">
+        <source>Opening times</source>
+        <target state="needs-translation">Opening times</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.description.properties.label">
+        <source>Description</source>
+        <target state="needs-translation">Description</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.barrier-free.properties.label">
+        <source>Barrier-free</source>
+        <target state="needs-translation">Barrier-free</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.main-trade.properties.label">
+        <source>Main trade</source>
+        <target state="needs-translation">Main trade</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.main-trade.properties.prependOptionLabel">
+        <source>Please choose</source>
+        <target state="needs-translation">Please choose</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.trades.properties.label">
+        <source>Further trades</source>
+        <target state="needs-translation">Further trades</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.trades.properties.elementDescription">
+        <source>Choose up to two further trades</source>
+        <target state="needs-translation">Choose up to two further trades</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.facebook.properties.label">
+        <source>Facebook</source>
+        <target state="needs-translation">Facebook</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.twitter.properties.label">
+        <source>Twitter</source>
+        <target state="needs-translation">Twitter</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.instagram.properties.label">
+        <source>Instagram</source>
+        <target state="needs-translation">Instagram</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.logo.properties.label">
+        <source>Logo</source>
+        <target state="needs-translation">Logo</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.logo.properties.elementDescription">
+        <source>JPG or PNG, max. 4 MB</source>
+        <target state="needs-translation">JPG or PNG, max. 4 MB</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-1.properties.label">
+        <source>Image</source>
+        <target state="needs-translation">Image</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-1.properties.elementDescription">
+        <source>JPG or PNG, max. 4 MB</source>
+        <target state="needs-translation">JPG or PNG, max. 4 MB</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-2.properties.label">
+        <source>Further image</source>
+        <target state="needs-translation">Further image</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.image-2.properties.elementDescription">
+        <source>JPG or PNG, max. 4 MB</source>
+        <target state="needs-translation">JPG or PNG, max. 4 MB</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.position.properties.label">
+        <source>Position on the map</source>
+        <target state="needs-translation">Position on the map</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.element.position.properties.elementDescription">
+        <source>Move the marker, if the position of your company is not correct.</source>
+        <target state="needs-translation">Move the marker, if the position of your company is not correct.</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.finisher.EmailToReceiver.subject">
+        <source>A company record was created or edited</source>
+        <target state="needs-translation">A company record was created or edited</target>
+      </trans-unit>
+      <trans-unit id="yellowpages2Company.finisher.FlashMessage.messageBody">
+        <source>Your company was saved. It will be visible after it was activated by our team.</source>
+        <target state="needs-translation">Your company was saved. It will be visible after it was activated by our team.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
