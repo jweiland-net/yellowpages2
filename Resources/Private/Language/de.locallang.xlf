@@ -110,26 +110,6 @@
         <source>Back to list view</source>
         <target state="final">Zurück zur Listenansicht</target>
       </trans-unit>
-      <trans-unit id="create" approved="yes">
-        <source>Create</source>
-        <target state="final">Erstellen</target>
-      </trans-unit>
-      <trans-unit id="update">
-        <source>Update</source>
-        <target state="needs-translation">Update</target>
-      </trans-unit>
-      <trans-unit id="companyCreated" approved="yes">
-        <source>Thank you for your entry. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="final">Vielen Dank für Ihren Eintrag. Bitte beachten Sie, dass Ihre Daten zuerst von der Webkoordination von Pforzheim überprüft und freigegeben werden. Sie werden dann per E-Mail über die Aktivierung benachrichtigt. Dieser Vorgang dauert höchstens 1-2 Werktage.</target>
-      </trans-unit>
-      <trans-unit id="companyUpdated" approved="yes">
-        <source>Your company was updated. Please note that your company will be first checked and released by the Webkoordination of Pforzheim. You will then be notified by e-mail about the activation. This process takes max. 1-2 business days.</source>
-        <target state="final">Vielen Dank für Ihren Eintrag. Bitte beachten Sie, dass Ihre Daten zuerst von der Webkoordination von Pforzheim überprüft und freigegeben werden. Sie werden dann per E-Mail über die Aktivierung benachrichtigt. Dieser Vorgang dauert höchstens 1-2 Werktage.</target>
-      </trans-unit>
-      <trans-unit id="pleaseChoose" approved="yes">
-        <source>--- Please choose ---</source>
-        <target state="final">--- Bitte wählen ---</target>
-      </trans-unit>
       <trans-unit id="yes" approved="yes">
         <source>Yes</source>
         <target state="final">Ja</target>
@@ -142,93 +122,9 @@
         <source>Map</source>
         <target state="final">Karte</target>
       </trans-unit>
-      <trans-unit id="hint" approved="yes">
-        <source>Hint</source>
-        <target state="final">Hinweis</target>
-      </trans-unit>
-      <trans-unit id="cshcompany" approved="yes">
-        <source>Enter the company name.This is mandatory.</source>
-        <target state="final">Geben Sie den Firmennamen an. Dies ist ein Pflichtfeld.</target>
-      </trans-unit>
-      <trans-unit id="cshstreet" approved="yes">
-        <source>Enter the street.This is mandatory.</source>
-        <target state="final">Geben Sie die Straße an. Dies ist ein Pflichtfeld.</target>
-      </trans-unit>
-      <trans-unit id="cshhouseNumber" approved="yes">
-        <source>Enter the house number.</source>
-        <target state="final">Geben Sie die Hausnummer an.</target>
-      </trans-unit>
-      <trans-unit id="cshzip" approved="yes">
-        <source>Enter the zip code.This is mandatory.</source>
-        <target state="final">Geben Sie die PLZ an. Dies ist ein Pflichtfeld.</target>
-      </trans-unit>
-      <trans-unit id="cshcity" approved="yes">
-        <source>Enter the city.This is mandatory.</source>
-        <target state="final">Geben Sie die Stadt an. Dies ist ein Pflichtfeld.</target>
-      </trans-unit>
-      <trans-unit id="cshdistrict" approved="yes">
-        <source>Enter the district.This is mandatory.</source>
-        <target state="final">Geben Sie den Stadtteil an. Dies ist ein Pflichtfeld.</target>
-      </trans-unit>
-      <trans-unit id="cshtelephone" approved="yes">
-        <source>Enter the phone number.</source>
-        <target state="final">Geben Sie die Telefonnummer an. Format Beispiel: 07231 1234456</target>
-      </trans-unit>
-      <trans-unit id="cshfax" approved="yes">
-        <source>Enter the fax number.</source>
-        <target state="final">Geben Sie die Faxnummer an. Format Beispiel: 07231 1234456</target>
-      </trans-unit>
-      <trans-unit id="cshemail" approved="yes">
-        <source>Enter the email address.</source>
-        <target state="final">Geben Sie die E-Mail Adresse an.</target>
-      </trans-unit>
-      <trans-unit id="cshwebsite" approved="yes">
-        <source>Enter the URL of the website</source>
-        <target state="final">Geben Sie die URL zur Webseite ein</target>
-      </trans-unit>
-      <trans-unit id="cshcontactPerson" approved="yes">
-        <source>Enter the contact person.</source>
-        <target state="final">Geben Sie hier die Kontaktperson.</target>
-      </trans-unit>
-      <trans-unit id="cshopeningTimes" approved="yes">
-        <source>Enter the opening times.</source>
-        <target state="final">Geben Sie hier die Öffnungszeiten an. Bitte verwenden Sie als Zeitformat mm:hh (z.B. 08:30 Uhr). Zeilenumbrüche werden in der Ausgabe auf der Webseite berücksichtigt.</target>
-      </trans-unit>
-      <trans-unit id="cshdescription" approved="yes">
-        <source>Describe your company.This is mandatory.</source>
-        <target state="final">Geben Sie ein Beschreibung Ihrer Firma an. Dies ist ein Pflichtfeld.</target>
-      </trans-unit>
-      <trans-unit id="cshbarrierFree" approved="yes">
-        <source>Is the company accessible</source>
-        <target state="final">Setzen Sie den Haken, wenn die Firma barrierefrei zugängig ist</target>
-      </trans-unit>
-      <trans-unit id="cshmainTrade" approved="yes">
-        <source>Enter a main trade</source>
-        <target state="final">Wählen Sie die Hauptkategorie für Ihre Firma aus</target>
-      </trans-unit>
-      <trans-unit id="cshtrades_0" approved="yes">
-        <source>Enter max. 2 sub trades</source>
-        <target state="final">Wählen Sie max. 2 Unterkategorien für Ihre Firma aus</target>
-      </trans-unit>
-      <trans-unit id="cshfacebook" approved="yes">
-        <source>Enter a URL to facebook.</source>
-        <target state="final">Geben Sie die URL zur Facebook Seite ein, falls vorhanden.</target>
-      </trans-unit>
-      <trans-unit id="cshtwitter" approved="yes">
-        <source>Enter a URL to twitter.</source>
-        <target state="final">Geben Sie die URL zu Twitter Seite ein, falls vorhanden.</target>
-      </trans-unit>
-      <trans-unit id="cshinstagram" approved="yes">
-        <source>Enter a URL to Instagram.</source>
-        <target state="final">Geben Sie die URL zur Instagram Seite ein, falls vorhanden.</target>
-      </trans-unit>
-      <trans-unit id="cshlogo" approved="yes">
-        <source>Upload the logo file (jpg,gif,png) in a square formatting.</source>
-        <target state="final">Laden Sie das Firmenlogo in quadratischem Format hoch (jpg,gif,png).</target>
-      </trans-unit>
-      <trans-unit id="cshimages_0" approved="yes">
-        <source>Upload max. 5 image files (jpg,gif,png). Please use the same image dimensions (i.e. 3:2, 3:4) if uploading more than one image.</source>
-        <target state="final">Laden Sie max. 5 Bilddateien (jpg, gif, png) hoch. Bitte benutzen Sie bei mehreren Bildern immer das gleiche Bildformat (z.B. 3:2, 4:3) um eine ruckelfrei Ausgabe der Bildergalerie zu gewährleisten.</target>
+      <trans-unit id="pageBrowser">
+        <source>Pagination</source>
+        <target state="needs-translation">Pagination</target>
       </trans-unit>
       <trans-unit id="pageBrowser.first" approved="yes">
         <source>First</source>
@@ -257,14 +153,6 @@
       <trans-unit id="email.subject.deactivated.admin" approved="yes">
         <source>A company record has been deactivated</source>
         <target state="final">Unternehmen wurde deaktiviert!</target>
-      </trans-unit>
-      <trans-unit id="email.subject.create" approved="yes">
-        <source>A new record was created</source>
-        <target state="final">Ein neuer Datensatz wurde erstellt</target>
-      </trans-unit>
-      <trans-unit id="email.subject.update" approved="yes">
-        <source>A record was updated</source>
-        <target state="final">Ein Datensatz wurde aktualisiert</target>
       </trans-unit>
       <trans-unit id="email.subject.activate" approved="yes">
         <source>A record was activated</source>
@@ -300,29 +188,73 @@
 					<p>Sehr geehrter Administrator</p>
 					<p>Der Firmeneintrag %2$s (%1$s) wurde nun deaktiviert</p>]]></target>
       </trans-unit>
-      <trans-unit id="error.upload" approved="yes">
-        <source>Something went wrong with your uploaded files. Please try again. Error: </source>
-        <target state="final">Etwas ist mit Ihren hochgeladenen Dateien schief gelaufen. Bitte versuchen Sie es erneut. Fehler: </target>
+      <trans-unit id="unauthorizedCompanyUser">
+        <source>You are not allowed to edit company records that do not assigned to you.</source>
+        <target state="needs-translation">You are not allowed to edit company records that do not assigned to you.</target>
       </trans-unit>
-      <trans-unit id="error.fileExtension" approved="yes">
-        <source>You only can upload files with following file extensions: %1$s</source>
-        <target state="final">Sie können nur Dateien mit folgenden Dateiendungen hochladen: %1$s</target>
+      <trans-unit id="userGroupNotConfigured">
+        <source>The user group, which is allowed to create companies, is not configured.</source>
+        <target state="needs-translation">The user group, which is allowed to create companies, is not configured.</target>
       </trans-unit>
-      <trans-unit id="errorFlashMessage" approved="yes">
-        <source>An error occurred while trying to call %1$s-&gt;%2$s()</source>
-        <target state="final">Beim Aufruf von %1$s-&gt;%2$s () ist ein Fehler aufgetreten</target>
+      <trans-unit id="pluginNeedsLogin">
+        <source>Please log in to create or edit companies.</source>
+        <target state="needs-translation">Please log in to create or edit companies.</target>
       </trans-unit>
-      <trans-unit id="errorAddressInvalid.title">
-        <source>Invalid Address</source>
-        <target state="needs-translation">Invalid Address</target>
+      <trans-unit id="notAllowedToCreate">
+        <source>You are not allowed to create companies.</source>
+        <target state="needs-translation">You are not allowed to create companies.</target>
+      </trans-unit>
+      <trans-unit id="richText.openInNewTab">
+        <source>Open in a new tab</source>
+        <target state="needs-translation">Open in a new tab</target>
+      </trans-unit>
+      <trans-unit id="email.form.greeting">
+        <source>Hello,</source>
+        <target state="needs-translation">Hello,</target>
+      </trans-unit>
+      <trans-unit id="email.form.edit">
+        <source>Edit record</source>
+        <target state="needs-translation">Edit record</target>
+      </trans-unit>
+      <trans-unit id="email.form.activate">
+        <source>Activate record</source>
+        <target state="needs-translation">Activate record</target>
+      </trans-unit>
+      <trans-unit id="email.form.values">
+        <source>These are the data of the created or edited record:</source>
+        <target state="needs-translation">These are the data of the created or edited record:</target>
       </trans-unit>
       <trans-unit id="errorAddressInvalid.body">
         <source>The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</source>
         <target state="needs-translation">The address you entered could not be found. Please check the spelling or provide more specific details (e.g., street number or zip code).</target>
       </trans-unit>
-      <trans-unit id="unauthorizedCompanyUser">
-        <source>You are not allowed to edit company records that do not assigned to you.</source>
-        <target state="needs-translation">You are not allowed to edit company records that do not assigned to you.</target>
+      <trans-unit id="confirmActivation.header">
+        <source>Activate company</source>
+        <target state="needs-translation">Activate company</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.description">
+        <source>Please check the company. It will be visible in frontend after the activation.</source>
+        <target state="needs-translation">Please check the company. It will be visible in frontend after the activation.</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.address">
+        <source>Address</source>
+        <target state="needs-translation">Address</target>
+      </trans-unit>
+      <trans-unit id="confirmActivation.submit">
+        <source>Activate company</source>
+        <target state="needs-translation">Activate company</target>
+      </trans-unit>
+      <trans-unit id="activation.success">
+        <source>The company was activated and is now visible in frontend.</source>
+        <target state="needs-translation">The company was activated and is now visible in frontend.</target>
+      </trans-unit>
+      <trans-unit id="activation.alreadyActivated">
+        <source>The company is activated already.</source>
+        <target state="needs-translation">The company is activated already.</target>
+      </trans-unit>
+      <trans-unit id="activation.invalidToken">
+        <source>The company could not be activated. The link is invalid or the company does not exist anymore.</source>
+        <target state="needs-translation">The company could not be activated. The link is invalid or the company does not exist anymore.</target>
       </trans-unit>
     </body>
   </file>
