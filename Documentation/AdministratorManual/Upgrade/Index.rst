@@ -122,8 +122,6 @@ of the plugins. Update your overrides and your CSS:
         -   `float-end img-fluid`
     *   -   images of the company without class
         -   `img-fluid img-thumbnail` in an `ul.list-unstyled`
-    *   -   paragraphs of the links to create, list and edit companies
-        -   `text-end`
     *   -   search form without classes
         -   `mb-3`, `form-label`, `form-select`, `form-control` and
             `btn btn-primary`. The select and the text field got labels.
@@ -138,6 +136,12 @@ Bootstrap 5 contains no icon font. Telephone and fax number are prefixed
 with the labels `Telephone` and `Fax` instead of the icons. Add your own
 icons in overrides of the templates, if needed. The new label `pageBrowser`
 is the `aria-label` of the pagination.
+
+The links to create a company and to list the own companies are rendered
+above the search form instead of below the list, left aligned like the
+edit link of a company. If you override
+:file:`Templates/Company/List.html`, move the partial
+`Company/InsertEditLinks` accordingly.
 
 Removed templates
 -----------------

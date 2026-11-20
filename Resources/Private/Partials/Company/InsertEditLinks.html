@@ -4,7 +4,7 @@
 
 <f:security.ifHasRole role="{settings.userGroup}">
     <aside>
-        <p class="text-end">
+        <p>
             <f:link.action action="perform"
                            controller="Management"
                            pluginName="Management"
@@ -12,7 +12,7 @@
                 <span>{f:translate(key: 'newCompany')}</span>
             </f:link.action>
         </p>
-        <p class="text-end">
+        <p>
             <f:link.action action="listMyCompanies"
                            controller="Management"
                            pluginName="Management"
