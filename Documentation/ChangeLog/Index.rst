@@ -19,6 +19,7 @@ Version 10.0.0
 *   [FEATURE] Render rich text elements in the mail of the moderator with the `FormatRichTextViewHelper`
 *   [!!!][TASK] Use Bootstrap 5 classes in the frontend templates: pagination, images, search form, links and messages. Remove the icon spans of an old theme. See :ref:`upgrade-10-0-0-bootstrap`.
 *   [BUGFIX] Do not emit PHP warnings for missing settings `presetTrade` and `district` in the list of companies
+*   [TASK] Render the links to create a company and to list the own companies above the search form, left aligned like the edit link of a company
 *   [!!!][TASK] Activate companies via a confirmation page (action `confirmActivation`) and POST only. The result is shown as flash message of the Directory plugin. Remove the `RestrictAccessEventListener`.
 
 Version 9.0.2
