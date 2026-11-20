@@ -4,10 +4,6 @@ TYPO3:
       prototypes:
         standard:
           finishersDefinition:
-            EmailToReceiver:
-              options:
-                templateRootPaths:
-                  1763380800: 'EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/'
             SaveCompanyFinisher:
               implementationClassName: 'JWeiland\Yellowpages2\Domain\Finisher\SaveCompanyFinisher'
       persistenceManager:

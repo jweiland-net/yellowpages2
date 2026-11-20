@@ -85,8 +85,8 @@ package, remove them. Adapt the form with a copy of
 *   `Templates/Management/New.html`, `Templates/Management/Edit.html`
 *   `Templates/Map/New.html`, `Templates/Map/Create.html`,
     `Templates/Map/Edit.html`, `Templates/Map/Update.html` (the moderation
-    mail is :file:`Resources/Private/FormFramework/Templates/Finishers/Email/Default.html`
-    and :file:`Default.txt` now)
+    mail is :file:`Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.html`
+    and :file:`CompanyModeration.txt` now)
 *   `Partials/Company/FormFields.html`, `Partials/Company/Field.html`,
     `Partials/Company/Fields/*.html`, `Partials/FormErrors.html`
 

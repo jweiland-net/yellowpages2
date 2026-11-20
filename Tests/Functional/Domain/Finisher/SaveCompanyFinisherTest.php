@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Functional\Domain\Finisher;
 
 use JWeiland\Yellowpages2\Domain\Finisher\SaveCompanyFinisher;
+use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use JWeiland\Yellowpages2\Tests\Functional\Traits\CompanyFormDefinitionTrait;
 use JWeiland\Yellowpages2\Tests\Functional\Traits\CompanyFormRequestTrait;
 use PHPUnit\Framework\Attributes\Test;
@@ -119,6 +120,20 @@ class SaveCompanyFinisherTest extends FunctionalTestCase
     }
 
     #[Test]
+    public function executeProvidesModerationTokenOfStoredCompany(): void
+    {
+        $this->loginFrontendUser(6);
+
+        $finisherContext = null;
+        $companyUid = $this->executeFinisher(self::FORM_VALUES, $this->buildFormRequest(), $finisherContext);
+
+        self::assertSame(
+            $this->get(ModerationLinkTokenService::class)->generateToken($companyUid),
+            $finisherContext?->getFinisherVariableProvider()->get('SaveCompany', 'moderationToken'),
+        );
+    }
+
+    #[Test]
     public function executeUpdatesPoiCollectionOfEditedCompany(): void
     {
         $this->executeFinisher(self::FORM_VALUES, $this->buildModerationRequest(1));
@@ -181,7 +196,7 @@ class SaveCompanyFinisherTest extends FunctionalTestCase
      * @param array<string, mixed> $formValues
      * @return int UID of the stored company
      */
-    private function executeFinisher(array $formValues, Request $request): int
+    private function executeFinisher(array $formValues, Request $request, ?FinisherContext &$finisherContext = null): int
     {
         $formState = new FormState();
         foreach ($formValues as $identifier => $value) {
