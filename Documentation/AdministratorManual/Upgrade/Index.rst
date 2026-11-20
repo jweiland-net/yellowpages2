@@ -94,6 +94,51 @@ after the second page was submitted:
     position. The POI collection of an edited company is updated, instead
     of creating a new one.
 
+..  _upgrade-10-0-0-bootstrap:
+
+Frontend markup uses Bootstrap 5
+--------------------------------
+
+The templates of yellowpages2 and the company form use the classes of
+Bootstrap 5. On a page with Bootstrap 5 the output works without own CSS
+or template overrides. The company form uses the template variant
+`version2` of EXT:form, see :ref:`company-form-markup`.
+
+The following classes have been replaced in the templates and partials
+of the plugins. Update your overrides and your CSS:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Before
+        -   Now
+    *   -   `f3-widget-paginator` of the pagination
+        -   `nav` with `aria-label`, `pagination`, `page-item` and
+            `page-link`
+    *   -   `thumbnail grid_1 floatleft` of the logo
+        -   `float-start me-3 mb-3`, the image gets
+            `img-fluid img-thumbnail`
+    *   -   `floatright` of the map image
+        -   `float-end img-fluid`
+    *   -   images of the company without class
+        -   `img-fluid img-thumbnail` in an `ul.list-unstyled`
+    *   -   paragraphs of the links to create, list and edit companies
+        -   `text-end`
+    *   -   search form without classes
+        -   `mb-3`, `form-label`, `form-select`, `form-control` and
+            `btn btn-primary`. The select and the text field got labels.
+    *   -   `noResults`
+        -   `alert alert-info noResults`
+    *   -   submit button of the activation without class
+        -   `btn btn-primary`
+
+The icon spans with the classes `icon-arrowright`, `icon-phone_pf`,
+`icon-fax_pf`, `icon-email` and `icon-earth` have been removed, as
+Bootstrap 5 contains no icon font. Telephone and fax number are prefixed
+with the labels `Telephone` and `Fax` instead of the icons. Add your own
+icons in overrides of the templates, if needed. The new label `pageBrowser`
+is the `aria-label` of the pagination.
+
 Removed templates
 -----------------
 

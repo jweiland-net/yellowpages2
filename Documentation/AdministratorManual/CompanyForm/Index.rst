@@ -198,10 +198,40 @@ overrides some values of the form definition with TypoScript
 Labels and descriptions of the form elements are translated with
 :file:`EXT:yellowpages2/Resources/Private/Language/locallang_form.xlf`.
 
-The form is rendered with the template variant `version2` of EXT:form
-(Bootstrap 5 markup). The partial
+..  _company-form-markup:
+
+Markup of the company form
+--------------------------
+
+The company form renders the markup of Bootstrap 5. It uses the template
+variant `version2` of EXT:form, which sets classes like `form-control`,
+`form-select`, `form-label`, `form-check-input` and `mb-3`. Fields with
+validation errors get the class `is-invalid`, the error messages are
+rendered with `invalid-feedback`. The navigation buttons of the two steps
+are rendered by the partial of EXT:form.
+
+:file:`Company.form.yaml` activates the template variant and adds the
+partial root path of yellowpages2 to this form only, so the partial does
+not change other forms of the installation:
+
+..  code-block:: yaml
+    :caption: EXT:yellowpages2/Configuration/Form/Company.form.yaml (excerpt)
+
+    renderingOptions:
+      templateVariant: version2
+      partialRootPaths:
+        1763380800: 'EXT:yellowpages2/Resources/Private/FormFramework/Partials/'
+
+Keep both options in an own copy of the form definition. To override the
+partial, add your own path with a higher key. The partial
 :file:`EXT:yellowpages2/Resources/Private/FormFramework/Partials/Field/Field.html`
-renders the element description as text below the field.
+is based on the partial of the template variant `version2` and renders the
+element description (:yaml:`properties.elementDescription`) as small text
+below the field:
+
+..  code-block:: html
+
+    <small id="yellowpages2Company-trades-desc" class="form-text text-muted">Choose up to two further trades</small>
 
 ..  _company-form-hooks:
 

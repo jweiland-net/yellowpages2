@@ -47,33 +47,35 @@ steps show how to plug in Georg Ringer's `numbered_pagination` extension instead
                   xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
                   data-namespace-typo3-fluid="true">
 
-            <ul class="f3-widget-paginator">
-                <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
-                    <li class="previous">
-                        <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous')}">
-                            {f:translate(key:'widget.pagination.previous', extensionName: 'fluid')}
-                        </a>
-                    </li>
-                </f:if>
-                <f:if condition="{pagination.hasLessPages}">
-                    <li>…</li>
-                </f:if>
-                <f:for each="{pagination.allPageNumbers}" as="page">
-                    <li class="{f:if(condition: '{page} == {paginator.currentPageNumber}', then:'current')}">
-                        <a href="{f:uri.action(action:actionName, arguments:{currentPage: page})}">{page}</a>
-                    </li>
-                </f:for>
-                <f:if condition="{pagination.hasMorePages}">
-                    <li>…</li>
-                </f:if>
-                <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
-                    <li class="next">
-                        <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">
-                            {f:translate(key:'widget.pagination.next', extensionName: 'fluid')}
-                        </a>
-                    </li>
-                </f:if>
-            </ul>
+            <nav aria-label="{f:translate(key: 'pageBrowser', extensionName: 'yellowpages2')}">
+                <ul class="pagination">
+                    <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
+                        <li class="page-item previous">
+                            <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous')}">
+                                {f:translate(key:'widget.pagination.previous', extensionName: 'fluid')}
+                            </a>
+                        </li>
+                    </f:if>
+                    <f:if condition="{pagination.hasLessPages}">
+                        <li class="page-item disabled"><span class="page-link">…</span></li>
+                    </f:if>
+                    <f:for each="{pagination.allPageNumbers}" as="page">
+                        <li class="page-item{f:if(condition: '{page} == {paginator.currentPageNumber}', then:' active')}">
+                            <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: page})}">{page}</a>
+                        </li>
+                    </f:for>
+                    <f:if condition="{pagination.hasMorePages}">
+                        <li class="page-item disabled"><span class="page-link">…</span></li>
+                    </f:if>
+                    <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
+                        <li class="page-item next">
+                            <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">
+                                {f:translate(key:'widget.pagination.next', extensionName: 'fluid')}
+                            </a>
+                        </li>
+                    </f:if>
+                </ul>
+            </nav>
             </html>
 
     5.  Clear Cache

@@ -17,6 +17,8 @@ Version 10.0.0
 *   [FEATURE] Add CKEditor 5 to the description of the company form (site setting `yellowpages2.form.richText.enable`)
 *   [FEATURE] Make the tags of the rich text sanitizer configurable with the PSR-14 event `ModifyRichTextSanitizerConfigurationEvent` and build the toolbar of the editor from them
 *   [FEATURE] Render rich text elements in the mail of the moderator with the `FormatRichTextViewHelper`
+*   [!!!][TASK] Use Bootstrap 5 classes in the frontend templates: pagination, images, search form, links and messages. Remove the icon spans of an old theme. See :ref:`upgrade-10-0-0-bootstrap`.
+*   [BUGFIX] Do not emit PHP warnings for missing settings `presetTrade` and `district` in the list of companies
 *   [!!!][TASK] Activate companies via a confirmation page (action `confirmActivation`) and POST only. The result is shown as flash message of the Directory plugin. Remove the `RestrictAccessEventListener`.
 
 Version 9.0.2
