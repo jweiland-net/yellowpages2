@@ -130,6 +130,30 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
         self::assertStringNotContainsString('tx_clubdirectory', $mail);
     }
 
+    /**
+     * Links in the text part are copied by the moderator. They must not
+     * contain HTML entities like "&amp;", else the parameters are broken.
+     */
+    #[Test]
+    public function textPartOfMailContainsLinksWithoutHtmlEntities(): void
+    {
+        $this->submitMapPage();
+
+        $textPart = $this->getTextPart();
+
+        self::assertMatchesRegularExpression(
+            '#https://\\S+' . preg_quote(urlencode(self::PLUGIN_NAMESPACE . '[action]'), '#') . '=confirmActivation&\\S+#',
+            $textPart,
+        );
+        self::assertMatchesRegularExpression(
+            '#https://\\S+' . preg_quote(urlencode(self::PLUGIN_NAMESPACE . '[action]'), '#') . '=perform&\\S+#',
+            $textPart,
+        );
+        foreach (['&amp;', '&quot;', '&#039;', '&lt;', '&gt;'] as $htmlEntity) {
+            self::assertStringNotContainsString($htmlEntity, $textPart);
+        }
+    }
+
     #[Test]
     public function activationLinkOfMailShowsConfirmButtonAndActivatesCompany(): void
     {
@@ -225,6 +249,20 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
         }
 
         return $this->executeFrontendSubRequest($request, $context);
+    }
+
+    /**
+     * Returns the decoded text/plain part of the sent mail
+     */
+    private function getTextPart(): string
+    {
+        self::assertFileExists(self::MBOX_FILE, 'No mail was sent');
+        $mail = str_replace("\r\n", "\n", (string)file_get_contents(self::MBOX_FILE));
+
+        $found = preg_match('#\\nContent-Type: text/plain[^\\n]*\\n((?:[^\\n]+\\n)*)\\n(.*?)\\n--#s', $mail, $matches);
+        self::assertSame(1, $found, 'The mail has no text part');
+
+        return str_contains(strtolower($matches[1]), 'quoted-printable') ? quoted_printable_decode($matches[2]) : $matches[2];
     }
 
     /**
