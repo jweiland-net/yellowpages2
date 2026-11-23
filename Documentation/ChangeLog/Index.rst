@@ -7,6 +7,11 @@
 ChangeLog
 =========
 
+Version 10.0.1
+==============
+
+*   [BUGFIX] Render the links and texts of the text part of the moderation mail (`CompanyModeration.txt`) without HTML entities. The links contained `&amp;` instead of `&`, so the copied links did not work in mail clients, which show the text part only.
+
 Version 10.0.0
 ==============
 
