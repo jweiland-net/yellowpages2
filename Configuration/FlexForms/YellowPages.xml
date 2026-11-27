@@ -2,25 +2,25 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <sheetTitle>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:sheetGeneral</sheetTitle>
+                <sheetTitle>yellowpages2.flex_forms:sheetGeneral</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.pidOfDetailPage>
-                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfDetailPage</label>
+                        <label>yellowpages2.flex_forms:pidOfDetailPage</label>
                         <config>
                             <type>number</type>
                             <default>0</default>
                         </config>
                     </settings.pidOfDetailPage>
                     <settings.pidOfListPage>
-                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfListPage</label>
+                        <label>yellowpages2.flex_forms:pidOfListPage</label>
                         <config>
                             <type>number</type>
                             <default>0</default>
                         </config>
                     </settings.pidOfListPage>
                     <settings.presetTrade>
-                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:presetTrade</label>
+                        <label>yellowpages2.flex_forms:presetTrade</label>
                         <config>
                             <type>select</type>
                             <renderType>selectTree</renderType>
@@ -44,7 +44,7 @@
                         </config>
                     </settings.presetTrade>
                     <settings.district>
-                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:district</label>
+                        <label>yellowpages2.flex_forms:district</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
@@ -52,7 +52,7 @@
                             <items type="array">
                                 <numIndex index="0">
                                     <label>
-                                        LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.district.pleaseChoose
+                                        yellowpages2.db:tx_yellowpages2_domain_model_company.district.pleaseChoose
                                     </label>
                                     <value></value>
                                 </numIndex>

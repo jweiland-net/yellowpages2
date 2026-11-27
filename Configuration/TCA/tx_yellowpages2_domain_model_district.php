@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 return [
     'ctrl' => [
-        'title'    => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_district',
+        'title'    => 'yellowpages2.db:tx_yellowpages2_domain_model_district',
         'label' => 'district',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -46,7 +46,7 @@ return [
     'columns' => [
         'district' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_district.district',
+            'label' => 'yellowpages2.db:tx_yellowpages2_domain_model_district.district',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
