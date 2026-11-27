@@ -136,7 +136,7 @@ automatically:
     :yaml:`sanitizeRichText: true` (instead of
     :yaml:`convertPlainTextToHtml` or :yaml:`normalizePlainText`).
 *   The element is rendered with the partial
-    :file:`RichTextEditor/Textarea.html`
+    :file:`RichTextEditor/Textarea.fluid.html`
     (:yaml:`renderingOptions.templateName`), which loads the assets of the
     editor, see :ref:`frontend-rich-text-editor-assets`. The element gets
     the property :yaml:`richTextEditor.translationsPath` of the site
@@ -221,10 +221,10 @@ Loaded files of the frontend rich text editor
 =============================================
 
 Rich text elements are rendered with the partial
-:file:`EXT:yellowpages2/Resources/Private/FormFramework/Partials/RichTextEditor/Textarea.html`
+:file:`EXT:yellowpages2/Resources/Private/FormFramework/Partials/RichTextEditor/Textarea.fluid.html`
 (:yaml:`renderingOptions.templateName`). It is based on the partial
-:file:`Textarea.html` of EXT:form and renders the partial
-:file:`RichTextEditor/LoadAssets.html`, which loads the assets with the
+:file:`Textarea.fluid.html` of EXT:form and renders the partial
+:file:`RichTextEditor/LoadAssets.fluid.html`, which loads the assets with the
 ViewHelpers :html:`<f:asset.module>` and :html:`<f:asset.css>`:
 
 *   The ES module `@jweiland/yellowpages2/rich-text-editor.js`
@@ -253,7 +253,7 @@ Override the files of the frontend rich text editor
 
 The partial root path of yellowpages2 is set in :file:`Company.form.yaml` for the company form
 only (key `1763380800`). To load own files, copy
-:file:`RichTextEditor/LoadAssets.html` into your site package and add your
+:file:`RichTextEditor/LoadAssets.fluid.html` into your site package and add your
 partial root path with a higher key, either in your copy of the form
 definition or with TypoScript:
 
@@ -516,7 +516,7 @@ PSR-14 event :php:`ModifyRichTextSanitizerConfigurationEvent`. Links with
 If you use your own mail templates, add the ViewHelper to them:
 
 ..  code-block:: html
-    :caption: EXT:my_sitepackage/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.html (excerpt)
+    :caption: EXT:my_sitepackage/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.fluid.html (excerpt)
 
     <html xmlns:yp="http://typo3.org/ns/JWeiland/Yellowpages2/ViewHelpers"
           data-namespace-typo3-fluid="true">

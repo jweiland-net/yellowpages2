@@ -22,9 +22,9 @@ use TYPO3\CMS\Core\View\ViewInterface;
 /**
  * Add plugin preview for EXT:yellowpages2
  */
-class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
+final class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
 {
-    private const PREVIEW_TEMPLATE = 'EXT:yellowpages2/Resources/Private/Templates/PluginPreview/YellowPages2.html';
+    private const PREVIEW_TEMPLATE = 'EXT:yellowpages2/Resources/Private/Templates/PluginPreview/YellowPages2.fluid.html';
 
     private const ALLOWED_PLUGINS = [
         'yellowpages2_directory',
@@ -86,7 +86,7 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
 
         $view->assign(
             'pluginName',
-            $this->getLanguageService()->sL('LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:' . $langKey),
+            $this->getLanguageService()->sL('yellowpages2.db:' . $langKey),
         );
     }
 

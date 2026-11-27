@@ -23,7 +23,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class CompanyTest extends UnitTestCase
+final class CompanyTest extends UnitTestCase
 {
     protected Company $subject;
 

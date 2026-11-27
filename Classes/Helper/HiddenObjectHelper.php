@@ -22,10 +22,10 @@ use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
  * That way it's possible to call Controller Actions with hidden objects.
  */
 
-readonly class HiddenObjectHelper
+final readonly class HiddenObjectHelper
 {
     public function __construct(
-        protected Session $session,
+        private Session $session,
     ) {}
 
     /**
@@ -37,19 +37,18 @@ readonly class HiddenObjectHelper
         RequestInterface $request,
         string $argumentName,
     ): void {
-        if ($repository instanceof HiddenRepositoryInterface) {
-            $objectRaw = $request->getArgument($argumentName);
-            if (is_array($objectRaw)) {
-                // get object from form ($_POST)
-                $object = $repository->findHiddenObject((int)$objectRaw['__identity']);
-            } else {
-                // get object from UID
-                $object = $repository->findHiddenObject((int)$objectRaw);
-            }
+        if (!$repository instanceof HiddenRepositoryInterface) {
+            return;
+        }
 
-            if ($object instanceof AbstractDomainObject) {
-                $this->session->registerObject($object, (string)$object->getUid());
-            }
+        $objectRaw = $request->getArgument($argumentName);
+        // Either the object from a form ($_POST) or the object from its UID
+        $object = $repository->findHiddenObject(
+            is_array($objectRaw) ? (int)($objectRaw['__identity'] ?? 0) : (int)$objectRaw,
+        );
+
+        if ($object instanceof AbstractDomainObject) {
+            $this->session->registerObject($object, (string)$object->getUid());
         }
     }
 }

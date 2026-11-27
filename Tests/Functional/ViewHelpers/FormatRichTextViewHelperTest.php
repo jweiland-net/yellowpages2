@@ -24,7 +24,7 @@ use TYPO3Fluid\Fluid\View\TemplateView;
 /**
  * Functional test
  */
-class FormatRichTextViewHelperTest extends FunctionalTestCase
+final class FormatRichTextViewHelperTest extends FunctionalTestCase
 {
     private const RICH_TEXT = '<h2 data-list-item-id="e1">Program</h2>'
         . '<p>Start at <strong>10 o\'clock</strong></p>'
@@ -113,8 +113,8 @@ class FormatRichTextViewHelperTest extends FunctionalTestCase
     public static function mailTemplateDataProvider(): array
     {
         return [
-            'HTML part' => ['CompanyModeration.html'],
-            'Text part' => ['CompanyModeration.txt'],
+            'HTML part' => ['CompanyModeration.fluid.html'],
+            'Text part' => ['CompanyModeration.fluid.txt'],
         ];
     }
 

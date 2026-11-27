@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
  * company, like the DataHandler does for the MM columns "main_trade" and
  * "trades". The column of the company contains the amount of relations.
  */
-readonly class CategoryRelationService
+final readonly class CategoryRelationService
 {
     private const TABLE = 'tx_yellowpages2_domain_model_company';
 

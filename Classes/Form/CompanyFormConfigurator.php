@@ -27,7 +27,7 @@ use TYPO3\CMS\Core\Routing\PageArguments;
  * - The finisher "Redirect" redirects to the current page (the list of the
  *   own companies), if no "pageUid" is set.
  */
-readonly class CompanyFormConfigurator
+final readonly class CompanyFormConfigurator
 {
     private const EMAIL_FINISHER = 'EmailToReceiver';
 

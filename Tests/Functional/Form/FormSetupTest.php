@@ -25,7 +25,7 @@ use TYPO3Fluid\Fluid\View\TemplatePaths;
  * The form setup of yellowpages2 is loaded for all forms of the
  * installation. It must not change the mails of other forms.
  */
-class FormSetupTest extends FunctionalTestCase
+final class FormSetupTest extends FunctionalTestCase
 {
     private const CORE_FORM_SETUP = 'EXT:form/Configuration/Form/Base/config.yaml';
 
@@ -74,7 +74,7 @@ class FormSetupTest extends FunctionalTestCase
         $templatePaths->setTemplateRootPaths(array_map(GeneralUtility::getFileAbsFileName(...), $options['templateRootPaths']));
         foreach (['html', 'txt'] as $format) {
             self::assertSame(
-                GeneralUtility::getFileAbsFileName(self::TEMPLATE_PATH . 'CompanyModeration.' . $format),
+                GeneralUtility::getFileAbsFileName(self::TEMPLATE_PATH . 'CompanyModeration.fluid.' . $format),
                 $templatePaths->resolveTemplateFileForControllerAndActionAndFormat('Default', 'CompanyModeration', $format),
             );
         }
@@ -84,7 +84,7 @@ class FormSetupTest extends FunctionalTestCase
     public function mailTemplateUsesModerationTokenOfFinisher(): void
     {
         foreach (['html', 'txt'] as $format) {
-            $template = (string)file_get_contents(GeneralUtility::getFileAbsFileName(self::TEMPLATE_PATH . 'CompanyModeration.' . $format));
+            $template = (string)file_get_contents(GeneralUtility::getFileAbsFileName(self::TEMPLATE_PATH . 'CompanyModeration.fluid.' . $format));
 
             self::assertStringContainsString('{finisherVariableProvider.SaveCompany.moderationToken}', $template);
         }

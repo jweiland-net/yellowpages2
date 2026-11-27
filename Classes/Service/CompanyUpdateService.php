@@ -15,7 +15,7 @@ use Doctrine\DBAL\Exception;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Mailer\NotificationMailer;
 
-readonly class CompanyUpdateService
+final readonly class CompanyUpdateService
 {
     private const DAYS_TO_HIDE_COMPANY = 396; // 13 months
     private const DAYS_TO_INFORM_USER = 365; // 12 months

@@ -32,7 +32,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  * file. The map step needs the form element "Maps2PoiPosition" of EXT:maps2
  * 12.3.0, so the tests are skipped with older versions.
  */
-class CompanyFormModerationMailTest extends FunctionalTestCase
+final class CompanyFormModerationMailTest extends FunctionalTestCase
 {
     private const PLUGIN_NAMESPACE = 'tx_yellowpages2_management';
 

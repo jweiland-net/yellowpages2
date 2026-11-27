@@ -29,7 +29,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  * 12.3.0. The tests are skipped, as long as an older version of EXT:maps2
  * is installed.
  */
-class CompanyFormTest extends FunctionalTestCase
+final class CompanyFormTest extends FunctionalTestCase
 {
     use CompanyFormRequestTrait;
 

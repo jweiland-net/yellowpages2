@@ -141,8 +141,8 @@ If the company is activated already, an information is shown. A request of
 the action `activate` via GET is redirected to the confirmation page.
 
 The mail is rendered with the templates
-:file:`EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.html`
-and :file:`CompanyModeration.txt`. The template name and its root path are
+:file:`EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.fluid.html`
+and :file:`CompanyModeration.fluid.txt`. The template name and its root path are
 options of the finisher in :file:`Company.form.yaml`, so they apply to the
 company form only and not to other forms of the installation. The finisher
 `SaveCompanyFinisher` provides the UID of the company and the token of the

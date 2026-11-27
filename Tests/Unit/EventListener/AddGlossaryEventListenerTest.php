@@ -21,6 +21,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
@@ -29,27 +30,20 @@ use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case.
  */
-class AddGlossaryEventListenerTest extends UnitTestCase
+final class AddGlossaryEventListenerTest extends UnitTestCase
 {
     protected AddGlossaryEventListener $subject;
 
-    /**
-     * @var QueryResultInterface|MockObject
-     */
-    protected MockObject $queryResultMock;
+    protected QueryResult&MockObject $queryResultMock;
 
     protected GlossaryService $glossaryService;
 
-    /**
-     * @var CompanyRepository|MockObject
-     */
-    protected MockObject $companyRepositoryMock;
+    protected CompanyRepository&MockObject $companyRepositoryMock;
 
     protected PostProcessFluidVariablesEvent $event;
 
@@ -77,7 +71,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
             ->willReturnArgument(0);
 
         $this->glossaryService = new GlossaryService(
-            $this->createMock(ExtConf::class),
+            new ExtConf($this->createMock(ExtensionConfiguration::class)),
             $eventDispatcherMock,
             $viewFactoryMock,
             new CharsetHelper($this->createMock(CharsetConverter::class), $eventDispatcherMock),

@@ -10,19 +10,19 @@
     <f:variable name="company">{finisherVariableProvider.SaveCompany.companyUid}</f:variable>
     <f:variable name="moderationToken">{finisherVariableProvider.SaveCompany.moderationToken}</f:variable>
 
-    <p>{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.greeting')}</p>
+    <p>{f:translate(key: 'yellowpages2.messages:email.form.greeting')}</p>
     <p>
         <f:link.action pageUid="{pidOfManagementPage}" action="perform" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}">
-            {f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.edit')}
+            {f:translate(key: 'yellowpages2.messages:email.form.edit')}
         </f:link.action>
     </p>
     <p>
         <f:link.action pageUid="{pidOfManagementPage}" action="confirmActivation" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}">
-            {f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.activate')}
+            {f:translate(key: 'yellowpages2.messages:email.form.activate')}
         </f:link.action>
     </p>
 
-    <p>{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.values')}</p>
+    <p>{f:translate(key: 'yellowpages2.messages:email.form.values')}</p>
 
     <table>
         <formvh:renderAllFormValues renderable="{form.formDefinition}" as="formValue">

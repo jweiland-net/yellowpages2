@@ -28,7 +28,7 @@ use TYPO3Fluid\Fluid\View\TemplateView;
  * The assets of the rich text editor are loaded by a Fluid partial, the
  * folder of the translations of CKEditor is configurable
  */
-class RichTextEditorOptionsTest extends FunctionalTestCase
+final class RichTextEditorOptionsTest extends FunctionalTestCase
 {
     protected array $coreExtensionsToLoad = [
         'form',

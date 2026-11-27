@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
  * for the file columns "logo" and "images". The column of the company
  * contains the amount of file references.
  */
-readonly class FileReferenceService
+final readonly class FileReferenceService
 {
     private const TABLE = 'tx_yellowpages2_domain_model_company';
 

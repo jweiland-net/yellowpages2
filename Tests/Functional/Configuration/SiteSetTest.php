@@ -19,7 +19,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * Test case.
  */
-class SiteSetTest extends FunctionalTestCase
+final class SiteSetTest extends FunctionalTestCase
 {
     protected array $coreExtensionsToLoad = [
         'form',

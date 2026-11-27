@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Tests\Functional\Controller;
 
 use PHPUnit\Framework\Attributes\Test;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Frontend\Page\CacheHashCalculator;
@@ -21,7 +22,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * The templates of the Directory plugin render the markup of Bootstrap 5
  */
-class CompanyControllerMarkupTest extends FunctionalTestCase
+final class CompanyControllerMarkupTest extends FunctionalTestCase
 {
     private const PLUGIN_NAMESPACE = 'tx_yellowpages2_directory';
 
@@ -113,10 +114,38 @@ class CompanyControllerMarkupTest extends FunctionalTestCase
         }
     }
 
+    #[Test]
+    public function showOfUnknownCompanyRespondsWithNotFound(): void
+    {
+        $response = $this->requestResponse('show', ['company' => '999']);
+
+        self::assertSame(404, $response->getStatusCode());
+    }
+
+    #[Test]
+    public function showOfHiddenCompanyRespondsWithNotFound(): void
+    {
+        $this->getConnectionPool()->getConnectionForTable('tx_yellowpages2_domain_model_company')->update(
+            'tx_yellowpages2_domain_model_company',
+            ['hidden' => 1],
+            ['uid' => 2],
+        );
+
+        self::assertSame(404, $this->requestResponse('show', ['company' => '2'])->getStatusCode());
+    }
+
     /**
      * @param array<string, string> $pluginArguments
      */
     private function request(string $actionName, array $pluginArguments = []): string
+    {
+        return (string)$this->requestResponse($actionName, $pluginArguments)->getBody();
+    }
+
+    /**
+     * @param array<string, string> $pluginArguments
+     */
+    private function requestResponse(string $actionName, array $pluginArguments = []): ResponseInterface
     {
         $queryParameters = [
             'id' => self::DIRECTORY_PAGE,
@@ -129,8 +158,8 @@ class CompanyControllerMarkupTest extends FunctionalTestCase
         $queryParameters['cHash'] = $this->get(CacheHashCalculator::class)
             ->generateForParameters(HttpUtility::buildQueryString($queryParameters));
 
-        return (string)$this->executeFrontendSubRequest(
+        return $this->executeFrontendSubRequest(
             (new InternalRequest('https://www.example.com/'))->withQueryParameters($queryParameters),
-        )->getBody();
+        );
     }
 }

@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * Test case.
  */
-class CompanyFormPrefillerTest extends FunctionalTestCase
+final class CompanyFormPrefillerTest extends FunctionalTestCase
 {
     use CompanyFormDefinitionTrait;
     use CompanyFormRequestTrait;

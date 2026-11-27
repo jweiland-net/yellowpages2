@@ -34,13 +34,13 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  * "tx_yellowpages2_management[moderationToken]". So a manipulated POST body
  * can not change the company, which was checked.
  */
-readonly class CompanyAccessService
+final readonly class CompanyAccessService
 {
     public const PLUGIN_NAMESPACE = 'tx_yellowpages2_management';
 
     private const TABLE = 'tx_yellowpages2_domain_model_company';
 
-    private const REASON_UNAUTHORIZED = 'unauthorizedCompanyUser';
+    public const REASON_UNAUTHORIZED = 'unauthorizedCompanyUser';
 
     public function __construct(
         private Context $context,
@@ -79,12 +79,42 @@ readonly class CompanyAccessService
             return $this->companyExists($companyUid) ? '' : self::REASON_UNAUTHORIZED;
         }
 
-        $denialReason = $this->getDenialReasonForFrontendUser($request);
+        $denialReason = $this->getFrontendUserDenialReason($request);
         if ($denialReason !== '' || $companyUid === 0) {
             return $denialReason;
         }
 
         return $this->companyExists($companyUid, $this->getFrontendUserUid()) ? '' : self::REASON_UNAUTHORIZED;
+    }
+
+    /**
+     * Returns true, if the request contains a moderation token for a company which does not match this company.
+     */
+    public function hasInvalidModerationToken(ServerRequestInterface $request): bool
+    {
+        $companyUid = $this->getCompanyUid($request);
+        $moderationToken = $this->getModerationToken($request);
+
+        return $companyUid > 0
+            && $moderationToken !== ''
+            && !$this->moderationLinkTokenService->isValidToken($companyUid, $moderationToken);
+    }
+
+    /**
+     * Returns the label key of the reason, why the current frontend user is not allowed to
+     * manage companies at all (not logged in, wrong user group). An empty string means: allowed.
+     */
+    public function getFrontendUserDenialReason(ServerRequestInterface $request): string
+    {
+        $userGroup = (int)($this->pluginSettingsService->getSettings($request)['userGroup'] ?? 0);
+        $groupIds = $this->context->getPropertyFromAspect('frontend.user', 'groupIds', []);
+
+        return match (true) {
+            $userGroup <= 0 => 'userGroupNotConfigured',
+            $this->getFrontendUserUid() <= 0 => 'pluginNeedsLogin',
+            !in_array($userGroup, is_array($groupIds) ? $groupIds : [], true) => 'notAllowedToCreate',
+            default => '',
+        };
     }
 
     public function getFrontendUserUid(): int
@@ -101,19 +131,6 @@ readonly class CompanyAccessService
                 $moderationToken !== ''
                 && $this->moderationLinkTokenService->isValidToken($companyUid, $moderationToken)
             );
-    }
-
-    private function getDenialReasonForFrontendUser(ServerRequestInterface $request): string
-    {
-        $userGroup = (int)($this->pluginSettingsService->getSettings($request)['userGroup'] ?? 0);
-        $groupIds = $this->context->getPropertyFromAspect('frontend.user', 'groupIds', []);
-
-        return match (true) {
-            $userGroup <= 0 => 'userGroupNotConfigured',
-            $this->getFrontendUserUid() <= 0 => 'pluginNeedsLogin',
-            !in_array($userGroup, is_array($groupIds) ? $groupIds : [], true) => 'notAllowedToCreate',
-            default => '',
-        };
     }
 
     /**

@@ -18,6 +18,7 @@ use JWeiland\Yellowpages2\Service\CompanyPoiCollectionService;
 use JWeiland\Yellowpages2\Service\CompanyRecordService;
 use JWeiland\Yellowpages2\Service\FileReferenceService;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -41,7 +42,7 @@ use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
  * The access is checked again, as the form could be rendered outside of the
  * ManagementController.
  */
-readonly class CompanyFormPrefiller
+final readonly class CompanyFormPrefiller
 {
     public const DATA_TYPE_PLAIN_TEXT = 'plainText';
 
@@ -58,6 +59,7 @@ readonly class CompanyFormPrefiller
         private CompanyPoiCollectionService $companyPoiCollectionService,
         private ResourceFactory $resourceFactory,
         private RteContentConverter $rteContentConverter,
+        private LoggerInterface $logger,
     ) {}
 
     public function prefill(FormDefinition $formDefinition, ServerRequestInterface $request): void
@@ -134,7 +136,17 @@ readonly class CompanyFormPrefiller
         try {
             $fileReference = new FileReference();
             $fileReference->setOriginalResource($this->resourceFactory->getFileReferenceObject($referenceUid));
-        } catch (ResourceDoesNotExistException) {
+        } catch (ResourceDoesNotExistException $exception) {
+            $this->logger->warning(
+                'The file of a file reference of the company does not exist. The upload element stays empty.',
+                [
+                    'companyUid' => $companyUid,
+                    'column' => $column,
+                    'fileReferenceUid' => $referenceUid,
+                    'exception' => $exception,
+                ],
+            );
+
             return null;
         }
 

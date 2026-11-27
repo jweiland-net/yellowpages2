@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class RichTextSanitizerTest extends UnitTestCase
+final class RichTextSanitizerTest extends UnitTestCase
 {
     private const ALLOWED_T3_HREFS = [
         't3://file?uid=1234',

@@ -71,6 +71,24 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
     }
 
     /**
+     * The magic finder findByFeUser() was removed in TYPO3 14. The frontend user must be valid (> 0), as
+     * a frontend user UID of 0 would match all companies without owner.
+     *
+     * @return QueryResultInterface<int, Company>
+     */
+    public function findByFeUser(int $feUserUid): QueryResultInterface
+    {
+        /** @var Query<Company> $query */
+        $query = $this->createQuery();
+        if ($feUserUid <= 0) {
+            // Never matches
+            return $query->matching($query->equals('uid', 0))->execute();
+        }
+
+        return $query->matching($query->equals('feUser', $feUserUid))->execute();
+    }
+
+    /**
      * @param array<string, mixed> $settings
      * @return QueryResultInterface<int, Company>
      */
@@ -141,9 +159,10 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
 
         if ($longStreetSearch !== '') {
             $orConstraints = [];
-            $orConstraints[] = $query->like('company', '%' . $search . '%');
-            $orConstraints[] = $query->like('street', '%' . $smallStreetSearch . '%');
-            $orConstraints[] = $query->like('street', '%' . $longStreetSearch . '%');
+            // Wildcards of the visitor must not match everything
+            $orConstraints[] = $query->like('company', '%' . $this->escapeLikeWildcards($search) . '%');
+            $orConstraints[] = $query->like('street', '%' . $this->escapeLikeWildcards($smallStreetSearch) . '%');
+            $orConstraints[] = $query->like('street', '%' . $this->escapeLikeWildcards($longStreetSearch) . '%');
 
             $constraints[] = $query->logicalOr(...$orConstraints);
         }
@@ -171,6 +190,11 @@ class CompanyRepository extends Repository implements HiddenRepositoryInterface
         );
 
         return $queryResult;
+    }
+
+    private function escapeLikeWildcards(string $value): string
+    {
+        return $this->connectionPool->getConnectionForTable(self::TABLE)->escapeLikeWildcards($value);
     }
 
     /**

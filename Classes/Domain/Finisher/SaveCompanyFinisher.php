@@ -17,6 +17,7 @@ use JWeiland\Yellowpages2\Service\CompanyAccessService;
 use JWeiland\Yellowpages2\Service\CompanyRecordService;
 use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use JWeiland\Yellowpages2\Service\PluginSettingsService;
+use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
@@ -43,7 +44,7 @@ use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
  * "SaveCompany.moderationToken".
  */
 #[Autoconfigure(public: true, shared: false)]
-class SaveCompanyFinisher extends AbstractFinisher
+final class SaveCompanyFinisher extends AbstractFinisher
 {
     public function __construct(
         protected readonly CompanyAccessService $companyAccessService,
@@ -59,7 +60,7 @@ class SaveCompanyFinisher extends AbstractFinisher
     protected function executeInternal(): ?string
     {
         $request = $this->finisherContext->getRequest();
-        $this->throwExceptionIfAccessIsDenied($this->companyAccessService->getDenialReason($request));
+        $this->throwExceptionIfAccessIsDenied($this->companyAccessService->getDenialReason($request), $request);
 
         $companyUid = $this->companyAccessService->getCompanyUid($request);
         $companyUid = $this->companyRecordService->save(
@@ -82,11 +83,22 @@ class SaveCompanyFinisher extends AbstractFinisher
     /**
      * @throws FinisherException
      */
-    protected function throwExceptionIfAccessIsDenied(string $denialReason): void
+    protected function throwExceptionIfAccessIsDenied(string $denialReason, ServerRequestInterface $request): void
     {
         if ($denialReason === '') {
             return;
         }
+
+        // The logger is injected by LoggerAwareInterface of AbstractFinisher
+        $this->logger?->warning(
+            'The company form was submitted without permission. Nothing was stored.',
+            [
+                'companyUid' => $this->companyAccessService->getCompanyUid($request),
+                'feUserUid' => $this->companyAccessService->getFrontendUserUid(),
+                'denialReason' => $denialReason,
+                'invalidModerationToken' => $this->companyAccessService->hasInvalidModerationToken($request),
+            ],
+        );
 
         $this->finisherContext->cancel();
 

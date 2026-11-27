@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Domain\Repository\PageRepository;
  * category. Records are translated to the current language. Options are
  * sorted by their label.
  */
-readonly class CompanyFormOptionsService
+final readonly class CompanyFormOptionsService
 {
     private const DISTRICT_TABLE = 'tx_yellowpages2_domain_model_district';
 

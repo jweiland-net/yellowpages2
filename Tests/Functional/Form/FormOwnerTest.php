@@ -19,6 +19,7 @@ use JWeiland\Yellowpages2\Service\CompanyPoiCollectionService;
 use JWeiland\Yellowpages2\Service\CompanyRecordService;
 use JWeiland\Yellowpages2\Tests\Functional\Fixtures\Classes\ForeignRichTextEditorHook;
 use PHPUnit\Framework\Attributes\Test;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -34,7 +35,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  * The hooks of EXT:form are called for all forms of the installation. The
  * hooks of yellowpages2 must act on forms of yellowpages2 only.
  */
-class FormOwnerTest extends FunctionalTestCase
+final class FormOwnerTest extends FunctionalTestCase
 {
     private const ADDRESS = [
         'street' => 'Echterdinger Straße',
@@ -172,6 +173,7 @@ class FormOwnerTest extends FunctionalTestCase
             $this->get(CompanyRecordService::class),
             $this->get(CompanyPoiCollectionService::class),
             $this->get(LanguageServiceFactory::class),
+            new NullLogger(),
         );
     }
 

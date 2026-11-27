@@ -20,7 +20,7 @@ namespace JWeiland\Yellowpages2\Converter;
  * Backend RTE format: "<p>Line 1<br />Line 2</p>\r\n<p>Paragraph 2</p>"
  * Only "&", "<" and ">" are encoded. Quotes stay raw.
  */
-readonly class RteContentConverter
+final readonly class RteContentConverter
 {
     private const PARAGRAPH_SEPARATOR = "\r\n";
 

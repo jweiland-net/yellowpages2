@@ -18,7 +18,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * Test case.
  */
-class CompanyTest extends FunctionalTestCase
+final class CompanyTest extends FunctionalTestCase
 {
     protected Company $subject;
 

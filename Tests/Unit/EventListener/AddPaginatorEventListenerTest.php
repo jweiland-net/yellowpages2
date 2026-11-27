@@ -16,6 +16,7 @@ use JWeiland\Yellowpages2\EventListener\AddPaginatorEventListener;
 use JWeiland\Yellowpages2\Pagination\CompanyPagination;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -44,7 +45,7 @@ final class AddPaginatorEventListenerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($this->subject, $GLOBALS['TYPO3_REQUEST']);
+        unset($this->subject);
 
         parent::tearDown();
     }
@@ -64,7 +65,6 @@ final class AddPaginatorEventListenerTest extends UnitTestCase
     #[DataProvider('validControllerActionsDataProvider')]
     public function invokeAddsPaginator(string $plugin, string $controller, string $action): void
     {
-        $GLOBALS['TYPO3_REQUEST'] = new ServerRequest('https://example.com/', 'GET');
         $event = $this->buildEvent($plugin, $controller, $action);
 
         $this->subject->__invoke($event);
@@ -77,14 +77,14 @@ final class AddPaginatorEventListenerTest extends UnitTestCase
     #[Test]
     public function invokeKeepsSearchArgumentsInPaginationOfSearchPlugin(): void
     {
-        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest('https://example.com/', 'POST'))
+        $serverRequest = (new ServerRequest('https://example.com/', 'POST'))
             ->withParsedBody([
                 'tx_yellowpages2_search' => [
                     'search' => 'bakery',
                     'category' => '3',
                 ],
             ]);
-        $event = $this->buildEvent('Search', 'Search', 'listSearchResults');
+        $event = $this->buildEvent('Search', 'Search', 'listSearchResults', $serverRequest);
 
         $this->subject->__invoke($event);
 
@@ -126,9 +126,20 @@ final class AddPaginatorEventListenerTest extends UnitTestCase
         self::assertArrayNotHasKey('paginator', $event->getFluidVariables());
     }
 
-    private function buildEvent(string $plugin, string $controller, string $action): PostProcessFluidVariablesEvent
-    {
+    private function buildEvent(
+        string $plugin,
+        string $controller,
+        string $action,
+        ?ServerRequestInterface $serverRequest = null,
+    ): PostProcessFluidVariablesEvent {
+        $serverRequest ??= new ServerRequest('https://example.com/', 'GET');
         $requestMock = $this->createMock(Request::class);
+        $requestMock
+            ->method('getQueryParams')
+            ->willReturn($serverRequest->getQueryParams());
+        $requestMock
+            ->method('getParsedBody')
+            ->willReturn($serverRequest->getParsedBody());
         $requestMock
             ->method('getControllerExtensionName')
             ->willReturn('Yellowpages2');

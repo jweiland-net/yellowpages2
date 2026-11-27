@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Upgrades\AbstractListTypeToCTypeUpdate;
  * With TYPO3 13 plugins have to be declared as content elements (CType) instead of "list_type"
  */
 #[UpgradeWizard('yellowpages2_migratePluginsToContentElementsUpdate')]
-class PluginToContentElementUpdate extends AbstractListTypeToCTypeUpdate
+final class PluginToContentElementUpdate extends AbstractListTypeToCTypeUpdate
 {
     protected function getListTypeToCTypeMapping(): array
     {

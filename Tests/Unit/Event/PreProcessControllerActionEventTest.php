@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class PreProcessControllerActionEventTest extends UnitTestCase
+final class PreProcessControllerActionEventTest extends UnitTestCase
 {
     protected PreProcessControllerActionEvent $subject;
 

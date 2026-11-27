@@ -14,7 +14,10 @@ namespace JWeiland\Yellowpages2\Tests\Functional\Controller;
 use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LogLevel;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
+use TYPO3\CMS\Core\Crypto\HashService;
+use TYPO3\CMS\Core\Log\Writer\FileWriter;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Frontend\Page\CacheHashCalculator;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
@@ -24,9 +27,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * The activation link of the moderation mail shows a confirmation page. Its
  * form activates the company via POST. The result is a flash message of the
- * Directory plugin.
+ * Directory plugin. Rejected requests are logged without personal data and
+ * show a flash message in the Management plugin.
  */
-class ManagementControllerActivationTest extends FunctionalTestCase
+final class ManagementControllerActivationTest extends FunctionalTestCase
 {
     private const PLUGIN_NAMESPACE = 'tx_yellowpages2_management';
 
@@ -41,6 +45,8 @@ class ManagementControllerActivationTest extends FunctionalTestCase
 
     private const OWNER = 6;
 
+    private const VISIBLE_COMPANY_OWNER = 5;
+
     protected array $coreExtensionsToLoad = [
         'form',
         'install',
@@ -53,6 +59,17 @@ class ManagementControllerActivationTest extends FunctionalTestCase
     ];
 
     protected array $configurationToUseInTestInstance = [
+        'LOG' => [
+            'JWeiland' => [
+                'Yellowpages2' => [
+                    'writerConfiguration' => [
+                        LogLevel::NOTICE => [
+                            FileWriter::class => ['logFile' => 'typo3temp/var/log/yellowpages2.log'],
+                        ],
+                    ],
+                ],
+            ],
+        ],
         'MAIL' => [
             'transport' => 'null',
         ],
@@ -183,6 +200,74 @@ class ManagementControllerActivationTest extends FunctionalTestCase
         self::assertStringContainsString('The company is activated already.', $this->getFlashMessages());
     }
 
+    #[Test]
+    public function confirmActivationWithInvalidTokenLogsWarningWithoutPersonalData(): void
+    {
+        $this->request('confirmActivation', [
+            'company' => (string)self::HIDDEN_COMPANY,
+            'moderationToken' => 'invalid',
+        ]);
+
+        $log = $this->getLog();
+        self::assertStringContainsString('The activation of a company was rejected', $log);
+        self::assertStringContainsString('"companyUid":' . self::HIDDEN_COMPANY, $log);
+        self::assertStringContainsString('"feUserUid":0', $log);
+        self::assertStringNotContainsString('moderator@example.com', $log);
+    }
+
+    #[Test]
+    public function activateViaPostWithLegacySha1TokenActivatesCompanyAndLogsNotice(): void
+    {
+        $this->postActivate(self::HIDDEN_COMPANY, $this->generateLegacyToken(self::HIDDEN_COMPANY));
+
+        self::assertFalse($this->isCompanyHidden(self::HIDDEN_COMPANY));
+        self::assertStringContainsString('A legacy SHA1 moderation token was used', $this->getLog());
+    }
+
+    #[Test]
+    public function performByForeignUserShowsFlashMessageAndLogsWarning(): void
+    {
+        $content = (string)$this->request('perform', ['company' => (string)self::VISIBLE_COMPANY], [], self::OWNER)->getBody();
+
+        self::assertStringContainsString('You are not allowed to edit company records', $content);
+        self::assertStringNotContainsString('<form', $content);
+        $log = $this->getLog();
+        self::assertStringContainsString('The company does not belong to the user', $log);
+        self::assertStringContainsString('"companyUid":' . self::VISIBLE_COMPANY . ',"feUserUid":' . self::OWNER, $log);
+    }
+
+    #[Test]
+    public function performWithInvalidModerationTokenShowsFlashMessageAndLogsWarning(): void
+    {
+        $content = (string)$this->request('perform', [
+            'company' => (string)self::HIDDEN_COMPANY,
+            'moderationToken' => 'invalid',
+        ])->getBody();
+
+        self::assertStringContainsString('The moderation link is invalid', $content);
+        self::assertStringContainsString('The moderation token is invalid', $this->getLog());
+    }
+
+    #[Test]
+    public function listMyCompaniesWithoutLoginShowsMessageAndNoCompany(): void
+    {
+        $content = (string)$this->request('listMyCompanies')->getBody();
+
+        self::assertStringContainsString('Please log in to create or edit companies.', $content);
+        self::assertStringNotContainsString('Bakery', $content);
+        self::assertStringNotContainsString('Florist', $content);
+    }
+
+    #[Test]
+    public function listMyCompaniesShowsCompaniesOfLoggedInUserOnly(): void
+    {
+        $content = (string)$this->request('listMyCompanies', [], [], self::VISIBLE_COMPANY_OWNER)->getBody();
+
+        self::assertStringContainsString('Bakery M', $content);
+        self::assertStringNotContainsString('Florist', $content);
+        self::assertStringNotContainsString('Please log in', $content);
+    }
+
     private function postActivate(int $companyUid, string $moderationToken, int $frontendUserUid = 0): ResponseInterface
     {
         return $this->request('activate', [], [
@@ -232,6 +317,27 @@ class ManagementControllerActivationTest extends FunctionalTestCase
     private function generateToken(int $companyUid): string
     {
         return $this->get(ModerationLinkTokenService::class)->generateToken($companyUid);
+    }
+
+    /**
+     * Token of mails sent before version 11.0.0
+     */
+    private function generateLegacyToken(int $companyUid): string
+    {
+        return $this->get(HashService::class)->hmac((string)$companyUid, 'yellowpages2/company-moderation-link');
+    }
+
+    /**
+     * The content of all log files of the test instance
+     */
+    private function getLog(): string
+    {
+        $log = '';
+        foreach (glob($this->instancePath . '/typo3temp/var/log/*.log') ?: [] as $logFile) {
+            $log .= (string)file_get_contents($logFile);
+        }
+
+        return $log;
     }
 
     /**

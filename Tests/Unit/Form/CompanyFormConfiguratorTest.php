@@ -14,19 +14,25 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Form;
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Form\CompanyFormConfigurator;
 use JWeiland\Yellowpages2\Service\CompanyAccessService;
+use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
+use JWeiland\Yellowpages2\Service\PluginSettingsService;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\NullLogger;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Crypto\HashService;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Routing\PageArguments;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case.
  */
-class CompanyFormConfiguratorTest extends UnitTestCase
+final class CompanyFormConfiguratorTest extends UnitTestCase
 {
-    private MockObject $companyAccessService;
+    private CompanyAccessService $companyAccessService;
 
     private CompanyFormConfigurator $subject;
 
@@ -34,7 +40,12 @@ class CompanyFormConfiguratorTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->companyAccessService = $this->createMock(CompanyAccessService::class);
+        $this->companyAccessService = new CompanyAccessService(
+            new Context(),
+            new ConnectionPool(),
+            new ModerationLinkTokenService(new HashService(), new NullLogger()),
+            new PluginSettingsService(new TypoScriptService(), new NullLogger()),
+        );
         $this->subject = new CompanyFormConfigurator(
             $this->companyAccessService,
             new ExtConf(
@@ -49,10 +60,9 @@ class CompanyFormConfiguratorTest extends UnitTestCase
     #[Test]
     public function configureAddsCompanyAndModerationTokenToFormAction(): void
     {
-        $this->companyAccessService->method('getCompanyUid')->willReturn(12);
-        $this->companyAccessService->method('getModerationToken')->willReturn('token');
+        $request = $this->buildRequest(['company' => '12', 'moderationToken' => 'token']);
 
-        $configuration = $this->subject->configure([], $this->buildRequest());
+        $configuration = $this->subject->configure([], $request);
 
         self::assertSame(
             ['tx_yellowpages2_management' => ['company' => 12, 'moderationToken' => 'token']],
@@ -63,9 +73,6 @@ class CompanyFormConfiguratorTest extends UnitTestCase
     #[Test]
     public function configureForNewCompanyKeepsFormAction(): void
     {
-        $this->companyAccessService->method('getCompanyUid')->willReturn(0);
-        $this->companyAccessService->method('getModerationToken')->willReturn('');
-
         self::assertArrayNotHasKey('renderingOptions', $this->subject->configure([], $this->buildRequest()));
     }
 
@@ -140,8 +147,13 @@ class CompanyFormConfiguratorTest extends UnitTestCase
         self::assertSame('3', $configuration['finishers'][4]['options']['pageUid']);
     }
 
-    private function buildRequest(): ServerRequestInterface
+    /**
+     * @param array<string, string> $pluginQueryParameters Query parameters of tx_yellowpages2_management
+     */
+    private function buildRequest(array $pluginQueryParameters = []): ServerRequestInterface
     {
-        return (new ServerRequest('https://example.com/'))->withAttribute('routing', new PageArguments(7, '0', []));
+        return (new ServerRequest('https://example.com/'))
+            ->withQueryParams(['tx_yellowpages2_management' => $pluginQueryParameters])
+            ->withAttribute('routing', new PageArguments(7, '0', []));
     }
 }
