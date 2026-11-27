@@ -20,6 +20,7 @@ use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
@@ -76,6 +77,7 @@ final class AddGlossaryEventListenerTest extends UnitTestCase
             $viewFactoryMock,
             new CharsetHelper($this->createMock(CharsetConverter::class), $eventDispatcherMock),
             new TypoScriptService(),
+            new NullLogger(),
         );
 
         $this->companyRepositoryMock = $this->createMock(CompanyRepository::class);
@@ -92,8 +94,12 @@ final class AddGlossaryEventListenerTest extends UnitTestCase
             ->willReturn('list');
         $requestMock
             ->method('getAttribute')
-            ->with('frontend.typoscript')
-            ->willReturn(new FrontendTypoScript(new RootNode(), [], [], []));
+            ->willReturnCallback(
+                // GlossaryService reads the site and the frontend TypoScript of the request
+                static fn(string $name): ?FrontendTypoScript => $name === 'frontend.typoscript'
+                    ? new FrontendTypoScript(new RootNode(), [], [], [])
+                    : null,
+            );
 
         $this->event = new PostProcessFluidVariablesEvent($requestMock, [], []);
 
