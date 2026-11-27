@@ -1,3 +1,4 @@
+@import 'EXT:glossary2/Configuration/Sets/Glossary2/setup.typoscript'
 @import 'EXT:yellowpages2/Configuration/Sets/Yellowpages2/setup.typoscript'
 
 # One company per page, so the pagination is rendered with two companies

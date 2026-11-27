@@ -9,6 +9,32 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Upgrade to version 11.0.0
+=========================
+
+This version is compatible with TYPO3 14 LTS only.
+
+*   EXT:maps2 13 (:composer:`jweiland/maps2`) and EXT:glossary2 8
+    (:composer:`jweiland/glossary2`) are required.
+*   The site set `jweiland/yellowpages2` depends on the site set
+    `jweiland/glossary2` now. If you include the TypoScript of yellowpages2
+    without the site set, include the TypoScript and site settings of
+    EXT:glossary2, too. Otherwise the A-Z list can not be rendered.
+*   The form setup of the company form is the form set
+    :file:`EXT:yellowpages2/Configuration/Form/Yellowpages2/config.yaml` now,
+    which EXT:form discovers automatically. The file
+    :file:`Configuration/Form/OverrideFormSettings.yaml` has been removed.
+    Remove references to it from your own TypoScript. As all form sets, it is
+    loaded for all sites and the form manager of the backend. To disable it,
+    add `jweiland/yellowpages2` to
+    :php:`$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['form']['disabledSets']`.
+*   The column `tx_maps2_uid` of the company table is declared with the TCA
+    renderType `maps2Relation` of EXT:maps2 13. Its database type stays
+    an unsigned integer (:file:`ext_tables.sql`).
+*   The TCA option `ctrl.searchFields` has been removed in TYPO3 14. The fields
+    `path_segment`, `facebook`, `twitter` and `instagram` are marked as not
+    searchable, so the backend search covers the same fields as before.
+
 Upgrade to version 10.0.0
 =========================
 

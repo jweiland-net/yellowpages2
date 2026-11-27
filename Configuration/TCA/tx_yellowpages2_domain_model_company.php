@@ -27,7 +27,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'company,logo,street,house_number,zip,city,telephone,fax,contact_person,email,website,opening_times,barrier_free,description,district,fe_user,',
         'iconfile' => 'EXT:yellowpages2/Resources/Public/Icons/tx_yellowpages2_domain_model_company.svg',
     ],
     'types' => [
@@ -70,6 +69,8 @@ return [
             'displayCond' => 'VERSION:IS:false',
             'config' => [
                 'type' => 'slug',
+                // Not part of the former ctrl.searchFields
+                'searchable' => false,
                 'size' => 50,
                 'generatorOptions' => [
                     'fields' => ['company'],
@@ -267,6 +268,8 @@ return [
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.facebook',
             'config' => [
                 'type' => 'link',
+                // Not part of the former ctrl.searchFields
+                'searchable' => false,
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink[linkList]',
@@ -278,6 +281,8 @@ return [
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.twitter',
             'config' => [
                 'type' => 'link',
+                // Not part of the former ctrl.searchFields
+                'searchable' => false,
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink[linkList]',
@@ -289,6 +294,8 @@ return [
             'label' => 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:tx_yellowpages2_domain_model_company.instagram',
             'config' => [
                 'type' => 'link',
+                // Not part of the former ctrl.searchFields
+                'searchable' => false,
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink[linkList]',

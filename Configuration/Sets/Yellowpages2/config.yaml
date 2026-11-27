@@ -6,3 +6,5 @@ dependencies:
   - typo3/form
   # Provides the form element "Maps2PoiPosition" for the map step of the company form
   - jweiland/maps2-default
+  # Provides TypoScript and site settings of EXT:glossary2, needed to render the A-Z list since glossary2 8.0.0
+  - jweiland/glossary2

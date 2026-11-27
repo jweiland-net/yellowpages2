@@ -23,6 +23,7 @@ class SiteSetTest extends FunctionalTestCase
 {
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [

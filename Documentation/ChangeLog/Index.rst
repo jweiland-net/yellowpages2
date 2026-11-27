@@ -7,6 +7,27 @@
 ChangeLog
 =========
 
+Version 11.0.0
+==============
+
+*   [!!!][TASK] Add compatibility for TYPO3 14 LTS and remove support for TYPO3 13 LTS
+*   [!!!][TASK] Require EXT:maps2 13 and EXT:glossary2 8. Both are compatible with TYPO3 14 only.
+*   [!!!][TASK] The site set `jweiland/yellowpages2` depends on the site set `jweiland/glossary2` now. Since glossary2 8.0.0 the A-Z list needs its TypoScript and site settings.
+*   [!!!][TASK] The form setup of the company form is a form set now (:file:`Configuration/Form/Yellowpages2/config.yaml`), which EXT:form discovers automatically. :file:`Configuration/Form/OverrideFormSettings.yaml` and its registration via `plugin.tx_form.settings.yamlConfigurations` have been removed.
+*   [!!!][TASK] Declare the column `tx_maps2_uid` with the TCA renderType `maps2Relation` of maps2 13 instead of `Maps2Registry::add()`
+*   [!!!][TASK] `Company::getTxMaps2Uid()` and `Company::setTxMaps2Uid()` are typed with `?PoiCollection` now
+*   [TASK] Send notification mails via `MailerInterface`, as `MailMessage::send()` has been removed
+*   [TASK] Replace removed `FlexFormService` with `FlexFormTools` and use `GridColumnItem::getRow()` in the backend preview
+*   [TASK] Use `getSubSchemaTypeInformation()` of the TCA schema, as `getSubSchemaDivisorField()` has been removed
+*   [TASK] Replace deprecated `PathUtility::getPublicResourceWebPath()` with the system resource API
+*   [TASK] Assign FlexForms via `columnsOverrides` instead of the deprecated `addPiFlexFormValue()`
+*   [TASK] Place the Extbase `#[Validate]` and `#[IgnoreValidation]` attributes on the method parameters
+*   [TASK] Migrate upgrade wizards to the `TYPO3\CMS\Core\Upgrades` namespace and the `TYPO3\CMS\Core\Attribute\UpgradeWizard` attribute
+*   [TASK] Replace the TCA `ctrl` option `searchFields` of company and district, which has been removed in TYPO3 14, with `searchable => false` on the fields that were not searchable before
+*   [TASK] Keep `tx_maps2_uid` as unsigned integer column via ext_tables.sql
+*   [TASK] Add `version` and `providesPackages` to composer.json
+*   [TASK] Adapt tests to TYPO3 14 (honeypot in form state, SHA3-256 HMAC of the form state, handling of `FinisherException`, final `GlossaryService`)
+
 Version 10.0.1
 ==============
 

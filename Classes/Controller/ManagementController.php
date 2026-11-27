@@ -105,8 +105,7 @@ class ManagementController extends ActionController
      * automatically. So the activation link of the mail shows this summary
      * of the company only. Its form activates the company via POST.
      */
-    #[IgnoreValidation(['value' => 'company'])]
-    public function confirmActivationAction(Company $company): ResponseInterface
+    public function confirmActivationAction(#[IgnoreValidation] Company $company): ResponseInterface
     {
         $moderationToken = $this->getValidModerationToken((int)$company->getUid());
         if ($moderationToken === '' || !$company->getHidden()) {

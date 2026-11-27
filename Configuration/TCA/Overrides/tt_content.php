@@ -65,17 +65,11 @@ ExtensionManagementUtility::addToAllTCAtypes(
     'after:subheader',
 );
 
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
-    'yellowpages2_directory',
-);
-
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:yellowpages2/Configuration/FlexForms/Search.xml',
-    'yellowpages2_search',
-);
+// pi_flexform is already added to showitem above, so the data structures are assigned directly
+$GLOBALS['TCA']['tt_content']['types']['yellowpages2_directory']['columnsOverrides']['pi_flexform']['config']['ds']
+    = 'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml';
+$GLOBALS['TCA']['tt_content']['types']['yellowpages2_search']['columnsOverrides']['pi_flexform']['config']['ds']
+    = 'FILE:EXT:yellowpages2/Configuration/FlexForms/Search.xml';
 
 $GLOBALS['TCA']['tt_content']['types']['yellowpages2_directory']['previewRenderer'] = Yellowpages2PluginPreview::class;
 $GLOBALS['TCA']['tt_content']['types']['yellowpages2_search']['previewRenderer'] = Yellowpages2PluginPreview::class;

@@ -45,6 +45,7 @@ class FormOwnerTest extends FunctionalTestCase
     protected array $coreExtensionsToLoad = [
         'form',
         'rte_ckeditor',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [

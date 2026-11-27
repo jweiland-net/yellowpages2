@@ -15,6 +15,7 @@ use JWeiland\Yellowpages2\Service\ModerationLinkTokenService;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
+use TYPO3\CMS\Core\Crypto\HashAlgo;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -43,6 +44,7 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
 
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [
@@ -187,6 +189,8 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
     {
         $formState = new FormState();
         $formState->setLastDisplayedPageIndex(1);
+        // Since TYPO3 14 the honeypot name of the displayed page is part of the signed form state
+        $formState->setHoneypotName(1, 'yellowpages2Honeypot');
         $valuesOfFirstPage = [
             'company' => 'Flower shop',
             'street' => 'Main street',
@@ -207,6 +211,7 @@ class CompanyFormModerationMailTest extends FunctionalTestCase
                     '__state' => $this->get(HashService::class)->appendHmac(
                         base64_encode(serialize($formState)),
                         HashScope::FormState->prefix(),
+                        HashAlgo::SHA3_256,
                     ),
                     '__currentPage' => '2',
                     'position' => ['latitude' => '48.6861', 'longitude' => '9.2159'],

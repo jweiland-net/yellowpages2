@@ -1,5 +1,19 @@
 parameters:
 	ignoreErrors:
+		# glossary2 8.0.0 types the queries of GlossaryService as Glossary generics,
+		# although the service is meant to be used with models of other extensions.
+		-
+			message: '#^Parameter \#1 \$extbaseQuery of method JWeiland\\Glossary2\\Service\\GlossaryService\:\:getLetterConstraintForExtbaseQuery\(\) expects#'
+			identifier: argument.type
+			count: 1
+			path: ../../Classes/Domain/Repository/CompanyRepository.php
+
+		-
+			message: '#^Parameter \#1 \$queryBuilder of method JWeiland\\Glossary2\\Service\\GlossaryService\:\:buildGlossary\(\) expects#'
+			identifier: argument.type
+			count: 1
+			path: ../../Classes/EventListener/AddGlossaryEventListener.php
+
 		-
 			message: '#^Property JWeiland\\Yellowpages2\\Domain\\Model\\Company\:\:\$images on left side of \?\?\= is not nullable nor uninitialized\.$#'
 			identifier: nullCoalesce.initializedProperty

@@ -43,6 +43,7 @@ class ManagementControllerActivationTest extends FunctionalTestCase
 
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [

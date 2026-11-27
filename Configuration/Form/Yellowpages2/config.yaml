@@ -1,0 +1,15 @@
+# Form set of yellowpages2. EXT:form discovers it automatically for all sites.
+name: jweiland/yellowpages2
+label: 'Yellowpages2 - Company form'
+# Loaded after the form set of EXT:maps2 (50)
+priority: 100
+
+prototypes:
+  standard:
+    finishersDefinition:
+      SaveCompanyFinisher:
+        implementationClassName: 'JWeiland\Yellowpages2\Domain\Finisher\SaveCompanyFinisher'
+
+persistenceManager:
+  allowedExtensionPaths:
+    1763380800: EXT:yellowpages2/Configuration/Form/

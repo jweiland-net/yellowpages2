@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Mailer;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -19,7 +20,7 @@ final readonly class NotificationMailer
 {
     public function __construct(
         private ExtConf $extConf,
-        private MailMessage $mailMessage,
+        private MailerInterface $mailer,
     ) {}
 
     /**
@@ -35,8 +36,9 @@ final readonly class NotificationMailer
                 $company['uid'],
                 $company['company'],
                 $this->extConf->getEditLink(),
-            ]))
-            ->send();
+            ]));
+
+        $this->mailer->send($mail);
     }
 
     /**
@@ -44,8 +46,8 @@ final readonly class NotificationMailer
      */
     public function informAdmin(array $company): void
     {
-        $this->mailMessage
-            ->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName())
+        $mail = new MailMessage();
+        $mail->setFrom($this->extConf->getEmailFromAddress(), $this->extConf->getEmailFromName())
             ->setTo($this->extConf->getEmailToAddress(), $this->extConf->getEmailToName())
             ->setSubject($this->translateSubject('deactivated', 'admin'))
             ->html(
@@ -53,8 +55,9 @@ final readonly class NotificationMailer
                     $company['uid'],
                     $company['company'],
                 ]),
-            )
-            ->send();
+            );
+
+        $this->mailer->send($mail);
     }
 
     private function translateSubject(string $type, string $recipient): string

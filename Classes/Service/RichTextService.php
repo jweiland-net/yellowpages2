@@ -105,7 +105,8 @@ readonly class RichTextService
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable($table);
         $queryBuilder->getRestrictions()->removeAll()->add(new DeletedRestriction());
 
-        $typeField = $this->tcaSchemaFactory->get($table)->getSubSchemaDivisorField()?->getName() ?? '';
+        $schema = $this->tcaSchemaFactory->get($table);
+        $typeField = $schema->supportsSubSchema() ? $schema->getSubSchemaTypeInformation()->getFieldName() : '';
         $record = $queryBuilder
             ->select(...array_filter(['pid', $column, $typeField]))
             ->from($table)

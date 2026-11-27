@@ -29,6 +29,7 @@ class CompanyControllerMarkupTest extends FunctionalTestCase
 
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [
@@ -63,6 +64,8 @@ class CompanyControllerMarkupTest extends FunctionalTestCase
         $this->get(SiteWriter::class)->write('yellowpages2', [
             'rootPageId' => 1,
             'base' => 'https://www.example.com/',
+            // Site settings of EXT:glossary2 are needed to render the A-Z list
+            'dependencies' => ['jweiland/glossary2'],
             'languages' => [
                 [
                     'languageId' => 0,

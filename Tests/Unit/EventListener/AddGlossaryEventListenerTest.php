@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Tests\Unit\EventListener;
 
+use JWeiland\Glossary2\Configuration\ExtConf;
+use JWeiland\Glossary2\Helper\CharsetHelper;
 use JWeiland\Glossary2\Service\GlossaryService;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Event\PostProcessFluidVariablesEvent;
@@ -18,6 +20,13 @@ use JWeiland\Yellowpages2\EventListener\AddGlossaryEventListener;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Charset\CharsetConverter;
+use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
+use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -35,10 +44,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
      */
     protected MockObject $queryResultMock;
 
-    /**
-     * @var GlossaryService|MockObject
-     */
-    protected MockObject $glossaryServiceMock;
+    protected GlossaryService $glossaryService;
 
     /**
      * @var CompanyRepository|MockObject
@@ -53,10 +59,30 @@ class AddGlossaryEventListenerTest extends UnitTestCase
 
         $this->queryResultMock = $this->createMock(QueryResult::class);
 
-        $this->glossaryServiceMock = $this->createMock(GlossaryService::class);
-        $this->glossaryServiceMock
-            ->method('buildGlossary')
+        // GlossaryService is final since glossary2 8.0.0 and can not be doubled.
+        // Use a real instance and mock its collaborators, so the view renders "html".
+        $viewMock = $this->createMock(ViewInterface::class);
+        $viewMock
+            ->method('render')
             ->willReturn('html');
+
+        $viewFactoryMock = $this->createMock(ViewFactoryInterface::class);
+        $viewFactoryMock
+            ->method('create')
+            ->willReturn($viewMock);
+
+        $eventDispatcherMock = $this->createMock(EventDispatcher::class);
+        $eventDispatcherMock
+            ->method('dispatch')
+            ->willReturnArgument(0);
+
+        $this->glossaryService = new GlossaryService(
+            $this->createMock(ExtConf::class),
+            $eventDispatcherMock,
+            $viewFactoryMock,
+            new CharsetHelper($this->createMock(CharsetConverter::class), $eventDispatcherMock),
+            new TypoScriptService(),
+        );
 
         $this->companyRepositoryMock = $this->createMock(CompanyRepository::class);
         $this->companyRepositoryMock
@@ -70,11 +96,15 @@ class AddGlossaryEventListenerTest extends UnitTestCase
         $requestMock
             ->method('getControllerActionName')
             ->willReturn('list');
+        $requestMock
+            ->method('getAttribute')
+            ->with('frontend.typoscript')
+            ->willReturn(new FrontendTypoScript(new RootNode(), [], [], []));
 
         $this->event = new PostProcessFluidVariablesEvent($requestMock, [], []);
 
         $this->subject = new AddGlossaryEventListener(
-            $this->glossaryServiceMock,
+            $this->glossaryService,
             $this->companyRepositoryMock,
         );
     }
@@ -83,7 +113,7 @@ class AddGlossaryEventListenerTest extends UnitTestCase
     {
         unset(
             $this->subject,
-            $this->glossaryServiceMock,
+            $this->glossaryService,
             $this->companyRepositoryMock,
         );
 

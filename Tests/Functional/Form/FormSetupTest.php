@@ -16,6 +16,8 @@ use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Form\Mvc\Configuration\InheritancesResolverService;
+use TYPO3\CMS\Form\Mvc\Configuration\YamlSource;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3Fluid\Fluid\View\TemplatePaths;
 
@@ -25,13 +27,14 @@ use TYPO3Fluid\Fluid\View\TemplatePaths;
  */
 class FormSetupTest extends FunctionalTestCase
 {
-    private const CORE_FORM_SETUP = 'EXT:form/Configuration/Yaml/FormSetup.yaml';
+    private const CORE_FORM_SETUP = 'EXT:form/Configuration/Form/Base/config.yaml';
 
-    private const FORM_SETUP = 'EXT:yellowpages2/Configuration/Form/OverrideFormSettings.yaml';
+    private const FORM_SETUP = 'EXT:yellowpages2/Configuration/Form/Yellowpages2/config.yaml';
 
     private const TEMPLATE_PATH = 'EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/';
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [
@@ -44,15 +47,17 @@ class FormSetupTest extends FunctionalTestCase
     public function formSetupKeepsEmailFinisherOfCore(): void
     {
         self::assertSame(
-            $this->getEmailFinisherDefinition([10 => self::CORE_FORM_SETUP]),
-            $this->getEmailFinisherDefinition([10 => self::CORE_FORM_SETUP, 1763380800 => self::FORM_SETUP]),
+            $this->getEmailFinisherDefinition([self::CORE_FORM_SETUP]),
+            $this->getEmailFinisherDefinition([self::CORE_FORM_SETUP, self::FORM_SETUP]),
         );
     }
 
     #[Test]
     public function formSetupRegistersSaveCompanyFinisher(): void
     {
-        $prototype = $this->getPrototype([10 => self::CORE_FORM_SETUP, 1763380800 => self::FORM_SETUP]);
+        // Uses the form sets discovered by EXT:form from all active extensions
+        $prototype = $this->get(ConfigurationManagerInterface::class)
+            ->getYamlConfiguration([], true)['prototypes']['standard'];
 
         self::assertArrayHasKey('SaveCompanyFinisher', $prototype['finishersDefinition']);
     }
@@ -92,7 +97,7 @@ class FormSetupTest extends FunctionalTestCase
      */
     private function getEmailFinisherOptionsOfCompanyForm(): array
     {
-        $options = $this->getEmailFinisherDefinition([10 => self::CORE_FORM_SETUP, 1763380800 => self::FORM_SETUP])['options'];
+        $options = $this->getEmailFinisherDefinition([self::CORE_FORM_SETUP, self::FORM_SETUP])['options'];
         $formDefinition = Yaml::parseFile(__DIR__ . '/../../../Configuration/Form/Company.form.yaml');
         foreach ($formDefinition['finishers'] as $finisher) {
             if ($finisher['identifier'] === 'EmailToReceiver') {
@@ -114,14 +119,17 @@ class FormSetupTest extends FunctionalTestCase
     }
 
     /**
+     * Merges the given form sets like EXT:form does, without the form sets of other extensions
+     *
      * @param array<int, string> $yamlConfigurations
      * @return array<string, mixed>
      */
     private function getPrototype(array $yamlConfigurations): array
     {
-        $configuration = $this->get(ConfigurationManagerInterface::class)
-            ->getYamlConfiguration(['yamlConfigurations' => $yamlConfigurations], true);
+        $configuration = InheritancesResolverService::create(
+            $this->get(YamlSource::class)->load($yamlConfigurations),
+        )->getResolvedConfiguration();
 
-        return ($configuration['prototypes'] ?? $configuration['TYPO3']['CMS']['Form']['prototypes'])['standard'];
+        return $configuration['prototypes']['standard'];
     }
 }

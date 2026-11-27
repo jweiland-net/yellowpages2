@@ -54,20 +54,9 @@ class CompanyController extends ActionController
         $this->preProcessControllerAction();
     }
 
-    #[Validate([
-        'validator' => 'String',
-        'param' => 'letter',
-    ])]
-    #[Validate([
-        'validator' => 'StringLength',
-        'param' => 'letter',
-        'options' => [
-            'minimum' => 0,
-            'maximum' => 3,
-        ],
-    ])]
-    public function listAction(string $letter = ''): ResponseInterface
-    {
+    public function listAction(
+        #[Validate(validator: 'StringLength', options: ['minimum' => 0, 'maximum' => 3])] string $letter = '',
+    ): ResponseInterface {
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,

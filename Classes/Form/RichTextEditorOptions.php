@@ -14,8 +14,10 @@ namespace JWeiland\Yellowpages2\Form;
 use JWeiland\Yellowpages2\Sanitizer\RichTextSanitizerConfiguration;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\SystemResource\Publishing\SystemResourcePublisherInterface;
+use TYPO3\CMS\Core\SystemResource\Publishing\UriGenerationOptions;
+use TYPO3\CMS\Core\SystemResource\SystemResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -25,6 +27,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 readonly class RichTextEditorOptions
 {
+    public function __construct(
+        private SystemResourceFactory $systemResourceFactory,
+        private SystemResourcePublisherInterface $resourcePublisher,
+    ) {}
+
     /**
      * The headings and toolbar items of the editor are based on the allowed tags.
      *
@@ -41,7 +48,7 @@ readonly class RichTextEditorOptions
         return [
             'language' => $languageCode,
             'allowedTags' => $configuration->allowedTags,
-            'translationUrl' => $this->getTranslationUrl($languageCode, $translationsPath),
+            'translationUrl' => $this->getTranslationUrl($languageCode, $translationsPath, $request),
             'labels' => [
                 'openInNewTab' => LocalizationUtility::translate('richText.openInNewTab', 'yellowpages2') ?? 'Open in a new tab',
             ],
@@ -59,7 +66,7 @@ readonly class RichTextEditorOptions
     /**
      * English is the built-in language of CKEditor and has no translation file
      */
-    private function getTranslationUrl(string $languageCode, string $translationsPath): string
+    private function getTranslationUrl(string $languageCode, string $translationsPath, ServerRequestInterface $request): string
     {
         if ($languageCode === 'en' || trim($translationsPath) === '') {
             return '';
@@ -70,6 +77,10 @@ readonly class RichTextEditorOptions
             return '';
         }
 
-        return PathUtility::getPublicResourceWebPath($translationFile);
+        return (string)$this->resourcePublisher->generateUri(
+            $this->systemResourceFactory->createPublicResource($translationFile),
+            $request,
+            new UriGenerationOptions(cacheBusting: false),
+        );
     }
 }

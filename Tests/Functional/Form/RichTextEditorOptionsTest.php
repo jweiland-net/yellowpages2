@@ -14,6 +14,8 @@ namespace JWeiland\Yellowpages2\Tests\Functional\Form;
 use JWeiland\Yellowpages2\Form\RichTextEditorOptions;
 use JWeiland\Yellowpages2\Sanitizer\RichTextSanitizer;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Page\AssetCollector;
@@ -31,6 +33,7 @@ class RichTextEditorOptionsTest extends FunctionalTestCase
     protected array $coreExtensionsToLoad = [
         'form',
         'rte_ckeditor',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [
@@ -86,8 +89,10 @@ class RichTextEditorOptionsTest extends FunctionalTestCase
      */
     private function getEditorOptions(string $locale, string $translationsPath): array
     {
-        $request = (new ServerRequest('https://example.com/'))
+        $request = (new ServerRequest('https://example.com/', 'GET', null, [], ['HTTP_HOST' => 'example.com', 'HTTPS' => 'on']))
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE)
             ->withAttribute('language', new SiteLanguage(0, $locale, new Uri('/'), []));
+        $request = $request->withAttribute('normalizedParams', NormalizedParams::createFromRequest($request));
 
         return $this->get(RichTextEditorOptions::class)->getEditorOptions(
             $request,

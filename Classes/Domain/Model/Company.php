@@ -422,13 +422,7 @@ class Company extends AbstractEntity
         $this->instagram = $instagram;
     }
 
-    /**
-     * SF: Do not add PoiCollection as strict_type to $txMaps2Uid
-     * as this will break DataMap in Extbase when maps2 is not installed.
-     *
-     * @return mixed
-     */
-    public function getTxMaps2Uid()
+    public function getTxMaps2Uid(): ?PoiCollection
     {
         return $this->txMaps2Uid;
     }
@@ -438,14 +432,9 @@ class Company extends AbstractEntity
         return $this->txMaps2Uid instanceof PoiCollection;
     }
 
-    /**
-     * @param mixed $txMaps2Uid
-     */
-    public function setTxMaps2Uid($txMaps2Uid): void
+    public function setTxMaps2Uid(?PoiCollection $txMaps2Uid): void
     {
-        if ($txMaps2Uid instanceof PoiCollection) {
-            $this->txMaps2Uid = $txMaps2Uid;
-        }
+        $this->txMaps2Uid = $txMaps2Uid;
     }
 
     public function getFeUser(): ?FeUser

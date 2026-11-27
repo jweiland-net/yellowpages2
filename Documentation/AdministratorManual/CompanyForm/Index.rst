@@ -34,7 +34,7 @@ Requirements of the company form
     provides the frontend configuration of EXT:form
     (:typoscript:`plugin.tx_form`). Without it, the form can not be
     rendered.
-*   EXT:maps2 12.3.0 or higher (:composer:`jweiland/maps2`) with its form
+*   EXT:maps2 13 (:composer:`jweiland/maps2`) with its form
     element `Maps2PoiPosition`. The site set `jweiland/yellowpages2`
     depends on the site set `jweiland/maps2-default`, which provides the
     form element.
@@ -176,8 +176,9 @@ checked by the `perform` action, while prefilling the form and again by the
 Configuration of the company form
 =================================
 
-The site set `jweiland/yellowpages2` registers the form setup
-:file:`EXT:yellowpages2/Configuration/Form/OverrideFormSettings.yaml` and
+EXT:form discovers the form set
+:file:`EXT:yellowpages2/Configuration/Form/Yellowpages2/config.yaml`
+automatically. The site set `jweiland/yellowpages2`
 overrides some values of the form definition with TypoScript
 :typoscript:`plugin.tx_yellowpages2.settings.overrideForm`:
 
