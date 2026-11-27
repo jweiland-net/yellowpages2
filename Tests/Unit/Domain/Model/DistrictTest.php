@@ -18,7 +18,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class DistrictTest extends UnitTestCase
+final class DistrictTest extends UnitTestCase
 {
     protected District $subject;
 

@@ -217,6 +217,12 @@
 			<trans-unit id="activation.invalidToken">
 				<source>The company could not be activated. The link is invalid or the company does not exist anymore.</source>
 			</trans-unit>
+			<trans-unit id="activation.mailFailed">
+				<source>The company was activated, but the notification mail to the moderator could not be sent.</source>
+			</trans-unit>
+			<trans-unit id="moderation.invalidToken">
+				<source>The moderation link is invalid. Please use the link of the mail again or contact the administrator.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

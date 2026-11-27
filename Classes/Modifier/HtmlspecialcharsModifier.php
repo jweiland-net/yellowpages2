@@ -14,7 +14,7 @@ namespace JWeiland\Yellowpages2\Modifier;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 
-readonly class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
+final readonly class HtmlspecialcharsModifier extends AbstractRequestFieldModifier
 {
     /**
      * @param array<string, mixed> $requestBody

@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
-readonly class CacheUtility
+final readonly class CacheUtility
 {
     /**
      * Adds cache tags to page cache by event-records.
@@ -28,7 +28,7 @@ readonly class CacheUtility
      */
     public static function addCacheTagsByCompanyRecords(array $companyRecords, ServerRequestInterface $request): void
     {
-        if (!self::getApplicationType()->isFrontend()) {
+        if (!ApplicationType::fromRequest($request)->isFrontend()) {
             return;
         }
 
@@ -55,25 +55,19 @@ readonly class CacheUtility
      */
     public static function addPageCacheTagsByQuery(QueryInterface $query, ServerRequestInterface $request): void
     {
-        if (!self::getApplicationType()->isFrontend()) {
+        if (!ApplicationType::fromRequest($request)->isFrontend()) {
             return;
         }
 
-        $cacheTags = [];
-        if ($query->getQuerySettings()->getStoragePageIds()) {
-            // Add cache tags for each storage page
-            foreach ($query->getQuerySettings()->getStoragePageIds() as $pageId) {
-                $cacheTags[] = new CacheTag('tx_yellowpages2_pid_' . $pageId);
-            }
-        } else {
+        // Add cache tags for each storage page
+        $cacheTags = array_map(
+            static fn(int $pageId): CacheTag => new CacheTag('tx_yellowpages2_pid_' . $pageId),
+            $query->getQuerySettings()->getStoragePageIds(),
+        );
+        if ($cacheTags === []) {
             $cacheTags[] = new CacheTag('tx_yellowpages2_domain_model_company');
         }
 
         $request->getAttribute('frontend.cache.collector')->addCacheTags(...$cacheTags);
-    }
-
-    protected static function getApplicationType(): ApplicationType
-    {
-        return ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST']);
     }
 }

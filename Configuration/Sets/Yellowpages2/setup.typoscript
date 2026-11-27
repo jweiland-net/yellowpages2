@@ -1,6 +1,3 @@
-# Register the finisher and the template paths of the company form based on EXT:form
-plugin.tx_form.settings.yamlConfigurations.1763380800 = EXT:yellowpages2/Configuration/Form/OverrideFormSettings.yaml
-
 plugin.tx_yellowpages2 {
   view {
     templateRootPaths {

@@ -8,15 +8,15 @@
 <f:section name="Main">
 <f:variable name="company">{finisherVariableProvider.SaveCompany.companyUid}</f:variable>
 <f:variable name="moderationToken">{finisherVariableProvider.SaveCompany.moderationToken}</f:variable>
-{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.greeting') -> f:format.raw()}
+{f:translate(key: 'yellowpages2.messages:email.form.greeting') -> f:format.raw()}
 
-{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.edit') -> f:format.raw()}:
+{f:translate(key: 'yellowpages2.messages:email.form.edit') -> f:format.raw()}:
 <f:format.raw><f:uri.action pageUid="{pidOfManagementPage}" action="perform" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}" /></f:format.raw>
 
-{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.activate') -> f:format.raw()}:
+{f:translate(key: 'yellowpages2.messages:email.form.activate') -> f:format.raw()}:
 <f:format.raw><f:uri.action pageUid="{pidOfManagementPage}" action="confirmActivation" controller="Management" extensionName="Yellowpages2" pluginName="Management" absolute="1" arguments="{company: company, moderationToken: moderationToken}" /></f:format.raw>
 
-{f:translate(key: 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:email.form.values') -> f:format.raw()}
+{f:translate(key: 'yellowpages2.messages:email.form.values') -> f:format.raw()}
 
 <formvh:renderAllFormValues renderable="{form.formDefinition}" as="formValue"><f:spaceless>
 <f:format.raw><formvh:translateElementProperty element="{formValue.element}" property="label" /></f:format.raw>: <f:if condition="{formValue.processedValue}"><f:then><f:if condition="{formValue.isMultiValue}"><f:then><f:for each="{formValue.processedValue}" as="singleValue">

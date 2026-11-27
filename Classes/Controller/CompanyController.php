@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Controller;
 
+use JWeiland\Yellowpages2\Domain\Model\Company;
 use JWeiland\Yellowpages2\Domain\Repository\CategoryRepository;
 use JWeiland\Yellowpages2\Domain\Repository\CompanyRepository;
 use JWeiland\Yellowpages2\Domain\Repository\DistrictRepository;
@@ -21,9 +22,11 @@ use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 /**
  * Controller for the public industry directory: list and show companies
@@ -47,6 +50,7 @@ class CompanyController extends ActionController
         protected readonly DistrictRepository $districtRepository,
         protected readonly FeUserRepository $feUserRepository,
         protected readonly PersistenceManagerInterface $persistenceManager,
+        protected readonly ErrorController $errorController,
     ) {}
 
     public function initializeListAction(): void
@@ -54,20 +58,9 @@ class CompanyController extends ActionController
         $this->preProcessControllerAction();
     }
 
-    #[Validate([
-        'validator' => 'String',
-        'param' => 'letter',
-    ])]
-    #[Validate([
-        'validator' => 'StringLength',
-        'param' => 'letter',
-        'options' => [
-            'minimum' => 0,
-            'maximum' => 3,
-        ],
-    ])]
-    public function listAction(string $letter = ''): ResponseInterface
-    {
+    public function listAction(
+        #[Validate(validator: 'StringLength', options: ['minimum' => 0, 'maximum' => 3])] string $letter = '',
+    ): ResponseInterface {
         $companies = $this->companyRepository->findByLetter($letter, $this->settings);
         $this->postProcessAndAssignFluidVariables([
             'companies' => $companies,
@@ -87,6 +80,14 @@ class CompanyController extends ActionController
     public function showAction(int $company): ResponseInterface
     {
         $companyObject = $this->companyRepository->findByIdentifier($company);
+        if (!$companyObject instanceof Company) {
+            // Unknown, hidden or deleted company
+            throw new PropagateResponseException(
+                $this->errorController->pageNotFoundAction($this->request, 'The company does not exist.'),
+                1764240001,
+            );
+        }
+
         $this->postProcessAndAssignFluidVariables([
             'company' => $companyObject,
         ]);

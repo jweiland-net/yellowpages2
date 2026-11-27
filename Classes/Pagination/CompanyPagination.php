@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Pagination;
 
 use JWeiland\Yellowpages2\Utility\RequestUtility;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Pagination\PaginationInterface;
 use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 
@@ -27,13 +28,20 @@ class CompanyPagination implements PaginationInterface
     /**
      * The plugin namespace is required to keep the request arguments (like
      * the search word of the Search plugin) in the page browser links.
+     * The request is optional as PaginationInterface defines the paginator as the only
+     * constructor argument. Without request no arguments are kept.
      */
     public function __construct(
         protected PaginatorInterface $paginator,
         string $pluginNamespace = self::PLUGIN_NAMESPACE,
+        ?ServerRequestInterface $request = null,
     ) {
-        foreach (RequestUtility::getMergedRequestArguments($pluginNamespace) as $argumentName => $argument) {
-            if ($argumentName[0] === '_' && $argumentName[1] === '_') {
+        $requestArguments = $request instanceof ServerRequestInterface
+            ? RequestUtility::getMergedRequestArguments($request, $pluginNamespace)
+            : [];
+        foreach ($requestArguments as $argumentName => $argument) {
+            $argumentName = (string)$argumentName;
+            if (str_starts_with($argumentName, '__')) {
                 continue;
             }
 

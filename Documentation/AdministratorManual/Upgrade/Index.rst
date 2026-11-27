@@ -9,6 +9,66 @@ Updating
 
 If you update EXT:yellowpages2 to a newer version, please read this section carefully!
 
+Upgrade to version 11.0.0
+=========================
+
+This version is compatible with TYPO3 14 LTS only.
+
+*   EXT:maps2 13 (:composer:`jweiland/maps2`) and EXT:glossary2 8
+    (:composer:`jweiland/glossary2`) are required.
+*   The site set `jweiland/yellowpages2` depends on the site set
+    `jweiland/glossary2` now. If you include the TypoScript of yellowpages2
+    without the site set, include the TypoScript and site settings of
+    EXT:glossary2, too. Otherwise the A-Z list can not be rendered.
+*   The form setup of the company form is the form set
+    :file:`EXT:yellowpages2/Configuration/Form/Yellowpages2/config.yaml` now,
+    which EXT:form discovers automatically. The file
+    :file:`Configuration/Form/OverrideFormSettings.yaml` has been removed.
+    Remove references to it from your own TypoScript. As all form sets, it is
+    loaded for all sites and the form manager of the backend. To disable it,
+    add `jweiland/yellowpages2` to
+    :php:`$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['form']['disabledSets']`.
+*   The column `tx_maps2_uid` of the company table is declared with the TCA
+    renderType `maps2Relation` of EXT:maps2 13. Its database type stays
+    an unsigned integer (:file:`ext_tables.sql`).
+*   The TCA option `ctrl.searchFields` has been removed in TYPO3 14. The fields
+    `path_segment`, `facebook`, `twitter` and `instagram` are marked as not
+    searchable, so the backend search covers the same fields as before.
+*   Moderation tokens are HMACs with SHA3-256 now. The links of moderation
+    mails sent before the update (SHA1) keep working during version 11.x. Each
+    use of such a link is logged as notice by the logger of the extension.
+    Support for SHA1 tokens will be removed in version 12.
+*   Rejected moderation links, access to foreign companies and rejected
+    submissions of the company form are logged as warning with the UID of the
+    company and of the frontend user (channel `JWeiland.Yellowpages2`). Failed
+    mails and addresses that could not be geocoded are logged, too. Configure
+    the log writer of :php:`$GLOBALS['TYPO3_CONF_VARS']['LOG']['JWeiland']['Yellowpages2']`
+    to store the entries.
+*   The Management plugin shows translated flash messages for rejected access
+    and for the result of the activation. The templates `Perform` and
+    `ListMyCompanies` do not render the reason as alert anymore, they render
+    :html:`<f:flashMessages/>` only. If you have overridden them, keep the tag
+    and the variable `denialReason` to hide the form or the list.
+*   The action `listMyCompanies` checks login and user group in the controller.
+    The variable `denialReason` contains the label key of the reason.
+*   Fluid templates, partials and layouts have the file extension
+    `.fluid.html` now (`CompanyModeration.fluid.txt` for the text part of the
+    moderation mail). Overrides with `.html` still work, as Fluid 5 resolves both.
+    If your sitepackage references template files directly (e.g. the preview
+    template of the backend), use the new file name.
+*   `RequestUtility::getMergedRequestArguments()` expects the request as first
+    argument, `RequestUtility::getRequestFromGlobalVariable()` has been removed.
+    Custom classes of `plugin.tx_yellowpages2.pageBrowser.class` get the request
+    as third constructor argument. Add it as optional argument, if you extend
+    `CompanyPagination` and call its constructor.
+*   If you XCLASS `ManagementController`, `MailHelper` or `NotificationMailer`:
+    they got the `LoggerInterface` as constructor argument, the `Context` of the
+    `ManagementController` has been removed and `MailHelper::sendMail()` returns
+    `false`, if the mail could not be sent.
+*   Labels are referenced with translation domains now (`yellowpages2.db`,
+    `yellowpages2.messages`, `yellowpages2.flex_forms`). The label files
+    stay the same.
+
 Upgrade to version 10.0.0
 =========================
 

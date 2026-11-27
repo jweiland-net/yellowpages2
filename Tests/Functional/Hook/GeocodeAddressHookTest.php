@@ -22,6 +22,7 @@ use JWeiland\Yellowpages2\Tests\Functional\Traits\CompanyFormRequestTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
 use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
@@ -33,7 +34,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * Test case.
  */
-class GeocodeAddressHookTest extends FunctionalTestCase
+final class GeocodeAddressHookTest extends FunctionalTestCase
 {
     use CompanyFormRequestTrait;
 
@@ -46,6 +47,7 @@ class GeocodeAddressHookTest extends FunctionalTestCase
 
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [
@@ -55,6 +57,8 @@ class GeocodeAddressHookTest extends FunctionalTestCase
     ];
 
     private GeoCodeService&MockObject $geoCodeService;
+
+    private LoggerInterface&MockObject $logger;
 
     private FormDefinition $formDefinition;
 
@@ -66,6 +70,7 @@ class GeocodeAddressHookTest extends FunctionalTestCase
 
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/CompanyForm.csv');
         $this->geoCodeService = $this->createMock(GeoCodeService::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
         $this->formDefinition = $this->buildFormDefinition();
         $this->formState = new FormState();
     }
@@ -93,6 +98,10 @@ class GeocodeAddressHookTest extends FunctionalTestCase
     public function afterSubmitWithUnknownAddressAddsErrorToFirstAddressElement(): void
     {
         $this->geoCodeService->method('getFirstFoundPositionByAddress')->willReturn(null);
+        $this->logger->expects($this->once())->method('warning')->with(
+            self::stringContains('could not be geocoded'),
+            ['companyUid' => 0, 'feUserUid' => 0],
+        );
 
         $this->submitAddressPage(self::ADDRESS, $this->buildFormRequest());
 
@@ -213,6 +222,7 @@ class GeocodeAddressHookTest extends FunctionalTestCase
             $this->get(CompanyRecordService::class),
             $this->get(CompanyPoiCollectionService::class),
             $this->get(LanguageServiceFactory::class),
+            $this->logger,
         );
     }
 

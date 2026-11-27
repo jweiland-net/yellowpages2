@@ -34,7 +34,7 @@ use TYPO3\CMS\Form\Domain\Model\FormDefinition;
  *                factoryClass="JWeiland\Yellowpages2\Domain\Factory\ArrayFormFactory"/>
  */
 #[Autoconfigure(public: true, shared: false)]
-class ArrayFormFactory extends CoreArrayFormFactory
+final class ArrayFormFactory extends CoreArrayFormFactory
 {
     public function __construct(
         protected readonly CompanyFormConfigurator $companyFormConfigurator,

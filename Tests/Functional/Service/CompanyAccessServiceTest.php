@@ -19,12 +19,13 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * Test case.
  */
-class CompanyAccessServiceTest extends FunctionalTestCase
+final class CompanyAccessServiceTest extends FunctionalTestCase
 {
     use CompanyFormRequestTrait;
 
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [

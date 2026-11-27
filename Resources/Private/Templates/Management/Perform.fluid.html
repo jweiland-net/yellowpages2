@@ -9,11 +9,6 @@
     <f:flashMessages/>
 
     <f:if condition="{denialReason}">
-        <f:then>
-            <div class="alert alert-danger" role="alert">
-                {f:translate(key: denialReason)}
-            </div>
-        </f:then>
         <f:else>
             <formvh:render persistenceIdentifier="EXT:yellowpages2/Configuration/Form/Company.form.yaml"
                            factoryClass="JWeiland\\Yellowpages2\\Domain\\Factory\\ArrayFormFactory"

@@ -27,7 +27,6 @@ ExtensionUtility::configurePlugin(
     ],
     // non-cacheable actions
     [],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 
 ExtensionUtility::configurePlugin(
@@ -40,7 +39,6 @@ ExtensionUtility::configurePlugin(
     [
         ManagementController::class => 'listMyCompanies, perform, confirmActivation, activate',
     ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 
 ExtensionUtility::configurePlugin(
@@ -53,7 +51,6 @@ ExtensionUtility::configurePlugin(
     [
         SearchController::class => 'listSearchResults',
     ],
-    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 
 // Clear cache of pages with yellowpages plugins, if a company record was edited/created/deleted in BE

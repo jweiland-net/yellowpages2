@@ -104,9 +104,14 @@ final readonly class AddPaginatorEventListener
             $paginationClass = self::FALLBACK_PAGINATION_CLASS;
         }
 
-        // Custom pagination classes with just one constructor argument
-        // silently ignore the additional plugin namespace.
-        return GeneralUtility::makeInstance($paginationClass, $paginator, $this->getPluginNamespace($event));
+        // Custom pagination classes with fewer constructor arguments
+        // silently ignore the additional plugin namespace and request.
+        return GeneralUtility::makeInstance(
+            $paginationClass,
+            $paginator,
+            $this->getPluginNamespace($event),
+            $event->getRequest(),
+        );
     }
 
     private function getPluginNamespace(PostProcessFluidVariablesEvent $event): string

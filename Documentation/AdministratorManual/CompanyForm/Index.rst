@@ -34,7 +34,7 @@ Requirements of the company form
     provides the frontend configuration of EXT:form
     (:typoscript:`plugin.tx_form`). Without it, the form can not be
     rendered.
-*   EXT:maps2 12.3.0 or higher (:composer:`jweiland/maps2`) with its form
+*   EXT:maps2 13 (:composer:`jweiland/maps2`) with its form
     element `Maps2PoiPosition`. The site set `jweiland/yellowpages2`
     depends on the site set `jweiland/maps2-default`, which provides the
     form element.
@@ -141,8 +141,8 @@ If the company is activated already, an information is shown. A request of
 the action `activate` via GET is redirected to the confirmation page.
 
 The mail is rendered with the templates
-:file:`EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.html`
-and :file:`CompanyModeration.txt`. The template name and its root path are
+:file:`EXT:yellowpages2/Resources/Private/FormFramework/Templates/Finishers/Email/CompanyModeration.fluid.html`
+and :file:`CompanyModeration.fluid.txt`. The template name and its root path are
 options of the finisher in :file:`Company.form.yaml`, so they apply to the
 company form only and not to other forms of the installation. The finisher
 `SaveCompanyFinisher` provides the UID of the company and the token of the
@@ -176,8 +176,9 @@ checked by the `perform` action, while prefilling the form and again by the
 Configuration of the company form
 =================================
 
-The site set `jweiland/yellowpages2` registers the form setup
-:file:`EXT:yellowpages2/Configuration/Form/OverrideFormSettings.yaml` and
+EXT:form discovers the form set
+:file:`EXT:yellowpages2/Configuration/Form/Yellowpages2/config.yaml`
+automatically. The site set `jweiland/yellowpages2`
 overrides some values of the form definition with TypoScript
 :typoscript:`plugin.tx_yellowpages2.settings.overrideForm`:
 

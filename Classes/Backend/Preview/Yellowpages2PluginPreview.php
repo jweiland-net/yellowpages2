@@ -13,8 +13,8 @@ namespace JWeiland\Yellowpages2\Backend\Preview;
 
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Core\View\ViewInterface;
@@ -22,9 +22,9 @@ use TYPO3\CMS\Core\View\ViewInterface;
 /**
  * Add plugin preview for EXT:yellowpages2
  */
-class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
+final class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
 {
-    private const PREVIEW_TEMPLATE = 'EXT:yellowpages2/Resources/Private/Templates/PluginPreview/YellowPages2.html';
+    private const PREVIEW_TEMPLATE = 'EXT:yellowpages2/Resources/Private/Templates/PluginPreview/YellowPages2.fluid.html';
 
     private const ALLOWED_PLUGINS = [
         'yellowpages2_directory',
@@ -32,13 +32,15 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
     ];
 
     public function __construct(
-        protected FlexFormService $flexFormService,
+        protected FlexFormTools $flexFormTools,
         protected ViewFactoryInterface $viewFactory,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
-        $ttContentRecord = $item->getRecord();
+        $ttContentRecord = $item->getRow();
         if (!$this->isValidPlugin($ttContentRecord)) {
             return '';
         }
@@ -84,7 +86,7 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
 
         $view->assign(
             'pluginName',
-            $this->getLanguageService()->sL('LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:' . $langKey),
+            $this->getLanguageService()->sL('yellowpages2.db:' . $langKey),
         );
     }
 
@@ -95,7 +97,7 @@ class Yellowpages2PluginPreview extends StandardContentPreviewRenderer
     protected function getPiFlexformData(array $ttContentRecord): array
     {
         if (!empty($ttContentRecord['pi_flexform'] ?? '')) {
-            return $this->flexFormService->convertFlexFormContentToArray($ttContentRecord['pi_flexform']);
+            return $this->flexFormTools->convertFlexFormContentToArray($ttContentRecord['pi_flexform']);
         }
 
         return [];

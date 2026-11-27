@@ -19,7 +19,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class RteContentConverterTest extends UnitTestCase
+final class RteContentConverterTest extends UnitTestCase
 {
     /**
      * Plain text as typed into the textarea of the frontend form

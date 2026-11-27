@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class PostProcessFluidVariablesEventTest extends UnitTestCase
+final class PostProcessFluidVariablesEventTest extends UnitTestCase
 {
     protected PostProcessFluidVariablesEvent $subject;
 

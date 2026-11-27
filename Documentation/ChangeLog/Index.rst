@@ -7,6 +7,43 @@
 ChangeLog
 =========
 
+Version 11.0.0
+==============
+
+*   [!!!][TASK] Add compatibility for TYPO3 14 LTS and remove support for TYPO3 13 LTS
+*   [!!!][TASK] Require EXT:maps2 13 and EXT:glossary2 8. Both are compatible with TYPO3 14 only.
+*   [!!!][TASK] The site set `jweiland/yellowpages2` depends on the site set `jweiland/glossary2` now. Since glossary2 8.0.0 the A-Z list needs its TypoScript and site settings.
+*   [!!!][TASK] The form setup of the company form is a form set now (:file:`Configuration/Form/Yellowpages2/config.yaml`), which EXT:form discovers automatically. :file:`Configuration/Form/OverrideFormSettings.yaml` and its registration via `plugin.tx_form.settings.yamlConfigurations` have been removed.
+*   [!!!][TASK] Declare the column `tx_maps2_uid` with the TCA renderType `maps2Relation` of maps2 13 instead of `Maps2Registry::add()`
+*   [!!!][TASK] `Company::getTxMaps2Uid()` and `Company::setTxMaps2Uid()` are typed with `?PoiCollection` now
+*   [TASK] Send notification mails via `MailerInterface`, as `MailMessage::send()` has been removed
+*   [TASK] Replace removed `FlexFormService` with `FlexFormTools` and use `GridColumnItem::getRow()` in the backend preview
+*   [TASK] Use `getSubSchemaTypeInformation()` of the TCA schema, as `getSubSchemaDivisorField()` has been removed
+*   [TASK] Replace deprecated `PathUtility::getPublicResourceWebPath()` with the system resource API
+*   [TASK] Register the FlexForms as 7th argument of `ExtensionUtility::registerPlugin()` instead of the deprecated `addPiFlexFormValue()` and drop the default plugin type argument of `configurePlugin()`
+*   [TASK] Place the Extbase `#[Validate]` and `#[IgnoreValidation]` attributes on the method parameters
+*   [TASK] Migrate upgrade wizards to the `TYPO3\CMS\Core\Upgrades` namespace and the `TYPO3\CMS\Core\Attribute\UpgradeWizard` attribute
+*   [TASK] Replace the TCA `ctrl` option `searchFields` of company and district, which has been removed in TYPO3 14, with `searchable => false` on the fields that were not searchable before
+*   [TASK] Keep `tx_maps2_uid` as unsigned integer column via ext_tables.sql
+*   [TASK] Add `version` and `providesPackages` to composer.json
+*   [!!!][BUGFIX] Generate the moderation tokens of the mail links as HMAC with SHA3-256. Tokens of mails sent before this version (SHA1) are accepted during version 11.x, but each use is logged as notice. Support for SHA1 tokens will be removed in version 12.
+*   [BUGFIX] Log rejected moderation tokens, unauthorized access to foreign companies and rejected submissions of the company form as warning with the UID of the company and the frontend user, without personal data
+*   [BUGFIX] Escape the wildcards `%` and `_` of the search term in the company search, so they can not be used to match all companies
+*   [BUGFIX] Do not list companies without owner (`fe_user = 0`) to visitors who are not logged in in the action `listMyCompanies`. The action checks login and user group in the controller now, not in the template only.
+*   [BUGFIX] Add `CompanyRepository::findByFeUser()`. The magic finder of Extbase has been removed, so the action `listMyCompanies` caused a fatal error.
+*   [BUGFIX] Respond with 404 for the action `show` of an unknown, hidden or deleted company instead of a fatal error
+*   [!!!][TASK] Pass the request explicitly to `RequestUtility::getMergedRequestArguments()` and to `CompanyPagination`. `RequestUtility::getRequestFromGlobalVariable()` and the access to `$GLOBALS['TYPO3_REQUEST']` have been removed. Custom pagination classes (`pageBrowser.class`) get the request as 3rd constructor argument.
+*   [!!!][TASK] `ManagementController` has the `LoggerInterface` as additional constructor argument and does not need `Context` anymore. `MailHelper::sendMail()` returns a boolean and `NotificationMailer` has the `LoggerInterface` as additional constructor argument. Adapt XCLASSes.
+*   [TASK] Show translated flash messages with the severity of the message for all rejections of the Management plugin: not logged in, wrong user group, foreign company and invalid moderation link. The activation of a company shows success, "already activated", invalid link and a warning, if the notification mail to the moderator could not be sent.
+*   [TASK] Log failed mails (`NotificationMailer`, `MailHelper`), addresses that could not be geocoded, missing files of a company and an unavailable TypoScript setup via the PSR-3 logger
+*   [TASK] Do not abort the update command, if a notification mail can not be sent. The error is logged.
+*   [TASK] Use TYPO3 14 translation domains (`yellowpages2.db:`, `yellowpages2.messages:`, `yellowpages2.flex_forms:`) instead of `LLL:EXT:` paths and add `target-language` to the German XLIFF files
+*   [!!!][TASK] Rename all Fluid templates, partials and layouts to `*.fluid.html` (`*.fluid.txt` for the text part of the moderation mail). Templates of your sitepackage with the old file extension still override them, as Fluid 5 checks both. Update paths that reference a template file directly, e.g. in your own preview or mail configuration.
+*   [TASK] Mark classes as `final` except classes that integrators may XCLASS (controllers, repositories, models, `NotificationMailer`, `MailHelper`, `CompanyPagination`, `RichTextEditorOptions`)
+*   [TASK] Remove `phpstan/phpdoc-parser` from the dev requirements and the unused php-cs-fixer configuration :file:`Build/php-cs-fixer/config.php`
+*   [TASK] Use real objects instead of mocks of own classes in tests and add tests for tokens, flash messages, logging and request handling
+*   [TASK] Adapt tests to TYPO3 14 (honeypot in form state, SHA3-256 HMAC of the form state, handling of `FinisherException`, final `GlossaryService`)
+
 Version 10.0.1
 ==============
 

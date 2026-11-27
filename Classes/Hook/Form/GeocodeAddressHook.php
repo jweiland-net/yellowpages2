@@ -18,6 +18,7 @@ use JWeiland\Yellowpages2\Form\PoiPosition;
 use JWeiland\Yellowpages2\Service\CompanyAccessService;
 use JWeiland\Yellowpages2\Service\CompanyPoiCollectionService;
 use JWeiland\Yellowpages2\Service\CompanyRecordService;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Error\Error;
@@ -49,7 +50,7 @@ final readonly class GeocodeAddressHook
      */
     public const GEOCODED_ADDRESS = '__yellowpages2GeocodedAddress';
 
-    private const ERROR_LABEL = 'LLL:EXT:yellowpages2/Resources/Private/Language/locallang.xlf:errorAddressInvalid.body';
+    private const ERROR_LABEL = 'yellowpages2.messages:errorAddressInvalid.body';
 
     public function __construct(
         private GeoCodeService $geoCodeService,
@@ -57,6 +58,7 @@ final readonly class GeocodeAddressHook
         private CompanyRecordService $companyRecordService,
         private CompanyPoiCollectionService $companyPoiCollectionService,
         private LanguageServiceFactory $languageServiceFactory,
+        private LoggerInterface $logger,
     ) {}
 
     /**
@@ -86,6 +88,13 @@ final readonly class GeocodeAddressHook
     {
         $position = $this->geoCodeService->getFirstFoundPositionByAddress($address);
         if (!$position instanceof Position) {
+            $this->logger->warning(
+                'The address of the company could not be geocoded. The user stays on the address page.',
+                [
+                    'companyUid' => $this->companyAccessService->getCompanyUid($formRuntime->getRequest()),
+                    'feUserUid' => $this->companyAccessService->getFrontendUserUid(),
+                ],
+            );
             $formRuntime->getFormDefinition()->getProcessingRule($errorElement)->getProcessingMessages()->addError(
                 new Error($this->translateError($formRuntime), 1763380803),
             );

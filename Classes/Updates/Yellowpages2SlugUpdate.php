@@ -11,29 +11,29 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Updates;
 
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
+use TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
-use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
-use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * Fill empty "path_segment" slug columns of company records with a URI compatible version of the company name
  */
 #[UpgradeWizard('yellowpages2_updateSlug')]
-class Yellowpages2SlugUpdate implements UpgradeWizardInterface
+final class Yellowpages2SlugUpdate implements UpgradeWizardInterface
 {
-    protected string $tableName = 'tx_yellowpages2_domain_model_company';
+    private string $tableName = 'tx_yellowpages2_domain_model_company';
 
-    protected string $fieldName = 'path_segment';
+    private string $fieldName = 'path_segment';
 
     /**
      * @var array<string, int>
      */
-    protected array $slugCache = [];
+    private array $slugCache = [];
     public function __construct(private readonly ConnectionPool $connectionPool) {}
 
     public function getTitle(): string
@@ -119,7 +119,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
         return true;
     }
 
-    protected function getUniqueValue(int $uid, string $slug): string
+    private function getUniqueValue(int $uid, string $slug): string
     {
         $counter = $this->slugCache[$slug] ?? 1;
         $newSlug = $slug;
@@ -138,7 +138,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
         return $newSlug;
     }
 
-    protected function slugExists(int $uid, string $slug): bool
+    private function slugExists(int $uid, string $slug): bool
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->tableName);
         $queryBuilder->getRestrictions()->removeAll();
@@ -163,7 +163,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
         return (bool)$numberOfMatches;
     }
 
-    protected function getSlugHelper(): SlugHelper
+    private function getSlugHelper(): SlugHelper
     {
         return GeneralUtility::makeInstance(
             SlugHelper::class,
@@ -180,7 +180,7 @@ class Yellowpages2SlugUpdate implements UpgradeWizardInterface
         ];
     }
 
-    protected function getConnectionPool(): ConnectionPool
+    private function getConnectionPool(): ConnectionPool
     {
         return $this->connectionPool;
     }

@@ -2,18 +2,18 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <sheetTitle>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:sheetGeneral</sheetTitle>
+                <sheetTitle>yellowpages2.flex_forms:sheetGeneral</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.pidOfDetailPage>
-                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfDetailPage</label>
+                        <label>yellowpages2.flex_forms:pidOfDetailPage</label>
                         <config>
                             <type>number</type>
                             <default>0</default>
                         </config>
                     </settings.pidOfDetailPage>
                     <settings.pidOfSearchResults>
-                        <label>LLL:EXT:yellowpages2/Resources/Private/Language/FlexForms.xlf:pidOfSearchResults</label>
+                        <label>yellowpages2.flex_forms:pidOfSearchResults</label>
                         <config>
                             <type>number</type>
                             <default>0</default>

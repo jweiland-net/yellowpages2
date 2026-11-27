@@ -36,7 +36,7 @@ use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
  * "options" (e.g. selects and checkboxes) are restricted to these options,
  * so a manipulated request can not relate other records.
  */
-readonly class CompanyFormDataMapper
+final readonly class CompanyFormDataMapper
 {
     public function __construct(
         private CompanyColumnTypeResolver $companyColumnTypeResolver,

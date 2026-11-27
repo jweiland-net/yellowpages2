@@ -28,11 +28,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class RichTextEditorHookTest extends UnitTestCase
+final class RichTextEditorHookTest extends UnitTestCase
 {
-    private MockObject $richTextEditorOptions;
+    private RichTextEditorOptions&MockObject $richTextEditorOptions;
 
-    private MockObject $formRuntime;
+    private FormRuntime&MockObject $formRuntime;
 
     private RichTextEditorHook $subject;
 

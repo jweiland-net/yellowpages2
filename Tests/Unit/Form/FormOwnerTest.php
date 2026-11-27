@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class FormOwnerTest extends UnitTestCase
+final class FormOwnerTest extends UnitTestCase
 {
     #[Test]
     public function markConfigurationSetsRenderingOption(): void

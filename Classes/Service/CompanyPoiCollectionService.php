@@ -13,6 +13,7 @@ namespace JWeiland\Yellowpages2\Service;
 
 use JWeiland\Yellowpages2\Configuration\ExtConf;
 use JWeiland\Yellowpages2\Form\PoiPosition;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
@@ -24,7 +25,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
  * type "Point", which is stored in the folder of the extension setting
  * "poiCollectionPid" or else next to the company.
  */
-readonly class CompanyPoiCollectionService
+final readonly class CompanyPoiCollectionService
 {
     private const TABLE = 'tx_yellowpages2_domain_model_company';
 
@@ -35,6 +36,7 @@ readonly class CompanyPoiCollectionService
     public function __construct(
         private ConnectionPool $connectionPool,
         private ExtConf $extConf,
+        private LoggerInterface $logger,
     ) {}
 
     public function getPosition(int $poiCollectionUid): ?PoiPosition
@@ -62,6 +64,13 @@ readonly class CompanyPoiCollectionService
             $this->connectionPool->getConnectionForTable(self::POI_COLLECTION_TABLE)
                 ->update(self::POI_COLLECTION_TABLE, $columns, ['uid' => $poiCollectionUid]);
             return;
+        }
+
+        if ($poiCollectionUid > 0) {
+            $this->logger->warning(
+                'The POI collection of the company does not exist anymore. A new one is created.',
+                ['companyUid' => (int)($company['uid'] ?? 0), 'poiCollectionUid' => $poiCollectionUid],
+            );
         }
 
         $this->connectionPool->getConnectionForTable(self::TABLE)->update(

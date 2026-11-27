@@ -20,12 +20,13 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * Functional test
  */
-class RichTextServiceTest extends FunctionalTestCase
+final class RichTextServiceTest extends FunctionalTestCase
 {
     private const TABLE = 'tx_yellowpages2_domain_model_company';
     protected array $coreExtensionsToLoad = [
         'form',
         'rte_ckeditor',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [

@@ -23,23 +23,19 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Builds the complete company form of Company.form.yaml with the
- * prototype of EXT:form incl. the form setup of EXT:maps2.
+ * prototype of EXT:form incl. the auto-discovered form sets of EXT:maps2 and EXT:yellowpages2.
  *
  * The map step needs the form element "Maps2PoiPosition" of EXT:maps2
  * 12.3.0. The tests are skipped, as long as an older version of EXT:maps2
- * is installed. MAPS2_FORM_SETUP has to match the form setup of EXT:maps2.
+ * is installed.
  */
-class CompanyFormTest extends FunctionalTestCase
+final class CompanyFormTest extends FunctionalTestCase
 {
     use CompanyFormRequestTrait;
 
-    /**
-     * Same path as in Fixtures/Frontend/CompanyForm.typoscript
-     */
-    private const MAPS2_FORM_SETUP = 'EXT:maps2/Configuration/Form/FormSetup.yaml';
-
     protected array $coreExtensionsToLoad = [
         'form',
+        'install',
     ];
 
     protected array $testExtensionsToLoad = [
@@ -108,14 +104,6 @@ class CompanyFormTest extends FunctionalTestCase
 
     private function buildForm(ServerRequestInterface $request): FormDefinition
     {
-        $frontendTypoScript = $request->getAttribute('frontend.typoscript');
-        $setup = $frontendTypoScript->getSetupArray();
-        $setup['plugin.']['tx_form.']['settings.']['yamlConfigurations.'] = [
-            '10' => 'EXT:form/Configuration/Yaml/FormSetup.yaml',
-            '20' => self::MAPS2_FORM_SETUP,
-            '30' => 'EXT:yellowpages2/Configuration/Form/OverrideFormSettings.yaml',
-        ];
-        $frontendTypoScript->setSetupArray($setup);
         $this->get(ConfigurationManagerInterface::class)->setRequest($request);
 
         $configuration = Yaml::parseFile(__DIR__ . '/../../../Configuration/Form/Company.form.yaml');

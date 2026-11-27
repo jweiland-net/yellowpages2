@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
  * new company gets the current frontend user as owner and a path segment. An edited company keeps its "pid", owner and path
  * segment.
  */
-readonly class CompanyRecordService
+final readonly class CompanyRecordService
 {
     public const TABLE = 'tx_yellowpages2_domain_model_company';
 

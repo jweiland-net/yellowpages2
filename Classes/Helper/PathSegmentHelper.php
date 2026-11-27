@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Helper class to generate a path segment (slug) for a company record.
  * Used while executing the UpgradeWizard and saving records in the frontend.
  */
-readonly class PathSegmentHelper
+final readonly class PathSegmentHelper
 {
     private const TABLE = 'tx_yellowpages2_domain_model_company';
 
@@ -32,7 +32,7 @@ readonly class PathSegmentHelper
         return $this->getSlugHelper()->generate($baseRecord, $pid);
     }
 
-    protected function getSlugHelper(): SlugHelper
+    private function getSlugHelper(): SlugHelper
     {
         // Add uid to slug, to prevent duplicates
         $config = (array)($GLOBALS['TCA'][self::TABLE]['columns']['path_segment']['config'] ?? []);

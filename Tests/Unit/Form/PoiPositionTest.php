@@ -19,7 +19,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class PoiPositionTest extends UnitTestCase
+final class PoiPositionTest extends UnitTestCase
 {
     #[Test]
     public function fromFormValueReturnsPosition(): void

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Form;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Package\PackageManager;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -33,7 +34,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * of the partial root path of the form, which loads the assets of the editor.
  * RichTextEditorHook adds the options of the editor while rendering.
  */
-readonly class RichTextFormElementConfigurator
+final readonly class RichTextFormElementConfigurator
 {
     public const DATA_TYPE = 'richText';
 
@@ -49,6 +50,7 @@ readonly class RichTextFormElementConfigurator
 
     public function __construct(
         private PackageManager $packageManager,
+        private LoggerInterface $logger,
     ) {}
 
     public function isEnabled(?ServerRequestInterface $request): bool
@@ -256,8 +258,13 @@ readonly class RichTextFormElementConfigurator
 
         try {
             $setup = $frontendTypoScript->getSetupArray();
-        } catch (\RuntimeException) {
+        } catch (\RuntimeException $exception) {
             // The setup is not available in cached frontend scope
+            $this->logger->notice(
+                'The TypoScript setup is not available. The rich text editor settings stay empty.',
+                ['exception' => $exception],
+            );
+
             return [];
         }
 

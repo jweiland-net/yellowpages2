@@ -24,7 +24,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * - "categories": The child categories of TypoScript
  *   "settings.startingUidForCategories"
  */
-readonly class FormElementOptionsConfigurator
+final readonly class FormElementOptionsConfigurator
 {
     public const PROVIDER_DISTRICTS = 'districts';
 

@@ -14,37 +14,26 @@ namespace JWeiland\Yellowpages2\Utility;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
-readonly class RequestUtility
+final readonly class RequestUtility
 {
     /**
      * Get request arguments merged from post
      *
      * @return array<string, mixed>
      */
-    public static function getMergedRequestArguments(string $parameter): array
+    public static function getMergedRequestArguments(ServerRequestInterface $request, string $parameter): array
     {
-        $query = self::getRequestFromGlobalVariable()->getQueryParams();
-        $body = self::getRequestFromGlobalVariable()->getParsedBody();
+        $body = $request->getParsedBody();
 
-        $postParameter = $body[$parameter] ?? [];
-        $getParameter = $query[$parameter] ?? [];
+        $postParameter = is_array($body) && is_array($body[$parameter] ?? null) ? $body[$parameter] : [];
+        $getParameter = $request->getQueryParams()[$parameter] ?? [];
 
         // Create a copy of $getParameter to avoid modifying it in-place
-        $mergedParameters = $getParameter;
+        $mergedParameters = is_array($getParameter) ? $getParameter : [];
 
         // Merge the parameters into $mergedParameters
         ArrayUtility::mergeRecursiveWithOverrule($mergedParameters, $postParameter);
 
         return $mergedParameters;
-    }
-
-    /**
-     * TYPO3 provides the request object also in the global variable $GLOBALS['TYPO3_REQUEST'].
-     * Whenever it is possible the request should be retrieved within the contexts described above.
-     * But this is not always possible by now.
-     */
-    public static function getRequestFromGlobalVariable(): ?ServerRequestInterface
-    {
-        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

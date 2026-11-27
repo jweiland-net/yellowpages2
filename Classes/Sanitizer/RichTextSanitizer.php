@@ -40,7 +40,7 @@ use TYPO3\HtmlSanitizer\Visitor\CommonVisitor;
  * The allowed, mapped, removed and block elements can be modified with
  * ModifyRichTextSanitizerConfigurationEvent.
  */
-readonly class RichTextSanitizer
+final readonly class RichTextSanitizer
 {
     private const ALLOWED_SCHEMES_PATTERN = '#^(?:https?://|mailto:|tel:)\S+$#i';
 

@@ -20,35 +20,38 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 ExtensionUtility::registerPlugin(
     'Yellowpages2',
     'Directory',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.title',
+    'yellowpages2.db:plugin.directory.title',
     'ext-yellowpages2-directory-wizard-icon',
     'plugins',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.directory.description',
+    'yellowpages2.db:plugin.directory.description',
+    'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
 );
 
 ExtensionUtility::registerPlugin(
     'Yellowpages2',
     'Management',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.management.title',
+    'yellowpages2.db:plugin.management.title',
     'ext-yellowpages2-directory-wizard-icon',
     'plugins',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.management.description',
+    'yellowpages2.db:plugin.management.description',
 );
 
 ExtensionUtility::registerPlugin(
     'Yellowpages2',
     'Search',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.search.title',
+    'yellowpages2.db:plugin.search.title',
     'ext-yellowpages2-directory-wizard-icon',
     'plugins',
-    'LLL:EXT:yellowpages2/Resources/Private/Language/locallang_db.xlf:plugin.search.description',
+    'yellowpages2.db:plugin.search.description',
+    'FILE:EXT:yellowpages2/Configuration/FlexForms/Search.xml',
 );
 
+// The FlexForm tab incl. pi_flexform is added by registerPlugin()
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
-    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
+    'pages, recursive',
     'yellowpages2_directory',
-    'after:subheader',
+    'after:pi_flexform',
 );
 
 ExtensionManagementUtility::addToAllTCAtypes(
@@ -60,21 +63,9 @@ ExtensionManagementUtility::addToAllTCAtypes(
 
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
-    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,pi_flexform, pages, recursive',
+    'pages, recursive',
     'yellowpages2_search',
-    'after:subheader',
-);
-
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:yellowpages2/Configuration/FlexForms/YellowPages.xml',
-    'yellowpages2_directory',
-);
-
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:yellowpages2/Configuration/FlexForms/Search.xml',
-    'yellowpages2_search',
+    'after:pi_flexform',
 );
 
 $GLOBALS['TCA']['tt_content']['types']['yellowpages2_directory']['previewRenderer'] = Yellowpages2PluginPreview::class;

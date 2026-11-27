@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace JWeiland\Yellowpages2\Service;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -23,12 +24,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * EXT:form. Like Extbase, plugin.tx_yellowpages2_management overrides
  * plugin.tx_yellowpages2.
  */
-readonly class PluginSettingsService
+final readonly class PluginSettingsService
 {
     private const PLUGIN_KEYS = ['tx_yellowpages2.', 'tx_yellowpages2_management.'];
 
     public function __construct(
         private TypoScriptService $typoScriptService,
+        private LoggerInterface $logger,
     ) {}
 
     /**
@@ -80,8 +82,13 @@ readonly class PluginSettingsService
 
         try {
             $pluginSetup = $frontendTypoScript->getSetupArray()['plugin.'] ?? [];
-        } catch (\RuntimeException) {
+        } catch (\RuntimeException $exception) {
             // The setup is not available in cached frontend scope
+            $this->logger->notice(
+                'The TypoScript setup of the plugin is not available. Settings and storage pages stay empty.',
+                ['exception' => $exception],
+            );
+
             return [];
         }
 

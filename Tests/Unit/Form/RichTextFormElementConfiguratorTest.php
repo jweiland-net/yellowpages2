@@ -13,6 +13,8 @@ namespace JWeiland\Yellowpages2\Tests\Unit\Form;
 
 use JWeiland\Yellowpages2\Form\RichTextFormElementConfigurator;
 use PHPUnit\Framework\Attributes\Test;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Package\PackageManager;
@@ -23,7 +25,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case.
  */
-class RichTextFormElementConfiguratorTest extends UnitTestCase
+final class RichTextFormElementConfiguratorTest extends UnitTestCase
 {
     private RichTextFormElementConfigurator $subject;
 
@@ -186,12 +188,24 @@ class RichTextFormElementConfiguratorTest extends UnitTestCase
         );
     }
 
-    private function buildSubject(bool $isRteCkeditorActive): RichTextFormElementConfigurator
+    #[Test]
+    public function isEnabledLogsNoticeIfTypoScriptSetupIsNotAvailable(): void
+    {
+        $request = (new ServerRequest('https://example.com/'))
+            ->withAttribute('frontend.typoscript', new FrontendTypoScript(new RootNode(), [], [], []));
+
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger->expects($this->once())->method('notice');
+
+        self::assertFalse($this->buildSubject(true, $logger)->isEnabled($request));
+    }
+
+    private function buildSubject(bool $isRteCkeditorActive, ?LoggerInterface $logger = null): RichTextFormElementConfigurator
     {
         $packageManager = $this->createMock(PackageManager::class);
         $packageManager->method('isPackageActive')->with('rte_ckeditor')->willReturn($isRteCkeditorActive);
 
-        return new RichTextFormElementConfigurator($packageManager);
+        return new RichTextFormElementConfigurator($packageManager, $logger ?? new NullLogger());
     }
 
     /**

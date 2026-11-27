@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
 /**
  * Resolves the CompanyColumnType of a column of the company table from TCA
  */
-readonly class CompanyColumnTypeResolver
+final readonly class CompanyColumnTypeResolver
 {
     public const TABLE = 'tx_yellowpages2_domain_model_company';
 

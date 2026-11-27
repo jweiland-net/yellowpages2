@@ -36,7 +36,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Without JavaScript the textarea is submitted as plain text. Values without
  * any tag are converted like the plain text description.
  */
-readonly class RichTextService
+final readonly class RichTextService
 {
     public function __construct(
         private RichTextSanitizer $richTextSanitizer,
@@ -105,7 +105,8 @@ readonly class RichTextService
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable($table);
         $queryBuilder->getRestrictions()->removeAll()->add(new DeletedRestriction());
 
-        $typeField = $this->tcaSchemaFactory->get($table)->getSubSchemaDivisorField()?->getName() ?? '';
+        $schema = $this->tcaSchemaFactory->get($table);
+        $typeField = $schema->supportsSubSchema() ? $schema->getSubSchemaTypeInformation()->getFieldName() : '';
         $record = $queryBuilder
             ->select(...array_filter(['pid', $column, $typeField]))
             ->from($table)

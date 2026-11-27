@@ -23,12 +23,9 @@ use JWeiland\Yellowpages2\Traits\PostProcessFluidVariablesTrait;
 use JWeiland\Yellowpages2\Traits\PreProcessControllerActionTrait;
 use JWeiland\Yellowpages2\Utility\CacheUtility;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
-use TYPO3\CMS\Core\Context\Exception\AspectPropertyNotFoundException;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -45,12 +42,12 @@ class ManagementController extends ActionController
     use PreProcessControllerActionTrait;
 
     public function __construct(
-        protected readonly Context $context,
         protected readonly CompanyRepository $companyRepository,
         protected readonly CategoryRepository $categoryRepository,
         protected readonly MailHelper $mailHelper,
         protected readonly CompanyAccessService $companyAccessService,
         protected readonly ModerationLinkTokenService $moderationLinkTokenService,
+        protected readonly LoggerInterface $logger,
     ) {}
 
     public function initializeListMyCompaniesAction(): void
@@ -59,14 +56,25 @@ class ManagementController extends ActionController
     }
 
     /**
-     * @throws AspectNotFoundException
-     * @throws AspectPropertyNotFoundException
+     * Only logged in users of the configured user group get their companies. Else the
+     * page shows a message and no company, as an anonymous visitor would match companies without owner.
      */
     public function listMyCompaniesAction(): ResponseInterface
     {
-        $user = $this->context->getAspect('frontend.user')->get('id');
-        $companies = $this->companyRepository->findByFeUser((int)$user);
+        $denialReason = $this->companyAccessService->getFrontendUserDenialReason($this->request);
+        if ($denialReason !== '') {
+            $this->addFlashMessageByKey($denialReason, ContextualFeedbackSeverity::WARNING);
+            $this->postProcessAndAssignFluidVariables([
+                'denialReason' => $denialReason,
+                'companies' => [],
+            ]);
+
+            return $this->htmlResponse();
+        }
+
+        $companies = $this->companyRepository->findByFeUser($this->companyAccessService->getFrontendUserUid());
         $this->postProcessAndAssignFluidVariables([
+            'denialReason' => '',
             'companies' => $companies,
             'categories' => $this->categoryRepository->findRelated(),
         ]);
@@ -88,8 +96,13 @@ class ManagementController extends ActionController
      */
     public function performAction(): ResponseInterface
     {
+        $denialReason = $this->companyAccessService->getDenialReason($this->request);
+        if ($denialReason !== '') {
+            $this->rejectAccess($denialReason);
+        }
+
         $this->postProcessAndAssignFluidVariables([
-            'denialReason' => $this->companyAccessService->getDenialReason($this->request),
+            'denialReason' => $denialReason,
         ]);
 
         return $this->htmlResponse();
@@ -105,12 +118,13 @@ class ManagementController extends ActionController
      * automatically. So the activation link of the mail shows this summary
      * of the company only. Its form activates the company via POST.
      */
-    #[IgnoreValidation(['value' => 'company'])]
-    public function confirmActivationAction(Company $company): ResponseInterface
+    public function confirmActivationAction(#[IgnoreValidation] Company $company): ResponseInterface
     {
         $moderationToken = $this->getValidModerationToken((int)$company->getUid());
         if ($moderationToken === '' || !$company->getHidden()) {
-            return $this->redirectToCompanyList(...$this->getActivationError($moderationToken));
+            $this->addActivationError((int)$company->getUid(), $moderationToken);
+
+            return $this->redirectToCompanyList();
         }
 
         $this->postProcessAndAssignFluidVariables([
@@ -144,18 +158,25 @@ class ManagementController extends ActionController
         $companyObject = $this->companyRepository->findHiddenObject($company);
         $moderationToken = $this->getValidModerationToken($company);
         if (!$companyObject instanceof Company || $moderationToken === '' || !$companyObject->getHidden()) {
-            return $this->redirectToCompanyList(...$this->getActivationError($companyObject instanceof Company ? $moderationToken : ''));
+            $this->addActivationError($company, $companyObject instanceof Company ? $moderationToken : '');
+
+            return $this->redirectToCompanyList();
         }
 
-        $this->activateCompany($companyObject);
+        $isMailSent = $this->activateCompany($companyObject);
 
-        return $this->redirectToCompanyList(
-            (string)LocalizationUtility::translate('activation.success', ExtConf::EXT_KEY),
-            ContextualFeedbackSeverity::OK,
-        );
+        $this->addDirectoryFlashMessage('activation.success', ContextualFeedbackSeverity::OK);
+        if (!$isMailSent) {
+            $this->addDirectoryFlashMessage('activation.mailFailed', ContextualFeedbackSeverity::WARNING);
+        }
+
+        return $this->redirectToCompanyList();
     }
 
-    protected function activateCompany(Company $company): void
+    /**
+     * Returns false, if the mail to the moderator could not be sent. The company is activated anyway.
+     */
+    protected function activateCompany(Company $company): bool
     {
         $company->setHidden(false);
         $this->companyRepository->update($company);
@@ -165,9 +186,10 @@ class ManagementController extends ActionController
             'company' => $company,
         ]);
 
-        $this->mailHelper->sendMail(
+        return $this->mailHelper->sendMail(
             $this->view->render(),
-            (string)LocalizationUtility::translate('email.subject.activate', ExtConf::EXT_KEY),
+            $this->translate('email.subject.activate'),
+            ['companyUid' => (int)$company->getUid(), 'feUserUid' => $this->companyAccessService->getFrontendUserUid()],
         );
     }
 
@@ -192,32 +214,77 @@ class ManagementController extends ActionController
     /**
      * Without a valid token the company can not be activated. With a valid
      * token the company is visible already, e.g. as the link was used before.
-     *
-     * @return array{0: string, 1: ContextualFeedbackSeverity}
      */
-    protected function getActivationError(string $moderationToken): array
+    protected function addActivationError(int $companyUid, string $moderationToken): void
     {
-        return $moderationToken === ''
-            ? [(string)LocalizationUtility::translate('activation.invalidToken', ExtConf::EXT_KEY), ContextualFeedbackSeverity::ERROR]
-            : [(string)LocalizationUtility::translate('activation.alreadyActivated', ExtConf::EXT_KEY), ContextualFeedbackSeverity::INFO];
+        if ($moderationToken !== '') {
+            $this->addDirectoryFlashMessage('activation.alreadyActivated', ContextualFeedbackSeverity::INFO);
+
+            return;
+        }
+
+        $this->logger->warning(
+            'The activation of a company was rejected: The moderation token is missing or invalid.',
+            ['companyUid' => $companyUid, 'feUserUid' => $this->companyAccessService->getFrontendUserUid()],
+        );
+        $this->addDirectoryFlashMessage('activation.invalidToken', ContextualFeedbackSeverity::ERROR);
+    }
+
+    /**
+     * Shows the reason as flash message. Rejected moderation tokens and foreign companies are
+     * logged, as they may be attempts to access companies of other users.
+     */
+    protected function rejectAccess(string $denialReason): void
+    {
+        $context = [
+            'companyUid' => $this->companyAccessService->getCompanyUid($this->request),
+            'feUserUid' => $this->companyAccessService->getFrontendUserUid(),
+        ];
+
+        if ($this->companyAccessService->hasInvalidModerationToken($this->request)) {
+            $this->logger->warning('Access to a company was rejected: The moderation token is invalid.', $context);
+            $this->addFlashMessageByKey('moderation.invalidToken', ContextualFeedbackSeverity::ERROR);
+
+            return;
+        }
+
+        if ($denialReason === CompanyAccessService::REASON_UNAUTHORIZED) {
+            $this->logger->warning('Access to a company was rejected: The company does not belong to the user.', $context);
+        }
+
+        $this->addFlashMessageByKey(
+            $denialReason,
+            $denialReason === CompanyAccessService::REASON_UNAUTHORIZED
+                ? ContextualFeedbackSeverity::ERROR
+                : ContextualFeedbackSeverity::WARNING,
+        );
+    }
+
+    /**
+     * Adds a translated message to the flash messages of this plugin. They are rendered in
+     * the same request, so they are not stored in the session of anonymous visitors.
+     */
+    protected function addFlashMessageByKey(string $labelKey, ContextualFeedbackSeverity $severity): void
+    {
+        $this->addFlashMessage($this->translate($labelKey), '', $severity, false);
     }
 
     /**
      * The list action of CompanyController belongs to another plugin
      * ("Directory") on another page (settings.pidOfListPage), so
-     * ActionController::redirect() can not be used here. The message is
+     * ActionController::redirect() can not be used here. The messages are
      * added to the flash messages of the Directory plugin, which renders them.
+     * They are stored in the session as the response is a redirect.
      */
-    protected function redirectToCompanyList(
-        string $message = '',
-        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK,
-    ): ResponseInterface {
-        if ($message !== '') {
-            $this->getFlashMessageQueue(CompanyController::FLASH_MESSAGE_QUEUE_IDENTIFIER)->enqueue(
-                GeneralUtility::makeInstance(FlashMessage::class, $message, '', $severity, true),
-            );
-        }
+    protected function addDirectoryFlashMessage(string $labelKey, ContextualFeedbackSeverity $severity): void
+    {
+        $this->getFlashMessageQueue(CompanyController::FLASH_MESSAGE_QUEUE_IDENTIFIER)->enqueue(
+            new FlashMessage($this->translate($labelKey), '', $severity, true),
+        );
+    }
 
+    protected function redirectToCompanyList(): ResponseInterface
+    {
         $this->uriBuilder->reset();
 
         $pidOfListPage = (int)($this->settings['pidOfListPage'] ?? 0);
@@ -228,5 +295,10 @@ class ManagementController extends ActionController
         return $this->redirectToUri(
             $this->uriBuilder->uriFor('list', [], 'Company', ExtConf::EXT_KEY, 'Directory'),
         );
+    }
+
+    protected function translate(string $labelKey): string
+    {
+        return (string)LocalizationUtility::translate($labelKey, ExtConf::EXT_KEY, request: $this->request);
     }
 }

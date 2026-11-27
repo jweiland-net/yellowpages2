@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace JWeiland\Yellowpages2\Updates;
 
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
-use TYPO3\CMS\Install\Updates\AbstractListTypeToCTypeUpdate;
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
+use TYPO3\CMS\Core\Upgrades\AbstractListTypeToCTypeUpdate;
 
 /**
  * With TYPO3 13 plugins have to be declared as content elements (CType) instead of "list_type"
  */
 #[UpgradeWizard('yellowpages2_migratePluginsToContentElementsUpdate')]
-class PluginToContentElementUpdate extends AbstractListTypeToCTypeUpdate
+final class PluginToContentElementUpdate extends AbstractListTypeToCTypeUpdate
 {
     protected function getListTypeToCTypeMapping(): array
     {
